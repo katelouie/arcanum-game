@@ -1,0 +1,8 @@
+# Bardic interactive fiction engine
+bardic>=0.1.0
+
+# UI framework
+nicegui>=1.4.0
+
+# Markdown rendering
+markdown>=3.5.0
