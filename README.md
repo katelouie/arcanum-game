@@ -7,6 +7,7 @@ An interactive fiction game about becoming a tarot reader, built with [Bardic](h
 Arcanum is a narrative game where you play as an aspiring tarot reader building your practice. Meet clients, perform readings, manage your schedule, and grow your skills.
 
 This game demonstrates what you can build with the Bardic interactive fiction engine:
+
 - Custom Python classes (Card, Client objects)
 - Dynamic UI with passage-level tags
 - Save/load functionality
@@ -54,7 +55,7 @@ Open your browser to `http://localhost:8080` and start playing!
 
 ## Project Structure
 
-```
+```sh
 arcanum-game/
 ├── player/
 │   ├── nicegui_test_player.py  # Main NiceGUI player application
@@ -94,6 +95,7 @@ bardic compile stories/reader_journey.bard -o compiled_stories/reader_journey.js
 ### Custom Classes
 
 The game uses custom Python classes defined in `game_logic/test_tarot_objects.py`:
+
 - `Card` - Tarot card objects with serialization
 - `Client` - Client profiles with flavor text
 
@@ -102,6 +104,7 @@ These objects are imported in the story and persist through saves.
 ### UI Customization
 
 The player UI in `player/nicegui_test_player.py` includes:
+
 - Landing page with gradient background
 - Story player with centered layout
 - Client cards with business card styling
@@ -128,6 +131,7 @@ This game is an example project demonstrating the Bardic engine.
 ## Credits
 
 Built with:
+
 - [Bardic](https://github.com/katelouie/bardic) - Interactive fiction engine
 - [NiceGUI](https://nicegui.io/) - Python UI framework
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
