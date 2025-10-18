@@ -1,4 +1,5 @@
-from game_logic.test_tarot_objects import Card, Client, Reader, draw_cards
+from game.tarot import Card, draw_cards
+from game.characters import Client, Reader
 
 @metadata
   title: The Reader's Journey
