@@ -516,6 +516,11 @@ def submit_inputs_action(input_widgets: dict):
     # Submit to engine
     engine.submit_inputs(input_data)
 
+    # Re-navigate to current passage to re-render with new state
+    # (engine.current() returns cached output, we need fresh render)
+    current_passage_id = engine.current_passage_id
+    engine.goto(current_passage_id)
+
     # Re-render UI to show submitted state
     update_ui()
 
