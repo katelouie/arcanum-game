@@ -1,4 +1,4 @@
-from nicegui import ui
+from nicegui import ui, app
 import json
 from pathlib import Path
 import sys
@@ -10,6 +10,15 @@ from bardic.runtime.engine import BardEngine
 # Import local save manager (from same directory)
 sys.path.insert(0, str(Path(__file__).parent))
 from save_manager import SaveManager
+
+# Make sure to include game_logic directory
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Set the story ID
+STORY_ID = "reader_journey"
+
+# Add assets as static files so they're accessible via URLs (for favicon, images, etc.)
+app.add_static_files("/assets", str(Path(__file__).parent.parent / "assets"))
 
 # CSS Reset + Body Styling (fix white border)
 ui.add_head_html("""
@@ -72,6 +81,10 @@ engine = None
 
 # Main container that will hold all screens
 main_container = None
+
+# Card detail drawer (created at page level)
+card_drawer = None
+card_drawer_content = None
 
 # SaveManager instance
 project_root = Path(__file__).resolve().parent.parent
@@ -272,7 +285,7 @@ def load_game_action(save_id: str, dialog):
         save_data = save_manager.load_game(save_id)
 
         # Load the story first (in case we're not already in a game)
-        story_id = save_data.get("story_id", "test_nicegui_game")
+        story_id = save_data.get("story_id", STORY_ID)
         story_path = project_root / "compiled_stories" / f"{story_id}.json"
 
         if not story_path.exists():
@@ -306,7 +319,7 @@ def start_new_game():
     # We need to go up to bardic/, then into compiled_stories/
     current_file = Path(__file__).resolve()
     project_root = current_file.parent.parent  # nicegui-player -> bardic
-    story_path = project_root / "compiled_stories" / "test_nicegui_game.json"
+    story_path = project_root / "compiled_stories" / f"{STORY_ID}.json"
 
     print(f"Loading story from: {story_path}")  # Debug
     load_story(str(story_path))
@@ -365,6 +378,16 @@ def show_player():
                 ui.html(html_content, sanitize=False).classes(
                     "text-xl font-body text-purple-100 mb-8 leading-relaxed"
                 )
+
+                # Render directives (between text and choices)
+                if hasattr(output, "render_directives") and output.render_directives:
+                    with ui.column().classes("w-full my-8"):
+                        for directive in output.render_directives:
+                            render_directive(directive)
+
+                # Input directives (text input forms)
+                if hasattr(output, "input_directives") and output.input_directives:
+                    render_input_form(output.input_directives)
 
                 # Choices - categorize by tags
                 if output.choices:
@@ -442,6 +465,370 @@ def show_player():
                     ui.label("✧ THE END ✧").classes(
                         "text-3xl font-serif text-amber-300 italic mt-8 text-center"
                     )
+
+
+def render_input_form(input_directives: list[dict]):
+    """Render text input form from input directives.
+
+    Args:
+        input_directives: List of input directive dicts with name, label, placeholder
+    """
+    # Store input widgets for later access
+    input_widgets = {}
+
+    with ui.column().classes('w-full gap-4 my-6 p-6 bg-purple-900/20 border border-purple-400/30 rounded-lg'):
+        # Render each input field
+        for spec in input_directives:
+            name = spec.get('name', '')
+            label = spec.get('label', name.replace('_', ' ').title())
+            placeholder = spec.get('placeholder', '')
+
+            # Create input widget with purple/amber styling
+            input_widgets[name] = ui.input(
+                label=label,
+                placeholder=placeholder
+            ).classes(
+                'w-full text-purple-100'
+            ).props('dark outlined')
+
+        # Submit button
+        ui.button(
+            'Submit',
+            on_click=lambda: submit_inputs_action(input_widgets)
+        ).classes(
+            'mt-4 px-8 py-3 bg-purple-600 text-white font-semibold rounded-lg '
+            'hover:bg-purple-700 hover:scale-105 transition-all shadow-lg'
+        )
+
+
+def submit_inputs_action(input_widgets: dict):
+    """Collect input data and submit to engine.
+
+    Args:
+        input_widgets: Dict mapping input names to NiceGUI input widgets
+    """
+    # Collect values from input widgets
+    input_data = {
+        name: widget.value or ''  # Use empty string if None
+        for name, widget in input_widgets.items()
+    }
+
+    # Submit to engine
+    engine.submit_inputs(input_data)
+
+    # Re-render UI to show submitted state
+    update_ui()
+
+
+def render_directive(directive: dict):
+    """Route a render directive to the appropriate rendering function.
+
+    Args:
+        directive: Directive dict with 'name', 'data', 'mode', etc.
+    """
+    directive_name = directive.get("name", "")
+    directive_data = directive.get("data", {})  # Changed from 'args' to 'data'
+
+    if directive_name == "render_spread":
+        # Legacy: simple card list with spread name
+        render_card_spread(directive_data)
+    elif directive_name == "render_reading":
+        # New: full Reading object with spread layout
+        render_reading(directive_data)
+    else:
+        # Unknown directive - show debug info
+        ui.label(f"Unknown directive: {directive_name}").classes("text-red-400 text-sm")
+
+
+def render_card_spread(args: dict):
+    """Render a tarot card spread with actual card images.
+
+    Args:
+        args: Dict with 'cards' (list) and 'spread' (str) keys
+    """
+    cards = args.get("cards", [])
+    spread_name = args.get("spread", "Card Spread")
+
+    # Spread title
+    ui.label(spread_name.replace("-", " ").replace("_", " ").title()).classes(
+        "text-2xl font-serif font-bold text-amber-300 mb-4"
+    )
+
+    # Card boxes in a horizontal row
+    with ui.row().classes("gap-6 w-full justify-center"):
+        for card in cards:
+            # Get card attributes - handle both dict and object
+            if isinstance(card, dict):
+                card_name = card.get("name", "Unknown Card")
+                is_reversed = card.get("reversed", False)
+                # For dict, we can't get image path directly - use placeholder
+                image_path = None
+            else:
+                card_name = getattr(card, "name", "Unknown Card")
+                is_reversed = getattr(card, "reversed", False)
+                # Get actual image path from card object
+                try:
+                    image_path = card.get_image_filename()
+                    # Convert to absolute path for NiceGUI
+                    from pathlib import Path
+
+                    abs_image_path = Path(__file__).parent.parent / image_path
+                    if not abs_image_path.exists():
+                        print(f"Warning: Card image not found: {abs_image_path}")
+                        image_path = None
+                except AttributeError:
+                    image_path = None
+
+            # Card box with image
+            with ui.card().classes(
+                "w-40 h-auto flex items-center justify-center "
+                "bg-purple-900/30 border-2 border-amber-400/50 "
+                "hover:border-amber-300 transition-all cursor-pointer p-2"
+            ):
+                with ui.column().classes("items-center justify-center gap-2"):
+                    # Card image or placeholder
+                    if image_path and abs_image_path.exists():
+                        # Show actual card image
+                        rotation_class = "rotate-180" if is_reversed else ""
+                        ui.image(str(abs_image_path)).classes(
+                            f"w-36 h-auto object-contain {rotation_class}"
+                        )
+                    else:
+                        # Fallback placeholder
+                        reversed_icon = "↓ " if is_reversed else ""
+                        ui.icon("style", size="3em").classes("text-amber-300/50")
+
+                    # Card name below image
+                    display_name = f"↓ {card_name}" if is_reversed else card_name
+                    ui.label(display_name).classes(
+                        "text-center text-sm font-light text-purple-100 mt-2"
+                    )
+
+
+def render_reading(args: dict):
+    """Render a full Reading object with spread layout.
+
+    Args:
+        args: Dict with 'reading' key containing Reading object
+    """
+    from pathlib import Path
+
+    reading = args.get("reading")
+    if not reading:
+        ui.label("Error: No reading provided").classes("text-red-400")
+        return
+
+    # Get positioned cards (cards merged with position data)
+    positioned_cards = reading.get_positioned_cards()
+    spread = reading.spread
+
+    # Spread title
+    ui.label(spread.name).classes("text-2xl font-serif font-bold text-amber-300 mb-6")
+
+    # Map card sizes to pixel widths
+    card_widths = {
+        "large": 180,  # 3-card spreads
+        "medium": 140,  # 5-7 card spreads
+        "small": 100,  # Celtic Cross, Year Ahead
+    }
+    card_width = card_widths.get(spread.card_size, 140)
+
+    # Container with aspect ratio
+    # Higher aspect ratio = shorter container (horizontal spreads)
+    # Lower aspect ratio = taller container (vertical spreads like Celtic Cross)
+    base_height = 600
+    if spread.aspect_ratio:
+        container_height = max(500, int(base_height / spread.aspect_ratio))
+    else:
+        container_height = base_height
+
+    # Relative positioning container
+    with (
+        ui.element("div")
+        .classes("relative w-full mx-auto")
+        .style(f"height: {container_height}px; max-width: 800px;")
+    ):
+        for card_data in positioned_cards:
+            card = card_data["card"]
+            x = card_data["x"]  # Percentage (0-100)
+            y = card_data["y"]  # Percentage (0-100)
+            position_name = card_data["name"]
+            rotation = card_data.get("rotation", 0)
+            z_index = card_data.get("zIndex", 1)
+
+            # Position card absolutely
+            transform = f"translate(-50%, -50%) rotate({rotation}deg)"
+
+            with ui.element("div").style(
+                f"position: absolute; "
+                f"left: {x}%; "
+                f"top: {y}%; "
+                f"transform: {transform}; "
+                f"z-index: {z_index};"
+            ):
+                render_single_card(card_data, card_width)
+
+
+def render_single_card(card_data: dict, width: int):
+    """Render a single card with image, position label, and click handler.
+
+    Args:
+        card_data: Full positioned card dict with card, position, meanings, etc.
+        width: Card width in pixels
+    """
+    from pathlib import Path
+
+    card = card_data["card"]
+    position_name = card_data["name"]
+    rotation = card_data.get("rotation", 0)
+
+    # Get image path
+    try:
+        image_path = card.get_image_filename()
+        abs_image_path = Path(__file__).parent.parent / image_path
+        has_image = abs_image_path.exists()
+    except AttributeError:
+        has_image = False
+
+    # Card container
+    with ui.column().classes("items-center gap-2").style(f"width: {width}px"):
+        # Card image with click handler and hover effect
+        with (
+            ui.card()
+            .classes(
+                "p-2 bg-purple-900/30 border-2 border-amber-400/50 "
+                "hover:border-amber-300 hover:scale-105 "  # Added hover scale
+                "transition-all duration-200 cursor-pointer w-full"
+            )
+            .on("click", lambda cd=card_data: show_card_modal(cd))
+        ):
+            if has_image:
+                # Actual card image
+                card_rotation = "rotate-180" if card.reversed else ""
+                ui.image(str(abs_image_path)).classes(
+                    f"w-full h-auto object-contain {card_rotation}"
+                )
+            else:
+                # Fallback placeholder
+                with ui.column().classes("items-center justify-center h-32"):
+                    ui.icon("style", size="3em").classes("text-amber-300/50")
+
+        # Position label only (card name is visible in the image itself)
+        label_class = (
+            "text-center text-xs font-semibold text-amber-200 uppercase tracking-wide"
+        )
+
+        if rotation != 0:
+            # Rotated card - label with rotation indicator
+            ui.label(f"⟲ {position_name}").classes(f"{label_class} mt-1")
+        else:
+            # Normal card - label below
+            ui.label(position_name).classes(f"{label_class} mt-1")
+
+
+def show_card_modal(card_data: dict):
+    """Update drawer content and show it with card details.
+
+    Args:
+        card_data: Dict from get_positioned_cards() with card, position, meanings
+    """
+    global card_drawer, card_drawer_content
+
+    if card_drawer is None:
+        return  # Drawer not initialized yet
+
+    from pathlib import Path
+
+    card = card_data["card"]
+    position_name = card_data["name"]
+    card_name = card.get_display_name()
+
+    # Clear and rebuild drawer content
+    card_drawer_content.clear()
+
+    with card_drawer_content:
+        # Header with close button
+        with ui.row().classes(
+            "w-full items-center justify-between p-4 border-b border-amber-400/30"
+        ):
+            ui.label(card_name).classes("text-2xl font-serif text-amber-300 font-bold")
+            ui.button(icon="close", on_click=card_drawer.hide).props(
+                "flat dense round"
+            ).classes("text-amber-300")
+
+        # Content (drawer handles scrolling natively)
+        with ui.column().classes("gap-6 w-full p-6"):
+            # Card image (centered, nice size)
+            image_path = card.get_image_filename()
+            abs_path = Path(__file__).parent.parent / image_path
+            if abs_path.exists():
+                with ui.row().classes("w-full justify-center mb-4"):
+                    ui.image(str(abs_path)).classes("rounded-lg shadow-2xl").style(
+                        "width: 280px; height: auto;"
+                    )
+
+            # Position section
+            ui.label(f"Position: {position_name}").classes(
+                "text-lg font-serif text-amber-200 font-semibold"
+            )
+
+            position_desc = card_data.get("short_description", "")
+            if position_desc:
+                ui.label(position_desc).classes("text-sm text-purple-200 italic")
+
+            # Divider
+            ui.separator().classes("bg-amber-400/20 my-2")
+
+            # Position meaning
+            position_meaning = card_data.get("position_meaning", "")
+            if position_meaning:
+                ui.label("Position Interpretation").classes(
+                    "text-sm font-serif text-amber-300 font-semibold uppercase tracking-wide"
+                )
+                ui.label(position_meaning).classes(
+                    "text-sm text-purple-100 leading-relaxed"
+                )
+
+                # Divider
+                ui.separator().classes("bg-amber-400/20 my-4")
+
+            # Core meaning
+            core = card_data.get("core_meaning", {})
+            if core:
+                ui.label("Core Card Meaning").classes(
+                    "text-sm font-serif text-amber-300 font-semibold uppercase tracking-wide"
+                )
+
+                essence = core.get("essence", "")
+                if essence:
+                    ui.label(essence).classes(
+                        "text-sm text-purple-100 italic leading-relaxed mb-3"
+                    )
+
+                keywords = core.get("keywords", [])
+                if keywords:
+                    ui.label(f"Keywords: {', '.join(keywords)}").classes(
+                        "text-xs text-purple-200 mb-3"
+                    )
+
+                practical = core.get("practical", "")
+                if practical:
+                    ui.label("Practical Guidance:").classes(
+                        "text-xs font-serif text-amber-300 font-semibold uppercase tracking-wide mt-2"
+                    )
+                    ui.label(practical).classes(
+                        "text-sm text-purple-100 leading-relaxed"
+                    )
+
+        # Close button at bottom
+        with ui.row().classes("w-full justify-center p-4 border-t border-amber-400/30"):
+            ui.button("Close", on_click=card_drawer.hide).classes(
+                "px-6 py-2 bg-amber-600/20 text-amber-300 rounded-lg "
+                "hover:bg-amber-600/30 transition-all"
+            )
+
+    # Show the drawer
+    card_drawer.show()
 
 
 def render_client_card(choice: dict, choice_index: int, is_special: bool = False):
@@ -753,7 +1140,18 @@ def show_dashboard(output=None):
 # Create the main container
 main_container = ui.column().classes("w-full h-full m-0 p-0")
 
+# Create the card detail drawer (at page level, outside main container)
+with (
+    ui.right_drawer()
+    .props("width=450 overlay elevated")
+    .classes("bg-purple-950/90 border-l-4 border-amber-500/50") as card_drawer
+):
+    card_drawer_content = ui.column().classes("w-full h-full")
+
+# Explicitly hide drawer on startup
+card_drawer.hide()
+
 # Initial render
 update_ui()
 
-ui.run()
+ui.run(title="Arcanum", favicon="🔮")

@@ -210,6 +210,13 @@
     "download_url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Wands08.jpg"
   },
   {
+    "filename": "w09.jpg",
+    "card_type": "minor",
+    "card_name": "9 of Wands",
+    "commons_filename": "Tarot Nine of Wands.jpg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tarot_Nine_of_Wands.jpg"
+  },
+  {
     "filename": "w10.jpg",
     "card_type": "minor",
     "card_name": "10 of Wands",

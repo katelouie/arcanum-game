@@ -1,5 +1,5 @@
-from game.tarot import Card, draw_cards
-from game.characters import Client, Reader
+from game_logic.tarot import Card, draw_cards, Reading
+from game_logic.characters import Client, Reader
 
 @metadata
   title: The Reader's Journey
@@ -25,7 +25,6 @@ nyx.flavor_text = "???"
 -> Prologue
 
 :: Prologue
-~ reader = Reader("You")
 ~ completed_sessions = 0
 ~ total_earnings = 0
 
@@ -41,7 +40,34 @@ As you touch the names, they shimmer with possibility. A tarot deck falls from b
 
 You are now a Reader.
 
-+ [Accept your calling] -> ReaderDesk
++ [Accept your calling] -> AskName
+
+:: AskName
+
+Before we begin, what is your name, Reader?
+
+<<if not _inputs.get("reader_name")>>
+@input name="reader_name" placeholder="Enter your name..." label="Your Name"
+<<else>>
+Thank you, **{_inputs.get("reader_name")}**!
+<<endif>>
+
++ [Continue] -> SetupReader
+
+:: SetupReader
+<<py
+# Get name from inputs (with fallback)
+name = _inputs.get("reader_name", "Reader").strip()
+if not name:
+    name = "Reader"
+
+# Create Reader object with the entered name
+reader = Reader(name)
+>>
+
+Welcome, {reader.name}. Your journey begins.
+
++ [Enter your sanctuary] -> ReaderDesk
 
 :: ReaderDesk ^UI:DASHBOARD
 ~ available_clients = ["Elena", "Marcus", "Aria"]
@@ -96,11 +122,12 @@ The Seeker: 1 wild card, unpredictable
 client = Client("Elena Hart", 28)
 client.trust_level = 35  # Nervous, skeptical
 
-# Draw three cards for a past-present-future spread
-cards = draw_cards()
-positions = ["past", "present", "future"]
-for i, card in enumerate(cards):
-    card.in_position(positions[i])
+# Create a past-present-future reading
+reading = Reading(spread_id="celtic-cross")
+reading.draw_cards()
+
+# For backward compatibility with the story text
+cards = reading.drawn_cards
 >>
 A young woman with anxious eyes enters. She fidgets with her bracelet.
 
@@ -125,7 +152,9 @@ You lay out three cards in a line:
 **PRESENT:** {cards[1].get_display_name()}
 **FUTURE:** {cards[2].get_display_name()}
 
-<<if any(card.is_major_arcana() for card in cards)>>
+@render render_reading(reading=reading)
+
+<<if any(card.is_major() for card in cards)>>
 Major arcana appears. This is significant.
 Elena leans forward, her skepticism wavering.
 <<endif>>

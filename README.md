@@ -135,5 +135,6 @@ Built with:
 - [Bardic](https://github.com/katelouie/bardic) - Interactive fiction engine
 - [NiceGUI](https://nicegui.io/) - Python UI framework
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [vectorsmarket15](https://www.flaticon.com/free-icons/tarot) - Flaticon
 
 Tarot card images and meanings sourced from public domain resources.
