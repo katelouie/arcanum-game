@@ -1,0 +1,978 @@
+:: Start
+~ reader = Reader("Reader")
+Rain hammers against your apartment window. It's been raining for three days straight—typical for October in the Pacific Northwest. The kind of rain that makes everything feel muted, like the world is wrapped in wet cotton.
+
+You're sitting at your kitchen table, nursing a cup of coffee that went cold an hour ago. Bills are spread out in front of you. Rent's due in a week. Your phone screen glows with job listings that all require "3-5 years experience" for positions that pay barely above minimum wage.
+
+Outside, a delivery truck splashes through a puddle. Brakes squeal.
+
+You're not expecting a package.
+
+The doorbell rings.
+
++ [Answer the door] -> Prologue.answer_door
++ [Ignore it] -> Prologue.ignore_door
+
+:: Prologue.answer_door
+~ prologue_answered_door = True
+You trudge to the door, still in the sweatpants you've been wearing for two days.
+
+The delivery driver is already halfway back to their truck, umbrella barely keeping them dry. On your doorstep: a small package, brown paper wrapping, no return address.
+
+You bring it inside, water dripping onto your floor.
+
++ [Examine the package] -> Prologue.examine_package
+
+:: Prologue.ignore_door
+~ prologue_answered_door = False
+You stay at the table. Probably just more junk mail anyway.
+
+But the doorbell rings again.
+
+And again.
+
+Fine.
+
+You haul yourself to the door, irritated now. By the time you open it, the delivery driver is gone. Just a package on your step, brown paper already soaking through.
+
+You grab it before it gets completely drenched.
+
++ [Examine the package] -> Prologue.examine_package
+
+:: Prologue.examine_package
+<<if prologue_answered_door>>
+    You set it on the table, pushing bills aside.
+<<else>>
+    You drop it on the table with a wet thud, scattering bills.
+<<endif>>
+
+No return address. No shipping label. Just your name and address, handwritten in dark ink. The handwriting is old-fashioned—elegant loops and careful spacing. The kind of penmanship your grandmother might have had.
+
+The package is surprisingly light.
+
++ [Open it immediately] -> Prologue.open_package_eager
++ [Check for a return address first] -> Prologue.open_package_careful
++ [Set it aside for later] -> Prologue.open_package_delayed
+
+:: Prologue.open_package_eager
+Curiosity wins. You tear the paper, not bothering with scissors.
+
+Inside: a small black leather book, about the size of a paperback. The cover is worn smooth, corners soft from handling. No title. No markings.
+
+And underneath it, folded carefully: a letter.
+
+Your hands are shaking slightly as you unfold it.
+
+You're not sure why.
+
++ [Read the letter] -> Prologue.read_letter
+
+:: Prologue.open_package_careful
+You turn it over, looking for any clue about who sent this.
+
+Nothing. Just that careful handwriting. Your name. Your address.
+
+You get scissors from the kitchen drawer and cut the tape methodically. Fold back the paper.
+
+Inside: a small black leather book and a folded letter.
+
+The book looks old. Well-loved. The leather is soft, darkened with age.
+
+You pick up the letter first.
+
++ [Read the letter] -> Prologue.read_letter
+
+:: Prologue.open_package_delayed
+You set it aside.
+
+You've got bills to worry about. Job applications to send. Real life doesn't stop for mysterious packages.
+
+But your eyes keep drifting back to it.
+
+That handwriting.
+
+Something about it feels...
+
+After ten minutes, you give in and open it.
+
+Inside: a small black leather book and a letter.
+
++ [Read the letter] -> Prologue.read_letter
+
+:: Prologue.read_letter
+The letter is written on thick cream paper, the same elegant handwriting:
+
+*"You're ready.*
+
+*I don't know you, not personally. But the cards know you. They've been waiting.*
+
+*I'm done. My time as a reader has passed. These clients need someone new—someone with fresh eyes and an open heart. Someone who hasn't grown tired yet.*
+
+*The book contains names. People I've read for over the years. Some of them have been with me for decades. Some are new. All of them need guidance.*
+
+*They're yours now, if you want them.*
+
+*The cards will show you the way. They always do.*
+
+*Trust yourself. Trust the cards.*
+
+*—M."*
+
+*P.S. Get some sleep -- you'll need it.*
+
+You read it twice.
+
+Three times.
+
+This doesn't make sense.
+
++ [Look at the book] -> Prologue.examine_black_book
++ [Check the package again for any other clues] -> Prologue.search_package
++ [This is some kind of prank] -> Prologue.dismiss_letter
+
+:: Prologue.examine_black_book
+You set the letter down and pick up the book.
+
+The leather is cool under your fingers. Smooth. There's something almost alive about it—like it's been held so many times, by so many hands, that it's absorbed their warmth.
+
+You open it.
+
+The first page:
+
+**"Client Registry - M. Thorne - Est. 1987"**
+
+1987. Thirty-eight years ago.
+
+You turn the page.
+
+Names. Dozens of them. Hundreds, maybe. Each entry written in that same careful hand:
+
+*Chen, Margaret - First reading: March 1987. Comes monthly. Prefers Celtic Cross. Brings tea.*
+
+*Patterson, James - First reading: June 1989. Career concerns. Skeptical but returns.*
+
+*Valdez, Sofia - First reading: April 2003. Grief reading. Lost her sister. Sensitive.*
+
+*Morrison, Alex - First reading: January 2020. Relationship troubles. Talks too much. Means well.*
+
+Page after page after page.
+
+Lives documented. Problems recorded. Observations noted.
+
+The last entry is dated three weeks ago.
+
+Your hands are really shaking now.
+
++ [This book...] -> Prologue.reaction_to_book
+
+:: Prologue.search_package
+
+You tear apart the wrapping paper, looking for any other information.
+
+Nothing. No note. No business card. No return address label that peeled off.
+
+Just the book and the letter.
+
+You pick up the book.
+
++ [Examine the book] -> Prologue.examine_black_book
+
+:: Prologue.dismiss_letter
+This has to be a prank. Or a scam. Or-
+
+But even as you think it, you know it's not true.
+
+Nobody would go to this much trouble for a prank. And what kind of scam involves giving you something instead of asking for money?
+
+You pick up the book.
+
++ [Examine the book] -> Prologue.examine_black_book
+
+:: Prologue.reaction_to_book
+# Reaction to book -- varies by background
+You flip through the pages, heart pounding.
+
+This is a client list. An actual, real client list for a tarot reading practice that's been running for nearly four decades.
+
+And someone just... gave it to you.
+
+*How did you even end up here? How did you become someone who reads tarot cards?*
+
++ [You learned from your grandmother. This is a family tradition.] -> Prologue.background_inheritance
++ [You were a therapist who started using tarot with clients. You recently quit to do this full-time.] -> Prologue.background_career_change
++ [You taught yourself from books and online videos. You're still learning.] -> Prologue.background_self_taught
++ [The cards just... started speaking to you one day. You don't fully understand it yourself.] -> Prologue.background_unexpected_gift
+
+:: Prologue.background_inheritance
+~ reader.background = "inheritance"
+~ reader.money = 200
+~ reader.reputation = 400
+~ reader.knowledge = 500
+
+You learned from your grandmother.
+
+She'd taught you when you were twelve, her wrinkled hands guiding yours as you shuffled her deck—the same deck her grandmother had given her. Rider-Waite-Smith, so old the edges were soft as fabric.
+
+She'd made you memorize the cards. Every symbol. Every traditional meaning. The way the Fool's journey mirrored life itself.
+
+"The cards are older than you think," she'd said. "And they remember. They always remember."
+
+She died six months ago. Pneumonia, quick and cruel. You'd inherited her deck, her books, her small collection of crystals she'd never actually believed in but kept anyway "for the aesthetics."
+
+You'd done readings for friends. For family. Small things. You never charged money—that felt wrong somehow, like you'd be profiting off Grandma's memory.
+
+But now rent is due and your savings are running out and you've been thinking, lately, that maybe...
+
+And now this.
+
+You look at the letter again. The initial: *M*.
+
+Your grandmother's name was Margaret.
+
+But the handwriting isn't hers. You'd know her loops anywhere—she always made her Rs look like Bs.
+
+Still.
+
+M. Thorne.
+
+Thorne isn't your grandmother's last name. But the coincidence makes your skin prickle.
+
++ [Check the voicemail] -> Prologue.check_voicemail
+
+:: Prologue.background_career_change
+~ reader.background = "career_change"
+~ reader.money = 800
+~ reader.reputation = 200
+~ reader.knowledge = 300
+
+You were a therapist.
+
+*Were* being the operative word.
+
+You'd started using tarot cards in sessions about three years ago—just as a tool, a way to help clients externalize their thoughts. "What does this card mean to you?" instead of "How do you feel about your mother?"
+
+It worked. Better than talk therapy alone, sometimes.
+
+Clients opened up. Made connections. Had breakthroughs.
+
+And then you started noticing something strange: the cards you pulled weren't random. They were... accurate. Eerily so. You'd pull the Tower the day before a client's crisis. The Three of Swords right when someone was processing heartbreak.
+
+Your clinical supervisor had not been amused when you'd brought it up.
+
+"That's confirmation bias and magical thinking," she'd said. "You're projecting meaning onto random events."
+
+Maybe. Probably.
+
+But six months ago, you'd quit the clinic. Cashed out your small 401k. Decided to try this full-time.
+
+Your friends think you've lost your mind. Your student loans certainly think you've lost your mind.
+
+But the readings you've been doing—the handful of clients you've scraped together through Craigslist and word of mouth—they keep coming back. They keep saying you helped.
+
+You're not sure if it's therapy skills or something else.
+
+But now this book, this letter, feels like... validation? Or a test?
+
+You're not sure which is more terrifying.
+
++ [Check the voicemail] -> Prologue.check_voicemail
+
+:: Prologue.background_self_taught
+~ reader.background = "self_taught"
+~ reader.money = 150
+~ reader.reputation = 100
+~ reader.knowledge = 200
+You taught yourself.
+
+Books first. "Tarot for Beginners." "The Ultimate Guide to Tarot." You'd checked them out from the library, renewed them three times, finally bought used copies online.
+
+Then YouTube. Podcasts. Forums. You'd absorbed everything you could find.
+
+Your first deck had been a gift from a friend—half-joke, half-curiosity. They'd seen you looking up tarot meanings at 2 AM and figured you might as well have actual cards.
+
+You'd practiced on yourself. Daily draws. Three-card spreads. Celtic Cross when you were feeling ambitious.
+
+Then friends. "Hey, can you do that card thing for me?"
+
+You'd been terrified the first time. Absolutely certain you'd mess it up, say the wrong thing, look like an idiot.
+
+But the reading had... worked. Your friend had teared up, said you'd helped them see something they'd been avoiding.
+
+After that, word spread. Friends of friends. Coworkers. Someone's cousin.
+
+You started charging—just a little, barely enough to cover coffee—and suddenly you had something resembling a side business.
+
+You've never been formally trained. You don't have a mentor or a lineage or whatever real tarot readers are supposed to have.
+
+You just have the cards, the books, and a growing sense that maybe you're better at this than you thought.
+
+And now someone who's been doing this for thirty-eight years thinks you're ready for their entire client base.
+
+You're not sure if you should be honored or terrified.
+
+Probably both.
+
++ [Check the voicemail] -> Prologue.check_voicemail
+
+:: Prologue.background_unexpected_gift
+~ reader.background = "unexpected_gift"
+~ reader.money = 200
+~ reader.reputation = 150
+~ reader.knowledge = 100
+
+You didn't plan this.
+
+A year ago, you'd been working retail. Selling organic skincare products to people who definitely didn't need $80 face cream.
+
+A coworker had brought in a tarot deck. "Do you want a reading?" she'd asked during break.
+
+You'd said sure. Why not.
+
+She'd shuffled. Laid out cards. Started interpreting.
+
+And you'd known—known with absolute certainty—that she was wrong.
+
+Not mean. Not fake. Just... wrong.
+
+The Death card didn't mean what she said it meant. Not for you. Not in that position.
+
+You'd reached out, touched the card, and the meaning had just... arrived. In your head. In your chest. Everywhere.
+
+<i>Transformation. The ending of one phase. You're ready to become something new.</i>
+
+You'd quit your job two weeks later.
+
+Bought a deck. Not because you understood what was happening, but because the cards felt like they were... waiting for you?
+
+That sounds insane. You know it sounds insane.
+
+But the first time you'd done a reading—for your roommate, who was stressed about grad school applications—the cards had practically read themselves. You'd just said what they showed you.
+
+Your roommate had cried. Applied to the program they'd been too scared to consider. Got in.
+
+After that, it kept happening. People coming to you. The cards speaking. You listening.
+
+You don't know why this is happening. You don't have training or books or tradition.
+
+You just have... whatever this is.
+
+And now someone who's been reading for nearly four decades apparently thought you were the right person to inherit their practice.
+
+You're not sure they made the right choice.
+
+But the cards seem to think they did.
+
++ [Check the voicemail] -> Prologue.check_voicemail
+
+:: Prologue.check_voicemail
+You set the book down carefully, like it might bite.
+
+Your phone buzzes.
+
+One new voicemail.
+
+That's weird. Your phone didn't ring. You would have heard it.
+
+You check the timestamp: 11:47 PM. Last night.
+
+You were asleep.
+
+You play it.
+
+A woman's voice, older, shaky:
+
+> "Hello? Is this... I'm calling for M. Thorne. I've been trying to reach them for two weeks and the number just goes to voicemail now. Someone at the metaphysical shop said this might be a new number? I don't know. I'm—my name is Margaret Chen. I've been seeing M. Thorne for... god, thirty-eight years now. Monthly readings. I'm supposed to come in this Thursday and I just wanted to confirm the appointment. If this is the wrong number, I'm sorry to bother you. But if you're... if you've taken over M. Thorne's practice... I'd very much like to keep my appointment. Please call me back."
+
+She leaves a number.
+
+You stare at your phone.
+
+Margaret Chen. First entry in the book. *Comes monthly. Prefers Celtic Cross. Brings tea.*
+
+Your hands are shaking again.
+
+This is real.
+
+This is actually real.
+
++ [Call Margaret Chen back immediately] -> Prologue.call_chen_back
++ [Look through the rest of the black book first] -> Prologue.explore_book
++ [Check if there are any emails] -> Prologue.check_email
+
+:: Prologue.call_chen_back
+You dial before you can talk yourself out of it.
+
+She picks up on the second ring.
+
+"Hello?"
+
+"Hi, uh, Mrs. Chen? This is {reader.name}. You left a voicemail about... about an appointment?"
+
+Silence.
+
+Then: "You're not M. Thorne."
+
+"No. I'm not. I just—I received a package today. A book. With client information. And a letter saying..."
+
+You trail off. How do you even explain this?
+
+"M. gave you the practice," Mrs. Chen says. It's not a question.
+
+"I... I think so? I don't know. I don't know who M. Thorne is. I don't know why they chose me. I just—"
+
+"How long have you been reading?"
+
+<<if reader.background == "inheritance">>
+    My grandmother taught me. She passed away six months ago. I've been doing readings since I was young, but nothing... nothing professional."
+<<elif reader.background == "career_change">>
+    "I'm a therapist. Was a therapist. I started using tarot in sessions and then quit to do readings full-time. About six months ago."
+<<elif reader.background == "self_taught">>
+    "I taught myself. Books, online resources. I've been practicing for about two years, doing readings for friends and some clients, but I'm still learning."
+<<elif reader.background == "unexpected_gift">>
+    "About a year. I know that's not long. I didn't plan this. The cards just... started speaking to me. I know that sounds—"
+<<endif>>
+
+"M. wouldn't have chosen you if you weren't ready," Mrs. Chen interrupts, gentle but firm. "I've known them for thirty-eight years. They don't make mistakes about these things."
+
+Your throat is tight.
+
+"I still have my appointment Thursday," she continues. "Two PM. Will you be ready?"
+
++ ["Yes. I'll be ready."] -> Prologue.accept_chen_appointment
++ ["I don't know if I can do this."] -> Prologue.hesitate_chen_appointment
++ ["Can you tell me more about M. Thorne first?"] -> Prologue.ask_about_thorne
+
+:: Prologue.explore_book
+You need to understand what you're dealing with before you call anyone back.
+
+You flip through the black book slowly.
+
+Hundreds of entries. Some clients saw M. Thorne once and never came back. Others have decades of appointments logged. Births. Deaths. Marriages. Divorces. All documented with clinical precision but also... care.
+
+*Patterson, James - Promoted to VP. Still skeptical of tarot but came to celebrate. Brought scotch.*
+
+*Valdez, Sofia - Anniversary of sister's death. Did grief spread. She's healing. Still hurts but healing.*
+
+*Morrison, Alex - Finally left the toxic relationship. Moved to Portland. Sent thank you card.*
+
+Lives. Real lives. Real people who trusted **M**. Thorne with their fears and hopes and questions.
+
+And now they're supposed to trust you?
+
+Near the back of the book, you find a section labeled **"NOTES - PERSONAL USE ONLY"**
+
+Tucked inside: a business card.
+
+*M. THORNE - TAROT READER
+By Appointment Only
+[Phone number]
+[Email address]*
+
+The phone number is disconnected. You know because you try it.
+
+But the email...
+
++ [Check the email] -> Prologue.check_email
+
+:: Prologue.check_email
+You open your laptop.
+
+Log into your email.
+
+And there it is: a new email forwarding notification.
+
+> All emails to mthorne.tarot@[domain] will now forward to [your email address].
+> This change was made on [today's date] at 3:47 AM.
+
+3:47 AM. While you were asleep.
+
+You have seventeen new emails.
+
+They're all inquiries. Appointment requests. Follow-ups from existing clients.
+
+> "Hi M., it's Lisa. I know we usually meet in person but I'm out of town. Can we do a phone reading?"
+
+> "Dear M. Thorne, I was referred by my friend Sarah. I'm going through a difficult transition and would love to schedule a reading."
+
+> "M., this is Patricia. I had a dream about my late husband and I can't stop thinking about it. Can you fit me in this week?"
+
+Real people. Real problems.
+
+All expecting M. Thorne.
+
+All getting you instead.
+
++ [Respond to one of the emails] -> respond_to_email
++ [This is too much. Close the laptop.] -> overwhelmed_response
++ [Call Mrs. Chen back now] -> call_chen_back
+
+:: Prologue.respond_to_email
+You click on the first email. From someone named David Morrison.
+
+> "M., I know it's been a few months since my last reading but I'm at a crossroads with my career and I could really use some guidance. Are you available this week?"
+
+You start typing:
+
+*"Dear David,*
+
+*This is {player_name}. I've recently taken over M. Thorne's practice. I understand you're a client of theirs and—"*
+
+You stop.
+
+What are you even saying? That M. Thorne retired? Disappeared? Gave their entire business to a stranger?
+
+You delete it.
+
+Try again:
+
+*"Dear David,*
+
+*M. Thorne has passed their practice to me. I'd be honored to continue your readings if you're comfortable with that. I have availability this week.*
+
+*Best,*
+*{reader.name}"*
+
+Your finger hovers over send.
+
++ [Send the email] -> send_email_committed
++ [Delete it. You need to think about this more.] -> delete_email_hesitant
+
+:: Prologue.overwhelmed_response
+You close the laptop.
+
+This is insane.
+
+You can't just... inherit an entire tarot reading practice from someone you've never met. That's not how this works. That's not how anything works.
+
+But the black book sits on your table.
+
+The voicemail is still on your phone.
+
+The emails are still waiting.
+
+And somewhere, M. Thorne - whoever they are - thought you could handle this.
+
+You pick up your phone.
+
++ [Call Mrs. Chen back] -> Prologue.call_chen_back
++ [Call your best friend. You need to talk to someone normal.] -> Prologue.call_friend
++ [Just... sit with this for a minute] -> Prologue.sit_with_mystery
+
+:: Prologue.sit_with_mystery
+You sit at the table, the black book open in front of you, and try to breathe.
+
+Rain still hammering the windows. Coffee still cold. Bills still due.
+
+But now this. This impossible gift. This mystery.
+
+Who was M. Thorne?
+
+Why did they choose you?
+
+And what did they mean: *"Get some sleep"*?
+
+You close your eyes.
+
+When you read tarot—when you're sitting across from someone and the cards are laid out—how do you approach it? What's your process?
+
+
++ [You trust your intuition. You feel what the cards are trying to say.]  -> Prologue.attribute_intuitive
++ [You analyze the cards systematically. You know the meanings and apply them logically.] -> Prologue.attribute_analytical
++ [You see stories in the cards. You weave the meanings into narratives.] -> Prologue.attribute_storyteller
++ [You focus on practical advice. You help people make decisions and take action.] -> Prologue.attribute_practical
+
+:: Prologue.attribute_intuitive
+~ reader.core_attribute = "intuitive"
+You trust your gut.
+
+When you look at the cards, you don't just see pictures—you feel them. A tightness in your chest when the Tower appears. A warmth when the Sun shows up. A shiver when the Moon stares back at you.
+
+<<if reader.background == "inheritance">>
+    Your grandmother called it "the gift." She said the cards speak to those who listen with their hearts, not their heads.
+<<elif reader.background == "career_change">>
+    Your clinical supervisor would have called it "emotional reasoning." You call it listening.
+<<elif reader.background == "self_taught">>
+    The books talk about traditional meanings, but you've learned to trust what the cards tell you directly.
+<<elif reader.background == "unexpected_gift">>
+    It's how the cards first spoke to you - not through meanings memorized from books, but through feelings that arrived fully formed.
+<<endif>>
+
+You don't always know where the interpretations come from. They just... arrive.
+
+And now, sitting here with this black book, you feel something.
+
+A pull. A rightness.
+
+Like the cards have been waiting for this moment. For you to be here, holding this book, making this choice.
+
+You open your eyes.
+
++ [What's your name?] -> Prologue.name_yourself
+
+:: Prologue.attribute_analytical
+~ reader.core_attribute = "analytical"
+You approach readings methodically.
+
+Each card has meanings—traditional, documented, studied over centuries. The Fool is beginnings. The Tower is upheaval. The Star is hope. These aren't mysterious; they're a language, and you've learned to speak it.
+
+<<if reader.background == "inheritance">>
+    Your grandmother taught you the traditional meanings first. "Learn the rules," she'd said, "before you break them."
+<<elif reader.background == "career_change">>
+    Your therapeutic training taught you to look for patterns, to analyze what clients are really saying beneath their words. The cards are another diagnostic tool.
+<<elif reader.background == "self_taught">>
+    The books were your teachers. You've read them all, cross-referenced systems, created spreadsheets of meanings by position and card combination.
+<<elif reader.background == "unexpected_gift">>
+    Even though the cards came to you suddenly, you've been trying to understand them logically. There must be a system. A structure.
+<<endif>>
+
+When you do a reading, you're not channeling some mystical force—you're applying knowledge, making connections, seeing patterns.
+
+And this situation? It's a puzzle.
+
+M. Thorne gave you their practice. Why? What's the pattern here?
+
+You look at the letter again, analyzing each word.
+
++ [What's your name?] -> Prologue.name_yourself
+
+:: Prologue.attribute_storyteller
+~ reader.core_attribute = "storyteller"
+The cards tell stories.
+
+When you lay them out, you don't just see individual meanings—you see a narrative. The journey from the Fool through the Major Arcana. The arc of the Cups suit from Ace to King. Every reading is a story, and you're the one who helps people see it.
+
+<<if reader.background == "inheritance">>
+    Your grandmother used to say, "The cards are ancient stories. Every person who sits before them is living one of those stories out."
+<<elif reader.background == "career_change">>
+    In therapy, you learned that people heal through narrative—by understanding their story and rewriting it. The cards help people see their story clearly.
+<<elif reader.background == "self_taught">>
+    The books gave you meanings, but you found that what helped people most was when you wove those meanings into something cohesive. A beginning, a middle, a path forward.
+<<elif reader.background == "unexpected_gift">>
+    When the cards first spoke to you, they showed you scenes. Journeys. Transformations. Not just isolated meanings but entire tales.
+<<endif>>
+
+And now you're at the beginning of a new story.
+
+A mysterious package. A letter from someone you've never met. A practice handed down like a legacy in a fairy tale.
+
+You can almost see how this story might unfold.
+
++ [What's your name?] -> Prologue.name_yourself
+
+:: Prologue.attribute_practical
+~ reader.core_attribute = "practical"
+You focus on what matters: helping people.
+
+The cards aren't mystical prophecies—they're a tool. A way to externalize problems, explore options, make decisions. When someone sits across from you, they're not looking for cosmic truth. They're looking for guidance.
+
+<<if reader.background == "inheritance">>
+    Your grandmother was practical too. "The cards work," she'd say, "because they help people think. Don't overcomplicate it."
+<<elif reader.background == "career_change">>
+    That's how you started using them - as a therapeutic intervention. A structured way to help clients examine their situations and make choices.
+<<elif reader.background == "self_taught">>
+    The books talk about symbolism and spirituality, but what you found most useful was asking: how does this help the person in front of me?
+<<elif reader.background == "unexpected_gift">>
+    Even though you don't fully understand why the cards work for you, you know they do work. That's what matters.
+<<endif>>
+
+So right now, the practical question is: what are you going to do?
+
+You have a client list. You have people waiting for appointments. You have a decision to make.
+
+Do you take this on or not?
+
++ [What's your name?] -> Prologue.name_yourself
+
+:: Prologue.name_yourself
+You need to make a decision.
+
+But first: if you're going to do this - if you're going to be a real tarot reader with real clients - you need to commit.
+
+You get up, rummage in your desk drawer for a marker and a piece of cardstock.
+
+You're going to make a sign. Something simple to hang on your door for when clients arrive.
+
+What's your name?
+
+<<if not _inputs.get("player_name")>>
+    @input name="player_name" placeholder="Enter your name..." label="Your Name"
+<<else>>
+    You write it carefully:
+    **{player_name} - TAROT READINGS By Appointment**
+
+    It looks... real.
+
+    Professional, almost.
+
+    You tape it to your door.
+
+    There. Committed.
+<<endif>>
+
+~ reader.name = _inputs.get("player_name")
+
++ [Now that that's taken care of...] -> Prologue.first_client_setup
+
+:: Prologue.first_client_setup
+# Varies by background
+You sit back down at the table.
+
+The black book. The letter. The voicemails and emails waiting.
+
+You could call Mrs. Chen back. She's expecting an appointment Thursday.
+
+Or you could...
+
+<<if reader.background == "inheritance">>
+    Your phone rings. It's a number you don't recognize.
+
+    You answer.
+
+    *"Hello?"*
+
+    "Is this {player_name}?" A younger woman's voice. Uncertain.
+
+    "Yes?"
+
+    "I'm calling about... I heard from Mrs. Chen that M. Thorne's practice has a new reader. I've never done tarot before but I'm... I'm going through something and I think I need help. Could I come see you? Maybe today?"
+
+    Your heart pounds.
+
+    Your first real client. Not a friend. Not practice. Real.
+<<elif reader.background == "career_change">>
+    An email pops up.
+
+    **From: David Morrison**
+
+    **Subject: Re: Appointment Request**
+
+    *"Hi {player_name},*
+
+    *I appreciate you reaching out. M. Thorne has been reading for me for five years and I trust their judgment. If they passed their practice to you, that's good enough for me.*
+
+    *I'm free this afternoon if you are. I'm at a career crossroads and could really use some guidance.*
+
+    *Best,*
+    *David"*
+
+    This afternoon.
+
+    Today.
+
+    You check the time. 1:47 PM.
+<<elif reader.background == "self_taught">>
+    You should probably call someone. Practice on a friend first before diving into M. Thorne's client list.
+
+    You text your roommate, Alex:
+
+    *"You home? Something weird happened and I need to practice a reading. You free?"*
+
+    Three dots appear immediately.
+
+    *"Always down for weird. Give me 20 min. Want coffee?"*
+
+    You smile despite your nerves.
+
+    *"Yes please. Extra shot."*
+
+    Twenty minutes. Then your first real reading with the black book sitting on the table like a weight.
+<<elif reader.background == "unexpected_gift">>
+    You close your eyes.
+
+    Ask the cards: *What should I do?*
+
+    You don't even pull a card. The answer just... arrives.
+
+    *Trust. Move forward. Someone needs you today.*
+
+    Your phone buzzes.
+
+    Text from an unknown number:
+
+    *"Hi. I got your email from M. Thorne's website contact form. I know this is last minute but I'm having a crisis and I really need a reading. Are you available today? I can pay extra for short notice."*
+
+    The cards brought them to you.
+
+    You trust the cards.
+<<endif>>
+
++ [No time like the present...] -> Prologue.schedule_first_client
+
+:: Prologue.schedule_first_client
+<<if reader.background == "inheritance">>
+    "What time works for you?" you ask.
+
+    "Three PM? I can be there by three."
+
+    You look at the clock. 2:15 PM.
+
+    Forty-five minutes to prepare.
+
+    "Three is perfect. Do you have my address?"
+
+    "Mrs. Chen gave it to me."
+
+    Of course she did.
+
+    "See you then," you say, and hang up.
+<<elif reader.background == "career_change">>
+    You type back:
+
+    *"3:30 PM work for you? I have an opening then."*
+
+    You hit send before you can overthink it.
+
+    His reply is immediate:
+
+    *"Perfect. See you then. Thank you."*
+
+    You look at the clock. 1:50 PM.
+
+    Less than two hours to prepare.
+<<elif reader.background == "self_taught">>
+    The front door opens.
+
+    Alex appears with two coffees and a pastry bag.
+
+    "Okay, what's the weird thing?" they ask, handing you a cup. "Did you finally match with someone normal on that dating app? Did your landlord actually fix something?"
+
+    "Better. Weirder." You gesture at the table. "I inherited a tarot reading business."
+
+    Alex stops mid-sip.
+
+    "You what."
+
+    "Sit down. I'll explain while I do your reading."
+<<elif reader.background == "unexpected_gift">>
+    You respond:
+
+    *"I have an opening at 4 PM today. Does that work?"*
+
+    The reply comes back instantly:
+
+    *"Yes. Thank you so much. What's your address?"*
+
+    You send it.
+
+    Three hours to prepare.
+
+    The cards hum in your awareness, pleased.
+<<endif>>
+
+You look around your apartment.
+
+It's... not exactly a professional tarot reading space. Kitchen table with mismatched chairs. Pile of mail. Coffee-stained notebook.
+
+But it'll have to do.
+
+You clear the table. Light a candle...
+<<if reader.core_attribute == "intuitive">>
+    ...to set the mood. The flame steadies your nerves.
+<<elif reader.core_attribute == "analytical">>
+    ...mostly for atmosphere, though you know scent can affect client comfort levels.
+<<elif reader.core_attribute == "storyteller">>
+    ...because every good story needs atmosphere.
+<<elif reader.core_attribute == "practical">>
+    ...because clients expect it, and meeting expectations builds trust.
+<<endif>>
+
+Your tarot deck sits in its usual spot.
+
+<<if reader.background == "inheritance">>
+    Grandma's old Rider-Waite-Smith, edges soft from decades of use.
+<<elif reader.background == "career_change">>
+    The deck you bought when you started using cards therapeutically. Clean, professional.
+<<elif reader.background == "self_taught">>
+    Your first deck, gifted by a friend who thought you might like it. Somewhat battered now.
+<<elif reader.background == "unexpected_gift">>
+    The deck you bought after that first moment of knowing. It chose you as much as you chose it.
+<<endif>>
+
+You shuffle once. Twice.
+
+<<if reader.core_attribute == "intuitive">>
+    The cards feel warm. Ready.
+<<elif reader.core_attribute == "analytical">>
+    The familiar motion calms you. You know these cards. You know their meanings.
+<<elif reader.core_attribute == "storyteller">>
+    Each shuffle is like opening a book to a random page, waiting to see what story appears.
+<<elif reader.core_attribute == "practical">>
+    Muscle memory. You've done this before. You can do it again.
+<<endif>>
+
+The black book sits at the edge of the table.
+
+Open to the first blank page.
+
+Waiting for you to write your first entry.
+
++ [You find your favorite pen] -> Prologue.first_reading_transition
+
+:: Prologue.first_reading_transition
+<<if reader.background == "self_taught>>
+    Alex sits down across from you, eyes wide as you explain about the package, the letter, M. Thorne.
+
+    "That's insane," they say.
+
+    "I know."
+
+    "But also kind of amazing?"
+
+    "I know."
+
+    "So you're really doing this? Taking over someone's entire client list?"
+
+    You look at the black book.
+
+    Then at your deck.
+
+    Then at Alex, who's been your friend since college, who let you practice readings on them dozens of times, who never laughed when you said you were going to try this for real.
+
+    "Yeah," you say. "I think I am."
+
+    "Okay then." Alex grins. "Read my cards, professional tarot reader."
+<<else>>
+    Time passes in a blur.
+
+    You make tea. Change into something that looks more professional than sweatpants. Move the bills off the table. Light the candle.
+
+    The doorbell rings.
+
+    Your heart hammers.
+
+    This is it.
+
+    Your first real client.
+<<endif>>
+
+<<if reader.core_attribute == "intuitive">>
+    You take a deep breath. Trust yourself. Trust the cards.
+
+    They'll tell you what this person needs to hear.
+<<elif reader.core_attribute == "analytical">>
+    You've studied. You know the meanings. You understand the spreads.
+
+    This is no different than any other reading.
+
+    (Except it's completely different.)
+<<elif reader.core_attribute == "storyteller">>
+    Every person who sits across from you is living a story.
+
+    Your job is to help them see it.
+
+    You can do this.
+<<elif reader.core_attribute == "practical">>
+    Someone needs help. You have a tool that helps people.
+
+    Everything else is just details.
+
+    You can do this.
+<<endif>>
+
+<<if reader.background == "self_taught">>
+    You shuffle.
+<<else>>
+    You open the door.
+<<endif>>
+
+:: [Return to desk] -> ReaderDesk

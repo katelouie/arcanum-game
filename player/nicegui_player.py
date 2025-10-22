@@ -15,7 +15,7 @@ from save_manager import SaveManager
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # Set the story ID
-STORY_ID = "reader_journey"
+STORY_ID = "arcanum"
 
 # Add assets as static files so they're accessible via URLs (for favicon, images, etc.)
 app.add_static_files("/assets", str(Path(__file__).parent.parent / "assets"))
@@ -476,28 +476,28 @@ def render_input_form(input_directives: list[dict]):
     # Store input widgets for later access
     input_widgets = {}
 
-    with ui.column().classes('w-full gap-4 my-6 p-6 bg-purple-900/20 border border-purple-400/30 rounded-lg'):
+    with ui.column().classes(
+        "w-full gap-4 my-6 p-6 bg-purple-900/20 border border-purple-400/30 rounded-lg"
+    ):
         # Render each input field
         for spec in input_directives:
-            name = spec.get('name', '')
-            label = spec.get('label', name.replace('_', ' ').title())
-            placeholder = spec.get('placeholder', '')
+            name = spec.get("name", "")
+            label = spec.get("label", name.replace("_", " ").title())
+            placeholder = spec.get("placeholder", "")
 
             # Create input widget with purple/amber styling
-            input_widgets[name] = ui.input(
-                label=label,
-                placeholder=placeholder
-            ).classes(
-                'w-full text-purple-100'
-            ).props('dark outlined')
+            input_widgets[name] = (
+                ui.input(label=label, placeholder=placeholder)
+                .classes("w-full text-purple-100")
+                .props("dark outlined")
+            )
 
         # Submit button
         ui.button(
-            'Submit',
-            on_click=lambda: submit_inputs_action(input_widgets)
+            "Submit", on_click=lambda: submit_inputs_action(input_widgets)
         ).classes(
-            'mt-4 px-8 py-3 bg-purple-600 text-white font-semibold rounded-lg '
-            'hover:bg-purple-700 hover:scale-105 transition-all shadow-lg'
+            "mt-4 px-8 py-3 bg-purple-600 text-white font-semibold rounded-lg "
+            "hover:bg-purple-700 hover:scale-105 transition-all shadow-lg"
         )
 
 
@@ -509,7 +509,7 @@ def submit_inputs_action(input_widgets: dict):
     """
     # Collect values from input widgets
     input_data = {
-        name: widget.value or ''  # Use empty string if None
+        name: widget.value or ""  # Use empty string if None
         for name, widget in input_widgets.items()
     }
 

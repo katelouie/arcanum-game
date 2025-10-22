@@ -1,0 +1,17 @@
+from game_logic.tarot import Card, draw_cards, Reading
+from game_logic.characters import Client, Reader
+
+@include prologue.bard
+
+@metadata
+  title: Arcanum
+  author: Kate Louie
+  version: 0.1.0
+  story_id: arcanum
+  description: A Digital Cartomancer's Tale
+
+@start Start
+
+:: ReaderDesk
+*Your sanctuary. Candles flicker. Cards wait.*
+
