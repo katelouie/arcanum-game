@@ -15,7 +15,7 @@ from save_manager import SaveManager
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # Set the story ID
-STORY_ID = "arcanum"
+STORY_ID = "reader_journey"
 
 # Add assets as static files so they're accessible via URLs (for favicon, images, etc.)
 app.add_static_files("/assets", str(Path(__file__).parent.parent / "assets"))
