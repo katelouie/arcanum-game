@@ -1,5 +1,8 @@
 :: Start
 ~ reader = Reader("Reader")
+~ clients = []
+~ nyx = Nyx()
+~ chen = Client()
 Rain hammers against your apartment window. It's been raining for three days straight—typical for October in the Pacific Northwest. The kind of rain that makes everything feel muted, like the world is wrapped in wet cotton.
 
 You're sitting at your kitchen table, nursing a cup of coffee that went cold an hour ago. Bills are spread out in front of you. Rent's due in a week. Your phone screen glows with job listings that all require "3-5 years experience" for positions that pay barely above minimum wage.
@@ -10,8 +13,8 @@ You're not expecting a package.
 
 The doorbell rings.
 
-+ [Answer the door] -> Prologue.answer_door
-+ [Ignore it] -> Prologue.ignore_door
++ [Someone's at the door, I may as well answer it] -> Prologue.answer_door
++ [Probably just junk mail] -> Prologue.ignore_door
 
 :: Prologue.answer_door
 ~ prologue_answered_door = True
@@ -790,7 +793,7 @@ When you read tarot—when you're sitting across from someone and the cards are 
 + [You focus on practical advice. The cards are tools for helping people make decisions.] -> Prologue.attribute_practical
 
 :: Prologue.attribute_intuitive
-~ reader.core_attribute = "intuitive"
+~ reader.style = "intuitive"
 You trust your intuition.
 
 When the cards come up, you don't just read their traditional meanings. You feel them. The Hermit isn't just about solitude—it's about the specific kind of solitude this person needs. The Two of Cups isn't just partnership—it's about the healing quality of connection they're missing.
@@ -818,7 +821,7 @@ You need to trust that.
 + [What's your name?] -> Prologue.name_yourself
 
 :: Prologue.attribute_analytical
-~ reader.core_attribute = "analytical"
+~ reader.style = "analytical"
 You analyze the cards systematically.
 
 Every card has a meaning. Every position in a spread adds context. It's not mystical—it's pattern recognition. The cards provide a structured way to examine problems from multiple angles.
@@ -842,7 +845,7 @@ You look at the letter again, analyzing each word.
 + [What's your name?] -> Prologue.name_yourself
 
 :: Prologue.attribute_storyteller
-~ reader.core_attribute = "storyteller"
+~ reader.style = "storyteller"
 The cards tell stories.
 
 When you lay them out, you don't just see individual meanings—you see a narrative. The journey from the Fool through the Major Arcana. The arc of the Cups suit from Ace to King. Every reading is a story, and you're the one who helps people see it.
@@ -866,7 +869,7 @@ You can almost see how this story might unfold.
 + [What's your name?] -> Prologue.name_yourself
 
 :: Prologue.attribute_practical
-~ reader.core_attribute = "practical"
+~ reader.style = "practical"
 You focus on what matters: helping people.
 
 The cards aren't mystical prophecies—they're a tool. A way to externalize problems, explore options, make decisions. When someone sits across from you, they're not looking for cosmic truth. They're looking for guidance.
@@ -904,7 +907,7 @@ What's your name?
     @input name="player_name" placeholder="Enter your name..." label="Your Name"
 <<else>>
     You write it carefully:
-    **{player_name} - TAROT READINGS By Appointment**
+    **{_inputs.get("player_name")} - TAROT READINGS By Appointment**
 
     It looks... real.
 
@@ -934,7 +937,7 @@ What happens next depends on your background and how you got here.
 
     *"Hello?"*
 
-    "Is this {player_name}?" A younger woman's voice. Uncertain.
+    "Is this {reader.name}?" A younger woman's voice. Uncertain.
 
     "Yes?"
 
@@ -950,7 +953,7 @@ What happens next depends on your background and how you got here.
 
     **Subject: Re: Appointment Request**
 
-    *"Hi {player_name},*
+    *"Hi {reader.name},*
 
     *I appreciate you reaching out. M. Thorne has been reading for me for five years and I trust their judgment. If they passed their practice to you, that's good enough for me.*
 
@@ -1070,13 +1073,13 @@ It's... not exactly a professional tarot reading space. Kitchen table with misma
 But it'll have to do.
 
 You clear the table. Light a candle...
-<<if reader.core_attribute == "intuitive">>
+<<if reader.style == "intuitive">>
     ...to set the mood. The flame steadies your nerves.
-<<elif reader.core_attribute == "analytical">>
+<<elif reader.style == "analytical">>
     ...mostly for atmosphere, though you know scent can affect client comfort levels.
-<<elif reader.core_attribute == "storyteller">>
+<<elif reader.style == "storyteller">>
     ...because every good story needs atmosphere.
-<<elif reader.core_attribute == "practical">>
+<<elif reader.style == "practical">>
     ...because clients expect it, and meeting expectations builds trust.
 <<endif>>
 
@@ -1094,13 +1097,13 @@ Your tarot deck sits in its usual spot.
 
 You shuffle once. Twice.
 
-<<if reader.core_attribute == "intuitive">>
+<<if reader.style == "intuitive">>
     The cards feel warm. Ready.
-<<elif reader.core_attribute == "analytical">>
+<<elif reader.style == "analytical">>
     The familiar motion calms you. You know these cards. You know their meanings.
-<<elif reader.core_attribute == "storyteller">>
+<<elif reader.style == "storyteller">>
     Each shuffle is like opening a book to a random page, waiting to see what story appears.
-<<elif reader.core_attribute == "practical">>
+<<elif reader.style == "practical">>
     Muscle memory. You've done this before. You can do it again.
 <<endif>>
 
@@ -1149,23 +1152,23 @@ Waiting for you to write your first entry.
     Your first real client.
 <<endif>>
 
-<<if reader.core_attribute == "intuitive">>
+<<if reader.style == "intuitive">>
     You take a deep breath. Trust yourself. Trust the cards.
 
     They'll tell you what this person needs to hear.
-<<elif reader.core_attribute == "analytical">>
+<<elif reader.style == "analytical">>
     You've studied. You know the meanings. You understand the spreads.
 
     This is no different than any other reading.
 
     (Except it's completely different.)
-<<elif reader.core_attribute == "storyteller">>
+<<elif reader.style == "storyteller">>
     Every person who sits across from you is living a story.
 
     Your job is to help them see it.
 
     You can do this.
-<<elif reader.core_attribute == "practical">>
+<<elif reader.style == "practical">>
     Someone needs help. You have a tool that helps people.
 
     Everything else is just details.
@@ -1179,4 +1182,4 @@ Waiting for you to write your first entry.
     You open the door.
 <<endif>>
 
-+ [Return to desk] -> ReaderDesk
++ [Return to Your Table] -> ReaderTable

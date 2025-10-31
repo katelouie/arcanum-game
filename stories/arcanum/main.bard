@@ -1,7 +1,10 @@
-from game_logic.tarot import Card, draw_cards, Reading
-from game_logic.characters import Client, Reader
+from game_logic.tarot import Deck, Reading
+from game_logic.characters import Client, Reader, Nyx
+from game_logic.models import Session, create_session
 
 @include prologue.bard
+@include nyx.bard
+@include nyx_session_1.bard
 
 @metadata
   title: Arcanum
@@ -12,6 +15,8 @@ from game_logic.characters import Client, Reader
 
 @start Start
 
-:: ReaderDesk
+:: ReaderTable ^UI:DASHBOARD
 *Your sanctuary. Candles flicker. Cards wait.*
 
++ {if "Nyx" in clients} [Nyx] -> Nyx ^CLIENT:SPECIAL
++ {if "Chen" in clients} [Mrs. Chen] -> Chen ^CLIENT

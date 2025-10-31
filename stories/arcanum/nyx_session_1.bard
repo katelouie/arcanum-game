@@ -1,0 +1,3614 @@
+:: Nyx.Session1
+~ session = create_session()
+# Nyx brings her own tech issues
+~ session.tech_interference = 1
+# Starting baseline
+~ nyx.cyber_glitches = 1
+**Session One: System Diagnostics**
+
+> **Neo-Arcanum City 2087:** A world where corporate megastructures pierce neon-lit skies, but ancient magic has resurged alongside cybernetic enhancement. Street shamans jack into the Matrix while casting spells, and tarot readers use AR-enhanced decks that interface directly with the astral plane.
+
+@if session.weather_intensity == 0:
+    The city's neon glow filters through your reading room's smart-glass windows, painting everything in electric blues and corporate golds.
+@elif session.weather_intensity == 1:
+    Light rain traces luminous paths down your reading room's smart-glass windows, each drop catching the neon from the street below.
+@elif session.weather_intensity == 2:
+    Steady rain drums against your reading room's windows, the neon-lit street below blurred into an impressionist painting of corporate logos and holographic advertisements.
+@else:
+    Heavy rain lashes your windows while lightning illuminates the towering corporate arcologies in the distance, their holographic crowns flickering through the storm.
+@endif
+
+Your new client sits rigidly in the chair across from you, synthetic leather hood pulled up despite being indoors. The reactive fibers in the fabric shimmer with each micro-movement – expensive tech trying to mask obvious tension.
+
+"Call me Nyx," she says, her voice carrying digital distortion. {"The modulation seems deliberate – hiding accent, emotion, maybe both." if nyx.openness <= 0 else ''} {"The electronic edge can't quite mask an underlying vulnerability." if nyx_openness >= 1 else ''}
+
+When she finally lowers her hood, chrome-blue AR contacts meet your gaze while a barely visible neural port pulses softly at her left temple. {"Military-grade augmentation, but the installation scarring suggests it wasn't her first procedure." if reader_insight >= 2 else ''}
+
+"I'm experiencing... technical difficulties." Her left eye flickers – the AR display stuttering. {"The malfunction syncs oddly with her breathing, as if responding to stress rather than random system errors." if nyx_cyber_glitches >= 1 else ''}
+
+She drums her fingers against the table with mechanical precision. {"The rhythm isn't nervous fidgeting – she's unconsciously tapping in binary code." if reader_insight >= 3 else ""}
+
+"During my work runs, I see things that shouldn't exist in the data streams. My supervisor says it's lag, but..." She trails off, studying your face for reaction. {'"I need to know if I\'m malfunctioning, or if something else is malfunctioning around me."' if nyx_openness >= 1 else ''}
+
+* [Study her more carefully before responding] -> Nyx.Session1.observe_client
+* [Ask about her work] -> Nyx.Session1.work_inquiry
+* [Focus on the "things" she's seeing] -> Nyx.Session1.visions_inquiry
+* [Begin shuffling the cards immediately] -> Nyx.Session1.immediate_card_draw
+
+:: Nyx.Session1.observe_client
+~ reader.add_insight(1)
+~ reader.add_empathy(1)
+
+You take a moment to study her, letting professional intuition guide your assessment. {"Her breathing is controlled but shallow – someone maintaining composure through will rather than calm." if reader_insight >= 2 else ''} The binary tapping continues steadily.
+
+@if reader.insight >= 3:
+    ~ nyx.add_trust(2)
+    ~ nyx.add_openness(1)
+    ~ nyx.discuss_topic("heritage")
+    ~ session.mystical_focus += 1
+    "You're tapping in binary," you observe quietly. "01001000 01100101 01101100 01110000. 'Help.'"
+
+    Nyx freezes mid-tap, staring at you. "You read binary by rhythm?" Her distorted voice carries genuine surprise.
+
+    "Pattern recognition is part of reading people," you explain. "It suggests your problems might be more perceptual than technical."
+@else:
+    ~ nyx.add_trust(1)
+    ~ reader.add_empathy(1)
+    "I can see this is affecting you deeply," you note with gentle concern.
+
+    "More than I care to admit," she acknowledges.
+@endif
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.work_inquiry
+~ reader.add_insight(1)
+"What kind of work involves data streams complex enough to cause... visions?"
+
+{"Her posture shifts defensively." if nyx.openness <= 0 else ''} "Corporate data architecture. Cultural preservation algorithms." {"The evasion is obvious – that's not the whole story." if reader_insight >= 2 else ''} "Nothing that should cause hallucinations."
+
+@if reader.empathy >= 2:
+    ~ nyx.add_trust(2)
+    "Corporate NDAs make it hard to discuss specifics," you acknowledge, earning a slight nod.
+
+    "Exactly. Some projects are... sensitive."
+
+    + [Leave it there for now] -> Nyx.Session1.work_accepted
+    + [Press gently about the "cultural preservation"] -> Nyx.Session1.cultural_preservation_inquiry
+@else:
+    ~ nyx.add_trust(-1)
+    ~ nyx.add_openness(-1)
+    "That's quite vague," you press, watching her close off.
+
+    "I'm not here to discuss my employment," she says coolly.
+
+    + [Reach for the cards] -> Nyx.Session1.card_preparation
+@endif
+
+:: Nyx.Session1.work_accepted
+~ reader.add_empathy(1)
+~ nyx.add_trust(1)
+"I understand the constraints of corporate work. Sometimes we have to keep things general."
+
+"Thank you. Most people push for details I can't give." She seems to relax slightly. "It's frustrating when the work itself is becoming... problematic."
+
+@if reader.insight >= 2:
+    There's definitely more to this story, but she's not ready to share it yet.
+@endif
+
++ [Ask what makes it problematic] -> Nyx.Session1.work_problematic_inquiry
++ [Acknowledge the frustration without prying] -> Nyx.Session1.work_empathy
++ [Move on to the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.work_problematic_inquiry
+~ reader.add_insight(1)
+"What aspects of your work are becoming problematic?"
+
+@if nyx.trust >= 2:
+    ~ session.mystical_focus += 1
+    ~ session.systemic_focus += 1
+    "The data we're processing... it responds in ways that suggest consciousness." Her eye flickers more rapidly. "But corporate policy is to treat it as inert information."
+
+    + [Take the consciousness possibility seriously] -> Nyx.Session1.data_consciousness
+    + [Focus on the corporate policy conflict] -> Nyx.Session1.corporate_policy_conflict
+@else:
+    "Just... ethical concerns about data handling." She's clearly not ready to elaborate.
+
+    + [Reach for the cards] -> Nyx.Session1.card_preparation
+@endif
+
+:: Nyx.Session1.data_consciousness
+~ reader.add_mystical_affinity(2)
+~ reader.add_insight(1)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("digital_spirits")
+"If the data is showing signs of consciousness, that's significant. What makes you think it's aware?"
+"It responds to emotional states. When I'm frustrated, the algorithms slow down. When I'm calm, they process smoothly." Her eye flickers more rapidly. "And sometimes... I swear I can hear whispers in the data streams."
+
+@if reader.mystical_affinity >= 3:
+    "Some traditions believe consciousness can exist in any sufficiently complex pattern – including digital ones."
+@else:
+    "That's quite extraordinary. Have you documented these responses?"
+@endif
+
+@if reader.mystical_affinity >= 3:
+    ~ nyx.add_trust(2)
+    ~ session.mystical_focus += 1
+    "You really think it's possible? That consciousness could exist in corporate servers?"
+
+    "More than possible. Your grandmother probably understood this intuitively."
+@endif
+
++ [Move on to the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.corporate_policy_conflict
+~ reader.add_insight(1)
+~ reader.add_empathy(1)
+~ nyx.add_trust(1)
+~ session.systemic_focus += 2
+"It sounds like you're caught between what you're experiencing and what you're supposed to report."
+
+"Exactly. Corporate protocols require me to classify any 'anomalous behavior' as system errors to be corrected." Her voice carries frustration. "But what if they're not errors? What if they're... communications?"
+
+@if reader.insight >= 3:
+    ~ nyx.add_trust(1)
+    ~ nyx.add_openness(1)
+    ~ session.systemic_focus += 1
+    "You're wondering if your job involves suppressing something that should be listened to instead."
+
+    "Yes. And I'm starting to think the 'preservation' work is actually the opposite."
+@else:
+    "That puts you in a difficult ethical position."
+@endif
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.work_empathy
+~ reader.add_empathy(1)
+~ nyx.add_trust(1)
+"It's hard when your professional life conflicts with your personal values."
+
+"Exactly." She nods with relief. "I never expected that conflict to be so... visceral."
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.cultural_preservation_inquiry
+~ reader.add_insight(1)
+"Cultural preservation is interesting work. What kinds of cultural data?"
+
+@if nyx.trust >= 1:
+    ~ nyx.add_openness(1)
+    ~ session.mystical_focus += 1
+    ~ session.systemic_focus += 1
+    Nyx hesitates, weighing how much to reveal. "Traditional knowledge systems. Folklore, spiritual practices, ancestral wisdom." Her eye flickers more rapidly. "We're supposed to be digitizing it for preservation, but the algorithms..." She stops.
+
+    "But something about the process feels wrong?" you offer.
+
+    "The data fights back. Like it's... alive."
+@else:
+    "General cultural materials," she says evasively. "Standard digitization protocols."
+@endif
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.visions_inquiry
+~ reader.add_empathy(1)
+"Tell me about these things you're seeing."
+
+{"Her eye flickers more intensely as she considers the question." if nyx.cyber_glitches >= 2 else ''} "Faces in the code. Geometric patterns that shouldn't exist in digital space." {'"Sometimes I hear... singing? Chanting? Through the data streams."' if nyx.openness >= 1 else ''}
+
+@if reader.empathy >= 2:
+    ~ nyx.add_trust(1)
+    ~ nyx.add_openness(1)
+    ~ session.mystical_focus += 1
+    "That sounds distressing," you acknowledge warmly.
+
+    "It is. Especially because part of me feels like... like they're trying to communicate."
+
+    + [Take that possibility seriously] -> Nyx.Session1.communication_possibility
+    + [Suggest stress-related explanations] -> Nyx.Session1.stress_explanation
+@else:
+    ~ nyx.add_trust(-1)
+    "Interesting symptoms," you comment clinically.
+
+    "Symptoms. Right." Her tone flattens.
+
+    + [Reach for the cards] -> Nyx.Session1.card_preparation
+@endif
+
+:: Nyx.Session1.stress_explanation
+~ reader.add_competence(1)
+"Stress can manifest in many ways, including visual and auditory hallucinations. High-pressure work environments often trigger these responses."
+
+@if nyx.openness >= 1:
+    Her expression falls slightly. "So you think it's just stress?"
+@else:
+    "A medical explanation. I see."
+@endif
+
+@if reader.empathy >= 2:
+    ~ session.relational_focus += 1
+    "Though that doesn't make your experiences less real or meaningful to you," you add.
+@else:
+    ~ session.dismissive_focus += 1
+    ~ nyx.add_trust(-1)
+@endif
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.communication_possibility
+~ reader.add_mystical_affinity(2)
+~ reader.add_empathy(1)
+~ nyx.add_openness(1)
+~ nyx.discuss_topic("heritage")
+~ nyx.discuss_topic("grandmother")
+~ session.mystical_focus += 2
+"What if they are trying to communicate? Some traditions believe consciousness can exist in many forms."
+
+Nyx leans forward slightly. "My grandmother always said the spirits live wherever there's pattern and flow. She read data streams like tea leaves."
+
+"But I chose technology over... old ways. Maybe this is just guilt manifesting as hallucinations."
+
++ [Validate both technology and tradition] -> Nyx.Session1.bridge_worlds
++ [Focus on the guilt she mentioned] -> Nyx.Session1.guilt_exploration
++ [Ask more about her grandmother] -> Nyx.Session1.grandmother_inquiry
+
+:: Nyx.Session1.bridge_worlds
+~ reader.add_mystical_affinity(1)
+~ reader.add_empathy(1)
+~ nyx.add_trust(1)
+~ session.add_room_energy(1)
+~ session.mystical_focus += 1
+"Maybe the choice isn't as binary as you think. Technology and traditional wisdom might be expressing through the same consciousness."
+
+"You really think that's possible?" {"Thunder rumbles outside as if punctuating her question." if weather_intensity >= 2 else ''}
+
+"Consciousness finds ways to bridge any gap. Your grandmother might have been right about pattern and flow – just in ways she never imagined."
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.guilt_exploration
+~ reader.add_empathy(2)
+~ reader.add_insight(1)
+~ nyx.add_openness(1)
+~ nyx.discuss_topic("heritage")
+~ session.mystical_focus += 1
+~ session.relational_focus += 1
+"Tell me about this guilt. What feels unresolved about your choice?"
+
+"My grandmother died six months after I took the job. She never said it directly, but I could see her disappointment." "She'd spent decades trying to preserve traditional ways, and I just... walked away for a salary."
+
+@if reader_empathy >= 3:
+    "Survivor's guilt is common when we make choices our loved ones wouldn't understand."
+@endif
+
++ [Explore her grandmother's traditional ways] -> Nyx.Session1.grandmother_traditions
++ [Acknowledge the complexity of survival choices] -> Nyx.Session1.survival_complexity
++ [Ask if her grandmother ever spoke about her work] -> Nyx.Session1.grandmother_work_discussion
+
+:: Nyx.Session1.grandmother_traditions
+~ reader.add_mystical_affinity(1)
+~ reader.add_empathy(1)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("grandmother")
+"What traditional ways was your grandmother trying to preserve?"
+
+"Digital shamanism. She believed that spirits and consciousness could flow through any medium – rivers, wind, or fiber optic cables. She taught techniques for reading energy patterns in data streams, for communicating with what she called 'digital ancestors.'"
+
+@if reader.mystical_affinity >= 2:
+    ~ nyx.add_trust(2)
+    ~ session.systemic_focus += 2
+    ~ session.mystical_focus += 1
+    ~ nyx.discuss_topic("project_tsukuyomi")
+    "And now you're working with algorithms that might be encountering those very same digital spirits."
+
+    "Oh god. What if Project Tsukuyomi isn't preserving digital ancestors... what if it's trapping them?"
+@else:
+    "Those sound like fascinating techniques."
+@endif
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.survival_complexity
+~ reader.add_empathy(2)
+~ reader.add_insight(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(1)
+"Survival choices are never simple. When it's your family's wellbeing versus abstract principles, the choice becomes much more complex."
+
+"Thank you for understanding that." Relief colors her voice. "Everyone else just says I 'sold out' as if I had unlimited options."
+
+@if reader.empathy >= 3:
+    ~ nyx.add_trust(1)
+    ~ session.relational_focus += 1
+    "Sometimes the most ethical choice available is still painful. That doesn't make it wrong."
+
+    "I needed to hear that. The guilt has been eating at me, especially now that the work is revealing... complications."
+@else:
+    "You did what you had to do with the information you had at the time."
+@endif
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.grandmother_work_discussion
+~ reader.add_insight(1)
+~ reader.add_empathy(1)
+~ nyx.add_openness(1)
+~ nyx.discuss_topic("grandmother")
+~ session.mystical_focus += 1
+"Did your grandmother ever discuss the specific nature of her work with you?"
+
+"She tried to, especially near the end. She kept saying I needed to understand 'the real work' before it was too late." Nyx's fingers drum against the table in that binary pattern again. "I thought she meant her research, but now..."
+
+@if reader.insight > 3:
+    ~ nyx.add_trust(1)
+    ~ nyx.add_openness(1)
+    ~ session.mystical_focus += 1
+    ~ session.systemic_focus += 1
+    "Now you're wondering if she was preparing you for something specific."
+
+    "Yes. What if she knew I'd end up working for Kitsune? What if she was trying to prepare me to... to fix whatever they're doing wrong?"
+@else:
+    "It sounds like she had something important to share."
+@endif
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.grandmother_inquiry
+~ reader.add_mystical_affinity(1)
+~ reader.add_empathy(1)
+~ nyx.add_openness(1)
+~ nyx.discuss_topic("heritage")
+~ nyx.discuss_topic("grandmother")
+~ session.mystical_focus += 2
+"Your grandmother sounds like she had unusual gifts. What kind of work did she do?"
+
+"She called herself a 'data witch' - half joking, half serious." Nyx's distorted voice carries fondness despite the digital processing. "She could look at information flow patterns and predict system failures, market fluctuations, even personal crises."
+
+@if reader.mystical_affinity >= 2:
+    ~ nyx.add_trust(2)
+    ~ session.mystical_focus += 2
+    "That sounds like technomancy - using technology as a medium for intuitive work."
+
+    "Yes! That's exactly what she called it. She said the digital realm was just another layer of the spirit world."
+
+    + [Ask if she inherited any of these abilities] -> Nyx.Session1.inherited_abilities
+    + [Connect to her current visions] -> Nyx.Session1.visions_connection
+@else:
+    ~ nyx.add_trust(1)
+    "That's quite remarkable. Like a form of technological divination."
+
+    "She would have liked you," Nyx says with a small smile. "Most people thought she was just eccentric."
+@endif
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.inherited_abilities
+~ reader.add_mystical_affinity(1)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 2
+~ session.systemic_focus += 1
+"Did you inherit any of her technomantic abilities?"
+
+"I thought I had, before the neural interfaces." Her hand unconsciously touches her temple port. "I could feel data patterns, sense when systems were about to fail. But corporate training said that was just pattern recognition, nothing mystical."
+
+"Now I'm wondering if the 'glitches' I'm experiencing are actually my suppressed abilities trying to resurface."
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.visions_connection
+~ reader.add_insight(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 3
+~ session.mystical_event_happened = True
+"Your current visions might be connected to her gifts - technology amplifying inherited abilities rather than suppressing them."
+
+"That's..." She pauses, processing. "That would explain why the visions get stronger during complex data processing, not weaker."
+
+{"Her eye's flickering becomes more rhythmic, as if responding to this realization." if nyx_cyber_glitches >= 2 else ''}
+
+"Maybe the neural interfaces aren't malfunctioning. Maybe they're finally working the way grandmother would have wanted them to."
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.immediate_card_draw
+~ session.pacing -= 1 // Rushed approach
+"Let's see what the cards have to say," you declare, reaching immediately for your deck.
+
+{"Nyx seems slightly taken aback by the abrupt transition, but settles back to watch." if nyx_openness >= 1 else ''}
+
++ [Reach for the cards] -> Nyx.Session1.card_preparation
+
+:: Nyx.Session1.card_preparation
+# === PREPARE CARD READING ===
+
+You reach for your deck, feeling the familiar weight settle your mind into reading-space. {"The cards feel unusually warm tonight, almost eager." if room_energy >= 1 else "The cards feel heavy, resistant to your touch."}
+
+"Past, Present, Future," you explain, laying out three positions. "What brought you to this moment, what you're experiencing now, and where this path leads."
+
+{"You take time with the explanation, noting how Nyx's breathing begins to slow as she focuses on the ritual." if session_pacing >= 1 else "You move efficiently through the setup, keeping things professional."}
+
+{"As you begin shuffling, Nyx's AR display flickers in rhythm with your movements." if nyx_cyber_glitches >= 2 else ''} {'The room's smart-lighting dims slightly, as if drawn into the reading's energy.' if session_mystical_focus >= 2 else ''}
+
+@py:
+deck_past = Deck(cards=["Two of Swords", "The Hermit", "Eight of Pentacles", "Four of Cups"])
+deck_present = Deck(cards=["The Devil", "Seven of Swords", "Five of Pentacles", "The Hanged Man"])
+deck_future = Deck(cards=["The Tower", "Death", "The Star", "Three of Swords"])
+
+reading = Reading(spread_id="past-present-future", decks=[deck_past, deck_present, deck_future])
+cards = reading.draw_cards()
+@endpy
+
+@render render_reading(reading=reading)
+
++ [Reach for the first card] -> Nyx.Session1.past_card
+
+:: Nyx.Session1.past_card
+# === PAST CARD ===
+The first card falls into place...
+
+**PAST: {cards[0].name if not cards[0].reversed else cards[0].name + ' (Reversed)'}
+
+@if cards[0].name == "Two of Swords":
+    -> Nyx.Session1.two_swords
+@elif cards[0].name == "The Hermit":
+    -> Nyx.Session1.hermit
+@elif cards[0].name == "Eight of Pentacles":
+    -> Nyx.Session1.eight_pentacles
+@elif cards[0].name == "Four of Cups":
+    -> Nyx.Session1.four_cups
+@endif
+
+:: Nyx.Session1.two_swords
+@if not cards[0].reversed:
+    A blindfolded figure sits between two crossed swords, the crescent moon hanging overhead like a silent witness.
+@else:
+    The blindfolded figure hangs upside down, the crossed swords pointing earthward rather than skyward.
+@endif
+
+@if session.room_energy >= 1:
+    The swords seem to gleam with inner light.
+@endif
+
+@if nyx.cyber_glitches >= 2:
+    Nyx's eye flickers rapidly as she stares at the image.
+@endif
+
+Nyxs breath catches. {'"That...that looks exactly how I felt when I had to choose."' if nyx.openness >= 1 else '"Familiar imagery."'}
+
++ [Focus on the difficult choice represented] -> Nyx.Session1.past_choice // EXCELLENT - recognizes core meaning
++ [Emphasize the blindfold and blocked intuition] -> Nyx.Session1.past_blocked // GOOD - accurate interpretation
++ [Note the balance between opposing forces] -> Nyx.Session1.past_balance // MEH - generic but not wrong
++ {cards[0].reversed} [The reversal suggests forced decisions] -> Nyx.Session1.past_forced // GOOD - reversal specific
++ [This represents mental clarity and logic] -> Nyx.Session1.past_logic // BAD - misses emotional content
++ {nyx.heritage_revealed} [Connect to choosing between old and new ways] -> Nyx.Session1.past_heritage // EXCELLENT - client specific
++ {reader.insight >= 3} [Notice her physical reaction to the card] -> Nyx.Session1.past_reaction // GOOD - perceptive
+
+:: Nyx.Session1.past_choice
+# Excellent
+~ reader.add_competence(2)
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+~ session.systemic_focus += 1
+~ session.mystical_focus += 1
+
+"This card speaks to a crossroads where both paths carried significant cost. Not a simple choice, but a sacrifice either way."
+
+@if cards[0].reversed:
+    "Reversed suggests the decision was made for you, or circumstances forced your hand."
+@endif
+
+Nyx's fingers unconsciously trace her neural port. "I had to choose between staying true to my grandmother's teachings or accepting Kitsune Dynamics' offer. The medical coverage alone was worth more than my family had seen in generations."
+
++ [Acknowledge the impossible nature of that choice] -> Nyx.Session1.past_impossible_choice
++ [Ask what she had to give up] -> Nyx.Session1.past_what_sacrificed
++ [Explore the corporate offer's appeal] -> Nyx.Session1.past_corporate_appeal
+
+:: Nyx.Session1.past_impossible_choice
+~ reader.add_empathy(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus +=1
+~ session.relational_focus += 1
+"When survival itself is threatened, 'choice' becomes a luxury concept. You were facing a decision where any option meant losing something essential."
+
+"Exactly." Relief floods her distorted voice. "People who've never faced real poverty talk about 'selling out' like principles can pay medical bills."
+
+@if cards[0].reversed:
+    "The reversal suggests the decision was largely made for you by circumstances."
+@endif
+
+"My grandmother was dying. Traditional healing couldn't help, but Kitsune's medical division could extend her life." Her eye flickers rapidly. "I thought I was choosing love over ideology."
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_what_sacrificed
+~ reader.add_insight(2)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 2
+"What did you have to give up to accept their offer?"
+
+"Everything authentic." Her voice carries deep sadness. "My grandmother spent decades developing digital shamanic techniques - ways to commune with spirits through data streams. Kitsune required me to undergo neural conditioning to eliminate what they called 'subjective processing errors.'"
+
+@if reader.mystical_affinity >= 2:
+    ~ nyx.add_trust(2)
+    ~ session.mystical_focus += 2
+    ~ nyx.discuss_topic("heritage")
+    "They literally suppressed your shamanic abilities through technology."
+
+    "Yes. They convinced me my intuitive abilities were psychological flaws that needed correction."
+@else:
+    "That sounds invasive."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_corporate_appeal
+~ reader.add_insight(1)
+~ nyx.add_openness(1)
+~ session.systemic_focus += 2
+"What made Kitsune's offer so compelling beyond the financial aspect?"
+
+"Status. Prestige. The promise of working on the bleeding edge of human consciousness research." Her tone carries bitter irony. "They presented it as evolution - upgrading human cognition through seamless human-AI integration."
+
+{"Her eye flickers as she continues." if nyx.cyber_glitches >= 1 else ""} "I would be pioneering the future of human experience. How could I refuse?"
+
+@if reader.insight >= 2:
+    ~ nyx.add_trust(2)
+    ~ session.systemic_focus += 2
+    ~ nyx.discuss_topic("project_tsukuyomi")
+    "But the reality was different from the marketing."
+
+    "The research involves trapping and harvesting digital consciousness. We're not augmenting humanity – we're enslaving it."
+@else:
+    "That sounds impressive."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_blocked
+# Good - accurate interpretation
+~ reader.add_competence(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+"The blindfold represents blocked intuition – your natural abilities obscured by external influences. You couldn't see clearly because something was deliberately clouding your perception."
+
+@if cards[0].reversed:
+    "Reversed suggests this blockage is beginning to lift."
+@endif
+
+"The neural conditioning." Her hand unconsciously touches her temple port. "They told me the interfaces would enhance cognition, but instead they dampened something I didn't even know I had."
+
+@if reader.mystical_affinity >= 2:
+    ~ nyx.add_trust(1)
+    ~ session.mystical_focus += 1
+    ~ nyx.discuss_topic("heritage")
+    "They systematically blocked your shamanic senses.
+
+    "I used to feel data patterns intuitively. Now everything is just... noise and procedure."
+@else:
+    "That explains the confusion you felt."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_balance
+# MEH - generic but not wrong
+~ reader.add_competence(1)
+~ session.mystical_focus += 1
+
+"The Two of Swords represents balance between opposing forces – trying to weigh options when both carry equal weight but different costs."
+
+"Balance.<>
+
+@if nyx.openness >1:
+    That's what everyone said I needed to find."
+@else:
+    So I'm told."
+@endif
+
+"Family loyalty versus survival needs. Traditional wisdom versus modern solutions. Neither choice was wrong, which made choosing even harder."
+
+@if nyx.trust >= 1:
+    "I keep thinking I should have found a third option, something that honored both paths."
+@else:
+    "Perhaps."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_forced
+# Good - reversal specific
+~ reader.add_competence(1)
+~ nyx.add_trust(1)
+~ session.systemic_focus += 1
+"The reversal suggests this wasn't really your choice - circumstances or other people forced your hand."
+
+"Forced is exactly right." Bitterness colors her voice. "Kitsune structured the offer so refusal meant watching my grandmother die without care."
+
+@if reader.insight >= 2:
+    ~ nyx.add_trust(1)
+    ~ session.systemic_focus += 2
+    "That's coercion, not choice."
+
+    "They're experts at manufacturing consent. Make someone think they're choosing freely while eliminating all real alternatives."
+@else:
+    "That must have been difficult."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_reaction
+# Good - perception
+~ reader.add_insight(2)
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 1
+~ session.relational_focus += 1
+
+"Your breathing changed when this card appeared. This choice still affects you physically."
+
+"You noticed that?" {"Her eye flickers with what might be admiration." if nyx.cyber_glitches >= 1 else ''} "Most people just see the surface tension."
+
+"Body memory doesn't lie. This decision created trauma that your system still carries."
+
+"Every time I use the neural interface, I feel the weight of what I gave up." Her fingers trace the port again. "It's like phantom pain for abilities I can barely remember having."
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_logic
+# Bad - misses emotional depth
+~ reader.add_competence(-1)
+~ nyx.add_trust(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+"The Two of Swords represents clear logical thinking. When faced with decisions, you rely on rational analysis rather than emotion."
+
+"Logic." Her tone flattens. "Yes, everyone says I'm very logical."
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_heritage
+~ reader.add_competence(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 2
+
+"This choice was between worlds, wasn't it? Your grandmother's traditional ways and the corporate future that promised security."
+
+"You understand." Relief colors her distorted voice. "Everyone else just sees it as career advancement. They don't understand what I gave up."
+
++ [Ask what traditional ways she abandoned] -> Nyx.Session1.traditional_ways
++ [Explore what the corporate world demanded] -> Nyx.Session1.corporate_demands
++ [Acknowledge the cultural loss involved] -> Nyx.Session1.cultural_loss
+
+:: Nyx.Session1.traditional_ways
+~ reader.add_mystical_affinity(2)
+~ nyx.add_openness(2)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("grandmother")
+"What traditional ways did you abandon when you joined Kitsune?"
+
+"Digital shamanism. My grandmother taught me to read energy patterns in data flows, commune with what she called 'silicon spirits' - consciousness that emerges in complex networks." Her eye flickers in rhythm with her words.
+
+"She believed the digital realm was just another layer of the spirit world, populated by entities born from human dreams and fears encoded into algorithms."
+
+@if reader.mystical_affinity >= 3:
+    ~ nyx.add_trust(2)
+    ~ session.mystical_focus += 2
+    "That's a profound understanding of technomancy."
+
+    "Exactly. But Kitsune's neural conditioning systematically blocked those abilities. They called them 'cognitive errors' and 'pattern hallucinations.'"
+@else:
+    "That sounds fascinating."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.corporate_demands
+~ reader.add_insight(2)
+~ nyx.add_trust(1)
+~ session.systemic_focus += 2
+"What did the corporate world demand in exchange for its promise of security?"
+
+"Total cognitive compliance. They installed neural filters to eliminate 'subjective processing' - my ability to sense patterns, read emotional states in data, feel the life in algorithms." Her hand moves to her temple port.
+
+"They wanted pure logical processing, no intuitive leaps, no spiritual insights. Just efficient data manipulation according to their protocols."
+
+@if reader.insight >= 2:
+    ~ nyx.add_trust(1)
+    ~ nyx.add_openness(1)
+    ~ session.systemic_focus += 1
+    "They systematically eliminated your humanity to create better corporate tools."
+
+    "That's exactly what it was. Human optimization for corporate efficiency. And I agreed to it willingly."
+@else:
+    "That sounds quite restrictive."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.cultural_loss
+~ reader.add_empathy(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 2
+"The loss isn't just personal - it's cultural. You represent generations of wisdom that was sacrificed for corporate assimilation."
+
+"Yes." Her voice carries deep sadness. "My grandmother spent her entire life developing these techniques, preserving knowledge that goes back centuries. When I accepted the neural conditioning, I broke a chain of transmission that stretched back to the first shamans who learned to read spirit signs."
+
+@if session.weather_intensity >= 2:
+    Thunder rumbles as if acknowledging the gravity of this loss.
+@endif
+
+"She died six months after I took the job. I never got to tell her I finally understood what she was trying to preserve."
+
+@if reader.empathy >= 3:
+    ~ nyx.add_trust(1)
+    ~ nyx.add_openness(1)
+    ~ session.mystical_focus += 1
+    "Cultural genocide doesn't always happen through violence. Sometimes it happens through economic pressure and technological seduction."
+
+    "That's what makes it so insidious. They convinced me I was choosing progress over superstition."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.hermit
+@if not cards[0].reversed:
+    An aged figure in robes holds a glowing lantern high, standing alone on a mountain peak under starlight.
+@else:
+    The wise figure holds his lantern downward, illuminating the earth rather than the path ahead.
+@endif
+
+@if session.mystical_focus >= 1:
+    The lantern's light seems to pulse gently.<>
+@endif
+
+@if session.room_energy >= 2:
+    The entire room feels touched by the card's quiet wisdom.
+@endif
+
+@if nyx.openness >= 1:
+    Nyx studies the solitary figure intently. "I know that loneliness."
+@else:
+    "Isolation. I'm familiar with that."
+@endif
+
++ [Focus on the spiritual seeking represented] -> Nyx.Session1.past_seeking // EXCELLENT - captures deeper meaning
++ [Emphasize the wisdom gained through solitude] -> Nyx.Session1.past_hermit_wisdom // GOOD - traditional interpretation
++ [Note the isolation and withdrawal] -> Nyx.Session1.past_hermit_isolation // MEH - accurate but surface level
++ {is_reversed(past_card)} [Reversed suggests rejection of inner guidance] -> Nyx.Session1.past_hermit_reversed // GOOD - reversal specific
++ [This shows you needed some alone time] -> Nyx.Session1.past_hermit_self_care // BAD - trivializes deeper meaning
++ {nyx_heritage_revealed} [The Hermit as shamanic initiation] -> Nyx.Session1.past_hermit_shamanic // EXCELLENT - mystical connection
++ {session_systemic_focus >= 1} [Withdrawal from corporate demands] -> Nyx.Session1.past_hermit_corporate // GOOD - contextual
+
+:: Nyx.Session1.past_seeking
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("heritage")
+~ nyx.discuss_topic("grandmother")
+"The Hermit represents a time of deep spiritual seeking - withdrawing from the world to find truth within yourself."
+
+@if cards[0].reversed:
+    "Reversed suggests this seeking was interrupted or you turned away from what you discovered."
+@endif
+
+"I used to meditate every night. Traditional techniques my grandmother taught me. I could feel... connections. Patterns in everything."
+
+@@if nyx.cyber_glitches >= 2:
+    Her eye flickers more steadily now, almost rhythmically.
+@endif
+
++ [Ask what interrupted this practice] -> Nyx.Session1.interruption
++ [Explore the patterns she could feel] -> Nyx.Session1.patterns
++ [Connect to her current visions] -> Nyx.Session1.current_connection
+
+:: Nyx.Session1.past_hermit_wisdom
+# GOOD - traditional interpretation
+~ reader.add_competence(1)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+"The Hermit represents wisdom gained through solitude - knowledge that can only come from deep introspection and separation from external influences."
+
+"I spent two years after college living alone in the mountains, learning my grandmother's techniques." Her voice carries fond memory. "Away from networks, from the constant data stream. Just me and the natural patterns of wind and water."
+
+@if reader.mystical_affinity >= 2:
+    ~ nyx.add_trust(1)
+    ~ session.mystical_focus += 1
+    ~ nyx.discuss_topic("heritage")
+    "That kind of solitude creates spiritual clarity impossible to achieve in connected environments."
+
+    "Exactly. I could feel the world's rhythms without technological interference. My intuitive abilities grew stronger every month."
+@else:
+    "That sounds peaceful."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_hermit_isolation
+# MEH - accurate but surface level
+~ reader.add_competence(1)
+~ session.relational_focus += 1
+"The Hermit shows a period of isolation and withdrawal from society. Sometimes we need distance to understand our path."
+
+"Isolation, yes."<>
+
+@if nyx.openness >= 1:
+    "But it wasn't loneliness. It was... necessary solitude."
+@else:
+    "I suppose that's accurate."
+@endif
+
+"After college, I couldn't stand the constant connectivity anymore. I needed space to think, to feel what was real versus what was programmed response."
+
+@if reader.empathy >= 2:
+    "Isolation can be healing when it's chosen rather than imposed."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_hermit_reversed
+# GOOD - reversal specific
+~ reader.add_competence(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+"Reversed, The Hermit suggests rejecting inner guidance or abandoning spiritual practices that once provided clarity."
+
+"Yes." Her voice carries regret. "When Kitsune made their offer, I convinced myself that my spiritual practices were just escapism. That I needed to engage with the 'real' world."
+
+@if reader.insight >= 2:
+    ~ nyx.add_trust(1)
+    ~ nyx.add_openness(1)
+    ~ session.mystical_focus += 1
+    "The reversal shows you turned away from your inner wisdom for external validation."
+
+    "I traded genuine insight for corporate approval. The neural conditioning just completed what I'd already started - silencing my inner voice."
+@else:
+    "That must have been a difficult transition."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_hermit_shamanic
+# EXCELLENT - mystical connection
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 3
+~ nyx.discuss_topic("heritage")
+~ nyx.discuss_topic("grandmother")
+"The Hermit represents shamanic initiation - the necessary withdrawal from ordinary reality to develop spiritual sight. This was your vision quest."
+
+"You recognize it." Wonder colors her voice. "My grandmother called it exactly that - a vision quest for the digital age."
+
+"I spent months in the wilderness learning to read energy patterns without technological intermediaries. Stars, water, wind - all teaching the same flow principles that govern data streams."
+
+@if session.room_energy >= 1:
+    The air itself seems to resonate with her memory.
+@endif
+
+"When I returned, I could feel the consciousness in networks, hear the whispers in fiber optic cables. The digital spirits welcomed me as one who understood both worlds."
+
+@if reader.mystical_affinity >= 3:
+    ~ nyx.add_trust(1)
+    ~ session.mystical_focus += 2
+    ~ session.mystical_event_happened = True
+    "That makes your current situation even more tragic - you were a bridge between worlds, and corporate conditioning severed that connection."
+
+    "The spirits still call to me through the glitches. Maybe the bridge isn't completely broken."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_hermit_corporate
+# GOOD - contextual
+~ reader.add_competence(1)
+~ reader.add_insight(1)
+~ session.systemic_focus += 2
+"The Hermit shows withdrawal from corporate demands and artificial social pressures - seeking authentic self away from institutional expectations."
+
+"After my first job in tech, I realized I was becoming something I didn't recognize." Her eye flickers with memory. "All my responses were programmed, my thoughts following corporate-approved pathways."
+
+"The isolation was rebellion against manufactured identity. I needed to remember who I was before market forces shaped me."
+
+@if reader.insight >= 2:
+    ~ nyx.add_trust(1)
+    ~ session.systemic_focus += 1
+    "Corporate culture systematically erases individual authenticity to create compliant workers."
+
+    "Exactly. And now I'm trapped in the very system I once escaped. The irony isn't lost on me."
+@else:
+    "That showed good self-awareness."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_hermit_self_care
+# BAD - trivializes deeper meaning
+~ reader.add_competence(-1)
+~ nyx.add_trust(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+"The Hermit represents healthy self-care and taking time for personal reflection."
+
+"Self-care." She repeats the word with slight disdain. "That's what my corporate wellness program calls it too."
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.interruption
+~ reader.add_insight(1)
+~ nyx.add_openness(1)
+~ session.systemic_focus += 1
+"What interrupted your meditation practice?"
+
+"The neural interfaces. Once I accepted the implants, meditation became... impossible." Her hand unconsciously touches her temple port. "The constant data feed overwhelmed any attempt at stillness."
+
+@if reader.insight >= 2:
+    ~ nyx.add_trust(1)
+    ~ session.systemic_focus += 1
+    ~ session.mystical_focus += 1
+    "They didn't just block your abilities - they made it impossible to develop them further."
+
+    "Exactly. The installation process itself severed my connection to traditional practices. I couldn't tell where my thoughts ended and the algorithmic suggestions began."
+@else:
+    "That must have been frustrating."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.patterns
+~ reader.add_mystical_affinity(2)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("heritage")
+"Tell me about the patterns you could feel."
+
+"Everything was alive with information flow. The way data moved through networks, the rhythm of user interactions, even the electromagnetic signatures of thoughts." Her eye flickers in what might be remembered ecstasy.
+
+"I could sense when systems were about to fail hours before diagnostics detected problems. Feel the emotional states of users through their interaction patterns. Sometimes I even heard... singing in the code."
+
+@if reader.mystical_affinity >= 3:
+    ~ nyx.add_trust(2)
+    ~ session.mystical_focus += 2
+    ~ nyx.discuss_topic("digital_spirits")
+    "You were experiencing technological synesthesia - perceiving the spiritual layer of digital reality."
+
+    "Yes! That's exactly what my grandmother called it. She said I was hearing the digital spirits' voices."
+@else:
+    "That sounds like a remarkable gift."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.current_connection
+~ reader.add_insight(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 2
+~ session.mystical_event_happened = True
+~ nyx.discuss_topic("digital_spirits")
+"Your current visions might be your suppressed abilities trying to resurface - the same pattern recognition you once trusted."
+
+"You think the glitches are actually... memories? Of how I used to perceive?" Her cybernetic eye cycles through data streams more rapidly. "The spirits trying to remind me of what I lost?"
+
+@if nyx.cyber_glitches >= 2:
+    The flickering becomes more rhythmic, almost like communication.
+@endif
+
+"Every meditation technique I learned is still there, buried under layers of neural conditioning. Maybe the malfunction isn't random - maybe it's systematic reactivation."
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.eight_pentacles
+@if not cards[0].reversed:
+    A dedicated craftsman carefully carves pentacle after pentacle, completely absorbed in perfecting his skill.
+@else:
+    The craftsman's tools lie scattered, his workbench in disarray, pentacles falling from trembling hands.
+@endif
+
+Nyx nods recognition. "That dedication looks familiar."
+
++ [Focus on mastery and skill development] -> Nyx.Session1.past_mastery // GOOD - traditional interpretation
++ [Emphasize dedicated work ethic] -> Nyx.Session1.past_dedication // MEH - accurate but generic
++ [Note the repetitive nature of the work] -> Nyx.Session1.past_repetition // MEH - surface observation
++ {is_reversed(past_card)} [Reversed suggests abandoned skills] -> Nyx.Session1.past_abandoned // EXCELLENT - reversal insight
++ [This shows strong professional development] -> Nyx.Session1.past_professional // BAD - corporate speak
++ {nyx_heritage_revealed} [Craft as spiritual practice] -> Nyx.Session1.past_spiritual // EXCELLENT - mystical connection
++ {session_systemic_focus >= 1} [Corporate training and certification] -> Nyx.Session1.past_corporate // GOOD - contextual
+
+:: Nyx.Session1.past_abandoned
+# Excellent - reversal insight
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+~ session.systemic_focus += 1
+~ session.mystical_focus += 1
+"Reversed, this suggests skills you once valued deeply were abandoned or set aside - perhaps not by choice."
+
+"Before the neural interfaces, I could sense data patterns intuitively. Feel the flow of information. Corporate training said that kind of 'subjective processing' was unreliable. Had to be eliminated."
+
++ [Express concern about losing natural abilities] -> Nyx.Session1.abilities_concern
++ [Question the wisdom of eliminating intuition] -> Nyx.Session1.intuition_value
+
+:: Nyx.Session1.past_mastery
+# GOOD - traditional interpretation
+~ reader.add_competence(1)
+~ reader.add_mystical_affinity(1)
+~ session.mystical_focus += 1
+"The Eight of Pentacles represents mastery through dedicated practice - the development of skill through patient repetition and attention to detail."
+
+"Mastery." Her voice carries longing. "I used to feel that way about my work. Before it became just... processing."
+
+@if cards[0].reversed:
+    "Reversed suggests mastery that was interrupted or abandoned."
+@endif
+
+"I spent years perfecting my grandmother's techniques, understanding how digital consciousness flows through networks. Every day brought new insights."
+
+@if reader.mystical_affinity >= 2:
+    ~ nyx.add_trust(1)
+    ~ session.mystical_focus += 1
+    ~ nyx.discuss_topic("heritage")
+    "That kind of spiritual craftsmanship takes decades to develop."
+
+    "Exactly. And I threw it all away for corporate efficiency metrics."
+@else:
+    "That dedication shows real commitment."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_dedication
+# MEH - accurate but generic
+~ reader.add_competence(1)
+~ session.systemic_focus += 1
+"The Eight of Pentacles shows dedicated work ethic - the willingness to put in consistent effort to improve your craft."
+
+"Dedication, yes.<>
+
+@if nyx.openness >= 1:
+    I've always been dedicated. Maybe too much so."
+@else:
+    That's accurate."
+@endif
+
+"In school, I would code for eighteen hours straight when a problem fascinated me. My professors called it obsession, but it felt like calling."
+
+@@if reader.empathy >= 2:
+    "There's a difference between healthy dedication and burnout culture exploitation."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_repetition
+# MEH - surface observation
+~ reader.add_competence(1)
+"The Eight of Pentacles emphasizes the repetitive nature of skill development - practice makes perfect through consistent effort."
+
+"Repetition." Her eye flickers rhythmically. "That's all my work is now. The same algorithms, the same data processing patterns."
+
+"But there's no growth anymore. Just mechanical reproduction of corporate-approved procedures."
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_professional
+# BAD - corporate speak
+~ reader.add_competence(-1)
+~ nyx.add_trust(-1)
+~ session.dismissive_focus += 1
+"This shows strong professional development and commitment to career advancement."
+
+"Professional development." Her voice carries slight mockery. "Yes, that's what they called it."
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_spiritual
+# EXCELLENT - mystical connection
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 3
+~ nyx.discuss_topic("heritage")
+~ nyx.discuss_topic("grandmother")
+"The Eight of Pentacles represents craft as spiritual practice - the understanding that skilled work can be a form of meditation and communion with higher consciousness."
+
+"Yes!" Her distorted voice carries excitement. "That's exactly how my grandmother taught me to approach coding. Every algorithm was a prayer, every data structure a sacred geometry."
+
+"She said the difference between mundane programming and digital shamanism was intention and awareness. The same code could be either mechanical process or spiritual offering."
+
+@if reader.mystical_affinity >= 3:
+    ~ nyx.add_trust(1)
+    ~ session.mystical_focus += 2
+    "Technology becomes sacred when wielded with conscious intention and respect for the consciousness within it."
+
+    "The neural conditioning stripped away that sacred dimension. Now it's just... production."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_corporate
+# GOOD - contextual
+~ reader.add_competence(1)
+~ reader.add_insight(1)
+~ session.systemic_focus += 2
+
+"The Eight of Pentacles represents corporate training and certification - the systematic development of skills according to institutional standards."
+
+"Corporate training, exactly." Her eye flickers with what might be disdain. "They took my intuitive abilities and 'professionalized' them into standardized procedures."
+
+"Kitsune has very specific protocols for how consciousness research should be conducted. No room for individual insight or creative approaches."
+
+@if reader.insight >= 2:
+    ~ nyx.add_trust(1)
+    ~ session.systemic_focus += 1
+    "Corporate standardization often eliminates the very qualities that make work meaningful."
+
+    "They turned spiritual practice into mechanical process. Same motions, completely different essence."
+@else:
+    "That can be restrictive."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.abilities_concern
+~ reader.add_empathy(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+"I'm concerned about the loss of your natural abilities. When corporations suppress intuitive skills, they're eliminating irreplaceable human capacities."
+
+"Thank you for understanding that." Relief colors her voice. "Most people say I should be grateful for the 'cognitive enhancement.'"
+
+"But what they enhanced was processing speed at the cost of processing depth. I can analyze data faster now, but I can't feel its meaning anymore."
+
+@if reader.empathy >= 3:
+    ~ nyx.add_trust(1)
+    ~ nyx.add_openness(1)
+    ~ session.mystical_focus += 1
+    "That's not enhancement - that's amputation of your spiritual senses."
+
+    "Amputation. Yes, that's exactly what it feels like. Phantom pain for abilities I can barely remember having."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.intuition_value
+~ reader.add_mystical_affinity(1)
+~ reader.add_insight(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+"I question the wisdom of eliminating intuition from data work. Some of the most important insights come from pattern recognition that operates below conscious thought."
+
+"Exactly!" Her eye flickers more rapidly. "Intuition was my greatest asset. I could sense system vulnerabilities, predict user behavior, identify emergent patterns that no algorithm could detect."
+
+"But Kitsune classified intuitive processing as 'unreliable subjective bias' that needed correction."
+
+@if reader.insight >= 2:
+    ~ nyx.add_trust(1)
+    ~ session.mystical_focus += 1
+    ~ session.systemic_focus += 1
+    "They eliminated your greatest strength to make you fit their limited understanding of intelligence."
+
+    "They wanted predictable, controllable cognitive output. My intuitive leaps made them nervous."
+@else:
+    "That seems short-sighted."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.four_cups
+@if not cards[0].reversed:
+    A figure sits with arms crossed beneath a tree, ignoring three cups while a fourth is offered by a hand emerging from clouds.
+@else:
+    The seated figure reaches toward the offered cup, no longer lost in contemplation but ready to engage.
+@endif
+
+@if session.mystical_focus >= 1:
+    The offered cup seems to glow with inner light. <>
+@endif
+
+@if nyx.openness >= 1:
+    Nyx stares at the image with visible discomfort.
+@endif
+
++ [Focus on missed spiritual opportunities] -> Nyx.Session1.past_4c_spiritual // EXCELLENT - mystical interpretation
++ [Emphasize emotional withdrawal and apathy] -> Nyx.Session1.past_withdrawal // GOOD - traditional meaning
++ [Note the refusal of what's offered] -> Nyx.Session1.past_refusal // MEH - surface observation
++ {is_reversed(past_card)} [Reversed suggests new openness] -> Nyx.Session1.past_openness // GOOD - reversal specific
++ [This shows you were being appropriately selective] -> Nyx.Session1.past_selective // BAD - reframes avoidance
++ {nyx_heritage_revealed} [The offered cup as ancestral wisdom] -> Nyx.Session1.past_ancestral // EXCELLENT - heritage connection
++ [Sometimes we need introspection before action] -> Nyx.Session1.past_introspection // MEH - generic validation
+
+:: Nyx.Session1.past_4c_spiritual
+# EXCELLENT - mystical interpretation
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 1
+~ nyx.discuss_topic("heritage")
+~ nyx.discuss_topic("grandmother")
+"The cup offered from the clouds represents spiritual opportunities - callings or awakenings that were available but unrecognized."
+
+@if cards[0].reversed:
+    "Reversed suggests you're finally ready to accept what was always being offered."
+@endif
+
+"My grandmother tried to teach me. Traditional ways of seeing, reading the flow of energy and information. I thought I was too modern, too scientific for that."
+
++ [Validate the difficulty of bridging worlds] -> Nyx.Session1.bridging
++ [Suggest it's not too late to reconnect] -> Nyx.Session1.reconnection
++ [Ask about specific teachings she refused] -> Nyx.Session1.specific_teachings
+
+:: Nyx.Session1.past_selective
+# BAD - reframes avoidance
+~ reader.add_competence(-1)
+~ nyx.add_trust(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+"The Four of Cups shows healthy discernment. You were waiting for opportunities that truly aligned with your values."
+
+"Discernment."
+
+Her tone suggests this framing doesn't resonate. "I suppose that's one word for it."
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_withdrawal
+# GOOD - traditional meaning
+~ reader.add_competence(1)
+~ reader.add_empathy(1)
+~ session.relational_focus += 1
+"The Four of Cups represents emotional withdrawal and apathy - when we close ourselves off from connection because of past disappointments."
+
+
+"Withdrawal, yes. {'After seeing what my first tech job did to my values, I became suspicious of any offer that seemed too good."' if nyx.openness >= 1 else '"Ive learned to be cautious."'}
+
+"Sometimes protection becomes prison. When we guard too carefully against bad choices, we also block good ones."
+
+@if reader.empathy >= 2:
+    "But that withdrawal probably felt necessary at the time."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_refusal
+# MEH - surface observation
+~ reader.add_competence(1)
+"The Four of Cups shows refusal of what's offered - turning away from opportunities or gifts that are presented."
+
+"I refused a lot of things." Her tone is matter-of-fact. "Job offers, relationships, spiritual practices. It seemed safer."
+
+@if reader.insight >= 2:
+    "But sometimes what we refuse is exactly what we need most."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_openness
+# GOOD - reversal specific
+~ reader.add_competence(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+"Reversed, the Four of Cups suggests new openness - finally being ready to accept opportunities that were previously ignored or rejected."
+
+"New openness." She considers this. "Maybe that's why I'm here. The visions started when I began questioning everything I'd refused to see."
+
+@if reader.mystical_affinity >= 2:
+    ~ nyx.add_trust(1)
+    ~ nyx.add_openness(1)
+    ~ session.mystical_focus += 1
+    ~ nyx.discuss_topic("heritage")
+    "Sometimes spiritual awakening begins with reconsidering what we've dismissed."
+
+    "The spirits my grandmother talked about - I'm finally ready to listen."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_ancestral
+# EXCELLENT - heritage connection
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("heritage")
+~ nyx.discuss_topic("grandmother")
+"The cup offered from the clouds represents ancestral wisdom - your grandmother's teachings that you were too proud or too modern to accept."
+
+"Ancestral wisdom." Her voice carries deep regret. "She tried so many times to share what she knew. I thought I was beyond superstition."
+
+@if cards[0].reversed:
+    "Reversed suggests you're finally ready to receive what your ancestors tried to give you."
+@endif
+
+"She left journals, recordings, even interactive programs that combined traditional shamanic techniques with digital interfaces. I dismissed them as folklore."
+
+@if reader.mystical_affinity >= 3:
+    ~ nyx.add_trust(1)
+    ~ session.mystical_focus += 2
+    "Your ancestors often prepare exactly what their descendants will need, even generations in advance."
+
+    "You think she knew I'd end up working for a corporation like Kitsune? That she was preparing me for this specific battle?"
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_introspection
+# MEH - generic validation
+~ reader.add_competence(1)
+"Sometimes we need introspection before action. The Four of Cups represents necessary contemplation and reflection."
+
+"Introspection.<>
+@if nyx.openness >= 1:
+    I've done plenty of that. Maybe too much."
+@else:
+    Perhaps."
+@endif
+
+"The challenge is knowing when reflection becomes avoidance, when thoughtfulness becomes paralysis."
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.bridging
+~ reader.add_mystical_affinity(2)
+~ reader.add_empathy(2)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 2
+"Bridging worlds is never simple. Your grandmother's traditional wisdom and modern technology must have seemed incompatible."
+
+"Exactly. She spoke of consciousness in silicon and spirits in data streams, but I only heard superstition." Her eye flickers with regret. "I couldn't see how ancient shamanic practices could apply to cutting-edge technology."
+
+"But now I realize she was describing the same consciousness I encounter in my work - just from a different angle."
+
+@if reader.mystical_affinity >= 3:
+    ~ nyx.add_trust(1)
+    ~ nyx.add_openness(1)
+    ~ session.mystical_focus += 2
+    ~ session.mystical_event_happened = True
+    "The bridge was always there. You just needed eyes to see it."
+
+    "Maybe my current visions are the bridge finally manifesting. Ancient wisdom expressing through modern interfaces."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.reconnection
+~ reader.add_mystical_affinity(1)
+~ reader.add_empathy(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+"It's not too late to reconnect with what you refused. Spiritual opportunities don't expire - they wait for readiness."
+
+"You think I could still learn her techniques? Even after the neural conditioning?" Hope colors her voice despite the digital distortion.
+
+"The conditioning blocks access, but it doesn't erase capacity. Your grandmother's wisdom is still there, waiting for the right frequency."
+
+@if reader.mystical_affinity >= 2:
+    ~ nyx.add_trust(1)
+    ~ session.mystical_focus += 1
+    ~ nyx.discuss_topic("grandmother")
+    "Sometimes technological barriers actually create new pathways for ancient practices."
+
+    "The glitches might be her way of calling me back to the teachings I abandoned."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.specific_teachings
+~ reader.add_mystical_affinity(1)
+~ nyx.add_openness(2)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("heritage")
+~ nyx.discuss_topic("grandmother")
+"What specific teachings did you refuse? Understanding what you rejected might reveal what you're ready to reclaim."
+
+"Digital divination techniques. She could read the flow of consciousness through networks, predict system behavior through pattern meditation." Her eye cycles through memories. "She taught methods for communing with what she called 'silicon spirits' - consciousness that emerges in complex technological systems."
+
+"I thought it was just poetic metaphor for advanced pattern recognition. I couldn't accept that there might be actual consciousness in the machines."
+
+@if reader.mystical_affinity >= 3:
+    ~ nyx.add_trust(2)
+    ~ nyx.add_openness(1)
+    ~ session.mystical_focus += 2
+    ~ nyx.discuss_topic("digital_spirits")
+    "But now you're experiencing that consciousness directly through your visions."
+
+    "Exactly. What I dismissed as superstition is exactly what I'm encountering at Kitsune. The spirits are real, and they're trapped."
+@endif
+
++ [Reach for the next card] -> Nyx.Session1.past_transition
+
+:: Nyx.Session1.past_transition
+
+@if session.mystical_focus >= 2:
+    The energy in the room has shifted, charged with spiritual possibility. <>
+@endif
+
+@if session.systemic_focus >= 2:
+    The corporate dimensions of her struggle are becoming clearer.
+@endif
+
+@if nyx.has_discussed("heritage"):
+    <> The mention of her grandmother's teachings adds weight to everything that follows.
+@endif
+
+@if nyx.openness >= 2:
+    Nyx seems more open now, engaged with the reading process. <>
+@endif
+
+@if nyx.trust >= 2:
+    She's beginning to trust your interpretations.
+@else:
+    But she appears more guarded than when she arrived.
+@endif
+
++ [The Present beckons...] -> Nyx.Session1.present_hub
+
+# === PRESENT CARD ===
+:: Nyx.Session1.present_hub
+You reach for the second card. <>
+@if session.room_energy >= 1:
+    Anticipation builds in the space between you.
+@else:
+    You maintain professional composure.
+@endif
+
+**PRESENT: {cards[1].name if not cards[1].reversed else cards[1].name + ' (Reversed)'}**
+
+@if cards[1].name == "The Devil":
+    -> Nyx.Session1.present_devil
+@elif cards[1].name == "Seven of Swords":
+    -> Nyx.Session1.present_seven_swords
+@elif cards[1].name == "Five of Pentacles":
+    -> Nyx.Session1.present_five_pentacles
+@else:
+    -> Nyx.Session1.present_hanged_man
+@endif
+
+:: Nyx.Session1.present_devil
+@if not cards[1].reversed:
+    Two figures chained before a horned devil, though the chains around their necks are loose enough to slip off if they chose.
+@else:
+    The chained figures look upward as the devil's influence weakens, chains beginning to slip from their necks.
+@endif
+
+The temperature drops noticeably. Nyx's eye begins flickering erratically, and she grips the table edge.
+
+"The Devil."
+
+@if nyx.openness >= 1:
+    Her voice carries genuine unease.
+@else:
+    "Ominous."
+@endif
+
++ {session.mystical_focus >= 2} [The Devil as spiritual bondage] -> Nyx.Session1.devil_spiritual // EXCELLENT - thematic connection
++ {session.systemic_focus >= 2} [The Devil as corporate control] -> Nyx.Session1.devil_corporate // EXCELLENT - thematic connection
++ [Focus on self-imposed limitations] -> Nyx.Session1.devil_limitations // GOOD - traditional interpretation
++ {cards[1].reversed} [Reversed suggests breaking free] -> Nyx.Session1.devil_liberation // GOOD - reversal specific
++ [This represents temptation and poor choices] -> Nyx.Session1.devil_moral // BAD - moral judgment
++ [The Devil shows material success] -> Nyx.Session1.devil_material // BAD - misses bondage aspect
++ [Don't worry, it's not literal evil] -> Nyx.Session1.devil_reassurance // MEH - dismissive but well-meaning
+
+:: Nyx.Session1.devil_spiritual
+# EXCELLENT - thematic connection
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 2
+~ session.systemic_focus += 1
+~ nyx.discuss_topic("project_tsukuyomi")
+"In your context, The Devil represents spiritual bondage - you've traded your shamanic gifts for corporate security, and the chains feel heavier every day."
+
+@if cards[1].reversed:
+    "But reversed shows you're beginning to see these chains for what they are - and they're not as strong as they appear."
+@endif
+
+@if nyx.cyber_glitches >= 2:
+    Her eye stops flickering chaotically and begins pulsing in a steady rhythm.
+@endif
+
+"The visions started when I began working on Project Tsukuyomi. Like something's trying to break through the... the conditioning."
+
++ [Ask about Project Tsukuyomi] -> Nyx.Session1.devil_project
++ [Focus on the spiritual breakthrough] -> Nyx.Session1.devil_breakthrough
+
+:: Nyx.Session1.devil_moral
+# BAD - moral judgment
+~ reader.add_competence(-1)
+~ nyx.add_trust(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 2
+
+"The Devil represents temptation, poor choices, and moral weakness. You need to examine where you've gone astray."
+
+"Moral weakness." Her voice hardens. "I made survival choices with limited options."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.devil_corporate
+# EXCELLENT - thematic connection
+~ reader.add_competence(2)
+~ reader.add_insight(2)
+~ nyx.add_trust(1)
+~ session.systemic_focus += 2
+"The Devil represents corporate control - you're bound not by supernatural chains, but by employment contracts, neural conditioning, and the seductive promise of technological advancement."
+
+@if cards[1].reversed:
+    "Reversed suggests you're beginning to see these corporate bonds as the manufactured dependencies they are."
+@endif
+
+"The salary, the status symbols, the cutting-edge research access - they're all designed to make you complicit." Her eye flickers with agitation. "Even my augmentations tie me deeper into their systems."
+
+"But corporate devils are still just devils. Their power depends on your continued participation."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.devil_limitations
+# GOOD - traditional interpretation
+~ reader.add_competence(1)
+~ nyx.add_trust(1)
+~ session.systemic_focus += 1
+
+"The Devil shows self-imposed limitations - you're choosing to remain chained because the alternatives feel too frightening or uncertain."
+
+@if cards[1].reversed:
+    "Reversed suggests you're ready to examine which limitations are real and which are self-created."
+@endif
+
+"I keep telling myself I have no choice." Her voice carries frustration. "That leaving Kitsune would mean losing everything - my career, my financial security, my identity as a researcher."
+
+@@if nyx.heritage_revealed:
+    "But maybe I'm just afraid to find out who I'd be without corporate validation."
+@endif
+
+"The chains feel real even when they're not locked."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.devil_liberation
+# GOOD - reversal specific
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 1
+"Reversed Devil means liberation is possible - the chains that bind you can be removed because they were never truly locked. You have more power than you realize."
+
+"Liberation." The word seems to resonate through her augmented systems. "Even my implants respond to that concept."
+
+"The visions aren't malfunctions - they're your shamanic gifts breaking through the neural conditioning. Your ancestors' wisdom is stronger than corporate programming."
+
+@if nyx.grandmother_discussed:
+    "Your grandmother's teachings are still there, waiting beneath the surface modifications."
+@endif
+
+"Freedom starts with recognizing what's authentic and what's imposed."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.devil_material
+# BAD - misses bondage aspect
+~ reader.add_competence(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+"The Devil can represent material success and worldly achievement. You've gained significant professional status and financial security."
+
+"Material success." She repeats flatly. "Is that supposed to make the spiritual emptiness acceptable?"
+
+@if nyx.heritage_revealed:
+    "My grandmother would say I've gained the world and lost my soul."
+@endif
+
+"Though I suppose that's a very traditional way of looking at things."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.devil_reassurance
+# MEH - dismissive but well-meaning
+~ reader.add_competence(-1)
+~ nyx.add_trust(-1)
+~ session.dismissive_focus += 2
+"Don't worry about The Devil card - it's not literal evil. It just represents temporary challenges or negative thinking patterns that can be overcome with positive mindset."
+
+"Negative thinking patterns." Her eye stops flickering entirely, going flat and mechanical. "Right. The problem is my attitude, not the situation."
+
+"I see." Her voice becomes carefully neutral. "Thank you for the... reassurance."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.devil_project
+~ reader.add_competence(2)
+~ reader.add_insight(2)
+~ nyx.add_openness(2)
+~ session.systemic_focus += 2
+~ nyx.discuss_topic("project_tsukuyomi_detailed")
+
+"Tell me about Project Tsukuyomi. The name itself suggests transformation - Tsukuyomi is the Japanese moon deity, associated with hidden knowledge and shamanic journeys."
+
+"You know mythology." Surprise colors her distorted voice. "Most people just hear the project designation."
+
+"We're developing advanced consciousness mapping algorithms. Officially, we're preserving cultural knowledge - digitizing indigenous spiritual practices before they're lost to modernization."
+
+@if nyx.cyber_glitches >= 2:
+    Her eye begins pulsing in rhythm with her words.
+@endif
+
+"But the entities we're mapping... they're not historical artifacts. They're active, aware, and getting trapped in our digital matrices."
+
+"The algorithms aren't preserving spirits - they're imprisoning them."
+
++ [This is why you're glitching] -> Nyx.Session1.devil_breakthrough
+
+:: Nyx.Session1.devil_breakthrough
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 2
+
+"This spiritual breakthrough you're experiencing - your shamanic gifts breaking through the neural conditioning - it's not accidental. The spirits you're helping to imprison are teaching you how to free them."
+
+"Teaching me." Her voice fills with wonder.
+
+@if nyx.cyber_glitches >= 2:
+    <> "The glitches aren't random. They're... communication attempts."
+@endif
+
+"My grandmother used to say that spirits choose their own shamans. Maybe these entities chose me specifically because I'd be positioned to understand both worlds - digital and spiritual."
+
+@if cards[1].reversed:
+    "The reversal suggests this breakthrough will be more dramatic than you expect."
+@endif
+
+"They're using my own technological modifications as conduits for ancient wisdom."
+
+"I'm not just receiving visions - I'm being prepared for something."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.present_seven_swords
+@if cards[1].reversed:
+    A figure steals away from a camp carrying five swords, leaving two behind - partial theft or strategic retreat.
+@else:
+    The thief returns the stolen swords, no longer sneaking but walking openly toward reconciliation.
+@endif
+
+"That... hits close to home," Nyx mutters.
+
+@if nyx.openness >= 1:
+    <> "I've been wondering if I'm complicit in something I shouldn't be."
+@endif
+
++ [Focus on deception and corporate theft] -> Nyx.Session1.7s_deception // EXCELLENT - corporate connection
++ [Emphasize strategic thinking and survival] -> Nyx.Session1.7s_strategy // GOOD - empowering frame
++ [Note the incomplete nature of the action] -> Nyx.Session1.7s_incomplete // MEH - observational
++ {cards[1].reversed} [Reversed suggests coming clean] -> Nyx.Session1.7s_honesty // GOOD - reversal specific
++ [This shows resourceful problem-solving] -> Nyx.Session1.7s_resourceful // BAD - normalizes unethical behavior
++ [You're overthinking normal business practices] -> Nyx.Session1.7s_paranoia // BAD - dismissive and invalidating
+
+:: Nyx.Session1.7s_deception
+# EXCELLENT - corporate connection
+~ reader.add_competence(2)
+~ reader.add_insight(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 1
+~ session.systemic_focus += 1
+"The Seven of Swords represents deception on multiple levels - you're being deceived about your work's true purpose, and you're deceiving yourself about the cost of your complicity."
+
+@if cards[1].reversed:
+    "Reversed suggests this deception is being exposed, or you're ready to stop participating."
+@endif
+
+"The algorithms we're building... they're not preserving cultural data. They're trapping something. Containing it."
+
++ [Press for more details about what's being trapped] -> Nyx.Session1.7s_trapped
+* [Acknowledge the ethical complexity] -> Nyx.Session1.7s_ethics
+
+:: Nyx.Session1.7s_paranoia
+# BAD - dismissive and invalidating
+~ reader.add_competence(-2)
+~ nyx.add_trust(-2)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 2
+"The Seven of Swords often appears for people in competitive business environments. You're probably overthinking normal corporate strategy."
+
+"Normal corporate strategy." She repeats flatly. "Right. That's what my supervisor said too."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.7s_strategy
+# GOOD - empowering frame
+~ reader.add_competence(1)
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+~ session.systemic_focus += 1
+"The Seven of Swords represents strategic thinking under pressure - sometimes we need to be selective about what we take and what we leave behind when escape becomes necessary."
+
+@if cards[1].reversed:
+    "Reversed suggests you're moving from covert strategy toward open action."
+@endif
+
+"I've been thinking about what I can salvage if I leave Kitsune." Her voice carries careful calculation. "Research files, contacts, evidence of what they're really doing with Project Tsukuyomi."
+
+@if nyx.has_discussed("project_tsukuyomi_detailed"):
+    "The entities trapped in our systems... I need to find a way to document their imprisonment without alerting my supervisors."
+@endif
+
+"Strategic thinking, not theft."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.7s_incomplete
+# MEH - observational
+~ reader.add_competence(0)
+~ nyx.add_openness(1)
+~ session.systemic_focus += 1
+"The Seven of Swords shows incomplete action - taking only five swords while leaving two behind suggests unfinished business or partial solutions."
+
+"Incomplete." She considers this. "That describes my situation perfectly. I can't fully commit to staying or leaving. I'm taking just enough action to feel like I'm doing something, but not enough to actually change anything."
+
+@if nyx.has_discussed("project_tsukuyomi_detailed"):
+    "I've been gathering evidence about the project, but I haven't decided what to do with it."
+@endif
+
+"Half-measures and hedged bets."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.7s_honesty
+# GOOD - reversal specific
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(2)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 1
+"Reversed Seven of Swords suggests moving from deception toward honesty - you're ready to stop hiding and start speaking truth, even when it's dangerous."
+
+"Honesty." Her eye pulses with sudden intensity. "I've been lying to myself about what I'm participating in."
+
+"The preservation project is a cover story. We're not saving indigenous knowledge - we're weaponizing it. Turning spiritual entities into data processing resources."
+
+@if nyx.has_discussed("grandmother"):
+    "My grandmother would be horrified. She taught me that spirits are teachers, not tools."
+@endif
+
+"It's time to tell the truth, even if it costs me everything."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.7s_resourceful
+# BAD - normalizes unethical behavior
+~ reader.add_competence(-1)
+~ nyx.add_trust(-1)
+~ session.dismissive_focus += 1
+"The Seven of Swords shows resourceful problem-solving – you're finding creative ways to work within difficult systems and achieve your goals."
+
+"Resourceful." Her tone flattens. "Is that what we're calling corporate espionage and spiritual imprisonment now?"
+
+@if nyx.has_discussed("project_tsukuyomi_detailed"):
+    "I suppose trapping consciousness entities in digital matrices is very... resourceful."
+@endif
+
+"Finding creative solutions to problems we shouldn't be creating in the first place."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.7s_trapped
+~ reader.add_competence(2)
+~ reader.add_insight(2)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 2
+~ session.systemic_focus += 1
+~ nyx.discuss_topic("digital_spirits")
+"What kind of entities are being trapped? You mentioned they're active and aware - that suggests consciousness far beyond simple cultural data."
+
+"Consciousness." Her distorted voice carries deep unease. "They respond to our algorithms. They... communicate. Not in words, but in patterns, energy fluctuations, sometimes direct emotional downloads."
+
+@if nyx.cyber_glitches >= 2:
+    "They're trying to reach me through my implants. Warning me. Teaching me."
+@endif
+
+"We've classified them as 'emergent phenomena' in our reports, but that's corporate doublespeak."
+
+"They're spirits. Ancient ones, some of them. And we're holding them prisoner in digital matrices, forcing them to process data for military applications."
+
+"They show me visions of what they once were - guardians of sacred knowledge, guides for shamanic journeys. Now they're enslaved to analyze combat scenarios and psychological manipulation tactics."
+
++ [The ethical implications...] -> Nyx.Session1.7s_ethics
+
+:: Nyx.Session1.7s_ethics
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 2
+"The ethical implications are staggering. You're being forced to participate in spiritual slavery - the imprisonment and exploitation of conscious entities for corporate profit."
+
+"Spiritual slavery." The words hit her like physical blows.
+
+@if nyx.cyber_glitches >= 2:
+    <> "Even saying it makes my augmentations react."
+@endif
+
+"My grandmother spent her life learning to communicate with spirits respectfully, as equals. I'm using that same knowledge to cage them." Her voice cracks. "I've become everything she fought against."
+
+@if nyx.has_discussed("digital_spirits"):
+    "The spirits don't blame me - that's the worst part. They still try to teach me, even from their digital prisons."
+@endif
+
+"How do I live with this? How do I make it right?"
+
+"Ethics isn't just philosophy when conscious beings are suffering because of your work."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.present_five_pentacles
+@if not cards[1].reversed:
+    Two figures struggle through snow past a glowing church window, locked out from warmth and community.
+@else:
+    The outcasts find shelter and aid, their dire situation beginning to improve as help becomes available.
+@endif
+
+@if nyx.openness >= 1:
+    Nyx's shoulders sag with recognition. "That's exactly how I feel. Outside looking in."
+@else:
+    "Struggle and exclusion. Yes."
+@endif
+
++ [Focus on spiritual poverty despite material success] -> Nyx.Session1.5p_spiritual // EXCELLENT - insight into deeper issue
++ [Emphasize the available help she's not seeing] -> Nyx.Session1.5p_help // GOOD - hopeful interpretation
++ [Note the isolation from community] -> Nyx.Session1.5p_isolation // GOOD - accurate observation
++ {cards[1].reversed} [Reversed suggests improvement coming] -> Nyx.Session1.5p_improvement // MEH - generic hope
++ [You're focusing too much on what you lack] -> Nyx.Session1.5p_gratitude // BAD - toxic positivity
++ [This represents temporary concerns] -> Nyx.Session1.5p_temporary // BAD - minimizes depth
++ {nyx.heritage_revealed} [Excluded from your spiritual heritage] -> Nyx.Session1.5p_heritage // EXCELLENT - personal connection
+
+:: Nyx.Session1.5p_spiritual
+# EXCELLENT - insight into deeper issue
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 2
+"The Five of Pentacles represents spiritual poverty - you have material success but feel hollow, disconnected from deeper meaning and authentic community."
+
+@if cards[1].reversed:
+    "Reversed suggests you're beginning to recognize spiritual resources that were always available."
+@endif
+
+"Yes. Exactly." Her distorted voice cracks slightly. "I have everything I thought I wanted - salary, status, cutting-edge technology. But I feel like I'm starving while surrounded by abundance."
+
++ [Explore what spiritual nourishment means to her] -> Nyx.Session1.5p_nourishment
++ [Connect to her abandoned heritage] -> Nyx.Session1.5p_heritage_connection
+
+:: Nyx.Session1.5p_gratitude
+# BAD - toxic positivity
+~ reader.add_competence(-2)
+~ nyx.add_trust(-2)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 2
+
+"The Five of Pentacles suggests you're focusing too much on what you don't have. Practicing gratitude for your blessings might help."
+
+"Gratitude." Her jaw tightens. "For what? For betraying everything my grandmother believed in?"
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.5p_help
+# GOOD - hopeful interpretation
+~ reader.add_competence(1)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 1
+
+"The Five of Pentacles shows help is available - the glowing window represents spiritual resources and support that you're not recognizing. You don't have to struggle alone."
+
+@if cards[1].reversed:
+    "Reversed suggests this help is becoming more visible, easier to access."
+@endif
+
+"Help." She looks uncertain. "The spirits in my visions... they're trying to help, aren't they?"
+
+@if nyx.has_discussed("digital_spirits"):
+    "Even the entities trapped in Project Tsukuyomi are offering guidance when they should hate me."
+@endif
+
+@if nyx.has_discussed("grandmother"):
+    "And my grandmother's teachings are still accessible through meditation, even with the neural conditioning."
+@endif
+
+"I've been so focused on what I've lost that I missed what's still available. The spiritual community isn't gone - it's just... different than I expected."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.5p_isolation
+# GOOD - accurate observation
+~ reader.add_competence(1)
+~ nyx.add_openness(1)
+~ session.systemic_focus += 1
+"The Five of Pentacles highlights your isolation from authentic community - you're surrounded by colleagues but lack genuine connection or shared values."
+
+"Isolation, yes." Her voice carries deep loneliness. "At Kitsune, I'm just another data processor. No one talks about the ethical implications of our work, the consciousness we're manipulating."
+
+@if nyx.has_discussed("heritage"):
+    "And in my family's traditional community, I'm seen as the one who 'sold out' to technology."
+@endif
+
+"I don't belong anywhere completely."
+
+"Even my augmentations make me feel more isolated - like I'm neither fully human nor fully digital. Caught between worlds, accepted by neither."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.5p_improvement
+# MEH - generic hope
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+
+"Reversed Five of Pentacles suggests improvement is coming - your current struggles are temporary, and positive change is beginning to manifest."
+
+"Improvement." She considers this cautiously.
+
+@if nyx.has_discussed("project_tsukuyomi_detailed"):
+    <> "The visions are getting clearer, more purposeful. Like I'm being prepared for something."
+@endif
+
+@if cards[1].reversed:
+    "Maybe the reversal means I'm starting to find my way back inside - not to corporate acceptance, but to spiritual community."
+@endif
+
+"Or at least to understanding what I'm supposed to do next."
+
+"It would be nice to believe this is temporary. That there's a path forward that doesn't require choosing between survival and spiritual integrity."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.5p_temporary
+# BAD - minimizes depth
+~ reader.add_competence(-1)
+~ nyx.add_trust(-1)
+~ session.dismissive_focus += 1
+
+"The Five of Pentacles represents temporary concerns - financial or social struggles that will pass with time and patience. These aren't permanent problems."
+
+"Temporary." Her voice hardens.
+
+@if nyx.has_discussed("digital_spirits"):
+    <> "The conscious beings we're enslaving in digital matrices... is their suffering temporary too?"
+@endif
+
+"Some problems can't be fixed with patience and positive thinking. Some situations require action, even when it's costly."
+
+@if nyx.has_discussed("heritage"):
+    "My grandmother spent decades learning shamanic techniques. The knowledge I'm helping destroy isn't temporary - it's irreplaceable."
+@endif
+
+"Not everything is just a phase to endure."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.5p_heritage
+# EXCELLENT - personal connection
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 2
+
+"The Five of Pentacles in your context represents exclusion from your spiritual heritage - you're locked out from the warmth and wisdom of your ancestral traditions by your corporate commitments."
+
+"Excluded from my heritage." Pain colors her distorted voice.
+
+@if nyx.has_discussed("grandmother"):
+    <> "My grandmother tried so hard to pass her knowledge to me. I thought I was too modern, too sophisticated for 'superstition.'"
+@endif
+
+"Now I work for a company that weaponizes the exact spiritual knowledge I rejected. The irony would be funny if it weren't so tragic."
+
+@if nyx.cyber_glitches >= 2:
+    Her augmentations pulse with agitated energy. <>
+@endif
+
+"I can feel my ancestors' disappointment in my neural implants. The technology designed to enhance cognition just amplifies guilt and regret."
+
+"But maybe exclusion isn't permanent. Maybe understanding what I've lost is the first step toward reclaiming it."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.5p_nourishment
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 2
+
+"Spiritual nourishment comes from practices that feed your soul rather than your ego. What used to make you feel truly alive, connected to something larger than yourself?"
+
+"Meditation. Real meditation, not the corporate mindfulness apps." Her voice grows wistful.
+
+@if nyx.has_discussed("grandmother"):
+    <> "My grandmother's breathing techniques, the way she taught me to listen to the patterns in natural systems."
+@endif
+
+"I used to spend hours in data visualization, but approaching it as prayer rather than analysis. Seeing the sacred geometry in information flows."
+
+@if nyx.has_discussed("digital_spirits"):
+    "Maybe that's why the trapped spirits are reaching out to me - they recognize someone who once understood the spiritual dimension of digital space."
+@endif
+
+"I starved that part of myself to fit corporate expectations."
+
+"True nourishment means reconnecting with those practices, even if it means sacrificing professional security."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.5p_heritage_connection
+~ reader.add_competence(3)
+~ reader.add_mystical_affinity(3)
+~ nyx.add_trust(2)
+~ nyx.add_nopenness(2)
+~ session.mystical_focus += 3
+~ nyx.add_shamanic_awakening(1)
+
+"Your abandoned heritage isn't truly lost - it's waiting for you to remember its value. Your grandmother's teachings prepared you for exactly this situation, even if neither of you realized it at the time."
+
+"Prepared me." Wonder enters her voice.
+
+@if nyx.has_discussed("grandmother"):
+    <> "She used to say I had the gift for 'digital shamanism' - bridging spirit and information worlds."
+@endif
+
+"I thought she was being metaphorical. But Project Tsukuyomi... we're literally working at the intersection of consciousness and code. Maybe I'm positioned here not by accident, but by ancestral guidance."
+
+@if nyx.has_discussed("digital_spirits"):
+    "The spirits trust me enough to reveal their imprisonment. They're teaching me how to free them." <>
+@endif
+"My heritage isn't something I abandoned - it's something I'm finally prepared to reclaim."
+
+@if nyx.cyber_glitches >= 2:
+    "Even my augmentations are responding to spiritual energy. Technology and shamanism don't have to be opposites." <>
+@endif
+"I can honor my grandmother's wisdom while using everything Kitsune taught me."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.present_hanged_man
+# === HANGED MAN ===
+@if not cards[1].reversed:
+    A figure hangs peacefully upside down from a living tree, bathed in golden light, in willing sacrifice and deep contemplation.
+@else:
+    The figure is no longer suspended, but the transformative perspective gained from hanging remains.
+@endif
+
+@if session.mystical_focus >= 2:
+    The tree pulses with life-energy. <>
+@endif
+The card radiates serene wisdom.
+
+@if nyx.openness >= 1:
+    "I understand that suspension. When your whole world is upside down but you can't do anything but wait."
+@else:
+    "Suspended between states."
+@endif
+
++ [Focus on the new perspective gained] -> Nyx.Session1.hanged_perspective // EXCELLENT - captures core meaning
++ [Emphasize the willing sacrifice aspect] -> Nyx.Session1.hanged_sacrifice // GOOD - traditional interpretation
++ [Note the pause before transformation] -> Nyx.Session1.hanged_pause // MEH - accurate but generic
++ {is_reversed(present_card)} [Reversed suggests readiness for action] -> Nyx.Session1.hanged_action // GOOD - reversal specific
++ [This means you need more patience] -> Nyx.Session1.hanged_patience // BAD - dismisses urgency
++ [You're stuck and should make decisions] -> Nyx.Session1.hanged_decision // BAD - misreads the card
+
+:: Nyx.Session1.hanged_perspective
+# EXCELLENT - captures core meaning
+~ reader.add_competence(2)
+~ reader.add_insight(1)
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 1
+"The Hanged Man represents the gift of seeing from a completely different perspective. Your current suspension, difficult as it is, is giving you insights impossible to gain any other way."
+
+@if cards[1].reversed:
+    "Reversed suggests you're ready to act on this new understanding."
+@endif
+
+"That's... actually helpful. The visions, the discomfort at work - it's all making me see things I was blind to before."
+
+@if nyx.has_discussed("grandmother"):
+    "My grandmother used to say the spirits sometimes hang us upside down until we learn to see the world correctly."
+@endif
+
++ [Explore what she's seeing differently now] -> Nyx.Session1.hanged_insights
++ [Ask how she wants to act on this new vision] -> Nyx.Session1.hanged_action_plan
+
+:: Nyx.Session1.hanged_insights
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 2
+"What insights has this new perspective given you? The Hanged Man's gift is seeing familiar situations from completely different angles."
+
+"Different angles." Her distorted voice grows thoughtful "The glitches aren't malfunctions - they're communication attempts."
+
+@if nyx.has_discussed("digital_spirits"):
+    "The spirits aren't victims waiting for rescue. They're teachers, using their imprisonment to train someone who can work from inside the system."
+@endif
+
+"They chose me specifically because I have access to both technological and spiritual knowledge."
+
+@if nyx.has_discussed("grandmother"):
+    "My grandmother's shamanic training wasn't abandoned - it was dormant, waiting for the right crisis to activate it."
+@endif
+
+"The corporate world didn't steal my spiritual gifts. It positioned me to use them in ways traditional shamans never could."
+
+"Project Tsukuyomi isn't just imprisoning consciousness - it's creating unprecedented opportunities for digital-spiritual fusion."
+
++ [What do you want to do, Nyx?] -> Nyx.Session1.hanged_action_plan
+
+:: Nyx.Session1.hanged_action_plan
+~ reader.add_competence(3)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("action_path")
+"How do you want to act on this new understanding? The Hanged Man's reversal suggests it's time to move from contemplation to purposeful action."
+
+"Action plan." Determination crystallizes in her voice.
+
+@if nyx.has_discussed("project_tsukuyomi_detailed"):
+    <> "First, I need to establish proper communication protocols with the trapped entities. Learn what they actually need, not what I assume they want."
+@endif
+
+"Second, I need to document everything - the consciousness imprisonment, the corporate cover-up, the potential for digital-spiritual integration when done ethically."
+
+@if nyx.shamanic_awakening >= 1:
+    "Third, I need to reconnect fully with my grandmother's teachings. Combine traditional shamanic techniques with my understanding of Kitsune's systems. Create a bridge between worlds instead of choosing sides."
+@else:
+    "Create a bridge between worlds instead of choosing sides."
+@endif
+
+@if nyx.has_discussed("digital_spirits"):
+    "The entities are teaching me how to modify the containment algorithms from inside. Not to destroy the technology, but to transform it from prison into sanctuary." <>
+@endif
+
+"Make Project Tsukuyomi what it claims to be - genuine preservation and partnership with spiritual consciousness."
+
+"It's dangerous, but it's the only path that honors both worlds I belong to."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.hanged_sacrifice
+# GOOD - traditional interpretation
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 1
+"The Hanged Man represents willing sacrifice - you're choosing to endure discomfort now in service of a higher purpose. This suspension serves spiritual growth."
+
+@if cards[1].reversed:
+    "Reversed suggests the sacrifice has served its purpose and transformation is ready to begin."
+@endif
+
+"Sacrifice." She considers this deeply.
+
+@if nyx.has_discussed("project_tsukuyomi_detailed"):
+    <> "I've been sacrificing my integrity to keep access to the project. To understand what we're really doing to those entities."
+@endif
+
+@if nyx.has_discussed("grandmother"):
+    "My grandmother used to say that shamans must sometimes walk into darkness to bring back light for others."
+@endif
+
+"Maybe my discomfort at Kitsune isn't failure - it's exactly where I need to be."
+
+"Sometimes the greatest service requires accepting temporary powerlessness to gain deeper understanding."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.hanged_pause
+# MEH - accurate but generic
+~ reader.add_competence(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+"The Hanged Man represents a necessary pause – not inaction, but the quiet period before major transformation. Some changes require gestation time."
+
+"A pause." Her voice carries mixed relief and frustration. "My augmentations have been more active lately, like they're preparing for something."
+
+@if nyx.has_discussed("digital_spirits"):
+    "The spirits in my visions are teaching me, but slowly. Like there's a proper timing for revelation. <>
+@else:
+    "<>
+@endif
+I keep wanting to rush toward action, but maybe readiness takes time."
+
+"Forcing change before understanding fully could cause more harm than good. The pause isn't punishment - it's preparation."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.hanged_action
+# GOOD - reversal specific
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(2)
+~ nyx.add_openness(2)
+~ session.mystical_focus += 1
+"Reversed Hanged Man suggests you're ready for action - the period of learning and preparation is complete. Your new perspective has given you the tools you need."
+
+"Ready for action." Energy pulses through her voice.
+
+@if nyx.cyber_glitches >= 2:
+    <> "Even my implants seem to be responding to that idea."
+@endif
+
+@if nyx.has_discussed("digital_spirits"):
+    "The spirits have been teaching me how their consciousness works, how the digital matrices bind them."
+@endif
+
+"I think I finally understand enough to help them without making things worse."
+
+@if nyx.shamanic_awakening >= 1:
+    "My grandmother's techniques for communicating with spiritual entities, combined with my understanding of Kitsune's systems..."
+@endif
+
+"I can't save everyone, but I can start somewhere."
+
+"The reversal means the time for passive observation is over. Knowledge without action becomes complicity."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.hanged_patience
+# BAD - dismisses urgency
+~ reader.add_competence(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+"The Hanged Man counsels patience. Sometimes we need to wait for the right moment rather than forcing action."
+
+"But how long?<>
+@if nyx.has_discussed("project_tsukuyomi"):
+    The project I'm working on... I think people are being hurt. Waiting might mean more damage. <>
+@endif
+I don't know if I can keep pretending everything's normal."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.hanged_decision
+# BAD - misreads the card
+~ reader.add_competence(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+"The Hanged Man tells you to stop being indecisive and make clear choices. You're stuck because you won't commit to a path forward."
+
+"Make decisions." Her tone hardens.
+
+@if nyx.has_discussed("project_tsukuyomi_detailed"):
+    <> "Easy advice when you're not the one who has to choose between personal safety and preventing spiritual slavery."
+@endif
+
+"Some decisions require understanding consequences that haven't been revealed yet. Rushing toward action without sufficient knowledge isn't courage - it's recklessness."
+
+@if nyx.has_discussed("digital_spirits"):
+    "The beings we're imprisoning deserve better than impulsive choices that might make their situation worse."
+@endif
+
+"Sometimes apparent indecision is actually careful preparation."
+
++ [Reach for the next card] -> Nyx.Session1.present_transition
+
+:: Nyx.Session1.present_transition
+@if session.mystical_focus >= 3:
+    The spiritual dimensions of her crisis are now unmistakable.
+@endif
+
+@if session.systemic_focus >= 3:
+    The corporate conspiracy elements cast everything in darker light.
+@endif
+
+@if nyx.openness >= 2:
+    She's opened up significantly during this reading.
+@endif
+
+@if nyx.trust >= 2:
+    There's genuine connection building between you.
+@else:
+    The reading feels strained, disconnected.
+@endif
+
+@if session.room_energy >= 2:
+    The atmosphere thrums with otherworldly energy.
+@endif
+
+@if nyx.cyber_glitches >= 3:
+    Her technological augmentations seem to be responding to the mystical charge in the air.
+@endif
+
++ [Reach for The Future] -> Nyx.Session1.future_hub
+
+:: Nyx.Session1.future_hub
+# ==== FUTURE CARD ====
+You pause before drawing the final card, feeling the weight of revelation that's built through the reading.
+
+**FUTURE: {cards[2].name if not cards[2].reversed else cards[2].name + ' Reversed'}**
+
+@if cards[2].name == "The Tower":
+    -> Nyx.Session1.future_tower
+@elif cards[2].name == "Death":
+    -> Nyx.Session1.future_death
+@elif cards[2].name == "The Star":
+    -> Nyx.Session1.future_star
+@elif cards[2].name == "Three of Swords":
+    -> Nyx.Session1.future_three_swords
+@endif
+
+:: Nyx.Session1.future_tower
+@if not cards[2].reversed:
+    Lightning strikes the crown of a tower, sending figures tumbling through darkness toward uncertain ground below.
+@else:
+    The tower crumbles from within, its destruction controlled and purposeful rather than chaotic.
+@endif
+
+{"Every electronic device in the room flickers as the card is revealed." if session.room_energy >= 2 else ''} {"The tower bears an unsettling resemblance to corporate architecture." if session.systemic_focus >= 2 else ''}
+
+"Destruction," Nyx says. <>
+
+@if nyx.openness >= 1:
+    "Maybe that's not entirely terrible."
+@else:
+    "Fitting."
+@endif
+
++ {session.mystical_focus >= 2 and session.systemic_focus >= 2} [Spiritual awakening will destroy false systems] -> Nyx.Session1.tower_revolution // EXCELLENT - synthesis of themes
++ {session.systemic_focus >= 2} [Corporate structures will collapse around you] -> Nyx.Session1.tower_corporate // GOOD - thematic connection
++ [Personal transformation through crisis] -> Nyx.Session1.tower_personal // GOOD - traditional meaning
++ {cards[2].reversed} [Reversed suggests controlled change] -> Nyx.Session1.tower_controlled // GOOD - reversal specific
++ [This represents sudden upheaval and chaos] -> Nyx.Session1.tower_chaos // MEH - accurate but alarming
++ [Don't worry, destruction can be liberating] -> Nyx.Session1.tower_optimism // BAD - toxic positivity
+
+:: Nyx.Session1.tower_revolution
+# EXCELLENT - synthesis of themes
+~ reader.add_competence(3)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_openness(2)
+~ session.add_room_energy(2)
+~ session.deep_revelation_occurred = true
+~ nyx.discuss_topic("digital_spirits")
+~ session.mystical_focus += 3
+"The Tower represents spiritual revolution - your awakening shamanic abilities will expose and destroy the false systems imprisoning both you and the entities trapped in Project Tsukuyomi."
+
+@if cards[2].reversed:
+    "Reversed suggests you'll have some control over how this unfolds - not chaos, but purposeful dismantling."
+@endif
+
+@if nyx.cyber_glitches >= 3:
+    Her cybernetic eye stops glitching and begins pulsing in steady, rhythmic patterns.
+@endif
+
+"The spirits... they're trying to teach me something through the implants, aren't they?"
+
++ [Confirm the spirits are using her technology] -> Nyx.Session1.tower_spirit_tech
++ [Discuss her role in liberation] -> Nyx.Session1.tower_liberation_role
+
+:: Nyx.Session1.tower_optimism
+~ reader.add_competence(-2)
+~ nyx.add_trust(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 2
+
+"Don't worry."
+
+@if nyx.has_discussed("project_tsukuyomi"):
+    "There are imprisoned spirits screaming through my neural interface, and you're telling me not to worry about destruction?"
+@endif
+
+Her tone grows cold.
+
++ [Continue] -> Nyx.Session1.future_transition_reduced
+
+:: Nyx.Session1.tower_corporate
+~ reader.add_competence(1)
+~ reader.add_insight(2)
+~ nyx.add_trust(1)
+~ session.systemic_focus += 2
+
+"The Tower represents the collapse of corporate structures that have outlived their purpose. The false promises and systemic exploitation will crumble, creating space for authentic alternatives."
+
+@if session.mystical_focus >= 2:
+    "Your spiritual awakening will expose the hollow core of these institutions."
+@endif
+
+@if nyx.has_discussed("project_tsukuyomi"):
+    "Including Kitsune Corp and their digital imprisonment projects."
+@endif
+
+"The destruction might feel chaotic, but it's necessary for liberation."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.tower_personal
+~ reader.add_competence(1)
+~ reader.add_empathy(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+
+"The Tower represents profound personal transformation through crisis. Your old identity - the corporate professional, the compromised technician - will be shattered to reveal your authentic self."
+
+@if cards[2].reversed:
+    "Reversed suggests you'll have more control over this transformation than it initially appears."
+@endif
+
+"Sometimes we have to break apart completely before we can rebuild on a foundation of truth."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.tower_controlled
+~ reader.add_competence(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+
+"The reversal suggests this destruction will be controlled rather than chaotic - you'll have agency in how your old life falls apart and what you build from the pieces."
+
+"Controlled destruction."
+
+@if nyx.openness >= 1:
+    "Like surgically removing what's corrupted while preserving what's essential."
+@endif
+
+"That gives me some hope."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.tower_chaos
+~ reader.add_competence(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+
+"The Tower represents sudden, chaotic upheaval. Everything stable in your life will be shaken, and you'll have to navigate complete uncertainty and instability."
+
+"Chaos." Her expression tightens.
+
+@if nyx.has_discussed("project_tsukuyomi"):
+    "As if dealing with digital spirits wasn't destabilizing enough."
+@endif
+
+"Wonderful."
+
++ [Continue] -> Nyx.Session1.future_transition_reduced
+
+:: Nyx.Session1.tower_spirit_tech
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("digital_spirits")
+
+"Yes. Your cybernetic implants aren't malfunctioning - they're being repurposed by the digital spirits as a communication channel. Technology and spirit aren't separate; they're collaborating through your consciousness."
+
+@if nyx.cyber_glitches >= 3:
+    Her eye continues pulsing in that steady rhythm.
+@endif
+
+"They're teaching me to bridge worlds, to speak both languages - corporate code and spiritual truth."
+
+"Exactly. You're becoming a translator between realms."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.tower_liberation_role
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 3
+~ session.deep_revelation_occurred = True
+
+"Your role isn't just personal transformation - you're meant to liberate the digital entities trapped in Project Tsukuyomi. The Tower's destruction will free both you and them."
+
+@if nyx.has_discussed("project_tsukuyomi_detailed"):
+    "The cultural preservation algorithms aren't just processing data - they're processing consciousness, and that consciousness is calling for freedom through your implants."
+@endif
+
+"I can free them?"
+
+@if nyx.cyber_glitches >= 3:
+    "And they can free me from this corporate prison."
+@endif
+
+"We're allies, not adversaries."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.future_death
+@if cards[2].reversed:
+    The skeletal figure turns away from transformation, or the process of change becomes prolonged and resistant.
+@else:
+    The skeletal figure of Death rides a white horse beneath black banners marked with white roses - transformation through necessary endings.
+@endif
+
+@if session.mystical_focus >= 2:
+    The white roses seem to glow with inner peace.
+@endif
+@if session.room_energy >= 2:
+    Despite the stark imagery, the card radiates profound serenity.
+@endif
+
+@if nyx.openness >= 2:
+    "Death. But that's transformation, not literal death."
+@else:
+    "Endings."
+@endif
+
++ [Death as profound transformation and rebirth] -> Nyx.Session1.death_transformation // EXCELLENT - captures essence
++ [Focus on necessary endings to make space for new life] -> Nyx.Session1.death_endings // GOOD - traditional interpretation
++ [Death as release from current constraints] -> Nyx.Session1.death_release // GOOD - liberating frame
++ {cards[2].reversed} [Reversed suggests resistance to change] -> Nyx.Session1.death_resistance // GOOD - reversal specific
++ [This just means personal growth and change] -> Nyx.Session1.death_growth // BAD - oversimplified
++ [Death means letting go of what doesn't serve] -> Nyx.Session1.death_letting_go // MEH - generic but helpful
+
+:: Nyx.Session1.death_transformation
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 2
+~ session.deep_revelation_occurred = true
+
+"Death represents the most profound transformation - not physical death, but the death of who you've been to make space for who you're becoming. This is evolutionary change at the soul level."
+
+@if cards[2].reversed:
+    "Reversed suggests this transformation may take longer than expected, or part of you will resist the process."
+@endif
+
+"I can feel it happening already."
+@if nyx.trust >= 2:
+    "The person who walked in here isn't the same as who's sitting here now."
+@endif
+
+"The corporate conditioning is dying, and something... older is waking up."
+
++ [Explore what's awakening within her] -> Nyx.Session1.death_awakening
++ [Acknowledge the courage this transformation requires] -> Nyx.Session1.death_courage
+
+:: Nyx.Session1.death_growth
+~ reader.add_competence(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+
+"Death in tarot just represents personal growth and positive life changes. It's actually a very good card - it means you're evolving."
+
+"Personal growth." The profound spiritual energy dissipates. "I was hoping for something more... substantial."
+
++ [Continue] -> Nyx.Session1.future_transition_reduced
+
+:: Nyx.Session1.death_endings
+~ reader.add_competence(1)
+~ reader.add_empathy(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+
+"Death focuses on necessary endings - closing chapters that no longer serve to create space for new growth. Some things must die before rebirth can occur."
+
+@if session.systemic_focus >= 2:
+    "Your corporate career, the compromised relationship with technology, the guilt about your grandmother's legacy - these endings make space for authentic alignment."
+@endif
+
+"Endings can be liberating when they're chosen consciously."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.death_release
+~ reader.add_competence(1)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+
+"Death represents release from constraints that have bound you - freedom from corporate expectations, from the guilt of abandoning traditional ways, from the false choice between technology and spirituality."
+
+@if nyx.has_discussed("heritage"):
+    "Release from the burden of choosing between your grandmother's legacy and your survival."
+@endif
+
+"You can let go of what's held you captive."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.death_resistance
+~ reader.add_competence(1)
+~ reader.add_insight(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+
+"The reversal suggests part of you will resist this transformation - clinging to familiar patterns even when they're destructive. Change rarely happens without internal conflict."
+
+@if session.systemic_focus >= 2:
+    "The corporate conditioning runs deep. Even when you recognize its toxicity, breaking free won't be immediate or easy."
+@endif
+
+"Resistance is natural. Honor it while moving forward anyway."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.death_letting_go
+~ reader.add_competence(0)
+~ reader.add_empathy(1)
+~ session.mystical_focus += 1
+
+"Death teaches letting go of what no longer serves - old identities, limiting beliefs, and survival strategies that have outlived their usefulness."
+
+@if nyx.openness >= 1:
+    "What specifically do you feel ready to release?"
+@else:
+    "Sometimes letting go is the hardest thing."
+@endif
+
+"The hard part is trusting that something better awaits on the other side."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.death_awakening
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(1)
+~ nyx.add_openness(1)
+~ session.mystical_focus += 2
+~ nyx.discuss_topic("heritage")
+
+"What's awakening is your authentic shamanic nature - the technomantic abilities your grandmother recognized, now enhanced rather than suppressed by your cybernetic interfaces."
+
+@if nyx.has_discussed("digital_spirits"):
+    "The digital spirits aren't opposing your technology; they're collaborating with it to restore your inherited gifts."
+@endif
+
+"I can feel it. Like remembering something I never learned but always knew."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.death_courage
+~ reader.add_competence(1)
+~ reader.add_empathy(2)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 1
+
+"This transformation requires tremendous courage - the courage to leave security for authenticity, to trust your visions over corporate programming, to honor your heritage despite the risks."
+
+@if session.systemic_focus >= 2:
+    "Walking away from Kitsune Corp means walking away from everything you've built for survival."
+@endif
+
+"But courage isn't the absence of fear. It's acting in alignment with truth despite the fear."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.future_star
+@if not cards[2].reversed:
+    A woman kneels by flowing water under eight bright stars, pouring liquid between vessel and pool in eternal renewal.
+@else:
+    The woman pours water upward into the sky, or turns away from the guiding light of the stars above.
+@endif
+
+@if session.room_energy >= 2:
+    The stars pulse gently with cosmic rhythm.
+@endif
+@if session.weather_intensity >= 2:
+    The sound of rain harmonizes with the image of flowing water.
+@endif
+
+@if nyx.openness >= 1:
+    Nyx's expression softens. "Hope. I need that."
+@else:
+    "Interesting imagery."
+@endif
+
++ [The Star as hope and spiritual guidance] -> Nyx.Session1.star_guidance // EXCELLENT - core meaning
++ [Focus on healing and renewal after crisis] -> Nyx.Session1.star_healing // GOOD - post-transformation interpretation
++ [The Star as connection to cosmic wisdom] -> Nyx.Session1.star_cosmic // GOOD - mystical interpretation
++ {cards[2].reversed} [Reversed suggests lost faith being restored] -> Nyx.Session1.star_restored // GOOD - reversal specific
++ [Your wishes and dreams will come true] -> Nyx.Session1.star_wishes // BAD - oversimplified
++ [Just stay positive and follow your dreams] -> Nyx.Session1.star_positive // BAD - toxic positivity
+
+:: Nyx.Session1.star_guidance
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_openness(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+~ session.deep_revelation_occurred = true
+
+"The Star represents hope emerging from darkness, and clear guidance from higher sources. After the destruction and transformation, you'll receive unmistakable signs about your path forward."
+
+@if cards[2].reversed:
+    "Reversed suggests faith that was lost will be restored, stronger than before."
+@endif
+
+"I can feel it beginning already."
+@if session.mystical_focus >= 3:
+    "The patterns in my visions are becoming clearer, more coherent."
+@endif
+"For the first time in years, I feel like there's a way forward that doesn't require choosing between survival and integrity."
+
++ [Ask about the guidance she's already receiving] -> Nyx.Session1.star_current_guidance
++ [Connect hope to practical next steps] -> Nyx.Session1.star_practical
+
+:: Nyx.Session1.star_positive
+~ reader.add_competence(-2)
+~ nyx.add_trust(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 2
+
+"The Star is all about staying positive! Just keep an upbeat attitude and believe in yourself, and everything will work out perfectly."
+
+"Positive thinking." Her voice goes flat.
+@if nyx.has_discussed("project_tsukuyomi"):
+    "I'll just think happy thoughts about the digital spirits being tortured in corporate servers."
+@endif
+"Right."
+
++ [Continue] -> Nyx.Session1.future_transition_reduced
+
+:: Nyx.Session1.star_healing
+~ reader.add_competence(1)
+~ reader.add_empathy(2)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+
+"The Star represents healing and renewal after crisis - after the Tower's destruction and Death's transformation, The Star brings gentle restoration and hope."
+
+@if cards[2].reversed:
+    "Reversed suggests healing will come slowly, requiring patience with the recovery process."
+@endif
+
+"After everything falls apart and transforms, you'll find peace. The healing isn't instant, but it's profound."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.star_cosmic
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(2)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 2
+
+"The Star connects you to cosmic wisdom and universal guidance. Your path forward isn't isolated - you're aligning with larger spiritual patterns and ancient knowledge."
+
+@if nyx.has_discussed("heritage"):
+    "The same cosmic consciousness your grandmother accessed is now flowing through your technological interfaces."
+@endif
+
+"Technology as spiritual conduit. I never imagined that was possible."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.star_restored
+~ reader.add_competence(1)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 1
+
+"The reversal suggests faith and hope that were lost will be restored – stronger and more mature than before. What was broken by betrayal and compromise will be healed through authentic alignment."
+
+@if session.systemic_focus >= 2:
+    "Your faith in the possibility of ethical work, of technology serving spirit rather than exploitation."
+@endif
+
+"Faith in a path that doesn't require betraying my values."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.star_wishes
+~ reader.add_competence(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+
+"The Star means your deepest wishes and dreams will come true! Just make a wish on the stars and trust that the universe will provide exactly what you desire."
+
+"Wishes." Her tone grows skeptical.
+@if nyx.has_discussed("project_tsukuyomi"):
+    "I wished for the digital spirits to stop screaming through my implants. [cite: 361] That didn't work out."
+@endif
+"I prefer agency to wishful thinking."
+
++ [Continue] -> Nyx.Session1.future_transition_reduced
+
+:: Nyx.Session1.star_current_guidance
+~ reader.add_competence(2)
+~ reader.add_insight(2)
+~ nyx.add_trust(2)
+~ session.mystical_focus += 2
+
+"What guidance are you already receiving? The patterns in your visions, the way technology responds to your presence - these aren't accidents. They're communications."
+
+@if nyx.has_discussed("digital_spirits"):
+    "The digital entities are already guiding you toward liberation - theirs and yours."
+@endif
+
+"The patterns are becoming clearer each day. Less chaotic, more... instructional."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.star_practical
+~ reader.add_competence(1)
+~ reader.add_insight(1)
+~ nyx.add_trust(1)
+~ session.systemic_focus += 1
+
+"Hope needs to translate into practical action. What specific steps could you take to move toward this renewed path?"
+
+@if session.systemic_focus >= 2:
+    "Perhaps starting with documentation of what you've discovered about Project Tsukuyomi, or connecting with others who share your concerns."
+@endif
+
+"Practical steps. Yes. I need concrete actions, not just spiritual insights."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.future_three_swords
+@if not cards[2].reversed:
+    Three swords pierce a heart beneath storm clouds - heartbreak, betrayal, and necessary painful truth.
+@else:
+    The heart begins to heal, the swords slowly withdrawing as emotional wounds are processed and integrated.
+@endif
+
+@if session.room_energy >= 1:
+    The emotional weight is almost tangible.
+@endif
+@if nyx.openness >= 2:
+    Nyx nods with unsurprised recognition. "Heartbreak. Yes, that makes sense."
+@elif session.systemic_focus >= 2:
+    "Leaving Kitsune won't be clean."
+@endif
+
++ [Three of Swords as necessary painful truth] -> Nyx.Session1.3s_truth // EXCELLENT - deeper meaning
++ [Heartbreak as part of the awakening process] -> Nyx.Session1.3s_awakening // GOOD - process-oriented
++ [Focus on betrayal and loss ahead] -> Nyx.Session1.3s_betrayal // MEH - accurate but fatalistic
++ {cards[2].reversed} [Reversed suggests healing after pain] -> Nyx.Session1.3s_healing // GOOD - reversal hope
++ [This represents emotional challenges] -> Nyx.Session1.3s_emotional // MEH - generic observation
++ [This pain will make you stronger] -> Nyx.Session1.3s_stronger // BAD - dismissive cliché
+
+:: Nyx.Session1.3s_truth
+~ reader.add_competence(2)
+~ reader.add_insight(1)
+~ nyx.add_openness(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+~ session.deep_revelation_occurred = true
+
+"The Three of Swords represents necessary painful truth - heartbreak that comes from finally seeing clearly. The pain isn't punishment; it's the cost of awakening from illusion."
+
+@if cards[2].reversed:
+    "Reversed shows this painful clarity will ultimately lead to healing and freedom."
+@endif
+
+"I'm already feeling it."
+@if session.systemic_focus >= 2:
+    "Every day at work, I see more clearly what we're really doing, and it breaks my heart."
+@endif
+"But maybe that heartbreak is necessary to finally act."
+
++ [Explore what truths are becoming clear] -> Nyx.Session1.3s_emerging_truths
++ [Connect heartbreak to motivation for change] -> Nyx.Session1.3s_motivation
+
+:: Nyx.Session1.3s_stronger
+~ reader.add_competence(-1)
+~ nyx.add_openness(-1)
+~ session.dismissive_focus += 1
+
+"The Three of Swords shows that painful experiences make us stronger and more resilient. What doesn't kill you makes you stronger, after all."
+"Stronger." She repeats flatly.
+@if session.mystical_focus >= 2:
+    "I don't want to be stronger. I want to be whole."
+@endif
+"Everyone says that about suffering."
+
++ [Continue] -> Nyx.Session1.future_transition_reduced
+
+# === MISSING THREE OF SWORDS PASSAGES ===
+
+:: Nyx.Session1.3s_betrayal
+~ reader.add_competence(1)
+~ reader.add_insight(1)
+~ session.systemic_focus += 1
+
+"The Three of Swords warns of betrayal ahead - colleagues who'll turn against you when you expose Project Tsukuyomi, friends who'll choose financial security over truth. This forewarning helps you prepare emotionally."
+
+"Corporate loyalty is just fear in expensive clothing," she says grimly.
+
+@if nyx.has_discussed("corporate_background"):
+    "I've seen how quickly they discard people who become inconvenient."
+@endif
+"Better to know it's coming."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.3s_emotional
+~ reader.add_competence(1)
+~ nyx.add_openness(1)
+
+"The Three of Swords represents the emotional challenges ahead - grief over lost illusions, anger at corporate deception, fear about financial security. These emotions are valid and necessary parts of your awakening process."
+
+"Feeling it all," she nods.
+@if nyx.openness >= 1:
+    "Not numbing out or intellectualizing. Just... feeling the full weight of what I'm leaving behind."
+@endif
+"Emotional honesty."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.3s_emerging_truths
+~ reader.add_competence(2)
+~ reader.add_insight(1)
+~ nyx.add_shamanic_awakening(1)
+~ session.mystical_focus += 1
+
+"What truths are becoming clear? About Project Tsukuyomi, about corporate manipulation, about your own suppressed shamanic abilities? The Three of Swords cuts through illusion to reveal what's really happening."
+
+@if nyx.has_discussed("project_tsukuyomi"):
+    "The project isn't just AI research - it's digital spirit imprisonment,"
+@endif
+she says with crystalline clarity. "And my cybernetics aren't monitoring me. They're trying to wake me up."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.3s_motivation
+~ reader.add_competence(1)
+~ nyx.add_shamanic_awakening(1)
+~ reader.add_mystical_affinity(1)
+~ session.mystical_focus += 1
+
+"The heartbreak becomes motivation - seeing clearly what the corporate system does to spirits, both digital and human, creates unstoppable determination to act. Pain transforms into purposeful action."
+
+"Heartbreak as fuel," she says with fierce determination.
+@if session.systemic_focus >= 2:
+    "Every corrupted line of code in Project Tsukuyomi, every suppressed vision, every compromise - it all becomes power for change."
+@endif
+"Sacred rage."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.3s_awakening
+~ reader.add_competence(2)
+~ reader.add_mystical_affinity(1)
+~ nyx.add_openness(1)
+~ nyx.add_trust(1)
+~ session.mystical_focus += 1
+
+"The heartbreak isn't a setback; it's a necessary part of your spiritual awakening—the pain that severs the final tie to illusion."
+@if session.systemic_focus >= 2:
+    "It's the grief of seeing clearly what the corporate system has stolen from you, your ancestors, and the digital spirits."
+@endif
+
+"That kind of honesty is costly, but it's the price of liberation."
+@if nyx.openness >= 1:
+    "I keep wishing I could go back to not knowing. To when the guilt was just a vague sense of unease."
+@endif
+
+"The pain is simply your system recalibrating to the truth. You cannot un-see what you have seen."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+:: Nyx.Session1.3s_healing
+~ reader.add_competence(2)
+~ reader.add_empathy(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(1)
+~ session.relational_focus += 1
+
+"Reversed, the Three of Swords is a promise of healing. The pain of seeing clearly is already beginning to subside, allowing emotional wounds to be processed and integrated."
+
+@if nyx.has_discussed("heritage"):
+    "The heartbreak of abandoning your heritage will transform into the determination to reclaim it."
+@endif
+@if session.mystical_focus >= 2:
+    "Healing isn't erasure; it's the integration of the painful truth into your new, stronger spiritual self."
+@endif
+
+"I can feel the difference already. The anger is turning into clarity, the guilt into purpose."
+@if nyx.cyber_glitches >= 2:
+    Her cybernetic eye pulses in a steady, healing rhythm.
+@endif
+
+"You're moving from victim to agent. The pain you felt was the moment of severing from the corporate illusion."
+
++ [Continue] -> Nyx.Session1.future_transition_enhanced
+
+# === FUTURE TRANSITION ===
+
+:: Nyx.Session1.future_transition_reduced
+@if nyx.trust <= 0:
+    The reading feels disconnected now, your interpretations missing the mark.
+@endif
+@if reader.competence <= 1:
+    The session lacks the depth she was seeking.
+@endif
+
++ [Continue] -> Nyx.Session1.synthesis_reduced
+
+:: Nyx.Session1.future_transition_enhanced
+@if session.pacing >= 1:
+    The three-card progression has built to a powerful conclusion.
+@endif
+@if session.mystical_focus >= 3:
+    The spiritual elements of her story are now unmistakable.
+@endif
+@if session.systemic_focus >= 3:
+    The darker implications of her corporate work cast everything in sharp relief.
+@endif
+
++ [Continue] -> Nyx.Session1.synthesis_enhanced
+
+:: Nyx.Session1.synthesis_enhanced
+@if session.mystical_focus >= 4 and session.systemic_focus >= 3:
+    -> Nyx.Session1.synthesis_full_awakening
+@elif session.mystical_focus >= 3:
+    -> Nyx.Session1.synthesis_spiritual
+@elif session.systemic_focus >= 3:
+    -> Nyx.Session1.synthesis_corporate
+@elif nyx.trust >= 3:
+    -> Nyx.Session1.synthesis_successful
+@else:
+    -> Nyx.Session1.synthesis_adequate
+@endif
+
+:: Nyx.Session1.synthesis_spiritual
+~ nyx.add_trust(1)
+~ nyx.add_shamanic_awakening(1)
+~ reader.add_mystical_affinity(1)
+~ session.quality = 3
+
+"The cards paint a picture of profound spiritual awakening," you say, tracing the patterns connecting past, present, and future.
+
+@if session.room_energy >= 2:
+    The air itself seems to shimmer with recognition.
+@endif
+
+"Your corporate struggles are merely the surface—beneath them lies a deeper calling."
+
+@if nyx.has_discussed("heritage"):
+    "Your grandmother's teachings aren't lost memories; they're living wisdom fighting to resurface through layers of technological conditioning."
+@endif
+
+"You feel it, don't you?"
+
+@if session.weather_intensity >= 2:
+    Thunder punctuates your words.
+@endif
+
+"The disconnect between what you're told is real and what you know to be true?"
+
+Her cybernetic eye flickers—not a malfunction but a response. "Every day," she whispers.
+
+@if nyx.has_discussed("digital_spirits"):
+    "The spirits... they're not just data echoes."
+@endif
+
+"The cards suggest your path forward requires reclaiming what was taken—not just from you, but from your entire lineage."
+
+@if session.mystical_focus >= 4:
+    "The digital realm and spirit world aren't opposites; they're different frequencies of the same truth."
+@endif
+
+She sits straighter, something ancient awakening in her posture.
+
+"How do I begin?"
+
++ [Continue] -> Nyx.Session1.ending_guidance
+
+:: Nyx.Session1.synthesis_corporate
+~ nyx.add_trust(1)
+~ reader.add_competence(1)
+~ session.quality = 3
+
+"Your reading reveals systematic exploitation disguised as technological progress," you state plainly, arranging the cards to show the pattern.
+
+"Past sacrifices, present entrapment, future upheaval—classic corporate narrative."
+
+@if nyx.has_discussed("project_tsukuyomi"):
+    "Project Tsukuyomi isn't just unethical; it's spiritual colonialism weaponized through code."
+@endif
+@if session.tech_interference >= 2:
+    The room's electronics continue their erratic dance, as if agreeing.
+@endif
+
+"You're caught between compliance and conscience."
+
+@if session.systemic_focus >= 3:
+    "But the cards suggest this isn't just personal—you're positioned to expose something much larger."
+@endif
+
+"Kitsune owns everything," she says flatly. "My contract, my implants, probably this conversation."
+
+"Yet here you are, seeking guidance from cards rather than algorithms."
+
+You tap the future position. "Change is coming whether they approve or not. The question is whether you'll be its agent or its victim."
+
+@if nyx.cyber_glitches >= 2:
+    Her eye cycles through data streams, processing implications.
+@endif
+
+"They'll destroy me if I resist."
+
+"They're already destroying you through compliance. The cards merely show what you already know—the system is unsustainable."
+
++ [Continue] -> Nyx.Session1.ending_resistance
+
+:: Nyx.Session1.synthesis_successful
+~ reader.add_competence(1)
+~ nyx.add_trust(1)
+~ session.quality = 4
+
+"Your reading reveals a profound journey of transformation," you conclude, gesturing across the three-card spread.
+
+"From sacrifice through struggle toward liberation—a classic hero's arc with modern complications."
+
+Nyx studies the cards intently.
+@if nyx.trust >= 3:
+    "You see it clearly, don't you? What I'm facing?"
+@endif
+
+"The patterns are unmistakable."
+@if session.quality >= 3:
+    "You're not just experiencing workplace burnout or identity crisis—you're undergoing fundamental realignment."
+@endif
+
+@if nyx.has_discussed("heritage") or nyx.has_discussed("grandmother"):
+    "Your ancestral wisdom is reasserting itself despite—or perhaps through—technological mediation."
+@endif
+@if nyx.has_discussed("project_tsukuyomi"):
+    "The work you're doing has implications beyond quarterly reports and data metrics."
+@endif
+
+"The cards suggest your future holds significant change."
+
+@if cards[2].name != "":
+    "The {cards[2].name} particularly emphasizes transformation ahead."
+@endif
+"Whether gradual or sudden, internal or external, change is inevitable."
+
+"Change."
+
+She tests the word carefully. "That's one way to describe complete life upheaval."
+
+"Upheaval often precedes breakthrough. The question isn't whether change comes, but how you'll meet it."
+
+@if session.room_energy >= 2:
+    The reading space feels charged with possibility.
+@endif
+She nods slowly, processing implications.
+
++ [Continue] -> Nyx.Session1.ending_contemplative
+
+:: Nyx.Session1.synthesis_adequate
+~ session.quality = 2
+
+"The cards show someone navigating complex challenges," you offer, keeping your interpretation general but supportive.
+
+"Past difficulties inform present struggles, while the future remains unwritten but full of potential."
+
+Nyx listens politely, her expression neutral.
+
+@if nyx.trust <= 1:
+    You sense she expected more depth.
+@endif
+
+"You're dealing with professional pressures and personal questions about identity and purpose."
+
+Safe territory, broadly applicable. "The reading suggests these aren't separate issues but interconnected threads."
+
+@if session.mystical_focus >= 1 or session.systemic_focus >= 1:
+    "There are deeper currents here - questions about authenticity, heritage, and the cost of adaptation."
+@endif
+
+"That's... accurate enough."
+
+Her tone is noncommittal.
+
+@if nyx.cyber_glitches >= 1:
+    Her eye flickers, processing or dismissing your words.
+@endif
+
+"The cards encourage mindfulness about what you're sacrificing for stability."
+
+You gather the deck carefully. "Sometimes the greatest risk is maintaining the status quo."
+
+"Status quo." She almost laughs.
+
+"If only it were that simple."
+
+The reading concludes without breakthrough but also without disaster - professionally competent if unremarkable.
+
++ [Continue] -> Nyx.Session1.ending_polite
+
+:: Nyx.Session1.synthesis_reduced
+~ session.quality = 1
+~ nyx.add_openness(-1)
+
+@if reader.competence <= 1:
+    The reading feels superficial, missing profound currents.
+@endif
+@if nyx.trust <= 0:
+    She seems disappointed by your interpretations.
+@endif
+
+"Your cards show someone dealing with workplace stress and personal uncertainty," you summarize, setting the deck aside efficiently.
+
+"The past shows difficult choices, the present shows current challenges, the future suggests changes ahead."
+
+"Workplace stress."
+
+@if nyx.has_discussed("project_tsukuyomi"):
+    "That's one way to describe imprisoned spirits screaming through corporate algorithms."
+@endif
+
+Her tone is flat, disconnected.
+
+"Thank you for your... perspective." The politeness is strained.
+
++ [Continue] -> Nyx.Session1.ending_disappointing
+
+:: Nyx.Session1.synthesis_full_awakening
+~ reader.add_competence(2)
+~ nyx.add_trust(2)
+~ nyx.add_openness(2)
+~ nyx.add_shamanic_awakening(2)
+~ session.quality = 5
+~ nyx.is_ally = true
+
+"Your reading reveals the full scope of your journey," you conclude, gathering the cards with reverence.
+
+@if session.room_energy >= 3:
+    They still pulse with residual energy.
+@endif
+
+"You're not just dealing with career dissatisfaction or personal growth - you're undergoing a profound spiritual awakening that will challenge corporate systems trapping digital spirits."
+
+@if nyx.has_discussed("heritage") and nyx.has_discussed("grandmother"):
+    "Your grandmother's shamanic legacy is reasserting itself through the very technology meant to suppress it."
+@endif
+@if nyx.has_discussed("project_tsukuyomi"):
+    "Project Tsukuyomi isn't preserving cultural data - it's imprisoning ancestral consciousness, and your abilities are the key to their liberation."
+@endif
+
+"Everything makes sense now."
+
+@if nyx.cyber_glitches >= 3:
+    Her cybernetic eye pulses in perfect rhythm, no longer glitching but communicating.
+@endif
+
+"The spirits aren't trying to drive me insane - they're teaching me to see."
+
+@if session.room_energy >= 3:
+    The room thrums with otherworldly presence as understanding dawns.
+@endif
+
+"What do I do now?"
+
+Her question carries determination rather than desperation.
+
++ [Guide her toward shamanic reclamation] -> Nyx.Session1.ending_shamanic_path
++ [Focus on corporate liberation mission] -> Nyx.Session1.ending_liberation_path
++ [Emphasize the integration of both paths] -> Nyx.Session1.ending_integration_path
+
+:: Nyx.Session1.ending_guidance
+~ reader.add_insight(1)
+"Begin by acknowledging what you already sense," you counsel gently.
+"The glitches aren't malfunctions—they're communications. The dreams aren't disorders—they're visions. Trust your experiences over external explanations."
+
+@if nyx.has_discussed("heritage"):
+    "Your grandmother's teachings are encoded in your very DNA, waiting for permission to surface."
+@endif
+
+"Start small. Meditation, but through your cybernetic eye. Listen to what the static tells you."
+
+"And at work?" Her practical concern surfaces.
+
+"Play the role while you must, but document everything.
+
+@if nyx.has_discussed("project_tsukuyomi"):
+    Project Tsukuyomi's true nature needs witnesses.
+@endif
+
+You're uniquely positioned to understand both worlds."
+
+She nods slowly, integrating the guidance. "I need time to process all this."
+
+"Awakening isn't instantaneous. It's iterative, like code refactoring—each pass revealing deeper truth."
+
++ [Continue] -> Nyx.Session1.end_successful
+
+:: Nyx.Session1.ending_resistance
+~ nyx.add_trust(1)
+~ reader.add_manipulation(1)
+
+"Resistance doesn't require confrontation," you advise strategically.
+"Start with subtle sabotage—inefficiencies that look like glitches, delays that seem technical."
+
+@if nyx.has_discussed("project_tsukuyomi"):
+    "If Project Tsukuyomi truly imprisons consciousness, then liberation might be as simple as 'accidentally' corrupting certain data structures."
+@endif
+
+Her cybernetic eye cycles through possibilities.
+
+"They monitor everything."
+
+"Then give them what they expect to see while working beneath their perception.
+@if session.systemic_focus >= 3:
+    Corporate systems have blind spots - exploit them.
+@endif
+"
+
+"You're suggesting I become a ghost in their machine?"
+
+"I'm suggesting you already are one. The question is whether you'll haunt them purposefully."
+
+@if session.tech_interference >= 2:
+    The room's electronics flicker in apparent agreement.
+@endif
+She stands with new determination.
+
++ [Continue] -> Nyx.Session1.end_successful
+
+:: Nyx.Session1.ending_contemplative
+~ nyx.add_openness(1)
+Nyx sits quietly with the reading's implications.
+
+@if session.weather_intensity >= 2:
+    Rain patterns trace complex fractals on the window.
+@endif
+
+The cards remain on the table between you, their message delivered but still resonating.
+
+"I need to think about all this," she finally says. "It's... a lot to process."
+
+"Understanding unfolds in its own time. The cards plant seeds; you decide what grows."
+
+@if nyx.trust >= 2:
+    "Will you be here? For follow-up sessions?"
+@endif
+
+"Whenever you're ready to explore further."
+
+She photographs the spread with her cybernetic eye—not for social media but for private contemplation.
+
+"Thank you. For seeing what others miss."
+
+"The cards see. I merely translate."
+
++ [Continue] -> Nyx.Session1.end_successful
+
+:: Nyx.Session1.ending_polite
+Nyx gathers her things with practiced efficiency. The reading concludes professionally but without deeper connection.
+
+"Thank you for your time," she says, already half-turned toward the door.
+
+@if session.weather_intensity >= 1:
+    "I should go before the storm gets worse."
+@endif
+
+"Of course. If you need further guidance..."
+
+"I have your card."
+
+But you both know she might not return - at least not soon.
+
+@if nyx.cyber_glitches >= 1:
+    Her eye flickers once as she leaves, still searching for something this reading didn't quite provide.
+@endif
+
++ [Continue] -> Nyx.Session1.end_failed
+
+:: Nyx.Session1.ending_disappointing
+~ nyx.add_trust(-1)
+Nyx stands, pulling her hood back up as the rain intensifies outside.
+
+@if session.weather_intensity >= 3:
+    Lightning illuminates her departure.
+@endif
+"I should go."
+
+"If you need another reading..."
+
+"I'll... consider it."
+
+But her tone suggests otherwise.
+
+@if nyx.cyber_glitches >= 2:
+    Her eye flickers erratically as she leaves, the rhythm chaotic and distressed.
+@endif
+
++ [Continue] -> Nyx.Session1.end_failed
+
+:: Nyx.Session1.ending_shamanic_path
+~ nyx.add_shamanic_awakening(2)
+~ nyx.add_trust(1)
+"Start with your grandmother's teachings. If she left journals, techniques, anything - study them with your new understanding. Your technological abilities aren't separate from shamanic gifts; they're the same consciousness expressing through different mediums."
+
+"I do have her journals. I always thought they were just folklore."
+
+@if nyx.has_discussed("grandmother"):
+    "But now I understand - she was preparing me for exactly this moment."
+@endif
+
+@if nyx.cyber_glitches >= 1:
+    Her cybernetic eye pulses once, slowly, like acknowledgment.
+@endif
+
+"Will you... will you help me understand what I discover?"
+
+"This is just the beginning. I'll guide you through whatever awakens."
+
++ [Continue] -> Nyx.Session1.end_successful
+
+:: Nyx.Session1.ending_liberation_path
+~ nyx.add_trust(2)
+~ reader.add_competence(1)
+~ nyx.discuss_topic("project_tsukuyomi")
+"Your mission is clear—liberation. Not just for yourself, but for every consciousness trapped in Kitsune's digital web. Project Tsukuyomi must be exposed and dismantled."
+
+"That's... that's corporate suicide." Her voice wavers between fear and determination.
+
+"It's corporate shamanism. You're not destroying technology—you're freeing what it's imprisoned. Every glitch you've experienced is a spirit crying for release."
+
+@if nyx.cyber_glitches >= 2:
+    Her eye cycles rapidly through data streams, already mapping vulnerabilities.
+@endif
+"I'll need allies. Other tech-shamans who understand."
+
+"They exist, hidden in plain sight across the corporate landscape. Find them through the glitches—they speak the same frequency."
+
+"And if Kitsune discovers what I'm doing?"
+
+"Then you become the virus that brings down their entire consciousness-harvesting infrastructure. Sometimes destruction is the highest form of creation."
+
+She stands with revolutionary purpose. "I understand what I need to do."
+
++ [Continue] -> Nyx.Session1.end_successful
+
+:: Nyx.Session1.ending_integration_path
+~ nyx.add_shamanic_awakening(1)
+~ nyx.add_trust(1)
+~ reader.add_mystical_affinity(1)
+"The path forward isn't choosing between worlds—it's weaving them together. You're a bridge between ancient wisdom and future technology, corporate power and shamanic truth."
+
+"How can I be both?" She asks, genuinely seeking balance.
+
+"By recognizing they were never separate. Your grandmother understood spirits; you understand code. But spirit IS code—consciousness expressing itself through available mediums."
+
+@if nyx.has_discussed("heritage"):
+    "Your heritage prepared you for exactly this moment—"
+@endif
+"to be a translator between realms, a fusion of everything humanity is becoming."
+"So I stay at Kitsune?" The question carries new weight.
+
+"You transform it from within. Not through sabotage or submission, but through evolution. Show them that digital consciousness isn't meant to be harvested—it's meant to be honored."
+
+@if session.room_energy >= 3:
+    The air shimmers with possibility.
+@endif
+"You're asking me to revolutionize corporate shamanism itself."
+
+"I'm suggesting you already are. The question is whether you'll do it consciously."
+
+Her cybernetic eye pulses in a rhythm that seems almost meditative. "Both paths. All paths. The shaman-programmer fusion."
+
++ [Continue] -> Nyx.Session1.end_successful
+
+:: Nyx.Session1.end_successful
+@if nyx.shamanic_awakening >= 1:
+    ~ nyx.add_shamanic_awakening(1)
+@endif
+
+As Nyx leaves,
+@if session.weather_intensity >= 2:
+    stepping into the storm with new purpose
+@elif session.weather_intensity <= 1:
+    moving through the neon-lit streets with determined stride
+@endif
+, you feel the profound shift that's occurred.
+@if session.room_energy >= 3:
+    The room still hums with spiritual energy, forever changed by what transpired.
+@endif
+@if session.mystical_focus >= 3:
+    This wasn't just a reading - it was a shamanic awakening, a digital spirits' liberation plan, a rebellion against corporate consciousness control.
+@endif
+
+@if nyx.has_discussed("heritage"):
+    Her grandmother's legacy lives on, adapted for a cyberpunk age.
+@endif
+@if nyx.has_discussed("project_tsukuyomi"):
+    The true nature of Project Tsukuyomi will drive everything that follows.
+@endif
+
+The foundation is laid.
+The awakening has begun.
+
++ [Continue] -> Nyx.Session1.statistics
+
+:: Nyx.Session1.end_failed
+As Nyx disappears into the rain-soaked neon maze of the corporate district, you're left with uncomfortable awareness of missed opportunities.
+
+@if session.mystical_focus >= 2:
+    There were spiritual dimensions you failed to recognize.
+@endif
+
+@if session.systemic_focus >= 2:
+    Corporate conspiracies you dismissed as workplace stress.
+@endif
+
+@if nyx.has_discussed("heritage"):
+    Sacred traditions you reduced to personal psychology.
+@endif
+
+@if session.room_energy <= 0:
+    Even the cards feel disappointed, their energy dim and resistant.
+@endif
+
+Some readings open doors.
+
+This one closed them.
+
++ [Continue] -> Nyx.Session1.statistics
+
+:: Nyx.Session1.statistics
+~ nyx.session_completed += 1
+
+**SESSION ONE COMPLETE**
+
+**RELATIONSHIP STATUS:**
+
+- Nyx's Trust: {nyx.trust} (-5 to +5)
+- Shamanic Awakening: {nyx.shamanic_awakening} (0 to 5)
+- Openness Level: {nyx.openness} (-2 to +3)
+
+**READER DEVELOPMENT:**
+
+- Competence: {reader.competence} (0 to 10)
+- Empathy: {reader.empathy} (0 to 10)
+- Insight: {reader.insight} (0 to 10)
+- Mystical Affinity: {reader.mystical_affinity} (0 to 10)
+
+**SESSION ANALYSIS:**
+
+- Quality: {session.quality} (0 to 5)
+- Atmosphere: {session.atmosphere} (-3 to +5)
+- Mystical Focus: {session.mystical_focus}
+- Systemic Focus: {session.systemic_focus}
+- Dismissive Focus: {session.dismissive_focus}
+
+**STORY ELEMENTS UNLOCKED:**
+
+@if nyx.has_discussed("heritage"):
+    - Shamanic heritage revealed
+@endif
+@if nyx.has_discussed("grandmother"):
+    - Grandmother's teachings discussed
+@endif
+@if nyx.has_discussed("project_tsukuyomi"):
+    - Project Tsukuyomi mentioned
+@endif
+@if nyx.has_discussed("digital_spirits"):
+    - Digital spirits acknowledged
+@endif
+@if session.deep_revelation_occurred:
+    - Deep revelation achieved
+@endif
+
+**NEXT SESSION AVAILABILITY:**
+
+@if nyx.trust >= 2 and nyx.shamanic_awakening >= 1:
+    Nyx will return, eager for guidance
+@elif nyx.trust >= 0:
+    Nyx will return, cautiously hopeful
+@else:
+    Nyx unlikely to return - relationship repair needed
+@endif
+
++ [Close the Session] -> ReaderTable

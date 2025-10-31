@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from typing import Optional
 
+
 # Helper function to normalize suit names
 def normalize_suit(suit: str) -> str:
     """Normalize suit names from tarot-images.json to internal format."""
@@ -13,7 +14,7 @@ def normalize_suit(suit: str) -> str:
         "Cups": "cups",
         "Swords": "swords",
         "Wands": "wands",
-        "Pentacles": "pentacles"
+        "Pentacles": "pentacles",
     }
     return mapping.get(suit, suit.lower())
 
@@ -21,25 +22,23 @@ def normalize_suit(suit: str) -> str:
 def _load_all_cards() -> list["Card"]:
     """Load all 78 tarot cards from tarot-images.json."""
     # Get the path to tarot-images.json relative to this file
-    assets_path = Path(__file__).parent.parent / "assets" / "images" / "tarot-images.json"
+    assets_path = (
+        Path(__file__).parent.parent / "assets" / "images" / "tarot-images.json"
+    )
 
-    with open(assets_path, 'r') as f:
+    with open(assets_path, "r") as f:
         data = json.load(f)
 
     cards = []
-    for card_data in data['cards']:
+    for card_data in data["cards"]:
         # Parse number (it's a string in JSON)
-        number = int(card_data['number'])
+        number = int(card_data["number"])
 
         # Normalize suit name
-        suit = normalize_suit(card_data['suit'])
+        suit = normalize_suit(card_data["suit"])
 
         # Create card
-        card = Card(
-            name=card_data['name'],
-            suit=suit,
-            number=number
-        )
+        card = Card(name=card_data["name"], suit=suit, number=number)
         cards.append(card)
 
     return cards
@@ -48,7 +47,7 @@ def _load_all_cards() -> list["Card"]:
 def _load_spreads_config() -> dict:
     """Load spreads-config.json at module init."""
     config_path = Path(__file__).parent / "spreads-config.json"
-    with open(config_path, 'r') as f:
+    with open(config_path, "r") as f:
         return json.load(f)
 
 
@@ -64,8 +63,8 @@ def find_spread_by_id(spread_id: str) -> dict:
     Raises:
         ValueError: If spread_id not found
     """
-    for spread in SPREADS_CONFIG['spreads']:
-        if spread['id'] == spread_id:
+    for spread in SPREADS_CONFIG["spreads"]:
+        if spread["id"] == spread_id:
             return spread
     raise ValueError(f"Spread '{spread_id}' not found in spreads-config.json")
 
@@ -101,14 +100,6 @@ class Card:
 
     def is_court(self) -> bool:
         return self.suit != "major" and self.number > 10
-
-    def get_position_meaning(self) -> str:
-        meanings = {
-            "past": "influences from your past",
-            "present": "your current situation",
-            "future": "potential outcomes",
-        }
-        return meanings.get(str(self.position), "unknown position")
 
     def _get_code(self) -> str:
         """Generate the filename code (e.g., 'm00', 'c05', 'w12')."""
@@ -148,7 +139,7 @@ class Card:
             meaning_path = Path(__file__).parent.parent / meaning_file
 
             try:
-                with open(meaning_path, 'r') as f:
+                with open(meaning_path, "r") as f:
                     self._meaning_data = json.load(f)
             except FileNotFoundError:
                 print(f"Warning: Meaning file not found: {meaning_path}")
@@ -166,11 +157,11 @@ class Card:
             Dict with essence, keywords, psychological, spiritual, practical, shadow
         """
         data = self.get_meaning_data()
-        if not data or 'core_meanings' not in data:
+        if not data or "core_meanings" not in data:
             return {}
 
         orientation = "reversed" if self.reversed else "upright"
-        return data['core_meanings'].get(orientation, {})
+        return data["core_meanings"].get(orientation, {})
 
     def get_position_meaning(self, rag_mapping: str) -> str:
         """Get position-specific meaning based on RAG mapping.
@@ -182,12 +173,12 @@ class Card:
             Position-specific interpretation string (or empty if not found)
         """
         data = self.get_meaning_data()
-        if not data or 'position_interpretations' not in data:
+        if not data or "position_interpretations" not in data:
             return ""
 
         # Navigate nested dict: temporal_positions.past
-        parts = rag_mapping.split('.')
-        meaning = data['position_interpretations']
+        parts = rag_mapping.split(".")
+        meaning = data["position_interpretations"]
 
         for part in parts:
             if not isinstance(meaning, dict):
@@ -249,30 +240,30 @@ class Spread:
         spread_data = find_spread_by_id(spread_id)
 
         # Load referenced layout
-        layout_name = spread_data['layout']
-        if layout_name not in SPREADS_CONFIG['layouts']:
+        layout_name = spread_data["layout"]
+        if layout_name not in SPREADS_CONFIG["layouts"]:
             raise ValueError(f"Layout '{layout_name}' not found in spreads-config.json")
-        layout_data = SPREADS_CONFIG['layouts'][layout_name]
+        layout_data = SPREADS_CONFIG["layouts"][layout_name]
 
         # Store metadata
         self.id = spread_id
-        self.name = spread_data['name']
-        self.description = spread_data['description']
+        self.name = spread_data["name"]
+        self.description = spread_data["description"]
         self.layout_name = layout_name
-        self.card_size = spread_data['cardSize']  # "large", "medium", "small"
-        self.aspect_ratio = spread_data['aspectRatio']
-        self.category = spread_data['category']
-        self.difficulty = spread_data['difficulty']
+        self.card_size = spread_data["cardSize"]  # "large", "medium", "small"
+        self.aspect_ratio = spread_data["aspectRatio"]
+        self.category = spread_data["category"]
+        self.difficulty = spread_data["difficulty"]
 
         # Merge layout coordinates into position data
         self.positions = []
-        for i, pos_data in enumerate(spread_data['positions']):
-            layout_pos = layout_data['positions'][i]
+        for i, pos_data in enumerate(spread_data["positions"]):
+            layout_pos = layout_data["positions"][i]
 
             # Merge position meaning + layout coords
             merged = {
                 **pos_data,  # name, descriptions, keywords, rag_mapping, etc.
-                **layout_pos  # x, y, rotation (optional), zIndex (optional)
+                **layout_pos,  # x, y, rotation (optional), zIndex (optional)
             }
             self.positions.append(merged)
 
@@ -288,10 +279,12 @@ class Spread:
         positioned = []
         for i, card in enumerate(cards):
             if i < len(self.positions):
-                positioned.append({
-                    'card': card,
-                    **self.positions[i]  # x, y, name, descriptions, keywords, etc.
-                })
+                positioned.append(
+                    {
+                        "card": card,
+                        **self.positions[i],  # x, y, name, descriptions, keywords, etc.
+                    }
+                )
         return positioned
 
     def __repr__(self) -> str:
@@ -327,7 +320,9 @@ class Deck:
     def draw_cards(self, count=1) -> list[Card]:
         """Draw multiple cards from the deck."""
         if count > len(self.cards):
-            raise ValueError(f"Cannot draw {count} cards from deck with only {len(self.cards)} cards")
+            raise ValueError(
+                f"Cannot draw {count} cards from deck with only {len(self.cards)} cards"
+            )
         return random.sample(self.cards, count)
 
     @classmethod
@@ -351,7 +346,9 @@ class Deck:
         return deck
 
     @classmethod
-    def numbers(cls, min_num: int, max_num: int, suit_filter: Optional[str] = None) -> "Deck":
+    def numbers(
+        cls, min_num: int, max_num: int, suit_filter: Optional[str] = None
+    ) -> "Deck":
         """Create a deck containing only cards with numbers in the given range.
 
         Args:
@@ -428,17 +425,17 @@ class Reading:
 
         # Enhance with meaning data
         for card_data in positioned:
-            card = card_data['card']
+            card = card_data["card"]
 
             # Get core meaning (upright/reversed)
-            card_data['core_meaning'] = card.get_core_meaning()
+            card_data["core_meaning"] = card.get_core_meaning()
 
             # Get position-specific meaning using RAG mapping
-            rag_mapping = card_data.get('rag_mapping', '')
+            rag_mapping = card_data.get("rag_mapping", "")
             if rag_mapping:
-                card_data['position_meaning'] = card.get_position_meaning(rag_mapping)
+                card_data["position_meaning"] = card.get_position_meaning(rag_mapping)
             else:
-                card_data['position_meaning'] = ""
+                card_data["position_meaning"] = ""
 
         return positioned
 
