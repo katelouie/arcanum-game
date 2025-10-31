@@ -15,7 +15,7 @@ from save_manager import SaveManager
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # Set the story ID
-STORY_ID = "reader_journey"
+STORY_ID = "arcanum"
 
 # Add assets as static files so they're accessible via URLs (for favicon, images, etc.)
 app.add_static_files("/assets", str(Path(__file__).parent.parent / "assets"))
@@ -376,7 +376,7 @@ def show_player():
                     extensions=["nl2br"],  # Converts \n to <br>
                 )
                 ui.html(html_content, sanitize=False).classes(
-                    "text-xl font-body text-purple-100 mb-8 leading-relaxed"
+                    "text-xl font-body text-purple-100 mb-8 leading-relaxed [&_p]:mb-6"
                 )
 
                 # Render directives (between text and choices)
@@ -1058,7 +1058,7 @@ def show_dashboard(output=None):
                         extensions=["nl2br"],
                     )
                     ui.html(html_content, sanitize=False).classes(
-                        "text-lg font-body text-purple-100 leading-relaxed"
+                        "text-lg font-body text-purple-100 leading-relaxed [&_p]:mb-6"
                     )
 
         # Client Selection Section (from passage choices if provided)
