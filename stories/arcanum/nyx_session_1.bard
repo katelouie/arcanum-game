@@ -1,5 +1,5 @@
 :: Nyx.Session1
-~ session = create_session()
+~ session = create_session(nyx)
 # Nyx brings her own tech issues
 ~ session.tech_interference = 1
 # Starting baseline

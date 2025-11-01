@@ -1,0 +1,765 @@
+# ============================================================================
+# CLIENT: [CLIENT NAME] - SESSION [X]: "[SESSION TITLE]"
+# ============================================================================
+#
+# TEMPLATE FOR AI CO-AUTHORING
+#
+# STRUCTURE:
+# 1.  **Opening:** Client arrives, establishes mood, presents surface-level question.
+# 2.  **Ritual/Banter:** Builds initial Trust/Comfort (like Margaret's tea or Nyx's observation).
+# 3.  **The Real Question:** The *hidden* emotional/ethical/cultural layer is revealed.
+# 4.  **Card Preparation:** A Python block (`@py:`) defines constrained card pools.
+# 5.  **Interpretation Hubs:** A loop for each card position (e.g., Past, Present, Future).
+# 6.  **Interpretation Choices:** 3-5 options per card:
+#     - 1-2 Style-Gated: {reader.style == "analytical"} etc.
+#     - Maybe 1 that's reversal-specific
+#     - 2-3 Quality-Varied: (Good, Okay, Bad) with comments.
+#     - Make sure the player ALWAYS has at least 2-3 options to pick from regardless of their background or other previous attribute choices
+# 7.  **Reversal as Texture:** Reversals are handled with `@if card.reversed:` inside an interpretation, not as separate branches.
+# 8.  **Synthesis:** A final passage that checks accumulated variables (`session.interpretation_good`, flags) to deliver a holistic summary.
+# 9.  **Outcome:** Payment, Reputation, and variable changes based on reading quality.
+#
+# ============================================================================
+# STEP 1: DEFINE CLIENT-SPECIFIC VARIABLES (Optional but Recommended)
+# ============================================================================
+# @py:
+# from game_logic.characters import Client
+# from dataclasses import dataclass
+#
+# @dataclass
+# class ClientName(Client):
+#     """
+#     [Brief description of client and any new variables we need to track.]
+#     """
+#     # EXAMPLE: Tracks trust, clarity, and key flags
+#     trust: int = 50
+#     clarity: int = 0
+#     discussed_guilt: bool = False
+#     will_return: bool = False
+#     gave_gift: bool = False
+# @endpy
+
+# ============================================================================
+# SESSION START
+# ============================================================================
+
+:: ClientName.SessionX
+# ---
+# NARRATIVE: Client arrives. Set the scene.
+# ---
+~ session = create_session(client_name)
+~ session.current_client = client_name
+
+You're in your apartment reading corner.
+@if session.weather_intensity == 0:
+    The afternoon sun streams in, dust motes dancing in the light.
+@else:
+    Rain taps gently against the window, cozy and soft.
+@endif
+
+Your phone buzzes. A new client.
+
++ [Welcome them in] -> ClientName.SessionX.Arrival
+
+:: ClientName.SessionX.Arrival
+# ---
+# NARRATIVE: First impression. Initial dialogue.
+# This is where you establish their mood (nervous, skeptical, grieving, etc.)
+# ---
+A [man/woman/person] stands in your doorway. [Describe their appearance, their energy.]
+
+"Hello," they say. "You're the tarot reader?"
+
++ ["I am. Please, come in."] -> ClientName.SessionX.Ritual
++ ["I am. Are you alright? You seem nervous."] -> ClientName.SessionX.Ritual_Empathy
+
+:: ClientName.SessionX.Ritual
+# ---
+# NARRATIVE: The "Ritual" phase.
+# Margaret brings tea. Nyx requires observation.
+# What does this client do? Do they offer a handshake? Do they comment on the room?
+# This is the first chance to build (or lose) trust.
+# ---
+~ client_name.comfort += 5
+They enter, looking around [curiously/skeptically/nervously].
+
+"So," they say, "how does this work?"
+
++ [Offer them tea] -> ClientName.SessionX.Ritual_Tea
++ [Explain the process] -> ClientName.SessionX.Ritual_Explain
+
+:: ClientName.SessionX.Ritual_Tea
+# ---
+# NARRATIVE: Offering tea is a good default for building comfort.
+# ---
+~ client_name.comfort += 5
+"Tea first?" you offer, gesturing to your kettle.
+
+They [accept/decline] but seem to relax slightly. The simple offer of hospitality changes the energy in the room.
+
+-> ClientName.SessionX.Question
+
+:: ClientName.SessionX.Ritual_Explain
+# ---
+# NARRATIVE: Good for analytical or skeptical clients.
+# ---
+~ reader.competence += 1
+"It's simple," you say calmly. "You have a question. We'll use the cards to explore it. They don't predict a fixed future, but they help reveal patterns and possibilities you might not see."
+
+They nod, appreciating the clear, no-nonsense explanation.
+~ client_name.trust += 5
+
+-> ClientName.SessionX.Question
+
+:: ClientName.SessionX.Ritual_Empathy
+# ---
+# NARRATIVE: Good for emotional clients.
+# ---
+~ reader.empathy += 1
+~ client_name.trust += 5
+~ client_name.comfort += 5
+"I am. Are you alright? You seem nervous."
+
+They stop, surprised by your directness. "Is it that obvious?"
+"A little," you say gently. "It's okay. Most people are their first time."
+
+They take a deep breath. "Thank you. That... actually helps."
+
+-> ClientName.SessionX.Question
+
+# ============================================================================
+# THE QUESTION
+# ============================================================================
+
+:: ClientName.SessionX.Question
+# ---
+# NARRATIVE: The client explains their problem.
+# Start with the SURFACE-LEVEL question.
+# ---
+"So," they begin, "I'm here because... [I need career advice / I'm having relationship problems / I feel stuck]."
+
++ [Ask a gentle, probing question] -> ClientName.SessionX.RealQuestion
++ [Move straight to the cards] -> ClientName.SessionX.BeginReading
+
+:: ClientName.SessionX.RealQuestion
+# ---
+# NARRATIVE: The REAL question.
+# This is where you use Insight/Empathy or just good dialogue
+# to find the hidden, vulnerable truth beneath the surface question.
+# ---
+~ reader.insight += 1
+"That sounds stressful. But I get the feeling..."
++ ["...it's not just about the job, is it?"] -> ClientName.SessionX.RealQuestion_Reveal
++ ["...this relationship problem is connected to something deeper?"] -> ClientName.SessionX.RealQuestion_Reveal
+
+:: ClientName.SessionX.RealQuestion_Reveal
+# ---
+# NARRATIVE: The client reveals the TRUE stakes.
+# (e.g., "I'm not just stuck, I'm grieving," or "It's not just my job, it's my family legacy.")
+# ---
+~ client_name.openness += 10
+~ client_name.discussed_guilt = True  # Set a flag for the synthesis
+They look at you, surprised you saw it.
+"No," they admit. "It's not just the job. It's... [my father's expectations / my fear of failure / my guilt]."
+
+"Thank you for being honest. That's what the cards need to hear."
+
+-> ClientName.SessionX.BeginReading
+
+# ============================================================================
+# CARD PREPARATION (PYTHON)
+# ============================================================================
+
+:: ClientName.SessionX.BeginReading
+You reach for your deck.
+"Let's do a simple 3-card spread. Past, Present, and Future. What led to this, where you are now, and where this path might lead."
+
+Margaret nods. "Let's see what they say."
+
+You shuffle. The cards whisper. You draw.
+
+@py:
+    # --- AI CO-AUTHOR: DEFINE CARD POOLS HERE ---
+    # 1. Define Deck() objects for each position.
+    # 2. Use 2-3 thematically related cards per pool.
+
+    deck_past = Deck(cards=["[CARD_A]", "[CARD_B]"])
+    deck_present = Deck(cards=["[CARD_C]", "[CARD_D]"])
+    deck_future = Deck(cards=["[CARD_E]", "[CARD_F]", "[CARD_G]"])
+
+    # 3. Create the Reading() object
+    #    (Make sure spread_id is unique for this session)
+    reading = Reading(
+        spread_id="clientname-session1-spread",
+        decks=[deck_past, deck_present, deck_future]
+    )
+
+    # 4. Draw the cards
+    cards = reading.draw_cards()
+
+    # 5. Initialize session tracking variables
+    session.interpretation_good = 0
+    session.interpretation_okay = 0
+    session.interpretation_bad = 0
+@endpy
+
++ [Lay out the cards.] -> ClientName.SessionX.LayoutCards
+
+:: ClientName.SessionX.LayoutCards
+# ---
+# NARRATIVE: Display the cards to the player.
+# ---
+@render render_reading(reading=reading)
+
+You lay the cards out:
+
+**Position 1 - The Past:**
+{cards[0].reversed ? {cards[0].name} (Reversed) | {cards[0].name}}
+
+**Position 2 - The Present:**
+{cards[1].reversed ? {cards[1].name} (Reversed) | {cards[1].name}}
+
+**Position 3 - The Future:**
+{cards[2].reversed ? {cards[2].name} (Reversed) | {cards[2].name}}
+
+---
+The client leans forward, watching you.
+"So... what does it mean?"
+
++ [Start with the Past card.] -> ClientName.SessionX.Position1_Hub
+
+# ============================================================================
+# POSITION 1: THE PAST
+# ============================================================================
+
+:: ClientName.SessionX.Position1_Hub
+# ---
+# LOGIC HUB: This passage routes to the correct card.
+# ---
+**Position 1: The Past**
+
+@if cards[0].name == "[CARD_A]":
+    -> ClientName.SessionX.CardA_Interpret
+@else:  // [CARD_B]
+    -> ClientName.SessionX.CardB_Interpret
+@endif
+
+# ---------------------------------------------------------------------------
+# [CARD_A] - Past
+# ---------------------------------------------------------------------------
+
+:: ClientName.SessionX.CardA_Interpret
+# ---
+# NARRATIVE: Describe the card.
+# Use @if card.reversed: for the REVERSAL description.
+# ---
+@if cards[0].reversed:
+    # REVERSED: [Describe the card image, inverted]
+@else:
+    # UPRIGHT: [Describe the card image, upright]
+@endif
+
+The client looks at the card, waiting.
+
+# ---
+# CHOICES: Offer 3-4 interpretations.
+# - 1-2 Gated by Style (if reader.style == "...")
+# - 2-3 Varied Quality (Good, Okay, Bad)
+# ---
++ ["[INTUITIVE - GOOD] This card feels like..."] -> ClientName.SessionX.CardA_Intuitive_Good
++ ["[PRACTICAL - OKAY] This card relates to your..."] -> ClientName.SessionX.CardA_Practical_Okay
++ {reader.style == "storyteller"} ["[STORYTELLER - GOOD] This card tells a story..."] -> ClientName.SessionX.CardA_Storyteller_Good
++ ["[GENERIC - BAD] This card means you..."] -> ClientName.SessionX.CardA_Generic_Bad
+
+:: ClientName.SessionX.CardA_Intuitive_Good
+# ---
+# INTERPRETATION: GOOD
+# - Increment stats
+# - Add reversal texture
+# - Write client's reaction
+# - Converge to the *next* hub
+# ---
+@py:
+    client_name.trust += 10
+    reader.competence += 1
+    reader.empathy += 1
+    session.interpretation_good += 1
+@endpy
+
+"[Write the GOOD, intuitive interpretation here.]"
+
+@if cards[0].reversed:
+    "And because it's reversed, that energy is [blocked/internalized/just starting to clear up]."
+@endif
+
+The client nods slowly. "Wow. Yes, that's... exactly how it felt."
+
++ ["Let's look at the Present card."] -> ClientName.SessionX.Position2_Hub
+
+:: ClientName.SessionX.CardA_Practical_Okay
+# ---
+# INTERPRETATION: OKAY
+# ---
+@py:
+    client_name.trust += 5
+    reader.competence += 1
+    session.interpretation_okay += 1
+@endpy
+
+"[Write the OKAY, practical interpretation here. It's accurate but maybe a bit surface-level.]"
+
+@if cards[0].reversed:
+    "The reversal suggests this was [more difficult / less stable] than it appeared."
+@endif
+
+"That makes sense," the client says. "That's a very clear way to put it."
+
++ ["Let's see what's happening now."] -> ClientName.SessionX.Position2_Hub
+
+:: ClientName.SessionX.CardA_Storyteller_Good
+# ---
+# INTERPRETATION: GOOD (Style-Gated)
+# ---
+@py:
+    client_name.trust += 10
+    reader.competence += 1
+    session.interpretation_good += 1
+@endpy
+
+"[Write the GOOD, storyteller-focused interpretation here.]"
+
+@if cards[0].reversed:
+    "But in your story, the reversal means [the journey was interrupted / the hero refused the call]."
+@endif
+
+The client seems captivated. "I never thought of it that way. Like a story."
+
++ ["Let's see what the next chapter is."] -> ClientName.SessionX.Position2_Hub
+
+:: ClientName.SessionX.CardA_Generic_Bad
+# ---
+# INTERPRETATION: BAD
+# ---
+@py:
+    client_name.trust -= 5
+    session.interpretation_bad += 1
+@endpy
+
+"[Write the BAD, generic, or slightly dismissive interpretation here.]"
+
+The client frowns. "I... guess? That's not really how it felt."
+
+You sense the misstep. The connection feels weaker.
+
++ ["Let's... let's look at the next card."] -> ClientName.SessionX.Position2_Hub
+
+# ---------------------------------------------------------------------------
+# [CARD_B] - Past
+# ---------------------------------------------------------------------------
+
+:: ClientName.SessionX.CardB_Interpret
+# ---
+# NARRATIVE: Describe the card.
+# ---
+@if cards[0].reversed:
+    # REVERSED: [Describe the card image, inverted]
+@else:
+    # UPRIGHT: [Describe the card image, upright]
+@endif
+
+The client looks at the card, waiting.
+
+# ---
+# CHOICES: Offer 3-4 interpretations.
+# ---
++ ["[INTUITIVE - GOOD] This card feels like..."] -> ClientName.SessionX.CardB_Intuitive_Good
++ ["[PRACTICAL - OKAY] This card relates to your..."] -> ClientName.SessionX.CardB_Practical_Okay
++ {reader.style == "analytical"} ["[ANALYTICAL - GOOD] The symbolism here suggests..."] -> ClientName.SessionX.CardB_Analytical_Good
++ ["[GENERIC - BAD] This card means you..."] -> ClientName.SessionX.CardB_Generic_Bad
+
+:: ClientName.SessionX.CardB_Intuitive_Good
+@py:
+    client_name.trust += 10
+    session.interpretation_good += 1
+@endpy
+"[GOOD intuitive interpretation for Card B]"
+@if cards[0].reversed:
+    "[Reversal texture for Card B]"
+@endif
+"Yes... that's it exactly."
++ ["Let's look at the Present card."] -> ClientName.SessionX.Position2_Hub
+
+:: ClientName.SessionX.CardB_Practical_Okay
+@py:
+    client_name.trust += 5
+    session.interpretation_okay += 1
+@endpy
+"[OKAY practical interpretation for Card B]"
+@if cards[0].reversed:
+    "[Reversal texture for Card B]"
+@endif
+"That's a useful way to think about it."
++ ["Let's see what's happening now."] -> ClientName.SessionX.Position2_Hub
+
+:: ClientName.SessionX.CardB_Analytical_Good
+@py:
+    client_name.trust += 10
+    session.interpretation_good += 1
+@endpy
+"[GOOD analytical interpretation for Card B]"
+@if cards[0].reversed:
+    "[Reversal texture for Card B]"
+@endif
+"I appreciate that level of detail. Very clear."
++ ["Let's move to the Present."] -> ClientName.SessionX.Position2_Hub
+
+:: ClientName.SessionX.CardB_Generic_Bad
+@py:
+    client_name.trust -= 5
+    session.interpretation_bad += 1
+@endpy
+"[BAD generic interpretation for Card B]"
+"I... I'm not sure I follow."
++ ["Let's... let's look at the next card."] -> ClientName.SessionX.Position2_Hub
+
+# ============================================================================
+# POSITION 2: THE PRESENT
+# ============================================================================
+
+:: ClientName.SessionX.Position2_Hub
+# ---
+# LOGIC HUB: Routes to the correct card for Position 2.
+# ---
+**Position 2: The Present**
+
+@if cards[1].name == "[CARD_C]":
+    -> ClientName.SessionX.CardC_Interpret
+@else:  // [CARD_D]
+    -> ClientName.SessionX.CardD_Interpret
+@endif
+
+# ---------------------------------------------------------------------------
+# [CARD_C] & [CARD_D] - Present
+# ---------------------------------------------------------------------------
+
+:: ClientName.SessionX.CardC_Interpret
+# ---
+# NARRATIVE: Describe Card C.
+# ---
+@if cards[1].reversed:
+    # REVERSED: [Describe Card C, inverted]
+@else:
+    # UPRIGHT: [Describe Card C, upright]
+@endif
+
++ ["[INTUITIVE - GOOD]..."] -> ClientName.SessionX.CardC_Good
++ ["[PRACTICAL - OKAY]..."] -> ClientName.SessionX.CardC_Okay
++ ["[GENERIC - BAD]..."] -> ClientName.SessionX.CardC_Bad
+
+:: ClientName.SessionX.CardC_Good
+@py: session.interpretation_good += 1 @endpy
+"[Good interpretation, with @if card.reversed: texture]"
++ ["Now, for the future."] -> ClientName.SessionX.Position3_Hub
+
+:: ClientName.SessionX.CardC_Okay
+@py: session.interpretation_okay += 1 @endpy
+"[Okay interpretation, with @if card.reversed: texture]"
++ ["Now, for the future."] -> ClientName.SessionX.Position3_Hub
+
+:: ClientName.SessionX.CardC_Bad
+@py: session.interpretation_bad += 1 @endpy
+"[Bad interpretation, with @if card.reversed: texture]"
++ ["Now, for the future."] -> ClientName.SessionX.Position3_Hub
+
+:: ClientName.SessionX.CardD_Interpret
+# ---
+# NARRATIVE: Describe Card D.
+# ---
+@if cards[1].reversed:
+    # REVERSED: [Describe Card D, inverted]
+@else:
+    # UPRIGHT: [Describe Card D, upright]
+@endif
+
++ ["[INTUITIVE - GOOD]..."] -> ClientName.SessionX.CardD_Good
++ ["[PRACTICAL - OKAY]..."] -> ClientName.SessionX.CardD_Okay
++ ["[GENERIC - BAD]..."] -> ClientName.SessionX.CardD_Bad
+
+:: ClientName.SessionX.CardD_Good
+@py: session.interpretation_good += 1 @endpy
+"[Good interpretation, with @if card.reversed: texture]"
++ ["Now, for the future."] -> ClientName.SessionX.Position3_Hub
+
+:: ClientName.SessionX.CardD_Okay
+@py: session.interpretation_okay += 1 @endpy
+"[Okay interpretation, with @if card.reversed: texture]"
++ ["Now, for the future."] -> ClientName.SessionX.Position3_Hub
+
+:: ClientName.SessionX.CardD_Bad
+@py: session.interpretation_bad += 1 @endpy
+"[Bad interpretation, with @if card.reversed: texture]"
++ ["Now, for the future."] -> ClientName.SessionX.Position3_Hub
+
+# ============================================================================
+# POSITION 3: THE FUTURE
+# ============================================================================
+
+:: ClientName.SessionX.Position3_Hub
+# ---
+# LOGIC HUB: Routes to the correct card for Position 3.
+# ---
+**Position 3: The Future**
+
+@if cards[2].name == "[CARD_E]":
+    -> ClientName.SessionX.CardE_Interpret
+@elif cards[2].name == "[CARD_F]":
+    -> ClientName.SessionX.CardF_Interpret
+@else:  // [CARD_G]
+    -> ClientName.SessionX.CardG_Interpret
+@endif
+
+# ---------------------------------------------------------------------------
+# [CARD_E], [CARD_F], [CARD_G] - Future
+# ---------------------------------------------------------------------------
+
+:: ClientName.SessionX.CardE_Interpret
+@if cards[2].reversed:
+    # REVERSED: [Describe Card E, inverted]
+@else:
+    # UPRIGHT: [Describe Card E, upright]
+@endif
++ ["[GOOD]..."] -> ClientName.SessionX.CardE_Good
++ ["[OKAY]..."] -> ClientName.SessionX.CardE_Okay
++ ["[BAD]..."] -> ClientName.SessionX.CardE_Bad
+
+:: ClientName.SessionX.CardE_Good
+@py: session.interpretation_good += 1 @endpy
+"[Good interpretation, with @if card.reversed: texture]"
++ ["Let's put it all together."] -> ClientName.SessionX.SynthesisHub
+
+:: ClientName.SessionX.CardE_Okay
+@py: session.interpretation_okay += 1 @endpy
+"[Okay interpretation, with @if card.reversed: texture]"
++ ["Let's put it all together."] -> ClientName.SessionX.SynthesisHub
+
+:: ClientName.SessionX.CardE_Bad
+@py: session.interpretation_bad += 1 @endpy
+"[Bad interpretation, with @if card.reversed: texture]"
++ ["Let's put it all together."] -> ClientName.SessionX.SynthesisHub
+
+:: ClientName.SessionX.CardF_Interpret
+@if cards[2].reversed:
+    # REVERSED: [Describe Card F, inverted]
+@else:
+    # UPRIGHT: [Describe Card F, upright]
+@endif
++ ["[GOOD]..."] -> ClientName.SessionX.CardF_Good
++ ["[OKAY]..."] -> ClientName.SessionX.CardF_Okay
++ ["[BAD]..."] -> ClientName.SessionX.CardF_Bad
+
+:: ClientName.SessionX.CardF_Good
+@py: session.interpretation_good += 1 @endpy
+"[Good interpretation, with @if card.reversed: texture]"
++ ["Let's put it all together."] -> ClientName.SessionX.SynthesisHub
+
+:: ClientName.SessionX.CardF_Okay
+@py: session.interpretation_okay += 1 @endpy
+"[Okay interpretation, with @if card.reversed: texture]"
++ ["Let's put it all together."] -> ClientName.SessionX.SynthesisHub
+
+:: ClientName.SessionX.CardF_Bad
+@py: session.interpretation_bad += 1 @endpy
+"[Bad interpretation, with @if card.reversed: texture]"
++ ["Let's put it all together."] -> ClientName.SessionX.SynthesisHub
+
+:: ClientName.SessionX.CardG_Interpret
+@if cards[2].reversed:
+    # REVERSED: [Describe Card G, inverted]
+@else:
+    # UPRIGHT: [Describe Card G, upright]
+@endif
++ ["[GOOD]..."] -> ClientName.SessionX.CardG_Good
++ ["[OKAY]..."] -> ClientName.SessionX.CardG_Okay
++ ["[BAD]..."] -> ClientName.SessionX.CardG_Bad
+
+:: ClientName.SessionX.CardG_Good
+@py: session.interpretation_good += 1 @endpy
+"[Good interpretation, with @if card.reversed: texture]"
++ ["Let's put it all together."] -> ClientName.SessionX.SynthesisHub
+
+:: ClientName.SessionX.CardG_Okay
+@py: session.interpretation_okay += 1 @endpy
+"[Okay interpretation, with @if card.reversed: texture]"
++ ["Let's put it all together."] -> ClientName.SessionX.SynthesisHub
+
+:: ClientName.SessionX.CardG_Bad
+@py: session.interpretation_bad += 1 @endpy
+"[Bad interpretation, with @if card.reversed: texture]"
++ ["Let's put it all together."] -> ClientName.SessionX.SynthesisHub
+
+# ============================================================================
+# SYNTHESIS & OUTCOME
+# ============================================================================
+
+:: ClientName.SessionX.SynthesisHub
+# ---
+# LOGIC: Calculate the final quality of the reading.
+# ---
+@py:
+    # Calculate reading quality based on interpretation tracking
+    if session.interpretation_good >= 2:
+        session.reading_quality = "profound"  # Best outcome for a 3-card spread
+        client_name.clarity = 10
+    elif session.interpretation_good >= 1:
+        session.reading_quality = "helpful"
+        client_name.clarity = 7
+    elif session.interpretation_okay >= 2:
+        session.reading_quality = "adequate"
+        client_name.clarity = 5
+    else:
+        session.reading_quality = "mediocre"
+        client_name.clarity = 2
+@endpy
+
+# ---
+# NARRATIVE: Deliver the final summary based on quality and flags.
+# ---
+You look at the full spread.
+[Card 1], [Card 2], [Card 3].
+A clear story.
+
+@if session.reading_quality == "profound":
+    "The story here is clear," you say. "You started at [summarize good Past interpretation], which has led you to [summarize good Present interpretation]. The path forward, [summarize good Future interpretation], isn't about X, it's about Y."
+
+    @if client_name.discussed_guilt:
+        "And all of this is wrapped up in the guilt you feel about [Z]."
+    @endif
+
+    The client looks... relieved. "Wow. That's... exactly it."
+
+@elif session.reading_quality == "helpful":
+    "The reading was solid," you say. "It shows that [summarize okay Past] is leading to [summarize okay Present]. The future suggests [summarize okay Future]."
+
+    The client nods thoughtfully. "That's helpful. It gives me a lot to think about."
+
+@else:
+    "The reading was... a bit unclear," you say honestly. "The cards show [summarize bad Past/Present] and a future of [summarize bad Future]. It suggests a time of confusion."
+
+    The client looks polite but disappointed. "I see."
+@endif
+
++ [(The reading is finished.)] -> ClientName.SessionX.PaymentAndDeparture
+
+:: ClientName.SessionX.PaymentAndDeparture
+# ---
+# NARRATIVE: Handle the end of the session, payment, and future unlocks.
+# This is where variables are finalized.
+# ---
+The client stands, gathering their things.
+"How much do I owe you?"
+
+"My ad says sliding scale. $30 to $60, whatever feels right to you."
+
+@if session.reading_quality == "profound":
+    # Best outcome
+    ~ reader.money += 70  # (60 + 10 tip)
+    ~ reader.reputation += 10
+    ~ reader.competence += 1
+    ~ client_name.will_return = True
+    ~ client_name.trust = 100
+    ~ client_name.gave_gift = True
+
+    "Here's $70," they say, pressing the bills into your hand. "You gave me more clarity than I've had in months."
+
+    "Thank you. That's very generous."
+
+    "You earned it. Can I... can I book another session? For next month?"
+
+    "Absolutely."
+
+@elif session.reading_quality == "helpful":
+    # Good outcome
+    ~ reader.money += 50
+    ~ reader.reputation += 5
+    ~ reader.competence += 1
+    ~ client_name.will_return = True
+    ~ client_name.trust = 75
+
+    "Here's $50," they say. "This was very helpful."
+
+    "Thank you. I'm glad I could help."
+
+    "I... I might come back in a few weeks, if that's okay?"
+
+    "Of course."
+
+@else:
+    # Mediocre outcome
+    ~ reader.money += 30
+    ~ reader.reputation += 2
+    ~ client_name.will_return = False
+    ~ client_name.trust = 60
+
+    "Here's $30," they say politely.
+
+    "Thank you for coming in."
+
+    They nod and leave without making another appointment.
+@endif
+
++ [Watch them go.] -> ClientName.SessionX.SessionComplete
+
+# ============================================================================
+# SESSION COMPLETE
+# ============================================================================
+
+:: ClientName.SessionX.SessionComplete
+The door closes.
+You sit in your reading corner, the client's payment in your hand.
+
+@if session.reading_quality == "profound":
+    You did it. You really did it.
+    Not just read cards - you *saw* someone. Helped someone.
+    @if client_name.will_return:
+        And they're coming back.
+        The practice has begun.
+    @endif
+@elif session.reading_quality == "helpful":
+    You did it. Not perfectly, but honestly.
+    You helped someone think more clearly. That's not nothing.
+    @if client_name.will_return:
+        And they're coming back. You must have done something right.
+    @endif
+@else:
+    You did it. Your first real client.
+    It wasn't your best work. But it was real.
+    You'll do better next time.
+@endif
+
+@py:
+    # --- FINAL STATE UPDATE ---
+    session.current_client = None
+
+    # Unlock Session 2 if they're returning
+    if client_name.will_return:
+        client_name.session_two_available = True
+
+    # Update global reader stats
+    reader.sessions_completed += 1
+@endpy
+
+---
+
+**Session Complete**
+
+**Money Earned:** ${reader.money_earned_this_session}
+**Reputation Gained:** {reader.reputation_gained_this_session}
+**Reading Quality:** {session.reading_quality}
+
+@if client_name.will_return:
+    {client_name.name} will return.
+@endif
+
+---
+
++ [Return to the Reader's Table] -> ReaderTable

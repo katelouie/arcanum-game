@@ -524,3 +524,44 @@ class Nyx(Client):
             return "elevated"
         else:
             return "minimal"
+
+
+@dataclass
+class Chen(Client):
+    """
+    Margaret Chen - Retired librarian, HK diaspora, gentle first client.
+
+    NEW ATTRIBUTES (justification):
+    - trust: Tracks how much she trusts you (affects payment, return)
+    - comfort: How comfortable she feels opening up (affects depth)
+    - clarity: How much clarity she's gained (reading success metric)
+    - discussed_grief: Flag for if you named David's death
+    - discussed_culture: Flag for if you acknowledged cultural pressure
+    - discussed_guilt: Flag for if you recognized her guilt
+    - will_return: Whether she books Session 2
+    """
+
+    _trust: int = 5  # Starts neutral-positive (5/10)
+    _comfort: int = 4  # Starts slightly guarded (4/10)
+    _clarity: int = 0  # Starts confused (0/10)
+
+    # Conversation flags
+    discussed_grief: bool = False
+    discussed_culture: bool = False
+    discussed_guilt: bool = False
+    discussed_practical: bool = False
+
+    # Session outcome
+    will_return: bool = False
+    gave_gift: bool = False
+
+    @property
+    def clarity(self) -> int:
+        return self._clarity
+
+    @clarity.setter
+    def clarity(self, value: int):
+        self._clarity = max(0, min(10, value))
+
+    def add_clarity(self, amount: int):
+        self.clarity += amount

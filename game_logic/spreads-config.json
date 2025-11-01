@@ -284,6 +284,31 @@
           "y": 16
         }
       ]
+    },
+    "decision-cross-5": {
+      "name": "Decision Cross (5-Card)",
+      "positions": [
+        {
+          "x": 50,
+          "y": 5
+        },
+        {
+          "x": 25,
+          "y": 35
+        },
+        {
+          "x": 75,
+          "y": 35
+        },
+        {
+          "x": 50,
+          "y": 70
+        },
+        {
+          "x": 50,
+          "y": 35
+        }
+      ]
     }
   },
   "spreads": [
@@ -1382,6 +1407,88 @@
             "travel": "Physical or mental journeys and expanded horizons in December"
           },
           "rag_mapping": "temporal_positions.future"
+        }
+      ]
+    },
+    {
+      "id": "chen-house-decision",
+      "name": "Decision Cross (5-Card)",
+      "description": "A 5-card spread for weighing two distinct paths, understanding the core fear, and finding central guidance.",
+      "layout": "decision-cross-5",
+      "cardSize": "medium",
+      "aspectRatio": 1.0,
+      "category": "decision",
+      "difficulty": "intermediate",
+      "positions": [
+        {
+          "name": "Where You Are Now",
+          "short_description": "The current situation or state of mind",
+          "detailed_description": "What is the core energy, central theme, or primary dynamic of your current experience? This represents where you are right now—emotionally, spiritually, and practically—stuck between choices.",
+          "keywords": [
+            "present",
+            "situation",
+            "now",
+            "core",
+            "central",
+            "stalemate"
+          ],
+          "rag_mapping": "temporal_positions.present_situation"
+        },
+        {
+          "name": "Path 1: Staying",
+          "short_description": "The likely outcome or energy of choosing to stay",
+          "detailed_description": "What would choosing to stay in the current situation bring into your life? What are the energies, opportunities, challenges, and likely outcomes associated with this option? This path represents continuity, legacy, and the known.",
+          "keywords": [
+            "choice",
+            "option",
+            "path",
+            "staying",
+            "continuity",
+            "legacy"
+          ],
+          "rag_mapping": "outcome_and_result.possible_outcome"
+        },
+        {
+          "name": "Path 2: Moving",
+          "short_description": "The likely outcome or energy of choosing to move",
+          "detailed_description": "What would this alternative choice or path manifest in your life? What different energies, experiences, and outcomes are associated with moving on? This path represents change, transition, and the unknown.",
+          "keywords": [
+            "alternative",
+            "option",
+            "path",
+            "moving",
+            "change",
+            "transition"
+          ],
+          "rag_mapping": "outcome_and_result.possible_outcome"
+        },
+        {
+          "name": "What You Fear",
+          "short_description": "The core fear surrounding this decision",
+          "detailed_description": "What is your deepest fear or anxiety related to this choice? This card reveals the subconscious emotional current that may be influencing your decision, such as a fear of loss, failure, or the unknown.",
+          "keywords": [
+            "fears",
+            "anxieties",
+            "subconscious",
+            "emotional",
+            "loss",
+            "challenge"
+          ],
+          "rag_mapping": "emotional_and_internal.fears"
+        },
+        {
+          "name": "Guidance / Core Truth",
+          "short_description": "The central guidance or truth you need",
+          "detailed_description": "What is the core wisdom or essential truth at the heart of this matter? This card provides central guidance to help you reframe the problem or find the best path forward, aligning the choice with your highest good.",
+          "keywords": [
+            "guidance",
+            "advice",
+            "wisdom",
+            "approach",
+            "truth",
+            "reframe"
+          ],
+          "rag_mapping": "guidance_and_action.guidance"
         }
       ]
     }
