@@ -442,7 +442,7 @@ def show_player():
                                     on_click=lambda i=idx: make_choice(i),
                                 ).classes(
                                     "w-full py-3 px-6 text-lg bg-purple-600 "
-                                    "text-white font-light rounded-lg shadow-lg "
+                                    "text-white font-body rounded-lg shadow-lg "
                                     "hover:bg-purple-700 hover:scale-105 "
                                     "transition-all duration-200 text-left"
                                 )
