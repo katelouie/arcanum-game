@@ -1,8 +1,4 @@
 :: Start
-~ reader = Reader("Reader")
-~ clients = []
-~ nyx = Nyx()
-~ chen = Client()
 Rain hammers against your apartment window. It's been raining for three days straight—typical for October in the Pacific Northwest. The kind of rain that makes everything feel muted, like the world is wrapped in wet cotton.
 
 You're sitting at your kitchen table, nursing a cup of coffee that went cold an hour ago. Bills are spread out in front of you. Rent's due in a week. Your phone screen glows with job listings that all require "3-5 years experience" for positions that pay barely above minimum wage.
@@ -43,11 +39,11 @@ You grab it before it gets completely drenched.
 + [Examine the package] -> Prologue.examine_package
 
 :: Prologue.examine_package
-<<if prologue_answered_door>>
+@if prologue_answered_door:
     You set it on the table, pushing bills aside.
-<<else>>
+@else:
     You drop it on the table with a wet thud, scattering bills.
-<<endif>>
+@endif
 
 No return address. No shipping label. Just your name and address, handwritten in dark ink. The handwriting is old-fashioned—elegant loops and careful spacing. The kind of penmanship your grandmother might have had.
 
@@ -156,7 +152,7 @@ Names. Dozens of them. Hundreds, maybe. Each entry written in that same careful 
 
 *Valdez, Sofia - First reading: April 2003. Grief reading. Lost her sister. Sensitive.*
 
-*Morrison, Alex - First reading: January 2020. Relationship troubles. Talks too much. Means well.*
+*Morrison, Grant - First reading: January 2020. Relationship troubles. Talks too much. Means well.*
 
 Page after page after page.
 
@@ -211,7 +207,6 @@ And someone just... gave it to you.
 ~ reader.money = 200
 ~ reader.reputation = 400
 ~ reader.knowledge = 500
-
 You learned from your grandmother.
 
 She'd taught you when you were twelve, her wrinkled hands guiding yours as you shuffled her deck—the same deck her grandmother had given her. Rider-Waite-Smith, so old the edges were soft as fabric.
@@ -343,7 +338,7 @@ And that's enough.
 + [Check the voicemail] -> Prologue.check_voicemail
 
 :: Prologue.check_voicemail
-<<if reader.background == "inheritance">>
+@if reader.background == "inheritance":
     Your phone shows three missed calls.
 
     No texts. Just voicemails.
@@ -369,7 +364,7 @@ And that's enough.
     These people are expecting M. Thorne.
 
     Not you.
-<<elif reader.background == "career_change">>
+@elif reader.background == "career_change":
     Wait.
 
     Check the voicemail?
@@ -382,12 +377,12 @@ And that's enough.
 
     The second:
 
-    "Hi, M., it's David Morrison. Just wanted to confirm our Thursday appointment. Let me know if anything's changed."
+    "Hi, M., it's Grant Morrison. Just wanted to confirm our Thursday appointment. Let me know if anything's changed."
 
     Your hands are shaking again.
 
     These people are waiting for appointments with M. Thorne.
-<<elif reader.background == "self_taught">>
+@elif reader.background == "self_taught":
     You check your phone.
 
     Four missed calls. Three voicemails.
@@ -409,7 +404,7 @@ And that's enough.
     These people don't know M. Thorne is gone.
 
     They don't know about you.
-<<elif reader.background == "unexpected_gift">>
+@elif reader.background == "unexpected_gift":
     The moment you think about checking voicemail, you know there will be messages waiting.
 
     The cards told you so.
@@ -420,7 +415,7 @@ And that's enough.
 
     Next message:
 
-    "Hi, my name is Alex Morrison. I've been seeing M. for a few years. I'd like to schedule something for next week if possible?"
+    "Hi, my name is Grant Morrison. I've been seeing M. for a few years. I'd like to schedule something for next week if possible?"
 
     Last message:
 
@@ -431,7 +426,7 @@ And that's enough.
     The cards didn't just bring you this book.
 
     They brought you these people.
-<<endif>>
+@endif
 
 + [Call Margaret Chen back immediately] -> Prologue.call_chen_back
 + [Look through the book more thoroughly first] -> Prologue.explore_book
@@ -444,7 +439,7 @@ She picks up on the second ring.
 
 "Hello?"
 
-"Hi, uh, Mrs. Chen? This is {reader.name}. You left a voicemail about... about an appointment?"
+"Hi, uh, Mrs. Chen? You left a voicemail about... about an appointment?"
 
 Silence.
 
@@ -481,6 +476,7 @@ Your throat is tight.
 + ["Can you tell me more about M. Thorne first?"] -> Prologue.ask_about_thorne
 
 :: Prologue.accept_chen_appointment
+~ clients.append(chen)
 "Yes," you say, surprising yourself with how steady your voice sounds. "I'll be ready."
 
 "Good." You can hear the smile in her voice. "I'll bring tea, like always. M. never could get the tea quite right. Maybe you'll have better luck."
@@ -496,6 +492,7 @@ You pull your tarot deck closer, letting your fingers rest on the cards.
 + [Just... sit with this for a moment] -> Prologue.sit_with_mystery
 
 :: Prologue.hesitate_chen_appointment
+~ clients.append(chen)
 "I don't know if I can do this," you say quietly. "Mrs. Chen, you've been with M. Thorne for thirty-eight years. What if I'm not... what if I can't—"
 
 "Child," she interrupts, and there's such warmth in her voice it makes your eyes sting. "M. Thorne was terrified their first time too. I was their very first client, you know. March 1987. They were shaking so hard they dropped the cards twice."
@@ -521,6 +518,7 @@ You can do that.
 + [You reach for the cards] -> Prologue.sit_with_mystery
 
 :: Prologue.ask_about_thorne
+~ clients.append(chen)
 "Can you tell me about M. Thorne?" you ask. "Who are they? Why did they stop? Why did they choose me?"
 
 Mrs. Chen is quiet for a moment.
@@ -564,7 +562,7 @@ Hundreds of entries. Some clients saw M. Thorne once and never came back. Others
 
 *Valdez, Sofia - Grief reading. Lost her sister. Update: Found peace through volunteer work with hospice. Reads annually now on her sister's birthday.*
 
-*Morrison, Alex - Relationship troubles. Talks too much. Means well. Update: Married! Partner is patient. Good match. Still talks too much.*
+*Morrison, Grant - Relationship troubles. Talks too much. Means well. Update: Married! Partner is patient. Good match. Still talks too much.*
 
 These aren't just names and dates. These are lives. Stories. People M. Thorne cared about enough to remember, to track, to note.
 
@@ -584,7 +582,7 @@ You open your laptop and start typing:
 
 *"Dear clients of M. Thorne,*
 
-*My name is {reader.name}. You don't know me, but I received a package today containing M. Thorne's client registry and a letter explaining that they have retired from practice and have chosen me to continue their work.*
+*You don't know me, but I received a package today containing M. Thorne's client registry and a letter explaining that they have retired from practice and have chosen me to continue their work.*
 
 *I know this must come as a surprise. It surprised me too..."*
 
@@ -601,16 +599,22 @@ You finish the email, keeping it simple and honest:
 
 *"...I understand if you'd prefer to seek another reader. I also understand if you'd like to meet me first before deciding. And I certainly understand if you have questions about M. Thorne and why they made this choice.*
 
-*I've been reading tarot for* <<if reader.background == "inheritance">>*several years, taught by my grandmother*<<elif reader.background == "career_change">>*about six months professionally, though I used cards therapeutically for years before that*<<elif reader.background == "self_taught">>*about two years, though I'm still learning*<<elif reader.background == "unexpected_gift">>*about a year, though my path to this work has been... unconventional*<<endif>>*.*
+*I've been reading tarot for*<>
+@if reader.background == "inheritance":
+    *several years, taught by my grandmother.*
+@elif reader.background == "career_change":
+    *about six months professionally, though I used cards therapeutically for years before that.*
+@elif reader.background == "self_taught":
+    *about two years, though I'm still learning.*
+@elif reader.background == "unexpected_gift":
+    *about a year, though my path to this work has been... unconventional.*
+@endif
 
 *If you'd like to continue your appointments with me, I'll do my very best to honor the trust M. Thorne placed in both of us.*
 
 *If not, I understand completely.*
 
 *Please feel free to contact me with any questions or concerns.*
-
-*Warmly,*
-*{reader.name}"*
 
 You hit send before you can second-guess yourself.
 
@@ -625,16 +629,22 @@ You delete what you wrote and start over, more formal this time:
 
 *"Dear Valued Clients,*
 
-*This letter serves to inform you of a transition in M. Thorne's tarot reading practice. Effective immediately, M. Thorne has retired and transferred their client list to me, {reader.name}.*
+*This letter serves to inform you of a transition in M. Thorne's tarot reading practice. Effective immediately, M. Thorne has retired and transferred their client list to me.*
 
-*I am* <<if reader.background == "inheritance">>*a trained reader with a family background in cartomancy*<<elif reader.background == "career_change">>*a former licensed therapist with extensive experience in using tarot as a therapeutic tool*<<elif reader.background == "self_taught">>*a dedicated student of tarot with two years of practice*<<elif reader.background == "unexpected_gift">>*an intuitive reader who works closely with the cards to provide guidance*<<endif>>*.*
+*I am*<>
+@if reader.background == "inheritance":
+    *a trained reader with a family background in cartomancy.*
+@elif reader.background == "career_change":
+    *a former licensed therapist with extensive experience in using tarot as a therapeutic tool.*
+@elif reader.background == "self_taught":
+    *a dedicated student of tarot with two years of practice.*
+@elif reader.background == "unexpected_gift":
+    *an intuitive reader who works closely with the cards to provide guidance.*
+@endif
 
 *M. Thorne has expressed confidence in my ability to serve your needs going forward. I am committed to maintaining the same level of care and insight you have come to expect.*
 
 *Please contact me at your earliest convenience to schedule or reschedule appointments.*
-
-*Sincerely,*
-*{reader.name}"*
 
 You read it back.
 
@@ -903,11 +913,11 @@ You're going to make a sign. Something simple to hang on your door for when clie
 
 What's your name?
 
-<<if not _inputs.get("player_name")>>
+@if not _inputs.get("player_name"):
     @input name="player_name" placeholder="Enter your name..." label="Your Name"
-<<else>>
-    You write it carefully:
-    **{_inputs.get("player_name")} - TAROT READINGS By Appointment**
+@else:
+    ~ reader.name = _inputs.get("player_name")
+    You write it carefully: **{reader.name} - TAROT READINGS By Appointment**
 
     It looks... real.
 
@@ -916,9 +926,7 @@ What's your name?
     You tape it to your door.
 
     There. Committed.
-<<endif>>
-
-~ reader.name = _inputs.get("player_name")
+@endif
 
 + [Now that that's taken care of...] -> Prologue.first_client_setup
 
@@ -928,9 +936,10 @@ You sit back down at the table.
 
 The black book. The letter. The voicemails and emails waiting.
 
-What happens next depends on your background and how you got here.
+(What happens next depends on your background and how you got here.)
 
 <<if reader.background == "inheritance">>
+    ~ clients.append(sarah)
     The phone rings.
 
     You answer.
@@ -947,6 +956,7 @@ What happens next depends on your background and how you got here.
 
     Your first real client. Not a friend. Not practice. Real.
 <<elif reader.background == "career_change">>
+    ~ clients.append(david)
     An email pops up.
 
     **From: David Morrison**
@@ -968,6 +978,7 @@ What happens next depends on your background and how you got here.
 
     You check the time. 1:47 PM.
 <<elif reader.background == "self_taught">>
+    ~ clients.append(alex)
     You should probably call someone. Practice on a friend first before diving into M. Thorne's client list.
 
     You text your roommate, Alex:
@@ -984,6 +995,7 @@ What happens next depends on your background and how you got here.
 
     Twenty minutes. Then your first real reading with the black book sitting on the table like a weight.
 <<elif reader.background == "unexpected_gift">>
+    ~ clients.append(sarah)
     You close your eyes.
 
     Ask the cards: *What should I do?*

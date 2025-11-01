@@ -5,6 +5,8 @@ from game_logic.models import Session, create_session
 @include prologue.bard
 @include nyx.bard
 @include nyx_session_1.bard
+@include chen.bard
+@include chen_session_1.bard
 
 @metadata
   title: Arcanum
@@ -13,10 +15,27 @@ from game_logic.models import Session, create_session
   story_id: arcanum
   description: A Digital Cartomancer's Tale
 
-@start Start
+@start InitVars
+
+:: InitVars
+@py:
+reader = Reader("Reader") # Will get name input in prologue
+clients = []  # Use list instead of set for unhashable objects
+# Starting Clients
+nyx = Nyx(name="Nyx", age=24, total_sessions=3, flavor_text="???")
+chen = Client(name="Margaret Chen", age=68, total_sessions=3)
+david = Client(name="David Morrison", age=34, total_sessions=3)
+alex = Client(name="Alex", age=28, total_sessions=3)
+sarah = Client(name="Sarah Kim", age=30, total_sessions=3)
+@endpy
+-> Start
 
 :: ReaderTable ^UI:DASHBOARD
+~ clients.append(nyx)
 *Your sanctuary. Candles flicker. Cards wait.*
 
-+ {if "Nyx" in clients} [Nyx] -> Nyx ^CLIENT:SPECIAL
-+ {if "Chen" in clients} [Mrs. Chen] -> Chen ^CLIENT
++ {nyx in clients} [Nyx] -> Nyx ^CLIENT:SPECIAL
++ {chen in clients} [Margaret Chen] -> Chen ^CLIENT
++ {david in clients} [David Morrison] -> David ^CLIENT
++ {alex in clients} [Alex] -> Alex ^CLIENT
++ {sarah in clients} [Sarah Kim] -> Sarah ^CLIENT
