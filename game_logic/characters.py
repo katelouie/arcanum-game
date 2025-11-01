@@ -387,10 +387,6 @@ class Nyx(Client):
     """
 
     # === DEFAULT STARTING VALUES ===
-    name = "Nyx"
-    flavor_text = "???"
-    total_sessions = 3
-
     _trust = 40  # Starts slightly cautious
     _comfort = 45
     _openness = -2  # Starts slightly guarded
