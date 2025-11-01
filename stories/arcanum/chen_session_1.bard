@@ -1,0 +1,29 @@
+# ============================================================================
+# MARGARET CHEN - SESSION 1: "The House Decision"
+# ============================================================================
+# STRUCTURE:
+# - Opening & Tea Ritual
+# - Question & Context
+# - 5-Card Decision Spread:
+#     Position 1: Current State (2 cards)
+#     Position 2: Staying (2 cards)
+#     Position 3: Moving (2 cards)
+#     Position 4: Fear (2 cards)
+#     Position 5: Guidance (3 cards)
+# - Synthesis (conditional based on cards + quality)
+# - Payment & Departure (outcome determination)
+#
+# REVERSALS: adds texture within same passage
+# INTERPRETATION OPTIONS: 3-4 per card, 1-2 style-gated, rest quality-varied
+# HUB CONVERGENCE: After each position, all branches reconverge
+#
+# ============================================================================
+
+# ============================================================================
+# SESSION START
+# ============================================================================
+
+:: Chen.Session1
+You're in your apartment reading corner.
+
++ [Return to your table] -> ReaderTable
