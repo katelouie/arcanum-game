@@ -18,6 +18,11 @@
 # INTERPRETATION OPTIONS: 3-4 per card, 1-2 style-gated, rest quality-varied
 # HUB CONVERGENCE: After each position, all branches reconverge
 #
+# Flags in this session:
+# discussed_grief: bool = False
+# discussed_culture: bool = False
+# discussed_guilt: bool = False
+# discussed_practical: bool = False
 # ============================================================================
 
 # ============================================================================

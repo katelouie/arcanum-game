@@ -1,7 +1,10 @@
 """Classes for characters and player."""
 
+import random
 from dataclasses import dataclass, field
-from typing import Literal, Set, List
+from typing import List, Literal, Set
+
+from game_logic.tarot import Card
 
 ReadingStyle = Literal["intuitive", "analytical", "storyteller", "practical"]
 Background = Literal["inheritance", "self_taught", "unexpected_gift", "career_change"]
@@ -553,10 +556,22 @@ class Chen(Client):
     discussed_culture: bool = False
     discussed_guilt: bool = False
     discussed_practical: bool = False
+    discussed_fear: bool = False
+    discussed_house: bool = False
+    discussed_daughter: bool = False
+    mentioned_david_name: bool = False
 
     # Session outcome
     will_return: bool = False
     gave_gift: bool = False
+
+    # Session tracking
+    session_one_quality: str = ""
+    session_one_cards: list[Card] = []
+    session_two_quality: str = ""
+    session_two_cards: list[Card] = []
+    session_three_quality: str = ""
+    session_three_cards: list[Card] = []
 
     @property
     def clarity(self) -> int:
@@ -568,3 +583,44 @@ class Chen(Client):
 
     def add_clarity(self, amount: int):
         self.clarity += amount
+
+    def determine_session_three_path(self):
+        crisis_weight = 50
+        acceptance_weight = 50
+
+        # Session 1 flags
+        if self.discussed_grief:
+            crisis_weight += 15
+        if self.discussed_culture:
+            acceptance_weight += 15
+        if self.discussed_guilt:
+            crisis_weight += 10
+        if self.discussed_practical:
+            acceptance_weight += 10
+
+        # Session 2 flags
+        if self.discussed_fear:
+            acceptance_weight += 15
+        if self.discussed_house:
+            acceptance_weight += 10
+        if self.discussed_daughter:
+            crisis_weight += 20
+        if self.mentioned_david_name:
+            crisis_weight += 5
+
+        # Quality modifier
+        if self.session_two_quality == "profound":
+            acceptance_weight += 15
+        elif self.session_two_quality == "adequate":
+            crisis_weight += 15
+
+        # Roll
+        total_weight = crisis_weight + acceptance_weight
+        roll = random.randint(1, total_weight)
+
+        if roll <= crisis_weight:
+            self.session_three_path = "final_push"
+        else:
+            self.session_three_path = "acceptance"
+
+        return self.session_three_path

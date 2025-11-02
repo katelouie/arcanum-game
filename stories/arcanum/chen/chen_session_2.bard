@@ -561,8 +561,16 @@ Margaret stares at it. <>
 @endif
 
 + {reader.style == "intuitive"} ["You broke free. You chose movement even though you were terrified."] -> Chen.Session2.EightWands_Intuitive_Good
-+ ["Eight of Wands represents swift action and forward momentum{cards[0].reversed ? , but reversed shows hesitation or delays | }."] -> Chen.Session2.EightWands_Analytical_Okay
-+ ["This is the speed card. Things are moving fast{cards[0].reversed ? , or they should be | }."] -> Chen.Session2.EightWands_Generic_Bad
+@if cards[0].reversed:
+    + ["Eight of Wands represents swift action and forward momentum, but reversed shows hesitation or delays."] -> Chen.Session2.EightWands_Analytical_Okay
+@else:
+    + ["Eight of Wands represents swift action and forward momentum."] -> Chen.Session2.EightWands_Analytical_Okay
+@endif
+@if cards[0].reversed:
+    + ["This is the speed card. Things are moving fast, or they should be."] -> Chen.Session2.EightWands_Generic_Bad
+@else:
+    + ["This is the speed card. Things are moving fast."] -> Chen.Session2.EightWands_Generic_Bad
+@endif
 + {reader.empathy >= 5} ["After two years of stillness, you finally let yourself fly."] -> Chen.Session2.EightWands_Empathetic_Good
 
 :: Chen.Session2.EightWands_Intuitive_Good
@@ -697,7 +705,11 @@ if cards[0].reversed:
 @endif
 
 + {reader.style == "intuitive"} ["You've been resting in grief. Maybe for too long."] -> Chen.Session2.FourSwords_Intuitive_Good
-+ ["Four of Swords represents rest and recuperation{cards[0].reversed ? , but reversed indicates it's time to re-engage | }."] -> Chen.Session2.FourSwords_Analytical_Okay
+@if cards[0].reversed:
+    + ["Four of Swords represents rest and recuperation, but reversed indicates it's time to re-engage."] -> Chen.Session2.FourSwords_Analytical_Okay
+@else:
+    + ["Four of Swords represents rest and recuperation."] -> Chen.Session2.FourSwords_Analytical_Okay
+@endif
 + ["This is the rest card. You've been taking a break."] -> Chen.Session2.FourSwords_Generic_Bad
 + {reader.empathy >= 5} ["After David, you needed to retreat. To rebuild yourself in quiet."] -> Chen.Session2.FourSwords_Empathetic_Good
 
@@ -762,8 +774,7 @@ Margaret considers this. "I suppose that's true."
 + [Continue to the second card] -> Chen.Session2.Position2_Hub
 
 :: Chen.Session2.FourSwords_Generic_Bad
-
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 
 "This is the rest card. You've been taking a break{cards[0].reversed ? , but now you need to get up | }."
 
@@ -822,7 +833,11 @@ if cards[0].reversed:
 Margaret goes very still. "That's me."
 
 + {reader.style == "intuitive"} ["You've been trapped between two equal choices, unable to see clearly."] -> Chen.Session2.TwoSwords_Intuitive_Good
-+ ["Two of Swords represents difficult decisions and stalemate{cards[0].reversed ? , but reversed shows the deadlock breaking | }."] -> Chen.Session2.TwoSwords_Analytical_Okay
+@if cards[0].reversed:
+    + ["Two of Swords represents difficult decisions and stalemate, but reversed shows the deadlock breaking."] -> Chen.Session2.TwoSwords_Analytical_Okay
+@else:
+    + ["Two of Swords represents difficult decisions and stalemate."] -> Chen.Session2.TwoSwords_Analytical_Okay
+@endif
 + ["This is the indecision card. You couldn't choose."] -> Chen.Session2.TwoSwords_Generic_Bad
 + {reader.empathy >= 5} ["Both options seemed equally right and equally wrong. So you chose neither."] -> Chen.Session2.TwoSwords_Empathetic_Good
 
@@ -892,8 +907,7 @@ Margaret nods. "That sounds right."
 + [Continue to the second card] -> Chen.Session2.Position2_Hub
 
 :: Chen.Session2.TwoSwords_Generic_Bad
-
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 
 "This is the indecision card. You couldn't choose{cards[0].reversed ? , but now you're making a choice | }."
 
@@ -976,7 +990,11 @@ You turn over the second card.
 @endif
 
 + {reader.style == "intuitive"} ["You're drowning in what you've lost. You can't see what you still have."] -> Chen.Session2.FiveCups_Intuitive_Good
-+ ["Five of Cups represents grief and focusing on loss{cards[1].reversed ? , but reversed shows beginning to move past it | }."] -> Chen.Session2.FiveCups_Analytical_Okay
+@if cards[1].reversed:
+    + ["Five of Cups represents grief and focusing on loss, but reversed shows beginning to move past it."] -> Chen.Session2.FiveCups_Analytical_Okay
+@else:
+    + ["Five of Cups represents grief and focusing on loss."] -> Chen.Session2.FiveCups_Analytical_Okay
+@endif
 + ["This is the grief card. You're sad."] -> Chen.Session2.FiveCups_Generic_Bad
 + {reader.empathy >= 5} ["Three cups spilled, two still standing. The math of grief: loss is always louder than what remains."] -> Chen.Session2.FiveCups_Poetic_Good
 
@@ -1058,8 +1076,7 @@ Margaret wipes her eyes. "Yes. That's where I am."
 + [Continue to the guidance card] -> Chen.Session2.Position3_Hub
 
 :: Chen.Session2.FiveCups_Generic_Bad
-
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 
 "This is the grief card. You're sad{cards[1].reversed ? , but getting better | }."
 
@@ -1115,8 +1132,16 @@ if cards[1].reversed:
 @endif
 
 + {reader.style == "intuitive"} ["You're holding onto hope, even if it feels fragile."] -> Chen.Session2.Star_Intuitive_Good
-+ ["The Star represents hope and renewal{cards[1].reversed ? , but reversed indicates struggling to believe in better days | }."] -> Chen.Session2.Star_Analytical_Okay
-+ ["This is the hope card. You're feeling hopeful{cards[1].reversed ? , or you're not | }."] -> Chen.Session2.Star_Generic_Bad
+@if cards[1].reversed:
+    + ["The Star represents hope and renewal, but reversed indicates struggling to believe in better days."] -> Chen.Session2.Star_Analytical_Okay
+@else:
+    + ["The Star represents hope and renewal."] -> Chen.Session2.Star_Analytical_Okay
+@endif
+@if cards[1].reversed:
+    + ["This is the hope card. You're feeling hopeful, or you're not."] -> Chen.Session2.Star_Generic_Bad
+@else:
+    + ["This is the hope card. You're feeling hopeful."] -> Chen.Session2.Star_Generic_Bad
+@endif
 + {reader.empathy >= 5} ["After everything, you're still reaching for light. That's remarkable."] -> Chen.Session2.Star_Empathetic_Good
 
 :: Chen.Session2.Star_Intuitive_Good
@@ -1182,8 +1207,7 @@ Margaret nods. "Yes, I suppose that's true."
 + [Continue to the guidance card] -> Chen.Session2.Position3_Hub
 
 :: Chen.Session2.Star_Generic_Bad
-
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 
 "This is the hope card. You're feeling hopeful{cards[1].reversed ? . Or maybe you're not. It's a bit unclear | }."
 
@@ -1239,7 +1263,11 @@ She cries quietly. You give her space.
 @endif
 
 + {reader.style == "intuitive"} ["You've been independent so long, you've forgotten how to let people help you."] -> Chen.Session2.NinePentacles_Intuitive_Good
-+ ["Nine of Pentacles represents independence and self-sufficiency{cards[1].reversed ? , but reversed can indicate isolation | }."] -> Chen.Session2.NinePentacles_Analytical_Okay
+@if cards[1].reversed:
+    + ["Nine of Pentacles represents independence and self-sufficiency, but reversed can indicate isolation."] -> Chen.Session2.NinePentacles_Analytical_Okay
+@else:
+    + ["Nine of Pentacles represents independence and self-sufficiency."] -> Chen.Session2.NinePentacles_Analytical_Okay
+@endif
 + ["This is the independence card. You're on your own."] -> Chen.Session2.NinePentacles_Generic_Bad
 + {reader.empathy >= 5} ["You built a life where you don't need anyone. But need and want are different."] -> Chen.Session2.NinePentacles_Empathetic_Good
 
@@ -1305,8 +1333,7 @@ Margaret thinks about this. "I suppose so."
 + [Continue to the guidance card] -> Chen.Session2.Position3_Hub
 
 :: Chen.Session2.NinePentacles_Generic_Bad
-
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 
 "This is the independence card. You're on your own{cards[1].reversed ? , and maybe that's a problem | }."
 
@@ -1387,7 +1414,11 @@ The final card. You turn it over slowly.
 @endif
 
 + {reader.style == "intuitive"} ["You don't have to choose between David's memory and your future. You can hold both."] -> Chen.Session2.Temperance_Intuitive_Good
-+ ["Temperance represents balance and moderation{cards[2].reversed ? , but reversed suggests imbalance or excess | }."] -> Chen.Session2.Temperance_Analytical_Okay
+@if cards[2].reversed:
+    + ["Temperance represents balance and moderation, but reversed suggests imbalance or excess."] -> Chen.Session2.Temperance_Analytical_Okay
+@else:
+    + ["Temperance represents balance and moderation."] -> Chen.Session2.Temperance_Analytical_Okay
+@endif
 + ["This is the balance card. Find moderation."] -> Chen.Session2.Temperance_Generic_Bad
 + {reader.empathy >= 5} ["The middle path isn't about compromise. It's about integration."] -> Chen.Session2.Temperance_Empathetic_Good
 
@@ -1462,8 +1493,7 @@ Margaret nods thoughtfully. "That makes sense."
 + [Continue to synthesis] -> Chen.Session2.SynthesisHub
 
 :: Chen.Session2.Temperance_Generic_Bad
-
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 
 "This is the balance card. Find moderation{cards[2].reversed ? . Or you're out of balance | }."
 
@@ -1534,9 +1564,13 @@ Margaret breathes deeply. "I can hold both."
 @endif
 
 + {reader.style == "intuitive"} ["Sometimes you have to leap without knowing where you'll land."] -> Chen.Session2.Fool_Intuitive_Good
-+ ["The Fool represents new beginnings and leaps of faith{cards[2].reversed ? , but reversed suggests fear of recklessness | }."] -> Chen.Session2.Fool_Analytical_Okay
+@if cards[2].reversed:
+    + ["The Fool represents new beginnings and leaps of faith, but reversed suggests fear of recklessness."] -> Chen.Session2.Fool_Analytical_Okay
+@else:
+    + ["The Fool represents new beginnings and leaps of faith."] -> Chen.Session2.Fool_Analytical_Okay
+@endif
 + ["This is the new beginning card. Start fresh."] -> Chen.Session2.Fool_Generic_Bad
-+ {reader.empathy >= 5} ["At seventy-one, you get to be a beginner again."] -> Chen.Session2.Fool_Empathetic_Good
++ {reader.empathy >= 5} ["At sixty-eight, you get to be a beginner again."] -> Chen.Session2.Fool_Empathetic_Good
 
 :: Chen.Session2.Fool_Intuitive_Good
 
@@ -1600,8 +1634,7 @@ Margaret considers this. "I see."
 + [Continue to synthesis] -> Chen.Session2.SynthesisHub
 
 :: Chen.Session2.Fool_Generic_Bad
-
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 
 "This is the new beginning card. Start fresh{cards[2].reversed ? . Or you're afraid to | }."
 
@@ -1665,7 +1698,11 @@ if cards[2].reversed:
 @endif
 
 + {reader.style == "intuitive"} ["You're already in the boat. You just have to let it carry you."] -> Chen.Session2.SixSwords_Intuitive_Good
-+ ["Six of Swords represents transition and moving from difficulty to calmer waters{cards[2].reversed ? , but reversed shows resistance to change | }."] -> Chen.Session2.SixSwords_Analytical_Okay
+@if cards[2].reversed:
+    + ["Six of Swords represents transition and moving from difficulty to calmer waters, but reversed shows resistance to change."] -> Chen.Session2.SixSwords_Analytical_Okay
+@else:
+    + ["Six of Swords represents transition and moving from difficulty to calmer waters."] -> Chen.Session2.SixSwords_Analytical_Okay
+@endif
 + ["This is the transition card. You're moving."] -> Chen.Session2.SixSwords_Generic_Bad
 + {reader.empathy >= 5} ["You don't leave your problems behind. You take them with you and they stop being so heavy."] -> Chen.Session2.SixSwords_Empathetic_Good
 
@@ -1731,8 +1768,7 @@ Margaret nods. "That's helpful."
 + [Continue to synthesis] -> Chen.Session2.SynthesisHub
 
 :: Chen.Session2.SixSwords_Generic_Bad
-
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 
 "This is the transition card. You're moving{cards[2].reversed ? . Or you should be | }."
 
@@ -2102,7 +2138,7 @@ reader.sessions_completed += 1
 
 # Record callbacks for Session 3 if unlocked
 if chen.session_three_unlocked:
-    chen.session_two_cards = [c.name for c in cards]
+    chen.session_two_cards = cards
     chen.session_two_quality = session.reading_quality
 @endpy
 

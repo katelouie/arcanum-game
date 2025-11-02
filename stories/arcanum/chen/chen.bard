@@ -1,0 +1,18 @@
+:: Chen
+@if chen.sessions_completed == 0:
+    -> Chen.Session1
+@elif chen.sessions_completed == 1:
+    -> Chen.Session2
+@elif chen.sessions_completed == 2:
+    ~ path = chen.determine_session_three_path()
+    @if chen.took_action:
+        -> Chen.Session3A.Start
+    @elif path == "final_push":
+        -> Chen.Session3B.Start
+    @else:
+    # path == "acceptance"
+        -> Chen.Session3C.Start
+    @endif
+@elif chen.sessions_completed == 3:
+    Margaret Chen's story is complete.
+@endif

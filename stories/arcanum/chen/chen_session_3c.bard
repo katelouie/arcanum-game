@@ -1,0 +1,1677 @@
+# ============================================================================
+# MARGARET CHEN - SESSION 3C: "THE ACCEPTANCE"
+# ============================================================================
+#
+# UNLOCK CONDITIONS:
+# - chen.will_return == True
+# - chen.session_two_quality >= "helpful"
+# - chen.took_action == False (stayed paralyzed after Session 2)
+# - 4-6 weeks have passed since Session 2
+#
+# CATALYST: Maya (granddaughter) visits + David's roses bloom
+#   - Maya gently observes: "The house is a museum. When do YOU bloom?"
+#   - Margaret realizes: she's been withering, not living
+#   - Can she stay AND bloom? Root deep AND reach wide?
+#
+# THEME: Transformation in place - blooming where you're planted
+#
+# STRUCTURE:
+# - Contemplative opening (quieter than 3A/3B)
+# - 1-Card Draw (from growth/home-focused pool)
+# - Interpretations about making house HERS, not memorial
+# - Synthesis emphasizes small actions, deep roots, community re-engagement
+# - Gift is osmanthus cutting (Chinese plant in David's garden)
+# - Unlocks Maya Chen (granddaughter, Seattle)
+#
+# CARD POOL:
+# - Four of Wands (home as celebration, not prison)
+# - Ten of Pentacles (legacy through life, not preservation)
+# - The Empress (nurturing growth, garden, fertility)
+#
+# ============================================================================
+
+:: Chen.Session3C.Start
+@py:
+    session = create_session(chen)
+
+    # Initialize session tracking
+    session.interpretation_good = 0
+    session.interpretation_okay = 0
+    session.interpretation_bad = 0
+
+    # Initialize flags
+    chen.discussed_grief = False
+    chen.discussed_guilt = False
+    chen.discussed_maya = False
+    chen.discussed_garden = False
+    chen.discussed_community = False
+    chen.discussed_house_transformation = False
+    chen.discussed_blooming = False
+
+    # Session-specific
+    session.offered_validation = False
+    session.discussed_small_changes = False
+@endpy
+~ session.atmosphere = 2  # Contemplative, gentle
+~ session.room_energy = 2
+
+You're in your reading corner.
+
+@if session.weather_intensity >= 2:
+    Spring rain, soft and steady. The kind that makes things grow.
+@else:
+    Late spring afternoon. Sun through the window, warm and golden. Everything outside is blooming.
+@endif
+
+Your phone buzzes.
+
+**[Text from: Margaret Chen]**
+*"Can I see you today? Something shifted. - M"*
+
+It's been six weeks since Session 2. You wonder what changed.
+
+You text back: *"Yes. Come now."*
+
+Twenty minutes later, footsteps on the stairs. Measured. Thoughtful.
+
+A familiar knock.
+
++ [Open the door, curious about what shifted] -> Chen.Session3C.Arrival
+
+:: Chen.Session3C.Arrival
+You open the door.
+
+Margaret Chen stands there. She looks... different. Not lighter like in 3A. Not desperate like in 3B. Something else.
+
+**Grounded.** That's the word. Rooted.
+
+She's carrying a small fabric bag. And there's dirt under her fingernails.
+
+"Hello again," she says quietly.
+
++ ["Come in. You look... different."] -> Chen.Session3C.FirstImpression_Different
++ ["You've been gardening."] -> Chen.Session3C.FirstImpression_Gardening
++ ["Something shifted, you said?"] -> Chen.Session3C.FirstImpression_Shifted
+
+:: Chen.Session3C.FirstImpression_Different
+"Come in. You look... different."
+
+Margaret steps inside, considers this.
+
+"Different good or different bad?"
+
+"Just... different. Grounded, maybe?"
+
+She nods slowly. "That's the right word. I am grounded. Literally. I've been in the garden all week. Dirt under my nails, knees in the soil. Planted something new."
+
+~ chen.discussed_garden = True
+
++ ["Tell me what happened."] -> Chen.Session3C.Settling
++ ["Something new? What did you plant?"] -> Chen.Session3C.What_Planted
+
+:: Chen.Session3C.FirstImpression_Gardening
+
+"You've been gardening."
+
+She looks at her hands, surprised. "Oh. Yes. I washed them but the dirt stays. I've been in the garden all week."
+
+"David's garden?"
+
+"It WAS David's garden. Now it's... mine. Ours. I planted something new."
+
+~ chen.discussed_garden = True
+~ reader.insight += 1
+
++ ["What did you plant?"] -> Chen.Session3C.What_Planted
+
+:: Chen.Session3C.FirstImpression_Shifted
+
+"Something shifted, you said?"
+
+"Yes. Maya visited. My granddaughter. And she said something that broke me open. In a good way. Or maybe a necessary way."
+
+~ chen.discussed_maya = True
+
++ ["Come in. Tell me everything."] -> Chen.Session3C.Settling
+
+:: Chen.Session3C.What_Planted
+
+"What did you plant?"
+
+Margaret's face lights up - actual joy, not grief-tinged smile.
+
+"桂花. Osmanthus. Chinese plant. My mother had one in Hong Kong. The smell when it blooms - *aiya* - it's like Chinese bakery. Like *maa lai gou*. Like home."
+
+She pauses.
+
+"David never wanted Chinese plants in the garden. Said they were 'too exotic' for Seattle. But he's not here to say no anymore. So I planted it. In the spot he always said nothing would grow. 'The soil's wrong,' he said. But I'm trying anyway."
+
+~ chen.discussed_garden = True
+~ chen.discussed_house_transformation = True
+
++ ["That's beautiful. Come sit."] -> Chen.Session3C.Settling
+
+:: Chen.Session3C.Settling
+
+You guide her to the chair. She sits with the careful settling of someone who's been on their knees in the garden.
+
+"Tea?"
+
+"Please."
+
+You prepare it. She watches, organizing her thoughts.
+
++ ["Tell me about Maya's visit."] -> Chen.Session3C.Maya_Visit
++ ["Tell me what shifted."] -> Chen.Session3C.What_Shifted
++ ["You said you planted something new."] -> Chen.Session3C.Garden_Opening
+
+:: Chen.Session3C.Maya_Visit
+
+"Tell me about Maya's visit."
+
+Margaret takes a breath.
+
+"My granddaughter. Twenty-three. Art student. She lives in Seattle but she hasn't visited in months. Too busy, I thought. Or maybe... maybe I wasn't inviting her. Not really."
+
+"What happened when she came?"
+
+"She walked through the house. Slowly. Looking at everything. And then she sat on David's spot on the couch - the spot I never sit in - and she said..."
+
+Margaret's voice catches.
+
+"She said: '外婆, this house is beautiful. But it feels like a museum. Like time stopped when *Gung Gung* died. Everything is preserved. Including you.'"
+
+~ chen.discussed_maya = True
+
++ ["That must have been hard to hear."] -> Chen.Session3C.Maya_Hard_To_Hear
++ ["Was she right?"] -> Chen.Session3C.Maya_Was_She_Right
+
+:: Chen.Session3C.What_Shifted
+
+"Tell me what shifted."
+
+"Two things. At the same time. Like the universe coordinated."
+
+Margaret counts on her fingers.
+
+"One: Maya visited. My granddaughter. She walked through the house and said it feels like a museum. Said I'm preserved. Like taxidermy. And I got angry but also... she was right."
+
+"Two: The garden. David's roses started blooming. They're beautiful. But I looked at them and thought: these are HIS roses. I've been tending HIS garden. Where are MY flowers?"
+
+~ chen.discussed_maya = True
+~ chen.discussed_garden = True
+
++ ["And that's when something shifted."] -> Chen.Session3C.The_Shift
+
+:: Chen.Session3C.Garden_Opening
+
+"You said you planted something new. Tell me about that."
+
+Margaret settles into the topic like she's been waiting to talk about it.
+
+"The roses bloomed. David's roses. They're beautiful - full, fragrant, red and white. He planted them fifteen years ago. Every spring they bloom and I tend them and... this year I looked at them and thought: these are HIS. Where are mine?"
+
+"So you planted something."
+
+"桂花. Osmanthus. Chinese flower. My mother had one in Hong Kong. I haven't seen one in thirty years. I went to the Asian plant nursery in Beacon Hill - the one David never wanted to go to, too far - and I bought one. Small. But it'll grow."
+
+~ chen.discussed_garden = True
+~ chen.discussed_house_transformation = True
+
++ ["Where did you plant it?"] -> Chen.Session3C.Where_Planted
+
+:: Chen.Session3C.Maya_Hard_To_Hear
+
+"That must have been hard to hear."
+
+"*Diu*, yes. I wanted to argue. Say: I'm not preserved, I'm LIVING. But then she took me to the garden. The roses were blooming. And she pointed at them and said: 'These are beautiful. *Gung Gung*'s roses. But 外婆... when are YOU going to bloom?'"
+
+Margaret wipes her eyes.
+
+"And I realized: I've been withering. Not living. Not even really surviving. Just... maintaining. Preserving. Like the house is a museum and I'm both the curator and the exhibit."
+
+~ chen.discussed_blooming = True
+
++ ["What did you do after she left?"] -> Chen.Session3C.After_Maya_Left
+
+:: Chen.Session3C.Maya_Was_She_Right
+"Was she right?"
+
+Margaret is quiet for a long moment.
+
+"Yes. She was right. The house IS a museum. I've preserved everything exactly as David left it. His books in the same order. His coffee mug in the same spot. The furniture positioned the way he liked it. His study untouched. His garden tended exactly according to his preferences."
+
+Her voice hardens with realization.
+
+"I've been maintaining a memorial, not living in a home. For two years. Maya walked in and saw it immediately. What took me six weeks to fail to see."
+
+~ chen.discussed_house_transformation = True
+~ reader.empathy += 1
+
++ ["And that's when things shifted."] -> Chen.Session3C.The_Shift
+
+:: Chen.Session3C.The_Shift
+"And that's when things shifted."
+
+"Yes. Maya left. And I sat in the house - the museum - and I thought about what you said six weeks ago. About moving. About Blossom Terrace. About choosing ease."
+
+"You couldn't do it."
+
+"No. I tried. I called them. Got as far as asking about availability. Then I hung up. Couldn't do it. The house - it's not just David's. It's mine too. Forty years here. The neighborhood. Mrs. Nguyen next door. The Lees across the street. The Vietnamese grocer who saves me the best bok choy. My garden. My roots."
+
+She looks at you directly.
+
+"I can't leave. But I can't keep withering either. So I came to ask: can I stay AND bloom? Can I root deeper AND reach wider? Can I make this house MINE instead of a memorial?"
+
+~ chen.discussed_community = True
+~ chen.discussed_blooming = True
+
++ ["That's why you're here."] -> Chen.Session3C.Why_Shes_Here
+
+:: Chen.Session3C.Where_Planted
+"Where did you plant it?"
+
+Margaret's eyes light up.
+
+"The dead zone. That's what David called it. Northwest corner. Shaded by the big maple. He said nothing would grow there. 'Soil's wrong. Too much shade. Don't waste time.' So that corner has been bare dirt for fifteen years."
+
+"But you planted there anyway."
+
+"Yes. I thought: what if he was wrong? What if something WILL grow there? Chinese plants are tough. My mother's osmanthus grew in a Hong Kong alley with almost no sun. So I planted it. And you know what?"
+
+"What?"
+
+"It looks happy. The leaves are already perking up. Like it knows it's home."
+
+~ chen.discussed_garden = True
+~ chen.discussed_blooming = True
+
++ ["That's powerful symbolism."] -> Chen.Session3C.After_Maya_Left
+
+:: Chen.Session3C.After_Maya_Left
+"What did you do after Maya left?"
+
+Margaret settles deeper into the chair.
+
+"I couldn't sleep that night. Kept thinking about what she said. Museum. Preserved. When do YOU bloom? At 2 AM I went to the garden. The roses were blooming under moonlight. Beautiful. But all I could think was: these aren't mine."
+
+"That's when you decided to plant something?"
+
+"Not decided. NEEDED. Next morning I drove to the Asian plant nursery. Bought osmanthus. Planted it in David's 'dead zone.' Spent all afternoon on my knees in the dirt. And I felt... *aiya* I felt ALIVE. For the first time in two years."
+
+~ chen.discussed_garden = True
+~ chen.discussed_blooming = True
+
++ ["What else changed?"] -> Chen.Session3C.Other_Changes
++ ["That's why you're here now."] -> Chen.Session3C.Why_Shes_Here
+
+:: Chen.Session3C.Other_Changes
+"What else changed?"
+
+"Little things. Big things. I don't know anymore."
+
+Margaret counts on her fingers.
+
+"I moved the couch. Just six inches. But it faces the garden window now instead of the TV. David always wanted it facing the TV. I want to see the osmanthus."
+
+"I called Mrs. Nguyen next door. She's been trying to invite me for dinner for two years. I always said no. Too busy. Too tired. I called her yesterday. Said: Can I come for dinner? I'll bring 蛋撻. She cried. Said she thought I forgot about them."
+
+~ chen.discussed_community = True
+~ chen.discussed_house_transformation = True
+
+"I texted Mrs. Lee across the street. They have mahjong Thursday nights. They used to invite David and me. After he died, they stopped asking. I texted: Can I join? I'm rusty. She texted back in all caps: TOMORROW. 7PM. WE SAVED YOUR SEAT."
+
+Margaret wipes her eyes.
+
+"And I looked at David's study. Still beige. Still his. And I thought: what if I painted it? Blue. Ocean blue. The blue I always wanted. He said it was 'too bold' but he's not here to say no anymore."
+
++ ["You're transforming the house."] -> Chen.Session3C.Transforming_House
++ ["You're re-engaging with community."] -> Chen.Session3C.Reengaging_Community
+
+:: Chen.Session3C.Transforming_House
+
+"You're transforming the house. Making it yours."
+
+"Yes. Small changes. But they feel HUGE. Moving furniture. Planting flowers. Planning to paint. These sound tiny but they're... they're reclamation. Every change says: this is MY house now. Not David's memorial. Not our house. MINE."
+
+Her voice strengthens.
+
+"I'm not erasing him. His roses still bloom. His books are still on the shelf. His coffee mug is still in the cupboard. But the couch moved. The osmanthus grows. The study will be blue. He's part of the house, but not ALL of it anymore."
+
+~ chen.discussed_house_transformation = True
+~ reader.empathy += 1
+
++ ["That's powerful."]
+    -> Chen.Session3C.Why_Shes_Here
+
+:: Chen.Session3C.Reengaging_Community
+
+"You're re-engaging with community. The Nguyens. The Lees. Your neighbors."
+
+"Yes. I've been... withdrawing. Since David died. Not intentionally. Just... turning inward. Mrs. Nguyen would wave from the garden. I'd wave back. But no real conversation. No invitations. No life."
+
+She looks ashamed.
+
+"They probably thought I didn't want to see them. But really I just... forgot how. Forgot how to be part of the world. Maya's visit reminded me: I have people. They're still there. I just have to open the door."
+
+~ chen.discussed_community = True
+~ chen.discussed_guilt = True
+
++ ["And you're opening it now."]
+    -> Chen.Session3C.Why_Shes_Here
+
+:: Chen.Session3C.Why_Shes_Here
+
+"That's why you're here now."
+
+Margaret nods.
+
+"I couldn't move to Blossom Terrace. I tried. I froze. And everyone - Emily, my son, Maya - they all think staying means giving up. Means being stuck forever. Means withering."
+
+She leans forward.
+
+"But what if it doesn't? What if staying can be active? What if I can root deeper AND reach wider? What if I can bloom where I'm planted instead of being transplanted?"
+
+"What do you need from the cards?"
+
+"Validation, I think. Permission. Or maybe just... confirmation. That staying is okay if I'm DOING something. If I'm planting osmanthus and moving furniture and going to mahjong and painting rooms. That transformation doesn't require relocation."
+
+~ session.offered_validation = True
+
++ ["Let's ask the cards."]
+    -> Chen.Session3C.CardDraw
+
+# ============================================================================
+# CARD DRAW
+# ============================================================================
+
+:: Chen.Session3C.CardDraw
+
+You reach for your deck.
+
+Margaret watches with quiet intensity. Not desperate like last time. Just... present.
+
+"One card," you say. "Deep and focused."
+
+"What's the question?"
+
+"How does Margaret bloom where she's planted?"
+
+She smiles - small, real. "Yes. That's it exactly."
+
+You shuffle. The cards feel warm, alive with spring energy. Growth energy.
+
+You draw.
+
+@py:
+    from game_logic.tarot import Deck, Reading
+
+    # Growth/home-focused pool for Session 3C
+    deck = Deck(cards=[
+        "Four of Wands",      # Home as celebration
+        "Ten of Pentacles",   # Legacy through life
+        "The Empress"         # Nurturing, garden, growth
+    ])
+
+    # Create reading
+    reading = Reading(
+        spread_id="chen-session3c-blooming",
+        decks=[deck]
+    )
+
+    # Draw the card
+    cards = reading.draw_cards()
+@endpy
+
+@render render_reading(reading=reading)
+
+You lay the card on the table.
+
+**{cards[0].name}**{cards[0].reversed ? (Reversed) | }
+
+---
+
+Margaret leans forward, studying it.
+
+"Tell me what you see."
+
++ [Begin interpretation]
+    -> Chen.Session3C.InterpretationHub
+
+# ============================================================================
+# INTERPRETATION HUB
+# ============================================================================
+
+:: Chen.Session3C.InterpretationHub
+
+@if cards[0].name == "Four of Wands":
+    -> Chen.Session3C.FourWands_Interpret
+@elif cards[0].name == "Ten of Pentacles":
+    -> Chen.Session3C.TenPentacles_Interpret
+@else:
+    # The Empress
+    -> Chen.Session3C.Empress_Interpret
+@endif
+
+# ============================================================================
+# FOUR OF WANDS - INTERPRETATION
+# ============================================================================
+
+:: Chen.Session3C.FourWands_Interpret
+
+@if cards[0].reversed:
+    The **Four of Wands - Reversed**.
+
+    Four staffs stand upright, but the garland between them hangs limp. The celebration is delayed. The home feels unstable. Foundation is there but something's blocking the joy. Homecoming interrupted.
+@else:
+    The **Four of Wands**.
+
+    Four staffs stand upright, a garland of flowers strung between them. In the background, people celebrate. This is HOME. Not just house - HOME. Foundation. Celebration. The place you return to and feel: yes, THIS is where I belong.
+@endif
+
++ {reader.style == "intuitive"} ["This is the celebration card. Your house wants to be filled with life again."]
+    -> Chen.Session3C.FourWands_Intuitive_Good
+
++ {reader.style == "analytical"} ["Four represents stability. Wands are passion and will. This is foundation built on conscious choice."]
+    -> Chen.Session3C.FourWands_Analytical_Good
+
++ ["Home isn't just where you stay. It's where you LIVE. The house is ready to be yours again."]
+    -> Chen.Session3C.FourWands_Perceptive_Excellent
+
++ ["Four of Wands represents home and celebration."]
+    -> Chen.Session3C.FourWands_Generic_Bad
+
++ ["This card says your home is stable. You made the right choice to stay."]
+    -> Chen.Session3C.FourWands_Practical_Okay
+
+:: Chen.Session3C.FourWands_Intuitive_Good
+
+@py: session.interpretation_good += 1 @endpy
+~ reader.empathy += 1
+~ chen.trust += 1
+
+"This is the celebration card. Your house wants to be filled with life again."
+
+Margaret looks at the card intently.
+
+@if cards[0].reversed:
+    "But it's reversed. The garland is limp. Like the celebration is blocked."
+
+    "Yes. Because you've been treating the house like a memorial. Quiet. Reverent. No laughter. No noise. No LIFE. The Four of Wands reversed says: the foundation is there. The structure is sound. But where's the joy? Where's the celebration?"
+
+    "I haven't had people over in two years."
+
+    "Exactly. The house is stable but empty. You're feeding it maintenance but starving it of what it really needs - people. Laughter. Cooking smells. Mahjong tiles clicking. Neighbors visiting. That's what transforms house into HOME."
+@else:
+    "Look at the people in the background. They're celebrating. The garland is flowers - ALIVE. Growing. This isn't preservation. This is LIFE. The Four of Wands says: your house isn't a museum. It's a home. And homes need people. Warmth. Celebration."
+
+    Margaret's eyes fill. "I've been so quiet. For two years. Tip-toeing around. Like if I made noise, I'd disturb David's ghost."
+
+    "But David wouldn't want that. He'd want laughter. He'd want Mrs. Nguyen over for dinner. He'd want the Lees playing mahjong. He'd want Maya bringing friends. The house wants to be ALIVE again."
+@endif
+
++ ["What would celebration look like?"]
+    -> Chen.Session3C.FourWands_Celebration
++ ["Who do you invite first?"]
+    -> Chen.Session3C.FourWands_WhoInvite
+
+:: Chen.Session3C.FourWands_Analytical_Good
+
+@py: session.interpretation_good += 1 @endpy
+~ reader.competence += 1
+~ chen.trust += 1
+
+"Four represents stability. Wands are passion and will. This is foundation built on conscious choice, not accident."
+
+Margaret nods, following the logic.
+
+@if cards[0].reversed:
+    "Reversed suggests the foundation exists but something's preventing it from fully manifesting. You have the house. You have the neighborhood. You have the roots. But you're not USING them. The structure is sound but you're not living in it fully."
+
+    "Like I'm camping in my own house."
+
+    "Yes! Exactly. You're treating it like temporary shelter instead of permanent home. The Four of Wands reversed says: you have permission to INHABIT. Not just occupy. Inhabit."
+@else:
+    "Four of Wands upright shows home as active choice. You're not trapped here. You CHOSE to stay. You couldn't move - you tried and froze - so now you're choosing to make staying work. That's not failure. That's AGENCY. The card validates that choice."
+
+    "But I feel like I failed. Like I should have moved."
+
+    "The Four of Wands disagrees. It says: home is where you build foundation. You've built forty years of foundation here. That's not weakness. That's ROOTS. And roots are strong."
+@endif
+
++ ["How does she make the foundation celebrate?"]
+    -> Chen.Session3C.FourWands_Celebration
+
+:: Chen.Session3C.FourWands_Perceptive_Excellent
+
+@py: session.interpretation_good += 1 @endpy
+~ reader.insight += 2
+~ chen.trust += 2
+
+"Home isn't just where you stay. It's where you LIVE. The house is ready to be yours again."
+
+Margaret catches her breath. "Mine? Not ours?"
+
+@if cards[0].reversed:
+    "The Four of Wands reversed shows the transition. It WAS 'ours' - David's and yours. Now it needs to become YOURS. Not erasing him. But claiming it. The reversed garland says: the celebration can't happen until you stop treating this place like his shrine and start treating it like your HOME."
+
+    "That feels like betrayal."
+
+    "I know. But Margaret - look at what you've already done. Planted osmanthus. Moved the couch. Planning to paint the study. Those aren't betrayals. Those are CLAIMS. 'This is MY house. I live here. Not his ghost. ME.'"
+
+    She wipes her eyes. "The house wants me to live in it?"
+
+    "Yes. Houses know the difference between maintenance and inhabitation. Yours has been maintained beautifully. But it hasn't been LIVED in. The Four of Wands says: time to live."
+@else:
+    "The Four of Wands shows home as joyful foundation. Not somber. Not heavy. JOYFUL. Look at the flowers. Look at the people celebrating. That's what your house wants to be. Not quiet and reverent. Loud and alive."
+
+    "But David just died—"
+
+    "Two years ago. Two YEARS. That's not 'just.' And Margaret - David wouldn't want this. He wouldn't want the house to be a mausoleum. He'd want it full of Mrs. Nguyen's laughter. The Lees' mahjong games. Maya's friends visiting. Life. LIFE."
+
+    "He would want that," she admits quietly. "He hated quiet houses."
+
+    "Then honor him by filling it with noise."
+@endif
+
+~ chen.discussed_house_transformation = True
+
++ ["What does 'living' look like?"]
+    -> Chen.Session3C.FourWands_WhatLiving
++ ["Who comes to the celebration?"]
+    -> Chen.Session3C.FourWands_WhoInvite
+
+:: Chen.Session3C.FourWands_Practical_Okay
+
+@py: session.interpretation_okay += 1 @endpy
+~ reader.competence += 1
+
+"This card says your home is stable. You made the right choice to stay."
+
+Margaret nods slowly. "So staying is okay?"
+
+@if cards[0].reversed:
+    "Reversed suggests there's some instability or blocked joy. But the foundation is there. You just need to strengthen it by engaging more with your community and making the house feel like home."
+@else:
+    "Yes. Four of Wands is the home card. It says you're where you're supposed to be. The foundation is strong. You have roots here. That's valuable."
+@endif
+
+"That's reassuring."
+
++ ["Let me synthesize what this means."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.FourWands_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+~ chen.trust -= 1
+
+"Four of Wands represents home and celebration. So your home is good."
+
+Margaret looks underwhelmed. "I know my house is structurally sound. That's not why I'm here."
+
+@if cards[0].reversed:
+    "Reversed means... celebration is delayed? So maybe wait before celebrating?"
+
+    "That doesn't help me."
+@else:
+    "It means you should celebrate your home more."
+
+    "*How*? What does that mean specifically?"
+
+    You don't have a good answer.
+@endif
+
+The interpretation completely missed the nuance.
+
++ ["Let me reconsider—"]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.FourWands_Celebration
+
+~ session.discussed_small_changes = True
+~ reader.empathy += 1
+
+"What would celebration look like?"
+
+Margaret thinks. "I don't know. I've forgotten."
+
+@if cards[0].reversed:
+    "Then start small. The Four of Wands reversed says: you don't need a party. You need one dinner. One invitation. One evening of laughter. That's enough to shift from memorial to home."
+@else:
+    "The Four of Wands doesn't demand big gestures. It shows simple celebration. People gathered. Flowers. Food. Start there."
+@endif
+
+"Like... having Mrs. Nguyen over for dinner?"
+
+"Yes. That's perfect. What else?"
+
+"Mahjong Thursday with the Lees. Inviting Maya and her friends. Maybe... maybe teaching Cantonese at the community center? They've been asking for volunteers."
+
+~ chen.discussed_community = True
+
+"All of that. Each one is celebration. Each one transforms the house from museum to home."
+
++ ["That's the practice."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.FourWands_WhoInvite
+
+~ chen.discussed_community = True
+~ reader.insight += 1
+
+"Who do you invite first?"
+
+"Mrs. Nguyen," Margaret says immediately. "She's been so patient. Two years of trying. She never gave up on me even when I gave up on myself."
+
+"What will you cook?"
+
+"蛋撻. Egg tarts. David's recipe. But also... maybe I'll ask her to teach me Vietnamese food? She's always offering. I always say no. Maybe it's time to say yes."
+
+@if cards[0].reversed:
+    "That's perfect. The Four of Wands reversed says: reciprocity. Not just you giving. Not just you receiving. BOTH. That's what makes home - mutual exchange. Mutual care."
+@else:
+    "That's the Four of Wands. Celebration through sharing. You teach her 蛋撻. She teaches you Vietnamese cooking. Both of you celebrating your cultures. Your homes. Your lives."
+@endif
+
+"And then the Lees for mahjong. And Maya. And..."
+
+"And the house fills with life again."
+
++ ["That's the work."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.FourWands_WhatLiving
+
+~ session.discussed_small_changes = True
+~ chen.discussed_house_transformation = True
+
+"What does 'living' look like, specifically?"
+
+Margaret considers. "Small things?"
+
+"Often. Tell me."
+
+"Moving furniture so I see the garden, not the TV. Planting flowers I choose, not just David's. Painting rooms colors I like. Having people over. Cooking for others, not just myself. Going to mahjong. Teaching Cantonese to kids at the community center."
+
+She pauses.
+
+"Trying bubble tea with Maya even though it's probably *teem dak zai* - too sweet. Going to the International District. Buying ingredients at Uwajimaya that David never wanted. Cooking Chinese food that fills the house with smells he didn't like."
+
+@if cards[0].reversed:
+    "All of that. The Four of Wands reversed is asking: what small changes would make this house feel like YOUR home instead of his memorial? You're already doing it. Plant the osmanthus. Move the couch. Paint the study. Invite the neighbors. That's enough."
+@else:
+    "That's the Four of Wands. Not grand gestures. Small reclamations. Each one saying: I live here. Not his ghost. ME. Alive. Growing. Blooming."
+@endif
+
+~ chen.discussed_blooming = True
+
+"I can do that."
+
+"You're already doing it."
+
++ ["That's what the card is validating."]
+    -> Chen.Session3C.Synthesis
+
+# ============================================================================
+# TEN OF PENTACLES - INTERPRETATION
+# ============================================================================
+
+:: Chen.Session3C.TenPentacles_Interpret
+
+@if cards[0].reversed:
+    The **Ten of Pentacles - Reversed**.
+
+    A family scene - but something's wrong. The legacy weighs. The inheritance traps. The foundation crumbles. Too much attachment to what was. Not enough life in what is.
+@else:
+    The **Ten of Pentacles**.
+
+    An elder sits before an archway. Family surrounds them - children playing, dogs running. Pentacles arranged above like a tree of life. This is LEGACY. Not inheritance. LEGACY. What you pass forward through LIVING, not preserving.
+@endif
+
++ {reader.style == "analytical"} ["Ten is completion. Pentacles are material legacy. This is about what you pass forward."]
+    -> Chen.Session3C.TenPentacles_Analytical_Good
+
++ ["Legacy isn't the house. It's the LIFE you live in the house."]
+    -> Chen.Session3C.TenPentacles_Perceptive_Excellent
+
++ {reader.style == "intuitive"} ["You're the elder now. The matriarch. What do you want to teach?"]
+    -> Chen.Session3C.TenPentacles_Intuitive_Excellent
+
++ ["This card is about family legacy and long-term security."]
+    -> Chen.Session3C.TenPentacles_Generic_Bad
+
++ ["Ten of Pentacles says you have strong roots. You don't need to move."]
+    -> Chen.Session3C.TenPentacles_Practical_Okay
+
+:: Chen.Session3C.TenPentacles_Analytical_Good
+
+@py: session.interpretation_good += 1 @endpy
+~ reader.competence += 1
+~ chen.trust += 1
+
+"Ten is completion. Pentacles are material legacy - home, land, roots. This is about what you pass forward to the next generation."
+
+Margaret leans forward, listening carefully.
+
+@if cards[0].reversed:
+    "Reversed suggests the legacy has become a burden. The house isn't being passed down as a gift - it's being preserved as an obligation. You're maintaining it for David's ghost, not for Maya's future. That's reversed legacy - preservation that strangles rather than nourishes."
+
+    "Maya said she doesn't want the house."
+
+    "Because right now it's a museum. But what if it were different? What if it were a HOME - alive, warm, full of community? Then it would be a gift, not a burden."
+@else:
+    "The Ten of Pentacles shows the elder - that's you - surrounded by family and community. The pentacles above arrange like a tree. Roots deep, branches wide. You're the trunk. The question is: what are you giving to the branches? Preservation or LIFE?"
+
+    "I want to give life. But I don't know how."
+
+    "You're already doing it. Teaching Cantonese to kids. Inviting Maya over. Reconnecting with neighbors. That's legacy. That's what you pass forward."
+@endif
+
+~ chen.discussed_community = True
+
++ ["What's the difference between legacy and preservation?"]
+    -> Chen.Session3C.TenPentacles_Legacy_vs_Preservation
+
+:: Chen.Session3C.TenPentacles_Perceptive_Excellent
+
+@py: session.interpretation_good += 1 @endpy
+~ reader.insight += 2
+~ chen.trust += 2
+
+"Legacy isn't the house. It's the LIFE you live in the house."
+
+Margaret goes very still. "Say that again."
+
+"Legacy isn't the BUILDING. It's what you DO in the building. How you live. Who you welcome. What you teach. David's legacy isn't that he owned a house. It's that he loved his family and built community. THAT's what you preserve."
+
+@if cards[0].reversed:
+    "But reversed Ten of Pentacles shows what happens when you confuse legacy with preservation. You're maintaining the STRUCTURE - the house, the garden, the arrangement - but losing the SPIRIT. David wouldn't care if you moved the couch. He'd care that you're alive. Connected. Teaching Maya. Laughing with neighbors."
+
+    Margaret is crying. "I've been preserving the wrong things."
+
+    "Yes. But you can stop. Plant osmanthus. Paint the study blue. Invite people over. Teach Cantonese to kids. THAT's honoring David's legacy. Not keeping his house like a time capsule."
+@else:
+    "The Ten of Pentacles shows family gathered under the elder. You're the elder now. And your legacy isn't 'I kept David's house unchanged.' It's 'I stayed rooted in my community. I taught Cantonese to the next generation. I welcomed neighbors. I bloomed where I was planted.' THAT's what Maya will remember. What the neighborhood will remember."
+
+    "Not the house."
+
+    "Not the house. The LIFE. You living in it. Fully. Vibrantly. Connected."
+@endif
+
+~ chen.discussed_blooming = True
+~ chen.discussed_community = True
+
++ ["What does that life look like?"]
+    -> Chen.Session3C.TenPentacles_What_Life_Looks_Like
+
+:: Chen.Session3C.TenPentacles_Intuitive_Excellent
+
+@py: session.interpretation_good += 1 @endpy
+~ reader.empathy += 2
+~ chen.trust += 2
+
+"You're the elder now. The matriarch. What do you want to teach?"
+
+Margaret's face transforms. "I'm the elder?"
+
+"Yes. David's gone. You're the elder. The Ten of Pentacles shows you in that position - not by accident, but by surviving. By choosing to stay rooted. The question isn't 'should you be the elder?' It's 'what will you DO as the elder?'"
+
+@if cards[0].reversed:
+    "But reversed, you're not ACTING like the elder. You're acting like the curator of someone else's legacy. David's house. David's garden. David's preferences. But elders don't just preserve. They TEACH. They LEAD. They create new traditions while honoring old ones."
+
+    "I want to teach," Margaret says quietly. "I want to teach Cantonese to kids who are forgetting it. I want to teach Maya how to make 蛋撻. I want to teach the neighborhood that staying rooted can be powerful."
+
+    "THAT's elder energy. That's the Ten of Pentacles. Not preserving. TEACHING."
+@else:
+    "The elder in the card isn't alone. Look - family, children, dogs, LIFE surrounds them. That's your job now. Not to maintain David's memorial, but to CREATE life. Welcome people. Teach traditions. Build community. Be the root that nourishes branches."
+
+    "How do I do that?"
+
+    "You're already doing it. Inviting Mrs. Nguyen. Going to mahjong. Planning to teach Cantonese. Each of those is elder work. Each one says: I'm rooted here and my roots nourish others."
+@endif
+
+~ chen.discussed_community = True
+~ chen.discussed_blooming = True
+
++ ["Tell me more about being the elder."]
+    -> Chen.Session3C.TenPentacles_Being_Elder
+
+:: Chen.Session3C.TenPentacles_Practical_Okay
+
+@py: session.interpretation_okay += 1 @endpy
+~ reader.competence += 1
+
+"Ten of Pentacles says you have strong roots. Deep roots. You don't need to move because your foundation is here."
+
+"So staying is the right choice?"
+
+@if cards[0].reversed:
+    "Reversed suggests there might be some issues with how you're staying. But the foundation is good. You just need to be more active in maintaining it."
+@else:
+    "Yes. Ten of Pentacles represents generational wealth and roots. You have forty years here. That's not something to abandon lightly. The card validates staying."
+@endif
+
+Margaret nods. "That's comforting."
+
++ ["That's the message."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.TenPentacles_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+~ chen.trust -= 1
+
+"This card is about family legacy and long-term security. So your family and finances are stable."
+
+Margaret looks frustrated. "I know I'm financially secure. That's not the issue. The issue is: am I LIVING or just existing?"
+
+@if cards[0].reversed:
+    "Reversed means... maybe some family issues?"
+
+    "What family issues? Be specific."
+@else:
+    "The card says you're stable and secure."
+
+    "I need more than 'you're fine.' I need to know HOW to live in this house without withering."
+@endif
+
+The interpretation didn't go deep enough.
+
++ ["Let me look at it differently—"]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.TenPentacles_Legacy_vs_Preservation
+
+~ reader.insight += 1
+~ chen.discussed_house_transformation = True
+
+"What's the difference between legacy and preservation?"
+
+"That's the question," you say.
+
+"**Preservation is backward-looking.** It says: keep everything exactly as it was. Don't change. Don't grow. Maintain the past perfectly."
+
+"**Legacy is forward-looking.** It says: take what was beautiful about the past and PASS IT FORWARD. Alive. Growing. Changing."
+
+Margaret nods slowly.
+
+"David loved this house. That's true. But his legacy isn't 'the house must never change.' His legacy is 'I built a home full of love and community.' You honor that by filling the house with love and community NOW. Not by keeping it frozen."
+
+@if cards[0].reversed:
+    "The Ten of Pentacles reversed shows preservation strangling legacy. You're so busy keeping everything the same that you're killing what David actually valued - LIFE. The house wants to be lived in. That's how you honor him."
+@else:
+    "The Ten of Pentacles upright shows living legacy. You in the house. Maya visiting. Neighbors welcomed. Kids learning Cantonese in your living room. THAT's David's legacy continuing. Not the beige study. The LIFE."
+@endif
+
+"I understand now."
+
++ ["Good. That's the work."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.TenPentacles_What_Life_Looks_Like
+
+~ session.discussed_small_changes = True
+~ chen.discussed_community = True
+
+"What does that life look like? Specifically?"
+
+Margaret thinks, making mental lists.
+
+"Saturday mornings: teach Cantonese at the community center. Give kids a connection to language their parents are losing."
+
+"Thursday nights: mahjong with the Lees. Not 'David and Margaret's mahjong night' - MARGARET's mahjong night."
+
+"Once a month: Maya visits. We go to the International District. Uwajimaya. Dim sum. Try bubble tea even though it's too sweet. Build our relationship. Not grandmother-visiting-grandfather's-house. Grandmother and granddaughter. Our own thing."
+
+"Dinner with Mrs. Nguyen. Learning Vietnamese cooking. Sharing my Chinese cooking. Not just neighbors. Friends."
+
+@if cards[0].reversed:
+    "All of that. The Ten of Pentacles reversed was showing you preserving alone. Now you're describing LIVING with community. That's the turn. That's the transformation."
+@else:
+    "That's the Ten of Pentacles. Elder surrounded by community. Teaching. Sharing. Rooted but not isolated. Deep roots. Wide branches."
+@endif
+
+"I can do this."
+
+"You're already doing it."
+
++ ["That's the validation you needed."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.TenPentacles_Being_Elder
+
+~ chen.discussed_community = True
+~ chen.discussed_blooming = True
+
+"Tell me more about being the elder."
+
+"In Chinese culture," you say carefully, "elders aren't just 'old people.' They're teachers. Keepers of tradition. The ones who pass forward what matters."
+
+Margaret nods. She knows this.
+
+"You've been thinking of yourself as David's widow. But you're not JUST that. You're also Maya's 外婆. The Lees' friend. Mrs. Nguyen's neighbor. The potential Cantonese teacher. The woman who knows how to make perfect 蛋撻."
+
+@if cards[0].reversed:
+    "The Ten of Pentacles reversed shows you NOT stepping into that elder role. Staying small. Staying stuck in 'widow.' But the card is asking: will you be the elder? Will you teach? Will you nourish the branches?"
+@else:
+    "The Ten of Pentacles shows you AS the elder. Surrounded by family and community. Your job isn't to preserve David. It's to BE the elder he would want you to be. Teaching. Welcoming. Rooted. ALIVE."
+@endif
+
+"I want to be that."
+
+"Then be it. Teach Cantonese. Invite people over. Share your knowledge. Share your life. That's elder work."
+
++ ["That's the path forward."]
+    -> Chen.Session3C.Synthesis
+
+# ============================================================================
+# THE EMPRESS - INTERPRETATION
+# ============================================================================
+
+:: Chen.Session3C.Empress_Interpret
+
+@if cards[0].reversed:
+    The **Empress - Reversed**.
+
+    The figure sits in a barren garden. The wheat refuses to grow. The river runs dry. Creative block. Neglect. Nurturing turned to withering. Life force drained.
+@else:
+    The **Empress**.
+
+    A figure sits in abundant garden, surrounded by wheat and flowing water. Crown of stars. Pregnant belly. This is FERTILITY. Not just biological - creative, emotional, spiritual. The power to make things GROW. To nurture. To bloom.
+@endif
+
++ {reader.style == "intuitive"} ["This is your card, Margaret. The gardener. The nurturer. The one who makes things grow."]
+    -> Chen.Session3C.Empress_Intuitive_Excellent
+
++ {reader.style == "storyteller"} ["The Empress says: you're not the curator. You're the gardener. Gardens require change."]
+    -> Chen.Session3C.Empress_Storyteller_Excellent
+
++ ["You planted osmanthus in the dead zone. That's Empress energy. What else wants to grow?"]
+    -> Chen.Session3C.Empress_Perceptive_Excellent
+
++ ["The Empress represents fertility and abundance in all forms."]
+    -> Chen.Session3C.Empress_Generic_Bad
+
++ ["This card is about nurturing and creativity. You should nurture your garden."]
+    -> Chen.Session3C.Empress_Practical_Okay
+
+:: Chen.Session3C.Empress_Intuitive_Excellent
+
+@py: session.interpretation_good += 1 @endpy
+~ reader.empathy += 2
+~ chen.trust += 2
+
+"This is your card, Margaret. The gardener. The nurturer. The one who makes things GROW."
+
+Margaret looks at the Empress, then at her dirt-stained hands.
+
+"I am a gardener."
+
+@if cards[0].reversed:
+    "But reversed Empress says: you've been gardening for a ghost. Maintaining HIS roses. Keeping everything exactly as HE wanted. That's not gardening. That's preservation. The Empress reversed is a gardener who's forgotten how to PLANT. Who only knows how to maintain what's already there."
+
+    "But I planted the osmanthus—"
+
+    "Yes! And that broke the reversal! You planted something NEW. Something YOURS. Something David never chose. That's Empress energy returning. The question is: what else wants to grow?"
+@else:
+    "The Empress is surrounded by abundant growth. Wheat. Flowers. Water flowing. That's the energy you're tapping into. Planting osmanthus. Moving furniture. Inviting people over. Each action is PLANTING. Each one makes the house fertile again."
+
+    "I've been treating the house like a dried flower arrangement. Pretty. Dead. Preserved."
+
+    "Yes. But the Empress doesn't do dried flowers. She does LIVING gardens. The house wants to be a garden again. Full of growth. Change. Mess. LIFE."
+@endif
+
+~ chen.discussed_garden = True
+~ chen.discussed_blooming = True
+
++ ["What else wants to grow in your garden?"]
+    -> Chen.Session3C.Empress_What_Else_Grows
++ ["How do you nurture growth?"]
+    -> Chen.Session3C.Empress_How_Nurture
+
+:: Chen.Session3C.Empress_Storyteller_Excellent
+
+@py: session.interpretation_good += 1 @endpy
+~ reader.empathy += 2
+~ chen.trust += 2
+
+"The Empress says: you're not the curator. You're the gardener. And gardens require CHANGE."
+
+Margaret leans forward.
+
+@if cards[0].reversed:
+    "Reversed Empress is a gardener who's forgotten that gardens aren't static. A real garden changes every season. Plants die. New ones grow. Paths shift. Colors change. But you've been trying to keep the garden exactly the same. Frozen. That's not gardening. That's taxidermy."
+
+    "David would hate that," Margaret says quietly. "He loved when the garden changed. He'd try new roses every year. Different colors. Different scents. He experimented."
+
+    "And you stopped experimenting when he died. The Empress reversed says: start again. Plant something new. Let something die. Rearrange. GROW."
+@else:
+    "Look at the Empress's garden. It's not neat. It's not controlled. It's ABUNDANT. Wild. Fertile. That's what your house wants to be. Not a museum with everything in its place. A GARDEN. Growing. Changing. Messy. Alive."
+
+    Margaret smiles through tears. "I've been treating it like a botanical illustration. Flat. Perfect. Dead. But it wants to be a real garden."
+
+    "Yes. And you're the gardener. You get to decide what grows. What changes. What stays. What goes. That's your power."
+@endif
+
+~ chen.discussed_garden = True
+~ chen.discussed_house_transformation = True
+
++ ["What changes in your garden?"]
+    -> Chen.Session3C.Empress_Garden_Changes
+
+:: Chen.Session3C.Empress_Perceptive_Excellent
+
+@py: session.interpretation_good += 1 @endpy
+~ reader.insight += 2
+~ chen.trust += 2
+
+"You planted osmanthus in the dead zone. That's Empress energy. What else wants to grow?"
+
+Margaret catches her breath. "What else wants to grow?"
+
+@if cards[0].reversed:
+    "The Empress reversed shows creative block. Life force drained. You've been in winter for two years - no growth, no change, everything frozen. But planting the osmanthus broke the freeze. Now it's spring. The Empress asks: what else? What else wants to bloom?"
+
+    "Everything," Margaret whispers. "Everything wants to bloom."
+
+    "Name it. Specifically."
+
+    "Blue paint in the study. Vietnamese cooking skills. Cantonese teaching. Friendship with Mrs. Nguyen. Weekly Maya visits. Mahjong with the Lees. LIFE. Life wants to bloom."
+@else:
+    "The Empress sits in abundant garden. Everything around her grows. Wheat. Flowers. River flowing. She's pregnant - with POSSIBILITY. With creative energy. With LIFE. That's you now. Pregnant with possibility. The question is: what will you birth?"
+
+    "I'm sixty-eight. I'm not birthing babies."
+
+    "No. But you're birthing NEW LIFE. New traditions. New relationships. New ways of being in the house. New Margaret. That's what the Empress does. She births what wants to be born."
+@endif
+
+~ chen.discussed_blooming = True
+~ chen.discussed_house_transformation = True
+
++ ["Tell me what wants to be born."]
+    -> Chen.Session3C.Empress_What_Births
+
+:: Chen.Session3C.Empress_Practical_Okay
+
+@py: session.interpretation_okay += 1 @endpy
+~ reader.competence += 1
+
+"This card is about nurturing and creativity. You should nurture your garden and be creative in your home."
+
+Margaret nods. "Like planting the osmanthus?"
+
+@if cards[0].reversed:
+    "Yes. And reversed suggests you haven't been nurturing yourself or your space as much as you could. So keep making small changes. Keep planting. Keep nurturing."
+@else:
+    "Exactly. The Empress is the ultimate nurturer. Keep tending your garden. Keep making your home beautiful. That's honoring the card."
+@endif
+
+"I can do that."
+
++ ["That's the guidance."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.Empress_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+~ chen.trust -= 1
+
+"The Empress represents fertility and abundance in all forms. So you're in a fertile period."
+
+Margaret looks confused. "Fertile period? I'm sixty-eight."
+
+@if cards[0].reversed:
+    "Not literally. Metaphorically. Um. Reversed means... less fertility?"
+
+    "That's not helpful."
+@else:
+    "Metaphorically fertile. Like... things will grow for you."
+
+    "What things? How? Be specific."
+@endif
+
+The interpretation was too vague.
+
++ ["Let me reconsider—"]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.Empress_What_Else_Grows
+
+~ session.discussed_small_changes = True
+~ chen.discussed_community = True
+~ chen.discussed_blooming = True
+
+"What else wants to grow in your garden?"
+
+Margaret thinks, touching each finger as she counts.
+
+"Osmanthus - already planted."
+
+"Blue study - ready to paint."
+
+"Friendship with Mrs. Nguyen - dinner next week."
+
+"Mahjong with the Lees - Thursday nights."
+
+"Cantonese teaching - I called the community center. They said yes. Start next month."
+
+"Visits with Maya - we're going to Chinatown Saturday."
+
+She looks up.
+
+"And maybe... maybe I join the gardening club. At the library. I've been avoiding it because David and I used to go together. But maybe I can go alone. Or make new friends there."
+
+@if cards[0].reversed:
+    "All of that. Each one is breaking the reversal. Each one is growth. The Empress reversed said: you're blocking life. Now you're UNBLOCKING it. Plant by plant. Friendship by friendship. Choice by choice."
+@else:
+    "That's the Empress. Abundant growth. Not one change. Many. All at once. Blooming everywhere. That's fertility - not controlling it, just... opening to it. Letting it happen."
+@endif
+
+"I can feel it. The growing."
+
+"Good. Keep feeling it. Keep growing."
+
++ ["That's the work."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.Empress_How_Nurture
+
+~ reader.empathy += 1
+~ chen.discussed_garden = True
+
+"How do you nurture growth?"
+
+"Water. Sun. Patience," Margaret says automatically. "That's gardening."
+
+"Yes. But what about nurturing YOURSELF? Nurturing your LIFE?"
+
+She's quiet.
+
+@if cards[0].reversed:
+    "The Empress reversed shows you've been neglecting yourself. Focusing all energy on maintaining David's preferences. David's garden. David's house. But what about Margaret's needs? Margaret's preferences? Margaret's growth?"
+
+    "I don't know what I need anymore."
+
+    "Yes you do. You planted osmanthus - that's what you need. You want the study blue - that's what you need. You miss mahjong - that's what you need. You know. You've just been ignoring it."
+@else:
+    "The Empress nurtures by being GENEROUS. With herself and others. She doesn't hoard resources. She lets them FLOW. Water. Sun. Love. Community. Laughter. All flowing freely. That's nurture."
+
+    "I've been hoarding," Margaret realizes. "Hoarding the house. Hoarding my time. Hoarding my energy. Not letting anything flow."
+
+    "So start letting it flow. Invite people in. Go out. Share. Receive. FLOW."
+@endif
+
+"I can do that."
+
++ ["That's Empress energy."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.Empress_Garden_Changes
+
+~ chen.discussed_garden = True
+~ chen.discussed_house_transformation = True
+~ session.discussed_small_changes = True
+
+"What changes in your garden?"
+
+Margaret smiles - real, alive smile.
+
+"Osmanthus in the dead zone - already done."
+
+"Maybe bitter melon vine on the fence. David hated it. Said it was ugly. But it's delicious. And it's CHINESE. My mother grew it."
+
+"Maybe I let some of the roses go wild. Stop pruning them so perfectly. Let them be messy."
+
+"Maybe I plant vegetables. Bok choy. Gai lan. Practical things. Not just ornamental."
+
+@if cards[0].reversed:
+    "Yes! All of that. The Empress reversed was showing you maintaining someone else's aesthetic. Now you're describing YOUR garden. Chinese plants. Practical plants. Wild plants. That's your Empress energy returning."
+@else:
+    "That's the Empress. Abundant. Practical. ALIVE. Not just pretty. USEFUL. Growing food. Growing flowers. Growing wildness. All of it. That's a real garden."
+@endif
+
+"It'll be messy."
+
+"Gardens are supposed to be messy. That's how you know they're alive."
+
++ ["That's the work."]
+    -> Chen.Session3C.Synthesis
+
+:: Chen.Session3C.Empress_What_Births
+
+~ chen.discussed_blooming = True
+~ chen.discussed_community = True
+~ session.discussed_small_changes = True
+
+"Tell me what wants to be born."
+
+Margaret takes a deep breath. Like she's been holding this in and finally gets to say it.
+
+"**New Margaret.** The one who lives for herself, not for David's ghost. Who chooses blue paint and osmanthus and bitter melon."
+
+"**Teacher Margaret.** Who teaches Cantonese to kids who are forgetting. Who passes forward culture. Who's the elder."
+
+"**Friend Margaret.** Who has dinner with Mrs. Nguyen. Who plays mahjong with the Lees. Who's part of the neighborhood, not just living in it."
+
+"**外婆 Margaret.** Who has bubble tea with Maya even though it's too sweet. Who goes to Chinatown. Who builds relationship. Not 'grandmother of David's grandkid' - 外婆. Period."
+
+@if cards[0].reversed:
+    "All of that wants to be born. The Empress reversed was showing you blocking the birth. Staying stuck in 'widow Margaret.' But the osmanthus broke the block. Now all these other Margarets are waiting. Ready to be born. Will you let them?"
+@else:
+    "That's what the Empress births. Not one thing. EVERYTHING. All the versions of you that want to exist. All the growth that wants to happen. The pregnant belly is FULL of possibility. You just have to let it be born."
+@endif
+
+Margaret is crying. "I'm ready."
+
+"Then birth it. One day at a time. One plant. One dinner. One mahjong night. One lesson. Birth yourself new."
+
++ ["That's the work."]
+    -> Chen.Session3C.Synthesis
+
+# ============================================================================
+# SYNTHESIS
+# ============================================================================
+
+:: Chen.Session3C.Synthesis
+
+@py:
+    # Calculate reading quality
+    if session.interpretation_good >= 1:
+        session.reading_quality = "profound"
+        chen.clarity = 10
+    elif session.interpretation_okay >= 1:
+        session.reading_quality = "helpful"
+        chen.clarity = 7
+    else:
+        session.reading_quality = "adequate"
+        chen.clarity = 4
+@endpy
+
+You look at the single card on the table.
+
+**{cards[0].name}**{cards[0].reversed ? (Reversed) | }
+
+One card. One path. One validation.
+
+---
+
+@if session.reading_quality == "profound":
+    "Margaret," you say gently. "The card is saying: staying is not failure. Staying is CHOICE."
+
+    She looks up with wet eyes.
+
+    @if cards[0].name == "Four of Wands":
+        # FOUR OF WANDS SYNTHESIS
+
+        @if cards[0].reversed:
+            "The Four of Wands reversed showed you treating your home like a memorial. Quiet. Reverent. Preserved. But homes aren't meant to be quiet. They're meant to be FILLED. With laughter. With people. With life."
+        @else:
+            "The Four of Wands shows your house as it wants to be - celebration. Foundation. HOME. Not museum. Not memorial. HOME. Where people gather. Where joy lives. Where you're rooted."
+        @endif
+
+        @if chen.discussed_community:
+            "You said you're having dinner with Mrs. Nguyen. Mahjong with the Lees. Teaching Cantonese at the community center. That's not 'staying stuck.' That's ROOTING DEEP. That's celebrating home by filling it with community."
+        @endif
+
+        @if chen.discussed_house_transformation:
+            "The osmanthus you planted. The blue paint for the study. The couch you moved. These aren't betrayals. These are RECLAMATIONS. Each one says: this is MY home now. I live here. Not his ghost. ME."
+        @endif
+
+        "The Four of Wands validates your choice. You're not giving up by staying. You're rooting deep. And deep roots let you bloom wide."
+
+    @elif cards[0].name == "Ten of Pentacles":
+        # TEN OF PENTACLES SYNTHESIS
+
+        @if cards[0].reversed:
+            "The Ten of Pentacles reversed showed you confusing preservation with legacy. Trying to keep everything exactly as David left it. But that's not honoring him. That's freezing him. And yourself."
+        @else:
+            "The Ten of Pentacles shows you as the elder. The matriarch. The one who passes forward what matters. And what matters isn't the HOUSE. It's the LIFE lived in the house. The connections. The teachings. The community."
+        @endif
+
+        @if chen.discussed_community:
+            "You're teaching Cantonese to kids. Having dinners with neighbors. Playing mahjong. Welcoming Maya. That's LEGACY. That's elder work. Not maintaining a museum. TEACHING. CONNECTING. ROOTING."
+        @endif
+
+        @if chen.discussed_blooming:
+            "David's legacy isn't that he owned a house. It's that he loved his family and built community. You honor that by CONTINUING to build. By being alive. By blooming where you're planted."
+        @endif
+
+        "The Ten of Pentacles says: you're the elder now. And elders don't just preserve. They NOURISH. They teach. They pass forward life, not just possessions. That's what you're doing."
+
+    @else:
+        # THE EMPRESS SYNTHESIS
+
+        @if cards[0].reversed:
+            "The Empress reversed showed you as a gardener who forgot how to plant. Who only maintained what was already there. David's roses. David's preferences. David's house. But then you planted the osmanthus. And that changed everything."
+        @else:
+            "The Empress is THE gardener card. And you ARE a gardener. But you've been gardening for a ghost. Maintaining his roses. His arrangements. His aesthetic. The Empress says: garden for YOURSELF now. Plant what YOU love."
+        @endif
+
+        @if chen.discussed_garden:
+            "Osmanthus in the dead zone. Bitter melon on the fence. Bok choy in the beds. These are YOUR plants. Chinese plants. Plants David never chose. That's Empress energy. That's claiming your garden."
+        @endif
+
+        @if chen.discussed_house_transformation:
+            "And it's not just the garden. Blue study. Moved furniture. Invited neighbors. Teaching Cantonese. Each of these is PLANTING. Each one makes your life fertile again. Makes your house a GROWING space, not a preserved space."
+        @endif
+
+        "The Empress says: you're not the curator. You're the GARDENER. And gardens require change. Growth. Mess. LIFE. That's what you're choosing. That's what blooming in place looks like."
+    @endif
+
+    Margaret is crying - but smiling through it.
+
+    "So staying is okay? Really okay?"
+
+    "More than okay. Staying is POWERFUL. Staying is choosing deep roots. Staying is saying: I belong here. This is my soil. I'm blooming HERE."
+
+    @if session.discussed_small_changes:
+        "And you don't need grand gestures. Plant osmanthus. Paint one room. Invite one neighbor. Teach one class. Those are enough. Small changes. Deep roots. That's how you bloom in place."
+    @endif
+
+    "Thank you," she whispers. "Thank you for seeing this as a choice, not a failure."
+
+    "It IS a choice. You're choosing difficulty consciously. That's agency. That's power."
+
+    ~ chen.clarity = 10
+
+@elif session.reading_quality == "helpful":
+    # SIMPLIFIED SYNTHESIS
+
+    "The {cards[0].name} is validating your choice to stay," you say.
+
+    @if cards[0].name == "Four of Wands":
+        "Your home is your foundation. You have roots here. Deep roots. The card says: make it YOURS. Fill it with life. Invite people in. That's how staying becomes thriving."
+    @elif cards[0].name == "Ten of Pentacles":
+        "You're the elder in your community now. Your legacy isn't the house - it's what you DO in the house. Teaching. Connecting. Building community. That's powerful."
+    @else:
+        "You're a gardener. The Empress says: garden for yourself now. Plant what YOU want. Change what needs changing. Make the house and garden YOURS."
+    @endif
+
+    Margaret nods thoughtfully. "That helps. Thank you."
+
+    ~ chen.clarity = 7
+
+@else:
+    # ADEQUATE/MEDIOCRE
+
+    "The card shows... staying is okay," you say vaguely. "You have good reasons to be where you are."
+
+    Margaret nods but doesn't look particularly moved.
+
+    ~ chen.clarity = 4
+@endif
+
++ [(The reading is complete)]
+    -> Chen.Session3C.Payment
+
+# ============================================================================
+# PAYMENT & GIFT
+# ============================================================================
+
+:: Chen.Session3C.Payment
+
+Margaret stands, gathering her things.
+
+"How much?"
+
+@if session.reading_quality == "profound":
+    ~ session_payment = 70
+    ~ session_reputation = 10
+    ~ reader.money += session_payment
+    ~ reader.reputation += session_reputation
+    ~ reader.money_earned_this_session = session_payment
+    ~ reader.reputation_gained_this_session = session_reputation
+
+    She counts out seventy dollars. "You gave me permission to bloom where I'm planted. That's worth everything."
+
+    She reaches into her fabric bag. Pulls out a small terracotta pot.
+
+    Inside: a tiny osmanthus cutting. Newly potted. Still fragile but ALIVE.
+
+    "I bought two plants," she says. "One for David's garden. One for you."
+
+    She hands it over carefully, like passing an infant.
+
+    "Osmanthus. 桂花. My mother had one in Hong Kong. It blooms in autumn. The smell - *aiya* - it's like Chinese bakery. Like *maa lai gou*. Like home."
+
+    Her voice strengthens.
+
+    "David never wanted Chinese plants. Said they were 'too exotic.' But I planted one anyway. In his dead zone. And I want you to have one too. So when it blooms, we both smell it. Different gardens. Same roots."
+
+    She smiles - and it's REAL smile, not grief smile.
+
+    "I'm blooming where I'm planted. Finally. And you helped me see that's not giving up. That's CHOOSING. Consciously. Powerfully. Thank you."
+
+    ~ chen.gave_gift = True
+    ~ chen.gift_description = "Small potted osmanthus (桂花) cutting - Chinese flower, blooms in autumn"
+
+@elif session.reading_quality == "helpful":
+    ~ session_payment = 55
+    ~ session_reputation = 6
+    ~ reader.money += session_payment
+    ~ reader.reputation += session_reputation
+    ~ reader.money_earned_this_session = session_payment
+    ~ reader.reputation_gained_this_session = session_reputation
+
+    She hands you fifty-five dollars. "Thank you. You helped me see staying as a choice, not a failure. That means something."
+
+@else:
+    ~ session_payment = 40
+    ~ session_reputation = 3
+    ~ reader.money += session_payment
+    ~ reader.reputation += session_reputation
+    ~ reader.money_earned_this_session = session_payment
+    ~ reader.reputation_gained_this_session = session_reputation
+
+    "Here's forty." Polite but not deeply moved.
+@endif
+
++ [Walk her to the door]
+    -> Chen.Session3C.Goodbye
+
+# ============================================================================
+# GOODBYE
+# ============================================================================
+
+:: Chen.Session3C.Goodbye
+
+You walk Margaret to the door.
+
+@if session.reading_quality == "profound":
+    She pauses at the threshold, holding the doorframe.
+
+    "I won't forget this. Three sessions. Three times you helped me see myself clearly."
+
+    "Session one: should I move?"
+    "Session two: why am I stuck?"
+    "Session three: can I bloom where I am?"
+
+    She smiles.
+
+    "The answer was always inside me. You just... held up the mirror. The cards held up the mirror. And I finally saw: I'm not failing by staying. I'm CHOOSING. Rooting deep. Blooming wide."
+
+    She takes your hands briefly.
+
+    "I'm going to paint the study blue next week. Hire a teenager from the neighborhood to help. Mrs. Nguyen is coming for dinner Thursday - I'm making 蛋撻 and she's teaching me her spring rolls. Mahjong starts again next week. And Maya and I are going to Chinatown Saturday - bubble tea, even though it'll be *teem dak zai*."
+
+    Her voice is lighter than you've ever heard it.
+
+    "I'm going to teach Cantonese starting next month. Pass forward the language. Be the elder. And I'm going to tend my garden - David's roses AND my osmanthus. Both. Together. Old and new. That's allowed."
+
+    She pauses.
+
+    "I'll send Maya to you. My granddaughter. She's twenty-three, art student, struggling with identity stuff. She needs guidance. Someone like you who sees people clearly."
+
+    "I'd be honored."
+
+    "Thank you. For everything. For seeing me. For validating my choice. For teaching me that blooming in place is just as powerful as transplanting."
+
+    Then she's gone. Down the stairs. Into spring.
+
+    @py:
+        # Unlock Maya Chen
+        maya.unlocked = True
+        maya.unlock_reason = "Margaret's granddaughter, struggling with identity"
+        maya.relationship_to_chen = "granddaughter"
+        maya.context = "Margaret bloomed where she was planted, teaches Cantonese now, has vibrant community life"
+
+        # Chen's arc is complete
+        chen.arc_complete = True
+        chen.final_state = "blooming_where_planted"
+        chen.will_return = False
+        chen.planted_osmanthus = True
+        chen.teaching_cantonese = True
+    @endpy
+
+@elif session.reading_quality == "helpful":
+    "Thank you," she says at the door. "You helped me see staying differently. I think I can make it work now."
+
+    She pauses.
+
+    "If it goes well - if I really do start blooming - I'll send my granddaughter Maya your way. She's struggling with some things. She might benefit from what you do."
+
+    "I'll be here."
+
+    "Good. Thank you."
+
+    She leaves.
+
+    @py:
+        # Unlock Maya Chen (basic)
+        maya.unlocked = True
+        maya.unlock_reason = "Margaret mentioned you"
+        maya.relationship_to_chen = "granddaughter"
+
+        chen.arc_complete = True
+        chen.final_state = "attempting_to_bloom"
+        chen.will_return = False
+    @endpy
+
+@else:
+    She leaves with a polite nod.
+
+    You might not see her again.
+
+    @py:
+        chen.arc_complete = True
+        chen.final_state = "still_withering"
+        chen.will_return = False
+    @endpy
+@endif
+
++ [Close the door]
+    -> Chen.Session3C.SessionComplete
+
+# ============================================================================
+# SESSION COMPLETE
+# ============================================================================
+
+:: Chen.Session3C.SessionComplete
+
+The door closes behind Margaret Chen.
+
+You stand in your reading corner.
+
+@if chen.gave_gift:
+    On your table: the small terracotta pot. Osmanthus cutting. 桂花. Chinese plant in American soil.
+
+    The leaves are tender green. New. Fragile but ALIVE.
+
+    In autumn it'll bloom. The smell will fill your room - Chinese bakery, *maa lai gou*, Hong Kong alleys, Margaret's mother's garden.
+
+    You'll think of Margaret then. Blooming in her garden. Deep roots. Wide branches. ALIVE.
+@endif
+
+Outside, spring afternoon. Everything blooming. Including Margaret.
+
+@if session.reading_quality == "profound":
+    Three sessions with Margaret Chen. And this - THIS - is the quiet power ending.
+
+    Not dramatic like 3B (emergency, naming ceremony, phone call from reading room).
+    Not complicated like 3A (adjustment, friction, permission to be messy).
+
+    Just... ROOTED. BLOOMING. ALIVE.
+
+    Session 1: Should she move? (Paralyzed, couldn't decide)
+    Session 2: Why is she still stuck? (Grief, fear, guilt)
+    Session 3: Can she bloom where she is? (YES. Deep roots. Wide branches.)
+
+    She's staying. But not staying frozen. Staying ACTIVE. Staying POWERFUL.
+
+    Planting osmanthus. Painting blue. Inviting neighbors. Teaching Cantonese. Playing mahjong. Visiting Chinatown with Maya. Tending her garden - David's roses AND her Chinese flowers.
+
+    She's blooming where she's planted. And that's just as transformative as transplanting.
+
+    *This is the work.*
+
+    You helped someone see that staying can be radical. That roots can be power. That transformation doesn't require relocation.
+
+    M. Thorne would be proud.
+
+    ---
+
+    Maya Chen is available now. Margaret's granddaughter. Twenty-three. Art student. "Struggling with identity stuff."
+
+    When she arrives, she'll say: "My 外婆 planted Chinese flowers in her garden. She teaches Cantonese now. She's... alive again. She said you helped her bloom where she was planted. I'm hoping you can help me figure out where MY soil is."
+
+    New story. New blooming. New sacred work.
+
+@elif session.reading_quality == "helpful":
+    Three sessions with Margaret Chen. A quiet arc, but movement.
+
+    She came paralyzed. She's leaving... attempting. Trying to make staying work. That's something.
+
+    Maybe she'll plant the osmanthus. Maybe she'll paint the study. Maybe she'll teach Cantonese. Maybe she'll bloom.
+
+    You gave her what you could. Validation. Support. Permission.
+
+    Maya might call. That's a thread. A possibility.
+
+    You're learning. Each session teaches you.
+
+@else:
+    Margaret is gone. Still uncertain. Still withering.
+
+    You tried. But sometimes people aren't ready to bloom.
+
+    Maybe she'll surprise you. Or maybe not.
+
+    Next client, you'll do better.
+@endif
+
+@py:
+    session.current_client = None
+    reader.sessions_completed += 1
+
+    # Special achievement for completing Chen's full arc via 3C
+    if chen.arc_complete and chen.final_state == "blooming_where_planted":
+        reader.achievements.add("chen_arc_complete_rooted_path")
+@endpy
+
+---
+
+**Session 3C Complete**
+
+**Money Earned:** ${reader.money_earned_this_session}
+**Reputation Gained:** +{reader.reputation_gained_this_session}
+**Reading Quality:** {session.reading_quality}
+
+@if chen.gave_gift:
+    **Gift Received:** {chen.gift_description}
+    *(Will bloom in autumn - reminder of Margaret blooming where she's planted)*
+@endif
+
+@if maya.unlocked:
+    **New Client Available:**
+    - Maya Chen (Margaret's granddaughter, 23, struggling with identity)
+@endif
+
+---
+
++ [Return to the Reader's Table]
+    -> ReaderTable
+
+# ============================================================================
+# END OF CHEN SESSION 3C
+# ============================================================================

@@ -1,0 +1,1530 @@
+# ============================================================================
+# MARGARET CHEN - SESSION 3B: "THE FINAL PUSH"
+# ============================================================================
+#
+# UNLOCK CONDITIONS:
+# - chen.will_return == True
+# - chen.session_two_quality >= "helpful"
+# - chen.took_action == False (stayed paralyzed after Session 2)
+# - 4-6 weeks have passed since Session 2
+#
+# CATALYST: Emily (daughter, Portland) had premature baby. Needs Margaret to:
+#   1) Help with newborn care (Emily recovering from C-section, husband back at work)
+#   2) Give baby his Chinese name (grandfather's traditional role, but David is gone)
+#   3) Come within first month (坐月子 cultural requirement)
+#
+# THEME: Crisis as catalyst - Margaret can move FOR Emily when she couldn't for herself
+#
+# STRUCTURE:
+# - Urgent opening (shorter than 3A, more desperate)
+# - 1-Card Draw (from action-focused 3-card pool)
+# - Directive Interpretations (4-5 options, focused on ACTION not exploration)
+# - Synthesis emphasizes NEXT STEPS and concrete plan
+# - Payment includes promise/commitment ritual
+# - Unlocks Maya Chen (granddaughter, Seattle)
+#
+# CARD POOL:
+# - The Fool (leap of faith, new beginning NOW)
+# - Eight of Wands (speed, momentum, urgency)
+# - Death (transformation, necessary ending)
+#
+# ============================================================================
+
+:: Chen.Session3B.Start
+@py:
+    session = create_session(chen)
+
+    # Initialize session tracking
+    session.interpretation_good = 0
+    session.interpretation_okay = 0
+    session.interpretation_bad = 0
+
+    # Initialize flags
+    chen.discussed_grief = False
+    chen.discussed_guilt = False
+    chen.discussed_culture = False
+    chen.discussed_emily = False
+    chen.discussed_naming_ceremony = False
+    chen.discussed_house_trap = False
+    chen.discussed_matriarch = False
+
+    # Session-specific
+    session.gave_concrete_plan = False
+    session.addressed_too_late_fear = False
+@endpy
+~ session.atmosphere = 3  # Urgent, tense
+~ session.room_energy = 3
+
+You're in your reading corner.
+
+@if session.weather_intensity >= 2:
+    Spring rain beats against the window - urgent, insistent.
+@else:
+    Grey afternoon light. The kind of day that feels like waiting.
+@endif
+
+Your phone buzzes.
+
+**[Text from: Margaret Chen]**
+*"Emergency. Can I come now? - M"*
+
+Your chest tightens. It's only been six weeks since your last session.
+
+You text back: *"Yes. Come now."*
+
+Ten minutes later, footsteps on the stairs. Fast. Urgent.
+
+A knock - not her usual polite tap, but harder. Desperate.
+
++ [Open the door immediately] -> Chen.Session3B.Arrival_Immediate
++ [Take a breath, center yourself, then open] -> Chen.Session3B.Arrival_Centered
+
+:: Chen.Session3B.Arrival_Immediate
+You open the door immediately.
+
+Margaret Chen stands there - and she looks *terrible*.
+
+Grey-faced. Eyes red and swollen from crying. Hair less neat than usual. She's clutching her phone like a lifeline.
+
+"Thank you for seeing me," she says, voice shaking. "I know it's short notice. I know you're busy. But I—"
+
+She stops. Starts crying.
+
++ ["Come in. Sit. Tell me everything."] -> Chen.Session3B.Settling_Crisis
++ ["What happened?"] -> Chen.Session3B.What_Happened
+
+:: Chen.Session3B.Arrival_Centered
+You take a breath. Center yourself. Whatever's happening, she needs you calm.
+
+You open the door.
+
+Margaret Chen stands there - and she looks *terrible*.
+
+Grey-faced. Eyes red and swollen. Hair disheveled. She's clutching her phone with white-knuckled hands.
+
+"Thank you," she whispers. "Thank you for seeing me."
+
+~ reader.competence += 1
+
++ ["Come in. Whatever it is, we'll figure it out."] -> Chen.Session3B.Settling_Crisis
++ ["Sit down. You look like you need to sit."] -> Chen.Session3B.Settling_Crisis
+
+:: Chen.Session3B.Settling_Crisis
+You guide her to the chair. She sits heavily, like her legs can't hold her anymore.
+
+"Do you need water? Tea?"
+
+"No. No time." She's breathing too fast. "I need the cards. I need them to tell me it's not too late."
+
++ ["Too late for what?"] -> Chen.Session3B.Too_Late_For_What
++ ["Take a breath first. Then tell me."] -> Chen.Session3B.Breathe_First
+
+:: Chen.Session3B.What_Happened
+"What happened?"
+
+Margaret steps inside, barely registering the space. She's somewhere else entirely.
+
+"Emily had the baby. Six weeks early. I wasted six weeks being paralyzed and now she needs me and I can't—"
+
+She stops. Sits down hard in the chair.
+
+"I can't help her because I chose this house over being her mother."
+
+~ chen.discussed_guilt = True
+
++ ["Start from the beginning."] -> Chen.Session3B.The_Beginning
++ ["Emily had the baby. Is the baby okay?"] -> Chen.Session3B.Baby_Okay
+
+:: Chen.Session3B.Breathe_First
+"Take a breath first. Then tell me."
+
+Margaret tries. One shaky inhale. Exhale. Another.
+
+"Okay," she whispers. "Okay."
+
+~ reader.empathy += 1
+
++ ["Now. What happened?"] -> Chen.Session3B.The_Beginning
+
+:: Chen.Session3B.Too_Late_For_What
+"Too late for what?"
+
+"Too late to be the mother Emily needs. Too late to meet my grandson. Too late to do what David would have done. Too late to—"
+
+She breaks. Puts her face in her hands.
+
+~ chen.discussed_guilt = True
+
++ ["Tell me about Emily. What happened?"] -> Chen.Session3B.The_Beginning
+
+:: Chen.Session3B.Baby_Okay
+"Emily had the baby. Is the baby okay?"
+
+"He's okay. Small. Three pounds eleven ounces. He was in NICU for two weeks but he's home now. His name is Ethan. Ethan Chen."
+
+A pause.
+
+"He doesn't have his Chinese name yet. That's why I'm here."
+
+~ chen.discussed_naming_ceremony = True
+
++ ["Tell me everything."] -> Chen.Session3B.The_Beginning
+
+:: Chen.Session3B.The_Beginning
+
+Margaret gathers herself. Tries to organize the chaos into sentences.
+
+"Emily called me yesterday morning. Six AM. I was still asleep. She said: '*Ma*, the baby came. Six weeks early. We're at the hospital.'"
+
+She wipes her eyes.
+
+"Ethan was born last Tuesday. April 23rd. Three pounds, eleven ounces. Lungs weren't fully developed. He was in NICU for two weeks. Emily stayed at the hospital the whole time. Sleeping in a chair. Jake had to go back to work after three days - his company only gave him a week and he'd already used three days for the birth."
+
+~ chen.discussed_emily = True
+
++ ["That's terrible. Is Ethan home now?"] -> Chen.Session3B.Ethan_Home
++ ["Two weeks in NICU. That must have been terrifying for Emily."] -> Chen.Session3B.Emily_Terrified
+
+:: Chen.Session3B.Ethan_Home
+"Is Ethan home now?"
+
+"Yes. Since Monday. Three days ago. He's okay - still small, but breathing on his own, eating okay. Emily is recovering from C-section. She can barely walk. Jake went back to work yesterday. Amazon gives two weeks paternity leave and he's already used it. So Emily is alone with a premature baby and surgical recovery."
+
+Margaret's voice hardens.
+
+"Alone. In Portland. Three hours away. And she needs her mother."
+
+~ chen.discussed_emily = True
+
++ ["She called you for help."] -> Chen.Session3B.The_Call
++ ["But you can't just leave the house."] -> Chen.Session3B.House_Trap
+
+:: Chen.Session3B.Emily_Terrified
+"Two weeks in NICU. That must have been terrifying for Emily."
+
+"*Aiya*." Margaret's face crumples. "She was alone. Jake came when he could, but he had to work. I should have been there. I should have driven down the moment she went into labor. But I... I couldn't."
+
+"Why couldn't you?"
+
+"The house." Her voice is bitter. "The garden needed watering. The mail needed collecting. What if something broke? What if there was an emergency? I couldn't just leave for weeks."
+
+She looks at you with devastated eyes.
+
+"I chose the house over my daughter. I chose *grief* over my daughter."
+
+~ chen.discussed_guilt = True
+~ chen.discussed_house_trap = True
+
++ ["Tell me about the call yesterday."] -> Chen.Session3B.The_Call
+
+:: Chen.Session3B.House_Trap
+"But you can't just leave the house."
+
+"Exactly!" Margaret's voice rises. "That's the trap. That's the *cage*. The house requires too much. The garden. The maintenance. The mortgage. I can't just abandon it for a month. But Emily needs me for at least a month. 坐月子 - sitting the month. She needs help. Ethan needs monitoring. And I'm *stuck*."
+
+She's shaking.
+
+"If I'd moved to Blossom Terrace like you said six weeks ago, I could go. Month-to-month apartment. Community support. Someone would water my plants. I could leave. But I chose the house. I chose paralysis. And now my daughter is suffering because of it."
+
+~ chen.discussed_house_trap = True
+~ chen.discussed_guilt = True
+
++ ["What did Emily say when she called?"] -> Chen.Session3B.The_Call
+
+:: Chen.Session3B.The_Call
+Margaret takes a shaky breath. This is the hard part.
+
+"Emily called yesterday morning. She said: 'Ma, I need you here. I can barely walk. Jake's at work twelve hours a day. I'm alone with Ethan and I'm terrified. Every time he cries I think something's wrong. Every time he's quiet I think he stopped breathing.'"
+
+She wipes her eyes.
+
+"And then she said: '*Gung Gung* should give Ethan his Chinese name. But *Gung Gung* is gone. So it's you, Ma. You have to come. You have to meet him. You have to look at his face and know who he is and give him his name. That's... that's the elder's job. The grandfather's job. But David is dead so now it's yours.'"
+
+Margaret is openly crying now.
+
+"Do you understand what she's asking? She's asking me to step into David's place. To be the family elder. The keeper of names. The matriarch. And I'm *honored*. *Diu*, I'm so honored. But I can't go. I can't leave the house. I'm trapped and my grandson is eleven days old and I haven't even met him."
+
+~ chen.discussed_naming_ceremony = True
+~ chen.discussed_matriarch = True
+~ chen.discussed_culture = True
++ ["Why can't you leave the house?"] -> Chen.Session3B.Why_Cant_Leave
++ ["How long do you have to give him his name?"] -> Chen.Session3B.Naming_Deadline
++ ["What did you tell Emily?"] -> Chen.Session3B.What_She_Said
+
+:: Chen.Session3B.Why_Cant_Leave
+"Why can't you leave the house for a month?"
+
+"Because—" Margaret gestures helplessly. "The garden. The roses need pruning. The lawn needs mowing. The gutters need cleaning. What if the furnace breaks? What if there's a leak? What if someone breaks in? I can't just *leave* it."
+
+"Can't your son check on it?"
+
+"He's in California. My niece lives in Tacoma but she works full time. I can't ask her to drive to Seattle three times a week to water plants."
+
+She looks at you directly.
+
+"If I'd moved to Blossom Terrace, this wouldn't be a problem. Month-to-month lease. Community support. Low maintenance. I could say: 'I'm going to help my daughter for a month' and people would understand. Someone would water my *one plant*. But I chose the house. I chose David's memorial over Emily's needs."
+
+~ chen.discussed_house_trap = True
+~ chen.discussed_guilt = True
+
++ ["How long do you have to give Ethan his name?"] -> Chen.Session3B.Naming_Deadline
+
+:: Chen.Session3B.Naming_Deadline
+"How long do you have to give him his name?"
+
+"First month. That's tradition. The baby stays home for the first month - 坐月子. Can't take him outside. Too vulnerable. So I have to go *to* him. And I have to do it soon."
+
+She counts on her fingers.
+
+"He's eleven days old. I have maybe twenty days left. Maybe less - some families do the naming at two weeks. I'm already late. I should have gone the day he was born. But I was paralyzed. Stuck. And now I've wasted almost two weeks."
+
+Her voice breaks.
+
+"What if it's too late? What if I can't do it in time? What if Emily stops asking and just... gives him a name herself? What if I fail at the one thing David would have done without hesitation?"
+
+~ chen.discussed_naming_ceremony = True
+~ session.addressed_too_late_fear = True
+
++ ["What did you tell Emily when she asked?"] -> Chen.Session3B.What_She_Said
+
+:: Chen.Session3B.What_She_Said
+"What did you tell Emily when she asked you to come?"
+
+Margaret's face is ashamed.
+
+"I said I'd think about it."
+
+A long pause.
+
+"My daughter just had a premature baby. She's recovering from surgery. She's alone and terrified. She asked me to come be her mother and perform a sacred family ritual. And I said I'd *think about it*."
+
+She looks at you with devastated eyes.
+
+"What kind of mother says that? David would have been in the car already. David would have dropped everything. But I'm stuck. I'm trapped. And Emily knows it. She said: 'It's okay, Ma. I understand. The house is a lot.'"
+
+Her voice hardens.
+
+"She's giving me *permission* to choose the house over her. And that's... that's unforgivable."
+
+~ chen.discussed_guilt = True
+~ chen.discussed_emily = True
+
++ ["That's why you're here."] -> Chen.Session3B.Why_Shes_Here
++ ["You haven't failed yet. You're here now."] -> Chen.Session3B.Not_Failed_Yet
+
+:: Chen.Session3B.Why_Shes_Here
+"That's why you're here."
+
+"Yes." Margaret straightens up slightly. "I need the cards to tell me: is it too late? Can I still move? Can I move fast enough to get to Portland by next week?"
+
+She looks at you fiercely.
+
+"I wasted six weeks. But I have twenty days. Twenty days to become the person David would have been. To be the matriarch Emily needs. To meet my grandson and know his name."
+
+"What do you need from the cards?"
+
+"Permission. No—" She corrects herself. "Not permission. *Direction*. Tell me how. Tell me it's possible. Tell me I can call Blossom Terrace today and move by Friday and drive to Portland on Monday. Tell me I can do what David would have done."
+
+~ session.addressed_too_late_fear = True
+
++ ["Let's ask the cards."] -> Chen.Session3B.CardDraw
+
+:: Chen.Session3B.Not_Failed_Yet
+"You haven't failed yet. You're here now."
+
+Margaret looks at you with desperate hope.
+
+"It's not too late?"
+
+"You have twenty days. That's *something*. The question isn't whether you've failed. The question is: what do you do RIGHT NOW?"
+
+She nods, wiping her eyes.
+
+"That's why I'm here. I need the cards to tell me what to do. First step. Tomorrow morning. Give me a plan."
+
+~ reader.empathy += 1
+~ session.addressed_too_late_fear = True
+
++ ["Let's ask the cards what you need to do."] -> Chen.Session3B.CardDraw
+
+# ============================================================================
+# CARD DRAW
+# ============================================================================
+
+:: Chen.Session3B.CardDraw
+You reach for your deck.
+
+Margaret watches you with desperate intensity.
+
+"One card," you say. "We're going deep and fast. No time for elaborate spreads."
+
+"Good. What's the question?"
+
+You think for a moment.
+
+"What does Margaret need to do RIGHT NOW to get to Portland in time?"
+
+She exhales. "Yes. That's it exactly."
+
+You shuffle. The cards feel urgent under your fingers. Insistent.
+
+You draw.
+
+@py:
+    # Action-focused 3-card pool for Session 3B
+    deck = Deck(cards=[
+        "The Fool",        # Leap of faith, new beginning NOW
+        "Eight of Wands",  # Speed, momentum, urgency
+        "Death"            # Transformation, necessary ending
+    ])
+
+    # Create reading
+    reading = Reading(
+        spread_id="single-focus",
+        decks=[deck]
+    )
+
+    # Draw the card
+    cards = reading.draw_cards()
+@endpy
+
+@render render_reading(reading=reading)
+
+You lay the card on the table.
+
+**{cards[0].name}**{cards[0].reversed ? (Reversed) | }
+
+---
+
+Margaret leans forward, hands gripping the table edge.
+
+"What does it say?"
+
++ [Begin interpretation] -> Chen.Session3B.InterpretationHub
+
+# ============================================================================
+# INTERPRETATION HUB
+# ============================================================================
+
+:: Chen.Session3B.InterpretationHub
+@render render_reading(reading=reading)
+@if cards[0].name == "The Fool":
+    -> Chen.Session3B.Fool_Interpret
+@elif cards[0].name == "Eight of Wands":
+    -> Chen.Session3B.EightWands_Interpret
+@else:
+    # Death
+    -> Chen.Session3B.Death_Interpret
+@endif
+
+# ============================================================================
+# THE FOOL - INTERPRETATION
+# ============================================================================
+
+:: Chen.Session3B.Fool_Interpret
+@if cards[0].reversed:
+    The **Fool - Reversed**.
+
+    The figure stands at the cliff edge, frozen. One foot raised but not stepping. The dog barks warning. The sun shines on paths not taken. Fear of the leap. Fear of being too late. Fear of being foolish.
+@else:
+    The **Fool**.
+
+    A figure stands at a cliff edge, one foot stepping into open air. A small dog at their heels. A bundle over their shoulder. The sun shines ahead. This is the leap. The beginning. Trust despite terror.
+@endif
+
++ {reader.style == "intuitive"} ["The Fool says: leap. Now. Trust that the net will appear."] -> Chen.Session3B.Fool_Intuitive_Good
++ {reader.style == "storyteller"} ["Every journey begins with one foolish step. Emily needs you to be foolish."] -> Chen.Session3B.Fool_Storyteller_Good
++ ["You're not too late. Beginnings don't have expiration dates. But you have to START."] -> Chen.Session3B.Fool_Perceptive_Excellent
++ ["The Fool represents new beginnings and taking risks."] -> Chen.Session3B.Fool_Generic_Bad
++ ["This card says you need to take action, even if you're scared."] -> Chen.Session3B.Fool_Practical_Okay
+
+:: Chen.Session3B.Fool_Intuitive_Good
+~ session.interpretation_good += 1
+~ reader.empathy += 1
+~ chen.trust += 1
+"The Fool says: leap. Now. Trust that the net will appear."
+
+Margaret stares at the card. "But what if there's no net?"
+
+@if cards[0].reversed:
+    "That's the reversal. That's the fear. The Fool reversed is standing at the edge, one foot raised, *almost* stepping but not quite. Still calculating. Still worrying. 'What if I fall? What if I'm too late? What if I look foolish?'"
+
+    You lean forward.
+
+    "But Margaret - Emily is in Portland with a three-pound baby and surgical recovery. Ethan needs his name. You don't have time to calculate anymore. The cliff is there. Jump or don't, but *decide*."
+@else:
+    "Look at the Fool. They're not looking down. Not calculating the fall. Not measuring the distance. They're looking at the *sun*. At where they're going, not what they're leaving."
+
+    "But I don't know where I'm going!"
+
+    "Yes you do. Portland. Emily's apartment. Ethan's face. His name waiting to be discovered. That's the sun. The house is the cliff behind you. Stop looking back."
+@endif
+
++ ["What's the first step?"] -> Chen.Session3B.Fool_FirstStep
++ ["What if you're too late?"] -> Chen.Session3B.Fool_TooLate
+
+:: Chen.Session3B.Fool_Storyteller_Good
+~ session.interpretation_good += 1
+~ reader.empathy += 1
+~ chen.trust += 1
+
+"Every journey begins with one foolish step. Emily needs you to be foolish."
+
+Margaret almost laughs. "Be foolish?"
+
+@if cards[0].reversed:
+    "Yes. The Fool reversed is trying to be *wise*. Calculating. Measuring risk. 'Let me think about this. Let me make a plan. Let me be sure.' But wisdom becomes paralysis. Sometimes you have to be foolish to move forward."
+
+    "But what if I make a mistake?"
+
+    "Then you make a mistake. But right now, the biggest mistake is not moving. Emily doesn't need you to be wise. She needs you to be *there*."
+@else:
+    "The Fool doesn't know what they're doing. They don't have a perfect plan. They have a bundle of belongings and a leap of faith. That's it. But they're *moving*. And that's more than you've done in six weeks."
+
+    Margaret flinches.
+
+    "I don't mean that cruelly," you say gently. "I mean: the Fool is permission to move without knowing everything. To leap without guarantees. Emily needs that from you."
+@endif
+
++ ["Tell me what I do first."] -> Chen.Session3B.Fool_FirstStep
++ ["But I wasted six weeks. Am I too late?"] -> Chen.Session3B.Fool_TooLate
+
+:: Chen.Session3B.Fool_Perceptive_Excellent
+~ session.interpretation_good += 1
+~ reader.insight += 2
+~ chen.trust += 2
+
+"You're not too late. Beginnings don't have expiration dates. But you have to START."
+
+Margaret's breath catches. "I can still begin?"
+
+@if cards[0].reversed:
+    "Yes. But the Fool reversed shows what's stopping you: you think you've used up your chance. You think the leap was offered in March and you declined, so now the cliff is closed. But that's not how cliffs work. They don't disappear. They wait."
+
+    "But I wasted six weeks—"
+
+    "Yes. And you can't get those back. Ethan is eleven days old and you missed those eleven days. That's real. But you still have twenty days. The Fool says: you can start now. Or you can waste twenty more days being 'too late.' Which do you choose?"
+@else:
+    "The Fool is card zero. The beginning of the journey. Not card six, after you've already delayed. ZERO. Every moment is a potential beginning. You can start now. You can call Blossom Terrace after this reading. You can move Friday. You can drive to Portland Monday. You can meet Ethan on Tuesday. You can give him his name on Wednesday."
+
+    Margaret is crying. "That fast?"
+
+    "That's what the Fool does. Leaps. Doesn't overthink. You've had six weeks to overthink. The Fool says: time to jump."
+@endif
+
+~ session.addressed_too_late_fear = True
+
++ ["What's the first step?"] -> Chen.Session3B.Fool_FirstStep
++ ["What if I'm still afraid?"] -> Chen.Session3B.Fool_Afraid
+
+:: Chen.Session3B.Fool_Practical_Okay
+~ session.interpretation_okay += 1
+~ reader.competence += 1
+
+"This card says you need to take action, even if you're scared."
+
+Margaret nods. "I know I need to act. But *how*?"
+
+@if cards[0].reversed:
+    "The reversal suggests you're hesitating. Overthinking. You need to just... move. Make a decision. Any decision. Call Blossom Terrace. Start packing. Book a hotel in Portland if the apartment isn't ready yet. Just START."
+@else:
+    "The Fool is about taking the leap. You've been standing still. Now you need to move forward. First step is calling Blossom Terrace and asking about availability. Can you do that today?"
+@endif
+
+Margaret thinks. "Yes. I can do that."
+
++ ["Then that's your first step."] -> Chen.Session3B.Synthesis
+
+:: Chen.Session3B.Fool_Generic_Bad
+~ session.interpretation_bad += 1
+~ chen.trust -= 1
+
+"The Fool represents new beginnings and taking risks."
+
+Margaret looks frustrated. "I know that. I need more than generic meanings. I need to know: can I do this? Is it too late?"
+
+@if cards[0].reversed:
+    "Well, reversed means... being too cautious? So you should be less cautious."
+
+    "That doesn't help."
+@else:
+    "The Fool says yes to new beginnings. So... yes?"
+
+    "I need specifics. Not platitudes."
+@endif
+
+The interpretation completely missed what she needs.
+
++ ["Let me think about this differently—"] -> Chen.Session3B.Synthesis
+
+:: Chen.Session3B.Fool_FirstStep
+~ session.gave_concrete_plan = True
+~ reader.competence += 1
+
+"What's the first step?"
+
+"Tell me."
+
+You think for a moment, looking at the card.
+
+@if cards[0].reversed:
+    "The Fool reversed is stuck in planning. 'What if this, what if that.' So the first step is: STOP PLANNING. Call Blossom Terrace right now. From this room. Before you leave. Ask if they have availability for move-in this Friday."
+@else:
+    "The Fool carries a small bundle. Not their whole house. Just what they need. So: first step is decide what comes to Portland with you. Not everything. A small bag. Clothes for a month. Toiletries. Photos of David. That's it."
+@endif
+
+"And then?"
+
+"Call Blossom Terrace. Today. Tell them: I need to move in by Friday. I have an emergency. My daughter needs me. Is it possible?"
+
+"What if they say no?"
+
+@if cards[0].reversed:
+    "Then you find a short-term rental. Airbnb for three months. Storage unit for the furniture. Hire someone to maintain the house while you're gone. There are SOLUTIONS. But first you have to ask. The Fool doesn't know what's possible until they step off the cliff."
+@else:
+    "The Fool doesn't ask 'what if they say no.' The Fool asks. Period. You don't plan for rejection. You plan for YES. And if it's no, you pivot. But you can't pivot while standing still."
+@endif
+
+Margaret nods, making mental notes.
+
+"Call Blossom Terrace today. Move Friday. Drive to Portland Monday."
+
+"Yes."
+
++ ["That's the plan. Can you do it?"] -> Chen.Session3B.Synthesis
+
+:: Chen.Session3B.Fool_TooLate
+~ session.addressed_too_late_fear = True
+~ reader.empathy += 1
+
+"What if you're too late?"
+
+Margaret's voice is small. "What if I am? What if Ethan is already two weeks old and I've missed it?"
+
+@if cards[0].reversed:
+    "The Fool reversed says: you're not too late. You're just convinced you are. 'Too late' is a story you tell yourself to justify staying stuck. But Emily hasn't named Ethan yet. She's waiting for YOU. You're not too late until she stops waiting."
+@else:
+    "The Fool doesn't measure time in 'too late.' The Fool measures time in: 'the sun is shining, the path is there, I'm stepping forward.' You have twenty days. That's FOREVER. That's an eternity. Stop wasting it worrying about the eleven you lost."
+@endif
+
+"But I should have been there when he was born."
+
+"Yes. And you weren't. You can't change that. But you can be there when he's named. When he's held by his grandmother. When Emily tells him: '外婆 came all the way from Seattle to give you your name.' That's not 'too late.' That's just... when you arrived."
+
+Margaret wipes her eyes. "Thank you."
+
++ ["Now let's talk about what you do."] -> Chen.Session3B.Fool_FirstStep
+
+:: Chen.Session3B.Fool_Afraid
+~ reader.empathy += 1
+
+"What if I'm still afraid?"
+
+"Then you leap afraid. The Fool isn't fearless. Look at them - one foot off the cliff, into nothing. That's TERRIFYING. But they do it anyway."
+
+@if cards[0].reversed:
+    "The Fool reversed is afraid AND frozen. The Fool upright is afraid AND moving. Fear isn't the problem. Paralysis is the problem."
+@else:
+    "You're afraid of moving. Afraid of leaving the house. Afraid of failing Emily. Afraid of not knowing the right name for Ethan. That's all real. But the Fool says: do it anyway. Afraid. Imperfect. Human."
+@endif
+
+"David wasn't afraid of anything."
+
+"David's not here. You are. And you're allowed to be afraid. Emily doesn't need fearless. She needs *you*. Scared. Flawed. Trying anyway."
+
+Margaret nods slowly.
+
++ ["So you'll do it?"] -> Chen.Session3B.Synthesis
+
+# ============================================================================
+# EIGHT OF WANDS - INTERPRETATION
+# ============================================================================
+
+:: Chen.Session3B.EightWands_Interpret
+@if cards[0].reversed:
+    The **Eight of Wands - Reversed**.
+
+    Eight staves hover in air - not flying, not landing. Suspended. Delayed. Momentum interrupted. The message is delayed. The journey stalls. "Not yet" becomes "not ever."
+@else:
+    The **Eight of Wands**.
+
+    Eight staves fly through the air in formation. Swift. Determined. Unstoppable. This is momentum. This is things moving FAST. Messages arriving. Journeys beginning. The time for waiting is over.
+@endif
+
++ {reader.style == "analytical"} ["Eight is completion of a cycle. Wands are action and will. This is decisive movement after long stagnation."] -> Chen.Session3B.EightWands_Analytical_Good
++ ["Everything moves fast now. Can you keep up?"] -> Chen.Session3B.EightWands_Perceptive_Excellent
++ ["The universe is giving you momentum. Don't fight it. Ride it."] -> Chen.Session3B.EightWands_Intuitive_Good
++ ["This card means swift action and rapid change."] -> Chen.Session3B.EightWands_Generic_Bad
++ ["Eight of Wands says things will move quickly. Be ready."] -> Chen.Session3B.EightWands_Practical_Okay
+
+:: Chen.Session3B.EightWands_Analytical_Good
+~ session.interpretation_good += 1
+~ reader.competence += 1
+~ chen.trust += 1
+
+"Eight is completion of a cycle. Wands are action and will. This is decisive movement after long stagnation."
+
+Margaret leans forward. "Say more."
+
+@if cards[0].reversed:
+    "You've been in the suit of Swords - thinking, analyzing, paralyzed by thought. The Eight of Wands reversed shows the transition point. Movement WANTS to happen. The wands WANT to fly. But something is blocking them. You are blocking them."
+
+    "How do I stop blocking?"
+
+    "Stop thinking. Act. The wands don't analyze trajectory. They just FLY."
+@else:
+    "For six weeks you've been static. Frozen. The Eight of Wands says: that cycle is complete. Now comes the movement cycle. And it's FAST. Once you decide - really decide - everything happens quickly. Blossom Terrace will have space. The move will flow. Portland will welcome you. This is energetic momentum. You just have to say yes to it."
+@endif
+
+"When does it start?"
+
+"Today. The moment you call Blossom Terrace. The moment you commit. Then the eight wands fly."
+
++ ["What's the first call I need to make?"] -> Chen.Session3B.EightWands_FirstCall
++ ["What if I can't keep up with the speed?"] -> Chen.Session3B.EightWands_KeepUp
+
+:: Chen.Session3B.EightWands_Perceptive_Excellent
+~ session.interpretation_good += 1
+~ reader.insight += 2
+~ chen.trust += 2
+
+"Everything moves fast now. Can you keep up?"
+
+Margaret's eyes widen. "How fast?"
+
+@if cards[0].reversed:
+    "That's the reversal. You're afraid of the speed. You want things to move at *your* pace. Measured. Controlled. But Emily doesn't have time for your pace. Ethan is eleven days old. Twelve days. Thirteen. Every day you delay, he gets older. The Eight of Wands reversed says: the speed is happening whether you're ready or not. You can ride it or be left behind."
+
+    "That sounds terrifying."
+
+    "It is. But being left behind is worse. Emily will name Ethan herself if you don't arrive in time. She won't wait forever. The wands don't wait."
+@else:
+    "Look at the card. Eight wands in perfect formation. No hesitation. They're not thinking about trajectory. They're FLYING. That's you now. Or that's what you could be. Call Blossom Terrace today. Move Friday. Portland Monday. Name Ethan by next weekend. Fast. Decisive. No more paralysis."
+
+    Margaret is overwhelmed. "That's five days."
+
+    "Yes. That's what Eight of Wands does. It doesn't give you months. It gives you MOMENTUM. The question is: can you trust it?"
+@endif
+
++ ["What happens if I try to slow down?"] -> Chen.Session3B.EightWands_SlowDown
++ ["Walk me through the five days."] -> Chen.Session3B.EightWands_FiveDays
+
+:: Chen.Session3B.EightWands_Intuitive_Good
+~ session.interpretation_good += 1
+~ reader.empathy += 1
+~ chen.trust += 1
+
+"The universe is giving you momentum. Don't fight it. Ride it."
+
+Margaret looks uncertain. "I'm not good at riding momentum. I'm good at control."
+
+@if cards[0].reversed:
+    "And that's why you're stuck. The Eight of Wands reversed shows control blocking flow. You're trying to direct the wands. But wands don't need direction. They know where to go. Your job is to GET OUT OF THE WAY."
+
+    "How do I get out of the way?"
+
+    "Stop planning. Stop calculating. Stop worrying. Pick up the phone. Call Blossom Terrace. Say yes to whatever they offer. Then start packing. That's it. Let the momentum carry you."
+@else:
+    "The Eight of Wands upright is pure flow. Everything aligning. Blossom Terrace will say yes. The move will be easy. Traffic to Portland will be light. Emily will cry when she opens the door and sees you. Ethan will look at you and you'll KNOW his name immediately. That's momentum. Trust it."
+
+    "What if I don't trust it?"
+
+    "Then you stay paralyzed. And Emily names Ethan herself. And you miss it. The wands don't wait for doubt. They fly."
+@endif
+
++ ["How do I start the momentum?"] -> Chen.Session3B.EightWands_FirstCall
+
+:: Chen.Session3B.EightWands_Practical_Okay
+~ session.interpretation_okay += 1
+~ reader.competence += 1
+
+"Eight of Wands says things will move quickly. Be ready."
+
+"How quickly?"
+
+@if cards[0].reversed:
+    "Reversed might mean some delays. But the movement is still coming. You should start preparing now so when things speed up, you're ready."
+@else:
+    "Very quickly. Once you make the decision, everything flows. You should call Blossom Terrace today. Ask about move-in availability. Then start packing."
+@endif
+
+"Okay. I can do that."
+
++ ["That's the guidance."] -> Chen.Session3B.Synthesis
+
+:: Chen.Session3B.EightWands_Generic_Bad
+~ session.interpretation_bad += 1
+~ chen.trust -= 1
+
+"This card means swift action and rapid change."
+
+Margaret looks frustrated. "Yes, I gathered that from the image. But what does that mean for ME? For Emily? For getting to Portland?"
+
+@if cards[0].reversed:
+    "Reversed means... slower action? So it might take longer than you think."
+
+    "I don't have longer. I have twenty days."
+@else:
+    "It means things will happen fast. So... be ready for fast things."
+
+    "That's not helpful."
+@endif
+
+The interpretation is too vague to be useful.
+
++ ["Let me look at it again—"] -> Chen.Session3B.Synthesis
+
+:: Chen.Session3B.EightWands_FirstCall
+~ session.gave_concrete_plan = True
+~ reader.competence += 1
+
+"What's the first call I need to make?"
+
+"Blossom Terrace. Today. As soon as you leave here."
+
+Margaret nods, making mental notes.
+
+"What do I say?"
+
+@if cards[0].reversed:
+    "You say: 'I inquired about an apartment two months ago. I need to move in by this Friday. Do you have availability?' Don't apologize. Don't explain about being paralyzed. Just ask. The Eight of Wands doesn't make excuses. It FLIES."
+@else:
+    "You say: 'My daughter just had a premature baby in Portland. I need to be with her. I need to move in by Friday so I can drive to Portland on Monday. Can you accommodate that?' They'll say yes. I'm certain of it. The Eight of Wands doesn't show blocked paths. It shows open sky."
+@endif
+
+"What if they don't have availability until next month?"
+
+"Then you ask about the waiting list. You ask about temporary housing. You ask if someone can sublet to you. But the card says: they'll say yes. Stop preparing for no. Prepare for YES."
+
+Margaret takes a breath. "Okay. I'll call today."
+
++ ["What else do you need to do?"] -> Chen.Session3B.EightWands_RestOfPlan
+
+:: Chen.Session3B.EightWands_KeepUp
+~ reader.empathy += 1
+
+"What if I can't keep up with the speed?"
+
+Margaret's voice is small. "What if it's too fast? What if I make mistakes? What if I forget something important?"
+
+@if cards[0].reversed:
+    "The Eight of Wands reversed shows that fear. 'What if I can't control everything? What if I miss something?' But Margaret - you've been controlling everything for six weeks. How's that working out? You missed Ethan's birth. His first two weeks. How much more are you willing to miss to maintain control?"
+@else:
+    "Then you make mistakes. You forget things. So what? Emily doesn't need you to be perfect. She needs you to be THERE. Ethan doesn't need you to bring the perfect clothes. He needs you to hold him and give him his name. The Eight of Wands says: imperfect and moving beats perfect and stuck."
+@endif
+
+"But the house—"
+
+"Will survive. Grass will grow too long. Mail will pile up. A pipe might leak. And you'll deal with it when you get back. Or you'll hire someone. But Emily can't wait. Ethan can't wait. The wands are flying. You have to fly with them."
+
++ ["Okay. Tell me the plan."] -> Chen.Session3B.EightWands_RestOfPlan
+
+:: Chen.Session3B.EightWands_SlowDown
+~ reader.insight += 1
+
+"What happens if I try to slow down?"
+
+@if cards[0].reversed:
+    "That's exactly what reversed Eight of Wands shows. You trying to catch the wands mid-flight. Trying to pause them. Analyze them. Make sure they're going the right direction. But wands don't pause. They either fly or they fall. If you slow down now, you miss the window. Emily names Ethan herself. And you become the grandmother who wasn't there."
+@else:
+    "You can't. That's the point. The Eight of Wands doesn't offer 'slow and steady.' It offers MOMENTUM. You ride it or you miss it. Emily needs you now. Not when you're ready. Not when you've thought about it more. NOW. The wands are already in the air. The question is: are you on them or watching them fly past?"
+@endif
+
+Margaret looks terrified and determined at once.
+
+"I'm on them. Tell me what to do."
+
++ ["Here's the plan."] -> Chen.Session3B.EightWands_RestOfPlan
+
+:: Chen.Session3B.EightWands_FiveDays
+~ session.gave_concrete_plan = True
+~ reader.competence += 1
+
+"Walk me through the five days."
+
+"Okay." You count on your fingers.
+
+"**Today - Thursday:** Call Blossom Terrace after you leave here. Tell them: emergency, need to move in Friday. They'll say yes."
+
+"**Friday:** Moving day. Hire movers if you need to. Or just take essentials and come back for the rest later. Get the keys. Sleep in your new apartment Friday night."
+
+"**Saturday:** Unpack minimum essentials. Set up bedroom. Rest. You're sixty-eight, you had surgery on your knee last year, don't overdo it."
+
+"**Sunday:** Rest more. Call Emily. Tell her: I'm coming Monday."
+
+"**Monday:** Drive to Portland. Three hours. Arrive by lunch. Meet Ethan."
+
+"**Tuesday through next weekend:** Be with Emily. Help her recover. Hold Ethan. Watch him. Learn who he is. When you know his name - and you WILL know - give it to him. Perform the ceremony."
+
+Margaret is crying. "That's real. That's actually real. I can do that."
+
+@if cards[0].reversed:
+    "You CAN. But only if you stop delaying. The Eight of Wands reversed says: the plan is there. The path is clear. Stop hesitating and FLY."
+@else:
+    "That's what Eight of Wands does. Makes the impossible possible. Makes the terrifying simple. Five days. That's all you need. Can you give Emily five days?"
+@endif
+
+"Yes. Yes I can."
+
++ ["Then that's the plan."] -> Chen.Session3B.Synthesis
+
+:: Chen.Session3B.EightWands_RestOfPlan
+~ session.gave_concrete_plan = True
+
+"What else do you need to do?"
+
+"After calling Blossom Terrace?"
+
+"Yes. If they say yes to Friday move-in, what's next?"
+
+Margaret thinks. "Pack?"
+
+"Yes. But not everything. Remember - Eight of Wands is SPEED. Don't pack the whole house. Pack one suitcase for Portland. Pack one box of essentials for the apartment. Everything else can wait."
+
+"But the furniture—"
+
+@if cards[0].reversed:
+    "Can sit in the house until you get back. Or hire movers for next week. Or next month. The Eight of Wands reversed shows you trying to do everything at once. Don't. Do the ESSENTIAL things. Move into apartment. Go to Portland. Everything else is details."
+@else:
+    "Will be fine. The house isn't on fire. The Eight of Wands says: prioritize. Emily and Ethan are priority one. Moving out of the grief-house is priority two. Everything else - furniture, books, kitchen stuff - is priority seventeen. Handle it later."
+@endif
+
+"So: call Blossom Terrace. Pack one suitcase. Move Friday. Portland Monday."
+
+"Yes. Can you do that?"
+
+Margaret nods, determined. "I can do that."
+
++ ["Then that's what you do."] -> Chen.Session3B.Synthesis
+
+# ============================================================================
+# DEATH - INTERPRETATION
+# ============================================================================
+
+:: Chen.Session3B.Death_Interpret
+@if cards[0].reversed:
+    **Death - Reversed**.
+
+    The figure on the pale horse waits. The banner hangs limp. The sun refuses to set. Resisting necessary change. Clinging to what's already dead. The old identity won't let go. But decay accelerates when transformation is denied.
+@else:
+    **Death**.
+
+    A skeletal figure rides a pale horse. A banner bearing a white rose. A sun setting (or rising?) on the horizon. This is not ending. This is TRANSFORMATION. The old must die so the new can be born. Not death. Rebirth.
+@endif
+
++ {reader.style == "intuitive"} ["The old Margaret - David's wife, the house's keeper - she's already dead. Time to bury her."] -> Chen.Session3B.Death_Intuitive_Excellent
++ {reader.style == "analytical"} ["Death is transformation. Alchemical dissolution before recombination. You're not dying. You're becoming."] -> Chen.Session3B.Death_Analytical_Good
++ ["Emily is asking you to step into David's role. That requires you to let go of being David's echo."] -> Chen.Session3B.Death_Perceptive_Excellent
++ ["Death means major change and transformation."] -> Chen.Session3B.Death_Generic_Bad
++ ["This card says something big is ending so something new can begin."] -> Chen.Session3B.Death_Practical_Okay
+
+:: Chen.Session3B.Death_Intuitive_Excellent
+~ session.interpretation_good += 1
+~ reader.empathy += 2
+~ chen.trust += 2
+
+"The old Margaret - David's wife, the house's keeper - she's already dead. Time to bury her."
+
+Margaret goes completely still.
+
+"Say that again."
+
+@if cards[0].reversed:
+    "She's dead. The Margaret who lived for David. Who maintained his house. Who tended his memorial garden. Who couldn't imagine a future without him. That Margaret died six weeks ago when Emily called and said: 'I'm pregnant.' But you're still carrying her corpse. Death reversed says: let her go. Bury her. Perform the funeral."
+
+    Margaret is crying.
+
+    "I don't know how to let her go."
+
+    "Emily is showing you how. She's asking you to be the matriarch. The elder. The keeper of names. Not David's wife. Not David's widow. MARGARET. The grandmother. The mother. The woman who gives her grandson his Chinese name. That's who you're becoming. But you can't be her while holding onto who you were."
+@else:
+    "Look at Death. The figure isn't mourning. They're RIDING. Moving forward. The sun is setting on one world and rising on another. That's you. The sun set on 'Margaret, David's wife' the day he died. The sun is rising on 'Margaret, the matriarch.' But you keep living in the sunset. Death says: turn around. Face the dawn."
+
+    "What does the dawn look like?"
+
+    "Emily's apartment. Ethan's face. The moment you look at him and KNOW his name. The moment you say: 'Your name is [X]' and he becomes real. Becomes connected to generations. To David's lineage. To YOUR lineage. That's the dawn. But you have to leave the sunset house to see it."
+@endif
+
+~ chen.discussed_matriarch = True
+~ chen.discussed_grief = True
+
++ ["What has to die for you to do this?"] -> Chen.Session3B.Death_WhatDies
++ ["What's being born?"] -> Chen.Session3B.Death_WhatsBorn
+
+:: Chen.Session3B.Death_Analytical_Good
+~ session.interpretation_good += 1
+~ reader.competence += 1
+~ chen.trust += 1
+
+"Death is transformation. Alchemical dissolution before recombination. You're not dying. You're becoming."
+
+Margaret leans forward, listening intently.
+
+@if cards[0].reversed:
+    "Death reversed shows arrested transformation. You're in the dissolution phase - the old self is breaking down. But you're clinging to the fragments. Trying to glue them back together. 'Maybe I can still be David's wife. Maybe I can still be the house keeper. Maybe nothing has to change.' But the dissolution can't be stopped. You're transforming whether you consent or not. The question is: do you participate consciously or resist until you're forced?"
+@else:
+    "In alchemy, nigredo precedes albedo. Blackening before whitening. Death before rebirth. You're at the nigredo stage. Everything you were - David's wife, the house's keeper, the woman paralyzed by grief - is dissolving. That's not failure. That's PROCESS. The albedo is coming. Margaret the matriarch. Margaret the elder. Margaret the name-giver. But you can't skip nigredo. You have to let the old die."
+@endif
+
+"How do I let it die?"
+
+"You leave the house. You move to Blossom Terrace. You drive to Portland. You hold Ethan and give him his name. Each action is a small death. A small release. By the time you name him, you'll be transformed. New. Reborn."
+
++ ["What exactly has to die?"] -> Chen.Session3B.Death_WhatDies
+
+:: Chen.Session3B.Death_Perceptive_Excellent
+~ session.interpretation_good += 1
+~ reader.insight += 2
+~ chen.trust += 2
+
+"Emily is asking you to step into David's role. That requires you to let go of being David's echo."
+
+Margaret's face crumples. "I'm his echo?"
+
+"Yes. For two years you've been maintaining his house. His garden. His routines. His preferences. His ghost. You're not Margaret. You're Margaret-shaped-David. His echo."
+
+@if cards[0].reversed:
+    "Death reversed shows you clinging to the echo. 'If I stop being his wife, who am I? If I leave his house, where does he live? If I become something new, does he disappear?' But Margaret - he's already gone. The echo isn't keeping him alive. It's keeping YOU dead."
+
+    She's sobbing now.
+
+    "Emily is offering you resurrection. She's saying: 'Be my mother. Be Ethan's grandmother. Be the family elder. Not David's assistant. Not David's memorial. YOU. Margaret.' But you can't be Margaret-the-matriarch while being Margaret-the-echo. One has to die."
+@else:
+    "Death upright says: the echo is already dead. You're not being asked to kill it. You're being asked to ACKNOWLEDGE it's dead and step into what comes next. The grandfather names the baby. But the grandfather is dead. So the grandmother steps up. Not as substitute. As MATRIARCH. That's not David's role. That's YOURS. Uniquely yours. He can't do it. You can."
+
+    Margaret wipes her face. "I'm terrified."
+
+    "Of course. Death is terrifying. But the alternative is worse. Be David's echo forever, or be Ethan's 外婆. Choose."
+@endif
+
+~ chen.discussed_matriarch = True
+~ chen.discussed_grief = True
+
++ ["What dies when you make this choice?"] -> Chen.Session3B.Death_WhatDies
++ ["Who do you become after?"] -> Chen.Session3B.Death_WhatsBorn
+
+:: Chen.Session3B.Death_Practical_Okay
+~ session.interpretation_okay += 1
+~ reader.competence += 1
+
+"This card says something big is ending so something new can begin."
+
+"What's ending?"
+
+@if cards[0].reversed:
+    "Your life in the house, probably. Death reversed suggests you're resisting the change. But the change is necessary. You need to let go of the old life to start the new one with Emily and Ethan."
+@else:
+    "Your old life. The house. The routines. The way things were. Death says all that has to end so you can be present for Emily and Ethan."
+@endif
+
+Margaret nods slowly. "I understand."
+
++ ["That's the guidance."] -> Chen.Session3B.Synthesis
+
+:: Chen.Session3B.Death_Generic_Bad
+~ session.interpretation_bad += 1
+~ chen.trust -= 1
+
+"Death means major change and transformation."
+
+Margaret looks impatient. "I know that. Everyone knows that. But what does it mean specifically? What has to change? How do I transform?"
+
+@if cards[0].reversed:
+    "Reversed means you're resisting change. So... stop resisting?"
+
+    "That's not helpful."
+@else:
+    "It means you're transforming. Big changes are coming. You should... embrace them."
+
+    "I need specifics, not platitudes."
+@endif
+
+The interpretation is too generic to help.
+
++ ["Let me reconsider—"] -> Chen.Session3B.Synthesis
+
+:: Chen.Session3B.Death_WhatDies
+~ reader.insight += 1
+~ chen.discussed_grief = True
+
+"What has to die for you to do this?"
+
+Margaret thinks. "Tell me."
+
+@if cards[0].reversed:
+    "Death reversed shows you clinging to corpses. So let's name them:"
+@else:
+    "Death upright shows what must be released. Let's name it:"
+@endif
+
+"**The house.** Not just leaving it. Releasing your identity as 'the woman who lives in David's house.' It's not your house anymore. It hasn't been for two years. It's a museum. A memorial. It has to die."
+
+"**David's routines.** His morning coffee ritual. His gardening schedule. His preferences for how things should be done. Those aren't helping you. They're haunting you. They have to die."
+
+"**The idea that you're failing him by changing.** That's a lie. David loved you. He'd want you to live. But as long as you believe moving forward is betrayal, you're trapped. That belief has to die."
+
+@if chen.discussed_naming_ceremony:
+    "**The grandmother who isn't ready.** Emily is asking you to name Ethan. But you keep saying 'I'm not ready. I'm not David. I don't know how.' That grandmother - the inadequate one - has to die. So the confident matriarch can emerge."
+@endif
+
+"Can you let those things die?"
+
+Margaret wipes her eyes. "I have to. For Emily. For Ethan."
+
+"For yourself."
+
++ ["What's being born after?"] -> Chen.Session3B.Death_WhatsBorn
+
+:: Chen.Session3B.Death_WhatsBorn
+~ reader.empathy += 1
+~ chen.discussed_matriarch = True
+
+"What's being born?"
+
+"Tell me. What comes after Death?"
+
+@if cards[0].reversed:
+    "Death reversed says: the new self is trying to be born but you keep pulling it back into the womb. 'Not yet. Not yet. I'm not ready.' But birth doesn't wait for readiness. It HAPPENS. Emily is the midwife. Ethan is the catalyst. They're pulling you into the world whether you're ready or not."
+@else:
+    "Death upright shows the sun on the horizon. Dawn. New day. After dissolution comes recombination. After death comes rebirth. Who's being born?"
+@endif
+
+"**Margaret the Matriarch.** The family elder. The keeper of names and traditions. Not David's wife. Not David's echo. The grandmother who holds Ethan and KNOWS his name. The woman Emily calls when she needs wisdom."
+
+"**Margaret who lives lightly.** In Blossom Terrace. Month-to-month apartment. Can pack a bag and drive to Portland when needed. Not weighed down by maintenance and memories. Free. Mobile."
+
+"**Margaret who chooses herself AND her family.** Not one or the other. Not sacrifice. Not guilt. Both. She can have community AND visit Emily. She can grieve David AND name Ethan. Death doesn't require choosing. It requires integrating."
+
+"That's who's being born. Do you want to meet her?"
+
+Margaret is crying. "Yes. *Diu*, yes."
+
++ ["Then let the old you die."] -> Chen.Session3B.Synthesis
+
+# ============================================================================
+# SYNTHESIS
+# ============================================================================
+
+:: Chen.Session3B.Synthesis
+@py:
+    # Calculate reading quality
+    if session.interpretation_good >= 1:
+        session.reading_quality = "profound"
+        chen.clarity = 10
+    elif session.interpretation_okay >= 1:
+        session.reading_quality = "helpful"
+        chen.clarity = 7
+    else:
+        session.reading_quality = "adequate"
+        chen.clarity = 4
+@endpy
+
+You look at the single card on the table.
+
+**{cards[0].name}**{cards[0].reversed ? (Reversed) | }
+
+One card. One directive. One path forward.
+
+---
+
+@if session.reading_quality == "profound":
+    "Margaret," you say. "The card isn't asking if you CAN do this. It's telling you that you MUST."
+
+    She looks at you with red-rimmed eyes.
+
+    @if cards[0].name == "The Fool":
+        # THE FOOL SYNTHESIS
+
+        @if cards[0].reversed:
+            "The Fool reversed shows you standing at the edge, afraid to leap. But Emily is in Portland. Ethan is eleven days old. The naming ceremony can't wait for your fear to subside. The card says: leap NOW. Afraid. Imperfect. Human."
+        @else:
+            "The Fool says: this is your new beginning. Not someday. Not when you're ready. NOW. Every moment is a potential beginning. You can start today. Call Blossom Terrace after you leave here. Say yes to whatever they offer. Then pack a bag and leap."
+        @endif
+
+        @if session.gave_concrete_plan:
+            "Here's your plan: Call Blossom Terrace today. Move Friday. Rest Saturday and Sunday. Drive to Portland Monday morning. Arrive by lunch. Meet Ethan. Hold him. Watch him. Learn who he is. By next weekend, you'll know his name. And you'll give it to him. That's five days. You have twenty. You're not too late."
+        @endif
+
+        @if session.addressed_too_late_fear:
+            "You asked if it's too late. It's not. Beginnings don't have expiration dates. You missed Ethan's first eleven days. That's real. But you can be there for days twelve through forty. For his naming. For Emily's recovery. For the sitting-the-month ritual. That's not 'too late.' That's 'when you arrived.'"
+        @endif
+
+        "The Fool is permission to be imperfect. You don't need to know everything. You don't need David's confidence. You just need to MOVE. Emily doesn't need perfect. She needs YOU. There. Present. Trying."
+
+    @elif cards[0].name == "Eight of Wands":
+        # EIGHT OF WANDS SYNTHESIS
+
+        @if cards[0].reversed:
+            "The Eight of Wands reversed shows momentum trying to happen but being blocked. By what? By you. By overthinking. By planning. By fear. But the wands WANT to fly. Emily NEEDS you. Ethan is waiting for his name. The momentum is there. Stop blocking it."
+        @else:
+            "The Eight of Wands says: everything moves fast now. Once you decide - really decide - the path clears. Blossom Terrace will have space. The move will flow. Portland will welcome you. This isn't obstacles. This is MOMENTUM. Your job is to ride it."
+        @endif
+
+        @if session.gave_concrete_plan:
+            "Your timeline: Today - call Blossom Terrace. Friday - move in. Saturday/Sunday - rest and minimal unpacking. Monday - drive to Portland. Three hours. Arrive for lunch. Meet Ethan. Tuesday through next weekend - be Emily's mother. Be Ethan's grandmother. Learn his name. Give it to him. Five days from now, you're in Portland. That's what Eight of Wands does. Makes the impossible fast."
+        @endif
+
+        "You said you're not good at momentum. You like control. But control has kept you paralyzed for six weeks. The Eight of Wands asks: are you willing to surrender control for SPEED? Because speed is what Emily needs. Ethan is growing every day. The first month is short. You don't have time to be controlled anymore. You have to FLY."
+
+    @else:
+        # DEATH SYNTHESIS
+
+        @if cards[0].reversed:
+            "Death reversed shows you clinging to what's already dead. The old Margaret. David's wife. The woman who lived in his house and maintained his memorial. She's gone. But you're carrying her corpse. The card says: bury her. Perform the funeral. Let her rest."
+        @else:
+            "Death says: the old you is already dead. You're not being asked to kill her. You're being asked to ACKNOWLEDGE she's gone and step into who comes next. Margaret the matriarch. The grandmother. The keeper of names. Not David's echo. YOU."
+        @endif
+
+        @if chen.discussed_matriarch:
+            "Emily is asking you to step into David's role. The grandfather names the baby. But the grandfather is dead. So the grandmother steps up. Not as substitute. As MATRIARCH. That's not David's role. That's YOURS. Uniquely, powerfully yours. He can't do it. You can. You MUST."
+        @endif
+
+        @if chen.discussed_grief:
+            "Letting go of the house doesn't mean letting go of David. He's not in the building. He's in YOU. In the memories. In the love. In the name you'll give Ethan that connects him to his grandfather's lineage. David moves with you. But the house? The house is a corpse. Leave it."
+        @endif
+
+        "Death isn't about dying. It's about TRANSFORMATION. The caterpillar dies so the butterfly can emerge. You're not ending. You're BECOMING. Margaret the matriarch. The woman who drives to Portland and holds her grandson and says: 'Your name is [X]' and makes it true. That's who you're becoming. But first, the old you has to die. Can you let her go?"
+    @endif
+
+    Margaret is crying - but determined crying. Resolute crying.
+
+    "Yes. Yes I can. Tell me: what do I do first? Right now. Today."
+
+    "Call Blossom Terrace. Before you leave this room if you want. Tell them: I have an emergency. My daughter had a premature baby. I need to move in by Friday. Do you have availability?"
+
+    "What if they say no?"
+
+    "Then you find an alternative. Short-term rental. Airbnb for three months. Storage unit. House sitter. There are SOLUTIONS. But first you have to ask. Stop preparing for no. Prepare for YES."
+
+    Margaret nods, pulling out her phone. "Can I call now? From here?"
+
+    "Yes."
+
+    She dials. Puts it on speaker.
+
+    ~ chen.clarity = 10
+
+@elif session.reading_quality == "helpful":
+    # SIMPLIFIED SYNTHESIS
+
+    "The {cards[0].name} is telling you something important," you say.
+
+    @if cards[0].name == "The Fool":
+        "You need to take a leap of faith. Call Blossom Terrace. Ask about moving in quickly. Then go to Portland and help Emily. It's not too late. You can still do this."
+    @elif cards[0].name == "Eight of Wands":
+        "Things will move fast now. Don't fight the speed. Call Blossom Terrace today. Move this week if possible. Get to Portland soon. Emily needs you and you have time."
+    @else:
+        "Big changes are necessary. The old life in the house has to end so the new life as grandmother and matriarch can begin. Let go of what was. Embrace what's coming."
+    @endif
+
+    Margaret nods. "Thank you. That helps."
+
+    ~ chen.clarity = 7
+
+@else:
+    # ADEQUATE/MEDIOCRE
+
+    "The card shows... significant change," you say vaguely. "You should probably move quickly. Emily needs you."
+
+    Margaret nods but doesn't look particularly moved.
+
+    ~ chen.clarity = 4
+@endif
+
++ [(She makes the call / The reading is complete)] -> Chen.Session3B.TheCall_OrPayment
+
+# ============================================================================
+# THE CALL (Profound outcome only) / PAYMENT
+# ============================================================================
+
+:: Chen.Session3B.TheCall_OrPayment
+@if session.reading_quality == "profound":
+
+    The phone rings. Once. Twice.
+
+    "Blossom Terrace Co-housing, this is Sarah."
+
+    Margaret takes a breath. "Hello. My name is Margaret Chen. I inquired about an apartment two months ago. I... I have an emergency. My daughter had a premature baby in Portland. I need to be with her. Is there any way I could move in by this Friday?"
+
+    A pause on the line.
+
+    "Let me check availability." Keyboard sounds. "Margaret Chen... yes, I have your application here. You were interested in the one-bedroom facing the garden?"
+
+    "Yes."
+
+    "That unit is actually available. The previous tenant moved out last week. We were going to list it next Monday, but if you can move in Friday, it's yours."
+
+    Margaret's eyes widen. She looks at you. You nod.
+
+    "Yes. Yes, I'll take it."
+
+    "Perfect. Move-in is Friday at 10 AM. First month plus deposit. I'll email you the paperwork. And Margaret?" The woman's voice softens. "Congratulations on your grandson. I hope the baby is okay."
+
+    "He's small but getting stronger. Thank you."
+
+    Margaret hangs up. Stares at the phone. Then at you.
+
+    "*Diu*," she whispers. "It happened. It actually happened."
+
+    "The Eight of Wands," you say. "Momentum."
+
+    She's crying and laughing at once. "Friday. I move Friday. Monday I drive to Portland. Tuesday I meet Ethan."
+
+    + [Mrs. Chen gets her purse] -> Chen.Session3B.Payment
+@else:
+    + [Mrs. Chen gets her purse] -> Chen.Session3B.Payment
+@endif
+
+:: Chen.Session3B.Payment
+Margaret stands, gathering her bag and phone.
+
+"How much do I owe you?"
+
+@if session.reading_quality == "profound":
+    ~ session_payment = 75
+    ~ session_reputation = 10
+    ~ reader.money += session_payment
+    ~ reader.reputation += session_reputation
+    ~ reader.money_earned_this_session = session_payment
+    ~ reader.reputation_gained_this_session = session_reputation
+
+    She counts out seventy-five dollars. "You just changed my life. Again. That's what this is worth."
+
+    "Margaret—"
+
+    "No. You helped me when I was paralyzed. Now you helped me move. Literally. You witnessed me call Blossom Terrace. You made it real."
+
+    She reaches into her bag. Pulls out a small red envelope - 紅包 (hong bao).
+
+    "This is for Ethan. Lucky money for his naming ceremony. $888. Lucky number."
+
+    She opens it, shows you. Inside: eight one-hundred dollar bills and a smaller bill. And a small piece of paper with three Chinese characters written in careful calligraphy.
+
+    "I wrote down three possible names. I won't know which one is HIS until I meet him. Until I hold him and look at his face. David would have known immediately. I hope... I hope some of his wisdom passed to me."
+
+    She gives you the envelope.
+
+    "Keep this. When I come back from Portland - after I name him - I'll tell you his name and you'll give this back to me. Deal?"
+
+    "Deal."
+
+    ~ chen.gave_gift = True
+    ~ chen.gift_description = "Red envelope (紅包) with $888 and three potential Chinese names for baby Ethan"
+
+@elif session.reading_quality == "helpful":
+    ~ session_payment = 50
+    ~ session_reputation = 6
+    ~ reader.money += session_payment
+    ~ reader.reputation += session_reputation
+    ~ reader.money_earned_this_session = session_payment
+    ~ reader.reputation_gained_this_session = session_reputation
+
+    She hands you fifty dollars. "Thank you. I'm going to call Blossom Terrace as soon as I leave. You gave me the courage to try."
+
+    "Good luck, Margaret."
+
+    "I'll need it."
+
+@else:
+    ~ session_payment = 35
+    ~ session_reputation = 3
+    ~ reader.money += session_payment
+    ~ reader.reputation += session_reputation
+    ~ reader.money_earned_this_session = session_payment
+    ~ reader.reputation_gained_this_session = session_reputation
+
+    "Here's thirty-five." She's polite but not warm.
+@endif
+
++ [Walk her to the door] -> Chen.Session3B.Goodbye
+
+# ============================================================================
+# GOODBYE
+# ============================================================================
+
+:: Chen.Session3B.Goodbye
+
+You walk Margaret to the door.
+
+@if session.reading_quality == "profound":
+    She pauses at the threshold.
+
+    "I won't forget this. You didn't just read cards. You... you MOVED me. Literally moved me." She laughs. "I called Blossom Terrace from your reading room. That's... that's magic."
+
+    She takes your hands - quick, fierce squeeze.
+
+    "When I come back - after Portland, after naming Ethan - I'll bring photos. I'll tell you his name. I'll tell you how Emily cried when she saw me. How Ethan looked at me and I KNEW. All of it."
+
+    She pauses.
+
+    "And I'll send my granddaughter Maya. She's twenty-three, lives in Seattle, struggling with something she won't tell me about. Identity stuff, I think. She needs guidance. She needs someone like you."
+
+    "I'd be honored."
+
+    "Thank you. For everything. For seeing me. For not giving up on me when I was paralyzed. For giving me direction when I was drowning."
+
+    She smiles - genuine, warm, hopeful.
+
+    "I'm going to Portland on Monday. I'm going to meet my grandson. I'm going to give him his Chinese name. I'm going to be the matriarch David would have been. Because you helped me see: I'm not his echo anymore. I'm ME."
+
+    Then she's gone. Down the stairs. Into spring.
+
+    @py:
+        # Unlock Maya Chen
+        maya.unlocked = True
+        maya.unlock_reason = "Margaret's granddaughter, struggling with identity"
+        maya.relationship_to_chen = "granddaughter"
+        maya.context = "Margaret went to Portland to help Emily with premature baby and naming ceremony"
+
+        # Chen's arc is complete
+        chen.arc_complete = True
+        chen.final_state = "transformed_into_matriarch"
+        chen.will_return = "after Portland to report back"
+        chen.named_baby_ethan = True
+    @endpy
+
+@elif session.reading_quality == "helpful":
+    "Thank you," she says at the door. "I'm going to try. I'm going to call Blossom Terrace. Try to get to Portland soon."
+
+    "You can do this."
+
+    "I hope so." She pauses. "If I succeed - if I make it to Portland and name Ethan - I'll send my granddaughter Maya your way. She lives in Seattle. She's struggling with something."
+
+    "I'll be here."
+
+    "Good. Thank you."
+
+    She leaves.
+
+    @py:
+        # Unlock Maya Chen (basic)
+        maya.unlocked = True
+        maya.unlock_reason = "Margaret mentioned you"
+        maya.relationship_to_chen = "granddaughter"
+
+        chen.arc_complete = True
+        chen.final_state = "attempting_transformation"
+        chen.will_return = False
+    @endpy
+
+@else:
+    She leaves with a polite nod.
+
+    You might not see her again.
+
+    @py:
+        chen.arc_complete = True
+        chen.final_state = "still_uncertain"
+        chen.will_return = False
+    @endpy
+@endif
+
++ [Close the door] -> Chen.Session3B.SessionComplete
+
+# ============================================================================
+# SESSION COMPLETE
+# ============================================================================
+
+:: Chen.Session3B.SessionComplete
+
+The door closes behind Margaret Chen.
+
+You stand in your reading corner.
+
+@if chen.gave_gift:
+    On your table: the red envelope. 紅包. $888 inside, plus three potential names in Margaret's careful calligraphy. You peek:
+
+    陳俊熙 (Chen Jun Xi)
+    陳浩然 (Chen Hao Ran)
+    陳睿哲 (Chen Rui Zhe)
+
+    Three names. Three possible futures. She'll look at Ethan's face and KNOW which one is his. That's the magic. That's the sacred.
+
+    You're holding his future in your hands until she returns to claim it.
+@endif
+
+Outside, spring afternoon. The rain has stopped. Everything feels possible.
+
+@if session.reading_quality == "profound":
+    Three sessions with Margaret Chen. And this - THIS - is the transformation moment.
+
+    Session 1: Should she move? (Paralyzed, couldn't decide)
+    Session 2: Why is she still stuck? (Shame, fear, guilt)
+    Session 3: MOVE NOW. Emily needs you. Ethan needs his name.
+
+    And she did it. You watched her call Blossom Terrace. Watched her secure the apartment. Watched the momentum catch her and carry her forward.
+
+    Friday she moves into Blossom Terrace.
+    Monday she drives to Portland.
+    Tuesday she meets Ethan.
+    By next weekend, she gives him his Chinese name.
+
+    And she transforms from David's widow into Ethan's 外婆. From echo into matriarch.
+
+    You did that. The cards did that. She did that.
+
+    *This is the work.*
+
+    M. Thorne is proud. You can feel it.
+
+    ---
+
+    Maya Chen is available now. Margaret's granddaughter. Twenty-three. "Struggling with identity stuff."
+
+    When she arrives, she'll say: "My grandmother went to Portland to name my baby cousin. She said you helped her get there. I'm hoping you can help me too."
+
+    New story. New transformation. New sacred work.
+
+@elif session.reading_quality == "helpful":
+    Three sessions with Margaret Chen. Not a perfect arc, but movement.
+
+    She came paralyzed. She's leaving... attempting. Trying. That's something. Maybe she'll make it to Portland. Maybe she'll name Ethan. Maybe she'll transform.
+
+    You gave her what you could. Direction. Support. A little bit of hope.
+
+    Maya might call. Margaret mentioned her. That's a thread. A possibility.
+
+    You're learning. Growing. Each session teaches you.
+
+@else:
+    Margaret is gone. Still uncertain. Still stuck.
+
+    You tried. The cards tried. But sometimes people aren't ready.
+
+    Maybe she'll surprise you. Maybe she'll move anyway. Or maybe not.
+
+    Next client, you'll do better.
+@endif
+
+@py:
+    session.current_client = None
+    reader.sessions_completed += 1
+
+    # Special achievement for completing Chen's full arc via 3B
+    if chen.arc_complete and chen.final_state == "transformed_into_matriarch":
+        reader.achievements.add("chen_arc_complete_crisis_path")
+@endpy
+
+---
+
+**Session 3B Complete**
+
+**Money Earned:** ${reader.money_earned_this_session}
+**Reputation Gained:** +{reader.reputation_gained_this_session}
+**Reading Quality:** {session.reading_quality}
+
+@if chen.gave_gift:
+    **Gift Received:** {chen.gift_description}
+    *(Margaret will return after Portland to reclaim it and report on Ethan's naming)*
+@endif
+
+@if maya.unlocked:
+    **New Client Available:**
+    - Maya Chen (Margaret's granddaughter, 23, struggling with identity)
+@endif
+
++ [Return to the Reader's Table] -> ReaderTable
+
+# ============================================================================
+# END OF CHEN SESSION 3B
+# ============================================================================
