@@ -1,0 +1,2127 @@
+# ============================================================================
+# MARGARET CHEN - SESSION 2: "The Middle Path"
+# ============================================================================
+#
+# UNLOCKS: Requires Chen.Session1 with reading_quality >= "profound"
+# TIME: 2 weeks after Session 1
+# SPREAD: 3-card (Past Action, Present Feeling, Guidance)
+# THEME: Margaret has started to act on her decision. Now she needs help
+#        navigating the emotional and practical complications.
+#
+# ============================================================================
+
+# ============================================================================
+# SESSION START
+# ============================================================================
+
+:: Chen.Session2.Start
+@py:
+# Initialize session-specific tracking
+session = create_session(chen)
+session.interpretation_good = 0
+session.interpretation_okay = 0
+session.interpretation_bad = 0
+session.reversals_handled = 0
+
+# Margaret's state has evolved based on Session 1
+# If she decided to move, she's started the process
+# If she decided to stay, she's made changes to the house
+chen.took_action = chen.clarity >= 8
+chen.feeling_overwhelmed = chance(0.4)
+
+# Session atmosphere tracking
+session.atmosphere = 0
+session.room_energy = 1
+session.weather_intensity = random.choice([1, 2, 3])
+session.time_of_day = random.choice(["afternoon", "morning"])
+
+# Flag tracking
+chen.discussed_grief = False
+chen.discussed_fear = False
+chen.discussed_house = False
+chen.discussed_daughter = False
+chen.mentioned_david_name = False
+
+# Reader brought tea at arrival flag
+reader.brought_tea_at_arrival = False
+@endpy
+
+You're in your reading corner on a {session.time_of_day == "afternoon" ? late afternoon | quiet morning}.
+
+@if session.weather_intensity >= 2:
+    Rain hammers against the window - heavier than last time, almost urgent. The drops race each other down the glass, blurring the world outside.
+@else:
+    Afternoon light slants through the window, warm and golden. Dust motes dance in the beams.
+@endif
+
+Your phone buzzes against the table.
+
+**[Text from: Margaret Chen]**
+*"Hello dear. I'm here again. Same time okay? - M"*
+
+Two weeks since her first reading. You wonder what she's decided - or if she's decided at all.
+
++ [Buzz her in, straighten your reading space] -> Chen.Session2.Arrival
++ [Buzz her in, put the kettle on immediately] -> Chen.Session2.Arrival_Tea
+
+:: Chen.Session2.Arrival
+
+You buzz her in and quickly straighten your reading cloth, checking that the deck is ready. The cards feel warm in your hands.
+
+Footsteps on the stairs - you recognize the rhythm now. Measured. Careful. But maybe... slightly faster than last time?
+
+A knock. Three deliberate taps.
+
+You open the door.
+
++ [See how Margaret is today] -> Chen.Session2.FirstImpression
+
+:: Chen.Session2.Arrival_Tea
+
+~ reader.brought_tea_at_arrival = True
+~ chen.trust += 1
+~ chen.comfort += 2
+~ reader.competence += 1
+
+You buzz her in and immediately fill the kettle. She brought pu-erh last time - this time, you're ready with your own.
+
+The water begins to heat. You set out two cups.
+
+Footsteps on the stairs. Three careful knocks.
+
+You open the door, already gesturing toward the kettle with a smile. "Tea first?"
+
+Margaret's face breaks into a warm smile - the kind that reaches the eyes. "*Wah*. You remember. You pay attention."
+
++ [Welcome her in, feeling the warmth of the moment] -> Chen.Session2.FirstImpression
+
+:: Chen.Session2.FirstImpression
+
+**Margaret Chen** stands in your doorway again.
+
+@if chen.took_action:
+    She looks different. Lighter somehow. Still tired - that hasn't changed - but there's something in her eyes. Purpose maybe. Or relief.
+
+    She's carrying the same thermos and fabric bag, but today she also has a manila folder under one arm. Official documents, you'd guess.
+@else:
+    She looks... the same. Maybe more tired. The weight of indecision still sits in her shoulders like a physical burden.
+
+    Same thermos. Same cloth bag. But her hands are gripping them tighter, knuckles white.
+@endif
+
+"Hello again, {reader.name}."
+
+Her voice is warm, but there's something underneath. Anticipation? Anxiety?
+
++ ["Margaret. It's good to see you. How have you been?"] -> Chen.Session2.HowAreYou
++ ["Come in. You look like you have news."] -> Chen.Session2.ComeIn_Direct
++ ["The cards have been waiting for you."] -> Chen.Session2.ComeIn_Mystical
+
+:: Chen.Session2.HowAreYou
+
+~ reader.empathy += 1
+~ chen.comfort += 1
+
+"Margaret. It's good to see you. How have you been?"
+
+@if chen.took_action:
+    She steps inside, setting down her things carefully - the thermos first, then the folder, then the bag. Everything in its place.
+
+    "Busy. *Aiya*, very busy. I've been... making changes." She says it like someone testing out new words.
+
+    "Good changes?"
+
+    "Scary changes." A small smile crosses her lips. "But yes. Good scary. The kind that means you're alive."
+@else:
+    She steps inside, shoulders sagging slightly as if your doorway gives her permission to stop holding them up.
+
+    "Tired. Still thinking. Too much thinking." She taps her temple. "*Tiu*, always spinning up here. Like a washing machine that won't stop."
+
+    "Still circling the question?"
+
+    "Like a *gwailo* dog chasing his tail." She shakes her head ruefully, but there's a hint of humor there. "Round and round and round. That's why I'm back. Need someone to help me stop spinning."
+@endif
+
++ [Let her settle in, sensing her state] -> Chen.Session2.TeaOrNot
+
+:: Chen.Session2.ComeIn_Direct
+
+~ reader.competence += 1
+
+"Come in. You look like you have news."
+
+@if chen.took_action:
+    Margaret enters, a small laugh escaping - surprised and pleased. "You can see it? I thought I hid it better. My daughter says I have a terrible poker face."
+
+    "You're carrying yourself differently. Taller."
+
+    "*Mm*." She sets down her folder with a decisive thump. "I made a decision. Big decision. Life-changing decision. But now..." She looks at the cards on your table. "Now I need help with the *next* decision."
+@else:
+    Margaret enters, hesitating in the doorway. "I wish I had news. I'm still... stuck. Maybe more stuck than before."
+
+    "The first reading didn't help?"
+
+    "It helped. But helping me see the problem clearly doesn't make the problem easier to solve." She sets down her bag. "Sometimes clarity is worse than confusion. At least confusion has hope in it."
+@endif
+
++ [Gesture to the chair. "Let's talk."] -> Chen.Session2.TeaOrNot
+
+:: Chen.Session2.ComeIn_Mystical
+
+~ session.room_energy += 1
+~ chen.trust += 1
+
+"The cards have been waiting for you."
+
+Margaret pauses in the doorway, looking at your reading corner. The candle. The deck. The cloth. You realize you've been keeping it ready, subconsciously prepared for her return.
+
+"I've been thinking about them. Those cards from last time. Every night before sleep, I see them in my mind." She enters slowly, drawn to the table.
+
+@if chen.took_action:
+    "Which card stayed with you most?"
+
+    She thinks, fingers touching her temple. "The center one. The guidance card. {cards[2].name if 'cards' in locals() else 'The one that showed me the way'}. It kept whispering to me at three in the morning."
+
+    ~ chen.comfort += 1
+@else:
+    "Which card haunted you?"
+
+    She shivers slightly, pulling her cardigan tighter. "The fear card. The one that knew my secrets. I see it when I can't sleep, when the house is too quiet."
+@endif
+
++ [Nod, acknowledging her connection] -> Chen.Session2.TeaOrNot
+
+:: Chen.Session2.TeaOrNot
+
+@if reader.brought_tea_at_arrival:
+    The kettle begins to whistle - perfect timing, as if it knew you'd need it now.
+
+    Margaret notices. Turns to look at you. "You made tea. For me."
+
+    "I remembered. You brought pu-erh last time."
+
+    "This is why M. Thorne recommended you. You pay attention to things. Small things. The things that matter." She settles into the chair, accepting the mug you pour with both hands, the traditional gesture of respect.
+
+    ~ chen.trust += 2
+    ~ chen.comfort += 2
+
+    + [With the tea poured, it's time to begin] -> Chen.Session2.TheNews
+@else:
+    "Tea?" you offer, gesturing toward your kettle.
+
+    + ["I bought some pu-erh. Nothing fancy, but—"] -> Chen.Session2.Tea_Remembered
+    + ["I have green tea, if you'd like?"] -> Chen.Session2.Tea_Offered
+    + ["Let's get right to the cards."] -> Chen.Session2.Skip_Tea
+@endif
+
+:: Chen.Session2.Tea_Remembered
+
+~ chen.trust += 2
+~ chen.comfort += 2
+~ reader.competence += 1
+
+"I bought some pu-erh. Nothing fancy, but—"
+
+"*Wah*! You bought pu-erh?" Margaret lights up like you've given her a gift. "Show me. Show me what you got."
+
+You produce the small tin - from the Asian grocery, not the expensive tea shop. She opens it, sniffs, nods approvingly with the air of a connoisseur.
+
+"Good choice. Not too young, not too old. Seven, eight years maybe." She looks at you with new respect. "You researched this."
+
+"I asked the shop owner what a Chinese grandmother would approve of."
+
+Margaret laughs - a real, full laugh that fills the room. "Smart. Very smart. Who did you talk to? Was it Mrs. Wu? She knows her tea."
+
+She helps you prepare it, correcting your water temperature with gentle authority. "Not boiling. Just before boiling. See the small bubbles? *Siu hauh*. Perfect. Now you pour..."
+
+The ritual settles you both. Steam rises between you like incense.
+
++ [With the tea poured, it's time to begin] -> Chen.Session2.TheNews
+
+:: Chen.Session2.Tea_Offered
+~ chen.comfort += 1
+
+"I have green tea, if you'd like?"
+
+"Green tea is fine. Good for afternoon." She settles into the chair, arranging herself with practiced ease.
+
+You prepare it simply. She accepts the mug with both hands, the gesture automatic.
+
+"Thank you."
+
++ [Hand her the warm mug, offering simple comfort] -> Chen.Session2.TheNews
+
+:: Chen.Session2.Skip_Tea
+"Let's get right to the cards."
+
+Margaret nods, setting down her things. "Yes. Okay. I came for the cards."
+
+But you notice her glance at your kettle. Next time, you'll remember.
+
++ [Acknowledge her focus and turn to the cards.] -> Chen.Session2.TheNews
+
+:: Chen.Session2.TheNews
+
+@if chen.took_action:
+    Margaret settles into her chair, hands wrapped around her tea. The folder sits on her lap like a sleeping cat.
+
+    "I did it. After our last reading, I... I started the process." She opens the folder, shows you paperwork. "I put the house on the market."
+
+    ~ chen.discussed_house = True
+
+    + ["That must have been terrifying."] -> Chen.Session2.News_Empathy_Move
+    + ["How does it feel?"] -> Chen.Session2.News_Feeling_Move
+    + ["What made you finally decide?"] -> Chen.Session2.News_Decision_Move
+@else:
+    Margaret looks into her tea like it might have answers.
+
+    "I thought after last time, I would know. Would feel clear. But it's been two weeks and I'm still..." She makes a circling gesture with one hand. "Stuck in the same loop."
+
+    + ["What's keeping you stuck?"] -> Chen.Session2.News_Stuck_Question
+    + ["Sometimes big decisions need more than clarity."] -> Chen.Session2.News_Reassurance
+    + ["The cards showed you the truth. You have to choose to act on it."] -> Chen.Session2.News_Direct_Push
+@endif
+
+:: Chen.Session2.News_Empathy_Move
+
+~ reader.empathy += 2
+~ chen.comfort += 2
+
+"That must have been terrifying."
+
+Margaret's eyes well up. She doesn't try to hide it. "Terrifying. Yes. That's the exact word."
+
+She pulls out a tissue - she came prepared this time. "I called the real estate agent at two in the morning. Left a voicemail because I couldn't do it when someone might answer. Then I couldn't sleep, thinking maybe they wouldn't call back. Maybe it was a sign."
+
+"But they did."
+
+"They did. Next morning, bright and early. *'Mrs. Chen, we've been waiting for you to call.'* Like they knew." She laughs, wiping her eyes. "Two weeks ago, they came to take photos. Photographer made me clean everything. Hide David's slippers."
+
+~ chen.mentioned_david_name = True
+
+"That must have been hard."
+
+"I put them in my closet. They're still there. Can't get rid of them yet."
+
++ [Hold space for her grief. This is a sacred, painful detail.] -> Chen.Session2.Why_Now
+
+:: Chen.Session2.News_Feeling_Move
+
+~ reader.empathy += 1
+
+"How does it feel?"
+
+Margaret thinks. "Like jumping off a cliff and growing wings on the way down. Or maybe not wings. Maybe just... deciding that falling is also movement."
+
+She touches the folder. "The house listing goes live Monday. Agent says it'll sell fast. Three bedroom, good neighborhood, original hardwood floors. They kept saying that - 'original hardwood floors' - like David and I didn't walk on them for forty years."
+
+~ chen.mentioned_david_name = True
+
++ [Let her powerful words settle. "Falling is also movement."] -> Chen.Session2.Why_Now
+
+:: Chen.Session2.News_Decision_Move
+
+~ reader.competence += 1
+
+"What made you finally decide?"
+
+Margaret looks at your cards. "You'll laugh."
+
+"I won't."
+
+"It was silly. But... three days after I saw you, I went to visit the co-housing place. Blossom Terrace. My daughter kept asking me to just look, so I went." She smiles. "There was a woman there. Older than me. Maybe seventy-five. And she was... she was *laughing*. Really laughing, with friends, over lunch in the common area."
+
+"And?"
+
+"And I realized I haven't laughed like that in two years. Not since David."
+
+~ chen.mentioned_david_name = True
+
++ ["So that's what made the choice... a person."] -> Chen.Session2.Why_Now
+
+:: Chen.Session2.News_Stuck_Question
+
+~ reader.empathy += 1
+
+"What's keeping you stuck?"
+
+"Fear, mostly." She says it simply, like admitting the weather. "Fear of making the wrong choice. Fear of making the *right* choice and it still being hard. Fear of..." She trails off.
+
+"Fear of what?"
+
+"Fear of David being disappointed in me."
+
+~ chen.mentioned_david_name = True
+~ chen.discussed_fear = True
+
++ ["David would want you to be happy."] -> Chen.Session2.Stuck_David_Comfort
++ ["What do you think David would actually say?"] -> Chen.Session2.Stuck_David_Realistic
++ ["This isn't about David. It's about you."] -> Chen.Session2.Stuck_David_Tough
+
+:: Chen.Session2.News_Reassurance
+
+~ reader.empathy += 1
+
+"Sometimes big decisions need more than clarity. They need courage too."
+
+Margaret nods. "My daughter says the same thing. She's been very patient. More patient than I deserve."
+
+"What does she want you to do?"
+
+"Move to the co-housing. Be closer. Be safe. Stop being so *ging gai*." She smiles slightly. "That's stubborn. I'm very stubborn."
+
+~ chen.discussed_daughter = True
+
++ [Listen. This dynamic with her daughter is key.] -> Chen.Session2.Stuck_Continue
+
+:: Chen.Session2.News_Direct_Push
+
+~ reader.competence += 1
+~ chen.comfort -= 1
+
+"The cards showed you the truth. You have to choose to act on it."
+
+Margaret flinches slightly, but nods. "You're right. I know you're right. It's just..."
+
+"Just what?"
+
+"Just that knowing and doing are different things. My head knows. My heart is slower."
+
++ [Soften. She's right. Knowing and doing are different worlds.] -> Chen.Session2.Stuck_Continue
+
+:: Chen.Session2.Stuck_David_Comfort
+
+~ reader.empathy += 1
+~ chen.comfort += 1
+
+"David would want you to be happy."
+
+Margaret smiles sadly. "Everyone says that. My daughter says that. The grief counselor said that. But how do they know? How does anyone know what a dead man wants?"
+
+The bluntness is startling. But honest.
+
++ [Accept her sharp, honest correction. She's right.] -> Chen.Session2.Stuck_Continue
+
+:: Chen.Session2.Stuck_David_Realistic
+
+~ reader.empathy += 2
+~ reader.competence += 1
+~ chen.trust += 2
+
+"What do you think David would actually say?"
+
+Margaret stops. Really thinks about it.
+
+"He'd probably tell me I'm being dramatic. He'd say *'Margaret, you're making it harder than it needs to be.'* He was practical that way." She smiles, tears on her cheeks. "He'd tell me to visit the damn co-housing and stop overthinking."
+
+~ chen.discussed_david = True
+
++ [Watch as she finds a clearer memory of him. This feels true.] -> Chen.Session2.Stuck_Continue
+
+:: Chen.Session2.Stuck_David_Tough
+
+~ reader.directness += 1
+~ chen.comfort -= 1
+~ chen.clarity += 2
+
+"This isn't about David. It's about you."
+
+Margaret goes still. For a moment, you wonder if you've pushed too hard.
+
+Then she laughs - short and sharp. "You sound like my daughter. She said the exact same thing last week."
+
+"Is she right?"
+
+"*Diu*. Yes. She's right. You're right. But it's easier to make it about David than to admit I'm afraid for myself."
+
+~ chen.discussed_fear = True
+
++ [This is the real fear. The one under everything else.] -> Chen.Session2.Stuck_Continue
+
+:: Chen.Session2.Stuck_Continue
+
+A moment of silence. The rain (or sunshine) continues outside.
+
+"That's why I came back. I need help seeing past the fear."
+
++ ["Then that's what we'll ask the cards to help with."] -> Chen.Session2.Why_Now
+
+:: Chen.Session2.Why_Now
+
+@if chen.took_action:
+    "So the house will sell. And then I have three months until Blossom Terrace is ready." She looks at you. "Three months where I'll have nowhere to live. Nowhere permanent."
+
+    "That sounds liminal. In-between."
+
+    "My daughter offered to let me stay with them. But she's eight months pregnant. I don't want to be in the way when the baby comes." She touches her tea. "I need guidance for this in-between time. How to... how to be unrooted without feeling lost."
+@else:
+    "I need to decide. Soon. My daughter's baby is due in three months. I can't still be frozen then. I need to be able to help her. Be present. Not trapped in my own mind."
+
+    ~ chen.discussed_daughter = True
+
+    "So you need the cards to help you move forward."
+
+    "Yes."
+@endif
+
++ ["Let's draw the cards."] -> Chen.Session2.PrepareCards
+
+:: Chen.Session2.PrepareCards
+
+You clear the space between you. Your reading cloth spreads like an altar.
+
+Margaret watches, hands folded, as you take out the deck. The cards feel charged today - more alert than usual.
+
+"Three cards again?" she asks.
+
+"Three cards. But different positions this time."
+
+@if chen.took_action:
+    "Position one: Past Action - the brave thing you did. Position two: Present Feeling - where you are now, emotionally. Position three: Guidance - what you need for this in-between time."
+@else:
+    "Position one: Past Block - what's been keeping you stuck. Position two: Present Feeling - what that stuckness is protecting. Position three: Guidance - how to finally move."
+@endif
+
+Margaret nods slowly. "Okay. I'm ready."
+
++ [Shuffle the deck] -> Chen.Session2.Shuffle
+
+:: Chen.Session2.Shuffle
+@py:
+# Draw the spread
+# Using a pool that makes narrative sense for Margaret's situation
+# More sophisticated draw weighted by chen's state
+if chen.took_action:
+    past_deck = Deck(cards=["Eight of Wands"], reversals=[0.5])
+else:
+    past_deck = Deck(cards=["Four of Swords", "Two of Swords"], reversals=[1, 0])
+
+# Present is grief-focused for both paths but can vary
+present_deck = Deck(cards=["Five of Cups", "The Star", "Nine of Pentacles"])
+
+# Guidance varies by past
+guidance_deck = Deck(cards=["Temperance", "The Fool", "Six of Swords"])
+
+reading = Reading(spread_id="past-present-future", decks=[past_deck, present_deck, guidance_deck])
+cards = reading.draw_cards()
+@endpy
+
+Your hands move through the familiar motions. Shuffle. Cut. Shuffle again.
+
+Margaret watches intently. You can feel her attention like a weight.
+
+Three cards. You lay them face-down in a row.
+
+@if chen.took_action:
+    Past Action. Present Feeling. Guidance.
+@else:
+    Past Block. Present Feeling. Guidance.
+@endif
+
+@render render_reading(reading=reading)
+
++ [Turn over the first card] -> Chen.Session2.Position1_Hub
+
+# ============================================================================
+# POSITION 1: PAST (Action or Block)
+# ============================================================================
+
+:: Chen.Session2.Position1_Hub
+@render render_reading(reading=reading)
+**Position 1: {chen.took_action ? Past Action | Past Block}**
+
+@if cards[0].name == "Eight of Wands":
+    -> Chen.Session2.EightWands_Interpret
+@elif cards[0].name == "Four of Swords":
+    -> Chen.Session2.FourSwords_Interpret
+@else:
+    # Two of Swords
+    -> Chen.Session2.TwoSwords_Interpret
+@endif
+
+:: Chen.Session2.EightWands_Interpret
+@render render_reading(reading=reading)
+@if cards[0].reversed:
+    The **Eight of Wands - Reversed**.
+
+    Eight wands suspended in air - frozen mid-flight. They should be moving, swift as arrows, but something has stopped them. Hesitation. Fear. The paralysis before action.
+@else:
+    The **Eight of Wands**.
+
+    Eight wands flying through the air like arrows, swift and sure. No obstacles. Pure forward momentum. The card of decisive action, of finally moving after long stillness.
+@endif
+
+// DEBUG -- weird highlighting starts here
+Margaret stares at it. <>
+
+@if cards[0].reversed:
+    "That's... that's me before."
+@else:
+    "That's what it felt like."
+@endif
+
++ {reader.style == "intuitive"} ["You broke free. You chose movement even though you were terrified."] -> Chen.Session2.EightWands_Intuitive_Good
++ ["Eight of Wands represents swift action and forward momentum{cards[0].reversed ? , but reversed shows hesitation or delays | }."] -> Chen.Session2.EightWands_Analytical_Okay
++ ["This is the speed card. Things are moving fast{cards[0].reversed ? , or they should be | }."] -> Chen.Session2.EightWands_Generic_Bad
++ {reader.empathy >= 5} ["After two years of stillness, you finally let yourself fly."] -> Chen.Session2.EightWands_Empathetic_Good
+
+:: Chen.Session2.EightWands_Intuitive_Good
+@py:
+session.interpretation_good += 1
+if cards[0].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 1
+~ chen.trust += 1
+
+@if cards[0].reversed:
+    "The reversed Eight of Wands," you say gently. "This is you frozen. All those wands in the air, but you couldn't release them. You wanted to move, but fear held you paralyzed."
+
+    @if chen.took_action:
+        "But that was *before*. Now you've turned this card upright in your life."
+
+        Margaret nods, tears starting. "Yes."
+    @else:
+        "And you're still there. Still holding those wands, afraid to let them fly."
+
+        "How do I let go?"
+
+        "That's what the guidance card will show."
+    @endif
+@else:
+    "You broke free," you say quietly. "Look at these wands - nothing stops them. That's you. You chose movement even though you were terrified."
+
+    @if chen.mentioned_david_name:
+        "After David, you were frozen for two years. And then something inside you said *enough*. You called the realtor. You let yourself fly forward."
+    @else:
+        "After grief kept you frozen, you chose to move anyway. That takes enormous courage."
+    @endif
+
+    Margaret wipes her eyes. "It doesn't feel courageous. It feels reckless."
+
+    "Courage and recklessness look the same from the inside. The difference is whether you're running from something or toward something."
+
+    "Which am I doing?"
+
+    "Which do you think?"
+
+    She's quiet. "Both, maybe."
+@endif
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.EightWands_Analytical_Okay
+@py:
+session.interpretation_okay += 1
+if cards[0].reversed:
+    session.reversals_handled += 1
+@endpy
+
+@if cards[0].reversed:
+    "Eight of Wands reversed represents delays, hesitation, or resistance to necessary movement. The wands are in the air but frozen - action that hasn't been taken yet."
+
+    @if chen.took_action:
+        "This shows where you were before - stuck in the in-between of wanting to act but not being able to."
+    @else:
+        "This shows where you are now - caught between knowing what you should do and actually doing it."
+    @endif
+@else:
+    "Eight of Wands represents swift action and forward momentum. When this card appears in the past position, it shows decisive movement, often after a period of stagnation."
+
+    @if chen.took_action:
+        "This represents your choice to list the house. You moved quickly once you finally made the decision."
+    @else:
+        "This suggests there was a moment of clarity where you almost moved forward - but something stopped you."
+    @endif
+@endif
+
+Margaret nods thoughtfully. "That makes sense."
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.EightWands_Generic_Bad
+
+@py:
+session.interpretation_bad += 1
+@endpy
+
+"This is the speed card. Things are moving fast{cards[0].reversed ? , or they should be | }."
+
+Margaret looks at you expectantly, waiting for more.
+
+You feel like you should say something deeper, but the words don't come. "It's... about momentum."
+
+"I see." She doesn't look particularly enlightened.
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.EightWands_Empathetic_Good
+
+@py:
+session.interpretation_good += 1
+if cards[0].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 1
+~ chen.comfort += 2
+
+@if cards[0].reversed:
+    "After two years of stillness, you wanted to move but couldn't," you say softly. "This card reversed - it's the moment before the arrow leaves the bow. All tension, no release."
+
+    "That's exactly how it feels."
+
+    "The wands are already in the air, Margaret. You're closer than you think."
+@else:
+    "After two years of stillness, you finally let yourself fly."
+
+    Your words hang in the air. Margaret's face crumples.
+
+    "I didn't think it would feel so good and so terrible at the same time."
+
+    "Movement always does. Especially movement that matters."
+@endif
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.FourSwords_Interpret
+@render render_reading(reading=reading)
+@if cards[0].reversed:
+    The **Four of Swords - Reversed**.
+
+    A figure lies on a tomb - but their eyes are opening. Rest that has lasted too long. The awakening from necessary hibernation. It's time to rise.
+@else:
+    The **Four of Swords**.
+
+    A figure lies in repose, three swords mounted above, one beneath. Rest. Retreat. Necessary stillness. But there's a thin line between healing rest and fearful hiding.
+@endif
+
++ {reader.style == "intuitive"} ["You've been resting in grief. Maybe for too long."] -> Chen.Session2.FourSwords_Intuitive_Good
++ ["Four of Swords represents rest and recuperation{cards[0].reversed ? , but reversed indicates it's time to re-engage | }."] -> Chen.Session2.FourSwords_Analytical_Okay
++ ["This is the rest card. You've been taking a break."] -> Chen.Session2.FourSwords_Generic_Bad
++ {reader.empathy >= 5} ["After David, you needed to retreat. To rebuild yourself in quiet."] -> Chen.Session2.FourSwords_Empathetic_Good
+
+:: Chen.Session2.FourSwords_Intuitive_Good
+
+@py:
+session.interpretation_good += 1
+if cards[0].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 1
+~ chen.trust += 1
+
+@if cards[0].reversed:
+    "Four of Swords reversed. You've been resting - or hiding - and now you're waking up. The figure's eyes are opening. You can't stay on this tomb forever."
+
+    Margaret nods slowly. "I told myself I needed time. Needed to heal."
+
+    "And you did. But grief can become comfortable if we're not careful. A place to hide instead of a place to heal."
+
+    ~ chen.discussed_grief = True
+@else:
+    "You've been resting in grief," you say gently. "Maybe for too long. This card in your past shows necessary retreat - but there's a line between healing stillness and fearful stagnation."
+
+    @if chen.took_action:
+        "You were stuck here. In the house, with David's slippers, with forty years of memories. Resting was right at first. But it became a prison."
+
+        ~ chen.mentioned_david_name = True
+    @else:
+        "And you're still there. Still lying in state, surrounded by swords of memory. It was necessary once. Is it still?"
+    @endif
+
+    ~ chen.discussed_grief = True
+@endif
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.FourSwords_Analytical_Okay
+
+@py:
+session.interpretation_okay += 1
+if cards[0].reversed:
+    session.reversals_handled += 1
+@endpy
+
+@if cards[0].reversed:
+    "Four of Swords reversed indicates it's time to end a period of rest or retreat. The recuperation has lasted long enough - now it's time to re-engage with the world."
+
+    "This shows you're ready to move from stillness to action, even if you don't feel ready."
+@else:
+    "Four of Swords represents rest, recuperation, and retreat from the world. In the past position, this shows a period of withdrawal - often necessary after trauma or loss."
+
+    @if chen.took_action:
+        "This represents the two years you spent in the house after your husband passed. A period of necessary stillness."
+    @else:
+        "This represents where you've been - withdrawn, resting, perhaps avoiding."
+    @endif
+@endif
+
+Margaret considers this. "I suppose that's true."
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.FourSwords_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+
+"This is the rest card. You've been taking a break{cards[0].reversed ? , but now you need to get up | }."
+
+Margaret waits for you to elaborate.
+
+You struggle to find more to say. "It's... about needing time to yourself."
+
+She nods politely, but you can see the disappointment.
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.FourSwords_Empathetic_Good
+
+@py:
+session.interpretation_good += 1
+if cards[0].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 1
+
+@if cards[0].reversed:
+    "After David, you needed to retreat. To rebuild yourself in quiet." You touch the card gently. "But reversed, this card says: you've rested enough. The tomb is becoming a cage."
+
+    ~ chen.mentioned_david_name = True
+    ~ chen.discussed_grief = True
+
+    Margaret's breath catches. "I don't know how to leave it."
+
+    "The guidance card will show you."
+@else:
+    "After David, you needed to retreat. To rebuild yourself in quiet." Your voice is soft. "This card shows that retreat. That necessary, sacred stillness after loss."
+
+    ~ chen.mentioned_david_name = True
+    ~ chen.discussed_grief = True
+
+    "But I'm still there."
+
+    "I know."
+@endif
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.TwoSwords_Interpret
+@render render_reading(reading=reading)
+@if cards[0].reversed:
+    The **Two of Swords - Reversed**.
+
+    A blindfolded figure holds two swords crossed over her heart - but the blindfold is slipping. The stalemate is breaking. A choice is being made, or about to be made.
+@else:
+    The **Two of Swords**.
+
+    A blindfolded figure sits with two swords crossed over her heart. Balanced but frozen. Equal weights on a scale that won't tip. The paralysis of perfect equilibrium.
+@endif
+
+Margaret goes very still. "That's me."
+
++ {reader.style == "intuitive"} ["You've been trapped between two equal choices, unable to see clearly."] -> Chen.Session2.TwoSwords_Intuitive_Good
++ ["Two of Swords represents difficult decisions and stalemate{cards[0].reversed ? , but reversed shows the deadlock breaking | }."] -> Chen.Session2.TwoSwords_Analytical_Okay
++ ["This is the indecision card. You couldn't choose."] -> Chen.Session2.TwoSwords_Generic_Bad
++ {reader.empathy >= 5} ["Both options seemed equally right and equally wrong. So you chose neither."] -> Chen.Session2.TwoSwords_Empathetic_Good
+
+:: Chen.Session2.TwoSwords_Intuitive_Good
+
+@py:
+session.interpretation_good += 1
+if cards[0].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 1
+~ chen.trust += 1
+
+@if cards[0].reversed:
+    "The blindfold is slipping," you say. "Look - she's about to see. The Two of Swords reversed means the deadlock is breaking. You're close to choosing."
+
+    @if chen.took_action:
+        "And you did choose. This is you finally lowering one sword and letting yourself see the path forward."
+
+        Margaret nods, tears streaming. "I chose the co-housing. I chose my daughter. I chose living."
+
+        ~ chen.discussed_daughter = True
+    @else:
+        "But you haven't lowered the swords yet. You're still sitting there, blindfolded, holding both options at arm's length."
+
+        "What if I choose wrong?"
+
+        "What if you don't choose at all?"
+    @endif
+@else:
+    "You've been trapped between two equal choices," you say quietly. "Look at her - perfectly balanced, perfectly frozen. Both swords the same weight. And the blindfold means you can't see clearly enough to choose."
+
+    "Stay in the house or leave. Keep David's memory close or let it go. Be independent or accept help." Margaret lists them like charges. "Every choice felt like betrayal."
+
+    ~ chen.discussed_fear = True
+    ~ chen.mentioned_david_name = True
+
+    "So you chose neither. You chose this frozen moment."
+@endif
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.TwoSwords_Analytical_Okay
+
+@py:
+session.interpretation_okay += 1
+if cards[0].reversed:
+    session.reversals_handled += 1
+@endpy
+
+@if cards[0].reversed:
+    "Two of Swords reversed indicates a stalemate breaking. A difficult decision that has kept you frozen is finally resolving. The blindfold is coming off."
+
+    @if chen.took_action:
+        "This represents your recent choice to move forward with listing the house."
+    @else:
+        "This suggests you're on the edge of making a decision, even if it doesn't feel that way yet."
+    @endif
+@else:
+    "Two of Swords represents difficult decisions and stalemate. A situation where two options seem equally weighted, creating paralysis. The blindfold represents inability to see clearly."
+
+    "This shows your indecision between staying in your house or moving to co-housing. The equal weight of both options has kept you frozen."
+@endif
+
+Margaret nods. "That sounds right."
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.TwoSwords_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+
+"This is the indecision card. You couldn't choose{cards[0].reversed ? , but now you're making a choice | }."
+
+Margaret looks at you, waiting for more insight.
+
+You fumble. "It's about... being stuck between options."
+
+The reading feels flat. You can see it in her face.
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+:: Chen.Session2.TwoSwords_Empathetic_Good
+
+@py:
+session.interpretation_good += 1
+if cards[0].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 1
+~ chen.comfort += 1
+
+@if cards[0].reversed:
+    "Both options seemed equally right and equally wrong," you say softly. "The house has David's ghost. The co-housing has your future. How do you choose between ghost and future?"
+
+    ~ chen.mentioned_david_name = True
+
+    "But reversed, this card says: you're choosing. The blindfold is slipping. The swords are lowering."
+
+    @if chen.took_action:
+        Margaret wipes her eyes. "I chose future. I hope that's not a betrayal."
+
+        "It's not."
+    @else:
+        "Am I? It doesn't feel like I'm choosing."
+
+        "You're here. That's the beginning of choosing."
+    @endif
+@else:
+    "Both options seemed equally right and equally wrong. So you chose neither."
+
+    The words land like a diagnosis. Margaret looks at the card, at the blindfolded figure, and sees herself.
+
+    "How do I stop being her?"
+
+    "First you have to take off the blindfold. Even if what you see is scary."
+@endif
+
++ [Continue to the second card] -> Chen.Session2.Position2_Hub
+
+# ============================================================================
+# POSITION 2: PRESENT FEELING
+# ============================================================================
+
+:: Chen.Session2.Position2_Hub
+
+**Position 2: Present Feeling**
+@render render_reading(reading=reading)
+You turn over the second card.
+
+@if cards[1].name == "Five of Cups":
+    -> Chen.Session2.FiveCups_Interpret
+@elif cards[1].name == "The Star":
+    -> Chen.Session2.Star_Interpret
+@else:
+    # Nine of Pentacles
+    -> Chen.Session2.NinePentacles_Interpret
+@endif
+
+:: Chen.Session2.FiveCups_Interpret
+
+@if cards[1].reversed:
+    The **Five of Cups - Reversed**.
+
+    The figure begins to turn. The three spilled cups remain, yes - grief doesn't vanish. But the two standing cups become visible. Acceptance emerging from loss.
+@else:
+    The **Five of Cups**.
+
+    A cloaked figure stands before three spilled cups, consumed by what's been lost. Behind them - unseen - two cups still stand full. A bridge leads forward. Grief is real, but so is what remains.
+@endif
+
++ {reader.style == "intuitive"} ["You're drowning in what you've lost. You can't see what you still have."] -> Chen.Session2.FiveCups_Intuitive_Good
++ ["Five of Cups represents grief and focusing on loss{cards[1].reversed ? , but reversed shows beginning to move past it | }."] -> Chen.Session2.FiveCups_Analytical_Okay
++ ["This is the grief card. You're sad."] -> Chen.Session2.FiveCups_Generic_Bad
++ {reader.empathy >= 5} ["Three cups spilled, two still standing. The math of grief: loss is always louder than what remains."] -> Chen.Session2.FiveCups_Poetic_Good
+
+:: Chen.Session2.FiveCups_Intuitive_Good
+
+@py:
+session.interpretation_good += 1
+if cards[1].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 1
+~ chen.trust += 1
+
+@if cards[1].reversed:
+    "You're beginning to turn around," you say gently. "Not fully. Not easily. But reversed Five of Cups means you're *starting* to see the two standing cups. Starting to notice what's still possible, not just what's gone."
+
+    @if chen.took_action:
+        "The co-housing. Your grandchild coming. Your daughter wanting you near. Those are the standing cups."
+
+        ~ chen.discussed_daughter = True
+    @else:
+        "Your health. Your mind. Your ability to still choose. Those are standing cups. You can't see them yet while you're staring at David's slippers, but they're there."
+
+        ~ chen.mentioned_david_name = True
+    @endif
+@else:
+    "You're drowning in what you've lost," you say quietly. "David. The house as it was. Forty years of marriage. The identity of being David's wife. You're staring at the spilled cups and you can't see anything else."
+
+    ~ chen.mentioned_david_name = True
+    ~ chen.discussed_grief = True
+
+    Margaret nods, tears streaming freely now. She doesn't try to hide them.
+
+    "But behind you - unseen - two cups still stand. A bridge leads forward. You haven't lost *everything*. It just feels like you have."
+@endif
+
+~ chen.discussed_grief = True
+
+"How do I turn around?"
+
++ ["That's what the guidance card will show."] -> Chen.Session2.Position3_Hub
++ ["You turn around by choosing to. One degree at a time."] -> Chen.Session2.FiveCups_TurnAround
+
+:: Chen.Session2.FiveCups_TurnAround
+
+~ reader.empathy += 1
+~ chen.clarity += 1
+
+"You turn around by choosing to. One degree at a time."
+
+"Is it that simple?"
+
+"It's that hard. But yes - that simple too."
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.FiveCups_Analytical_Okay
+
+@py:
+session.interpretation_okay += 1
+if cards[1].reversed:
+    session.reversals_handled += 1
+@endpy
+
+@if cards[1].reversed:
+    "Five of Cups reversed represents beginning to move past grief or loss. While you can still see what's been lost, you're starting to acknowledge what remains. The worst of the mourning is passing."
+@else:
+    "Five of Cups represents grief and focusing on loss rather than what remains. The figure in the card is so consumed by the three spilled cups that they can't see the two cups still standing behind them, or the bridge that leads forward."
+@endif
+
+@if chen.took_action:
+    "Even though you made the brave choice to move forward, you're still carrying grief about leaving the house. That's normal."
+@else:
+    "This shows your present emotional state - grieving what you've lost makes it hard to see new possibilities."
+@endif
+
+Margaret wipes her eyes. "Yes. That's where I am."
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.FiveCups_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+
+"This is the grief card. You're sad{cards[1].reversed ? , but getting better | }."
+
+Margaret waits for more. You can see the expectation in her eyes.
+
+"It's about... loss. Feeling loss."
+
+The interpretation feels hollow. You're stating the obvious without adding insight.
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.FiveCups_Poetic_Good
+
+@py:
+session.interpretation_good += 1
+if cards[1].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 1
+~ chen.comfort += 1
+
+@if cards[1].reversed:
+    "Three cups spilled, two still standing. But reversed, you're finally turning to look at the standing ones."
+
+    You lean forward. "Grief has volume. It's loud. It drowns out everything else. The math of grief is that three spilled cups are louder than two full ones. But you're starting to hear the full cups too."
+@else:
+    "Three cups spilled, two still standing. The math of grief: loss is always louder than what remains."
+
+    Margaret makes a small sound - recognition, pain, truth.
+
+    "You can lose forty years and keep sixty years to live, and the forty will still be louder. That's not wrong. That's human."
+@endif
+
+~ chen.discussed_grief = True
+
+"Will it always be this loud?"
+
+"No. But it will always be *there*. The trick is learning to hear the standing cups too."
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.Star_Interpret
+@render render_reading(reading=reading)
+@if cards[1].reversed:
+    The **Star - Reversed**.
+
+    A woman kneels by water, pouring from vessels - but the water doesn't flow right. The star above dims. Hope struggling. Faith shaken. The light is there, but you can't quite see it.
+@else:
+    The **Star**.
+
+    A woman kneels by water, naked and unashamed, pouring from two vessels. Above her, a brilliant star. Hope. Faith. Renewal after devastation. The knowledge that healing is possible.
+@endif
+
++ {reader.style == "intuitive"} ["You're holding onto hope, even if it feels fragile."] -> Chen.Session2.Star_Intuitive_Good
++ ["The Star represents hope and renewal{cards[1].reversed ? , but reversed indicates struggling to believe in better days | }."] -> Chen.Session2.Star_Analytical_Okay
++ ["This is the hope card. You're feeling hopeful{cards[1].reversed ? , or you're not | }."] -> Chen.Session2.Star_Generic_Bad
++ {reader.empathy >= 5} ["After everything, you're still reaching for light. That's remarkable."] -> Chen.Session2.Star_Empathetic_Good
+
+:: Chen.Session2.Star_Intuitive_Good
+
+@py:
+session.interpretation_good += 1
+if cards[1].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 1
+~ chen.trust += 1
+
+@if cards[1].reversed:
+    "The Star reversed. You're trying to hold onto hope, but it keeps slipping through your fingers."
+
+    @if chen.took_action:
+        "You made the brave choice, but now you're scared you made the wrong one. The star is there, but you can't quite see it clearly."
+    @else:
+        "You want to believe things can get better, but grief and fear keep dimming the light. You can't trust it."
+    @endif
+
+    ~ chen.discussed_fear = True
+@else:
+    "You're holding onto hope," you say warmly. "Even if it feels fragile. The Star after such loss - that's powerful, Margaret. That's you refusing to give up."
+
+    @if chen.took_action:
+        "You chose to move forward. That choice came from hope - hope that life could still have brightness in it."
+    @else:
+        "You came here today. That's an act of hope. You're looking for guidance because you believe it's possible to move forward."
+    @endif
+@endif
+
+Margaret smiles through tears. "Sometimes I feel it. Sometimes I don't."
+
+"That's how hope works. It's not constant. It comes and goes like breathing."
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.Star_Analytical_Okay
+
+@py:
+session.interpretation_okay += 1
+if cards[1].reversed:
+    session.reversals_handled += 1
+@endpy
+
+@if cards[1].reversed:
+    "The Star reversed indicates struggling with hope or faith. You want to believe in better possibilities, but it's difficult. The light is there, but you can't quite connect with it."
+@else:
+    "The Star represents hope, faith, and renewal. It often appears after periods of difficulty, indicating that healing is possible and that you're ready to believe in better days ahead."
+@endif
+
+@if chen.took_action:
+    "Despite your grief, you're holding onto hope about the co-housing and being near your daughter."
+
+    ~ chen.discussed_daughter = True
+@else:
+    "This shows you haven't completely lost hope - you're still open to the possibility of things improving."
+@endif
+
+Margaret nods. "Yes, I suppose that's true."
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.Star_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+
+"This is the hope card. You're feeling hopeful{cards[1].reversed ? . Or maybe you're not. It's a bit unclear | }."
+
+Margaret waits, but you don't have much more to offer.
+
+"It's a... positive card. Usually."
+
+She looks disappointed.
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.Star_Empathetic_Good
+
+@py:
+session.interpretation_good += 1
+if cards[1].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 1
+~ chen.comfort += 2
+
+@if cards[1].reversed:
+    "After everything - after loss, after grief, after fear - you're *still* reaching for light. Even reversed, with the star dimmed, you're still reaching."
+
+    "That doesn't feel remarkable. It feels desperate."
+
+    "Desperate and remarkable aren't opposites. Sometimes they're the same thing."
+@else:
+    "After everything - after David, after two years of grief, after such enormous loss - you're still reaching for light. That's remarkable, Margaret."
+
+    ~ chen.mentioned_david_name = True
+
+    Margaret shakes her head. "I don't feel remarkable. I feel tired."
+
+    "Hope when you're tired *is* remarkable. Easy hope costs nothing. This hope? This costs everything and you're paying it anyway."
+@endif
+
+She cries quietly. You give her space.
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.NinePentacles_Interpret
+@render render_reading(reading=reading)
+@if cards[1].reversed:
+    The **Nine of Pentacles - Reversed**.
+
+    A woman stands in her garden, surrounded by abundance - but reversed, the garden feels like a cage. Independence that has become isolation. Self-sufficiency that has become loneliness.
+@else:
+    The **Nine of Pentacles**.
+
+    A woman stands alone in a garden, surrounded by fruit and flowers. A falcon perches on her gloved hand. Independence. Self-sufficiency. But there's a question: is she alone by choice, or simply alone?
+@endif
+
++ {reader.style == "intuitive"} ["You've been independent so long, you've forgotten how to let people help you."] -> Chen.Session2.NinePentacles_Intuitive_Good
++ ["Nine of Pentacles represents independence and self-sufficiency{cards[1].reversed ? , but reversed can indicate isolation | }."] -> Chen.Session2.NinePentacles_Analytical_Okay
++ ["This is the independence card. You're on your own."] -> Chen.Session2.NinePentacles_Generic_Bad
++ {reader.empathy >= 5} ["You built a life where you don't need anyone. But need and want are different."] -> Chen.Session2.NinePentacles_Empathetic_Good
+
+:: Chen.Session2.NinePentacles_Intuitive_Good
+
+@py:
+session.interpretation_good += 1
+if cards[1].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 1
+~ chen.trust += 1
+
+@if cards[1].reversed:
+    "Nine of Pentacles reversed. Independence that's become isolation."
+
+    @if chen.took_action:
+        "You're moving toward community, toward co-housing, but part of you is terrified of losing the self-sufficiency you've built. The garden feels safe precisely because it's yours alone."
+    @else:
+        "You've been taking care of yourself, managing the house, staying independent - but it's lonely. The reversed card asks: is this self-sufficiency or is this hiding?"
+    @endif
+@else:
+    "You've been independent so long, you've forgotten how to let people help you."
+
+    Margaret goes still. "My whole life, I took care of people. David. My daughter. My mother before she died. And then David got sick and I took care of him too."
+
+    ~ chen.mentioned_david_name = True
+    ~ chen.discussed_daughter = True
+
+    "And when he died?"
+
+    "I had to learn to take care of myself. Had to become this." She gestures at the card. "Independent. Capable. Alone."
+@endif
+
+"Is that how you want to be?"
+
+{chen.took_action ? "I don't know anymore." : "I don't know if I have a choice."}
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.NinePentacles_Analytical_Okay
+
+@py:
+session.interpretation_okay += 1
+if cards[1].reversed:
+    session.reversals_handled += 1
+@endpy
+
+@if cards[1].reversed:
+    "Nine of Pentacles reversed can indicate that independence has become isolation, or that self-sufficiency is feeling burdensome rather than empowering."
+@else:
+    "Nine of Pentacles represents independence, self-sufficiency, and enjoying the fruits of one's labor. It suggests you're currently in a place of self-reliance."
+@endif
+
+@if chen.took_action:
+    "You've been managing on your own since your husband passed, but you're questioning whether that independence serves you anymore."
+@else:
+    "This shows your present state - independent, self-sufficient, but perhaps questioning if that's what you truly want."
+@endif
+
+Margaret thinks about this. "I suppose so."
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.NinePentacles_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+
+"This is the independence card. You're on your own{cards[1].reversed ? , and maybe that's a problem | }."
+
+Margaret looks at you expectantly.
+
+"It's about... being self-sufficient."
+
+The reading lacks depth. You can feel her pulling back slightly.
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+:: Chen.Session2.NinePentacles_Empathetic_Good
+
+@py:
+session.interpretation_good += 1
+if cards[1].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 1
+~ chen.comfort += 1
+
+@if cards[1].reversed:
+    "You built a life where you don't need anyone. But reversed, this card asks: is that strength or is that protection?"
+
+    Margaret's eyes widen. "*Diu*. Both."
+
+    "And now?"
+
+    "Now my daughter wants to help. The co-housing offers community. And I don't know if I remember how to accept those things."
+
+    ~ chen.discussed_daughter = True
+@else:
+    "You built a life where you don't need anyone. But need and want are different."
+
+    Margaret looks at the woman in the garden - alone with her falcon and her flowers.
+
+    "After David, I *had* to be independent. Had to prove I could manage. But somewhere along the way, it stopped being a choice and started being a fortress."
+
+    ~ chen.mentioned_david_name = True
+@endif
+
+"Fortresses keep things out. But they also keep you in."
+
+She nods slowly. "Yes."
+
++ [Continue to the guidance card] -> Chen.Session2.Position3_Hub
+
+# ============================================================================
+# POSITION 3: GUIDANCE
+# ============================================================================
+
+:: Chen.Session2.Position3_Hub
+@render render_reading(reading=reading)
+**Position 3: Guidance**
+
+The final card. You turn it over slowly.
+
+@if cards[2].name == "Temperance":
+    -> Chen.Session2.Temperance_Interpret
+@elif cards[2].name == "The Fool":
+    -> Chen.Session2.Fool_Interpret
+@else:
+    # Six of Swords
+    -> Chen.Session2.SixSwords_Interpret
+@endif
+
+:: Chen.Session2.Temperance_Interpret
+@render render_reading(reading=reading)
+@if cards[2].reversed:
+    **Temperance - Reversed**.
+
+    An angel pours water between two cups - but reversed, the flow is chaotic. Imbalance. Too much of one thing, not enough of another. The middle path lost.
+@else:
+    **Temperance**.
+
+    An angel stands with one foot on land, one in water, pouring liquid between two cups in perfect balance. The middle path. Integration. Patience. The wisdom of "both/and" rather than "either/or."
+@endif
+
++ {reader.style == "intuitive"} ["You don't have to choose between David's memory and your future. You can hold both."] -> Chen.Session2.Temperance_Intuitive_Good
++ ["Temperance represents balance and moderation{cards[2].reversed ? , but reversed suggests imbalance or excess | }."] -> Chen.Session2.Temperance_Analytical_Okay
++ ["This is the balance card. Find moderation."] -> Chen.Session2.Temperance_Generic_Bad
++ {reader.empathy >= 5} ["The middle path isn't about compromise. It's about integration."] -> Chen.Session2.Temperance_Empathetic_Good
+
+:: Chen.Session2.Temperance_Intuitive_Good
+
+@py:
+session.interpretation_good += 1
+if cards[2].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 2
+~ chen.clarity += 2
+
+@if cards[2].reversed:
+    "Reversed Temperance says you're trying to balance too much, or you've lost the middle path. You're swinging between extremes."
+
+    @if chen.took_action:
+        "Moving forward completely, or staying rooted entirely. All independence or all dependence. You're struggling to find the middle - to move forward *while* honoring what you're leaving."
+    @else:
+        "All or nothing thinking. Move or stay. Remember or forget. The reversed card says this either/or is what's keeping you stuck."
+    @endif
+
+    "So what do I do?"
+
+    "Find the middle. Not compromise - integration. Take David with you when you move. Let your daughter help without losing yourself."
+
+    ~ chen.mentioned_david_name = True
+    ~ chen.discussed_daughter = True
+@else:
+    "You don't have to choose between David's memory and your future. You can hold both."
+
+    ~ chen.mentioned_david_name = True
+
+    Margaret stares at the card. The angel with one foot in each world.
+
+    @if chen.took_action:
+        "Temperance says: move to the co-housing *and* take David with you. Not his slippers - though you can take those too. But take the forty years. Take the love. It doesn't stay in the house. It stays in you."
+
+        Margaret starts crying. Really crying. "I was so afraid moving meant leaving him behind."
+
+        "He's in you. He goes where you go."
+    @else:
+        "Temperance says: you can move forward *and* honor what you've lost. You can seek help *and* maintain your independence. You can grieve *and* live. The middle path isn't about choosing less - it's about holding more."
+    @endif
+@endif
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.Temperance_Analytical_Okay
+
+@py:
+session.interpretation_okay += 1
+if cards[2].reversed:
+    session.reversals_handled += 1
+@endpy
+
+@if cards[2].reversed:
+    "Temperance reversed suggests imbalance or excess. The guidance here is to moderate your approach and find equilibrium between competing needs or desires."
+@else:
+    "Temperance represents balance, moderation, and patience. The guidance is to find the middle path - integrating different aspects of your life rather than choosing between them."
+@endif
+
+@if chen.took_action:
+    "As you move forward, balance honoring your past with embracing your future."
+@else:
+    "The card suggests finding balance between independence and accepting help, between staying and moving."
+@endif
+
+Margaret nods thoughtfully. "That makes sense."
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.Temperance_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+
+"This is the balance card. Find moderation{cards[2].reversed ? . Or you're out of balance | }."
+
+Margaret waits for more specific guidance.
+
+"It's about... not going to extremes."
+
+The interpretation feels vague and unhelpful.
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.Temperance_Empathetic_Good
+
+@py:
+session.interpretation_good += 1
+if cards[2].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 2
+~ chen.clarity += 2
+
+@if cards[2].reversed:
+    "The middle path isn't about compromise - it's about integration. But reversed, you've lost sight of it."
+
+    @if chen.took_action:
+        "You made the brave choice to move, but now you're swinging between excitement and regret, hope and terror. The angel pours water between cups, but yours is spilling."
+    @else:
+        "You're stuck between two extremes: moving forward completely or staying rooted entirely. But Temperance reversed says: this binary thinking is the trap."
+    @endif
+
+    "How do I find balance?"
+
+    "One foot on land, one in water. One foot in past, one in future. You don't have to leave yourself behind to move forward."
+@else:
+    "The middle path isn't about compromise. It's about integration."
+
+    You touch the card gently. "Look at the angel - one foot on land, one in water. Not choosing between worlds, but standing in both. That's your guidance."
+
+    @if chen.took_action:
+        "Move to co-housing *and* keep David's memory alive. Let your daughter help *and* maintain your independence. Grieve the house *and* embrace the new community."
+
+        ~ chen.mentioned_david_name = True
+        ~ chen.discussed_daughter = True
+    @else:
+        "You can honor your forty years with David *and* build new connections. You can maintain independence *and* accept help. These aren't opposites - they're partners."
+
+        ~ chen.mentioned_david_name = True
+    @endif
+@endif
+
+Margaret breathes deeply. "I can hold both."
+
+"You can hold both."
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.Fool_Interpret
+@render render_reading(reading=reading)
+@if cards[2].reversed:
+    **The Fool - Reversed**.
+
+    A young figure stands at the cliff's edge - but reversed, they're frozen. The leap has become paralysis. New beginning delayed by fear of recklessness.
+@else:
+    **The Fool**.
+
+    A young figure stands at the cliff's edge, one foot stepping into air, a small dog at their heels. The card of new beginnings. Pure potential. The wisdom of not knowing what comes next.
+@endif
+
++ {reader.style == "intuitive"} ["Sometimes you have to leap without knowing where you'll land."] -> Chen.Session2.Fool_Intuitive_Good
++ ["The Fool represents new beginnings and leaps of faith{cards[2].reversed ? , but reversed suggests fear of recklessness | }."] -> Chen.Session2.Fool_Analytical_Okay
++ ["This is the new beginning card. Start fresh."] -> Chen.Session2.Fool_Generic_Bad
++ {reader.empathy >= 5} ["At seventy-one, you get to be a beginner again."] -> Chen.Session2.Fool_Empathetic_Good
+
+:: Chen.Session2.Fool_Intuitive_Good
+
+@py:
+session.interpretation_good += 1
+if cards[2].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 1
+~ chen.trust += 2
+~ chen.clarity += 2
+
+@if cards[2].reversed:
+    "The Fool reversed. You're at the cliff's edge but you won't step off. The guidance has become paralysis."
+
+    @if chen.took_action:
+        "You listed the house - that was brave. But now you're terrified you've been reckless. The reversed Fool says: stop second-guessing. The step is already taken."
+    @else:
+        "You need to take the leap, but reversed Fool shows you're confusing caution with wisdom. Sometimes caution is just fear wearing a responsible mask."
+
+        ~ chen.discussed_fear = True
+    @endif
+@else:
+    "Sometimes you have to leap without knowing where you'll land."
+
+    Margaret looks at the figure - so young, so carefree. "I'm seventy-one. Fools are for young people."
+
+    "The Fool isn't about age. It's about willingness to begin again. At seventy-one, you get to be a beginner."
+
+    @if chen.took_action:
+        "You're already leaping. The house is listed. The co-housing is waiting. You're in mid-air. The Fool says: *trust the leap*."
+    @else:
+        "The Fool says: sometimes you don't get to know the outcome before you choose. Sometimes you just have to step off the cliff and trust."
+    @endif
+@endif
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.Fool_Analytical_Okay
+
+@py:
+session.interpretation_okay += 1
+if cards[2].reversed:
+    session.reversals_handled += 1
+@endpy
+
+@if cards[2].reversed:
+    "The Fool reversed suggests being held back by fear of recklessness or naivety. The guidance is to examine whether your caution is wisdom or simply fear."
+@else:
+    "The Fool represents new beginnings, leaps of faith, and embracing the unknown. The guidance is to trust in the journey even when you can't see the destination."
+@endif
+
+@if chen.took_action:
+    "You've already begun this new chapter. The Fool encourages you to embrace it fully."
+@else:
+    "The card suggests you need to take a leap of faith into something new."
+@endif
+
+Margaret considers this. "I see."
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.Fool_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+
+"This is the new beginning card. Start fresh{cards[2].reversed ? . Or you're afraid to | }."
+
+Margaret looks at you, clearly wanting more.
+
+"It's about... being willing to start over."
+
+The guidance feels surface-level and unhelpful.
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.Fool_Empathetic_Good
+
+@py:
+session.interpretation_good += 1
+if cards[2].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 2
+~ chen.clarity += 2
+
+@if cards[2].reversed:
+    "At seventy-one, you think you're too old to be a fool. But reversed, this card says: stop letting age be an excuse for staying stuck."
+
+    Margaret's mouth opens. Closes. "*Wah*. You're direct."
+
+    "Am I wrong?"
+
+    "No. Not wrong." She looks at the card. "I tell myself I'm being wise. Being careful. But maybe I'm just being scared."
+
+    ~ chen.discussed_fear = True
+@else:
+    "At seventy-one, you get to be a beginner again."
+
+    The words land softly. Margaret's eyes fill with tears.
+
+    "I didn't think... I thought you had to know what you were doing at my age. Had to have it figured out."
+
+    "The Fool says: nobody knows what they're doing. We're all just stepping off cliffs and hoping we grow wings. Your age doesn't change that. It just makes the courage more impressive."
+
+    @if chen.took_action:
+        "You're already being the Fool. You stepped off the cliff when you called that realtor. Now you just have to trust the fall."
+    @else:
+        "The guidance is clear: leap. Be the Fool. Start fresh. You have permission to not know what comes next."
+    @endif
+@endif
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.SixSwords_Interpret
+@render render_reading(reading=reading)
+@if cards[2].reversed:
+    **Six of Swords - Reversed**.
+
+    A ferryman guides a boat across troubled waters toward calmer shores - but reversed, the boat is stuck. Resistance to necessary transition. The refusal to leave difficult shores.
+@else:
+    **Six of Swords**.
+
+    A ferryman guides a boat across troubled waters toward calmer shores. Six swords stand upright in the boat - problems carried, yes, but not steering. The journey of transition. Moving from turbulence to peace.
+@endif
+
++ {reader.style == "intuitive"} ["You're already in the boat. You just have to let it carry you."] -> Chen.Session2.SixSwords_Intuitive_Good
++ ["Six of Swords represents transition and moving from difficulty to calmer waters{cards[2].reversed ? , but reversed shows resistance to change | }."] -> Chen.Session2.SixSwords_Analytical_Okay
++ ["This is the transition card. You're moving."] -> Chen.Session2.SixSwords_Generic_Bad
++ {reader.empathy >= 5} ["You don't leave your problems behind. You take them with you and they stop being so heavy."] -> Chen.Session2.SixSwords_Empathetic_Good
+
+:: Chen.Session2.SixSwords_Intuitive_Good
+
+@py:
+session.interpretation_good += 1
+if cards[2].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 1
+~ chen.trust += 2
+~ chen.clarity += 2
+
+@if cards[2].reversed:
+    "Six of Swords reversed. You see the boat, you see the calmer shores, but you won't get in. You're resisting the transition that needs to happen."
+
+    @if chen.took_action:
+        "You listed the house - that's you at the dock. But some part of you is still trying to get back on dry land, still trying to say 'never mind, I'll stay here.'"
+    @else:
+        "The ferryman is waiting. The boat is ready. But you won't step in because stepping in means admitting the troubled waters are real, and you're tired of struggling."
+    @endif
+
+    "How do I get in the boat?"
+
+    "You stop waiting to feel ready. You get in scared."
+@else:
+    "You're already in the boat. You just have to let it carry you."
+
+    Margaret looks at the card - the figure in the boat, the swords standing upright but not steering.
+
+    @if chen.took_action:
+        "You got in the boat when you called the realtor. Now you're in the crossing - the in-between time. Three months until the co-housing is ready. The guidance says: *let the boat carry you*."
+    @else:
+        "The Six of Swords says: you can't stay on these troubled shores forever. There's a boat. There's a ferryman. There are calmer waters ahead. You just have to step in."
+    @endif
+@endif
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.SixSwords_Analytical_Okay
+
+@py:
+session.interpretation_okay += 1
+if cards[2].reversed:
+    session.reversals_handled += 1
+@endpy
+
+@if cards[2].reversed:
+    "Six of Swords reversed indicates resistance to necessary change or transition. The guidance is to examine what's keeping you from moving forward."
+@else:
+    "Six of Swords represents transition from turbulent situations to calmer ones. The guidance is to trust the process of change, even if it feels uncertain."
+@endif
+
+@if chen.took_action:
+    "You're in the middle of a major transition. The card encourages you to trust the journey."
+@else:
+    "The card suggests it's time to begin the journey away from current difficulties toward something better."
+@endif
+
+Margaret nods. "That's helpful."
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.SixSwords_Generic_Bad
+
+@py: session.interpretation_bad += 1 @endpy
+
+"This is the transition card. You're moving{cards[2].reversed ? . Or you should be | }."
+
+Margaret waits for deeper insight.
+
+"It's about... journeys. Going from one place to another."
+
+The reading feels inadequate.
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+:: Chen.Session2.SixSwords_Empathetic_Good
+
+@py:
+session.interpretation_good += 1
+if cards[2].reversed:
+    session.reversals_handled += 1
+@endpy
+~ reader.empathy += 2
+~ chen.trust += 2
+~ chen.clarity += 2
+
+@if cards[2].reversed:
+    "You don't leave your problems behind. You take them with you - but reversed, you're trying to leave them and it's not working."
+
+    @if chen.took_action:
+        "You think moving to co-housing means leaving grief in the house. But grief doesn't work that way. The swords come with you in the boat. That's not failure - that's human."
+    @else:
+        "You're afraid if you move forward, you'll have to leave everything - David's memory, your independence, your identity. But look at the boat. The swords are *in* the boat. They come with you."
+
+        ~ chen.mentioned_david_name = True
+    @endif
+@else:
+    "You don't leave your problems behind. You take them with you and they stop being so heavy."
+
+    Margaret stares at the swords in the boat. "The grief comes with me."
+
+    "Of course it does. But in the boat, it's not driving. It's just... there. Upright. Acknowledged. The ferryman does the steering now."
+
+    @if chen.took_action:
+        "You're in the crossing. Three months until the co-housing. That's your ferryman time - guided transition from troubled waters to calm. You don't do it alone."
+    @else:
+        "The guidance is clear: get in the boat. Take your grief, your fear, your memories. They're allowed. They just don't get to steer anymore."
+    @endif
+@endif
+
++ [Continue to synthesis] -> Chen.Session2.SynthesisHub
+
+# ============================================================================
+# SYNTHESIS & OUTCOME
+# ============================================================================
+
+:: Chen.Session2.SynthesisHub
+@render render_reading(reading=reading)
+@py:
+# Calculate reading quality based on interpretations
+if session.interpretation_good >= 2:
+    session.reading_quality = "profound"
+    chen.clarity = 10
+elif session.interpretation_good >= 1 or session.interpretation_okay >= 2:
+    session.reading_quality = "helpful"
+    chen.clarity = 7
+else:
+    session.reading_quality = "adequate"
+    chen.clarity = 4
+
+# Bonus for handling reversals well
+if session.reversals_handled >= 2:
+    session.reading_quality = "profound"
+    chen.clarity = 10
+@endpy
+
+You look at the three cards laid out before you.
+
+{cards[0].name}{cards[0].reversed ? " - Reversed" | ""}. {cards[1].name}{cards[1].reversed ? " - Reversed" | ""}. {cards[2].name}{cards[2].reversed ? " - Reversed" | ""}.
+
+@if chen.took_action:
+    The story of her brave choice, the feelings it carries, and the path forward.
+@else:
+    The story of her paralysis, what it costs her, and how to finally move.
+@endif
+
+The silence stretches. Margaret waits for you to weave it together.
+
+@if session.reading_quality == "profound":
+    -> Chen.Session2.Synthesis_Profound
+@elif session.reading_quality == "helpful":
+    -> Chen.Session2.Synthesis_Helpful
+@else:
+    -> Chen.Session2.Synthesis_Adequate
+@endif
+
+:: Chen.Session2.Synthesis_Profound
+
+~ chen.clarity = 10
+~ reader.reputation += 2
+
+"Margaret," you say carefully, letting the truth gather itself before you speak. "The cards are showing you something important."
+
+@if chen.took_action:
+    @if cards[0].name == "Eight of Wands":
+        "You broke free. {cards[0].reversed ? The wands were frozen, and then you let them fly | You let the wands fly}. After two years of stillness, you chose movement. That took extraordinary courage."
+    @elif cards[0].name == "Four of Swords":
+        "You were resting - {cards[0].reversed ? and then you woke up | maybe too long}. Grief needed that stillness. But you recognized when rest was becoming stagnation."
+    @else:
+        "You were trapped between two equal choices, {cards[0].reversed ? and then you finally lowered the swords | paralyzed}. You took off the blindfold and chose to see, even though seeing was terrifying."
+    @endif
+
+    "But {cards[1].name}{cards[1].reversed ? ", reversed," : ""} shows you're still carrying the weight of it."
+
+    @if cards[1].name == "Five of Cups":
+        @if cards[1].reversed:
+            "You're beginning to turn around, beginning to see what remains. But the grief is still there, still loud."
+        @else:
+            "You're still staring at the spilled cups. David. The house. Forty years. The loss feels bigger than what remains."
+        @endif
+
+        ~ chen.mentioned_david_name = True
+
+        @if chen.discussed_grief:
+            "That's okay. That's *right*. You don't have to be over it yet. Grief this big takes time."
+        @endif
+    @elif cards[1].name == "The Star":
+        @if cards[1].reversed:
+            "You're trying to hold onto hope, but it keeps dimming. You made the brave choice but now you're scared you made the wrong one."
+        @else:
+            "You're holding onto hope, even though it's fragile. After such loss, that's remarkable. Hope isn't constant - it comes and goes like breathing."
+        @endif
+    @else:
+        "The Nine of Pentacles - {cards[1].reversed ? "independence becoming isolation" : "independent but questioning if that's what you want"}. You've been taking care of yourself, but somewhere it became a fortress instead of a choice."
+    @endif
+
+    "And {cards[2].name}{cards[2].reversed ? ", reversed," : ""} - the guidance - says:"
+
+    @if cards[2].name == "Temperance":
+        @if cards[2].reversed:
+            "Find balance again. You're swinging between extremes - all hope or all fear, all excitement or all regret. One foot on land, one in water. You can honor what you're leaving *and* embrace what's coming."
+        @else:
+            "The middle path. You don't have to choose between David's memory and your future. Look at the angel - one foot on each shore. You can hold both. David isn't in the house. He's in *you*. You carry him forward."
+        @endif
+
+        ~ chen.mentioned_david_name = True
+    @elif cards[2].name == "The Fool":
+        @if cards[2].reversed:
+            "Stop second-guessing. You're at the cliff's edge, terrified you're being reckless. But the Fool reversed says: you already jumped. The house is listed. Now you just have to trust the leap."
+        @else:
+            "Be the Fool. At seventy-one, you get to be a beginner again. You don't have to know what comes next. Trust the leap. You're already in mid-air anyway."
+        @endif
+    @else:
+        @if cards[2].reversed:
+            "Stop resisting the boat. You're in transition whether you accept it or not. The swords come with you - the grief, the memories, all of it. But they don't steer anymore."
+        @else:
+            "Trust the boat. You're in the crossing now - three months until co-housing. The swords come with you, but they don't steer. You're being ferried to calmer waters. Let yourself be carried."
+        @endif
+    @endif
+
+    Margaret wipes her eyes, nodding. "*Diu*. That's... that's exactly it."
+
+@else:
+    # Didn't take action path
+    @if cards[0].name == "Eight of Wands":
+        "The Eight of Wands reversed. You've been holding those wands frozen in mid-air, terrified to release them. You want to move but you're paralyzed."
+    @elif cards[0].name == "Four of Swords":
+        "{cards[0].reversed ? "You've been resting too long" : "You've been resting - maybe hiding"}. The stillness that was healing has become a cage. Grief needed quiet, but quiet has become stagnation."
+    @else:
+        "The Two of Swords{cards[0].reversed ? " reversed - you're close to choosing, but not there yet" : " - perfect paralysis"}. Two equal weights on a scale that won't tip. You've been trapped between stay and go, remember and forget, hold on and let go."
+    @endif
+
+    ~ chen.discussed_fear = True
+
+    "And {cards[1].name}{cards[1].reversed ? " reversed" : ""} shows what that paralysis costs you:"
+
+    @if cards[1].name == "Five of Cups":
+        "Grief has become your whole world. You're staring at what's gone and you can't see the two cups still standing. Your health. Your mind. Your daughter needing you. Your grandchild coming. They're there, but grief is too loud."
+
+        ~ chen.discussed_daughter = True
+    @elif cards[1].name == "The Star":
+        @if cards[1].reversed:
+            "You want to hope but you can't trust it. You keep reaching for light but your hand closes on nothing."
+        @else:
+            "You're still holding hope - barely, precariously. That's powerful, Margaret. But hope without action just becomes another form of waiting."
+        @endif
+    @else:
+        "Independence that's become isolation. You've built a garden but it's become a cage. You tell yourself you're self-sufficient, but really you're just alone."
+    @endif
+
+    "The guidance - {cards[2].name}{cards[2].reversed ? " reversed" : ""} - says:"
+
+    @if cards[2].name == "Temperance":
+        @if cards[2].reversed:
+            "Stop thinking in either/or. Move *or* stay. Remember *or* forget. David *or* your future. The reversed Temperance says: this binary thinking is the trap. You need integration, not choice."
+        @else:
+            "Find the middle path. You don't have to choose between David's memory and moving forward. One foot in past, one in future. Both/and, not either/or."
+        @endif
+
+        ~ chen.mentioned_david_name = True
+    @elif cards[2].name == "The Fool":
+        @if cards[2].reversed:
+            "Stop confusing caution with wisdom. You're not being wise - you're being scared. The Fool reversed says: your age doesn't excuse staying stuck. Leap."
+        @else:
+            "Leap. Be the Fool. You don't get to know the outcome before you choose. Sometimes you just step off the cliff and trust. At seventy-one, you get to be a beginner again."
+        @endif
+    @else:
+        @if cards[2].reversed:
+            "Stop resisting the boat. The ferryman is waiting. The calmer shores are there. But you won't get in because getting in means admitting these waters are troubled."
+        @else:
+            "Get in the boat. The Six of Swords says: you can't stay on these troubled shores forever. The swords come with you - grief, fear, memory, all of it. But they don't steer. Trust the crossing."
+        @endif
+    @endif
+
+    Margaret is crying openly now. "But what if I choose wrong?"
+
+    "You're not afraid of choosing wrong. You're afraid of *being* the person who made a choice. Of becoming someone new."
+
+    She nods, unable to speak.
+@endif
+
++ [(The reading is complete.)] -> Chen.Session2.PaymentAndDeparture
+
+:: Chen.Session2.Synthesis_Helpful
+
+~ chen.clarity = 7
+~ reader.reputation += 1
+
+"The cards show a clear picture," you say, gesturing to the spread.
+
+@if chen.took_action:
+    "{cards[0].name} shows your brave action - listing the house, choosing movement. {cards[1].name} shows where you are emotionally right now - carrying the weight of that choice. And {cards[2].name} offers guidance for moving forward."
+@else:
+    "{cards[0].name} shows what's kept you stuck - {cards[0].name == "Two of Swords" ? "indecision" : cards[0].name == "Four of Swords" ? "excessive rest" : "frozen momentum"}. {cards[1].name} shows the emotional cost. {cards[2].name} points toward the path forward."
+@endif
+
+@if cards[2].name == "Temperance":
+    "The key is balance - you don't have to choose between past and future. You can honor both."
+@elif cards[2].name == "The Fool":
+    "The key is embracing new beginnings, even when you don't know exactly where they'll lead."
+@else:
+    "The key is trust - trusting the transition process, even in uncertainty."
+@endif
+
+Margaret nods thoughtfully. "That helps. Thank you."
+
++ [(The reading is complete.)] -> Chen.Session2.PaymentAndDeparture
+
+:: Chen.Session2.Synthesis_Adequate
+
+~ chen.clarity = 4
+
+"The reading shows..." You gesture at the cards, trying to find the thread that connects them.
+
+"{cards[0].name} in the past, {cards[1].name} in the present, {cards[2].name} as guidance. It's... it's a complex situation you're facing."
+
+Margaret looks polite but not particularly moved. "I see."
+
+You wish you'd seen the connections more clearly.
+
++ [(The reading is complete.)] -> Chen.Session2.PaymentAndDeparture
+
+:: Chen.Session2.PaymentAndDeparture
+
+Margaret stands slowly, gathering her thermos and bag. The folder tucked under her arm.
+
+@if chen.took_action:
+    "The house listing goes live Monday. Agent says it'll sell fast." She touches the folder. "Then I'll have nowhere to go for three months until Blossom Terrace is ready. My daughter offered to let me stay, but she's due any day now."
+
+    ~ chen.discussed_daughter = True
+@else:
+    "I need to decide. Soon." She looks tired. "My daughter's baby is due in three months. I can't still be frozen then. I need to be able to help her. Be present."
+
+    ~ chen.discussed_daughter = True
+@endif
+
+"How much do I owe you?"
+
+@if session.reading_quality == "profound":
+    ~ reader.money += 65
+    ~ reader.reputation += 8
+    ~ reader.competence += 1
+    ~ reader.empathy += 1
+    ~ chen.will_return = True
+    ~ chen.trust = 100
+
+    She counts out sixty-five dollars carefully, pressing them into your hand. "More than last time. You've gotten even better. *Geng hou*."
+
+    "Thank you, Margaret. That's generous."
+
+    "Can I come back? One more time?" She looks at you intently. "Maybe in a month, once I'm actually *in* the co-housing? Or still *in* the house if I haven't moved yet. Either way - I want to see you again. Need to see you again."
+
+    "Absolutely. Anytime."
+
+    She squeezes your hand. "You have a gift. M. Thorne was right about you."
+
+    ~ chen.session_three_unlocked = True
+
+@elif session.reading_quality == "helpful":
+    ~ reader.money += 50
+    ~ reader.reputation += 5
+    ~ chen.will_return = True
+    ~ chen.trust = 80
+
+    "Here's fifty. Same as last time." She hands you the bills. "You're consistent - I appreciate that. Steady hands."
+
+    "I'm glad I could help."
+
+    "I might return. After things settle. We'll see how it goes."
+
+@else:
+    ~ reader.money += 35
+    ~ reader.reputation += 2
+    ~ chen.will_return = False
+    ~ chen.trust = 65
+
+    "Here's thirty-five."
+
+    "Thank you for coming."
+
+    She nods politely and leaves without booking another session. You get the sense you didn't quite reach her.
+@endif
+
++ [Watch her go] -> Chen.Session2.SessionComplete
+
+:: Chen.Session2.SessionComplete
+
+The door closes softly.
+
+Margaret's money is warm in your hand - still carrying the heat of her fingers.
+
+@if session.reading_quality == "profound":
+    You did it again. Helped her see clearly through the fog.
+
+    @if chen.took_action:
+        She's scared, but she's moving. The cards gave her permission to carry her grief forward instead of leaving it behind like abandoned luggage.
+    @else:
+        You named her fear without judgment - that frozen moment between knowing and doing. Sometimes that's all someone needs: to be seen clearly, even in their stuckness.
+    @endif
+
+    @if chen.discussed_grief and chen.mentioned_david_name:
+        She'll carry David forward. Not his slippers - though maybe those too - but the forty years, the love, the history. It doesn't stay in the house. It stays in her.
+    @endif
+
+    M. Thorne would be proud.
+
+@elif session.reading_quality == "helpful":
+    A solid reading. Not transformational, but useful.
+
+    You gave her clarity, if not quite the deep insight she was hoping for. Sometimes that's enough. Sometimes people just need someone to organize their thoughts, reflect them back.
+
+    You're getting better at this.
+
+@else:
+    It was okay. Not your best work.
+
+    You couldn't quite find the thread connecting the cards. The readings felt separate, not woven together. She was polite, but you could see the disappointment behind her eyes.
+
+    But you showed up. That counts for something.
+@endif
+
+@if session.weather_intensity >= 2:
+    Outside, the rain has softened to a drizzle. The world feels washed clean.
+@else:
+    Outside, the afternoon light is fading to amber. Golden hour.
+@endif
+
+@py:
+session.current_client = None
+reader.sessions_completed += 1
+
+# Record callbacks for Session 3 if unlocked
+if chen.session_three_unlocked:
+    chen.session_two_cards = [c.name for c in cards]
+    chen.session_two_quality = session.reading_quality
+@endpy
+
+---
+
+**Session 2 Complete**
+
+**Money Earned:** ${reader.money}
+**Reputation Gained:** +{reader.reputation if session.reading_quality == "profound" else (5 if session.reading_quality == "helpful" else 2)}
+**Reading Quality:** *{session.reading_quality.capitalize()}*
+
+@if chen.will_return:
+    *Margaret Chen will return.*
+@endif
+
+---
+
++ [Return to the Reader's Table] -> ReaderTable
+
+# ============================================================================
+# END OF CHEN SESSION 2
+# ============================================================================

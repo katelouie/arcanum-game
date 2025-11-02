@@ -1,0 +1,1757 @@
+# ============================================================================
+# MARGARET CHEN - SESSION 3A: "THE AFTERMATH"
+# ============================================================================
+#
+# UNLOCK CONDITIONS:
+# - chen.will_return == True
+# - chen.session_two_quality >= "helpful"
+# - chen.took_action == True (moved to co-housing)
+# - 4-6 weeks have passed since Session 2
+#
+# THEME: Permission to have complicated feelings about a good choice
+#
+# STRUCTURE:
+# - Opening & Update (chen's complex adjustment to Blossom Terrace)
+# - 1-Card Draw (from tight 3-card pool)
+# - Deep Interpretation (5-6 options + sub-branches for good interpretations)
+# - Synthesis (card-specific, flag-responsive)
+# - Payment & Goodbye (unlocks Maya Chen & Eleanor Blackwood)
+#
+# CARD POOL:
+# - Six of Pentacles (community giving/receiving dynamics)
+# - Nine of Cups (wish fulfillment but complicated)
+# - Five of Swords (community friction)
+#
+# ============================================================================
+
+:: Chen.Session3A.Start
+
+@py:
+    session = create_session(chen)
+
+    # Initialize session tracking
+    session.interpretation_good = 0
+    session.interpretation_okay = 0
+    session.interpretation_bad = 0
+
+    # Initialize flags
+    chen.discussed_grief = False
+    chen.discussed_guilt = False
+    chen.discussed_culture = False
+    chen.discussed_practical = False
+    chen.discussed_autonomy = False
+    chen.discussed_david_liu = False
+    chen.discussed_mrs_wong = False
+
+    # Session-specific
+    session.offered_permission = False
+@endpy
+~ session.atmosphere = 1
+~ session.room_energy = 2
+
+You're in your reading corner.
+
+@if session.weather_intensity >= 2:
+    Spring rain taps against the window - softer than winter rain, more hopeful.
+@else:
+    Spring afternoon light fills the room, warm and golden.
+@endif
+
+Your phone buzzes.
+
+**[Text from: Margaret Chen]**
+*"Hello dear. It's been a month. Can I come see you? - M"*
+
+A month since Session 2. You wonder what's happened.
+
+You buzz her in.
+
++ [Wait by the door, curious about how she's doing] -> Chen.Session3A.Arrival
++ [Put the kettle on - you remember she likes tea first] -> Chen.Session3A.Arrival_Tea_Ready
+
+:: Chen.Session3A.Arrival
+
+You stand by the door, listening for her footsteps.
+
+Lighter than last time, you think. Quicker. Or maybe that's just hope.
+
+A knock.
+
+You open the door.
+
++ [Open the door to welcome her in.] -> Chen.Session3A.FirstImpression
+
+:: Chen.Session3A.Arrival_Tea_Ready
+
+You fill the kettle, set out two mugs. Tea first. Always.
+
+Footsteps on the stairs - lighter than you remember. Or maybe just different.
+
+A knock.
+
+You open the door with a smile. "Tea's already on."
+
+Margaret's face lights up. "*Wah*. You remember."
+
+~ chen.trust += 1
+~ chen.comfort += 2
+~ reader.competence += 1
+
++ [Step aside, offering her the warm space.] -> Chen.Session3A.FirstImpression
+
+:: Chen.Session3A.FirstImpression
+**Margaret Chen** stands in your doorway.
+
+She looks different. Not lighter, exactly. Not happier. Just... *different*.
+
+Her hair is the same silver-grey bun. Same burgundy cardigan. But there's something in her posture - less weight in her shoulders, maybe. Or different weight. New weight.
+
+She's carrying a smaller thermos than before. More portable. Bus-friendly.
+
+"Hello again," she says. Her voice is warm but there's an uncertainty underneath it.
+
+@if chen.session_two_quality == "profound":
+    "You look..." You pause, trying to name it. "Changed."
+
+    "I am changed. That's the problem." She steps inside. "Or maybe not a problem. I don't know yet. That's why I'm here."
+@else:
+    "How are you?"
+
+    "That's exactly the question I can't answer." She steps inside. "That's why I'm here."
+@endif
+
++ ["Come sit. Tell me everything."] -> Chen.Session3A.Settling_In
++ ["You moved. How is Blossom Terrace?"] -> Chen.Session3A.Blossom_Terrace_Direct
++ ["You look like you have a lot on your mind."] -> Chen.Session3A.Settling_In
+
+:: Chen.Session3A.Settling_In
+"Come sit. Tell me everything."
+
+Margaret settles into the chair across from you - the same chair as always. But she sits differently now. Less carefully. More naturally.
+
+@if reader.brought_tea_at_arrival:
+    The kettle whistles. You pour.
+@else:
+    "Tea?" you offer.
+
+    "Please."
+
+    You prepare it. She watches you, organizing her thoughts.
+@endif
+
+"So," she begins. "I moved. Four weeks ago yesterday."
+
+She says it like a confession. Or an achievement. Or both.
+
++ ["How is it?"] -> Chen.Session3A.Update_How_Is_It
++ ["Four weeks. That's significant."] -> Chen.Session3A.Update_Four_Weeks
++ ["Tell me about Blossom Terrace."] -> Chen.Session3A.Update_Blossom_Terrace
+
+:: Chen.Session3A.Blossom_Terrace_Direct
+"You moved. How is Blossom Terrace?"
+
+Margaret's face does something complicated - not quite a smile, not quite a grimace.
+
+"That's exactly why I'm here. I don't know how to answer that question."
+
+She settles into the chair.
+
++ ["Start with the first thing that comes to mind."] -> Chen.Session3A.Update_First_Thought
++ ["Is it good? Bad?"] -> Chen.Session3A.Update_Good_Bad
++ ["Tell me what surprised you most."] -> Chen.Session3A.Update_Surprises
+
+:: Chen.Session3A.Update_How_Is_It
+"How is it?"
+
+Margaret laughs - complicated laughter. Relief mixed with frustration mixed with something else you can't quite name.
+
+"That's the question everyone asks. My daughter. My son. The neighbors. 'How is it, Ma? Are you happy?' And I don't know what to say."
+
+"What do you want to say?"
+
+"I want to say: it's good and hard and strange and better than expected and worse than expected and I'm happy and I'm grieving and I miss my kitchen and I love the mahjong nights and I feel guilty about all of it."
+
+She takes a breath.
+
+"But that's too complicated for small talk. So I just say: 'It's fine.'"
+
+~ chen.discussed_guilt = True
+~ reader.empathy += 1
+
++ ["Tell me the complicated version."] -> Chen.Session3A.Update_Complicated_Version
+
+:: Chen.Session3A.Update_Four_Weeks
+"Four weeks. That's significant. Past the 'honeymoon' phase. Into the reality."
+
+"*Mm*." Margaret nods. "First week was all new. Exciting. Scary. Second week I cried every night. Third week I stopped crying and started... living? Fourth week..." She pauses. "Fourth week I don't know what I'm feeling anymore."
+
+~ reader.insight += 1
+
++ ["Tell me about each week."] -> Chen.Session3A.Update_Week_By_Week
++ ["And now you're here to make sense of it."] -> Chen.Session3A.Update_Making_Sense
+
+:: Chen.Session3A.Update_Blossom_Terrace
+"Tell me about Blossom Terrace."
+
+Margaret's face softens.
+
+"It's in Beacon Hill. Old building, renovated. Thirty units. Shared kitchen, shared dining room, community garden. Mostly older people - fifties to eighties."
+
+She pauses.
+
+"Sixty percent Asian. Filipino, Vietnamese, Chinese, Japanese, Korean. Fifteen of us are from Hong Kong specifically. We speak Cantonese together. Watch TVB dramas on Thursday nights. Play mahjong."
+
+Her eyes brighten, then dim.
+
+"I haven't played mahjong with other people since David died."
+
+~ chen.discussed_culture = True
+~ chen.discussed_grief = True
+
++ ["That sounds wonderful."] -> Chen.Session3A.Update_Wonderful_But
++ ["But...?"] -> Chen.Session3A.Update_The_But
+
+:: Chen.Session3A.Update_First_Thought
+"Start with the first thing that comes to mind."
+
+Margaret doesn't hesitate: "I taught Maria how to make 蛋撻 last week. David's recipe. And halfway through, measuring the sugar, I realized: I'm happy. Actually *happy*. And then I felt so guilty I had to go to my room and cry."
+
+She looks at you directly.
+
+"That's the first thing. Is that what you wanted to hear?"
+
+~ chen.discussed_guilt = True
+~ chen.discussed_grief = True
+
++ ["Yes. Tell me more about Maria."] -> Chen.Session3A.Update_About_Maria
++ ["Guilt and happiness at the same time. That's complicated."] -> Chen.Session3A.Update_Complicated_Version
++ ["Why did happiness make you feel guilty?"] -> Chen.Session3A.Update_Why_Guilty
+
+:: Chen.Session3A.Update_Good_Bad
+"Is it good? Bad?"
+
+"Both," Margaret says immediately. "Both at the same time. Every day."
+
+She sets down her mug.
+
+"Monday I'm happy. Tuesday I'm crying. Wednesday I'm annoyed. Thursday I'm laughing at mahjong. Friday I drive past my old house and want to turn back time. Saturday I wake up and think: *aiya*, I'm glad I'm here."
+
+"That's exhausting."
+
+"*Diu*, yes. So exhausting."
+
+~ chen.discussed_practical = True
+
++ ["Tell me about the good parts."] -> Chen.Session3A.Update_Complicated_Version
++ ["Tell me about the hard parts."] -> Chen.Session3A.Update_The_But
+
+:: Chen.Session3A.Update_Surprises
+"Tell me what surprised you most."
+
+Margaret thinks for a moment.
+
+"How fast I made friends. I thought it would take months. But first week, Maria - she's Filipina, seventy-two - she saw me struggling with the shared kitchen schedule and just... helped. Started talking to me. By week two we were cooking together."
+
+She smiles, then it fades.
+
+"And how much I miss being alone. I escaped loneliness. Now I have company all the time and I miss solitude. Does that make sense?"
+
+~ chen.discussed_autonomy = True
+~ reader.empathy += 1
+
++ ["That makes perfect sense."] -> Chen.Session3A.Update_Complicated_Version
+
+:: Chen.Session3A.Update_Complicated_Version
+Margaret takes a breath. Begins to catalog, the way librarians do.
+
+"The good:" She counts on her fingers. "I have friends. Real friends. Not just 'hello at the grocery store' friends. *Real* ones."
+
+"Maria Reyes - Filipina, seventy-two, from Quezon City. Widowed five years ago. We cook together. She teaches me Filipino food, I teach her Cantonese. We laugh about our grandchildren being 'too American.' Her grandson doesn't speak Tagalog. My granddaughter Maya barely speaks Cantonese."
+
+She pauses for breath.
+
+"There are fifteen Hong Kong people at Blossom Terrace. *Fifteen*. I speak Cantonese every day. We watch TVB dramas together Thursday nights. We play mahjong. I forgot how much I missed mahjong."
+
+Her face is bright now, animated.
+
+"Yuki Tanaka - she's Japanese, seventy, been in Seattle since '75 - she runs the garden committee. We bond over tomatoes and bitter melon. There's this... *thing* between us. History. Hong Kong and Japan. My father was there during the war. But we're both just old ladies who like gardening, so we pretend it doesn't exist and talk about soil pH instead."
+
+~ chen.discussed_culture = True
+
++ ["That all sounds wonderful. What's the 'but'?"] -> Chen.Session3A.Update_The_But
++ ["Tell me more about the people."] -> Chen.Session3A.Update_More_People
+
+:: Chen.Session3A.Update_More_People
+"Tell me more about the people."
+
+"David Liu." Margaret says the name carefully. "He's sixty-eight. Widower. Was a bus driver for King County Metro for thirty years. He speaks Cantonese with me. He's... kind."
+
+There's something in her voice.
+
+"He offers to help carry my groceries. Saves me a seat at community dinner. Last week he asked if I wanted to walk to the Asian grocery together and I said no, but I *wanted* to say yes."
+
+~ chen.discussed_david_liu = True
+
+"Why did you say no?"
+
+"Because..." She fidgets with her mug. "Because I felt weird. Like saying yes would mean something. Like David - my David - would be disappointed."
+
+~ chen.discussed_guilt = True
+~ chen.discussed_grief = True
+
++ ["Would he be disappointed? Really?"] -> Chen.Session3A.David_Exploration
++ ["It's just groceries. It doesn't have to mean anything."] -> Chen.Session3A.David_Practical
++ ["You're allowed to have male friends."] -> Chen.Session3A.David_Permission
+
+:: Chen.Session3A.David_Exploration
+"Would he be disappointed? Really? David - your David?"
+
+Margaret's eyes fill. "No. David would... David would want me to have friends. To not be alone. He'd probably like David Liu. They'd talk about buses and routes and..."
+
+She wipes her eyes.
+
+"But it still feels like betrayal. Even though I know it's not."
+
+~ reader.empathy += 1
+~ chen.trust += 1
+
++ ["That feeling will ease with time."] -> Chen.Session3A.Update_The_But
++ ["Knowing and feeling are different things."] -> Chen.Session3A.Update_The_But
+
+:: Chen.Session3A.David_Practical
+"It's just groceries. It doesn't have to mean anything."
+
+"I know." Margaret nods. "Logically, I know. But feelings aren't logical."
+
+~ reader.competence += 1
+
++ ["Let's circle back to the 'but' now."] -> Chen.Session3A.Update_The_But
+
+:: Chen.Session3A.David_Permission
+
+"You're allowed to have male friends. Companionship isn't betrayal."
+
+Margaret looks at you gratefully. "Thank you. I needed to hear someone say that."
+
+~ chen.trust += 1
+~ session.offered_permission = True
+
++ ["Now, let's hear about the other complicated parts."] -> Chen.Session3A.Update_The_But
+
+:: Chen.Session3A.Update_The_But
+"But." Margaret's expression shifts. "The hard parts."
+
+She sets down her mug.
+
+"Mrs. Wong. She's seventy-five, from Hong Kong, been in Seattle since '78. She's MORE traditional than me. She judges. She says: 'In my day, we kept our family homes. We didn't move to these places.' Like I'm *gwailo* now for choosing ease over tradition."
+
+~ chen.discussed_culture = True
+~ chen.discussed_mrs_wong = True
+
+"Do you care what she thinks?"
+
+"I shouldn't. But I do. Because part of me agrees with her."
+
+~ chen.discussed_guilt = True
+
+She continues: "I miss my kitchen. *My* kitchen. Where I made the rules. Now there's a schedule. Tuesday I can't use the wok station because the Filipino group has it. Wednesday someone left the rice cooker dirty. Thursday Mrs. Wong criticized how I cut vegetables. 'Too thick,' she said."
+
+She laughs bitterly.
+
+"I escaped being alone. Now I'm never alone and I miss being alone. I miss autonomy. I miss making my own decisions about everything from when to eat dinner to what temperature the apartment should be."
+
+~ chen.discussed_autonomy = True
+~ chen.discussed_practical = True
+
++ ["That's community. It's work."] -> Chen.Session3A.Community_Work
++ ["You're grieving your independence."] -> Chen.Session3A.Grieving_Independence
++ ["Do you regret moving?"] -> Chen.Session3A.Regret_Question
+
+:: Chen.Session3A.Update_Wonderful_But
+"That sounds wonderful."
+
+"It is wonderful." Margaret nods. "But also..."
+
++ [Acknowledge the positive, but gently guide her to the difficulty.] -> Chen.Session3A.Update_The_But
+
+:: Chen.Session3A.Update_About_Maria
+"Tell me more about Maria."
+
+"Maria Reyes. Widowed five years before me. She understands. We don't have to explain things. When I cry randomly while cooking, she just hands me a tissue and keeps chopping onions. When she gets quiet during dinner, I know she's thinking about her husband and I don't ask questions."
+
+Margaret's voice is soft.
+
+"We're teaching each other our foods. I show her how to make 蛋撻. She shows me how to make lumpia. We laugh when we can't pronounce each other's ingredients correctly."
+
+~ chen.discussed_culture = True
+
++ [It's clear Maria is a blessing. Now, what's the challenge?] -> Chen.Session3A.Update_The_But
+
+:: Chen.Session3A.Update_Why_Guilty
+"Why did happiness make you feel guilty?"
+
+"Because David is dead." Margaret says it bluntly. "He's dead and I'm making egg tarts and laughing with new friends and living a life he can't have. How is that fair?"
+
+Her voice breaks.
+
+"I got to move on. He doesn't get to. So every moment of happiness feels like... like I'm leaving him behind."
+
+~ chen.discussed_grief = True
+~ chen.discussed_guilt = True
+~ reader.empathy += 1
+
++ ["You're not leaving him behind."] -> Chen.Session3A.Not_Leaving_Behind
++ ["He would want you to be happy."] -> Chen.Session3A.He_Would_Want
+
+:: Chen.Session3A.Not_Leaving_Behind
+"You're not leaving him behind. You're carrying him forward. There's a difference."
+
+Margaret wipes her eyes. "How?"
+
+"Leaving behind means forgetting. Carrying forward means: he comes with you. The love. The memories. The recipes. He's in those egg tarts. He's in your laughter. You didn't erase him by moving. You brought him to a new place."
+
+Margaret is crying now. "Thank you. I needed to hear that."
+
+~ chen.trust += 2
+~ reader.empathy += 1
+~ session.offered_permission = True
+
++ [Let the emotion settle before continuing.] -> Chen.Session3A.Update_The_But
+
+:: Chen.Session3A.He_Would_Want
+"He would want you to be happy. You know that."
+
+"I know. Logically I know." Margaret wipes her eyes. "But knowing and *feeling* are different things."
+
+~ reader.competence += 1
+
++ [Acknowledge the conflict between her head and heart.] -> Chen.Session3A.Update_The_But
+
+:: Chen.Session3A.Update_Week_By_Week
+Margaret thinks back.
+
+"First week: Everything new. Unpacking boxes. Meeting people. Learning where the bathroom is, how the kitchen schedule works, when community dinner happens. I was too busy to feel anything except overwhelmed."
+
+"Second week: Crashed. Cried every night. Missed David. Missed my house. Drove past the old house and saw the new owners painting David's study bright yellow and I wanted to scream."
+
+"Third week: Got angry instead of sad. Anger felt better. Productive. I joined the garden committee. Started really talking to Maria and Yuki. Played mahjong. Made lumpia with Maria and laughed when I folded them wrong."
+
+"Fourth week: Now. Don't know what I'm feeling. Too many feelings. All at once."
+
+~ chen.discussed_grief = True
+~ chen.discussed_practical = True
+
++ ["That's a lot of change in a short time."] -> Chen.Session3A.Update_Making_Sense
+
+:: Chen.Session3A.Update_Making_Sense
+"And now you're here to make sense of it."
+
+"Yes." Margaret looks at you directly. "I need the cards to tell me something."
+
+"What do you need them to say?"
+
+"I need *permission*." Her voice is fierce now, certain.
+
+"Permission to be happy at Blossom Terrace. Permission to be annoyed by Mrs. Wong. Permission to enjoy David Liu's company without betraying my husband. Permission to miss my old kitchen. Permission to feel guilty about the house selling. Permission to grieve AND laugh on the same day."
+
+She takes a breath.
+
+"Permission to feel fifteen things at once and not have to pick just one. Am I allowed to have complicated feelings about a good choice? Or do I have to pretend everything is perfect now?"
+
+~ session.offered_permission = True
+
++ ["Let's ask the cards what you need to hear."] -> Chen.Session3A.CardDraw
++ ["You're asking permission to be human. The answer is yes."] -> Chen.Session3A.Permission_Given_Early
+
+:: Chen.Session3A.Community_Work
+"That's community. It's work. It's not all mahjong and laughter. It's negotiating. Compromising. Being patient with Mrs. Wong's opinions. Sharing the wok station."
+
+"*Mm*." Margaret nods. "Work I didn't have to do in my own house."
+
+"But in your own house, you were alone."
+
+"Yes."
+
+"So which kind of tired do you prefer? Tired from solitude or tired from people?"
+
+Margaret is quiet for a long moment.
+
+"I don't know yet. Both are exhausting. But one kind of exhaustion feels... alive. The other kind felt like dying slowly."
+
+~ reader.competence += 1
+~ chen.trust += 1
+
++ [Observe her realization about the two types of exhaustion.] -> Chen.Session3A.Question_Build
+
+:: Chen.Session3A.Grieving_Independence
+"You're grieving your independence. Your autonomy. For sixty-eight years you made your own decisions. Your own schedule. Your own rules. Now you have to accommodate Mrs. Wong's opinions and the Filipino group's wok station schedule."
+
+Margaret laughs - real laughter. "*Aiya*, yes! Fifteen Hong Kong grandmothers all with opinions about everything. How to fold dumplings. What temperature the rice cooker should be. Whether to celebrate Mid-Autumn Festival on Saturday or Sunday."
+
+"That's a lot."
+
+"Too much sometimes." She pauses. "But also... nice. To matter. To be part of something. Even when it's annoying."
+
+~ reader.empathy += 1
+~ chen.discussed_autonomy = True
+
++ [Acknowledge the grief behind the annoyance.] -> Chen.Session3A.Question_Build
+
+:: Chen.Session3A.Regret_Question
+"Do you regret moving?"
+
+Margaret goes very still.
+
+"No. Yes. Sometimes. I don't know."
+
+She wipes her eyes quickly, efficient.
+
+"I sold the house for $1.2 million. Above asking. The new owners - they're young. Tech people. White couple with a baby. They're painting David's study bright yellow. I drove by last week and saw them through the window. The baby was crawling on the floor where David's desk used to be."
+
+Her voice breaks.
+
+"And I thought: *diu*, that should make me sad. But I felt... *relieved*. Like: good. Let new life happen there. Let that house be full of noise and baby toys and messy life. It doesn't need to be a memorial anymore."
+
+~ chen.discussed_grief = True
+~ reader.empathy += 1
+
+"That's beautiful, Margaret."
+
+"But then I felt guilty for feeling relieved! See? I can't win."
+
+~ chen.discussed_guilt = True
+
++ [Nod, letting her process the guilt of feeling relieved.] -> Chen.Session3A.Question_Build
+
+:: Chen.Session3A.Question_Build
+Margaret pulls herself together, the way she does.
+
+"So that's why I'm here. I need the cards to tell me something."
+
+"What do you need them to say?"
+
+She looks at you directly.
+
+"I need *permission*. Permission to be happy in the co-housing. Permission to be annoyed by Mrs. Wong's vegetable-cutting opinions. Permission to laugh with Maria. Permission to miss my kitchen. Permission to feel guilty about feeling good. Permission to feel *everything* at once."
+
+Her voice intensifies.
+
+"Am I allowed to have complicated feelings about a good choice? Or do I have to pretend it's all perfect now?"
+
+~ session.offered_permission = True
+
++ ["Let's ask the cards what you need to hear."] -> Chen.Session3A.CardDraw
++ ["You're asking permission to be human. I can give you that right now."] -> Chen.Session3A.Permission_Given_Early
+
+:: Chen.Session3A.Permission_Given_Early
+"You're asking permission to be human. I can give you that right now: Yes. You're allowed. All of it. The complicated feelings. The contradictions. The guilt and the joy and the annoyance and the grief. All of it."
+
+Margaret's eyes fill.
+
+"But let's see what the cards add to that. Because I have a feeling there's something specific they want you to hear."
+
+~ chen.trust += 2
+~ reader.empathy += 1
+~ session.offered_permission = True
+
++ ["Let's see what the cards add to that certainty."] -> Chen.Session3A.CardDraw
+
+# ============================================================================
+# CARD DRAW
+# ============================================================================
+
+:: Chen.Session3A.CardDraw
+You reach for your deck.
+
+Margaret watches you, hands folded in her lap. Not as tight as before. More open.
+
+"One card today," you say. "We're going deep. Not broad."
+
+She nods. "What's the question?"
+
+"What does Margaret Chen need to hear right now?"
+
+"Simple. I like it."
+
+You shuffle. The cards feel warm, alive. Spring energy.
+
+You draw.
+
+@py:
+    # Tight 3-card pool for Session 3A
+    deck = Deck(cards=[
+        "Six of Pentacles",   # Community giving/receiving
+        "Nine of Cups",       # Wish fulfillment (complicated)
+        "Five of Swords"      # Community friction
+    ])
+
+    # Create reading
+    reading = Reading(
+        spread_id="single-focus",
+        decks=[deck]
+    )
+
+    # Draw the card
+    cards = reading.draw_cards()
+@endpy
+
+@render render_reading(reading=reading)
+
+You lay the card on the table.
+
+**{cards[0].name}**{cards[0].reversed ? (Reversed) | }
+
+---
+
+Margaret leans forward, studying it.
+
+"Tell me what you see."
+
++ [Begin interpretation] -> Chen.Session3A.InterpretationHub
+
+# ============================================================================
+# INTERPRETATION HUB
+# ============================================================================
+
+:: Chen.Session3A.InterpretationHub
+@render render_reading(reading=reading)
+@if cards[0].name == "Six of Pentacles":
+    -> Chen.Session3A.SixPentacles_Interpret
+@elif cards[0].name == "Nine of Cups":
+    -> Chen.Session3A.NineCups_Interpret
+@else:
+    # Five of Swords
+    -> Chen.Session3A.FiveSwords_Interpret
+@endif
+
+# ============================================================================
+# SIX OF PENTACLES - INTERPRETATION
+# ============================================================================
+
+:: Chen.Session3A.SixPentacles_Interpret
+@if cards[0].reversed:
+    The **Six of Pentacles - Reversed**.
+
+    The figure's scales tip. The flow becomes imbalanced. Giving without receiving, or receiving without giving. The equilibrium is broken.
+@else:
+    The **Six of Pentacles**.
+
+    A robed figure holds scales in one hand, coins in the other. Below, two figures receive. The scales are balanced - giving and receiving in perfect flow. This is community. This is interdependence.
+@endif
+
+Margaret stares at the card.
+
+@if chen.discussed_autonomy:
+    "Scales. Balance. But I don't feel balanced."
+@else:
+    "What does it mean?"
+@endif
+
++ {reader.style == "intuitive"} ["This is about flow. The give and take of community."] -> Chen.Session3A.SixPentacles_Intuitive_Good
++ {reader.style == "analytical"} ["The Six of Pentacles represents reciprocity. The scales symbolize justice and balance in exchange."] -> Chen.Session3A.SixPentacles_Analytical_Good
++ ["You're good at giving. But can you receive?"] -> Chen.Session3A.SixPentacles_Perceptive_Excellent
++ ["In community, everyone gives and receives. That's how it works."] -> Chen.Session3A.SixPentacles_Practical_Okay
++ ["This card is about charity and generosity."] -> Chen.Session3A.SixPentacles_Generic_Bad
+
+:: Chen.Session3A.SixPentacles_Intuitive_Good
+~ session.interpretation_good += 1
+~ reader.empathy += 1
+~ chen.trust += 1
+"This is about flow. The give and take of community. Energy moving in both directions."
+
+Margaret nods slowly, listening.
+
+@if cards[0].reversed:
+    "But reversed - the flow is blocked. Or imbalanced. You're giving - teaching Maria to make 蛋撻, showing up for mahjong, helping in the garden. But are you *receiving*? Are you letting David Liu carry your groceries? Are you accepting when Maria offers to drive you somewhere?"
+
+    Margaret's jaw tightens. "Accepting feels like admitting I'm old. Helpless."
+
+    "Or it feels like community. Letting people care for you isn't weakness. It's trust."
+
+    She's quiet. "I'm not good at trust."
+
+    "I know. But the reversed Six of Pentacles says: you have to learn. Or you'll exhaust yourself giving and never letting anyone give back."
+@else:
+    "The figure holds scales - perfectly balanced. In Blossom Terrace, you're teaching Maria Cantonese cooking. She's teaching you Filipino cooking. You're both giving. Both receiving. That's the flow."
+
+    Margaret nods. "With Maria, yes. It feels equal."
+
+    "But with others?"
+
+    She hesitates. "With David Liu... he offers help and I say no. With Yuki in the garden... she asks if I need anything and I say I'm fine. With Mrs. Wong..." She laughs bitterly. "She only gives criticism, no actual help, so that doesn't count."
+@endif
+
++ ["Why is receiving so hard for you?"] -> Chen.Session3A.SixPentacles_Receiving_Deep
++ ["Let's go deeper into this."] -> Chen.Session3A.SixPentacles_SubBranch_Choice
+
+:: Chen.Session3A.SixPentacles_Analytical_Good
+~ session.interpretation_good += 1
+~ reader.competence += 1
+~ chen.trust += 1
+
+"The Six of Pentacles represents reciprocity. The scales symbolize justice and balance in exchange. In alchemical terms, it's the equilibrium between active and receptive forces."
+
+Margaret tilts her head. "Say more."
+
+@if cards[0].reversed:
+    "Reversed, the equilibrium is disrupted. The scales tip. You're either giving too much and depleting yourself, or receiving without reciprocating and accumulating debt - energetic debt, emotional debt."
+
+    "I don't like debt," Margaret says firmly.
+
+    "Exactly. So you give and give to avoid owing anyone. But that's not balance. That's avoidance."
+@else:
+    "In healthy systems - ecological, social, energetic - there's always exchange. Trees give oxygen, receive carbon dioxide. You give cooking lessons, you receive companionship. The giving IS the receiving. They're not separate."
+
+    "But what if people give more than I can give back?"
+
+    "Then you receive gracefully. That's also a gift. Letting people help you is generous - you're giving them the opportunity to be kind."
+@endif
+
+~ reader.competence += 1
+
++ ["This goes deeper than just helping with groceries."] -> Chen.Session3A.SixPentacles_SubBranch_Choice
+
+:: Chen.Session3A.SixPentacles_Perceptive_Excellent
+~ session.interpretation_good += 1
+~ reader.insight += 1
+~ chen.trust += 2
+
+"You're good at giving. But can you receive?"
+
+Margaret's breath catches. "No. I'm terrible at receiving."
+
+"Why?"
+
+@if cards[0].reversed:
+    "The scales are tipped, Margaret. Look at them. You're pouring everything into one side - giving, helping, teaching, showing up - and the other side is empty. Eventually the scales break. Or you do."
+
+    Her eyes fill. "I don't know how to let people help me."
+
+    "You know how. You just won't. There's a difference."
+@else:
+    "The Six of Pentacles shows perfect balance. The figure gives. The figures below receive. But here's what people miss: the giver is also *receiving*. They receive the joy of giving. The connection. The purpose. Giving and receiving aren't opposites. They're the same act from different angles."
+
+    Margaret stares at the card. "So when David Liu offers to carry my groceries..."
+
+    "He's giving you help. You're giving him the gift of being useful. Of mattering. By saying no, you're denying both of you."
+@endif
+
++ ["Let's explore why receiving is so hard."] -> Chen.Session3A.SixPentacles_SubBranch_Choice
+
+:: Chen.Session3A.SixPentacles_Practical_Okay
+~ session.interpretation_okay += 1
+~ reader.competence += 1
+
+"In community, everyone gives and receives. That's how it works. You teach Maria cooking, she teaches you. You help in the garden, Yuki helps you understand the plants. It's reciprocal."
+
+Margaret nods. "That makes sense."
+
+@if cards[0].reversed:
+    "But reversed, maybe the balance is off. Maybe you're giving more than receiving, or vice versa."
+
+    "I give more," Margaret says quietly.
+
+    "Then the card is saying: let people give back. Accept help. Let the scales balance."
+@else:
+    "The card says: you're doing it right with Maria. The flow is good. Try to create that same flow with others."
+
+    "I'll try."
+@endif
+
++ ["That's what the card is showing."] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.SixPentacles_Generic_Bad
+~ session.interpretation_bad += 1
+~ chen.trust -= 1
+
+"This card is about charity and generosity. So you should be generous to your new neighbors."
+
+Margaret's expression flattens. "I *am* generous. I teach people cooking. I help in the garden. I show up for community dinners even when I'm tired."
+
+@if cards[0].reversed:
+    "Well, reversed it might mean... being less generous?"
+
+    "That doesn't make sense."
+@else:
+    "Then you're doing well. The card says keep being generous."
+
+    "That's not helpful."
+@endif
+
+The reading didn't land at all.
+
++ ["Let me look at it again—"] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.SixPentacles_SubBranch_Choice
+Margaret leans back, thinking.
+
+"You're right. Receiving is hard for me. But why?"
+
++ ["Because receiving feels like weakness?"] -> Chen.Session3A.SixPentacles_Weakness_Branch
++ ["Because you think you have to earn help by being helpful first?"] -> Chen.Session3A.SixPentacles_Earning_Branch
++ ["Because in Chinese culture, self-sufficiency is virtue?"] -> Chen.Session3A.SixPentacles_Culture_Branch
+
+:: Chen.Session3A.SixPentacles_Receiving_Deep
+"Why is receiving so hard for you?"
+
+Margaret is quiet for a long moment.
+
+"Because..." She struggles with it. "Because receiving means admitting I need something. And needing means not being enough by myself. And not being enough means..."
+
+She stops.
+
++ ["Means being weak?"] -> Chen.Session3A.SixPentacles_Weakness_Branch
++ ["Means losing face?"] -> Chen.Session3A.SixPentacles_Culture_Branch
+
+:: Chen.Session3A.SixPentacles_Weakness_Branch
+~ reader.empathy += 1
+~ chen.discussed_guilt = True
+
+"Because receiving feels like weakness. Like admitting you can't do everything yourself."
+
+"Yes!" Margaret's voice is fierce. "For two years I maintained that house alone. I proved I could. I was *strong*. Now if I let David Liu carry my groceries, I'm saying: I'm not strong anymore. I'm old. I need help."
+
+"And that feels like failure."
+
+"*Diu*, yes."
+
+You lean forward. "But Margaret - strength that requires you to never need anyone isn't strength. It's isolation wearing strength's costume."
+
+She wipes her eyes.
+
+@if cards[0].reversed:
+    "The Six of Pentacles reversed is showing you the cost of that isolation. You're exhausted. You're giving everything to prove you don't need anything. But humans *need*. That's not weakness. That's humanity."
+@else:
+    "The Six of Pentacles says: real strength is being able to give AND receive. To be vulnerable. To say 'yes, I'd like company walking to the grocery store' without feeling like you've lost something."
+@endif
+
+"Can I tell you something?" Margaret asks quietly.
+
+"Of course."
+
+"Last week David Liu asked if I wanted to walk to the Asian grocery. I said no. But I *wanted* to say yes. I wanted company. But I thought... he'd think I was weak. Old. Helpless."
+
+"What if he just wanted to spend time with you?"
+
+Margaret goes very still. "I didn't think of that."
+
+~ chen.discussed_david_liu = True
+
++ ["That's what the card is asking you to consider."] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.SixPentacles_Earning_Branch
+~ reader.insight += 1
+~ chen.discussed_guilt = True
+
+"Because you think you have to earn help by being helpful first. Like it's transactional. I give, therefore I'm allowed to receive."
+
+Margaret's face crumbles. "Yes. *Aiya*, yes."
+
+"But that's not how love works. It's not commerce. Maria doesn't help you because you taught her to make egg tarts. She helps you because she *likes* you."
+
+"But if I stop being useful—"
+
+"Then people will stop caring?" You shake your head. "That's fear talking. Not truth."
+
+@if cards[0].reversed:
+    "The Six of Pentacles reversed shows what happens when you make community transactional. The scales tip. The flow breaks. You exhaust yourself trying to earn the right to be cared for."
+@else:
+    "The Six of Pentacles says: you already matter. Not because of what you give. Because of who you are. You're allowed to receive even when you have nothing to give back."
+@endif
+
+"That's hard to believe."
+
+"I know. But try. Try saying yes next time David Liu offers to walk with you. Try letting Maria drive you somewhere. Try receiving without immediately calculating what you owe."
+
+~ chen.discussed_david_liu = True
+
++ ["That's the practice the card is offering."] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.SixPentacles_Culture_Branch
+~ reader.empathy += 1
+~ chen.discussed_culture = True
+
+"Because in Chinese culture, self-sufficiency is virtue. Asking for help is admitting weakness. Losing face."
+
+Margaret's eyes fill. "*Aiya*. Yes. My mother - she lived alone until eighty-five in Hong Kong. Never asked for help. Never *needed* help. That's what strong women do. That's what 孝順 daughters do - take care of others, never burden others."
+
+"And you're trying to be your mother."
+
+"I'm trying to be worthy of her."
+
+You pause, choosing words carefully.
+
+"Margaret. You're sixty-eight years old. You're not your mother. You're not in Hong Kong in her generation. You're in Seattle in a co-housing community where the whole *point* is interdependence."
+
+@if cards[0].reversed:
+    "The Six of Pentacles reversed is showing you: your mother's way isn't working here. The scales are broken. You're giving and giving to prove you're strong enough, but it's killing you. And Mrs. Wong - she judges you for moving, but she's also here, isn't she? She also needed community."
+
+    "She doesn't admit she needed it," Margaret says bitterly.
+
+    "No. But you can. You can be braver than Mrs. Wong. You can say: I need people. That's not weakness. That's wisdom."
+@else:
+    "The Six of Pentacles says: there's another way to be strong. Strong enough to need people. Strong enough to ask for help. Strong enough to be human instead of superhuman."
+@endif
+
+~ chen.discussed_mrs_wong = True
+
+"Can I tell you something?" Margaret asks.
+
+"Always."
+
+"Last week Maria offered to drive me to the Asian grocery. I said no. But I *wanted* to say yes. I wanted company. But I thought... she'd think I was weak. That I couldn't manage alone. That I'm becoming the 'helpless old Chinese lady' everyone expects."
+
+"What if she just wanted to spend time with you? What if it wasn't about whether you *need* the ride, but about her wanting your company?"
+
+Margaret's face does something complicated. Relief and pain and recognition all at once.
+
+"I never thought of it that way."
+
++ ["That's what the card is offering - a different way of seeing."] -> Chen.Session3A.Synthesis
+
+# ============================================================================
+# NINE OF CUPS - INTERPRETATION
+# ============================================================================
+
+:: Chen.Session3A.NineCups_Interpret
+@if cards[0].reversed:
+    The **Nine of Cups - Reversed**.
+
+    The figure sits before nine cups, arms crossed. They got what they wanted. So why does it feel hollow? Why isn't contentment enough?
+@else:
+    The **Nine of Cups**.
+
+    A figure sits satisfied before nine cups arranged in an arc. Arms crossed, expression smug. This is wish fulfillment. Getting what you asked for. But there's a question underneath: is it allowed? Is it real? Is it enough?
+@endif
+
+Margaret stares at the card.
+
+"Nine cups. Contentment. But..."
+
++ {reader.style == "intuitive"} ["You got what you wanted. But it doesn't feel the way you thought it would."] -> Chen.Session3A.NineCups_Intuitive_Excellent
++ {reader.style == "storyteller"} ["This is the 'be careful what you wish for' card. Not because wishes are bad, but because getting them is complicated."] -> Chen.Session3A.NineCups_Storyteller_Good
++ ["You wished for community, ease, connection. And you have those things now. So why do you still feel bad sometimes?"] -> Chen.Session3A.NineCups_Perceptive_Excellent
++ ["Nine of Cups is about satisfaction and contentment. You should feel happy."] -> Chen.Session3A.NineCups_Generic_Bad
++ ["This card represents wish fulfillment. Your wish came true when you moved."] -> Chen.Session3A.NineCups_Practical_Okay
+
+:: Chen.Session3A.NineCups_Intuitive_Excellent
+~ session.interpretation_good += 1
+~ reader.empathy += 2
+~ chen.trust += 2
+"You got what you wanted. But it doesn't feel the way you thought it would."
+
+Margaret's breath catches. "No. It doesn't."
+
+@if cards[0].reversed:
+    "The Nine of Cups reversed is the hollow victory. You wanted community - you have it. You wanted ease - you have it. You wanted to stop being so tired and alone - you're not anymore. But you thought getting what you wanted would *fix* you. Make you whole. Make the grief go away."
+
+    Margaret is crying now. "*Diu*. Yes."
+
+    "But grief doesn't disappear just because circumstances change. You're still a widow at Blossom Terrace. You're still mourning David. You're just mourning him with better food and mahjong nights."
+@else:
+    "The Nine of Cups is complicated. It's satisfaction, yes. Wish fulfillment, yes. But there's a smugness to the figure. Like they're trying to *prove* they're satisfied. Like if they cross their arms hard enough and smile wide enough, the contentment will become real."
+
+    "Are you saying I'm faking being happy?"
+
+    "No. I'm saying you're *surprised* you're happy sometimes. And then you feel guilty about the happiness. And then you feel bad about the guilt. And none of it feels simple."
+@endif
+
++ ["Let's go deeper into this."] -> Chen.Session3A.NineCups_SubBranch_Choice
+
+:: Chen.Session3A.NineCups_Storyteller_Good
+~ session.interpretation_good += 1
+~ reader.empathy += 1
+~ chen.trust += 1
+
+"This is the 'be careful what you wish for' card. Not because wishes are bad, but because getting them is complicated."
+
+Margaret leans forward. "Go on."
+
+@if cards[0].reversed:
+    "Once upon a time, there was a woman who wished for community. She wished to not be alone. She wished for ease and laughter and mahjong nights. And then—" You gesture to the card. "Her wish was granted."
+
+    "But she didn't feel the way she expected. She felt guilty. She felt overwhelmed. She missed her old kitchen. She grieved her autonomy. The wish came true but it wasn't *neat*. It didn't fix everything."
+@else:
+    "Imagine you wish on a star for community. And the star grants your wish. You move to Blossom Terrace. You make friends. You laugh at dinner. You play mahjong. The wish came true."
+
+    "But you didn't wish carefully enough. You wished for community, but you forgot to specify: 'and also please make Mrs. Wong stop judging me' and 'please let me keep my autonomy' and 'please make the grief go away too.'"
+
+    Margaret laughs through tears. "So my wish was incomplete?"
+
+    "No. Your wish was *human*. We wish for one thing - community - and forget that everything comes with complications. Nine cups is a lot. But it's not ten. It's not perfect. It's almost-contentment. Good-enough contentment."
+@endif
+
++ ["And maybe that's enough."] -> Chen.Session3A.NineCups_SubBranch_Choice
+
+:: Chen.Session3A.NineCups_Perceptive_Excellent
+~ session.interpretation_good += 1
+~ reader.insight += 2
+~ chen.trust += 2
+
+"You wished for community, ease, connection. And you have those things now. So why do you still feel bad sometimes?"
+
+Margaret's voice is small. "Because I thought getting what I wanted would make me whole. But I'm still broken. Just broken in a nicer place."
+
+@if cards[0].reversed:
+    "The Nine of Cups reversed says: you're not broken. You're *human*. Humans are complicated. We can be happy AND sad. Relieved AND grieving. Grateful AND annoyed. All at the same time."
+
+    "But it's exhausting."
+
+    "Yes. But exhausting doesn't mean wrong. The card is giving you permission to be exhausted. To have nine cups of good things and still feel like something's missing. Because what's missing isn't out there in the world. It's David. And no amount of community dinners will bring him back."
+
+    Margaret sobs. "I know. I *know* he's not coming back. But I keep expecting the grief to end. And it doesn't. It just... changes location."
+@else:
+    "The Nine of Cups says: you got what you wanted. But what you wanted wasn't a *cure*. It was just... different circumstances. Better circumstances. But you're still you. You're still grieving. You're still adjusting. You're still learning who Margaret is without David."
+
+    "So the move didn't fix me."
+
+    "The move was never supposed to fix you. It was supposed to give you a better place to do the work of healing. And it did. You're healing at Blossom Terrace. But healing isn't linear. It's messy."
+@endif
+
+~ chen.discussed_grief = True
+~ chen.discussed_guilt = True
+
++ ["Let's explore what 'good enough' means for you."] -> Chen.Session3A.NineCups_SubBranch_Choice
+
+:: Chen.Session3A.NineCups_Practical_Okay
+~ session.interpretation_okay += 1
+~ reader.competence += 1
+
+"This card represents wish fulfillment. Your wish came true when you moved to Blossom Terrace. You wanted community and ease. You have it now."
+
+"But I don't feel as happy as I expected," Margaret says.
+
+@if cards[0].reversed:
+    "That's the reversal. The wish came true but it doesn't feel as good as you thought it would. That's normal. Real life is always more complicated than wishes."
+@else:
+    "Well, the card says you should feel satisfied. Maybe you need to focus on the good parts more."
+@endif
+
+Margaret nods but doesn't look convinced.
+
++ ["That's what the card is showing."] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.NineCups_Generic_Bad
+~ session.interpretation_bad += 1
+~ chen.trust -= 1
+
+"Nine of Cups is about satisfaction and contentment. You should feel happy. You have friends, community, mahjong nights. That's good."
+
+Margaret's face is neutral. "I do feel happy sometimes. But I also feel guilty and tired and overwhelmed."
+
+@if cards[0].reversed:
+    "Well, reversed means you're not satisfied. So maybe Blossom Terrace isn't right for you?"
+
+    "That's not—" Margaret stops. "That's not what I'm saying."
+@else:
+    "But the card says you're satisfied."
+
+    "Cards don't dictate feelings," Margaret says sharply. "I have complicated feelings. That's why I'm here."
+@endif
+
+The reading completely missed the mark.
+
++ ["Let me think about this differently—"] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.NineCups_SubBranch_Choice
+You pause, looking at Margaret.
+
+"There's something deeper here. What do you think it is?"
+
++ ["I think you're afraid that being happy means betraying David."] -> Chen.Session3A.NineCups_Betrayal_Branch
++ ["I think you expected moving to erase the grief, and it didn't."] -> Chen.Session3A.NineCups_Grief_Branch
++ ["I think you feel guilty for wanting ease instead of staying strong."] -> Chen.Session3A.NineCups_Guilt_Branch
+
+:: Chen.Session3A.NineCups_Betrayal_Branch
+~ reader.empathy += 1
+~ chen.discussed_grief = True
+~ chen.discussed_guilt = True
+
+"I think you're afraid that being happy means betraying David."
+
+Margaret breaks. Really cries. Deep, shaking sobs.
+
+"Yes. *Diu*, yes."
+
+You wait. Let her cry.
+
+After a moment: "Last week I laughed. Really laughed. Maria told a joke about her grandson and I laughed until I cried. And then afterward I felt *terrible*. Like: how dare I laugh when David can't? How dare I be happy when he's dead?"
+
+@if cards[0].reversed:
+    "The Nine of Cups reversed says: that's the hollow victory. You got the wish - laughter, community, joy. But it feels wrong because David isn't here to share it."
+
+    "So what do I do?"
+
+    "You grieve AND you laugh. You carry David with you AND you make new friends. You honor him by *living*, not by refusing all joy for the rest of your life."
+@else:
+    "The Nine of Cups says: you're allowed to be happy. David loved you. He'd want you to laugh. He'd want you to have friends and mahjong nights and egg tarts with Maria. Refusing joy doesn't honor him. It dishonors his love."
+@endif
+
+Margaret wipes her face. "I know that logically. But my heart is slower than my head."
+
+"That's okay. Give your heart time."
+
+~ chen.trust += 2
+
++ ["That's what the card is telling you."] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.NineCups_Grief_Branch
+~ reader.empathy += 1
+~ chen.discussed_grief = True
+
+"I think you expected moving to erase the grief, and it didn't."
+
+"Yes." Margaret's voice is quiet. "I thought: new place, new life, new Margaret. The grief would stay in the old house. But it followed me. It's in my apartment at Blossom Terrace. It's at the mahjong table. It's in the garden with Yuki. Everywhere I go, there it is."
+
+@if cards[0].reversed:
+    "The Nine of Cups reversed is the disappointment. You got what you wished for - community, ease, new beginnings. But the grief didn't leave. So now you have all these good things AND you're still sad. And that feels like failure."
+
+    "It does feel like failure."
+
+    "But it's not. Grief doesn't have an address. It lives in you, not in houses. Moving didn't fail. You just expected something it couldn't deliver - which is a grief-free life. That doesn't exist."
+@else:
+    "The Nine of Cups says: you have nine out of ten cups full. That's *so much*. Friends, community, laughter, mahjong, egg tarts, Maria, Yuki. Nine cups! But you're focused on the empty cup. The David cup. The grief cup."
+
+    "How do I stop focusing on what's missing?"
+
+    "You don't. You just also start noticing the nine that are full. Both. At the same time. Not one or the other."
+@endif
+
+~ chen.trust += 1
+
++ ["That's the practice."] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.NineCups_Guilt_Branch
+~ reader.insight += 1
+~ chen.discussed_guilt = True
+~ chen.discussed_culture = True
+
+"I think you feel guilty for wanting ease instead of staying strong."
+
+Margaret nods emphatically. "Yes! Chinese women are supposed to be strong. We're supposed to handle everything. My mother never moved to easier place. Mrs. Wong judges me for it. And part of me agrees with her."
+
+@if cards[0].reversed:
+    "The Nine of Cups reversed asks: what if strength isn't what you need anymore? What if you've been strong for sixty-eight years and now you're allowed to want ease? To want community? To want help?"
+
+    "But that feels like giving up."
+
+    "Or it feels like evolution. Choosing ease isn't weakness. It's wisdom. The card says: you got what you wished for. Now give yourself permission to actually enjoy it instead of feeling guilty about it."
+@else:
+    "The Nine of Cups says: you *earned* this ease. You were strong for forty years in that house. Strong for two years alone after David died. Strong through selling the house and moving. You're still strong. Just differently strong. Strong enough to need people."
+
+    "Mrs. Wong wouldn't see it that way."
+
+    "Mrs. Wong is at Blossom Terrace too. She also needed community. She just can't admit it. You can be braver than her. You can say: I choose ease. And that's valid."
+@endif
+
+~ chen.discussed_mrs_wong = True
+
++ ["That's what the card offers - permission."] -> Chen.Session3A.Synthesis
+
+# ============================================================================
+# FIVE OF SWORDS - INTERPRETATION
+# ============================================================================
+
+:: Chen.Session3A.FiveSwords_Interpret
+@if cards[0].reversed:
+    The **Five of Swords - Reversed**.
+
+    The figure begins to lay down the swords. The battle is ending. Perhaps not won, but the fighting is over. Choosing peace over being right.
+@else:
+    The **Five of Swords**.
+
+    A figure holds three swords, smirking. Two others walk away, defeated. The figure won - but at what cost? Victory that isolates. Being right but losing connection. This is community friction. Small battles. Petty conflicts.
+@endif
+
++ {reader.style == "analytical"} ["The Five of Swords represents conflict - but not war. Small battles that erode community."] -> Chen.Session3A.FiveSwords_Analytical_Good
++ ["This is about the price of being right. Winning arguments but losing connection."] -> Chen.Session3A.FiveSwords_Perceptive_Excellent
++ {reader.style == "intuitive"} ["Community has friction. That's not failure. That's just... people being people."] -> Chen.Session3A.FiveSwords_Intuitive_Good
++ ["Five of Swords means conflict and difficulty in relationships."] -> Chen.Session3A.FiveSwords_Generic_Bad
++ ["You're having disagreements with your neighbors. That's normal."] -> Chen.Session3A.FiveSwords_Practical_Okay
+
+:: Chen.Session3A.FiveSwords_Analytical_Good
+~ session.interpretation_good += 1
+~ reader.competence += 1
+~ chen.trust += 1
+
+"The Five of Swords represents conflict - but not war. Not violence. Small battles that erode community if left unresolved. In tarot numerology, five is instability. In Swords, it's mental/social instability."
+
+Margaret nods, following.
+
+@if cards[0].reversed:
+    "Reversed, it indicates moving past conflict. Choosing to lay down weapons. Prioritizing relationship over being correct. The ego surrenders - not in defeat, but in wisdom."
+
+    "Like with Mrs. Wong?"
+
+    "Exactly. She criticizes your vegetable cutting. You could argue. Prove your way is just as good. But reversed Five of Swords says: let her be right. The connection matters more than the vegetables."
+@else:
+    "The figure in the card won the argument. Collected all the swords. But look - the others are walking away. Victory through dominance creates isolation. In Blossom Terrace, you could win every debate - about the rice cooker temperature, the composting rules, the wok station schedule. But at what cost?"
+
+    "I'd be alone again. Just... alone with people around."
+
+    "Yes. Surrounded by people you alienated."
+@endif
+
+~ chen.discussed_practical = True
+
++ ["Let's explore this friction more."] -> Chen.Session3A.FiveSwords_SubBranch_Choice
+
+:: Chen.Session3A.FiveSwords_Perceptive_Excellent
+~ session.interpretation_good += 1
+~ reader.insight += 2
+~ chen.trust += 2
+
+"This is about the price of being right. Winning arguments but losing connection."
+
+Margaret goes still. "Say that again."
+
+"You can be right, or you can be in community. Sometimes you don't get both."
+
+@if cards[0].reversed:
+    "Reversed Five of Swords says: you're learning this. When Mrs. Wong criticizes how you cut vegetables, you could argue. Prove she's wrong. Win. But then what? She stops talking to you? She excludes you from mahjong? You were right, but you're alone again."
+
+    "So I should just let her criticize me?"
+
+    "No. But you pick your battles. Vegetables aren't worth fighting over. If she said something racist, or cruel, or actually harmful - then you fight. But vegetables? Let her be the expert. It costs you nothing."
+@else:
+    "The Five of Swords asks: what are you willing to sacrifice for community? Your autonomy sometimes. Your preference for how things should be done. Your need to be right. The figure won but everyone left. That's not victory."
+
+    "I miss making decisions by myself," Margaret admits. "In my house, I decided everything. Rice cooker temperature. When to eat. How to cut vegetables. Now everything is negotiated."
+
+    "Yes. That's the price of community. But you also have mahjong. Laughter. Maria. Yuki. The Filipino group's cooking. Cantonese movie nights. You can't have both isolation and community. You have to choose."
+@endif
+
+~ chen.discussed_autonomy = True
+~ chen.discussed_practical = True
+
++ ["What battles are worth fighting?"] -> Chen.Session3A.FiveSwords_SubBranch_Choice
+
+:: Chen.Session3A.FiveSwords_Intuitive_Good
+~ session.interpretation_good += 1
+~ reader.empathy += 1
+~ chen.trust += 1
+"Community has friction. That's not failure. That's just... people being people."
+
+Margaret relaxes slightly. "Really?"
+
+@if cards[0].reversed:
+    "Really. The Five of Swords reversed is about accepting that friction and choosing peace anyway. Mrs. Wong will criticize. Someone will leave the kitchen dirty. The Filipino group will take the wok station when you wanted it. That's life with people."
+
+    "So I just have to accept it?"
+
+    "You have to decide: is this the friction I can live with? Is annoying-but-with-people better than peaceful-but-alone?"
+@else:
+    "The Five of Swords shows you what happens when you fight every battle. The figure won - collected all the swords - but they're standing alone. Is that what you want? To be right all the time and completely isolated?"
+
+    "No." Margaret's voice is firm. "I was isolated in my house. I moved to *not* be alone anymore."
+
+    "Then the card says: accept the friction. Mrs. Wong's opinions. The kitchen politics. The vegetable-cutting criticism. It's annoying. But it's the price of admission to community."
+@endif
+
+~ chen.discussed_autonomy = True
+~ chen.discussed_mrs_wong = True
+
++ ["That's the deal."] -> Chen.Session3A.FiveSwords_SubBranch_Choice
+
+:: Chen.Session3A.FiveSwords_Generic_Bad
+~ session.interpretation_bad += 1
+~ chen.trust -= 1
+
+"Five of Swords means conflict and difficulty in relationships. So you're having conflicts with your neighbors."
+
+Margaret frowns. "Not *conflicts*. Just... friction. Small annoyances."
+
+@if cards[0].reversed:
+    "Reversed means the conflicts are resolving."
+
+    "There aren't really conflicts to resolve."
+@else:
+    "Then maybe you'll have conflicts soon?"
+
+    "That's not helpful."
+@endif
+
+The interpretation missed the nuance entirely.
+
++ ["Let me reconsider—"] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.FiveSwords_Practical_Okay
+~ session.interpretation_okay += 1
+~ reader.competence += 1
+"You're having disagreements with your neighbors. Mrs. Wong criticizes you. People leave the kitchen messy. There's debate about composting rules. That's normal in shared living."
+
+"I know it's normal," Margaret says. "But it's exhausting."
+
+@if cards[0].reversed:
+    "Reversed suggests you're getting better at handling it. Learning to let small things go."
+
+    "I am trying."
+@else:
+    "The card says: pick your battles. Not everything is worth fighting over. Save your energy for things that truly matter."
+
+    "That makes sense."
+@endif
+
++ ["That's the guidance."] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.FiveSwords_SubBranch_Choice
+
+"Let's go deeper. What's the real issue here?"
+
++ ["Is it that you miss having control?"] -> Chen.Session3A.FiveSwords_Control_Branch
++ ["Is it that Mrs. Wong represents all your internal criticism?"] -> Chen.Session3A.FiveSwords_MrsWong_Branch
++ ["Is it that you're fighting about vegetables when you're really grieving autonomy?"] -> Chen.Session3A.FiveSwords_Autonomy_Branch
+
+:: Chen.Session3A.FiveSwords_Control_Branch
+~ reader.insight += 1
+~ chen.discussed_autonomy = True
+"Is it that you miss having control? For forty years, you made the rules in your own house."
+
+"Yes!" Margaret's voice is passionate. "Everything was my decision. My timing. My preferences. Now I have to accommodate fifteen other people's opinions. It's *exhausting*."
+
+@if cards[0].reversed:
+    "The Five of Swords reversed says: control was isolating you. You had complete autonomy and complete loneliness. Now you have less autonomy and more connection. The card asks: which do you value more?"
+@else:
+    "The Five of Swords says: you can have control or you can have community. Not both. The figure has all the swords - all the control - and no companions. Is that what you want?"
+@endif
+
+"No. I chose community. I moved here for community."
+
+"Then the cost is: less control. Negotiating. Compromising. Letting Mrs. Wong be right about vegetables even though she's not."
+
+~ chen.discussed_mrs_wong = True
+
++ ["That's the trade."] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.FiveSwords_MrsWong_Branch
+~ reader.empathy += 1
+~ chen.discussed_culture = True
+~ chen.discussed_guilt = True
+~ chen.discussed_mrs_wong = True
+
+"Is it that Mrs. Wong represents all your internal criticism? She's saying what you already think about yourself."
+
+Margaret goes very still. Then: "*Diu*. Yes."
+
+"What does she criticize?"
+
+"Everything. I cut vegetables wrong. I fold dumplings wrong. I moved to co-housing when I should have stayed in my house. I'm not traditional enough. Not Chinese enough. Not *strong* enough."
+
+"And you believe her."
+
+"Part of me does. The part that sounds like my mother. The part that says: strong women don't need help. Strong women handle everything themselves."
+
+@if cards[0].reversed:
+    "The Five of Swords reversed says: you're laying down that internal battle. Mrs. Wong can criticize. Your mother's voice can criticize. But you don't have to fight them OR internalize them. You can just... let them be wrong."
+@else:
+    "The Five of Swords says: fighting Mrs. Wong is really fighting yourself. The external critic and the internal critic. And you'll never win that battle. Because even if you prove her wrong about vegetables, the voice in your head remains."
+@endif
+
+"So what do I do?"
+
+"Stop fighting. Stop trying to prove you're strong enough, traditional enough, Chinese enough, *enough*. You're sixty-eight. You moved to co-housing. You're making friends. You're doing it. Mrs. Wong's opinion doesn't have to matter."
+
+~ chen.trust += 2
+
++ ["That's what the card is offering - permission to stop fighting."] -> Chen.Session3A.Synthesis
+
+:: Chen.Session3A.FiveSwords_Autonomy_Branch
+~ reader.insight += 1
+~ chen.discussed_autonomy = True
+~ chen.discussed_grief = True
+
+"Is it that you're fighting about vegetables when you're really grieving autonomy?"
+
+Margaret's breath catches. "Yes. It's never about the vegetables. It's about: I used to decide. Now I don't. I used to have my kitchen. Now I share. I used to be independent. Now I'm interdependent."
+
+"And that feels like loss."
+
+"It IS loss. I lost my house. I lost David. I lost my independence. I lost my identity as 'strong woman who handles everything alone.'"
+
+@if cards[0].reversed:
+    "The Five of Swords reversed asks: what if interdependence isn't loss? What if it's evolution? You're not *losing* independence. You're *choosing* connection. That's active. That's powerful."
+@else:
+    "The Five of Swords says: yes, it's loss. But look at the figures walking away. If you keep fighting for total autonomy, you'll win - and be alone again. Is that what you want?"
+@endif
+
+"No."
+
+"Then you grieve the autonomy AND you embrace the community. Both. That's the work."
+
+~ chen.discussed_grief = True
+
++ ["That's what the card is showing."] -> Chen.Session3A.Synthesis
+
+# ============================================================================
+# SYNTHESIS
+# ============================================================================
+
+:: Chen.Session3A.Synthesis
+@py:
+    # Calculate reading quality
+    if session.interpretation_good >= 1:
+        session.reading_quality = "profound"
+        chen.clarity = 10
+    elif session.interpretation_okay >= 1:
+        session.reading_quality = "helpful"
+        chen.clarity = 7
+    else:
+        session.reading_quality = "adequate"
+        chen.clarity = 4
+@endpy
+
+You look at the single card on the table.
+
+**{cards[0].name}**{cards[0].reversed ? (Reversed) | }
+
+One card. One answer. One truth.
+
+---
+
+@if session.reading_quality == "profound":
+    "Margaret," you say carefully. "I think the card is giving you exactly what you asked for."
+
+    "What did I ask for?"
+
+    "Permission."
+
+    Her eyes fill.
+
+    @if cards[0].name == "Six of Pentacles":
+        # SIX OF PENTACLES SYNTHESIS
+
+        @if cards[0].reversed:
+            "The Six of Pentacles reversed is showing you the cost of imbalance. You're giving everything to prove you don't need anything. Teaching Maria, helping in the garden, showing up for mahjong even when you're exhausted. But you're not *receiving*. You're not letting David Liu walk with you to the grocery store. You're not accepting Maria's offers to drive you places."
+        @else:
+            "The Six of Pentacles is the flow of community. You're teaching Maria Cantonese cooking. She's teaching you Filipino cooking. Yuki shares garden wisdom. You share your experience. It's reciprocal. It's balanced."
+        @endif
+
+        @if chen.discussed_culture:
+            You lean forward. "Your mother lived alone until eighty-five. Mrs. Wong judges you for moving. But Margaret - you're not your mother. You're not in her generation. You're in a co-housing community where the whole *point* is interdependence."
+        @endif
+
+        @if chen.discussed_david_liu:
+            "David Liu offers to walk with you. That's not him thinking you're weak. That's him wanting your company. You're allowed to say yes. Enjoying his company doesn't betray your David. Love doesn't work that way."
+        @endif
+
+        "The Six of Pentacles gives you permission to receive as much as you give. To need as much as you're needed. To be human, not superhuman."
+
+    @elif cards[0].name == "Nine of Cups":
+        # NINE OF CUPS SYNTHESIS
+
+        @if cards[0].reversed:
+            "The Nine of Cups reversed shows wish fulfillment that feels hollow. You wanted community, ease, connection. You have all that. But you thought getting what you wanted would fix you. Make the grief go away. Make everything *simple*."
+        @else:
+            "The Nine of Cups is nine out of ten cups full. That's *so much*. Friends, laughter, mahjong, Maria, Yuki, egg tarts, community dinners. Nine cups! But you keep focusing on the empty cup. The David cup."
+        @endif
+
+        @if chen.discussed_grief:
+            "Grief doesn't disappear when circumstances change. You're still a widow at Blossom Terrace. You're just a widow with better food and mahjong nights. That's not failure. That's reality."
+        @endif
+
+        @if chen.discussed_guilt:
+            "You feel guilty about being happy sometimes. But Margaret - David loved you. He'd want you to laugh with Maria. To play mahjong. To teach people cooking. Refusing joy doesn't honor him. It dishonors his love."
+        @endif
+
+        "The Nine of Cups gives you permission to have nine wonderful things AND still miss what's missing. To be happy AND sad. Grateful AND grieving. You don't have to pick one. You can hold them all."
+
+    @else:
+        # FIVE OF SWORDS SYNTHESIS
+
+        @if cards[0].reversed:
+            "The Five of Swords reversed says: you're learning to lay down weapons. To choose connection over being right. Mrs. Wong criticizes your vegetables - you could argue, but you let it go. Someone leaves the rice cooker dirty - annoying, but you clean it rather than starting a war."
+        @else:
+            "The Five of Swords shows the price of winning every battle. You could be right about everything - vegetables, rice cookers, composting rules. But then what? You'd be right and alone. Again."
+        @endif
+
+        @if chen.discussed_autonomy:
+            "You miss autonomy. You miss making all the decisions by yourself. That's real. But the card asks: would you trade community for control? Would you rather be autonomous and isolated, or interdependent and annoyed?"
+        @endif
+
+        @if chen.discussed_mrs_wong:
+            "Mrs. Wong represents your internal critic. The voice that says you're not strong enough, traditional enough, Chinese enough. But you don't have to fight her. You don't have to prove anything. You can just... exist. Imperfect. Human. Doing your best."
+        @endif
+
+        "The Five of Swords gives you permission to be annoyed sometimes. To miss your old kitchen. To find community exhausting. And to choose it anyway. Because being annoyed-with-people is better than being peaceful-alone."
+    @endif
+
+    Margaret is crying - the good kind. Relief. Permission received.
+
+    "*Diu*," she whispers. "Thank you. That's... that's exactly what I needed to hear."
+
+    ~ chen.clarity = 10
+
+@elif session.reading_quality == "helpful":
+    # SIMPLIFIED SYNTHESIS
+
+    "The {cards[0].name} is telling you something important," you say.
+
+    @if cards[0].name == "Six of Pentacles":
+        "Community is about giving and receiving. Both matter. You're good at giving. Try to get better at receiving too."
+    @elif cards[0].name == "Nine of Cups":
+        "You got what you wanted - community, ease, friends. It's okay if it doesn't feel perfect. That's normal. Real life is always more complicated than wishes."
+    @else:
+        "Community has friction. Mrs. Wong criticizes. People leave things messy. That doesn't mean you failed. It means you're living with people. Pick your battles. Let small things go."
+    @endif
+
+    Margaret nods. "That's helpful. Thank you."
+
+    ~ chen.clarity = 7
+
+@else:
+    # ADEQUATE/MEDIOCRE
+
+    "The card shows... adjustment," you say vaguely. "Moving to Blossom Terrace is a big change. It's natural to have mixed feelings."
+
+    Margaret waits for more. There isn't more.
+
+    "I see," she says politely.
+
+    ~ chen.clarity = 4
+@endif
+
++ [(The reading is complete.)] -> Chen.Session3A.Payment
+
+# ============================================================================
+# PAYMENT & GOODBYE
+# ============================================================================
+
+:: Chen.Session3A.Payment
+Margaret stands, gathering her new, smaller thermos.
+
+"How much do I owe you?"
+
+@if session.reading_quality == "profound":
+    ~ session_payment = 70
+    ~ session_reputation = 10
+    ~ reader.money += session_payment
+    ~ reader.reputation += session_reputation
+    ~ reader.money_earned_this_session = session_payment
+    ~ reader.reputation_gained_this_session = session_reputation
+
+    She counts out seventy dollars. "You're getting expensive," she says with a smile. "Good. You should charge more."
+
+    "Margaret, that's generous—"
+
+    "You gave me permission to be human. That's worth everything."
+
+    She reaches into her bag. Pulls out something wrapped in cloth.
+
+    "This is David. In his garden. 2019, before he got sick."
+
+    She unwraps a small framed photo. David Chen - silver-haired, smiling, standing among tomato plants in full summer glory. He's holding a tomato the size of a fist, laughing at the camera. At Margaret, who was holding the camera.
+
+    "I want you to have it."
+
+    "I can't—"
+
+    "You helped me carry him forward. Now he's here too. In your space. Watching you help people." Her voice cracks. "He'd be proud. He loved when people helped each other."
+
+    ~ chen.gave_gift = True
+    ~ chen.gift_description = "A framed photo of David Chen in his garden, 2019"
+
+@elif session.reading_quality == "helpful":
+    ~ session_payment = 55
+    ~ session_reputation = 6
+    ~ reader.money += session_payment
+    ~ reader.reputation += session_reputation
+    ~ reader.money_earned_this_session = session_payment
+    ~ reader.reputation_gained_this_session = session_reputation
+
+    She hands you fifty-five dollars. "Thank you. This helped."
+
+    "I'm glad."
+
+@else:
+    ~ session_payment = 40
+    ~ session_reputation = 3
+    ~ reader.money += session_payment
+    ~ reader.reputation += session_reputation
+    ~ reader.money_earned_this_session = session_payment
+    ~ reader.reputation_gained_this_session = session_reputation
+
+    "Here's forty." Polite but not warm.
+@endif
+
++ [Walk her to the door] -> Chen.Session3A.Goodbye
+
+:: Chen.Session3A.Goodbye
+You walk Margaret to the door.
+
+@if session.reading_quality == "profound":
+    She pauses at the threshold.
+
+    "I might not come back," she says. "Not because you weren't good - because you were *too* good. I have what I need now."
+
+    She smiles - genuine, warm.
+
+    "But I'll send people. My granddaughter Maya - she's twenty-three, struggling with something she won't tell me about. I'll give her your number. And Eleanor - my friend from the library, retired now. She needs guidance too. She's been stuck for years."
+
+    "I'd be honored."
+
+    Margaret steps forward, hugs you - quick, fierce, Chinese-grandmother-style. Her small frame is surprisingly strong.
+
+    "Thank you. For seeing me. For giving me permission to be messy and human and complicated. For helping me carry David forward without being crushed by him."
+
+    She pulls back, wipes her eyes.
+
+    "You're going to be very good at this. You already are. M. Thorne knew."
+
+    Then she's gone. Down the stairs. Into spring.
+
+    @py:
+        # Unlock new clients
+        maya.unlocked = True
+        maya.unlock_reason = "Margaret's granddaughter, struggling with identity"
+        maya.relationship_to_chen = "granddaughter"
+
+        eleanor.unlocked = True
+        eleanor.unlock_reason = "Margaret's library friend, stuck in grief"
+        eleanor.relationship_to_chen = "close friend"
+
+        # Chen's arc is complete
+        chen.arc_complete = True
+        chen.final_state = "thriving_in_community"
+        chen.will_return = False
+    @endpy
+
+@elif session.reading_quality == "helpful":
+    "Thank you," she says at the door. "I'll think about what you said."
+
+    "You're welcome anytime."
+
+    She pauses. "My granddaughter Maya - she's struggling with something. I might give her your number. If that's okay."
+
+    "Of course."
+
+    "Good. Thank you again."
+
+    She leaves.
+
+    @py:
+        # Partial unlock - only Maya
+        maya.unlocked = True
+        maya.unlock_reason = "Margaret mentioned you"
+        maya.relationship_to_chen = "granddaughter"
+
+        chen.arc_complete = True
+        chen.final_state = "adjusting_with_help"
+        chen.will_return = False
+    @endpy
+
+@else:
+    She leaves with a polite nod.
+
+    You might not see her again.
+
+    @py:
+        chen.arc_complete = True
+        chen.final_state = "uncertain"
+        chen.will_return = False
+    @endpy
+@endif
+
++ [Watch her depart, trusting the work is done.] -> Chen.Session3A.SessionComplete
+
+# ============================================================================
+# SESSION COMPLETE
+# ============================================================================
+
+:: Chen.Session3A.SessionComplete
+The door closes behind Margaret Chen.
+
+You stand in your reading corner, her payment warm in your hand.
+
+@if chen.gave_gift:
+    On your table: David's photo. Him in the garden, laughing, holding that impossible tomato. You can see what Margaret loved - the joy in his face, the aliveness of him, the way he looked at whoever was holding the camera (Margaret) like she was the sun.
+
+    This isn't just a photo. This is trust. This is: *I'm letting go now. You helped me learn how.*
+@endif
+
+Outside, spring rain patters gently. Your deck sits on the table, the single card still visible. {cards[0].name}. Permission granted.
+
+@if session.reading_quality == "profound":
+    Three sessions. Three times you helped Margaret Chen see herself clearly.
+
+    Session 1: The decision - stay or go.
+    Session 2: The aftermath - guilt and hope tangled together.
+    Session 3: Permission - to be human, complicated, imperfect.
+
+    She came to you paralyzed. She leaves you thriving - or at least, living. Really living. Making egg tarts with new friends. Laughing. Grieving. Being annoyed by Mrs. Wong. Playing mahjong. Carrying David forward without being crushed by him.
+
+    You did that. Not just the cards. *You*.
+
+    M. Thorne would be proud.
+
+    No - M. Thorne *is* proud. Somewhere.
+
+    ---
+
+    Two new names are available now in your contact list:
+
+    **Maya Chen** - Margaret's granddaughter, 23, "struggling with something she won't tell me about"
+
+    **Eleanor Blackwood** - Margaret's library friend, retired, "stuck in grief for years"
+
+    Margaret's story is complete. But the practice continues.
+
+    New stories. New people. New grief and joy and permission-giving.
+
+    This is the work. You're good at it.
+
+@elif session.reading_quality == "helpful":
+    Three sessions with Margaret Chen. Not perfect, but helpful.
+
+    She came to you paralyzed. She's leaving you... adjusting. It's not a clean ending. Not triumphant. But she's doing the work. That's enough.
+
+    Maya's number is in your phone now. Margaret's granddaughter. Another chance to help someone.
+
+    You're learning. Growing. Each session teaches you something.
+
+@else:
+    Margaret is gone. You might not see her again.
+
+    The reading was... adequate. Not transformational. You gave her some things to think about, but you didn't quite connect.
+
+    That stings.
+
+    But you showed up. You tried. Next client, you'll do better.
+@endif
+
+@py:
+    session.current_client = None
+    reader.sessions_completed += 1
+
+    # Special achievement for completing Chen's full arc
+    if chen.arc_complete and chen.final_state == "thriving_in_community":
+        reader.achievements.add("chen_arc_complete")
+@endpy
+
+---
+
+**Session 3A Complete**
+
+**Money Earned:** ${reader.money_earned_this_session}
+**Reputation Gained:** +{reader.reputation_gained_this_session}
+**Reading Quality:** {session.reading_quality}
+
+@if chen.gave_gift:
+    **Gift Received:** {chen.gift_description}
+@endif
+
+@if maya.unlocked and eleanor.unlocked:
+    **New Clients Available:**
+    - Maya Chen (Margaret's granddaughter)
+    - Eleanor Blackwood (Margaret's library friend)
+@elif maya.unlocked:
+    **New Client Available:**
+    - Maya Chen (Margaret's granddaughter)
+@endif
+
+---
+
++ [Return to the Reader's Table] -> ReaderTable
+
+# ============================================================================
+# END OF CHEN SESSION 3A
+# ============================================================================
