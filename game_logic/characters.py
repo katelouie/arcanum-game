@@ -40,6 +40,9 @@ class Reader:
     has_shop: bool = False  # Rented permanent reading space
     advanced_spreads_unlocked: bool = False
 
+    # Achievements collection
+    achievements = set()
+
     ### Bounded Properties ###
     # === EMPATHY (0-10) ===
     @property
