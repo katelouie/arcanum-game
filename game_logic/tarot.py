@@ -294,11 +294,30 @@ class Spread:
 class Deck:
     """Construct a Deck of Cards, either full or partial."""
 
-    def __init__(self, cards: Optional[list[str]] = None) -> None:
+    def __init__(
+        self,
+        cards: Optional[list[str]] = None,
+        reversals: Optional[list[float | int]] = None,
+    ) -> None:
+        """Create a deck (full or constrained) of tarot cards for drawing.
+
+        If no cards are specified, the full 78-card deck will be constructed.
+
+        Args:
+        cards (optional): List of card names
+        reversals (optional): List of reversal chance (int or float) for each card in either
+            cards or the full 78-card deck. Must be the same length as either cards or len==78.
+            0 -> only upright, 1 -> only reversed, between 0 and 1 is chance for reversal.
+        """
         self.cards_raw = cards
         self.cards = []
-
+        self.reversals = reversals
         self._construct_deck()
+
+        if reversals and len(reversals) == len(self.cards):
+            self.reversal_map = dict(zip(self.cards, reversals))
+        else:
+            self.reversal_map = None
 
     def _construct_deck(self):
         if self.cards_raw:
@@ -315,7 +334,17 @@ class Deck:
         """Draw a card from the deck"""
         if not self.cards:
             raise ValueError("Cannot draw from an empty deck")
-        return random.sample(self.cards, 1)[0]
+        card = random.choice(self.cards)
+
+        if self.reversal_map:
+            card_reversal_chance = self.reversal_map[card]
+        else:
+            card_reversal_chance = 0.5
+
+        if random.randint(0, 1) <= card_reversal_chance:
+            card.set_reversed(True)
+
+        return card
 
     def draw_cards(self, count=1) -> list[Card]:
         """Draw multiple cards from the deck."""
@@ -323,7 +352,15 @@ class Deck:
             raise ValueError(
                 f"Cannot draw {count} cards from deck with only {len(self.cards)} cards"
             )
-        return random.sample(self.cards, count)
+
+        cards_drawn = random.sample(self.cards, count)
+
+        for card in cards_drawn:
+            card_reversal_chance = self.reversal_map[card] if self.reversal_map else 0.5
+            if random.randint(0, 1) <= card_reversal_chance:
+                card.set_reversed(True)
+
+        return cards_drawn
 
     @classmethod
     def from_names(cls, card_names: list[str]) -> "Deck":
@@ -401,16 +438,16 @@ class Reading:
         """
         for p in range(len(self.spread.positions)):
             if not self.allow_repeats:
-                position_pool = [
+                self.decks[p].cards = [
                     c for c in self.decks[p].cards if c not in self.drawn_cards
                 ]
 
-                if not position_pool:
+                if not self.decks[p].cards:
                     raise Exception(f"No cards available for position {p}")
             else:  # Repeats allowed
-                position_pool = self.decks[p].cards
+                pass
 
-            self.drawn_cards.extend(random.sample(position_pool, 1))
+            self.drawn_cards.append(self.decks[p].draw_card())
 
         return self.drawn_cards
 
