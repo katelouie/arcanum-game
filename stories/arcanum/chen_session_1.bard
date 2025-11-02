@@ -816,7 +816,7 @@ Your book is on the shelf - you could reference it. But M. Thorne's note said: *
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.FourCups_Interpret
-
+@render render_reading(reading=reading)
 @if cards[0].reversed:
     # REVERSED: Emerging from apathy, renewed interest, clarity returning
     The **Four of Cups** - but upside down.
@@ -1005,6 +1005,7 @@ You feel the misfire. The reading didn't land.
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.TwoSwords_Interpret
+@render render_reading(reading=reading)
 @if cards[0].reversed:
     # REVERSED: Decision being forced, can't avoid anymore, information emerging
     The **Two of Swords** - upside down.
@@ -1146,6 +1147,7 @@ The reading fell flat. You didn't give her anything she didn't already know.
 # ============================================================================
 
 :: Chen.Session1.Position2_Hub
+@render render_reading(reading=reading)
 # Logic hub
 You both look at the second card.
 
@@ -1162,6 +1164,7 @@ You both look at the second card.
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.TenPentacles_Interpret
+@render render_reading(reading=reading)
 @if cards[1].reversed:
     # REVERSED: Legacy crumbling, family discord, inheritance issues, burden of tradition
     The **Ten of Pentacles** - upside down.
@@ -1305,6 +1308,7 @@ The reading didn't go deeper than the obvious. You sense you missed something im
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.FourWands_Interpret
+@render render_reading(reading=reading)
 @if cards[1].reversed:
     # REVERSED: Home instability, celebration interrupted, foundation shaking
     The **Four of Wands** - inverted.
@@ -1459,6 +1463,7 @@ You sense you're not giving her anything useful.
 # ============================================================================
 
 :: Chen.Session1.Position3_Hub
+@render render_reading(reading=reading)
 # Logic hub
 You turn to the third card.
 
@@ -1475,6 +1480,7 @@ You turn to the third card.
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.SixSwords_Interpret
+@render render_reading(reading=reading)
 @if cards[2].reversed:
     # REVERSED: Can't move on, stuck in transition, resistance to change
     The **Six of Swords** - upside down.
@@ -1630,6 +1636,7 @@ You're stating the obvious. Not helpful.
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.EightCups_Interpret
+@render render_reading(reading=reading)
 @if cards[2].reversed:
     # REVERSED: Fear of moving on, clinging to what no longer serves, resistance
     The **Eight of Cups** - inverted.
@@ -1783,7 +1790,7 @@ The reading is circular. You're not adding anything she doesn't already know.
 
 :: Chen.Session1.Position4_Hub
 # Logic hub
-
+@render render_reading(reading=reading)
 **Position 4: What You Fear**
 
 @if cards[3].name == "Five of Pentacles":
@@ -1797,7 +1804,7 @@ The reading is circular. You're not adding anything she doesn't already know.
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.FivePentacles_Interpret
-
+@render render_reading(reading=reading)
 @if cards[3].reversed:
     # REVERSED: Recovery from loss, help arriving, less dire than feared
     The **Five of Pentacles** - upside down.
@@ -1917,7 +1924,7 @@ The interpretation didn't land. You're not seeing what she's actually afraid of.
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.FiveCups_Interpret
-
+@render render_reading(reading=reading)
 @if cards[3].reversed:
     # REVERSED: Moving past grief, seeing what remains, acceptance coming
     The **Five of Cups** - reversed.
@@ -2064,6 +2071,7 @@ You've completely missed the deeper fear here.
 
 :: Chen.Session1.Position5_Hub
 # Logic hub
+@render render_reading(reading=reading)
 You both take a breath.
 
 Four cards revealed. The situation laid bare.
@@ -2085,6 +2093,7 @@ Now: the center. The guidance. The truth the cards are trying to speak.
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.Lovers_Interpret
+@render render_reading(reading=reading)
 @if cards[4].reversed:
     # REVERSED: Misalignment with values, choice avoidance, self-betrayal
     **The Lovers** - upside down.
@@ -2269,6 +2278,7 @@ The reading fell flat. No new insight provided.
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.Temperance_Interpret
+@render render_reading(reading=reading)
 @if cards[4].reversed:
     # REVERSED: Imbalance, impatience, extremes, forcing rather than flowing
     **Temperance** - upside down.
@@ -2434,6 +2444,7 @@ You didn't give her anything concrete to work with.
 # ---------------------------------------------------------------------------
 
 :: Chen.Session1.Death_Interpret
+@render render_reading(reading=reading)
 @if cards[4].reversed:
     # REVERSED: Resistance to change, clinging, stagnation, inability to let go
     **Death** - upside down.
@@ -2611,6 +2622,7 @@ You lost the power of the card by being afraid of it.
 # ============================================================================
 
 :: Chen.Session1.SynthesisHub
+@render render_reading(reading=reading)
 @py:
 # Calculate reading quality based on interpretation tracking
 total_interpretations = session.interpretation_good + session.interpretation_okay + session.interpretation_bad
@@ -3002,6 +3014,9 @@ session.current_client = None
 if chen.will_return:
     chen.session_two_available = True
     chen.next_session_date = "2 weeks"
+
+chen.session_one_cards = cards
+chen.session_two_quality = session.reading_quality
 
 # Update reader stats summary
 reader.sessions_completed += 1
