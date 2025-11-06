@@ -1,0 +1,1843 @@
+{
+  "version": "0.1.0",
+  "initial_passage": "VarInit",
+  "metadata": {
+    "title": "The Reader's Journey",
+    "author": "Kate & Clicky",
+    "version": "1.0.0",
+    "story_id": "reader_journey",
+    "description": "Begin your journey as a tarot reader"
+  },
+  "imports": [
+    "from game_logic.tarot import Card, draw_cards, Reading",
+    "from game_logic.characters import Client, Reader",
+    ""
+  ],
+  "passages": {
+    "VarInit": {
+      "id": "VarInit",
+      "content": [
+        {
+          "type": "jump",
+          "target": "Prologue"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [],
+      "execute": [
+        {
+          "type": "python_block",
+          "code": "elena = Client(\"Elena Hart\", 28)\nelena.flavor_text = \"Trust issues, seeking clarity\"\nmarcus = Client(\"Marcus Webb\", 32)\nmarcus.flavor_text = \"Career crossroads, needs direction\"\naria = Client(\"Aria Chen\", 25)\naria.flavor_text = \"Lost love, searching for closure\"\n# Special Clients\n# Special Clients\nnyx = Client(\"Nyx\", 25)\nnyx.flavor_text = \"???\""
+        }
+      ],
+      "tags": []
+    },
+    "Prologue": {
+      "id": "Prologue",
+      "content": [
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**The Mysterious Package**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "You find a worn black leather book on your doorstep. No return address. Inside, ornate handwriting lists names:"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "*Elena Hart - Trust Issues*"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "*Marcus Webb - Career Crossroads*"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "*Aria Chen - Lost Love*"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "As you touch the names, they shimmer with possibility. A tarot deck falls from between the pages\u201479 cards, one extra. The Seeker."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "You are now a Reader."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Accept your calling",
+          "target": "AskName",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [
+        {
+          "type": "set_var",
+          "var": "completed_sessions",
+          "expression": "0"
+        },
+        {
+          "type": "set_var",
+          "var": "total_earnings",
+          "expression": "0"
+        }
+      ],
+      "tags": []
+    },
+    "AskName": {
+      "id": "AskName",
+      "content": [
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Before we begin, what is your name, Reader?"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "conditional",
+          "branches": [
+            {
+              "condition": "not _inputs.get(\"reader_name\")",
+              "content": [
+                {
+                  "type": "input",
+                  "name": "reader_name",
+                  "placeholder": "Enter your name...",
+                  "label": "Your Name"
+                }
+              ]
+            },
+            {
+              "condition": "True",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "Thank you, **"
+                },
+                {
+                  "type": "expression",
+                  "code": "_inputs.get(\"reader_name\")"
+                },
+                {
+                  "type": "text",
+                  "value": "**!"
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continue",
+          "target": "SetupReader",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [],
+      "tags": []
+    },
+    "SetupReader": {
+      "id": "SetupReader",
+      "content": [
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Welcome, "
+        },
+        {
+          "type": "expression",
+          "code": "reader.name"
+        },
+        {
+          "type": "text",
+          "value": ". Your journey begins."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Enter your sanctuary",
+          "target": "ReaderDesk",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [
+        {
+          "type": "python_block",
+          "code": "# Get name from inputs (with fallback)\n# Get name from inputs (with fallback)\nname = _inputs.get(\"reader_name\", \"Reader\").strip()\nif not name:\n    name = \"Reader\"\n\n\n# Create Reader object with the entered name\n# Create Reader object with the entered name\nreader = Reader(name)"
+        }
+      ],
+      "tags": []
+    },
+    "ReaderDesk": {
+      "id": "ReaderDesk",
+      "content": [
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "*Your sanctuary. Candles flicker. Cards wait.*"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Elena Hart",
+          "target": "Elena_Session",
+          "condition": "\"Elena\" in available_clients",
+          "sticky": true,
+          "tags": [
+            "CLIENT",
+            "var:elena"
+          ]
+        },
+        {
+          "text": "Marcus Webb",
+          "target": "Marcus_Session",
+          "condition": "\"Marcus\" in available_clients",
+          "sticky": true,
+          "tags": [
+            "CLIENT",
+            "var:marcus"
+          ]
+        },
+        {
+          "text": "Aria Chen",
+          "target": "Aria_Session",
+          "condition": "\"Aria\" in available_clients",
+          "sticky": true,
+          "tags": [
+            "CLIENT",
+            "var:aria"
+          ]
+        },
+        {
+          "text": "Nyx",
+          "target": "Nyx_Session",
+          "condition": null,
+          "sticky": true,
+          "tags": [
+            "CLIENT:SPECIAL",
+            "var:nyx"
+          ]
+        },
+        {
+          "text": "Review your progress",
+          "target": "Progress",
+          "condition": null,
+          "sticky": true,
+          "tags": [
+            "META_OPTION"
+          ]
+        },
+        {
+          "text": "Study the cards",
+          "target": "StudyCards",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [
+        {
+          "type": "set_var",
+          "var": "available_clients",
+          "expression": "[\"Elena\", \"Marcus\", \"Aria\"]"
+        }
+      ],
+      "tags": [
+        "UI:DASHBOARD"
+      ]
+    },
+    "Progress": {
+      "id": "Progress",
+      "content": [
+        {
+          "type": "text",
+          "value": "**\u2550\u2550\u2550 YOUR JOURNEY \u2550\u2550\u2550**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Sessions:** "
+        },
+        {
+          "type": "expression",
+          "code": "completed_sessions"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Earnings:** $"
+        },
+        {
+          "type": "expression",
+          "code": "total_earnings"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Level:** "
+        },
+        {
+          "type": "expression",
+          "code": "reader.get_level()"
+        },
+        {
+          "type": "text",
+          "value": " ("
+        },
+        {
+          "type": "expression",
+          "code": "reader.experience"
+        },
+        {
+          "type": "text",
+          "value": " XP)"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "conditional",
+          "branches": [
+            {
+              "condition": "reader.experience < 50",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "You are still a novice, learning to read the energy."
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            },
+            {
+              "condition": "reader.experience < 150",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "Your intuition is developing. Clients begin to trust you."
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            },
+            {
+              "condition": "reader.experience < 300",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "You are a seasoned reader. Your reputation grows."
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            },
+            {
+              "condition": "True",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "You are a master. Clients seek you from far and wide."
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Client Progress:**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "- Elena: "
+        },
+        {
+          "type": "expression",
+          "code": "completed_sessions >= 1 and \"Completed\" or \"Available\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "- Marcus: "
+        },
+        {
+          "type": "expression",
+          "code": "completed_sessions >= 2 and \"Completed\" or \"Not yet available\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "- Aria: "
+        },
+        {
+          "type": "expression",
+          "code": "completed_sessions >= 3 and \"Completed\" or \"Not yet available\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Return to desk",
+          "target": "ReaderDesk",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [],
+      "tags": []
+    },
+    "StudyCards": {
+      "id": "StudyCards",
+      "content": [
+        {
+          "type": "text",
+          "value": "You spread the cards across your desk. 79 cards shimmer in the candlelight."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "The extra card\u2014The Seeker\u2014pulses with your energy. It represents the questioner, the one seeking truth."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Major Arcana: 22 cards of profound transformation"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Minor Arcana: 56 cards of daily life"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "The Seeker: 1 wild card, unpredictable"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Return to desk",
+          "target": "ReaderDesk",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [],
+      "tags": []
+    },
+    "Elena_Session": {
+      "id": "Elena_Session",
+      "content": [
+        {
+          "type": "text",
+          "value": "A young woman with anxious eyes enters. She fidgets with her bracelet."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\"I've... I've never done this before. My friend recommended you. I don't know if I believe in this stuff, but...\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "She trails off, looking at the cards."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Client:** "
+        },
+        {
+          "type": "expression",
+          "code": "client.name"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Age:** "
+        },
+        {
+          "type": "expression",
+          "code": "client.age"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Current Trust:** "
+        },
+        {
+          "type": "expression",
+          "code": "client.trust_level"
+        },
+        {
+          "type": "text",
+          "value": "/100"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "You shuffle the deck, feeling Elena's energy - doubt mixed with desperate hope."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Draw the cards",
+          "target": "Elena_Draw",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [
+        {
+          "type": "python_block",
+          "code": "# Create Elena client\n# Create Elena client\nclient = Client(\"Elena Hart\", 28)\nclient.trust_level = 35  # Nervous, skeptical\n\n\n# Create a past-present-future reading\n# Create a past-present-future reading\nreading = Reading(spread_id=\"celtic-cross\")\nreading.draw_cards()\n\n\n# For backward compatibility with the story text\n# For backward compatibility with the story text\ncards = reading.drawn_cards"
+        }
+      ],
+      "tags": []
+    },
+    "Elena_Draw": {
+      "id": "Elena_Draw",
+      "content": [
+        {
+          "type": "text",
+          "value": "**\u2550\u2550\u2550 THE SPREAD \u2550\u2550\u2550**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "You lay out three cards in a line:"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**PAST:** "
+        },
+        {
+          "type": "expression",
+          "code": "cards[0].get_display_name()"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**PRESENT:** "
+        },
+        {
+          "type": "expression",
+          "code": "cards[1].get_display_name()"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**FUTURE:** "
+        },
+        {
+          "type": "expression",
+          "code": "cards[2].get_display_name()"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "render_directive",
+          "name": "render_reading",
+          "args": "reading=reading",
+          "framework_hint": null
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "conditional",
+          "branches": [
+            {
+              "condition": "any(card.is_major() for card in cards)",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "Major arcana appears. This is significant."
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                },
+                {
+                  "type": "text",
+                  "value": "Elena leans forward, her skepticism wavering."
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "conditional",
+          "branches": [
+            {
+              "condition": "sum(1 for c in cards if c.reversed) >= 2",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "Two reversed... blocked energy. Elena needs to hear this carefully."
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**\u2550\u2550\u2550 INTERPRETATIONS \u2550\u2550\u2550**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "How will you read for Elena?"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Traditional interpretation - Safe, by-the-book",
+          "target": "Elena_Traditional",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        },
+        {
+          "text": "Intuitive interpretation - Trust your gut",
+          "target": "Elena_Intuitive",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        },
+        {
+          "text": "Direct interpretation - Tell her what you really see",
+          "target": "Elena_Direct",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [],
+      "tags": []
+    },
+    "Elena_Traditional": {
+      "id": "Elena_Traditional",
+      "content": [
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "You provide a careful, traditional interpretation:"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\"The "
+        },
+        {
+          "type": "expression",
+          "code": "cards[0].name"
+        },
+        {
+          "type": "text",
+          "value": " in your past suggests "
+        },
+        {
+          "type": "expression",
+          "code": "cards[0].position == 'past' and 'foundations' or 'challenges'"
+        },
+        {
+          "type": "text",
+          "value": "...\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Elena nods slowly. \"That... that makes sense. My ex always said I didn't trust enough.\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "conditional",
+          "branches": [
+            {
+              "condition": "cards[1].reversed",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "\"The reversed "
+                },
+                {
+                  "type": "expression",
+                  "code": "cards[1].name"
+                },
+                {
+                  "type": "text",
+                  "value": " in your present shows resistance to change.\""
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            },
+            {
+              "condition": "True",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "\"The "
+                },
+                {
+                  "type": "expression",
+                  "code": "cards[1].name"
+                },
+                {
+                  "type": "text",
+                  "value": " in your present shows you're ready for transformation.\""
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "She's listening now, really listening."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\"And your future... the "
+        },
+        {
+          "type": "expression",
+          "code": "cards[2].name"
+        },
+        {
+          "type": "text",
+          "value": "... this suggests "
+        },
+        {
+          "type": "expression",
+          "code": "cards[2].reversed and 'caution is needed' or 'positive growth'"
+        },
+        {
+          "type": "text",
+          "value": ".\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Session Complete**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Elena's trust: "
+        },
+        {
+          "type": "expression",
+          "code": "client.trust_level"
+        },
+        {
+          "type": "text",
+          "value": "/100"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Your experience: +10 XP"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Earnings: +$75"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Elena stands, looking thoughtful. \"Thank you. I... I think I needed to hear that.\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Return to desk",
+          "target": "ReaderDesk",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [
+        {
+          "type": "python_block",
+          "code": "reader.add_experience(10)\nclient.modify_trust(8)  # She appreciates the structure\ncompleted_sessions += 1\ntotal_earnings += 75"
+        }
+      ],
+      "tags": []
+    },
+    "Elena_Intuitive": {
+      "id": "Elena_Intuitive",
+      "content": [
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "You close your eyes, letting intuition guide you:"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\"I see... walls. You've built them so high.\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Elena's breath catches. Her eyes shimmer."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\"The "
+        },
+        {
+          "type": "expression",
+          "code": "cards[0].name"
+        },
+        {
+          "type": "text",
+          "value": " isn't just your past\u2014it's a prison you've locked yourself in. You're afraid if you trust again, you'll shatter.\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "She looks away, but you see the tear."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "conditional",
+          "branches": [
+            {
+              "condition": "cards[1].reversed",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "\"But here, now\u2014the reversed "
+                },
+                {
+                  "type": "expression",
+                  "code": "cards[1].name"
+                },
+                {
+                  "type": "text",
+                  "value": "\u2014you're already breaking free. You're here, aren't you? That took courage.\""
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            },
+            {
+              "condition": "True",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "\"And here, the "
+                },
+                {
+                  "type": "expression",
+                  "code": "cards[1].name"
+                },
+                {
+                  "type": "text",
+                  "value": " upright\u2014you're ready. More ready than you think.\""
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\"Your future... the "
+        },
+        {
+          "type": "expression",
+          "code": "cards[2].name"
+        },
+        {
+          "type": "text",
+          "value": "... "
+        },
+        {
+          "type": "expression",
+          "code": "cards[2].reversed and 'will challenge you, but you will rise' or 'shows love waiting, if you let it in'"
+        },
+        {
+          "type": "text",
+          "value": ".\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Session Complete**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Elena's trust: "
+        },
+        {
+          "type": "expression",
+          "code": "client.trust_level"
+        },
+        {
+          "type": "text",
+          "value": "/100"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Your experience: +15 XP"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Earnings: +$75"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Elena stands, wiping her eyes. \"How did you...?\" She doesn't finish. \"Same time next week?\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Return to desk",
+          "target": "ReaderDesk",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [
+        {
+          "type": "python_block",
+          "code": "reader.add_experience(15)\nclient.modify_trust(12)  # She's moved by your insight\ncompleted_sessions += 1\ntotal_earnings += 75"
+        }
+      ],
+      "tags": []
+    },
+    "Elena_Direct": {
+      "id": "Elena_Direct",
+      "content": [
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "You don't soften it:"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\"You came here expecting me to tell you what you want to hear. I won't.\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Elena stiffens, but doesn't leave."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\"The "
+        },
+        {
+          "type": "expression",
+          "code": "cards[0].name"
+        },
+        {
+          "type": "text",
+          "value": " in your past\u2014you've been hurt. Badly. But you're using that hurt as an excuse.\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "conditional",
+          "branches": [
+            {
+              "condition": "cards[1].reversed",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "\"The reversed "
+                },
+                {
+                  "type": "expression",
+                  "code": "cards[1].name"
+                },
+                {
+                  "type": "text",
+                  "value": " right now? That's not fate. That's you, choosing to stay stuck.\""
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            },
+            {
+              "condition": "True",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "\"The "
+                },
+                {
+                  "type": "expression",
+                  "code": "cards[1].name"
+                },
+                {
+                  "type": "text",
+                  "value": " right now shows you KNOW this. You know you're ready.\""
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\"And your future\u2014the "
+        },
+        {
+          "type": "expression",
+          "code": "cards[2].name"
+        },
+        {
+          "type": "text",
+          "value": "\u2014"
+        },
+        {
+          "type": "expression",
+          "code": "cards[2].reversed and 'will stay blocked until YOU unblock it' or 'is already opening up, if you have the courage to walk through that door'"
+        },
+        {
+          "type": "text",
+          "value": ".\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "**Session Complete**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Elena's trust: "
+        },
+        {
+          "type": "expression",
+          "code": "client.trust_level"
+        },
+        {
+          "type": "text",
+          "value": "/100"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Your experience: +12 XP"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Earnings: +$75"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "Elena sits in silence for a long moment. Then she laughs\u2014short, surprised. \"You're right. Damn. Okay. Okay.\""
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "She leaves with purpose in her step."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Return to desk",
+          "target": "ReaderDesk",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [
+        {
+          "type": "python_block",
+          "code": "reader.add_experience(12)\nclient.modify_trust(15)  # Honesty resonates deeply\ncompleted_sessions += 1\ntotal_earnings += 75"
+        }
+      ],
+      "tags": []
+    },
+    "Marcus_Session": {
+      "id": "Marcus_Session",
+      "content": [
+        {
+          "type": "text",
+          "value": "**Marcus Webb's session would go here...**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "This is a placeholder for the next client."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Return to desk",
+          "target": "ReaderDesk",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [],
+      "tags": []
+    },
+    "Aria_Session": {
+      "id": "Aria_Session",
+      "content": [
+        {
+          "type": "text",
+          "value": "**Aria Chen's session would go here...**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "This is a placeholder for the next client."
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Return to desk",
+          "target": "ReaderDesk",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [],
+      "tags": []
+    },
+    "Nyx_Session": {
+      "id": "Nyx_Session",
+      "content": [
+        {
+          "type": "text",
+          "value": "**Nyx's Special dream-session would go here...**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        },
+        {
+          "type": "text",
+          "value": "This is a placeholder for a **special client.**"
+        },
+        {
+          "type": "text",
+          "value": "\n"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Return to desk",
+          "target": "ReaderDesk",
+          "condition": null,
+          "sticky": true,
+          "tags": []
+        }
+      ],
+      "execute": [],
+      "tags": []
+    }
+  }
+}

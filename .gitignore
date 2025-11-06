@@ -39,8 +39,8 @@ Thumbs.db
 
 # Game-specific
 saves/*.json
-compiled_stories/*.json
-!compiled_stories/.gitkeep
+# compiled_stories/*.json
+# !compiled_stories/.gitkeep
 
 # Logs
 *.log
