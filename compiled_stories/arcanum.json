@@ -28679,7 +28679,7 @@
             }
           ],
           "target": "Chen.Session1.Learned_Grandmother",
-          "condition": null,
+          "condition": "reader.background == \"inheritance\"",
           "sticky": true,
           "tags": []
         },
@@ -28691,7 +28691,7 @@
             }
           ],
           "target": "Chen.Session1.Learned_Therapist",
-          "condition": null,
+          "condition": "reader.background == \"career_change\"",
           "sticky": true,
           "tags": []
         },
@@ -28703,7 +28703,7 @@
             }
           ],
           "target": "Chen.Session1.Learned_SelfTaught",
-          "condition": null,
+          "condition": "reader.background == \"self_taught\"",
           "sticky": true,
           "tags": []
         },
@@ -28715,7 +28715,7 @@
             }
           ],
           "target": "Chen.Session1.Learned_Mystic",
-          "condition": null,
+          "condition": "reader.background == \"unexpected_gift\"",
           "sticky": true,
           "tags": []
         }
@@ -31260,7 +31260,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "# Set up the position decks\ndeck_current = Deck(cards=[\"Four of Cups\", \"Two of Swords\"])\ndeck_staying = Deck(cards=[\"Ten of Pentacles\", \"Four of Wands\"])\ndeck_moving = Deck(cards=[\"Six of Swords\", \"Eight of Cups\"])\ndeck_fear = Deck(cards=[\"Five of Pentacles\", \"Five of Cups\"])\ndeck_guidance = Deck(cards=[\"The Lovers\", \"Temperance\", \"Death\"])\n\n# Create reading and draw cards into spread\nreader = Reading(spread_id=\"chen-house-decision\", decks=[deck_current, deck_staying, deck_moving, deck_fear, deck_guidance])\ncards = reading.draw_cards()\n\n# Initialize interpretation tracking\nsession.interpretation_good = 0\nsession.interpretation_okay = 0\nsession.interpretation_bad = 0"
+          "code": "# Set up the position decks\ndeck_current = Deck(cards=[\"Four of Cups\", \"Two of Swords\"])\ndeck_staying = Deck(cards=[\"Ten of Pentacles\", \"Four of Wands\"])\ndeck_moving = Deck(cards=[\"Six of Swords\", \"Eight of Cups\"])\ndeck_fear = Deck(cards=[\"Five of Pentacles\", \"Five of Cups\"])\ndeck_guidance = Deck(cards=[\"The Lovers\", \"Temperance\", \"Death\"])\n\n# Create reading and draw cards into spread\nreading = Reading(spread_id=\"chen-house-decision\", decks=[\n    deck_current, deck_staying, deck_moving, deck_fear, deck_guidance\n])\ncards = reading.draw_cards()\n\n# Initialize interpretation tracking\nsession.interpretation_good = 0\nsession.interpretation_okay = 0\nsession.interpretation_bad = 0"
         }
       ],
       "tags": []

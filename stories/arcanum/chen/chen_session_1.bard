@@ -305,10 +305,10 @@ Margaret settles into the chair across from you, cradling her mug.
 
 "How did you begin this? M. Thorne always said everyone has a different door into this world. What was yours?"
 
-+ ["It's a family tradition. My grandmother taught me."] -> Chen.Session1.Learned_Grandmother
-+ ["I was a therapist. I started using cards with clients and... it took over."] -> Chen.Session1.Learned_Therapist
-+ ["I taught myself, mostly. Books, online videos. I'm still learning."] -> Chen.Session1.Learned_SelfTaught
-+ ["I... don't really know. The cards just started speaking to me one day."] -> Chen.Session1.Learned_Mystic
++ {reader.background == "inheritance"} ["It's a family tradition. My grandmother taught me."] -> Chen.Session1.Learned_Grandmother
++ {reader.background == "career_change"} ["I was a therapist. I started using cards with clients and... it took over."] -> Chen.Session1.Learned_Therapist
++ {reader.background == "self_taught"} ["I taught myself, mostly. Books, online videos. I'm still learning."] -> Chen.Session1.Learned_SelfTaught
++ {reader.background == "unexpected_gift"} ["I... don't really know. The cards just started speaking to me one day."] -> Chen.Session1.Learned_Mystic
 
 # ============================================================================
 # LEARNING PATH 1: GRANDMOTHER
@@ -760,7 +760,9 @@ deck_fear = Deck(cards=["Five of Pentacles", "Five of Cups"])
 deck_guidance = Deck(cards=["The Lovers", "Temperance", "Death"])
 
 # Create reading and draw cards into spread
-reader = Reading(spread_id="chen-house-decision", decks=[deck_current, deck_staying, deck_moving, deck_fear, deck_guidance])
+reading = Reading(spread_id="chen-house-decision", decks=[
+    deck_current, deck_staying, deck_moving, deck_fear, deck_guidance
+])
 cards = reading.draw_cards()
 
 # Initialize interpretation tracking
