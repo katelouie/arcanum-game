@@ -99,6 +99,11 @@ def load_story(story_path: str):
     """Load a compiled story JSON and create BardEngine instance."""
     global engine
 
+    # Default to compiled story if no path provided
+    if story_path is None:
+        base_dir = Path(__file__).parent.parent
+        story_path = base_dir / "compiled_stories" / "arcanum.json"
+
     with open(story_path) as f:
         story_data = json.load(f)
 
@@ -138,9 +143,11 @@ def update_ui():
 
 def show_landing():
     """Display the landing page."""
+    print("🎭 show_landing() called")
     with ui.column().classes(
         "min-h-screen w-screen bg-gradient-to-b from-purple via-purple-950 to-black flex items-center justify-center m-0 p-8"
     ):
+        print("   Creating landing page elements...")
         # Main title
         ui.label("ARCANUM").classes(
             "text-7xl font-serif text-amber-400 border-b-4 border-amber-600/50 pb-4 fade-in"
@@ -173,14 +180,14 @@ def show_landing():
                 "transition-all duration-300 tracking-wide"
             )
 
-            ui.button(
-                "View Reading Table", on_click=lambda: navigate_to("dashboard")
-            ).classes(
-                "w-full py-4 text-xl bg-purple-900/50 backdrop-blur-sm "
-                "text-purple-200 font-semibold rounded-full shadow-lg border border-purple-400/30 "
-                "hover:bg-purple-800/50 hover:scale-105 "
-                "transition-all duration-300 tracking-wide"
-            )
+            # ui.button(
+            #     "View Reading Table", on_click=lambda: navigate_to("dashboard")
+            # ).classes(
+            #     "w-full py-4 text-xl bg-purple-900/50 backdrop-blur-sm "
+            #     "text-purple-200 font-semibold rounded-full shadow-lg border border-purple-400/30 "
+            #     "hover:bg-purple-800/50 hover:scale-105 "
+            #     "transition-all duration-300 tracking-wide"
+            # )
 
 
 # ============================================================================
@@ -357,7 +364,7 @@ def show_player():
                 )
 
                 ui.button(
-                    "Return to Table", on_click=lambda: navigate_to("dashboard")
+                    "Return to Landing", on_click=lambda: navigate_to("landing")
                 ).classes(
                     "px-8 py-2 bg-purple-900/50 text-purple-200 rounded-lg "
                     "border border-purple-400/30 hover:bg-purple-800/50 transition-all"
@@ -1142,7 +1149,8 @@ def show_dashboard(output=None):
 # MAIN APP
 # ============================================================================
 
-# Create the main container
+
+# Create the main container (at module level for NiceGUI)
 main_container = ui.column().classes("w-full h-full m-0 p-0")
 
 # Create the card detail drawer (at page level, outside main container)
@@ -1159,4 +1167,25 @@ card_drawer.hide()
 # Initial render
 update_ui()
 
-ui.run(title="Arcanum", favicon="🔮")
+
+# Only run if this file is executed directly
+if __name__ in {"__main__", "__mp_main__"}:
+    import os
+
+    # Check if we're in production (Railway sets this)
+    port = int(os.environ.get("PORT", 8080))
+    is_production = os.environ.get("RAILWAY_ENVIRONMENT") is not None
+
+    if is_production:
+        # Production: Railway deployment
+        ui.run(
+            title="Arcanum",
+            favicon="🔮",
+            host="0.0.0.0",  # Bind to all interfaces
+            port=port,
+            reload=False,
+            show=False,
+        )
+    else:
+        # Local development
+        ui.run(title="Arcanum", favicon="🔮")

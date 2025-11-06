@@ -1,0 +1,1 @@
+web: python player/nicegui_player.py
