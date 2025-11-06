@@ -567,11 +567,11 @@ class Chen(Client):
 
     # Session tracking
     session_one_quality: str = ""
-    session_one_cards: list[Card] = []
+    session_one_cards: list[Card] = field(default_factory=list)
     session_two_quality: str = ""
-    session_two_cards: list[Card] = []
+    session_two_cards: list[Card] = field(default_factory=list)
     session_three_quality: str = ""
-    session_three_cards: list[Card] = []
+    session_three_cards: list[Card] = field(default_factory=list)
 
     @property
     def clarity(self) -> int:
