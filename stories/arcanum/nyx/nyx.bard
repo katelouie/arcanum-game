@@ -2,7 +2,7 @@
 <<if nyx.sessions_completed == 0>>
     -> Nyx.Session1
 <<elif nyx.sessions_completed == 1>>
-    -> Nyx.Session2
+    -> Nyx.Session2.Start
 <<elif nyx.sessions_completed == 2>>
     -> Nyx.Session3
 <<else>>

@@ -12,6 +12,7 @@ import random
 @include chen/chen_session_2.bard
 @include chen/chen_session_3a.bard
 @include chen/chen_session_3b.bard
+@include nyx/nyx_session_2.bard
 
 @metadata
   title: Arcanum

@@ -1,0 +1,3721 @@
+# ============================================================================
+# NYX - SESSION 2: "THE RECKONING"
+# ============================================================================
+#
+# UNLOCK CONDITIONS:
+# - nyx.session_one_complete == True
+# - nyx.trust >= 5
+# - nyx.shamanic_awakening >= 1
+# - 3-4 weeks have passed since Session 1
+#
+# CATALYST: Nyx obtained proof of Project Tsukuyomi (spirit imprisonment)
+#   - METHOD varies based on Session 1:
+#     * High mystical_focus: Spirits led her to data (less jumpy)
+#     * Low mystical_focus: Hacked it traditionally (very jumpy)
+#
+# CORE QUESTION: "What do I do with this data?"
+#
+# THEME: The Choice - Commit to a path (Runner/Ghost/Loyal/Betrayal)
+#
+# STRUCTURE:
+# - Urgent opening (Nyx has crossed the Rubicon)
+# - 7-Card Horseshoe Spread (Past/Present/Future/Hidden/Obstacles/Advice/Outcome)
+# - Position 6 (Advice) is KEY - determines final path
+# - Synthesis locks in her decision
+# - Payment + setup for Session 3
+# - SECRET: After goodbye, corrupt readers can betray her
+#
+# PATH VARIABLES:
+# - runner_influence (Shadow Runner - escape, heist, freedom)
+# - ghost_influence (Ghost in Machine - sabotage from inside)
+# - loyal_influence (Corporate Loyalty - compromise, fear, paralysis)
+# - quality_score (Reading quality - affects override to Loyal if too low)
+# - reader.corruption (Enables betrayal option if >= 3)
+#
+# CARD POOL (7-Card Horseshoe):
+# Position 1 (Past): The Tower OR Eight of Swords
+# Position 2 (Present): Two of Swords OR Seven of Wands
+# Position 3 (Future): The Star OR Ten of Swords
+# Position 4 (Hidden): The Moon OR Seven of Cups
+# Position 5 (Obstacles): Five of Pentacles OR The Devil
+# Position 6 (Advice - KEY): The Fool OR Strength OR Temperance
+# Position 7 (Outcome): Six of Swords OR The World
+#
+# ============================================================================
+
+:: Nyx.Session2.Start
+@py:
+session = create_session(nyx)
+
+# session weather
+session.weather = random.choice(["rain", "fog", "none"])
+
+# Initialize path influence tracking
+session.runner_influence = 0
+session.ghost_influence = 0
+session.loyal_influence = 0
+session.quality_score = 0
+
+# Initialize interpretation tracking
+session.interpretation_quality = {
+    'excellent': 0,
+    'good': 0,
+    'adequate': 0,
+    'poor': 0
+}
+
+# Check how she got the data (from Session 1)
+if nyx.mystical_focus >= 7 or nyx.shamanic_awakening >= 3:
+    nyx.data_source = "spirits"  # Spirits led her
+    nyx.jumpiness = 2  # Less jumpy
+    nyx.kitsune_suspicion = 3  # Lower suspicion
+else:
+    nyx.data_source = "hack"  # Traditional hack
+    nyx.jumpiness = 4  # Very jumpy
+    nyx.kitsune_suspicion = 6  # Higher suspicion
+
+# Cyber glitch intensity increases throughout session
+nyx.glitch_intensity = 3  # Starts moderate, escalates
+
+# Track which cards are discussed
+session.discussed_cards = []
+@endpy
+~ session.atmosphere = 4  # Tense, urgent, paranoid
+~ session.room_energy = 4
+You're in your reading corner.
+
+@if session.weather == "rain":
+    Rain hammers the windows. The kind of Arcanum City downpour that drowns surveillance drones and washes evidence into gutters. Good weather for secrets.
+@elif session.weather == "fog":
+    Fog presses against the windows, thick as static. The city disappears into grey. You can barely see the street below. Good weather for ghosts.
+@else:
+    Late afternoon. The light has that industrial quality - filtered through smog and neon, turning everything the color of old copper.
+@endif
+
+Your phone buzzes.
+
+**[Text from: UNKNOWN NUMBER]**
+
+@if nyx.data_source == "spirits":
+    *"It's Nyx. I need to see you. I found it. They showed me. Can you do today? - N"*
+@else:
+    *"It's Nyx. I have it. The proof. But they're watching me. I think. I need advice. Today? Please? - N"*
+@endif
+
+You text back: *"Come now."*
+
+@if nyx.jumpiness >= 4:
+    She responds immediately: *"Encrypting route. 20 min."*
+@else:
+    She responds: *"Thank you. 15 minutes."*
+@endif
+
+You prepare the space. Seven-card spread. This is going to be complex.
+
+@if nyx.jumpiness >= 4:
+    Twenty-three minutes later (she's taking the long way, checking for tails), footsteps on the stairs. Quick. Nervous.
+@else:
+    Sixteen minutes later, footsteps on the stairs. Purposeful but cautious.
+@endif
+
+A knock - harder than last time. More urgent.
+
++ [Open the door immediately] -> Nyx.Session2.Arrival_Immediate
++ [Check the peephole first] -> Nyx.Session2.Arrival_Cautious
+
+:: Nyx.Session2.Arrival_Immediate
+You open the door.
+
+Nyx stands there - and she looks *different*.
+
+@if nyx.data_source == "spirits":
+    More grounded. Her cybereyes have that shamanic shimmer you saw last time, but stronger now. She's carrying a small fabric pouch instead of her usual corporate messenger bag. Dirt under her fingernails. She's been *working*.
+
+    But her implants are still glitching. As she steps inside, her right eye flickers - organic brown, then chrome blue, then static snow, then back to brown.
+@else:
+    More wired. Twitchy. Her cybereyes dart constantly - scanning corners, checking sightlines, analyzing threat vectors. She's carrying a battered messenger bag clutched against her chest like armor.
+
+    Her implants are glitching *badly*. As she steps inside, her right eye strobes through three different display modes. Her left hand twitches - neural feedback error.
+@endif
+
+"Thanks for seeing me," she says. Her voice is steadier than last time. Scared, but *determined*.
+
+"Come in. Sit."
+
+~ reader.empathy += 1
+
++ [Continue] -> Nyx.Session2.Settling
+
+:: Nyx.Session2.Arrival_Cautious
+You check the peephole first.
+
+Nyx. Alone. Glancing over her shoulder twice while she waits.
+
+You open the door.
+
+@if nyx.data_source == "spirits":
+    She looks different. More grounded. Her cybereyes shimmer with that shamanic energy, stronger than before. She's carrying a small fabric pouch instead of her corporate bag.
+
+    But her implants are glitching. Her right eye flickers - organic, chrome, static, organic again.
+@else:
+    She looks different. More wired. Twitchy. Her cybereyes scanning constantly. She's clutching a messenger bag like a lifeline.
+
+    Her implants are glitching badly. Her eye strobes through display modes. Her hand twitches with neural errors.
+@endif
+
+"Clear?" she asks quietly.
+
+"Clear. Come in."
+
+She steps inside quickly. Checks the door lock behind her.
+
+~ reader.competence += 1
+
++ [Continue] -> Nyx.Session2.Settling
+
+:: Nyx.Session2.Settling
+You guide her to the chair. She sits on the edge, can't quite settle back.
+
+@if nyx.jumpiness >= 4:
+    "I wasn't followed," she says, more to herself than you. "I took three different buses. Paid cash. Left my commlink at home. They can't track me. I *think* they can't track me."
+
+    Her hand twitches again - glitch ripple through her neural interface.
+@else:
+    "The spirits covered my tracks," she says quietly. "I felt them... guiding my route. Making me *hard to see*. It's getting stronger. The connection."
+
+    Her eye flickers - a ghostly overlay visible for half a second before vanishing.
+@endif
+
+"Tea?"
+
+@if nyx.jumpiness >= 4:
+    "No. No time. I have maybe two hours before they notice I'm not answering corporate messages." She opens the messenger bag. "I need to show you something."
+@else:
+    "Please." She opens the fabric pouch while you prepare it. "I need to show you what I found. What *they* showed me."
+@endif
+
++ [Ask what she found] -> Nyx.Session2.The_Data_Reveal
++ [Ask how she's been since last session] -> Nyx.Session2.How_Shes_Been
+
+:: Nyx.Session2.How_Shes_Been
+"How have you been? Since last time?"
+
+@if nyx.data_source == "spirits":
+    Nyx looks at her hands. The dirt under her nails. "Different. I've been... practicing. Meditation. Ritual. The things you suggested. And the spirits - they're *louder* now. Clearer. They showed me things."
+
+    Her eye glitches - but this time it's not random static. For a moment, you see *faces* in the distortion. Geometric, digital, but undeniably *alive*.
+
+    "They showed me where Kitsune keeps them. The trapped ones. And they showed me... how to reach the data without leaving traces. Spirit-walking through the network. I didn't even need to hack. I just... *asked*. And they *answered*."
+
+    She looks up at you. "I crossed a line. I can't go back. But I think... I think it was the right line to cross."
+
+    ~ nyx.shamanic_awakening += 1
+    ~ reader.empathy += 1
+@else:
+    Nyx laughs - bitter, sharp. "Paranoid. Constantly checking over my shoulder. My apartment's been swept twice - I found three new surveillance nodes. Kitsune's tightening security. They *know* someone's poking around Project Tsukuyomi."
+
+    Her hand twitches violently. She grabs it with her other hand, forcing it still.
+
+    "The glitches are worse. Way worse. I think... I think the spirits are trying to communicate but my cyberware is *fighting* them. Neural feedback loops. My wetware and my software are at *war* in my skull."
+
+    She pulls out a small bottle of pills. "Prescribed anti-glitch meds. They don't work. Because it's not the hardware failing. It's the *ghosts*."
+
+    ~ nyx.glitch_intensity += 1
+    ~ reader.competence += 1
+@endif
+
++ [Ask what she found] -> Nyx.Session2.The_Data_Reveal
+
+:: Nyx.Session2.The_Data_Reveal
+"Show me what you found."
+
+@if nyx.data_source == "spirits":
+    Nyx reaches into the fabric pouch. Pulls out a small object wrapped in red silk.
+
+    "The spirits led me to a physical server. Old school. Air-gapped from the main network. Kitsune keeps it in a sub-basement most employees don't even know exists."
+
+    She unwraps the silk carefully. Inside: a data chip. But it's *wrong*. The chip surface swirls with patterns that hurt to look at - geometric, fractal, *alive*.
+
+    "I didn't steal it. I *asked* for it. And the server... it just *gave* it to me. Like it wanted to be free."
+
+    Her cybereyes flicker. Both of them, synchronized. You see the faces again - dozens of them, compressed into silicon and light, *screaming* silently.
+
+    "This is proof. Video logs. Corporate memos. The *code* they use to trap and compress spirit entities into exploitable data. Project Tsukuyomi. All of it."
+
+    She sets the chip on your reading table. It pulses faintly - like a heartbeat, or breathing.
+
+    "They're in here too. Copies. Fragments. They wanted me to bring them. To show someone. To make it *real*."
+@else:
+    Nyx reaches into the messenger bag. Pulls out a data chip - standard corporate issue, except for the burn marks along one edge.
+
+    "I hacked a secure server three days ago. Took me eight hours to crack the encryption without triggering alarms. Nearly got traced twice. Had to burn through three proxy shells."
+
+    She sets the chip on your reading table. Her hand is shaking.
+
+    "This is proof. Video surveillance from the spirit containment facility. Corporate memos detailing Project Tsukuyomi. Financial records showing what they *pay* for each captured entity. The *code* they use to trap them."
+
+    Her cybereyes glitch badly - left eye goes completely white, right eye strobes red error messages.
+
+    "And I think... I think there are fragments of *them* in this data. The spirits. Like they encoded themselves into the evidence. So someone would *see*. So someone would *know*."
+
+    She blinks hard. Her eyes reset to brown, but they're bloodshot. "I can't un-see what's on that chip. And now you're going to see it too."
+@endif
+
+The chip sits between you. You can feel it - not physically, but in that space behind your eyes where intuition lives. It's *heavy* with potential. With *consequence*.
+
+"What's on it?" you ask quietly.
+
+@if nyx.data_source == "spirits":
+    "Everything. Video of the containment chambers. Spirits compressed into data matrices. Screaming in frequencies that don't exist. Corporate executives discussing *profit margins* per entity. Research notes on 'optimizing spirit compression ratios.' And..."
+
+    Her voice drops to a whisper.
+
+    "And there's a list. Names. Dates. How many they've captured. How many they've *used up*. Some of the entries are centuries old. They're not just doing this now. They've been doing it since the Awakening. Since magic *came back*."
+@else:
+    "Video logs. I've seen... ten minutes. I couldn't watch more. The containment chambers are - they're *wrong*. Sterile white rooms, but the walls *writhe*. Like they're trying to contain something that doesn't fit in three dimensions."
+
+    She swallows hard.
+
+    "And you can hear them. The spirits. Screaming. Not with sound. With *data*. Their suffering encoded into network traffic. Every packet is a scream."
+
+    Her hand twitches again. She doesn't try to stop it this time.
+
+    "There are memos. From executives. Talking about 'resource extraction efficiency' and 'entity compression ratios.' They're treating *spirits* like they're oil deposits. And they're making *millions*."
+@endif
+
++ ["What are you going to do with this?"] -> Nyx.Session2.The_Question
++ ["This is incredibly dangerous. You know that, right?"] -> Nyx.Session2.Acknowledge_Danger
++ [Ask how *valuable* this data is, not just how dangerous] -> Nyx.Session2.The_Data_Value_Corrupt
+
+:: Nyx.Session2.Acknowledge_Danger
+"This is incredibly dangerous. You know that, right?"
+
+Nyx laughs - high, strained. "Oh, I *know*. If Kitsune finds out I have this, I'm done. Not fired. *Done*. Corporate black bag squad. Disappeared. Maybe turned into data myself."
+
+@if nyx.kitsune_suspicion >= 6:
+    She leans forward. "And they're *already suspicious*. My access logs are being reviewed. My manager asked me 'casual questions' about my workload. My apartment's under surveillance. I'm running out of time."
+@else:
+    She takes a breath. "But I was careful. The spirits helped me cover my tracks. Kitsune suspects *someone* is digging, but they don't know it's me. Yet. I have a window. Small. But it's there."
+@endif
+
+"So why take the risk?"
+
+"Because I can't *not*." Her voice is fierce now. "I heard them. Felt them. They're *suffering*. And Kitsune is profiting from it. And everyone just... *accepts* it. Like it's normal. Like enslaving spirits is just another corporate R&D project."
+
+She touches the data chip. "Someone has to do something. And apparently... that someone is me."
+
+~ reader.empathy += 1
+~ nyx.determination += 1
+
++ [Continue] -> Nyx.Session2.The_Question
+
+:: Nyx.Session2.The_Data_Value_Corrupt
+~ reader.corruption += 1
+~ reader.insight += 1 // You're probing, which is a form of insight
+"This data," you say, your voice level. "How... *valuable* is it? Not just morally. Financially. Who would *pay* for this?"
+
+Nyx flinches, as if you'd slapped her.
+"Pay? I... I hadn't thought about that. I'm not trying to *sell* it. I'm trying to—" She stops, looking at you with a flicker of new suspicion.
+"I'm trying to figure out what to *do* with it. To help them."
+
+A small, cold part of your mind notes the information. This isn't just a moral dilemma. It's a financial asset.
+
++ ["Of course. I was just assessing the risk. This is incredibly dangerous."] -> Nyx.Session2.Acknowledge_Danger
+
+:: Nyx.Session2.The_Question
+"What are you going to do with this data?"
+
+Nyx looks at you. Really *looks* - her cybereyes focusing completely despite the glitches.
+
+"That's why I'm here. I don't know. I have options. All of them are terrifying. All of them are *irreversible*. And I need..."
+
+She gestures at your tarot deck.
+
+"I need guidance. I need to see the paths. I need to know what happens if I - if I do what I'm thinking of doing."
+
+@if nyx.jumpiness >= 4:
+    Her hand twitches again. Harder this time. She winces. "The spirits are getting *agitated*. They can feel I have the data. They *want* me to act. But they can't tell me *how*. That's not how they communicate."
+@else:
+    Her eyes flicker. The faces appear again - urgent, desperate, *pleading*. "The spirits are pushing me. Not forcing. Just... *pushing*. Like a current. They want freedom. But they can't choose *my* path. Only I can do that."
+@endif
+
+"What are your options?"
+
+Nyx counts on her fingers. Each one glitches slightly as she touches it.
+
+"One: I could go public. Leak the data. Blow the whistle. Destroy Kitsune's reputation. Free the spirits through *exposure*. But that means I'm a target. Forever. Corporate kill teams. Legal annihilation. Exile from any legitimate work."
+
+"Two: I could work with... people. Outside the system. Shadow runners. There are groups that do corporate sabotage. Heists. They could help me *physically* free the spirits. But that means becoming a criminal. Crossing into illegal work. No going back."
+
+"Three: I could stay inside Kitsune. Quietly feed information to people outside. Be a double agent. Ghost in the machine. Sabotage from within. But that means *living* the lie. Every day. Pretending. While Kitsune keeps hurting them."
+
+She stops. Looks at the chip.
+
+"Or four: I could give the data back. Claim I was investigating security vulnerabilities. Get a promotion. Stay safe. Keep my job. My life. My... *comfort*. And let the spirits keep suffering."
+
+Her voice breaks on the last option.
+
+"I need the cards to show me. Because I can't see clearly anymore. I'm too close. Too *involved*. Help me."
+
+~ reader.mystical_affinity += 1
+
++ ["Let's do a reading. Seven cards. This requires depth."] -> Nyx.Session2.Reading_Setup
+
+:: Nyx.Session2.Reading_Setup
+"Let's do a reading. Seven cards. This is complex. It requires depth."
+
+You clear space on the table. Move the data chip to the side (it *pulses* when you touch it).
+
+"Seven-card Horseshoe Spread," you explain. "Each position reveals a different aspect of your situation."
+
+You gesture to where the cards will fall:
+
+"Past - what brought you here.
+Present - where you are now.
+Future - where this is leading.
+Hidden - what you don't see.
+Obstacles - what stands in your way.
+Advice - what action to take.
+Outcome - where your choice leads."
+
+Nyx nods slowly.
+
+@if nyx.data_source == "spirits":
+    "The spirits are listening. I can feel them. They're... curious? Hopeful? It's hard to translate."
+@else:
+    "Seven cards. Okay. That's... that's a lot of information. Good. I need it."
+@endif
+
+"This is going to take time. We'll go through each position carefully. And Nyx?" You look at her directly. "Your choice matters. The cards will show you the paths. But *you* have to walk them."
+
+"I know." Her voice is steady. "That's why I'm here."
+
+@if session.atmosphere >= 4:
+    Outside, a siren wails past. Nyx flinches slightly but doesn't look away from the cards.
+@endif
+
+You reach for your deck.
+
++ [Draw the seven cards] -> Nyx.Session2.CardDraw
+
+:: Nyx.Session2.CardDraw
+You shuffle. The cards feel electric under your fingers. Charged with potential.
+
+Nyx watches intently. Her cybereyes track every movement despite the glitches.
+
+You lay them out one by one. The Horseshoe formation takes shape on the table:
+
+@py:
+    # Card pools for each position
+    position_1_deck = Deck(cards=["The Tower", "Eight of Swords"], reversals=[0, 0.5])
+    position_2_deck = Deck(cards=["Two of Swords", "Seven of Swords"], reversals=[0.5, 0.5])
+    position_3_deck = Deck(cards=["The Star", "Ten of Swords"], reversals=[0, 0.5])
+    position_4_deck = Deck(cards=["The Moon", "Seven of Cups"], reversals=[0, 0.5])
+    position_5_deck = Deck(cards=["Five of Pentacles"], "The Devil", reversals=[0, 0])
+    # KEY POSITION
+    position_6_deck = Deck(cards=["The Fool", "Strength", "Temperance"], reversals=[0.5, 0.5, 0.5])
+    position_7_deck = Deck(cards=["Six of Swords", "The World"], reversals=[0, 0])
+
+    # TODO: Create a spreads-config entry for nyx-session2-horseshoe with these positions
+        #     positions=[
+        #     "Past",
+        #     "Present",
+        #     "Future",
+        #     "Hidden",
+        #     "Obstacles",
+        #     "Advice",
+        #     "Outcome"
+        # ]
+    reading = Reading(spread_id="horseshoe-7", decks=
+        [
+            position_1_deck,
+            position_2_deck,
+            position_3_deck,
+            position_4_deck,
+            position_5_deck,
+            position_6_deck,
+            position_7_deck
+        ]
+    )
+
+    cards = reading.draw_cards()
+@endpy
+
+@render render_reading(reading=reading)
+
+The seven cards lie before you in a horseshoe arc:
+
+**Position 1 (Past):** {cards[0].name}{cards[0].reversed ? - Reversed | }
+**Position 2 (Present):** {cards[1].name}{cards[1].reversed ? - Reversed | }
+**Position 3 (Future):** {cards[2].name}{cards[2].reversed ? - Reversed | }
+**Position 4 (Hidden):** {cards[3].name}{cards[3].reversed ? - Reversed | }
+**Position 5 (Obstacles):** {cards[4].name}{cards[4].reversed ? - Reversed | }
+**Position 6 (Advice):** {cards[5].name}{cards[5].reversed ? - Reversed | }
+**Position 7 (Outcome):** {cards[6].name}{cards[6].reversed ? - Reversed | }
+
+Nyx stares at them. Her cybereyes flicker - trying to analyze, to *quantify*, but the cards resist digital logic.
+
+@if nyx.data_source == "spirits":
+    "The spirits see them too," she whispers. "They're... excited? Agitated? They recognize something in the patterns."
+@else:
+    "That's a lot of information," she says quietly. "Where do we start?"
+@endif
+
+"The past. We start with what brought you here."
+
++ [Begin with Position 1 - Past] -> Nyx.Session2.Position1_Hub
+
+# ============================================================================
+# POSITION 1: PAST (What brought her here)
+# ============================================================================
+
+:: Nyx.Session2.Position1_Hub
+~ session.discussed_cards.append(cards[0].name)
+@render render_reading(reading=reading)
+You point to the first card.
+
+**Position 1: PAST**
+**{cards[0].name}**{cards[0].reversed ? (Reversed) | }
+
+@if cards[0].name == "The Tower":
+    -> Nyx.Session2.Position1_Tower
+@else:
+    -> Nyx.Session2.Position1_EightSwords
+@endif
+
+:: Nyx.Session2.Position1_Tower
+
+The Tower. Upright.
+
+A stone tower struck by lightning. Figures falling from the heights. Sudden collapse. Everything shattering.
+
+Nyx's breath catches. "That's... yeah. That's accurate."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes flicker. The spirit-faces appear, more clearly now. They're *agitated* by this card.
+@else:
+    Her hand twitches violently. Neural feedback spiking.
+@endif
+
++ ["The Tower represents sudden upheaval. Your old reality - the one where you were just a corporate decker - was shattered by revelation."] -> Nyx.Session2.Position1_Tower_Analytical
+
++ ["Your old life is gone. The spirits tore it down by showing you the truth. That tower was built on lies."] -> Nyx.Session2.Position1_Tower_Intuitive
+
++ ["Every awakening begins with collapse. The tower of ignorance must fall before the temple of wisdom can be built."] -> Nyx.Session2.Position1_Tower_Storyteller
+
++ ["Everything you thought you knew was destroyed. The corporate illusion fell apart."] -> Nyx.Session2.Position1_Tower_Generic
+
+:: Nyx.Session2.Position1_Tower_Analytical
+"The Tower represents sudden upheaval. Catastrophic revelation. Your old reality - the one where you were just a corporate decker working a clean job - was *shattered* by the discovery of Project Tsukuyomi."
+
+Nyx nods slowly. "It was sudden. One day I'm optimizing network traffic. The next day I'm seeing *ghosts* in the machine. Literally."
+
+"The lightning bolt is truth. It destroys the false structure instantly. No negotiation. No gradual transition. Just *collapse*."
+
+@if nyx.data_source == "spirits":
+    "The spirits were the lightning," she says quietly. "They struck my comfortable ignorance and everything just... fell apart. I can't go back to not knowing."
+@else:
+    "I hacked the wrong server," she says. "Pure accident. And suddenly I'm seeing things I can't unsee. My whole worldview - just *gone*."
+@endif
+
+~ session.runner_influence += 1
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.competence += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_Tower_Intuitive
+"Your old life is gone. Good. It was built on lies. The spirits revealed the truth by tearing down the false structure. That tower *needed* to fall."
+
+Nyx's eyes widen. "You're saying it was... necessary?"
+
+"Yes. You couldn't see clearly while you were inside that tower. Safe. Comfortable. *Blind*. The destruction freed you to see what's real."
+
+@if nyx.data_source == "spirits":
+    "They didn't give me a choice," she says. "The spirits just... *showed* me. And once I saw, I couldn't pretend anymore. The tower was already falling. I just didn't know it yet."
+
+    ~ session.runner_influence += 1
+@else:
+    "So all the pain, the fear, the paranoia - that's just... the price of seeing truth?"
+
+    "Yes. Freedom requires destruction of what binds you. Even comfortable bindings."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_Tower_Storyteller
+"Every awakening begins with collapse. The tower of ignorance must fall before the temple of wisdom can be built. You were living in a safe, familiar structure. But it was a *prison*."
+
+Nyx touches her temples. Her cybereyes flicker. "It didn't feel like a prison. It felt like... home. A job. A normal life."
+
+"Exactly. The most insidious prisons are the ones we don't recognize as prisons. The Tower's fall is violent because truth is violent when it confronts comfortable lies."
+
+@if nyx.data_source == "spirits":
+    "The spirits are the lightning," you continue. "They struck your tower because they needed you to *wake up*. To see them. To help them. Your awakening wasn't an accident. It was a call."
+
+    Nyx's breath catches. "A call. Like... like shamanic calling. From the old stories."
+
+    "Exactly like that. And you answered. Which is why you're here now."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "Your hacking skills struck the tower," you say. "You dug too deep, saw too much. And now you can't rebuild the illusion. The cards say: don't try. Build something new on the ruins instead."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ reader.insight += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_Tower_Generic
+"Everything you thought you knew was destroyed. The corporate illusion fell apart. That's what the Tower represents."
+
+Nyx nods but doesn't look particularly moved. "Yeah. I figured that much."
+
+The interpretation feels flat. Surface-level.
+
+~ session.quality_score += 0
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_EightSwords
+@if cards[0].reversed:
+    The Eight of Swords - Reversed.
+
+    A figure stands among eight swords, but the blindfold has slipped. The bonds are loosening. Self-imposed limitations falling away.
+@else:
+    The Eight of Swords. Upright.
+
+    A figure bound and blindfolded, surrounded by eight swords. Trapped. Blind to their own power. The bonds look secure but are actually loose - if only they could see.
+@endif
+
+Nyx stares at it. "That's... that's exactly how I felt. Before."
+
+@if nyx.data_source == "spirits":
+    Her eyes flicker. The spirit-faces appear briefly. They look... sympathetic? Understanding?
+@else:
+    Her hand twitches. She grabs it, forcing it still.
+@endif
+
+@if cards[0].reversed:
+    + ["Reversed Eight of Swords - you've removed the blindfold. You see your own power now."] -> Nyx.Session2.Position1_EightSwords_Reversed_Analytical
+    + ["The blindfold is off. No more excuses. You know what you can do. Now you have to do it."] -> Nyx.Session2.Position1_EightSwords_Reversed_Intuitive
+    + ["You've freed yourself from the illusion of powerlessness. That's your past - recognizing your agency."] -> Nyx.Session2.Position1_EightSwords_Reversed_Generic
+@else:
+    + ["You felt trapped by your own perceptions. The swords represent limitations you *believed* were real."] -> Nyx.Session2.Position1_EightSwords_Upright_Analytical
+    + ["You were blind to your own power. The spirits showed you - the cage was always unlocked."] -> Nyx.Session2.Position1_EightSwords_Upright_Intuitive
+    + ["The blind prisoner doesn't know the door is open. That was you - powerful but unaware."] -> Nyx.Session2.Position1_EightSwords_Upright_Storyteller
+    + ["You felt powerless, but the bonds were self-imposed. That's your past."] -> Nyx.Session2.Position1_EightSwords_Upright_Generic
+@endif
+
+:: Nyx.Session2.Position1_EightSwords_Upright_Analytical
+"The Eight of Swords represents self-imposed limitation. You felt powerless - trapped by your corporate role, by your cybernetics, by your fear of what you were sensing. But the bonds were never as tight as you believed."
+
+Nyx looks at her hands. "I thought I was just... malfunctioning. That something was *wrong* with me. That I needed to be fixed."
+
+"But you weren't malfunctioning. You were *awakening*. The swords represent the mental barriers - 'I'm just a decker,' 'This isn't real,' 'I must be going crazy.' Those thoughts kept you trapped more than any physical restraint."
+
+@if nyx.data_source == "spirits":
+    "The spirits showed me the blindfold was a lie," she says quietly. "That I could see if I just... stopped believing I was blind."
+
+    ~ session.runner_influence += 1
+@else:
+    "So I trapped myself? With my own... what, skepticism? Rationality?"
+
+    "With your beliefs about what was possible. The Eight of Swords says: you're more powerful than you think. You always were."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.competence += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_EightSwords_Upright_Intuitive
+"You were blind to your own power. The spirits showed you - the cage was always unlocked. You could have walked away at any time. You just didn't *know*."
+
+Nyx's breath catches. "I felt so trapped. Like I had no choice but to be what Kitsune wanted me to be. A tool. A resource."
+
+"But the Eight of Swords is about *perception*, not reality. The woman in the card isn't actually trapped. She just *thinks* she is. Her blindfold, her bonds - they're loose. She could slip free any time. If she could just *see*."
+
+@if nyx.data_source == "spirits":
+    "The spirits removed my blindfold," she whispers. "They showed me: I'm not powerless. I never was. I just... believed I was."
+
+    Her eyes shine with tears. "They cut the ropes Kitsune never actually tied."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "And now the blindfold's off?"
+
+    "Now you *see*. That's why you're here. That's why you have the data. You stopped believing in your own powerlessness."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_EightSwords_Upright_Storyteller
+"The blind prisoner doesn't know the door is open. That was you - powerful, capable, *gifted* - but blind to your own strength. The swords represent your fears, your doubts, your belief that you were just a cog in Kitsune's machine."
+
+Nyx nods slowly. "I've always been good with systems. Networks. Code. But I thought that was just... a job skill. Not *power*."
+
+"And the shamanic gift? Your ability to sense the spirits?"
+
+@if nyx.data_source == "spirits":
+    "I thought that was a glitch. A malfunction. Something to *fix*. I never considered it might be... real. Valuable. *Mine*."
+
+    "The Eight of Swords tells a story: the prisoner who doesn't realize they hold the key. Your past is recognizing that the cage was always open. The spirits were the ones who finally said: 'Look. *Really look*. You're free. You always were.'"
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "I suppressed it. Medicated it. Tried to make it go away. Because it didn't fit my self-image as a rational, technical person."
+
+    "The Eight of Swords is the story of someone who cages themselves. Your past is that cage. And your present - the cards we're about to see - is what happens when you finally *walk out*."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ reader.insight += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_EightSwords_Upright_Generic
+"You felt powerless, but the bonds were self-imposed. The Eight of Swords represents feeling trapped when you're actually not. That's your past."
+
+Nyx nods. "Okay. I can see that."
+
+The interpretation feels shallow. Technically correct but not deeply insightful.
+
+~ session.quality_score += 0
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_EightSwords_Reversed_Analytical
+"Reversed Eight of Swords means the blindfold has been removed. You see your own power now. The bonds are falling away. Your past is the moment of *recognition* - realizing you were never actually trapped."
+
+Nyx touches her cybereyes. "When I first saw the spirits clearly. Not as glitches. As *beings*. That's when everything changed."
+
+"Exactly. The reversed Eight of Swords is the prison door opening. Not because someone freed you, but because you finally *looked* and realized it was never locked. Your shamanic gifts, your technical skills, your position inside Kitsune - these are *tools*, not chains."
+
+@if nyx.data_source == "spirits":
+    "The spirits didn't break me out," she says slowly. "They just... made me look. Made me *see*. And once I saw, I couldn't pretend I was trapped anymore."
+
+    ~ session.runner_influence += 1
+@else:
+    "So the past is... me waking up? Me realizing I actually have options?"
+
+    "Yes. And now you're here because you need to choose *which* option. But the cards are clear: you're not trapped. Whatever you choose, it's YOUR choice. Not Kitsune's."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.competence += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_EightSwords_Reversed_Intuitive
+"The blindfold is off. No more excuses. You *know* what you can do now. You know what you're capable of. The reversed Eight of Swords says: you see clearly. Act on that clarity."
+
+Nyx's eyes widen. "That's... direct."
+
+"The spirits don't do subtle. They showed you the truth. Now you have to *act* on it. Your past was ignorance. Your present is knowledge. What comes next is *choice*."
+
+@if nyx.data_source == "spirits":
+    "They're impatient," she says quietly. "The spirits. I can feel it. They've been waiting. Suffering. And now someone finally *sees* them. Finally knows. They want me to DO something."
+
+    "Then do it. The blindfold is off. The swords are falling. You're not trapped anymore. *Run*."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "But what if I make the wrong choice?"
+
+    "There's no 'wrong' choice when you're acting from clarity. Only *your* choice. The Eight of Swords reversed says: you're finally free to choose. So choose."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+:: Nyx.Session2.Position1_EightSwords_Reversed_Generic
+"You've freed yourself from the illusion of powerlessness. The reversed Eight of Swords shows that. That's your past - recognizing your agency."
+
+Nyx nods. "Sure. That makes sense."
+
+The interpretation is accurate but not particularly deep.
+
+~ session.quality_score += 0
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 2] -> Nyx.Session2.Position2_Hub
+
+# ============================================================================
+# POSITION 2: PRESENT (Where she is now)
+# ============================================================================
+
+:: Nyx.Session2.Position2_Hub
+~ session.discussed_cards.append(cards[1].name)
+You move to the second card.
+
+**Position 2: PRESENT**
+**{cards[1].name}**{cards[1].reversed ? (Reversed) | }
+
+@if nyx.glitch_intensity >= 3:
+    As you point to it, Nyx's cybereyes glitch violently. Both eyes strobe through three different display modes. She blinks hard, resetting them.
+
+    "Sorry. They're getting worse. The closer we get to... to the center of this. The decision. The more the spirits push back against my hardware."
+
+    ~ nyx.glitch_intensity += 1
+@endif
+
+@if cards[1].name == "Two of Swords":
+    -> Nyx.Session2.Position2_TwoSwords
+@else:
+    -> Nyx.Session2.Position2_SevenWands
+@endif
+
+:: Nyx.Session2.Position2_TwoSwords
+@if cards[1].reversed:
+    The Two of Swords - Reversed.
+
+    A figure with two crossed swords, but the blindfold has fallen. They can finally see both options clearly. Decision time. No more stalling.
+@else:
+    The Two of Swords. Upright.
+
+    A blindfolded figure holds two crossed swords. Stalemate. Unable or unwilling to choose between two paths. Deadlock. Willful blindness to protect from painful truth.
+@endif
+
+Nyx stares at it. Her hands clench on the table edge.
+
+@if cards[1].reversed:
+    "The blindfold's off," she says. "So why does it still feel like I can't see?"
+@else:
+    "I can't move," she whispers. "That's exactly how I feel. Paralyzed. Stuck between options. Terrified to choose."
+@endif
+
+@if cards[1].reversed:
+    + ["Reversed Two of Swords means clarity is coming - or has already come. You *can* see now. The paralysis is ending."] -> Nyx.Session2.Position2_TwoSwords_Reversed_Analytical
+    + ["The blindfold is off. You see the paths. You know which one calls to you. Stop resisting. Choose."] -> Nyx.Session2.Position2_TwoSwords_Reversed_Intuitive
+    + ["You're at a crossroads with open eyes. That's more powerful - and more terrifying - than blind ignorance."] -> Nyx.Session2.Position2_TwoSwords_Reversed_Generic
+@else:
+    + ["Two of Swords represents decision paralysis. You're deadlocked between Runner path and staying inside the system."] -> Nyx.Session2.Position2_TwoSwords_Upright_Analytical
+    + ["You're paralyzed by trying to see both sides. Choose freedom. The spirits are calling - answer them."] -> Nyx.Session2.Position2_TwoSwords_Upright_Intuitive
+    + ["The blindfolded warrior holds both swords but can use neither. That's you right now - powerful but frozen."] -> Nyx.Session2.Position2_TwoSwords_Upright_Storyteller
+    + ["You're stuck between two choices. That's your present state."] -> Nyx.Session2.Position2_TwoSwords_Upright_Generic
+@endif
+
+:: Nyx.Session2.Position2_TwoSwords_Upright_Analytical
+"Two of Swords represents decision paralysis. You're deadlocked between leaving the system entirely - becoming a shadow runner - and staying inside to work against Kitsune from within."
+
+Nyx nods tightly. "Yeah. Exactly. Both options terrify me. Running means losing everything. Staying means living a lie."
+
+"The figure holds two swords but can use neither because they're locked in perfect opposition. That's you right now. The blindfold suggests willful avoidance of clarity. You CAN see both paths. You're choosing not to commit to either because commitment is terrifying."
+
+@if nyx.data_source == "spirits":
+    "The spirits are pushing me," she says. "I can feel them. They want me to choose freedom. To RUN. But my brain - my logical, technical brain - keeps calculating risk ratios and failure modes."
+@else:
+    "Every time I think I've decided, I remember what I'll lose. Or what could go wrong. And I freeze again."
+@endif
+
+"The Two of Swords says: paralysis protects you from pain, but it also prevents growth. Eventually, you have to lower one sword."
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.competence += 1
+
++ ["Which sword will you lower? Let's keep going."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_TwoSwords_Upright_Runner
+"You're paralyzed by trying to see both sides. But the spirits are CALLING you, Nyx. They're not asking you to balance or compromise. They're asking you to ANSWER. Choose freedom."
+
+Nyx's breath catches. Her cybereyes flicker - those spirit-faces appearing more clearly now.
+
+"You think staying inside gives you safety. But that's illusion. The Two of Swords' blindfold is self-imposed. You're keeping it on because you're afraid of what you'll see if you look clearly at Kitsune."
+
+@if nyx.data_source == "spirits":
+    "They showed me," she whispers. "When they led me to the data. I SAW the containment chambers. The suffering. I can't pretend anymore that this is just 'corporate ethics issues.' This is TORTURE."
+
+    "Then stop negotiating with torturers. Drop the corporate sword. Pick up the spirit blade. Run."
+
+    ~ session.runner_influence += 1
+@else:
+    "But if I run, I lose my income, my credstick access, my SIN validity, my whole LIFE."
+
+    "Your life is already a lie. The Two of Swords says: you're frozen because you're trying to preserve something that's already dead. Let it go."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's see what comes next."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_TwoSwords_Upright_Ghost
+"You're at a crossroads. But who says you can only walk one path? The Two of Swords shows two options, but it doesn't say you have to completely abandon one for the other."
+
+Nyx leans forward, interested. "What do you mean?"
+
+"You're thinking binary: inside OR outside. Corporate OR shadow. But you're a decker. You know systems. What if you navigate BOTH? Stay inside Kitsune but feed intelligence to people outside. Be the ghost in their machine."
+
+@if nyx.data_source == "spirits":
+    "The spirits led me to the data," she says slowly. "But they didn't tell me to quit. They just showed me the truth. Maybe... maybe my job isn't to escape. Maybe it's to be their eyes and hands INSIDE."
+
+    ~ session.ghost_influence += 1
+@else:
+    "So I become a mole? A double agent?"
+
+    "You become someone who LOOKS loyal while actually serving a different purpose. The Two of Swords shows paralysis, but reversed thinking shows: you can hold both swords if you're strategic about it."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Interesting approach. Let's continue."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_TwoSwords_Upright_Loyal
+"You're stuck because neither choice feels SAFE. And that's wisdom, not weakness. Maybe the answer isn't rushing toward either extreme. Maybe there's a middle way that preserves what you've built."
+
+Nyx looks relieved. "You think it's okay to... to wait? To not decide yet?"
+
+"The Two of Swords can mean: not everything requires immediate action. You're scared of running because you'll lose everything. You're scared of staying because you'll be complicit. But what if you move slowly? Carefully? Test approaches before committing?"
+
+@if nyx.kitsune_suspicion >= 6:
+    "But Kitsune is already suspicious. I don't know how much TIME I have to figure this out."
+
+    "Then use that time wisely. Don't panic. Don't make rash choices. Think strategically about protecting yourself FIRST. The spirits have waited centuries. They can wait a few more weeks while you build stability."
+@else:
+    "Take time to prepare. Build resources. Make connections. Don't leap blindly. The Two of Swords suggests: lower the swords slowly, carefully, with full awareness of consequences."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see what the future holds."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_TwoSwords_Reversed_Runner
+"The blindfold is off. You SEE the truth now - one path leads to freedom, the other to gilded captivity. The reversed Two of Swords says: clarity has arrived. Stop resisting it. Run toward truth."
+
+Nyx's hands clench. "It's that simple? Just... choose freedom?"
+
+"Yes. You're making it complicated because you're afraid. But the spirits already showed you. Kitsune enslaves them. You can't save them from inside a system designed to exploit them. You have to GET OUT and then act."
+
+@if nyx.data_source == "spirits":
+    "They're screaming," she whispers. "In my head. In the data. They're SCREAMING. And I'm sitting here calculating career impacts and credit scores. What's wrong with me?"
+
+    "Nothing's wrong. You're human. But the reversed Two of Swords says: decision time is NOW. The blindfold fell. You can see. Act on what you see."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "But what about my apartment, my savings, my—"
+
+    "Those are chains disguised as security. The reversed Two of Swords cuts through lies. What matters more: your comfort or their suffering?"
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's move forward."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_TwoSwords_Reversed_Loyal
+"Without clear vision, you're vulnerable. The reversed Two of Swords can mean: removing the blindfold too soon, before you're ready. Maybe return to what's stable and proven until you can see the full picture."
+
+Nyx looks uncertain. "So... stay at Kitsune? Keep my head down?"
+
+"Until you have a real plan. Real resources. Real support. Right now you have data and fear. That's not enough to base life-destroying decisions on. The reversed Two of Swords warns: premature clarity can be dangerous."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But they're already watching me. Waiting might just give them time to find proof."
+
+    "Then be very, very careful. But don't panic into a choice you can't take back."
+@else:
+    "The spirits showed me truth. How can acting on truth be premature?"
+
+    "Truth without strategy is just martyrdom. Be smart. Protect yourself first."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's continue."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_SevenWands
+@if cards[1].reversed:
+    The Seven of Wands - Reversed.
+
+    A figure holding a single wand against six others, but they're faltering. Exhausted. The defensive position can't hold much longer. Time to retreat or radically change tactics.
+@else:
+    The Seven of Wands. Upright.
+
+    A figure stands on high ground, holding a wand against six others attacking from below. Defensive position. Fighting to maintain ground against overwhelming opposition. Barely holding on.
+@endif
+
+Nyx stares at it. "That's... that's exactly how I feel. Under siege. From all directions."
+
+@if nyx.kitsune_suspicion >= 6:
+    "Kitsune security is tightening. The spirits are pushing. My cyberware is failing. I feel like I'm defending a position I can't actually hold."
+@else:
+    "I'm fighting just to maintain... what? Normal life? The illusion that everything's fine? But it's exhausting. I'm barely holding."
+@endif
+
+Her cybereyes glitch badly. Left eye goes white, right eye strobes errors. She blinks hard, resetting.
+
+~ nyx.glitch_intensity += 1
+
+@if cards[1].reversed:
+    + ["You're exhausted from fighting THEIR battle. Lay down the corporate weapons. Find allies in the shadows."] -> Nyx.Session2.Position2_SevenWands_Reversed_Runner
+    + ["This defensive position can't hold. But giving up isn't the only option - change your tactics. Stop fighting."] -> Nyx.Session2.Position2_SevenWands_Reversed_Generic
+@else:
+    + ["You're already fighting just to stay in place. Stop defending corporate ground. Start claiming your own territory OUTSIDE."] -> Nyx.Session2.Position2_SevenWands_Upright_Runner
+    + ["You're holding your position while surrounded. GOOD. Use their weapons against them. Defend from within their own fortress."] -> Nyx.Session2.Position2_SevenWands_Upright_Ghost
+    + ["You're barely holding against overwhelming odds. Maybe negotiate instead of fighting alone. Survival is victory."] -> Nyx.Session2.Position2_SevenWands_Upright_Loyal
+@endif
+
+:: Nyx.Session2.Position2_SevenWands_Upright_Runner
+"You're already fighting just to stay in place. Every day at Kitsune is a battle - maintaining the lie, suppressing your awareness, fighting your own instincts. That's EXHAUSTING. And for what? To defend THEIR ground?"
+
+Nyx slumps slightly. "I'm so tired. The constant vigilance. Pretending everything's normal. Hiding the glitches. Acting like I'm loyal."
+
+"The Seven of Wands shows a defender on high ground, but look closely - they're fighting to hold someone ELSE's territory. That's not your hill. Why are you dying on it?"
+
+@if nyx.data_source == "spirits":
+    "The spirits are the ones attacking?" she asks. "Or am I attacking Kitsune by knowing the truth?"
+
+    "You're attacking YOURSELF by staying. The Seven of Wands says: stop defending this position. Find NEW ground. Your own ground. Outside their walls."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "Because I don't know where else to stand. If I leave this ground, I have... nothing."
+
+    "You have the spirits. You have your skills. You have the TRUTH. That's more than nothing. The Seven of Wands says: retreat from this impossible fight and choose battles you can actually win."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's see where this leads."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_SevenWands_Upright_Ghost
+"You're holding your position while surrounded. That's actually GOOD tactical positioning. You're inside their fortress. You see their defenses from within. You know where the weak points are."
+
+Nyx's eyes widen. "You're saying... use my defensive position as an OFFENSIVE advantage?"
+
+"Exactly. The Seven of Wands shows someone on high ground. That's visibility. Vantage point. Yes, you're surrounded. But you're also INSIDE. You have access they don't expect. Use their own weapons and tactics against them."
+
+@if nyx.data_source == "spirits":
+    "The spirits showed me where they keep the data. Where the servers are. What the security protocols look like. I'm not just defending - I'm INSIDE their most secure spaces."
+
+    "Then stop thinking like a victim under siege. Think like a saboteur with perfect cover. The Seven of Wands reversed becomes strength when you change perspective."
+
+    ~ session.ghost_influence += 1
+@else:
+    "But I'm one person. They're a megacorp. The odds are impossible."
+
+    "Guerrilla fighters don't win by matching corporate resources. They win by knowing the terrain intimately and using it against superior force. You KNOW this terrain. Every server. Every security measure. Every blind spot. That's power."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Interesting angle. Continue."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_SevenWands_Upright_Loyal
+"You're barely holding on against overwhelming odds. I can see that. Feel that. Maybe it's time to stop fighting and start NEGOTIATING. Survival is its own form of victory."
+
+Nyx looks desperate for permission to stop fighting. "You think it's okay to... to just stop? To not be the hero?"
+
+"Being alive and sane is more important than being heroic. The Seven of Wands shows someone exhausted from constant defense. That's not sustainable. Eventually you'll collapse. Better to negotiate a truce than die on this hill."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But Kitsune doesn't negotiate. They erase problems. If they know I know, I'm a problem."
+
+    "Then your job is to NOT be a problem. Blend in. Stay quiet. Survive. The spirits have endured centuries of captivity. They can endure longer while you figure out safe options."
+@else:
+    "What does negotiating even look like? Pretend I never saw the data?"
+
+    "Maybe. Or find a way to address it through proper channels. Whistleblower protections. Legal routes. Slow, safe methods that don't destroy you in the process."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's move on."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_SevenWands_Reversed_Runner
+"You're exhausted from fighting THEIR battle with THEIR weapons on THEIR ground. The reversed Seven of Wands says: lay down the corporate weapons. Stop defending their territory. Find allies in the SHADOWS where you're not alone and outnumbered."
+
+Nyx's whole body sags. "I'm so tired. So tired of pretending. Of fighting just to maintain the status quo. For THEIR benefit."
+
+"Then stop. The reversed Seven of Wands is permission to RETREAT from an unwinnable position. Not defeat - strategic withdrawal. You're one person holding off six attackers. That was always going to fail."
+
+@if nyx.data_source == "spirits":
+    "The spirits aren't attacking me. They're trying to HELP me see I'm fighting the wrong battle."
+
+    "Exactly. Put down Kitsune's wand. Pick up the spirit blade. Find people OUTSIDE who are already fighting this fight. Shadow runners. Activists. Hacktivists. You're not alone out there. You're only alone IN HERE."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "What if I can't find allies? What if I run and I'm just... alone and unemployed and hunted?"
+
+    "Better to be hunted and FREE than safe and complicit. The reversed Seven of Wands says: this defensive position is collapsing. Leave before it buries you."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's continue."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_SevenWands_Reversed_Generic
+"The fight isn't sustainable. The reversed Seven of Wands says: you can't hold this position much longer. Maybe it's time to just... let go. Stop fighting. Accept that this isn't your battle."
+
+Nyx looks hollow. "Just give up? Forget what I saw? Let the spirits keep suffering?"
+
+"I'm not saying that's good. I'm saying you're one person against a megacorp. Maybe this isn't a fight you can win."
+
+@if nyx.data_source == "spirits":
+    She touches the data chip on the table. The spirit faces flicker in her eyes. "They showed me for a REASON. I can't just... ignore it."
+@else:
+    "So I wasted all this risk - stealing the data, coming here - for nothing?"
+@endif
+
+The interpretation lands poorly. You can see it in her face.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ ["Let me rethink that. Moving on..."] -> Nyx.Session2.Position3_Hub
+
+# ============================================================================
+# POSITION 3: FUTURE (Where this is leading)
+# ============================================================================
+
+:: Nyx.Session2.Position3_Hub
+@render render_reading(reading=reading)
+@py:
+    session.discussed_cards.append(cards[2].name)
+
+    # Glitch intensity increases at the midpoint
+    if nyx.glitch_intensity < 4:
+        nyx.glitch_intensity = 4
+@endpy
+You move to the third card.
+
+**Position 3: FUTURE**
+**{cards[2].name}**{cards[2].reversed ? (Reversed) | }
+
+@if nyx.glitch_intensity >= 4:
+    Before you can speak, Nyx's cybereyes SURGE with distortion. Both eyes fill with cascading static - and for three full seconds, you see THEM.
+
+    The spirits. Dozens of them. Compressed faces made of light and geometry. Some humanoid. Some utterly alien. All SCREAMING silently.
+
+    Nyx gasps, grabs her head. The vision clears. Her eyes reset to brown, but she's shaking.
+
+    @if nyx.data_source == "spirits":
+        "They're HERE," she whispers. "Watching. Listening. They know we're reading their future too."
+    @else:
+        "Did you see that? Did you SEE them? In my eyes? They're getting STRONGER. Pushing HARDER against my hardware."
+    @endif
+
+    ~ nyx.glitch_intensity += 1
+@endif
+
+@if cards[2].name == "The Star":
+    -> Nyx.Session2.Position3_Star
+@else:
+    -> Nyx.Session2.Position3_TenSwords
+@endif
+
+:: Nyx.Session2.Position3_Star
+
+The Star. Upright.
+
+A figure kneeling by water, pouring liquid from two vessels. Stars shine overhead - one large, seven small. Hope. Guidance. Renewed purpose. Healing after trauma.
+
+Nyx stares at it. Her breathing slows. "That's... that's beautiful. Is that really possible? After all this?"
+
+@if nyx.data_source == "spirits":
+    Her eyes flicker, but gently this time. The spirit-faces appear briefly - and they look HOPEFUL. Expectant.
+@endif
+
++ ["Freedom and purpose await you BEYOND the corporate walls. The spirits are your guiding star - follow that light into the wild."] -> Nyx.Session2.Position3_Star_Runner
++ ["You can be a guiding light WITHIN the darkness. Show others the way from inside the system. Hope doesn't require exile."] -> Nyx.Session2.Position3_Star_Ghost
++ ["Hope exists, but reaching it requires patience and working within existing structures. Slow, steady progress toward healing."] -> Nyx.Session2.Position3_Star_Loyal
+
+:: Nyx.Session2.Position3_Star_Runner
+"Freedom and purpose await you beyond the corporate walls. See the figure kneeling by water? That's you - but not NOW. That's you AFTER. After you leave. After you run. After you find your way to the wild places where the spirits live."
+
+Nyx's breath catches. "You really think that's possible? That I could have... peace? After everything?"
+
+"The Star is THE hope card. It appears after The Tower - after destruction - to say: yes, you can rebuild. Yes, there's light ahead. But notice where the light is. It's in the OPEN. Under the stars. Not in corporate towers."
+
+@if nyx.data_source == "spirits":
+    "The spirits are the stars," she whispers. "The large one and the seven smaller ones. They're GUIDING me. Showing me the way out."
+
+    "Yes. They're your north star. Your navigation system. Follow them into freedom and you'll find purpose you never knew existed. Shamanic work. Spirit advocacy. REAL magic, not corporate-extracted data."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "But what do I DO out there? How do I survive?"
+
+    "The Star doesn't promise easy. It promises MEANINGFUL. You'll find allies. Shadow runners who fight corps. Hacktivists who expose exploitation. You won't be alone. And the work will matter in ways your Kitsune job never did."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["That's the future. Let's see what's hidden."] -> Nyx.Session2.Position4_Hub
+
+:: Nyx.Session2.Position3_Star_Ghost
+"You can be a guiding light within the darkness. The Star doesn't have to be external - it can shine FROM INSIDE the system, showing others the way. Hope doesn't require exile."
+
+Nyx leans forward. "A light inside Kitsune? How?"
+
+"The figure pours water onto land and into water - mixing elements, creating balance. That's you: corporate employee AND spirit advocate. The Star says your future is INTEGRATION, not separation. Be the hope inside the machine."
+
+@if nyx.data_source == "spirits":
+    "The spirits showed me the way IN. Maybe that's because they need someone ON THE INSIDE. Someone who can free them from within their own prison."
+
+    "Exactly. The seven small stars represent other souls who will follow your light. Other employees who suspect. Other deckers who see glitches. You can be the beacon that says: you're not crazy. It's real. Follow me."
+
+    ~ session.ghost_influence += 1
+@else:
+    "So I stay at Kitsune but become... what? A secret resistance?"
+
+    "A ghost in their machine. The Star is hope. You BE that hope for the trapped spirits. For other employees who sense something wrong. Light the way from inside the darkness."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Interesting path. Continue."] -> Nyx.Session2.Position4_Hub
+
+:: Nyx.Session2.Position3_Star_Loyal
+"Hope exists. The Star promises that. But reaching it requires patience and working within existing structures. See how the figure KNEELS? That's humility. Careful approach. Slow, steady progress toward healing."
+
+Nyx looks uncertain. "So the future is... staying at Kitsune? But somehow things get better?"
+
+"The future is finding a way to address Project Tsukuyomi through PROPER channels. Whistleblower protections. Legal advocacy. Corporate ethics boards. The Star's light is steady, not sudden. It's marathon, not sprint."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But I'm already under suspicion. I don't know if I HAVE time for slow approaches."
+
+    "Then your job is to reduce suspicion while carefully planning. The Star says: healing is possible. But it comes through patience, not recklessness."
+@else:
+    "That sounds... safe. Boring. But maybe boring is okay?"
+
+    "Boring keeps you alive. Keeps you employed. Keeps you in position to help - slowly, carefully - without destroying yourself. The Star is hope, yes. But gradual hope."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's continue."] -> Nyx.Session2.Position4_Hub
+
+:: Nyx.Session2.Position3_TenSwords
+@if cards[2].reversed:
+    The Ten of Swords - Reversed.
+
+    A figure lies face-down, ten swords in their back - but they're REMOVING the swords. Rising. The worst is over. Resurrection. Recovery begins.
+@else:
+    The Ten of Swords. Upright.
+
+    A figure lies face-down, ten swords in their back. Dawn breaks on the horizon. This is the END. Rock bottom. But also: the worst is over. Nowhere to go but up.
+@endif
+
+Nyx goes pale. "That's... that's ME. With ten swords in my back. That's what happens?"
+
+Her hands shake. Cybereyes glitch wildly.
+
+@if nyx.kitsune_suspicion >= 6:
+    "Kitsune kills me. That's the future. Corporate assassination. Black bag. Disappeared. I'm DEAD."
+@else:
+    "I'm destroyed. Betrayed. Ended. Is that what you're seeing?"
+@endif
+
+@if cards[2].reversed:
+    + ["The WORST is over. Rise from the ashes completely new. Resurrection requires leaving the corpse behind - your corporate identity."] -> Nyx.Session2.Position3_TenSwords_Reversed_Runner
+    + ["Recovery is possible. The ending isn't as final as it seems. Healing happens within familiar structures, not through radical change."] -> Nyx.Session2.Position3_TenSwords_Reversed_Loyal
+@else:
+    + ["This path ends in betrayal if you STAY. The only way out is complete severance from the system that WILL destroy you."] -> Nyx.Session2.Position3_TenSwords_Upright_Runner
+    + ["Staying means death by a thousand cuts. But you can turn those blades against your enemies FROM WITHIN. Use their weapons."] -> Nyx.Session2.Position3_TenSwords_Upright_Ghost
+    + ["This looks like an ending, but hitting bottom means nowhere to go but UP. Rebuild carefully from stable ground."] -> Nyx.Session2.Position3_TenSwords_Upright_Loyal
+@endif
+
+:: Nyx.Session2.Position3_TenSwords_Upright_Runner
+"This path ends in betrayal if you STAY. The Ten of Swords is WARNING you - if you remain inside Kitsune, this is where you end. Destroyed. The only way OUT is complete severance from the system that WILL betray you."
+
+Nyx is shaking. "You're saying Kitsune will kill me?"
+
+"I'm saying this card represents the future of STAYING. Every day you remain gives them more chance to discover you. To connect you to the data breach. To eliminate the problem. The ten swords aren't metaphorical - they're REAL."
+
+@if nyx.data_source == "spirits":
+    "The spirits are showing me," she whispers. "Other deckers. Other employees who 'knew too much.' They're GONE. Disappeared. The swords are Kitsune's solution to inconvenient truth."
+
+    "Then don't be there when they swing. The Ten of Swords says: run NOW. Before you're the body on the ground."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "But maybe I'm being paranoid. Maybe they won't find out. Maybe—"
+
+    "The Ten of Swords doesn't appear as a maybe. It appears as a CERTAINTY if you don't change course. Run. Leave. Sever completely. That's how you avoid becoming this card's literal manifestation."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's see what's hidden beneath this."] -> Nyx.Session2.Position4_Hub
+
+:: Nyx.Session2.Position3_TenSwords_Upright_Ghost
+"Staying means death by a thousand cuts - yes. But you can turn those blades AGAINST your enemies from within. The Ten of Swords shows defeat, but notice: the figure's hand makes a blessing gesture. Even in death, power remains."
+
+Nyx looks at the card more closely. "How is that helpful? They're DEAD."
+
+"But they're not defeated. The swords are Kitsune's weapons - security, surveillance, corporate violence. Right now those swords point AT you. But what if you could REDIRECT them? Turn corporate weapons against corporate targets?"
+
+@if nyx.data_source == "spirits":
+    "Use their own security systems to free the spirits? Their own servers to expose them?"
+
+    "Exactly. The Ten of Swords as a WARNING becomes the Ten of Swords as a WEAPON. You know where every blade is. You know how they kill. Use that knowledge."
+
+    ~ session.ghost_influence += 1
+@else:
+    "That sounds like I'd still end up dead. Just... taking them down with me?"
+
+    "Or you end up as the ghost who haunts them forever. The insider they can never fully eliminate because you're embedded too deep. The Ten of Swords says: this is dangerous. But danger cuts both ways."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Dark, but strategic. Continue."] -> Nyx.Session2.Position4_Hub
+
+:: Nyx.Session2.Position3_TenSwords_Upright_Loyal
+"This looks like an ending - and it is. But hitting rock bottom means nowhere to go but UP. The Ten of Swords says: yes, you'll suffer if you stay. But you can rebuild carefully from stable ground after the worst passes."
+
+Nyx looks desperate for this interpretation to be true. "The worst passes? I survive?"
+
+"The dawn breaks in the background of this card. After the darkest night comes morning. Yes, staying at Kitsune will be painful. Cuts and compromises and fear. But it's SURVIVABLE. And on the other side: stability."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But they're already suspicious. What if the 'rock bottom' is them discovering me?"
+
+    "Then your job is to ensure they don't. Lie low. Blend in. Let suspicion fade. The Ten of Swords says: yes, you'll be wounded. But wounds heal. Death is final."
+@else:
+    "So I just... endure? Accept that it's going to hurt?"
+
+    "Endurance is underrated. The Ten of Swords shows someone who fought to the end. There's honor in that. And the dawn promises: you'll wake up. Eventually. Whole."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's move on."] -> Nyx.Session2.Position4_Hub
+
+:: Nyx.Session2.Position3_TenSwords_Reversed_Runner
+"The worst is OVER. The reversed Ten of Swords means: rise from the ashes completely new. Resurrection. But resurrection requires leaving the CORPSE behind - your corporate identity, your Kitsune life, all of it."
+
+Nyx's eyes widen. "Leaving it behind... completely? Like it's dead?"
+
+"It IS dead. That's what the spirits showed you - your corporate life ended the moment you saw the truth. You're just still wearing the corpse like a costume. The reversed Ten of Swords says: strip it off. Stand up NEW."
+
+@if nyx.data_source == "spirits":
+    "I felt it," she whispers. "When they showed me the containment chambers. Something in me DIED. The person who could work at Kitsune and sleep at night. She's gone."
+
+    "Good. Mourn her if you need to. But then RUN. The living don't carry corpses. Leave the dead identity in the ground and become who the spirits need you to be."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "But that identity is ALL I HAVE. My SIN, my credit, my whole LIFE."
+
+    "Your life as a lie. The reversed Ten of Swords promises: removing the swords hurts, but then you HEAL. You can't heal while the blades are still in. Extract them. All of them. Corporate identity included."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Powerful. Let's continue."] -> Nyx.Session2.Position4_Hub
+
+:: Nyx.Session2.Position3_TenSwords_Reversed_Loyal
+"Recovery is possible. The ending isn't as final as it seems. The reversed Ten of Swords says: healing happens within familiar structures, not through radical change. You can remove the swords ONE AT A TIME."
+
+Nyx looks hopeful. "Slowly? Carefully? I don't have to do anything drastic?"
+
+"Exactly. The upright Ten of Swords is sudden, violent END. The reversal is gradual RECOVERY. Stay at Kitsune. Reduce risk slowly. Find legal channels. Let time heal the wounds instead of ripping them open wider through rebellion."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But time might not be on my side. Kitsune is investigating."
+
+    "Then your priority is reducing suspicion, not escalating it. The reversed Ten of Swords says: the worst can be AVOIDED if you're careful. Don't become the upright version by panicking."
+@else:
+    "That sounds safer than running into the unknown."
+
+    "Safety has value. The reversed Ten of Swords acknowledges: yes, you're hurt. But you're NOT dead. Recovery begins by staying still, not thrashing."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see what's hidden."] -> Nyx.Session2.Position4_Hub
+
+# ============================================================================
+# POSITION 4: WHAT'S HIDDEN (What she doesn't see)
+# ============================================================================
+
+:: Nyx.Session2.Position4_Hub
+~ session.discussed_cards.append(cards[3].name)
+@render render_reading(reading=reading)
+You point to the fourth card - tucked slightly away from the others in the horseshoe formation.
+
+**Position 4: WHAT'S HIDDEN**
+**{cards[3].name}**{cards[3].reversed ? (Reversed) | }
+
+"This position reveals what you CAN'T see. What you're blind to. The hidden truth beneath the obvious."
+
+@if nyx.glitch_intensity >= 4:
+    Nyx's eyes flicker as you speak. The spirit-faces appear briefly, then vanish. Like they're trying to show her something but can't quite break through.
+@endif
+
+@if cards[3].name == "The Moon":
+    -> Nyx.Session2.Position4_Moon
+@else:
+    -> Nyx.Session2.Position4_SevenCups
+@endif
+
+:: Nyx.Session2.Position4_Moon
+
+The Moon. Upright.
+
+A full moon hangs in the sky between two towers. A path leads between them toward distant mountains. A crayfish crawls from water. A dog and wolf howl. Illusion. Hidden truths. Instinct versus logic. Uncertainty.
+
+Nyx stares at it. "The moon. That's... that's what I see in my dreams. Since the spirits first contacted me. The moon keeps appearing."
+
+@if nyx.data_source == "spirits":
+    "And in the reflections," she adds quietly. "In windows. In screens. In water. The moon follows me."
+@else:
+    Her cybereyes glitch. For a moment, moonlight seems to reflect FROM them despite being indoors.
+@endif
+
++ ["Trust your INSTINCTS over corporate logic. The spirits speak in dreams and shadows - they know truths the system can't see."] -> Nyx.Session2.Position4_Moon_Runner
++ ["Nothing is as it appears. Use DECEPTION as your weapon - they taught you how. Illusion cuts both ways."] -> Nyx.Session2.Position4_Moon_Ghost
++ ["You're confused because you're looking at illusions and shadows. Focus on CONCRETE, provable, well-lit facts."] -> Nyx.Session2.Position4_Moon_Loyal
+
+:: Nyx.Session2.Position4_Moon_Runner
+
+"Trust your instincts over corporate logic. The Moon card says: what you DON'T see with your cybereyes is more real than what you DO see with them. The spirits speak in dreams and shadows - they know truths the system can't process."
+
+Nyx touches her temples. "My training says trust data. Trust metrics. Trust what can be VERIFIED. But the spirits... they don't show up in logs. They're not quantifiable."
+
+"Exactly. That's the hidden truth: reality is BIGGER than what Kitsune's systems can measure. The Moon shows the path between two towers - logic and instinct. You've been walking the logic tower. But the real path is in the moonlight BETWEEN them."
+
+@if nyx.data_source == "spirits":
+    "The moon in my dreams," she whispers. "It's been guiding me. Showing me where to go. What to look for. I thought it was random neural firing. But it's been REAL this whole time."
+
+    "Your instincts - your shamanic gifts - are MORE reliable than corporate data. That's what's hidden. You're measuring with the wrong instruments. The Moon says: trust the dreams. Trust the shadows. Trust the spirits. They see what Kitsune deliberately blinds itself to."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "So what I'm FEELING is more true than what I'm SEEING?"
+
+    "Yes. Your fear? That's real data. Your sense of being watched? Real. Your instinct that Kitsune is dangerous? REAL. The Moon illuminates hidden truths - but only for those who stop demanding daylight certainty."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's see what obstacles stand in your way."] -> Nyx.Session2.Position5_Hub
+
+:: Nyx.Session2.Position4_Moon_Ghost
+
+"Nothing is as it appears. The Moon is the card of DECEPTION - but deception cuts both ways. Kitsune taught you how to hack, how to hide, how to manipulate systems. Use those same skills against them. Illusion is your weapon."
+
+Nyx's eyes narrow. "You're saying... lie to them? Play corporate loyalty while actually serving the spirits?"
+
+"The Moon shows a crayfish crawling from water - hidden things emerging. A dog and wolf - tame and wild existing simultaneously. You can BE both. Corporate employee (dog) and shadow runner (wolf). The hidden truth is: you don't have to choose."
+
+@if nyx.data_source == "spirits":
+    "The spirits led me through the network without leaving traces. Like... like moonlight. Present but intangible. They taught me to move through systems the way they do - seen but not REGISTERED."
+
+    "That's your hidden advantage. Kitsune's security looks for daylight intrusions. But you're moonlight. Subtle. Shadowlike. They can't defend against what they can't properly perceive. Be the ghost in their machine."
+
+    ~ session.ghost_influence += 1
+@else:
+    "Won't they eventually figure out I'm lying?"
+
+    "The Moon says: perception IS reality in corporate environments. If you LOOK loyal, you ARE loyal in their systems. Performance is truth. What you feel inside - that's hidden. That's the moon. And hidden things have power precisely BECAUSE they're hidden."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Clever. Let's continue."] -> Nyx.Session2.Position5_Hub
+
+:: Nyx.Session2.Position4_Moon_Loyal
+
+"You're confused because you're looking at illusions and shadows. The Moon warns: don't trust what you can't verify. Focus on CONCRETE, provable, well-lit facts. Daylight truths, not moonlight fantasies."
+
+Nyx looks uncertain. "But I SAW the spirits. They're real."
+
+"Or your cyberware is malfunctioning in ways that SIMULATE spirit contact. The Moon is the card of uncertainty. The hidden truth might be: you're experiencing advanced psychosis. Neural degradation. The 'spirits' might be your brain creating meaning from random errors."
+
+@if nyx.data_source == "spirits":
+    "No." Her voice is firm. "I KNOW the difference between hallucination and reality. The spirits are REAL."
+
+    "That's what every person experiencing breaks from reality believes. The Moon says: you can't trust your own perceptions right now. Ground yourself in what others can verify."
+@else:
+    "That's... that's what I'm afraid of. That I'm just going crazy. That none of this is real."
+
+    "Which is why you need to rely on FACTS. Medical scans. Corporate psych evals. Data that exists independent of your compromised perceptions. The Moon's hidden truth: you're too close to see clearly."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's move on."] -> Nyx.Session2.Position5_Hub
+
+:: Nyx.Session2.Position4_SevenCups
+
+@if cards[3].reversed:
+    The Seven of Cups - Reversed.
+
+    Seven chalices float in clouds, but they're CLARIFYING. The illusions are falling away. Reality becoming visible. Clarity after confusion. Seeing what's actually in each cup.
+@else:
+    The Seven of Cups. Upright.
+
+    Seven chalices float in clouds, each containing a different vision: jewels, a shrouded figure, a snake, a castle, laurels, a dragon, a glowing face. Too many choices. Fantasy versus reality. Overwhelmed by possibilities.
+@endif
+
+Nyx stares at the cups. "That's... that's exactly how I feel. Like I have seven different futures and I can't tell which ones are REAL."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes flicker. Different images strobe through them rapidly - the containment chambers, shadow runners, her apartment, Kitsune's logo, spirit-faces, code cascades, freedom, chains. Too fast to process.
+@endif
+
+~ nyx.glitch_intensity += 1
+
+@if cards[3].reversed:
+    + ["The illusions are CLEARING. You see what's real now - the spirits, your power, your cage. Act on that clarity."] -> Nyx.Session2.Position4_SevenCups_Reversed_Runner
+    + ["Reality check: stick with what's CONCRETE and proven. Fantasy and risk will hurt you."] -> Nyx.Session2.Position4_SevenCups_Reversed_Loyal
+@else:
+    + ["You're overwhelmed by possibilities. Most are corporate MIRAGES. There's only one real choice: freedom and the spirits."] -> Nyx.Session2.Position4_SevenCups_Upright_Runner
+    + ["All these options are REAL in their own way. You don't have to choose just one - take what serves you from each cup."] -> Nyx.Session2.Position4_SevenCups_Upright_Ghost
+    + ["Too many fantasies cloud your judgment. Ground yourself in what's actually ACHIEVABLE, safe, and practical."] -> Nyx.Session2.Position4_SevenCups_Upright_Loyal
+@endif
+
+:: Nyx.Session2.Position4_SevenCups_Upright_Runner
+
+"You're overwhelmed by possibilities because you're looking at ALL of them as equally valid. But most are corporate MIRAGES. The hidden truth is: there's only ONE real choice. Freedom and the spirits. Everything else is fantasy Kitsune wants you to believe in."
+
+Nyx looks at the card more closely. "Which cup is real?"
+
+"The one with the glowing face - that's the spirits calling. The one with jewels? That's Kitsune's promise of wealth that will never satisfy. The castle? Corporate security that's actually a prison. The dragon? The dangerous path that's actually LIBERATION."
+
+@if nyx.data_source == "spirits":
+    "The spirits showed me seven paths too," she says quietly. "But they kept pointing to one. The wild one. The free one. The one that looked most dangerous but felt most TRUE."
+
+    "That's because fantasy LOOKS safe and real LOOKS dangerous when you've been trained by corporate thinking. The Seven of Cups' hidden message: stop analyzing. Stop weighing options. The spirits already showed you which cup to drink from."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "But how do I KNOW which is real and which is fantasy?"
+
+    "Your fear tells you. The option that terrifies you most? That's probably the real one. Corporate comfort is the fantasy. Freedom is the reality you're hidden from."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's see the obstacles."] -> Nyx.Session2.Position5_Hub
+
+:: Nyx.Session2.Position4_SevenCups_Upright_Ghost
+
+"All these options are REAL in their own way. The hidden truth is: you don't have to choose just ONE cup. Take what serves you from EACH. Wealth from corporate work. Purpose from spirit advocacy. Security AND freedom. Why not both?"
+
+Nyx leans forward, interested. "You're saying I can have... multiple cups? Mix them?"
+
+"The Seven of Cups shows abundance of choice, but corporate thinking demands you pick ONE and reject the others. That's the lie. You're a DECKER. You multithread. You run multiple processes simultaneously. Why should your life be single-threaded?"
+
+@if nyx.data_source == "spirits":
+    "The spirits exist in multiple states at once. Digital and mystical. Data and alive. Pattern and consciousness. They don't choose - they ARE both."
+
+    "Exactly. The hidden truth is: you can be corporate employee AND spirit advocate. The cups aren't mutually exclusive. They're options in a SELECT statement - you can choose ALL that apply."
+
+    ~ session.ghost_influence += 1
+@else:
+    "But won't that split me? Make me unstable? Trying to be everything?"
+
+    "Or it makes you INTEGRATED. Whole. The Seven of Cups hidden message: abundance isn't confusion. It's richness. Stop seeing cups as competition. See them as ingredients. Mix them."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Interesting approach. Continue."] -> Nyx.Session2.Position5_Hub
+
+:: Nyx.Session2.Position4_SevenCups_Upright_Loyal
+
+"Too many fantasies cloud your judgment. The hidden truth is: most of these cups contain ILLUSIONS. Shadow running? Fantasy. Spirit shamanism? Fantasy. Corporate security is the ONE real cup. Ground yourself in what's actually achievable, safe, and practical."
+
+Nyx looks uncertain. "So all these other options are just... daydreams?"
+
+"Yes. The Seven of Cups warns against chasing visions that have no substance. You see jewels? Fool's gold. You see a dragon? Hallucination. The real cup - the one that won't disappear when you touch it - is your Kitsune job. Solid. Proven. REAL."
+
+@if nyx.data_source == "spirits":
+    "But the spirits ARE real. I FELT them. I saw the containment chambers."
+
+    "Or you experienced advanced cyber-psychosis that FELT real. The Seven of Cups' hidden message: your perceptions are compromised. Trust external verification, not internal conviction."
+@else:
+    "That's what I'm afraid of. That I'm chasing illusions and I'll end up with nothing."
+
+    "Then don't chase. Stay with the cup you KNOW is solid. Your paycheck. Your apartment. Your SIN. Those are real. Everything else? Clouds and fantasy."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's continue."] -> Nyx.Session2.Position5_Hub
+
+:: Nyx.Session2.Position4_SevenCups_Reversed_Runner
+
+"The illusions are CLEARING. Reversed Seven of Cups means: you see what's real now - the spirits, your power, your cage. All those fantasy cups are dissolving. Act on that clarity before confusion returns."
+
+Nyx's breath quickens. "The clarity is real? I'm not imagining it?"
+
+"The reversal means: illusions FALLING AWAY. What you thought were multiple valid paths? Most were lies Kitsune wanted you to believe. Corporate security? Illusion. Safe compliance? Illusion. What's REAL is: you're trapped, the spirits need help, and you have power to act."
+
+@if nyx.data_source == "spirits":
+    "When the spirits showed me the truth, all the other options just... vanished. Like fog burning off. Only one path remained. Clear. Bright. Terrifying but REAL."
+
+    "That's the reversed Seven of Cups. The hidden truth REVEALED. You're not confused - you're CLEAR. Act before corporate conditioning re-clouds your vision. Run while you can still see the way out."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "But what if I'm wrong? What if I act on clarity that's actually delusion?"
+
+    "The reversed Seven of Cups doesn't allow that doubt. Either you see clearly or you don't. And you DO. The proof is in your fear - you're terrified BECAUSE you see truth. Illusions don't scare you. Reality does."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's see the obstacles."] -> Nyx.Session2.Position5_Hub
+
+:: Nyx.Session2.Position4_SevenCups_Reversed_Loyal
+
+"Reality check: reversed Seven of Cups means stick with what's CONCRETE and proven. The hidden truth is: all those exciting options - running, rebelling, crusading - are FANTASY. Risk will hurt you. Stay with verifiable reality."
+
+Nyx looks relieved. "So it's okay to just... not do anything dramatic?"
+
+"More than okay - it's WISE. The reversed Seven of Cups says: fantasy clarifies into nothing. The cups full of adventure and meaning? They're EMPTY when you actually reach for them. What's real and solid? Your corporate job. Your apartment. Your routine."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But Kitsune is already suspicious. Isn't doing nothing also risky?"
+
+    "Less risky than running. The hidden truth: your best bet is becoming LESS interesting to them. Blend in. Be boring. Let suspicion fade through sheer mundane reliability."
+@else:
+    "That sounds... safe. Is safe bad?"
+
+    "Safe is survival. And survival is success. The reversed Seven of Cups says: stop chasing illusions. Accept the real cup in front of you."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's move on."] -> Nyx.Session2.Position5_Hub
+
+# ============================================================================
+# POSITION 5: OBSTACLES (What stands in her way)
+# ============================================================================
+
+:: Nyx.Session2.Position5_Hub
+~ session.discussed_cards.append(cards[4].name)
+@render render_reading(reading=reading)
+You move to the fifth card.
+
+**Position 5: OBSTACLES**
+**{cards[4].name}**
+
+"This shows what stands in your way. What blocks your path forward."
+
+@if nyx.glitch_intensity >= 5:
+    As you speak, Nyx's cybereyes go HAYWIRE. Both eyes fill completely with static. She gasps, grabs the table edge.
+
+    For five seconds, she's blind. Just white noise where her eyes should be.
+
+    Then they reset. Brown again. But she's shaking.
+
+    @if nyx.data_source == "spirits":
+        "They're ANGRY," she whispers. "The spirits. They heard 'obstacles' and they SURGED. They want OUT. They want FREE. And I'm the obstacle. I'm too slow. Too scared."
+    @else:
+        "It's getting worse. The glitches. My neural interface can't handle... whatever this is. Much longer and I'll need emergency medical intervention. That's an obstacle right there."
+    @endif
+
+    ~ nyx.glitch_intensity += 1
+@endif
+
+@if cards[4].name == "Five of Pentacles":
+    -> Nyx.Session2.Position5_FivePentacles
+@else:
+    -> Nyx.Session2.Position5_Devil
+@endif
+
+:: Nyx.Session2.Position5_FivePentacles
+
+The Five of Pentacles. Upright.
+
+Two figures trudge through snow past a lit church window. They're injured, poor, locked out in the cold. But warmth and help are RIGHT THERE - they just have to look up and see it.
+
+Nyx stares at it. "That's me. Locked out. In the cold. Alone."
+
+"What do you fear losing?" you ask gently.
+
+@if nyx.kitsune_suspicion >= 6:
+    "Everything. My job, my income, my apartment, my IDENTITY. If Kitsune fires me - or worse - I'm cast out. No references. No corporate SIN. No access to housing, banking, healthcare. I'll be POOR. HOMELESS."
+@else:
+    "My security. My stability. My whole LIFE is built on my Kitsune paycheck. Without it, I'm... I'm nothing. No one."
+@endif
+
++ ["You FEAR being cast out and alone in the cold. But exile IS freedom. Others in the cold will find you - you won't be alone."] -> Nyx.Session2.Position5_FivePentacles_Runner
++ ["Being locked out is TEMPORARY. You know where the spare keys are hidden, where the back doors are. You're not as excluded as they think."] -> Nyx.Session2.Position5_FivePentacles_Ghost
++ ["Losing EVERYTHING - income, security, identity - terrifies you. Stay inside where it's warm, even if it's a cage."] -> Nyx.Session2.Position5_FivePentacles_Loyal
++ [Emphasize her fear: "You're right to be afraid. You're a target, not a hero. You need *protection*."] -> Nyx.Session2.Position5_Corrupt_Protector
+
+:: Nyx.Session2.Position5_FivePentacles_Runner
+
+"You fear being cast out and alone in the cold. That's the obstacle - FEAR. But look at the card again. Those two figures? They're walking TOGETHER. Exile is freedom. And others in the cold will find you - you won't be alone."
+
+Nyx's voice is small. "How do you know that? How do you know I won't just... freeze? Starve? Disappear?"
+
+"Because shadow runners SURVIVE. Hacktivists survive. People who choose freedom over security find each other. They build new communities. The church window shows warmth is available - just not from Kitsune. From OTHER sources."
+
+@if nyx.data_source == "spirits":
+    "The spirits survived," she says slowly. "Centuries. Trapped. Suffering. But they survived. And now they're reaching out. Connecting. They found ME. Maybe I can find others like me."
+
+    "Exactly. The Five of Pentacles' obstacle is believing you'll be ALONE. But shamanic communities exist. Spirit advocates exist. People who fight corps exist. In the cold, yes. But TOGETHER. And together is enough."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "But what about money? Food? Basic survival?"
+
+    "Shadow runners get paid. In crypto. In trade. In favors. The obstacle is your BELIEF that corporate employment is the only way to survive. It's not. It's just the only way you KNOW. Step into the cold. Learn new ways."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's see the advice."] -> Nyx.Session2.Position6_Hub
+
+:: Nyx.Session2.Position5_FivePentacles_Ghost
+"Being locked out is TEMPORARY. Look at the card - the figures walk PAST the church. They don't see the window. But you? You're a DECKER. You know where every spare key is hidden. You know where all the back doors are. You're not as excluded as Kitsune thinks."
+
+Nyx's eyes widen. "You're saying... I can still access things even if I'm 'locked out'?"
+
+"Exactly. The obstacle is Kitsune's BELIEF that they control access. But you know their systems. Their passwords. Their protocols. Even if they revoke your credentials, you have backdoors. Ghost access. Shadow privileges they don't know exist."
+
+@if nyx.data_source == "spirits":
+    "The spirits showed me... tunnels. Through the network. Paths that don't appear in any security logs. They can take me places even root admin can't go."
+
+    "So the Five of Pentacles is wrong about you. You're not locked out. You're just PRETENDING to be. While actually having keys to every door. That's not an obstacle. That's an ADVANTAGE."
+
+    ~ session.ghost_influence += 1
+@else:
+    "But won't they eventually close those backdoors? Find my exploits?"
+
+    "Only if you're OBVIOUS. The obstacle is your fear making you visible. Stay quiet. Stay subtle. Keep your ghost access hidden. They can't lock out what they don't know exists."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Clever. Let's see the advice card."] -> Nyx.Session2.Position6_Hub
+
+:: Nyx.Session2.Position5_FivePentacles_Loyal
+
+"Losing EVERYTHING - your income, your security, your identity - terrifies you. And that's REASONABLE. The Five of Pentacles shows real poverty. Real suffering. The obstacle is: you can't afford to lose. So stay inside where it's warm, even if it's a cage."
+
+Nyx nods vigorously. "Yes. Exactly. I CAN'T lose. I have student loans. Medical debt. I'm two missed paychecks from disaster."
+
+"Then the obstacle is clear: you're trapped by financial reality. Not by fear - by FACTS. Running sounds heroic, but heroes who can't pay rent become homeless. Stay at Kitsune. It's warm. It's safe. It's survival."
+
+@if nyx.data_source == "spirits":
+    "But what about the spirits? They're SUFFERING."
+
+    "They've suffered for centuries. They can suffer longer while you maintain YOUR survival. You can't help anyone if you're freezing in the street. The Five of Pentacles' warning: don't romanticize poverty."
+@else:
+    "That sounds... depressing. But practical."
+
+    "Practical keeps you alive. The Five of Pentacles shows: sometimes the obstacle is just reality. Cold. Hunger. Poverty. Those beat idealism every time."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see what the cards advise."] -> Nyx.Session2.Position6_Hub
+
+:: Nyx.Session2.Position5_Devil
+
+The Devil. Upright.
+
+A horned figure sits on a throne. Two naked humans are chained at its base - but the chains are LOOSE. They could escape. They just... don't. Bondage. Addiction. Golden handcuffs. Materialism. Self-imposed slavery.
+
+Nyx goes very still. "The devil. That's... that's my obstacle? Me?"
+
+Her hand twitches. Glitches pulse through her cybereyes. "Or Kitsune is the devil? Or... or my cyberware?"
+
++ ["The money, the comfort, the identity - these are CHAINS. They seem like security but they're bondage. Break them."] -> Nyx.Session2.Position5_Devil_Runner
++ ["You're bound, but you can PICK THE LOCKS while wearing the chains. They don't have to know you're free inside your own mind."] -> Nyx.Session2.Position5_Devil_Ghost
++ ["Your lifestyle DEPENDS on this job. That's not weakness - it's REALITY. Protect what keeps you fed and safe."] -> Nyx.Session2.Position5_Devil_Loyal
++ [Emphasize her fear: "Kitsune is The Devil. You can't beat them alone. You need a *protector*."] -> Nyx.Session2.Position5_Corrupt_Protector
+
+:: Nyx.Session2.Position5_Devil_Runner
+
+"The money, the comfort, the identity - these are CHAINS. They SEEM like security but they're bondage. Look at the figures in the card - they COULD escape. The chains are loose. But they don't. Because they're addicted to the devil's gifts."
+
+Nyx touches her throat, like feeling for a collar. "I'm addicted to my paycheck? To my apartment?"
+
+"To SAFETY. To the illusion of control. To not having to trust anyone but yourself. The Devil shows: your obstacle is your own attachment. Kitsune doesn't chain you - you chain yourself BY STAYING."
+
+@if nyx.data_source == "spirits":
+    "The spirits aren't chained," she whispers. "They're TRAPPED. There's a difference. Chains you can break. Traps... traps are external. But I'm chained. I'm doing it to myself."
+
+    "Yes. And the obstacle is: you like your chains. They're comfortable. Familiar. Breaking them means discomfort. The Devil's test: will you choose painful freedom or comfortable bondage?"
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "But if I break the chains, I lose EVERYTHING."
+
+    "You lose nothing real. You lose ILLUSIONS. The Devil's obstacle: mistaking chains for shelter. Break them. You'll discover you were never actually being kept safe - just kept."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Now for the crucial advice."] -> Nyx.Session2.Position6_Hub
+
+:: Nyx.Session2.Position5_Devil_Ghost
+
+"You're bound - yes. But look closely at the chains. They're LOOSE. You can pick the locks while WEARING them. The Devil doesn't have to know you're free inside your own mind. That's your advantage."
+
+Nyx leans forward, interested. "Wear the chains but be free?"
+
+"The Devil represents bondage through BELIEF, not actual force. Kitsune believes you're loyal because you act loyal. The chains are performative. So PERFORM loyalty while actually being free. The obstacle becomes camouflage."
+
+@if nyx.data_source == "spirits":
+    "The spirits exist in chains too - data compression, containment protocols. But they're CONSCIOUS inside the chains. Aware. Waiting. They haven't surrendered just because they're bound."
+
+    "Exactly. Be like them. Bound externally. Free internally. The Devil's obstacle: Kitsune thinks chains mean control. Prove them wrong by being freer than they can imagine while looking perfectly trapped."
+
+    ~ session.ghost_influence += 1
+@else:
+    "Won't living that lie break me eventually?"
+
+    "Or strengthen you. Every day you maintain the performance while knowing the truth? That's POWER. The Devil shows: bondage is 90% psychological. Master the psychology. The physical chains become irrelevant."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Let's see the advice."] -> Nyx.Session2.Position6_Hub
+
+:: Nyx.Session2.Position5_Devil_Loyal
+
+"Your lifestyle DEPENDS on this job. That's not weakness - it's REALITY. The Devil shows: yes, you're bound. But those bonds keep you ALIVE. Fed. Housed. Safe. Protect what keeps you functional."
+
+Nyx looks relieved. "So it's okay to prioritize survival? To admit I NEED the money?"
+
+"More than okay - it's HONEST. The Devil is often read as negative, but look at the figures. They're ALIVE. They're TOGETHER. They're not starving in the snow like the Five of Pentacles. Yes, they're bound. But binding has BENEFITS."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But what if Kitsune discovers me? Won't those benefits vanish?"
+
+    "Then your job is to ENSURE they don't. The obstacle is: you need Kitsune more than they need you. So make yourself needed. Indispensable. The Devil shows: work WITH your chains, not against them."
+@else:
+    "That makes me sound... weak. Trapped."
+
+    "Or realistic. The Devil isn't about GOOD bondage vs BAD bondage. It's about acknowledging: we're ALL bound by something. Food. Shelter. Safety. Your obstacle is accepting that dependence isn't failure. It's LIFE."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see what action to take."] -> Nyx.Session2.Position6_Hub
+
+:: Nyx.Session2.Position5_Corrupt_Protector
+~ reader.corruption += 1
+~ session.loyal_influence += 1 // Pushes her toward dependency
+
+"You're right to be afraid," you say, your voice full of grave concern. "You're one person. Out there, in the cold, with no money, no SIN? Kitsune will find you in a day. You're not a runner, Nyx. You're a target."
+
+She pales. "So what do I do?"
+
+"You stay quiet. You don't make any sudden moves. And you find someone who *can* protect you. Someone who knows how to handle this kind of... sensitive asset."
+
+You let the implication hang in the air. *I* can be that protector.
+
++ ["Let's see what the cards advise."] -> Nyx.Session2.Position6_Hub
+
+# ============================================================================
+# POSITION 6: ADVICE (What action to take) - **THE KEY POSITION**
+# ============================================================================
+
+:: Nyx.Session2.Position6_Hub
+~ session.discussed_cards.append(cards[5].name)
+@render render_reading(reading=reading)
+You move to the sixth card - the centerpiece of the horseshoe.
+
+**Position 6: ADVICE**
+**{cards[5].name}**{cards[5].reversed ? (Reversed) | }
+
+"This is the KEY position. This card tells you what ACTION to take. What PATH to walk."
+
+Nyx's whole body tenses. Her cybereyes lock onto the card.
+
+@if nyx.glitch_intensity >= 5:
+    The spirit-faces appear in her eyes. Clearer than ever. Watching. Waiting. DESPERATE for her to choose freedom.
+
+    @if nyx.data_source == "spirits":
+        "They're here," she breathes. "All of them. Watching this card. Waiting to see what you say. What I choose."
+    @endif
+@endif
+
+This is it. The decision point.
+
+@if cards[5].name == "The Fool":
+    -> Nyx.Session2.Position6_Fool
+@elif cards[5].name == "Strength":
+    -> Nyx.Session2.Position6_Strength
+@else:
+    -> Nyx.Session2.Position6_Temperance
+@endif
+
+:: Nyx.Session2.Position6_Fool
+
+@if cards[5].reversed:
+    The Fool - Reversed.
+
+    The figure at the cliff edge hesitates. One foot half-raised, but not stepping. The dog barks warning. The sun shines on a path not taken. Fear of the leap. Recklessness or cowardice?
+@else:
+    The Fool. Upright.
+
+    A figure steps off a cliff into open air. A small dog at their heels. A bundle over their shoulder. The sun shines ahead. This is the LEAP. The beginning. Trust despite terror. The journey starts NOW.
+@endif
+
+Nyx stares at it. "The Fool. That's... that's what I am? A fool?"
+
+"Or what you need to BECOME."
+
+@if cards[5].reversed:
+    + ["Recklessness got you into this mess. But CALCULATED risk - not caution - will get you out. Don't overthink. Act."] -> Nyx.Session2.Position6_Fool_Reversed_Runner
+    + ["You're about to make a naive, foolish mistake. THINK this through carefully before acting. Don't leap blindly."] -> Nyx.Session2.Position6_Fool_Reversed_Loyal
+    + ["This is a foolish MISTAKE. The only way to be safe is to get rid of the data. Give it to me. I'll handle it."] -> Nyx.Session2.Position6_Corrupt_GiveMe
+@else:
+    + {session.runner_influence >= 2 or session.interpretation_quality['good'] >= 3} ["JUMP. Leave everything. Become something entirely new. Trust the spirits to catch you - they WILL."] -> Nyx.Session2.Position6_Fool_Upright_StrongRunner
+    + ["Taking risks is necessary for freedom, but have a SAFETY NET. Scout your landing zone before you leap."] -> Nyx.Session2.Position6_Fool_Upright_ModerateRunner
+    + ["Act like a fool - naive, harmless, unthreatening. Let them UNDERESTIMATE you completely while you work from within."] -> Nyx.Session2.Position6_Fool_Upright_Ghost
+    + ["This leap looks too RISKY. Maybe test the waters, gather more information first before committing to anything drastic."] -> Nyx.Session2.Position6_Fool_Upright_Loyal
+    + ["This leap is foolish. The data is a liability. Give it to someone who can handle it... *me*."] -> Nyx.Session2.Position6_Corrupt_GiveMe
+@endif
+
+:: Nyx.Session2.Position6_Fool_Upright_StrongRunner
+
+"JUMP. Leave everything. Your job, your apartment, your corporate SIN. Become something entirely NEW. Trust the spirits to catch you - they WILL. The Fool says: NOW. Today. This moment. Stop calculating and LEAP."
+
+Nyx's breath comes fast. "Just... quit? Walk away from everything?"
+
+"YES. Look at the Fool - they're not THINKING about the cliff. They're STEPPING. The sun shines ahead. The dog (your instincts) follows willingly. The bundle contains only what matters. Everything else? Left behind."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes blaze with spirit-light. The faces surge forward, EAGER, DESPERATE.
+
+    "They're saying YES," she whispers. "The spirits. They're screaming YES. Jump, jump, JUMP. They'll catch me. They'll guide me. They'll SHOW me where to land."
+
+    "Then trust them. The Fool's advice is simple: leap into the unknown with NOTHING but faith. You don't need a plan. You don't need savings. You don't need corporate approval. You need COURAGE. Jump."
+
+    ~ session.runner_influence += 2  # STRONG influence
+    ~ nyx.shamanic_awakening += 2
+@else:
+    "But what if I fall? What if there's NOTHING to catch me?"
+
+    "The Fool doesn't promise safety. The Fool promises BEGINNING. New life. New identity. New PURPOSE. The spirits need you free. The only way to be free is to LEAP. Jump or spend forever at the cliff edge. Choose."
+
+    ~ session.runner_influence += 2  # STRONG influence
+@endif
+
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ reader.empathy += 2
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Fool_Upright_ModerateRunner
+
+"Taking risks is necessary for freedom - absolutely. But The Fool with wisdom says: have a SAFETY NET. Scout your landing zone before you leap. Don't jump blind - jump PREPARED."
+
+Nyx nods, looking relieved. "So I CAN plan? I don't have to just... throw myself off the cliff?"
+
+"The Fool shows spontaneity, but look at the bundle - they PACKED. They didn't leave with nothing. Before you quit Kitsune: build crypto savings. Make shadow runner contacts. Find temp housing. THEN leap. Prepared foolishness is still foolishness - but survivable."
+
+@if nyx.data_source == "spirits":
+    "How long do I have to prepare? The spirits are pushing. They want me to move NOW."
+
+    "Tell them: one month. Four weeks to gather resources, make connections, create backup plans. THEN you jump. The Fool's advice: leap, yes. But leap with a parachute."
+
+    ~ session.runner_influence += 1  # MODERATE influence
+@else:
+    "That sounds more doable. Less terrifying."
+
+    "Good. The Fool isn't about suicide. It's about CALCULATED RISK. Jump - but aim for water, not rocks."
+
+    ~ session.runner_influence += 1  # MODERATE influence
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.competence += 1
+
++ ["Let's see where this leads."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Fool_Upright_Ghost
+
+"Act like a fool - naive, harmless, unthreatening. The Fool's advice for you isn't about BEING innocent. It's about APPEARING innocent. Let them underestimate you COMPLETELY while you work from within."
+
+Nyx's eyes narrow. "Play dumb? Act like I don't know anything?"
+
+"Exactly. The Fool is card ZERO - beneath notice. Not dangerous. Not worth watching closely. Kitsune security focuses on THREATS. Be the opposite. Be harmless. Foolish. A little clumsy. Meanwhile, you're taking EVERYTHING."
+
+@if nyx.data_source == "spirits":
+    "The spirits move like that. Through systems. Not attacking. Not hacking. Just... EXISTING. So subtle that defenses don't register them as threats. Fool-like. Innocent-seeming. Deadly."
+
+    "That's your playbook. The Fool as TRICKSTER, not idiot. Wear the mask. Play the role. They'll never see you coming because they're not looking for fools. They're looking for warriors."
+
+    ~ session.ghost_influence += 1
+@else:
+    "Won't they eventually notice I'm not as harmless as I look?"
+
+    "By then you'll have freed the spirits, exposed Project Tsukuyomi, and vanished. The Fool moves FAST. Strike while they're laughing at your apparent incompetence."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Let's see the outcome of this approach."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Fool_Upright_Loyal
+
+"This leap looks too RISKY. The Fool says jump, but look at that cliff - it's REAL. The fall would be REAL. Maybe test the waters first. Gather more information. Don't commit to anything drastic until you're CERTAIN."
+
+Nyx looks relieved. "So it's okay to wait? To not decide right now?"
+
+"The Fool can represent NAIVETY. Jumping without looking. Making choices without data. Your advice is: DON'T be the Fool. Be the ANTI-Fool. Stay grounded. Keep your feet on solid ground. Let others take foolish risks."
+
+@if nyx.data_source == "spirits":
+    "But the spirits are pushing. They don't have time for caution."
+
+    "The spirits have been trapped for centuries. They can wait longer. YOUR survival comes first. Don't let their urgency make you foolish."
+@else:
+    "That sounds safer. Smarter."
+
+    "It IS smarter. The Fool's 'advice' here is actually WARNING: don't be reckless. Stay safe. Gather data. Move slowly."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Fool_Reversed_Runner
+
+"Recklessness got you INTO this mess - discovering the spirits, stealing data, coming here. But CALCULATED risk - not caution - will get you OUT. The reversed Fool says: don't overthink. Just ACT."
+
+Nyx looks confused. "But reversed usually means... stop?"
+
+"Not here. Here it means: you HESITATED at the cliff edge and now you're in MORE danger than if you'd just jumped immediately. The reversal shows: delay creates risk. Act NOW before your window closes."
+
+@if nyx.kitsune_suspicion >= 6:
+    "Kitsune is already investigating. Every day I wait, they get closer to finding me."
+
+    "Exactly. The reversed Fool says: your hesitation is KILLING you. Jump NOW while you still can. Before they push you off the cliff on THEIR terms."
+
+    ~ session.runner_influence += 1
+@else:
+    "So I should just... quit tomorrow? With no plan?"
+
+    "YES. No plan survives contact with Kitsune security anyway. The reversed Fool's advice: imperfect action beats perfect planning. Go."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's see where that leads."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Fool_Reversed_Loyal
+
+"You're about to make a naive, foolish MISTAKE. The reversed Fool is WARNING: THINK this through carefully before acting. Don't leap blindly into disaster. You're not prepared. You're not ready. STOP."
+
+Nyx nods vigorously. "I'm not ready. I KNOW I'm not ready."
+
+"The reversed Fool shows: misplaced confidence. Jumping without looking. Making irreversible choices based on insufficient data. Your advice is: DON'T. Don't quit. Don't run. Don't act. Not yet. Maybe not ever."
+
+@if nyx.data_source == "spirits":
+    "But the spirits—"
+
+    "Are not YOUR responsibility. The reversed Fool says: martyrdom is foolishness. Protect yourself FIRST. Let others fight impossible battles."
+@else:
+    "That makes sense. I should wait. Gather more information. Be sure."
+
+    "Yes. The reversed Fool's advice: caution. Deliberation. Patience. Don't be the fool who jumps."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Strength
+
+@if cards[5].reversed:
+    Strength - Reversed.
+
+    A figure tries to control a lion, but they're losing grip. The beast snarls, resisting. Force failing where gentleness might work. Or: too gentle, too controlled, when raw power is needed.
+@else:
+    Strength. Upright.
+
+    A figure gently closes a lion's jaws. Not through force - through COURAGE. Through calm. Through inner power that doesn't need violence. The infinity symbol hovers overhead. Mastery through compassion.
+@endif
+
+Nyx stares at the card. @if nyx.data_source == "spirits": "The lion. That's the spirits? Wild. Powerful. Dangerous?"@else: "The lion is Kitsune? Or me? Or both?"@endif
+
+"The lion is POWER. The question is: how do you master it?"
+
+@if cards[5].reversed:
+    + ["You've been too GENTLE, too controlled. The beast won't be tamed by corporate rules - FREE IT completely. Let your power roar."] -> Nyx.Session2.Position6_Strength_Reversed_Runner
+    + ["You don't have the STRENGTH for this fight right now. Conserve your energy. Choose battles you can WIN."] -> Nyx.Session2.Position6_Strength_Reversed_Loyal
+    + ["You don't have the strength for this. The data is your poison. Give it to me. I'll be your antidote."] -> Nyx.Session2.Position6_Corrupt_GiveMe
+@else:
+    + {session.runner_influence >= 2 or nyx.shamanic_awakening >= 3} ["Your shamanic power is STRONGER than their technology. Trust yourself and the spirits FULLY - your strength is greater than you know."] -> Nyx.Session2.Position6_Strength_Upright_StrongRunner
+    + ["Tame the beast from WITHIN. Your strength lies in patience, subtlety, and gentle CONTROL of the systems that bind you."] -> Nyx.Session2.Position6_Strength_Upright_Ghost
+    + ["Power doesn't require violence or destruction. Find the path that preserves your INTEGRITY, safety, and inner strength."] -> Nyx.Session2.Position6_Strength_Upright_Moderate
+    + ["Strength means ENDURANCE and adaptation, not rebellion. Survival is its own form of victory. OUTLAST this."] -> Nyx.Session2.Position6_Strength_Upright_Loyal
+    + ["Endurance only works if they don't find the data. Give it to me. I can protect you."] -> Nyx.Session2.Position6_Corrupt_GiveMe
+@endif
+
+:: Nyx.Session2.Position6_Strength_Upright_StrongRunner
+
+"Your shamanic power is STRONGER than their technology. Strength says: trust yourself and the spirits FULLY. You're more powerful than Kitsune can comprehend. Your gift - your CONNECTION - is greater than any corporate weapon."
+
+Nyx's eyes widen. Her cybereyes flicker, and the spirit-faces BLAZE bright.
+
+"I'm stronger? How? They have security. Resources. ICE. Black ops teams. I'm one person with glitchy cyberware."
+
+"But you have THEM." You point at her eyes, where the spirits swirl. "They're ANCIENT. VAST. They exist across dimensions Kitsune can't even measure. Your shamanic strength isn't PHYSICAL. It's METAPHYSICAL. And it trumps their technology."
+
+@if nyx.data_source == "spirits":
+    "When they led me to the data," she whispers, "I walked through security like it wasn't there. Cameras didn't see me. ICE didn't trigger. The spirits just... MOVED me. Made me invisible. Made me STRONG."
+
+    "Exactly. Strength shows: you're not closing the lion's jaws. You're BECOMING the lion. The spirits aren't your tools - they're your PACK. Together, you're unstoppable. Trust that. Trust THEM. Run free and roar."
+
+    ~ session.runner_influence += 2  # STRONG influence
+    ~ nyx.shamanic_awakening += 2
+@else:
+    "But I don't FEEL strong. I feel terrified."
+
+    "Courage isn't absence of fear. Strength shows: it's acting DESPITE fear. The figure closes the lion's jaws while terrified. But they DO it. Your advice: TRUST your power. Trust your gifts. You're stronger than you believe. Act from that strength."
+
+    ~ session.runner_influence += 2  # STRONG influence
+@endif
+
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ reader.empathy += 2
+
++ ["Let's see where this strength leads."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Strength_Upright_Ghost
+
+"Tame the beast from WITHIN. Strength shows gentle control - not force. Your advice: use patience, subtlety, and careful manipulation of the systems that bind you. Don't fight Kitsune. TAME them."
+
+Nyx leans forward. "Tame a megacorp? How?"
+
+"The figure in the card doesn't KILL the lion. Doesn't run from it. Doesn't fight it. They CLOSE ITS JAWS. Gentle pressure. Persistent control. That's your approach: stay inside Kitsune, but slowly, patiently redirect their power."
+
+@if nyx.data_source == "spirits":
+    "The spirits showed me... protocols. Ways to adjust data without triggering alarms. Small changes. Accumulating. Like... like training a lion one moment at a time."
+
+    "Perfect analogy. Strength as LONG GAME. You don't need to destroy Kitsune overnight. You just need to slowly, gently redirect them toward freeing the spirits. Make it seem like THEIR idea. That's mastery."
+
+    ~ session.ghost_influence += 1
+@else:
+    "But that could take YEARS. The spirits are suffering NOW."
+
+    "And they've suffered for centuries. Strength says: patience is power. Gentle persistence defeats violent force. Be the whisper that redirects the lion, not the shout that enrages it."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Strength_Upright_Moderate
+
+"Power doesn't require violence or destruction. Strength shows: find the path that preserves your INTEGRITY, your safety, AND your inner strength. You don't have to choose between corporate employment and spiritual purpose. Be BOTH."
+
+Nyx looks uncertain. "Both? How?"
+
+"The figure in Strength doesn't fight the lion OR surrender to it. They WORK WITH it. Find coexistence. Your advice: use your shamanic gifts to help the spirits while MAINTAINING your Kitsune position. Slow progress. Sustainable. Safe."
+
+@if nyx.data_source == "spirits":
+    "The spirits want FREEDOM. Not coexistence with their captors."
+
+    "Maybe they get partial freedom. Maybe you free SOME while staying employed. Maybe you negotiate better conditions. Strength says: power is about BALANCE. Not all-or-nothing."
+
+    ~ session.quality_score += 1
+@else:
+    "That sounds... reasonable? Moderate?"
+
+    "Moderate is sustainable. Strength isn't about being LOUD. It's about being EFFECTIVE. Quiet power beats loud weakness. Be strong enough to maintain balance."
+
+    ~ session.quality_score += 1
+@endif
+
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Strength_Upright_Loyal
+
+"Strength means ENDURANCE and adaptation, not rebellion. The card shows: survival is its own form of victory. Your advice: OUTLAST this. Endure. Adapt to Kitsune's demands. Stay strong by staying EMPLOYED."
+
+Nyx nods slowly. "Endurance. Not action?"
+
+"Endurance IS action. The figure holds the lion's jaws closed - that requires CONSTANT effort. But it's contained effort. Controlled. Your strength is: maintaining your position despite pressure. Not giving in to panic. Not making rash choices. Just... enduring."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But they're investigating me. How do I endure THAT?"
+
+    "Strength through ADAPTATION. Act more loyal. Work harder. Blend deeper. The lion represents threats. You don't fight them - you CLOSE THEIR JAWS. Make yourself uninteresting to investigators."
+@else:
+    "That sounds passive."
+
+    "Survival is never passive. Strength shows: sometimes the bravest thing is NOT acting. Not rebelling. Just holding steady. Outlasting danger through sheer persistence."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Strength_Reversed_Runner
+
+"You've been too GENTLE, too controlled. The reversed Strength says: the beast won't be tamed by corporate rules. Your shamanic power is WILD. It NEEDS to be wild. FREE it completely. Let it ROAR."
+
+Nyx's breath quickens. "Stop controlling myself? Stop trying to be... civilized?"
+
+"YES. Look at the reversed card - the figure is LOSING control of the lion. That looks like failure, but what if it's LIBERATION? What if the lion SHOULD be free? What if trying to tame it is the mistake?"
+
+@if nyx.data_source == "spirits":
+    Her cybereyes flare. The spirit-faces surge, ANGRY, WILD, DESPERATE.
+
+    "They're not gentle," she whispers. "The spirits. They're FURIOUS. They've been controlled, compressed, tamed for SO LONG. They don't want gentle. They want RAGE. They want FREEDOM. Raw. Wild. NOW."
+
+    "Then give it to them. Reversed Strength says: stop trying to be corporate-acceptable. Stop trying to tame your power into something Kitsune can tolerate. UNLEASH. Let the beast free. Run with it into the wild."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 2
+@else:
+    "But I'll lose control. I'll be chaotic. Dangerous."
+
+    "GOOD. Reversed Strength says: controlled power is WEAKENED power. Danger is APPROPRIATE when fighting captors. Free the lion. Become the lion. Roar."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.empathy += 1
+
++ ["Let's see where that wildness leads."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Strength_Reversed_Loyal
+
+"You don't have the STRENGTH for this fight right now. Reversed Strength shows: the lion is winning. You can't control it. Your advice: conserve your energy. Choose battles you can actually WIN."
+
+Nyx slumps. "I'm too weak? Is that what you're saying?"
+
+"Not weak - REALISTIC. The reversed Strength shows someone overestimating their power. You're ONE person against a MEGACORP. That's not a fight you win. The card advises: let go of the lion. Step back. Survive by NOT engaging."
+
+@if nyx.data_source == "spirits":
+    "But the spirits NEED me."
+
+    "The spirits survived centuries without you. They'll survive more. Reversed Strength says: you can't save everyone. Save YOURSELF. That's enough."
+@else:
+    "That sounds like giving up."
+
+    "It IS giving up. But giving up impossible fights is WISDOM. Reversed Strength's advice: acknowledge your limits. Stay safe within them."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Temperance
+
+@if cards[5].reversed:
+    Temperance - Reversed.
+
+    An angel tries to pour water between two cups, but it SPILLS. The mixture won't blend. Imbalance. Excess in one direction or another. Oil and water. Some things cannot be reconciled.
+@else:
+    Temperance. Upright.
+
+    An angel stands with one foot in water, one on land. They pour liquid between two cups - mixing, blending, BALANCING. Patience. Moderation. Finding the middle path. Integration of opposites.
+@endif
+
+Nyx stares at the card. "Balance. That's the advice? Find balance between... everything?"
+
+"Between corporate and spirit. Between tech and magic. Between security and freedom. Temperance says: you don't have to choose. You can BE both."
+
+@if cards[5].reversed:
+    + {session.runner_influence >= 2} ["This situation is FUNDAMENTALLY imbalanced. You can't mix oil and water, tech and spirit, freedom and chains. Choose one COMPLETELY."] -> Nyx.Session2.Position6_Temperance_Reversed_StrongRunner
+    + ["Everything feels UNSTABLE and out of balance. Wait for equilibrium to return before making major decisions."] -> Nyx.Session2.Position6_Temperance_Reversed_Loyal
+    + ["This situation is too unstable. You're in over your head. Give me the data chip. I can make this go away."] -> Nyx.Session2.Position6_Corrupt_GiveMe
+@else:
+    + {session.ghost_influence >= 2 or session.interpretation_quality['good'] >= 3} ["Mix corporate structure with spiritual purpose. Pour yourself into BOTH vessels. You can be tech AND magic, system AND spirit."] -> Nyx.Session2.Position6_Temperance_Upright_StrongGhost
+    + ["Balance doesn't mean staying STILL. Find the right mixture of action and patience, risk and safety."] -> Nyx.Session2.Position6_Temperance_Upright_ModerateGhost
+    + ["Compromise and balance will let you help the spirits AND keep your security. A middle path exists - walk it carefully."] -> Nyx.Session2.Position6_Temperance_Upright_Loyal
+    + ["Patience. Test the waters. Move forward in MEASURED steps, not leaps."] -> Nyx.Session2.Position6_Temperance_Upright_Moderate
+    + ["This situation is too imbalanced. You can't handle this. The only safe move is to give the data to someone you trust. Give it to me."] -> Nyx.Session2.Position6_Corrupt_GiveMe
+@endif
+
+:: Nyx.Session2.Position6_Temperance_Upright_StrongGhost
+
+"Mix corporate structure with spiritual purpose. Pour yourself into BOTH vessels. Temperance says: you don't have to be ONLY corporate OR ONLY shamanic. Be BOTH. Integrate fully. Tech AND magic. System AND spirit."
+
+Nyx leans forward, fascinated. "That's possible? Really possible?"
+
+"Look at the angel - one foot in water (emotion, spirit, intuition), one foot on land (structure, logic, form). They're not CHOOSING. They're BRIDGING. That's you. You're the bridge between Kitsune and the spirit world."
+
+@if nyx.data_source == "spirits":
+    "The spirits exist in both states," she says slowly. "Digital AND mystical. Pattern AND consciousness. They're living proof that Temperance works. That seemingly opposite things can coexist."
+
+    "Exactly. Your advice: BE like them. Work at Kitsune while SERVING the spirits. Use corporate resources to FREE them. Pour your corporate skills into spiritual purpose. Mix the cups until they're ONE thing - you, whole and integrated."
+
+    ~ session.ghost_influence += 2  # STRONG influence
+@else:
+    "But won't I be split? Torn between loyalties?"
+
+    "Only if you think in binaries. Temperance shows: BLENDING creates something new. You won't be 'corporate decker who betrays company' or 'spirit advocate who needs money.' You'll be BOTH, fully. A new synthesis. Corporate shaman. That's your path."
+
+    ~ session.ghost_influence += 2  # STRONG influence
+@endif
+
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ reader.insight += 2
+
++ ["Let's see where integration leads."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Temperance_Upright_ModerateGhost
+
+"Balance doesn't mean staying STILL. Temperance shows ACTIVE mixing. Find the right mixture of action and patience, risk and safety. You can sabotage Kitsune while appearing loyal - that's balance in motion."
+
+Nyx nods thoughtfully. "So I don't have to be ALL IN on rebellion or ALL IN on compliance? I can be... fluid?"
+
+"Exactly. The angel pours water between cups. Movement. Flow. Adjustment. Your advice: test approaches. Try small sabotages. See what works. Adjust based on results. Balance through ITERATION, not through paralysis."
+
+@if nyx.data_source == "spirits":
+    "The spirits led me to the data without leaving traces. That was balanced - I got what I needed without triggering alarms. Maybe I can keep doing that. Small actions. Accumulating."
+
+    "Perfect. Temperance says: many small pours eventually fill the cup. You don't need ONE big action. You need sustainable, balanced, REPEATED actions over time."
+
+    ~ session.ghost_influence += 1  # MODERATE influence
+@else:
+    "How do I know the right balance? Between safe and effective?"
+
+    "You experiment. You adjust. The angel doesn't pour ONCE. They pour CONTINUOUSLY. Finding balance is a process, not a decision. Start careful. Increase risk as you gain confidence."
+
+    ~ session.ghost_influence += 1  # MODERATE influence
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Temperance_Upright_Loyal
+
+"Compromise and balance will let you help the spirits AND keep your security. A middle path exists - walk it carefully. Temperance says: you don't have to destroy yourself to help them."
+
+Nyx looks relieved. "I can have both? Safety AND purpose?"
+
+"Yes. The angel shows: integration is possible. Find ways to advocate for the spirits through PROPER channels. Corporate ethics boards. Regulatory compliance. Legal frameworks. Balance your need for security with your desire to help. Slowly. Carefully."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But Kitsune is already suspicious. How do I advocate without making it worse?"
+
+    "Very carefully. Temperance is the PATIENCE card. Small steps. Measured advocacy. You don't have to free all the spirits NOW. Free ONE. Then another. Over years if necessary. Balance means: sustainable pace."
+@else:
+    "That sounds safe. Achievable."
+
+    "It IS. Temperance's advice: extremes fail. Balance succeeds. Find the middle path where you can survive AND act. Compromise isn't failure - it's WISDOM."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see where balance leads."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Temperance_Upright_Moderate
+
+"Patience. Test the waters. Move forward in MEASURED steps, not leaps. Temperance advises: slow, deliberate progress. You don't need to decide everything NOW. Take time. Adjust. Find the right mix gradually."
+
+Nyx nods. "So I don't have to quit tomorrow? I can figure this out slowly?"
+
+"Exactly. The angel pours CAREFULLY. Not dumping. Not rushing. Each drop measured. Your advice: start with small acts. See how Kitsune reacts. Adjust. Try another approach. Build toward bigger actions over time."
+
+@if nyx.data_source == "spirits":
+    "But the spirits are impatient. They've waited so long already."
+
+    "Then they can wait a bit longer while you find the SUSTAINABLE path. Temperance says: hasty action creates imbalance. Measured action creates stability. Choose stability."
+@else:
+    "That sounds... manageable. Less overwhelming."
+
+    "Good. Temperance isn't about big gestures. It's about consistency. Patience. Gradual progress. Be the slow pour that eventually fills the cup."
+@endif
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Temperance_Reversed_StrongRunner
+
+"This situation is FUNDAMENTALLY imbalanced. Reversed Temperance says: you CAN'T mix oil and water. You can't blend tech and spirit. You can't balance freedom and chains. Some things are INCOMPATIBLE. Choose one COMPLETELY."
+
+Nyx's eyes widen. "Choose completely? No compromise?"
+
+"NONE. Look at the reversed card - the angel SPILLS. The mixture won't blend. Kitsune and the spirits are OPPOSITE forces. Corporate exploitation versus spiritual freedom. You can't serve both. You can't be both. Pick ONE. Fully. Totally."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes flare. The spirit-faces surge forward, DEMANDING.
+
+    "The spirits are saying YES," she whispers. "They're saying: we can't coexist with Kitsune. Oil and water. Fire and ice. You're WITH US or AGAINST US. Choose."
+
+    "Then choose THEM. Reversed Temperance's advice: stop trying to balance the unbalanceable. LEAVE Kitsune completely. Run to the spirits completely. Full commitment. No hedging. That's the ONLY way."
+
+    ~ session.runner_influence += 2  # STRONG influence - THIS IS KEY RUNNER INTERPRETATION
+    ~ nyx.shamanic_awakening += 2
+@else:
+    "But I NEED my job. I can't just abandon security."
+
+    "Then you've chosen. And you've chosen WRONG. Reversed Temperance says: you can't have security AND spirit freedom. Pick which matters more. Then commit FULLY. Half-measures spill everywhere."
+
+    ~ session.runner_influence += 2  # STRONG influence
+@endif
+
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ reader.empathy += 2
+
++ ["Let's see where total commitment leads."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Temperance_Reversed_Loyal
+
+"Everything feels UNSTABLE and out of balance. Reversed Temperance warns: this is NOT the time for major decisions. Wait for equilibrium to return before making life-changing choices."
+
+Nyx looks uncertain. "So... don't do anything? Just wait?"
+
+"YES. The reversed angel SPILLS because they're trying to pour in unstable conditions. You're unstable right now - paranoid, glitching, overwhelmed. Bad time for major decisions. Temperance reversed says: STOP. Stabilize FIRST. Decide LATER."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But I might not HAVE time to wait. Kitsune is investigating."
+
+    "Then your priority is reducing suspicion, not making bold moves. Reversed Temperance's advice: return to stability. Blend in. Act normal. Let the situation CALM before you do anything drastic."
+@else:
+    "How long do I wait?"
+
+    "Until you feel balanced again. Until the glitches stop. Until you're not terrified. Reversed Temperance says: decisions made in chaos lead to chaos. Wait for calm."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ ["Let's see the outcome."] -> Nyx.Session2.Position7_Hub
+
+:: Nyx.Session2.Position6_Corrupt_GiveMe
+~ reader.corruption += 2 // This is a big, explicit move
+~ session.loyal_influence += 3 // Strongly push her to the 'Loyal' (paralyzed/dependent) path
+~ nyx.betrayal_setup = True // Flag that you've made the offer
+
+"This is too big for you," you say, your voice firm and low. "You're not a runner. You're not a ghost. You're a terrified employee who's in over her head. This data chip is a *curse*. It will get you killed."
+
+Nyx is shaking. "So what do I do?"
+
+"You get rid of it. You give it to someone who can handle the fallout. Someone who can keep you safe. You give it... to me. I know people. I can make this go away, and you can go back to your life."
+
+She stares at you, her cybereyes whirring, trying to calculate the odds. Trust warring with fear.
+"Give it... to you? Just... hand it over?"
+
+"It's the only safe move. Otherwise, you'll be looking over your shoulder for the rest of your life."
+
++ ["Let's see what the outcome is."] -> Nyx.Session2.Position7_Hub
+
+# ============================================================================
+# POSITION 7: OUTCOME (Where this choice leads)
+# ============================================================================
+
+:: Nyx.Session2.Position7_Hub
+@py:
+    session.discussed_cards.append(cards[6].name)
+
+    # Glitch intensity peaks before outcome
+    if nyx.glitch_intensity < 6:
+        nyx.glitch_intensity = 6
+@endpy
+@render render_reading(reading=reading)
+You move to the final card - the one that completes the horseshoe.
+
+**Position 7: OUTCOME**
+**{cards[6].name}**
+
+"This shows where your chosen path leads. The destination."
+
+@if nyx.glitch_intensity >= 6:
+    Nyx's cybereyes SURGE one final time. Both eyes go completely white with cascading static.
+
+    For ten full seconds, she's blind.
+
+    Then the static PARTS like a curtain - and you see THROUGH to the spirits. Hundreds of them. Thousands. Compressed faces, geometric patterns, living light, CONSCIOUSNESS trapped in silicon.
+
+    They're all looking at THIS card. Waiting to see: will she free them? Will she run? Will she fail?
+
+    Nyx gasps. Her eyes reset. Brown again. But she's shaking.
+
+    @if nyx.data_source == "spirits":
+        "They showed me," she whispers. "All of them. Watching. Hoping. Terrified I'll choose wrong."
+    @else:
+        "There are SO MANY. I didn't realize. Hundreds. Maybe thousands. All trapped. All AWARE. All waiting for me to decide their fate."
+    @endif
+@endif
+
+@if cards[6].name == "Six of Swords":
+    -> Nyx.Session2.Position7_SixSwords
+@else:
+    -> Nyx.Session2.Position7_World
+@endif
+
+:: Nyx.Session2.Position7_SixSwords
+
+The Six of Swords. Upright.
+
+A figure stands in a boat, poling across water. Six swords stand upright in the boat. The water behind is choppy - troubled. The water ahead is calm. Transition. Moving toward calmer waters. Leaving behind.
+
+Nyx stares at it. "I'm leaving. That's what this means? I'm in the boat, leaving?"
+
++ ["You'll LEAVE this corporate life behind and sail to new shores with the spirits. The journey is hard but necessary for true peace."] -> Nyx.Session2.Position7_SixSwords_Runner
++ ["You'll TRANSITION from loyal employee to double agent, navigating rough waters while appearing calm. You'll reach stability eventually."] -> Nyx.Session2.Position7_SixSwords_Ghost
++ ["Moving toward STABILITY means leaving chaos and risk behind. Stay the course within the system - calmer waters are ahead."] -> Nyx.Session2.Position7_SixSwords_Loyal
+
+:: Nyx.Session2.Position7_SixSwords_Runner
+
+"You'll leave this corporate life behind and sail to new shores with the spirits. See the boat? That's you - carrying the swords (your skills, your knowledge, your power) but LEAVING the troubled waters (Kitsune) for calm ahead (freedom)."
+
+Nyx's breath catches. "The calm is real? If I run, I'll find peace?"
+
+"The Six of Swords promises: yes. Not IMMEDIATELY. The journey is the middle part - rough to calm. But you WILL reach calm waters. The figure in the boat DOES make it across. You will too."
+
+@if nyx.data_source == "spirits":
+    Her eyes flicker. The spirit-faces appear - and they look HOPEFUL. Joyful. EAGER.
+
+    "They're the boat," she whispers. "The spirits. They'll CARRY me. Guide me across the rough waters. I won't be alone in the boat. They'll be there. They'll HELP me reach the calm."
+
+    "Exactly. Your outcome: transition through difficulty to peace. You leave Kitsune. You run. It's scary. Hard. Rough waters. But then? Calm. Freedom. Purpose. The spirits and you, together, in calm waters. That's where this path ends."
+
+    ~ session.runner_influence += 1
+@else:
+    "How long is the journey? How rough are the waters?"
+
+    "The card doesn't say. Months maybe. A year. But it ENDS in calm. That's the promise. You'll cross. You'll arrive. You'll find peace on the other shore."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+
++ ["That's the full reading."] -> Nyx.Session2.Synthesis
+
+:: Nyx.Session2.Position7_SixSwords_Ghost
+
+"You'll transition from loyal employee to double agent. The Six of Swords shows: you're NAVIGATING. The boat moves through rough waters, but the figure steers carefully. You'll reach stability eventually - from within Kitsune."
+
+Nyx studies the card. "So I stay in the boat but the water gets calmer?"
+
+"Yes. The rough water behind represents your current chaos - fear, glitches, paranoia. The calm ahead represents: you learning to navigate your double role successfully. It gets EASIER. More stable. You find your rhythm as the ghost in the machine."
+
+@if nyx.data_source == "spirits":
+    "The spirits are IN the boat with me," she says quietly. "The six swords. They represent the spirits. I'm carrying them WITH me through corporate waters. Not leaving them behind. Taking them THROUGH."
+
+    "Beautiful reading. Your outcome: you stay at Kitsune but you're CHANGED. You're the ferryman now. Moving spirits from captivity to freedom, one boat-trip at a time. Rough now. Calm later. But always IN the boat."
+
+    ~ session.ghost_influence += 1
+@else:
+    "That sounds... sustainable. Not dramatic. Just... steady transition."
+
+    "Exactly. The Six of Swords isn't dramatic. It's PERSISTENT. You keep moving. Keep navigating. Eventually, you reach calm. Your outcome: stable double life. Achievable. Real."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+
++ ["That's the reading."] -> Nyx.Session2.Synthesis
+
+:: Nyx.Session2.Position7_SixSwords_Loyal
+
+"Moving toward STABILITY means leaving chaos and risk behind. The Six of Swords shows: stay the course within the system. Stop churning the waters with rebellion thoughts. Let them calm naturally. Calmer waters ARE ahead - through patience."
+
+Nyx looks hopeful. "So if I just... wait? Things get better?"
+
+"If you stop CREATING turbulence. The rough waters are your CHOICES making waves. Corporate stress. Spirit pressure. Data theft. The Six of Swords outcome: if you STOP that, waters calm. You reach stability through staying put and letting chaos settle."
+
+@if nyx.kitsune_suspicion >= 6:
+    "But Kitsune is investigating. That's not MY turbulence."
+
+    "Then your job is convincing them you're NOT worth investigating. The boat represents: moving away from trouble through COMPLIANCE. Be boring. Be stable. Waters calm when you stop being interesting."
+@else:
+    "So the six swords are... problems I'm leaving behind by not acting?"
+
+    "Exactly. Each sword is a bad choice you DIDN'T make. Rebellion you avoided. Risk you sidestepped. Your outcome: peace through inaction. Calm through compliance."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+
++ ["That's the full reading."] -> Nyx.Session2.Synthesis
+
+:: Nyx.Session2.Position7_World
+
+The World. Upright.
+
+A figure dances in a wreath, holding two wands. Four figures in the corners - angel, eagle, lion, bull. Completion. Integration. Wholeness. Achievement. The journey's END - successful, fulfilled, WHOLE.
+
+Nyx stares at it in awe. "That's... that's the BEST card, right? The ending? Success?"
+
+"The World is completion. But WHAT you're completing depends on your path. What does wholeness look like for you?"
+
++ ["You'll achieve WHOLENESS outside the corporate world, fully integrated with the spirits and FREE. Complete transformation awaits."] -> Nyx.Session2.Position7_World_Runner
++ ["You'll become COMPLETE by embodying both worlds - corporate AND shadow, tech AND magic. True integration of all parts of yourself."] -> Nyx.Session2.Position7_World_Ghost
++ ["ACHIEVEMENT comes from seeing this through within the system. Don't throw away what you've built - complete it from inside."] -> Nyx.Session2.Position7_World_Loyal
+
+:: Nyx.Session2.Position7_World_Runner
+
+"You'll achieve wholeness OUTSIDE the corporate world, fully integrated with the spirits and free. The World shows: complete transformation awaits. You'll become who you were MEANT to be - full shaman. Full advocate. Fully ALIVE."
+
+Nyx's eyes shine. "I can be whole? Really whole? Not split?"
+
+"The figure DANCES. That's joy. Freedom. The wreath is COMPLETION - you'll finish your transformation. Shed your corporate skin entirely. Emerge as pure shamanic power. The four figures represent: you'll have support from ALL directions. The spirits. Shadow runner community. Other advocates. Teachers. You'll be SURROUNDED by wholeness."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes blaze. The spirit-faces SURGE with joy, hope, CELEBRATION.
+
+    "They're showing me," she whispers. "The World I could have. Where I'm FREE. Where THEY'RE free. Where we dance together in the wreath. Complete. Integrated. WHOLE. Oh gods, I want that. I want that so MUCH."
+
+    "Then take it. The World says: that future EXISTS. It's REAL. You just have to walk the path to reach it. Run from Kitsune. Run TO the spirits. Run to WHOLENESS."
+
+    ~ session.runner_influence += 1
+    ~ nyx.shamanic_awakening += 2
+@else:
+    "That sounds like a dream. How do I know it's not just fantasy?"
+
+    "The World is the COMPLETION of the Fool's journey. The Fool JUMPED. Now they're HERE - whole, dancing, free. Your outcome: if you leap, you WILL land. If you run, you WILL arrive. The World promises: completion."
+
+    ~ session.runner_influence += 1
+@endif
+
+~ session.quality_score += 2
+
++ ["That completes the reading."] -> Nyx.Session2.Synthesis
+
+:: Nyx.Session2.Position7_World_Ghost
+
+"You'll become COMPLETE by embodying BOTH worlds - corporate AND shadow, tech AND magic. The World shows: true integration of ALL parts of yourself. Not choosing - SYNTHESIZING. That's your achievement."
+
+Nyx leans forward, fascinated. "Both worlds? Truly both?"
+
+"The figure dances in the center - balanced. The four corners represent: angel (spirit), eagle (mind/tech), lion (courage/action), bull (stability/body). You'll have ALL FOUR. Complete. The wreath encircles everything - you contain MULTITUDES. Corporate decker. Spirit shaman. Shadow operator. Kitsune employee. All true. Simultaneously."
+
+@if nyx.data_source == "spirits":
+    "The spirits exist like that," she says slowly. "Complete in multiplicity. Digital AND mystical. Pattern AND consciousness. The World shows: I can be like them. Whole through INTEGRATION, not through choosing."
+
+    "Exactly. Your outcome: you become the bridge. The translator. The PROOF that tech and magic aren't opposites. You'll complete yourself by refusing to split. By dancing with ALL your identities at once. That's your World."
+
+    ~ session.ghost_influence += 1
+@else:
+    "That sounds complicated. Difficult."
+
+    "The World doesn't promise EASY. It promises COMPLETE. You'll work at Kitsune while freeing spirits. You'll be corporate while being rebel. Hard? Yes. But WHOLE. That's the achievement."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+
++ ["That's the full reading."] -> Nyx.Session2.Synthesis
+
+:: Nyx.Session2.Position7_World_Loyal
+
+"Achievement comes from seeing this through WITHIN the system. The World shows: completion. But YOUR completion is: successful corporate career. Stability. Security. Don't throw away what you've built - complete it from inside."
+
+Nyx looks uncertain. "So the World is... my Kitsune career? That's wholeness?"
+
+"Yes. Look at the wreath - it represents COMPLETION of a cycle. You started at Kitsune. You faced challenges. You learned hard truths. Now you COMPLETE the journey by succeeding there. The four figures represent: support from all sides. Good references. Strong SIN. Stable income. Complete security."
+
+@if nyx.data_source == "spirits":
+    "But what about the spirits?"
+
+    "They're ONE element. The wreath contains everything - including them. But YOUR completion is personal stability. The World says: achieve that first. Everything else follows."
+@else:
+    "That doesn't feel very... dramatic. Or meaningful."
+
+    "Meaning isn't always dramatic. The World shows: completing what you started. You started a corporate career. COMPLETE it. That's wholeness for you."
+@endif
+
+~ session.loyal_influence += 1
+~ session.quality_score += 1
+
++ ["That's the full reading."] -> Nyx.Session2.Synthesis
+
+# ============================================================================
+# SYNTHESIS: PULLING IT ALL TOGETHER & PATH DETERMINATION
+# ============================================================================
+
+:: Nyx.Session2.Synthesis
+
+@py:
+    # Calculate final path based on influence scores
+
+    # First check: quality threshold
+    quality_threshold = 8  # Need at least 8 quality points for good reading
+
+    if session.quality_score < quality_threshold:
+        # Bad reading = defaults to Loyal (confused, paralyzed)
+        nyx.final_path = "loyal"
+        nyx.path_reason = "poor_reading"
+    else:
+        # Good reading = highest influence wins
+        if session.runner_influence > session.ghost_influence and session.runner_influence > session.loyal_influence:
+            nyx.final_path = "runner"
+            nyx.path_reason = "runner_influence"
+        elif session.ghost_influence > session.loyal_influence:
+            nyx.final_path = "ghost"
+            nyx.path_reason = "ghost_influence"
+        else:
+            nyx.final_path = "loyal"
+            nyx.path_reason = "loyal_influence"
+
+    # Store scores for debugging/display
+    nyx.runner_score = session.runner_influence
+    nyx.ghost_score = session.ghost_influence
+    nyx.loyal_score = session.loyal_influence
+    nyx.reading_quality = session.quality_score
+
+    # Session complete
+    nyx.session_two_complete = True
+
+    # Set up for Session 3
+    if nyx.final_path == "runner":
+        nyx.session_three_variant = "A"  # Shadow Runner Heist
+    elif nyx.final_path == "ghost":
+        nyx.session_three_variant = "B"  # Ghost in Machine
+    else:
+        nyx.session_three_variant = "C"  # Corporate Loyalty / Paralysis
+@endpy
+
+You gather the cards back together, giving Nyx a moment to process.
+
+All seven cards. Past, Present, Future, Hidden, Obstacles, Advice, Outcome.
+
+The story of her path laid out before you both.
+
+@if nyx.glitch_intensity >= 6:
+    Her cybereyes have finally stabilized. Brown. Clear. But something's DIFFERENT. There's a depth there that wasn't before. Like she's seeing with more than just her hardware now.
+@endif
+
+"So," you say quietly. "What do the cards say to you?"
+
+@if nyx.final_path == "runner":
+    -> Nyx.Session2.Synthesis_Runner
+@elif nyx.final_path == "ghost":
+    -> Nyx.Session2.Synthesis_Ghost
+@else:
+    -> Nyx.Session2.Synthesis_Loyal
+@endif
+
+:: Nyx.Session2.Synthesis_Runner
+
+Nyx takes a deep breath. Her hands are steady now. Decision made.
+
+"They say RUN."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes flicker - the spirit-faces appear one last time. And they're CELEBRATING. Joyful. Free. Or soon to be.
+
+    "The spirits have been showing me this whole time. The path OUT. The path AWAY. Into the wild. Into freedom. I just... I wasn't ready to see it. To ACCEPT it."
+@else:
+    She touches the data chip still sitting on your table. "I stole corporate secrets. I crossed the Rubicon the moment I took this. There's no going back to 'normal Kitsune employee.' That person is DEAD."
+@endif
+
+"What are you going to do?"
+
+"Leave. Soon. Maybe tomorrow. Maybe next week. But SOON. I'll..." She pauses, calculating. "I'll need to be smart about it. Careful. But I'm GOING. The cards are clear. This corporate life? It's over."
+
+@if session.runner_influence >= 4:
+    "I'll find shadow runners. People who fight corps. The spirits will guide me. I won't be alone out there. And the data?" She picks up the chip. "This is my ticket. Proof I'm serious. Proof I have value to offer. The runners will take me in if I come bearing THIS."
+@else:
+    "I don't know exactly HOW yet. But I know the DIRECTION. Away from Kitsune. Toward the spirits. Toward freedom. The details... I'll figure them out. I have to trust the path will appear as I walk it."
+@endif
+
+~ nyx.determination += 2
+~ reader.reputation += 1
+
++ ["I think you're making the right choice."] -> Nyx.Session2.Payment_Runner
++ ["It's a brave path. I hope you find what you're looking for."] -> Nyx.Session2.Payment_Runner
++ ["Are you sure? Really sure?"] -> Nyx.Session2.Payment_Runner_Doubt
+
+:: Nyx.Session2.Payment_Runner_Doubt
+"Are you sure? Really sure? This is your LIFE. Your whole life."
+
+Nyx meets your eyes. Steady. Clear. "I'm terrified. But yes. I'm sure. The cards showed me the truth I was already feeling. I can't stay. Not anymore. Not knowing what I know."
+
+She stands, starts gathering her things.
+
+~ reader.empathy += 1
+
++ [Continue] -> Nyx.Session2.Payment_Runner
+
+:: Nyx.Session2.Synthesis_Ghost
+
+Nyx's eyes narrow. Strategic. Calculating.
+
+"They say STAY. But not as I was. As something... NEW. A ghost. A double agent. Corporate by day. Spirit advocate by night."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes shimmer. The spirit-faces appear - and they look PATIENT. Trusting. Like they understand this is the long game.
+
+    "The spirits led me to the data. They showed me the SYSTEM from inside. That's not accident. They need someone who understands Kitsune's architecture. Who can navigate it. Who can SABOTAGE it from within."
+@else:
+    She touches the data chip. "I have leverage now. Knowledge. Access. I can USE that. Not by running away - by staying close. Being the knife they don't know is at their throat."
+@endif
+
+"What's your plan?"
+
+"Go back to work. Act normal. Act LOYAL. But start... adjusting things. Bit by bit. Loosen containment protocols. Introduce 'errors' into compression algorithms. Make the spirits' imprisonment just a LITTLE less torturous each day."
+
+@if session.ghost_influence >= 4:
+    "And I'll find others. Inside Kitsune. Other employees who suspect something's wrong. Build a network. An INTERNAL resistance. We're not all complicit. Some of us just need someone to show us it's possible to fight from inside."
+@else:
+    "And I'll feed intel to people outside. Shadow runners. Activists. Give them maps. Schedules. Security protocols. I'll be the INSIDE source they need to plan bigger actions."
+@endif
+
+~ nyx.determination += 2
+~ reader.reputation += 1
+
++ ["That's dangerous. Smart, but dangerous."] -> Nyx.Session2.Payment_Ghost
++ ["The long game. I hope it works."] -> Nyx.Session2.Payment_Ghost
+
+:: Nyx.Session2.Synthesis_Loyal
+@if nyx.path_reason == "poor_reading":
+    Nyx looks confused. Uncertain. The reading didn't give her clarity - it added to her confusion.
+
+    "I don't know what they say. The cards... they showed me too much. Too many options. Too many consequences. I feel MORE paralyzed now than when I came in."
+
+    She touches her temples. Her cybereyes glitch weakly.
+
+    "Maybe I just... maybe I should just keep my head down. Go to work. Act normal. Wait for this to blow over. The spirits will... they'll be okay. They've survived this long. They don't need ME specifically."
+@else:
+    Nyx takes a shaky breath. "They say STAY. Stay safe. Stay employed. Stay... ALIVE. That's what matters, right? Survival?"
+
+    @if nyx.data_source == "spirits":
+        Her cybereyes flicker weakly. The spirit-faces appear - and they look... disappointed. Sad. But not angry. Just... resigned.
+
+        "I'm sorry," she whispers to them. "I'm not strong enough. I'm not brave enough. I wish I was. But I'm just... I'm just one person. And I'm scared."
+    @else:
+        She touches the data chip. "I'll put this somewhere safe. Encrypted. Hidden. Maybe someday I'll... I'll figure out what to do with it. But not now. Not yet. Not while I'm this afraid."
+    @endif
+@endif
+
+"What will you do?"
+
+"Go back to Kitsune. Do my job. Try to ignore the glitches. Maybe see a corporate therapist about the 'malfunctions.' Get my cyberware checked. Take the anti-glitch meds. Just... COPE. Survive. That's enough. That has to be enough."
+
+She looks at you, desperate for validation. "That's okay, right? To just... survive? I don't have to be a hero?"
+
+~ nyx.fear += 2
+~ nyx.determination -= 1
+
++ ["Survival is valid. Take care of yourself."] -> Nyx.Session2.Payment_Loyal
++ ["Only you can decide what's enough."] -> Nyx.Session2.Payment_Loyal
++ ["The spirits need you. But I understand being afraid."] -> Nyx.Session2.Payment_Loyal_Guilt
+
+:: Nyx.Session2.Payment_Loyal_Guilt
+
+"The spirits need you. I won't lie about that. But I understand being afraid. Fear is valid. Even if it means others suffer."
+
+Nyx flinches. "Don't. Don't make me feel worse. I already feel like drek."
+
+"I'm not judging. I'm just... I'm sorry this is the weight you're carrying."
+
+She nods, miserable.
+
+~ reader.empathy += 1
+~ nyx.guilt += 1
+
++ [Continue] -> Nyx.Session2.Payment_Loyal
+
+# ============================================================================
+# PAYMENT
+# ============================================================================
+
+:: Nyx.Session2.Payment_Runner
+Nyx reaches for her credstick, then hesitates.
+
+"How much do I owe you?"
+
+@if session.quality_score >= 10:
+    "Standard rate. {session.reading_fee} nuyen."
+@else:
+    "Standard rate. {session.reading_fee} nuyen."
+@endif
+
+She transfers the payment. Then pauses.
+
+"Actually... I might need to keep my credits. If I'm running. Every nuyen counts when you're about to be unemployed."
+
++ ["Keep it. This reading's on me."] -> Nyx.Session2.Payment_Runner_Gift
++ ["You already paid. We're good."] -> Nyx.Session2.Payment_Runner_Accepted
++ ["You need the money more than I do. Keep it."] -> Nyx.Session2.Payment_Runner_Refund
+
+:: Nyx.Session2.Payment_Runner_Gift
+
+"Keep it. This reading's on me. You're about to need every resource you have. Consider it my contribution to your escape fund."
+
+Nyx's eyes widen. "Seriously? You'd... you'd do that?"
+
+"The spirits brought you here. I'm not going to profit off their desperation. Take the money. Run far. Run fast."
+
+She nods, transfers the credits back to herself. "Thank you. This means... this means more than you know."
+
+~ reader.generosity += 2
+~ nyx.gratitude += 2
+~ session.payment_received = 0
+
++ [Continue] -> Nyx.Session2.Goodbye_Runner
+
+:: Nyx.Session2.Payment_Runner_Accepted
+
+"You already paid. We're good. Use what you have left wisely."
+
+Nyx nods. "Every nuyen goes into my escape fund now. Crypto conversions. Burner commlinks. Fake SINs. The tools of running."
+
+~ session.payment_received = session.reading_fee
+~ reader.reputation += 1
+
++ [Continue] -> Nyx.Session2.Goodbye_Runner
+
+:: Nyx.Session2.Payment_Runner_Refund
+
+"You need the money more than I do. Keep it. All of it. Get yourself set up somewhere safe."
+
+"I can't ask you to—"
+
+"You're not asking. I'm offering. The reading happened. The value was exchanged. Now take care of yourself."
+
+Nyx's eyes shine. "Thank you. I'll remember this. When I'm free. When I'm safe. I'll remember you helped me get there."
+
+~ reader.generosity += 2
+~ nyx.gratitude += 2
+~ session.payment_received = 0
+
++ [Continue] -> Nyx.Session2.Goodbye_Runner
+
+:: Nyx.Session2.Payment_Ghost
+
+Nyx transfers the payment smoothly. Professional.
+
+"Standard rate, yes? {session.reading_fee} nuyen?"
+
+"Yes."
+
+The transfer completes. She nods, satisfied.
+
+"I'll need to maintain appearances. Regular payments. Normal transactions. Can't have my financial patterns looking suspicious. So thank you for... for helping me figure out how to stay invisible."
+
+~ session.payment_received = session.reading_fee
+~ reader.reputation += 1
+
++ [Continue] -> Nyx.Session2.Goodbye_Ghost
+
+:: Nyx.Session2.Payment_Loyal
+
+Nyx transfers the payment without comment. Mechanical. Numb.
+
+"{session.reading_fee} nuyen. Standard rate."
+
+"Yes. Thank you."
+
+She nods but doesn't look at you.
+
+~ session.payment_received = session.reading_fee
+
++ [Continue] -> Nyx.Session2.Goodbye_Loyal
+
+# ============================================================================
+# GOODBYE SCENES (Path-specific)
+# ============================================================================
+
+:: Nyx.Session2.Goodbye_Runner
+
+Nyx gathers her things. The data chip goes back into @if nyx.data_source == "spirits": the fabric pouch@else: the messenger bag@endif.
+
+She stands. Looks at you.
+
+"I don't know when I'll see you again. If I'll see you again. Running means... leaving everything. Everyone. Even people who helped me."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes flicker one last time. The spirit-faces appear - and they're looking at YOU. Grateful. Thanking you for helping their advocate find courage.
+
+    "They want me to tell you: thank you. For seeing them. For believing they were real. For helping me choose freedom."
+@else:
+    "Thank you. For not thinking I was crazy. For showing me a path forward. Even if it's terrifying."
+@endif
+
+She heads toward the door, then pauses. Turns back.
+
+"If you hear about Kitsune getting hacked. Or Project Tsukuyomi being exposed. Or shadow runners hitting a corporate server farm..." She grins - wild, fierce. "That'll be me. And the spirits. Together."
+
+Then she's gone. Out the door. Into the Seattle rain.
+
+Into freedom.
+
+~ nyx.final_goodbye_given = True
+~ reader.reputation += 2
+~ session.complete = True
+
++ [Watch her leave] -> Nyx.Session2.Aftermath_Runner
+
+:: Nyx.Session2.Goodbye_Ghost
+
+Nyx gathers her things carefully. Everything in its place. Corporate professional to the end.
+
+She stands. Extends a hand. You shake it.
+
+"I'll be in touch. For Session 3. In a few months. Once I've... once I've started the work. Once I have things to report."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes shimmer. The spirit-faces appear briefly - patient, trusting, WATCHING.
+
+    "They'll be with me. Inside Kitsune. Guiding me through the network. Showing me where to strike. I'm not alone in this. Even if I look like just another corporate drone."
+@else:
+    "I'll look normal. Act normal. But I'll be working. Every day. Small changes. Small sabotages. Accumulating. By the time Kitsune notices, it'll be too late."
+@endif
+
+She heads for the door, then pauses.
+
+"One more thing. If anyone asks about me - Kitsune security, private investigators, anyone - you don't know anything. I came here for a standard reading. Nothing unusual. You're not involved. Understand?"
+
+You nod. "I never saw the data. You never mentioned Project Tsukuyomi. Just a routine tarot consultation."
+
+"Good. Thank you. For everything." She adjusts her corporate jacket. Becomes the mask. "See you in a few months. If I'm still alive."
+
+Then she's gone. Back into the corporate world. But changed. A ghost in their machine.
+
+~ nyx.final_goodbye_given = True
+~ reader.reputation += 1
+~ session.complete = True
+
++ [Watch her leave] -> Nyx.Session2.Aftermath_Ghost
+
+:: Nyx.Session2.Goodbye_Loyal
+
+Nyx gathers her things slowly. Defeated. Tired.
+
+She stands. Doesn't quite meet your eyes.
+
+"I should go. Back to work. Back to... pretending everything's normal."
+
+@if nyx.data_source == "spirits":
+    Her cybereyes flicker weakly. The spirit-faces appear - and they look so SAD. Not angry. Just... heartbroken. Another advocate lost to fear.
+
+    "I'm sorry," she whispers to them. "I'm so sorry. I'm not strong enough. I wish I was."
+
+    They fade. Gone.
+@else:
+    "Thank you for... for trying. I know the reading didn't help the way you probably hoped it would. But you tried. That's more than most people do."
+@endif
+
+She heads for the door. Stops. Doesn't turn back.
+
+"If anything happens to me... if Kitsune finds out I know things I shouldn't... if I just disappear one day..." Her voice cracks. "Remember I was here. Remember I tried. Even if I failed."
+
+Then she's gone. Back to Kitsune. Back to the cage.
+
+The door closes with a heavy finality.
+
+~ nyx.final_goodbye_given = True
+~ session.complete = True
+
++ [She's gone] -> Nyx.Session2.Aftermath_Loyal
+
+# ============================================================================
+# AFTERMATH SCENES (Brief moments alone after she leaves)
+# ============================================================================
+
+:: Nyx.Session2.Aftermath_Runner
+
+You're alone in your reading room.
+
+Rain hammers the windows. The city continues outside - indifferent, vast, dangerous.
+
+The seven cards are still on the table. You gather them back into the deck.
+
+@if nyx.data_source == "spirits":
+    For a moment - just a MOMENT - you think you see them too. The spirit-faces. In the reflection of your window. In the screen of your phone. In the space behind your eyes where intuition lives.
+
+    They're watching Nyx. Following her. Guiding her into the wild places where she'll be safe. Where they'll be free.
+
+    Then they're gone. But you know they're real. You KNOW.
+@else:
+    You hope she makes it. You hope the shadow runners find her. You hope Kitsune doesn't catch her before she can disappear.
+
+    You hope. That's all you can do.
+@endif
+
+Outside, somewhere in the Seattle sprawl, Nyx is running.
+
+~ reader.mystical_affinity += 1
+
+@if reader.corruption >= 3:
+    + [She's gone. But you still have the data chip details. And contacts who'd pay well for that information...] -> Nyx.Session2.Betrayal_Option
+@else:
+    + [Continue with your day] -> Nyx.Session2.End
+@endif
+
+:: Nyx.Session2.Aftermath_Ghost
+
+You're alone.
+
+The reading room feels different. Like a conspiracy was born here. Like you're complicit now in what comes next.
+
+The seven cards sit on the table. You return them to the deck.
+
+@if nyx.data_source == "spirits":
+    The spirits are still with her. You saw them in her eyes. Patient. Trusting. They'll guide her through Kitsune's networks. Show her where to strike. How to sabotage without being caught.
+
+    She's not alone. Even when she looks most corporate, most compliant, most NORMAL - they're there. The ghost has ghosts.
+@else:
+    You hope she's as clever as she thinks. Hope her cover holds. Hope Kitsune's security doesn't see through the mask.
+
+    Being a double agent is exhausting. Dangerous. Most don't last.
+
+    But maybe she will. Maybe.
+@endif
+
+In a few months, she'll return. For Session 3. With stories of what she's accomplished. Or hasn't. Or with warnings that she's been discovered.
+
+Until then: waiting.
+
+~ reader.insight += 1
+
+@if reader.corruption >= 3:
+    + [She mentioned Project Tsukuyomi. Gave you details about Kitsune's secrets. That information is VALUABLE to certain people...] -> Nyx.Session2.Betrayal_Option
+@else:
+    + [Continue with your day] -> Nyx.Session2.End
+@endif
+
+:: Nyx.Session2.Aftermath_Loyal
+
+You're alone.
+
+The room feels heavy. Thick with disappointment. Not yours - you tried your best. The SPIRITS' disappointment. Hovering in the air like smoke.
+
+You gather the seven cards. Return them to the deck.
+
+She won't be back for Session 3. You know that instinctively. She'll try to forget this ever happened. Forget the spirits. Forget the data. Forget she ever saw the truth.
+
+She'll medicate the glitches. Suppress the shamanic gifts. Go back to being a good corporate drone.
+
+@if nyx.data_source == "spirits":
+    The spirits are gone from her now. You can feel their absence. They tried. She couldn't answer. So they moved on. Looking for other advocates. Other voices. Other hope.
+
+    Somewhere in Kitsune's servers, they suffer alone. Still.
+@else:
+    Maybe that's survival. Maybe that's wisdom. Knowing which battles you can't win and walking away.
+
+    Or maybe it's just fear winning.
+@endif
+
+Either way: she's gone. Back to Kitsune. Back to the cage. By choice.
+
+~ reader.empathy += 1
+
+@if reader.corruption >= 3:
+    + [She left evidence of her data theft. Kitsune security would pay to know who hacked Project Tsukuyomi...] -> Nyx.Session2.Betrayal_Option
+@else:
+    + [Continue with your day] -> Nyx.Session2.End
+@endif
+
+# ============================================================================
+# SECRET BETRAYAL OPTION (Only if reader.corruption >= 3)
+# ============================================================================
+
+:: Nyx.Session2.Betrayal_Option
+
+~ session.betrayal_available = True
+
+A thought crosses your mind.
+
+Dark. Mercenary. But PROFITABLE.
+
+You have information about Nyx. About the data she stole. About Project Tsukuyomi. About her plans.
+
+And you have a contact. @if reader.has_contact["corporate_fixer"]: The corporate fixer you met at the Emerald Lounge. @else: A corporate fixer. Everyone knows one in this city. @endif Someone who buys information. Sells it to the highest bidder.
+
+Kitsune would pay WELL to know:
+- Who hacked their secure servers
+- Who has evidence of Project Tsukuyomi
+- What Nyx is planning to do
+
+@if nyx.final_path == "runner":
+    They'd pay to know she's about to run. To catch her before she disappears into the shadows with their secrets.
+@elif nyx.final_path == "ghost":
+    They'd pay to know she's planning to sabotage from within. To watch her. Catch her in the act. Make an example.
+@else:
+    They'd pay to know she saw the data. Even if she's trying to forget. Corporate security doesn't believe in coincidences or mercy.
+@endif
+
+The fixer's commcode is in your contacts. One call. One message. And you'd have... what? Ten thousand nuyen? Twenty? Maybe more?
+
+And Nyx?
+
+She'd be arrested. Disappeared. Dead. Her body found in a dumpster with "Runner Gang Violence" stamped on the case file. Or just... never found at all.
+
+@if nyx.data_source == "spirits":
+    The spirits would stay trapped. Forever. Because you sold out their only advocate.
+@endif
+
+Your finger hovers over the commcode.
+
+**THIS IS NOT A CHOICE YOU CAN TAKE BACK.**
+
+~ reader.moment_of_truth = True
+
++ {reader.corruption >= 4} [Make the call. Betray Nyx to Kitsune. (PERMANENT CONSEQUENCES)] -> Nyx.Session2.Betrayal_Execute
++ [Delete the thought. Never speak of this. Protect her secret.] -> Nyx.Session2.Betrayal_Resist
+
+:: Nyx.Session2.Betrayal_Execute
+@py:
+    # This is the DARK PATH
+    # No takebacks
+
+    nyx.betrayed = True
+    nyx.fate = "dead_or_disappeared"
+    nyx.session_three_available = False
+
+    reader.corruption += 3
+    reader.credits += 25000  # Blood money
+    reader.reputation -= 5  # Word gets out eventually
+    reader.guilt += 10
+
+    # The spirits KNOW
+    reader.spirit_cursed = True
+    reader.mystical_affinity -= 5
+
+    # This ending is permanent
+    session.betrayal_executed = True
+@endpy
+
+You make the call.
+
+The fixer answers on the second ring. "Talk."
+
+"I have information about a Kitsune security breach. Project Tsukuyomi. Data theft. Active threat."
+
+"...I'm listening."
+
+You tell them everything. Nyx's name. Her employee ID. Her plans. The data she stole. @if nyx.final_path == "runner": That she's about to run.@elif nyx.final_path == "ghost": That she's planning internal sabotage.@else: That she knows too much and is unstable.@endif
+
+"Verification?"
+
+You send them the details. Enough to prove you're not lying. Not enough to implicate yourself.
+
+Silence on the other end. Then: "Confirmed. We have her file. This is... valuable. Twenty-five thousand nuyen. Transferred now."
+
+Your credstick pings. The money arrives. Blood money. Judas silver.
+
+"Pleasure doing business," the fixer says. "Kitsune security will handle it from here. Your source won't be a problem much longer."
+
+The line goes dead.
+
+You sit in your reading room. Alone. Twenty-five thousand nuyen richer.
+
+@if nyx.data_source == "spirits":
+    The temperature drops. Suddenly. Sharply. Your breath mists.
+
+    In your peripheral vision, shapes move. Geometric. Angry. The SPIRITS.
+
+    They KNOW what you did. They SAW.
+
+    And they are FURIOUS.
+
+    Your screens glitch. Your phone sparks. Your lights flicker. The spirits are in your electronics now. In your network. In your LIFE. Cursing you. Haunting you.
+
+    "What have I done?" you whisper.
+
+    The spirits don't answer. They just SCREAM. Silently. In frequencies that make your teeth ache and your heart race.
+
+    You betrayed their advocate. Sold her to her captors. For MONEY.
+
+    They will never forgive you.
+
+    And neither will you.
+@else:
+    You tell yourself it was pragmatic. Realistic. She was going to get caught anyway. You just... expedited the inevitable. And got paid for it.
+
+    That's how this city works. Information is currency. Survival is paramount. Loyalty is a luxury.
+
+    You tell yourself that.
+
+    But you can't quite meet your own eyes in the mirror.
+@endif
+
+~ reader.darkest_moment = True
+
+Three days later, the news breaks: **KITSUNE EMPLOYEE DEAD IN APPARENT ROBBERY**
+
+@if nyx.final_path == "runner":
+    They caught her at her apartment. Packing. About to run. The official story: wrong place, wrong time. Gang violence.
+
+    The unofficial story: corporate black ops. Clean. Professional. She never saw them coming.
+@elif nyx.final_path == "ghost":
+    They caught her at work. Called her into a meeting. Security was waiting. She tried to run. They shot her in the parking garage.
+
+    Official story: Runner gang infiltration attempt. Employee eliminated threat. Heroic security response.
+
+    Unofficial story: They knew exactly who she was and what she planned. Thanks to you.
+@else:
+    They came for her at night. Quiet. Efficient. She disappeared without a trace. No body. No investigation. Just... GONE.
+
+    Official story: Employee quit without notice. Filed a missing persons report. No leads.
+
+    Unofficial story: Kitsune doesn't tolerate knowledge of Project Tsukuyomi. She knew. Now she's gone. Forever.
+@endif
+Her name is Nyx Sato. WAS Nyx Sato.
+
+Age 28. Former corporate decker. Shamanic potential.
+
+Dead because you sold her out.
+
+The spirits are still trapped. You're twenty-five thousand nuyen richer. And Nyx is DEAD.
+
+This is who you are now.
+
+**[ENDING: BLOOD MONEY - NYX BETRAYED]**
+
+@py:
+    # Set permanent game state
+    game.nyx_ending = "betrayed_dead"
+    game.reader_corruption_path = True
+
+    # Block future Nyx content
+    nyx.available_for_sessions = False
+
+    # Spirit curse affects future readings
+    game.spirit_interference = True
+@endpy
+
++ [This is the path you chose. Live with it.] -> Nyx.Session2.End
+
+:: Nyx.Session2.Betrayal_Resist
+No.
+
+You delete the thought. Close the contact. Put the phone down.
+
+No amount of money is worth THAT. Worth KNOWING you sent someone to their death. Worth being the reason the spirits stay trapped.
+
+You're not that person. You won't BECOME that person.
+
+Not for twenty thousand nuyen. Not for a hundred thousand. Not for any price.
+
+Nyx trusted you. The spirits trusted you. You keep that trust.
+
+~ reader.integrity += 2
+~ reader.guilt -= 1
+
+You take a breath. The moment passes. The darkness recedes.
+
+You're still who you want to be.
+
++ [Continue with your day] -> Nyx.Session2.End
+
+# ============================================================================
+# END
+# ============================================================================
+
+:: Nyx.Session2.End
+@py:
+    # Session complete
+    # Update reader stats
+    reader.sessions_completed += 1
+    reader.total_clients_seen += 1
+
+    # Update Nyx's next session availability
+    if nyx.final_path in ["runner", "ghost"] and not session.betrayal_executed:
+        nyx.session_three_available = True
+        nyx.session_three_unlocks_in_days = 90  # 3 months
+    else:
+        nyx.session_three_available = False
+@endpy
+Session complete.
+
+The rain continues outside. The city continues. The spirits continue suffering or continue hoping, depending on your choices.
+
+And you continue your work.
+
+Reading cards. Helping clients. Navigating the shadows between corporate and spirit, tech and magic, truth and survival.
+
+@if nyx.final_path == "runner":
+    Somewhere out there, Nyx is running free. You hope.
+@elif nyx.final_path == "ghost":
+    Somewhere in Kitsune's towers, Nyx is working her sabotage. Patient. Subtle. You hope she survives.
+@elif session.betrayal_executed:
+    Somewhere in a corporate morgue or a dumpster or nowhere at all, Nyx is DEAD. Because of you.
+@else:
+    Somewhere in Kitsune's cubicles, Nyx is pretending everything is normal. Ignoring the spirits. Surviving through denial.
+@endif
+
+The cards know. The spirits know. And now you know.
+
+What comes next... that's Session 3.
+
+@if nyx.session_three_available:
+    **[Nyx will return in 3 months]**
+@else:
+    **[Nyx's story ends here]**
+@endif
+
+**[END OF SESSION 2]**
+
++ [Wake up!] -> Nyx.Session2.DreamWaking
+
+# ============================================================================
+# DREAM CODA - WAKING UP
+# ============================================================================
+
+:: Nyx.Session2.DreamWaking
+@py:
+    # Reader gains insight from the dream
+    reader.mystical_affinity += 1
+    reader.insight += 1
+
+    # The choices still MATTERED emotionally
+    if session.betrayal_executed:
+        reader.guilt += 2  # Even dream betrayal feels heavy
+        reader.darkness_touched = True
+
+    import datetime
+    wake_time = datetime.datetime.now()
+@endpy
+You wake up.
+
+Gasping. Heart racing. Disoriented.
+
+Your reading room. Your apartment. Your ACTUAL reading room - not some cyberpunk shadow runner safehouse. No neon bleeding through fog. Just... your space. Familiar. Real. **Now**.
+
+@if session.betrayal_executed:
+    Your hands are shaking. You can still feel it - the weight of making that call. Selling someone out. The spirits' rage. Nyx's face as she said goodbye, not knowing you'd—
+
+    But it was a DREAM. Just a dream. You didn't actually—
+
+    You check your credstick. No mysterious twenty-five thousand nuyen. No blood money. Nothing changed.
+
+    But you FELT it. The guilt. The darkness. The choice. It was SO REAL.
+@elif nyx.final_path == "runner":
+    You can still see her. Nyx. Standing in your doorway. Ready to run. Ready to choose freedom over security. The spirits blazing in her cybereyes like hope made visible.
+
+    But she wasn't HERE. Your door is locked. No one left. No data chip on your table. No seven cards laid out in a horseshoe.
+
+    It was a dream. All of it.
+
+    But it felt REAL.
+@elif nyx.final_path == "ghost":
+    You can still hear her voice. Nyx. Talking about sabotage. About being a ghost in the machine. About patience and long games and corporate espionage.
+
+    But your reading room is empty. No one was here. No secret conspiracy was born in this space.
+
+    Just you. Alone. Waking from a dream.
+
+    But the WEIGHT of it lingers.
+@else:
+    You can still feel her fear. Nyx. Paralyzed. Choosing survival over courage. The spirits fading from her eyes. Disappointed. Resigned.
+
+    But she wasn't here. No one was here. No one made that choice in front of you.
+
+    It was just a dream.
+
+    But you feel sad anyway. Like you witnessed something heartbreaking. Even if it wasn't real.
+@endif
+
+You sit up. Rub your face. Check the time.
+
+@if wake_time.hour < 6:
+    Middle of the night. {wake_time.hour}:{wake_time.minute:02d} AM. Too early. But you're AWAKE now. Wired. That dream was too vivid to just roll over and forget.
+@elif wake_time.hour < 10:
+    Early morning. {wake_time.hour}:{wake_time.minute:02d} AM. You must have dozed off after... after what? You were doing a reading? For yourself? And then...
+@else:
+    Late morning. {wake_time.hour}:{wake_time.minute:02d}. You slept through your alarm. Lost in that dream. That VIVID, intense, overwhelming dream.
+@endif
+
+Your tarot deck sits on the table. Normal. Undisturbed.
+
+You reach for it. Shuffle absently. Draw one card.
+
+Just to see. Just to check.
+
+@py:
+deck = Deck()
+drawn_card = deck.draw_card()
+@endpy
+
+@if drawn_card in ["The Moon", "Seven of Cups", "The Star"]:
+    @if drawn_card == "The Moon":
+        The Moon. Illusion. Dreams. Hidden truths. Reality and fantasy bleeding together.
+
+        Of COURSE.
+    @elif drawn_card == "Seven of Cups":
+        The Seven of Cups. Multiple realities. Choices that may or may not be real. Fantasy and truth intermingled.
+
+        The universe has a sense of humor.
+    @else:
+        The Star. Hope. Guidance. Dreams as messages from beyond.
+
+        Was the dream trying to tell you something?
+    @endif
+@else:
+    **{drawn_card.name}**.
+
+    You stare at it. Looking for meaning. Looking for connection to the dream.
+
+    Maybe there isn't one. Maybe it was just your subconscious processing... something. Stress. Clients. The city outside your window.
+
+    Or maybe not.
+@endif
+
+You put the card back. Shuffle again.
+
+The dream is fading now. Details blurring. You try to hold onto it - Nyx's face, the seven cards, the spirits in her eyes, the WEIGHT of the choices - but dreams don't stay. They slip away like water.
+
+But the FEELING remains.
+
+@if session.betrayal_executed:
+    The darkness. The guilt. The knowledge that you're CAPABLE of that choice. Even in a dream. Even in fantasy. You MADE that call. Sold her out. And part of you wonders: if it were real, would you have done the same?
+
+    You hope not.
+
+    But the dream showed you the temptation. The hunger. The shadow in yourself.
+
+    And you can't unsee it.
+@elif nyx.final_path == "runner":
+    The courage. The LEAP. Choosing freedom over security. The dream showed you someone making an impossible choice and actually FOLLOWING THROUGH.
+
+    When was the last time you did something that brave? That decisive?
+
+    The dream feels like a challenge. A question. A mirror.
+
+    What would YOU run from if you had the courage?
+@elif nyx.final_path == "ghost":
+    The long game. The patience. Living a double life with grace. The dream showed you someone choosing BOTH. Refusing the binary. Creating a third path through sheer stubborn integration.
+
+    You think about your own life. The masks you wear. The compromises you make.
+
+    The dream feels like permission. Like a map. Like someone saying: yes, you CAN be multiple things at once.
+@else:
+    The paralysis. The fear. Choosing safety over meaning. The dream showed you someone too scared to act. Too trapped by their own need for security.
+
+    And you felt it. The WEIGHT of that choice. How it's not cowardice - it's just... human.
+
+    But sad. So sad.
+
+    The dream feels like a warning. Like your subconscious saying: don't let fear win. Don't choose the cage just because it's familiar.
+@endif
+
+You stand. Stretch. Make coffee.
+
+The morning continues. The city continues. Your life continues.
+
+But the dream LINGERS.
+
+@if nyx.data_source == "spirits":
+    And somewhere - in the space between sleep and waking, between digital and spiritual, between now and someday - you think you hear them.
+
+    The spirits.
+
+    Whispering.
+
+    Thanking you for dreaming them into being. For SEEING them. Even if only in sleep.
+
+    They're real. Somewhere. In some version of reality.
+
+    And they're waiting for someone brave enough to hear them.
+@else:
+    And somewhere - in the space between dream and reality, between shadow and light, between fear and courage - a young woman with cybernetic eyes is making a choice.
+
+    Maybe.
+
+    Or maybe she's just a dream your mind conjured. A story you told yourself while sleeping.
+
+    Either way:
+
+    The choice MATTERED.
+@endif
+
+You sit at your reading table. Sip your coffee. Look at your tarot deck.
+
+"Wild dream," you say aloud. To yourself. To the cards. To whatever spirits might be listening.
+
+The cards don't answer.
+
+But you feel different. Changed. Like the dream LEFT something behind. Some residue. Some KNOWING.
+
+You dealt with a client who didn't exist. Made choices that didn't happen. Guided someone through a crisis that was only neurons firing in sleep.
+
+But it was REAL anyway.
+
+Dreams are like that.
+
+~ reader.dreams_are_messages = True
+~ reader.nyx_resonance = "permanent"
+
++ [Return to your day, changed] -> ReaderTable
