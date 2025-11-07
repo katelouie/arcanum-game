@@ -3024,6 +3024,7 @@ if chen.will_return:
 
 chen.session_one_cards = cards
 chen.session_two_quality = session.reading_quality
+chen.sessions_completed += 1
 
 # Update reader stats summary
 reader.sessions_completed += 1

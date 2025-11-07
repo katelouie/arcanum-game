@@ -2135,6 +2135,7 @@ Margaret's money is warm in your hand - still carrying the heat of her fingers.
 @py:
 session.current_client = None
 reader.sessions_completed += 1
+chen.sessions_completed += 1
 
 # Record callbacks for Session 3 if unlocked
 if chen.session_three_unlocked:

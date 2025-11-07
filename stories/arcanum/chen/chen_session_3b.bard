@@ -1499,6 +1499,7 @@ Outside, spring afternoon. The rain has stopped. Everything feels possible.
 @py:
     session.current_client = None
     reader.sessions_completed += 1
+    chen.sessions_completed += 1
 
     # Special achievement for completing Chen's full arc via 3B
     if chen.arc_complete and chen.final_state == "transformed_into_matriarch":

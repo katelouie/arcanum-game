@@ -1643,6 +1643,7 @@ Outside, spring afternoon. Everything blooming. Including Margaret.
 @py:
     session.current_client = None
     reader.sessions_completed += 1
+    chen.sessions_completed += 1
 
     # Special achievement for completing Chen's full arc via 3C
     if chen.arc_complete and chen.final_state == "blooming_where_planted":

@@ -1721,6 +1721,7 @@ Outside, spring rain patters gently. Your deck sits on the table, the single car
 @py:
     session.current_client = None
     reader.sessions_completed += 1
+    chen.sessions_completed += 1
 
     # Special achievement for completing Chen's full arc
     if chen.arc_complete and chen.final_state == "thriving_in_community":
