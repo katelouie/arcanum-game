@@ -18,17 +18,22 @@
     Heavy rain lashes your windows while lightning illuminates the towering corporate arcologies in the distance, their holographic crowns flickering through the storm.
 @endif
 
-Your new client sits rigidly in the chair across from you, synthetic leather hood pulled up despite being indoors. The reactive fibers in the fabric shimmer with each micro-movement – expensive tech trying to mask obvious tension.
+Your new client sits rigidly in the chair across from you, synthetic leather hood pulled up despite being indoors. The reactive fibers in the fabric shimmer with each micro-movement - expensive tech trying to mask obvious tension.
 
-"Call me Nyx," she says, her voice carrying digital distortion. {"The modulation seems deliberate – hiding accent, emotion, maybe both." if nyx.openness <= 0 else ''} {"The electronic edge can't quite mask an underlying vulnerability." if nyx_openness >= 1 else ''}
+"Call me Nyx," she says, her voice carrying digital distortion. <>
+@if nyx.openness <= 0:
+    The modulation seems deliberate - hiding accent, emotion, maybe both.
+@else:
+    The electronic edge can't quite mask an underlying vulnerability.
+@endif
 
-When she finally lowers her hood, chrome-blue AR contacts meet your gaze while a barely visible neural port pulses softly at her left temple. {"Military-grade augmentation, but the installation scarring suggests it wasn't her first procedure." if reader_insight >= 2 else ''}
+When she finally lowers her hood, chrome-blue AR contacts meet your gaze while a barely visible neural port pulses softly at her left temple. {"Military-grade augmentation, but the installation scarring suggests it wasn't her first procedure." if reader.insight >= 2 else ''}
 
-"I'm experiencing... technical difficulties." Her left eye flickers – the AR display stuttering. {"The malfunction syncs oddly with her breathing, as if responding to stress rather than random system errors." if nyx_cyber_glitches >= 1 else ''}
+"I'm experiencing... technical difficulties." Her left eye flickers - the AR display stuttering. {"The malfunction syncs oddly with her breathing, as if responding to stress rather than random system errors." if nyx.cyber_glitches >= 1 else ''}
 
-She drums her fingers against the table with mechanical precision. {"The rhythm isn't nervous fidgeting – she's unconsciously tapping in binary code." if reader_insight >= 3 else ""}
+She drums her fingers against the table with mechanical precision. {"The rhythm isn't nervous fidgeting – she's unconsciously tapping in binary code." if reader.insight >= 3 else ""}
 
-"During my work runs, I see things that shouldn't exist in the data streams. My supervisor says it's lag, but..." She trails off, studying your face for reaction. {'"I need to know if I\'m malfunctioning, or if something else is malfunctioning around me."' if nyx_openness >= 1 else ''}
+"During my work runs, I see things that shouldn't exist in the data streams. My supervisor says it's lag, but..." She trails off, studying your face for reaction. {'"I need to know if I\'m malfunctioning, or if something else is malfunctioning around me."' if nyx.openness >= 1 else ''}
 
 * [Study her more carefully before responding] -> Nyx.Session1.observe_client
 * [Ask about her work] -> Nyx.Session1.work_inquiry
@@ -39,7 +44,7 @@ She drums her fingers against the table with mechanical precision. {"The rhythm 
 ~ reader.add_insight(1)
 ~ reader.add_empathy(1)
 
-You take a moment to study her, letting professional intuition guide your assessment. {"Her breathing is controlled but shallow – someone maintaining composure through will rather than calm." if reader_insight >= 2 else ''} The binary tapping continues steadily.
+You take a moment to study her, letting professional intuition guide your assessment. {"Her breathing is controlled but shallow - someone maintaining composure through will rather than calm." if reader.insight >= 2 else ''} The binary tapping continues steadily.
 
 @if reader.insight >= 3:
     ~ nyx.add_trust(2)
@@ -65,7 +70,7 @@ You take a moment to study her, letting professional intuition guide your assess
 ~ reader.add_insight(1)
 "What kind of work involves data streams complex enough to cause... visions?"
 
-{"Her posture shifts defensively." if nyx.openness <= 0 else ''} "Corporate data architecture. Cultural preservation algorithms." {"The evasion is obvious – that's not the whole story." if reader_insight >= 2 else ''} "Nothing that should cause hallucinations."
+{"Her posture shifts defensively." if nyx.openness <= 0 else ''} "Corporate data architecture. Cultural preservation algorithms." {"The evasion is obvious - that's not the whole story." if reader.insight >= 2 else ''} "Nothing that should cause hallucinations."
 
 @if reader.empathy >= 2:
     ~ nyx.add_trust(2)
