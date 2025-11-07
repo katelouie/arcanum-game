@@ -7168,7 +7168,7 @@
         },
         {
           "type": "text",
-          "value": "Your new client sits rigidly in the chair across from you, synthetic leather hood pulled up despite being indoors. The reactive fibers in the fabric shimmer with each micro-movement \u2013 expensive tech trying to mask obvious tension."
+          "value": "Your new client sits rigidly in the chair across from you, synthetic leather hood pulled up despite being indoors. The reactive fibers in the fabric shimmer with each micro-movement - expensive tech trying to mask obvious tension."
         },
         {
           "type": "text",
@@ -7183,20 +7183,35 @@
           "value": "\"Call me Nyx,\" she says, her voice carrying digital distortion. "
         },
         {
-          "type": "expression",
-          "code": "\"The modulation seems deliberate \u2013 hiding accent, emotion, maybe both.\" if nyx.openness <= 0 else ''"
-        },
-        {
-          "type": "text",
-          "value": " "
-        },
-        {
-          "type": "expression",
-          "code": "\"The electronic edge can't quite mask an underlying vulnerability.\" if nyx_openness >= 1 else ''"
-        },
-        {
-          "type": "text",
-          "value": "\n"
+          "type": "conditional",
+          "branches": [
+            {
+              "condition": "nyx.openness <= 0",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "The modulation seems deliberate - hiding accent, emotion, maybe both."
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            },
+            {
+              "condition": "True",
+              "content": [
+                {
+                  "type": "text",
+                  "value": "The electronic edge can't quite mask an underlying vulnerability."
+                },
+                {
+                  "type": "text",
+                  "value": "\n"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "text",
@@ -7208,7 +7223,7 @@
         },
         {
           "type": "expression",
-          "code": "\"Military-grade augmentation, but the installation scarring suggests it wasn't her first procedure.\" if reader_insight >= 2 else ''"
+          "code": "\"Military-grade augmentation, but the installation scarring suggests it wasn't her first procedure.\" if reader.insight >= 2 else ''"
         },
         {
           "type": "text",
@@ -7220,11 +7235,11 @@
         },
         {
           "type": "text",
-          "value": "\"I'm experiencing... technical difficulties.\" Her left eye flickers \u2013 the AR display stuttering. "
+          "value": "\"I'm experiencing... technical difficulties.\" Her left eye flickers - the AR display stuttering. "
         },
         {
           "type": "expression",
-          "code": "\"The malfunction syncs oddly with her breathing, as if responding to stress rather than random system errors.\" if nyx_cyber_glitches >= 1 else ''"
+          "code": "\"The malfunction syncs oddly with her breathing, as if responding to stress rather than random system errors.\" if nyx.cyber_glitches >= 1 else ''"
         },
         {
           "type": "text",
@@ -7240,7 +7255,7 @@
         },
         {
           "type": "expression",
-          "code": "\"The rhythm isn't nervous fidgeting \u2013 she's unconsciously tapping in binary code.\" if reader_insight >= 3 else \"\""
+          "code": "\"The rhythm isn't nervous fidgeting \u2013 she's unconsciously tapping in binary code.\" if reader.insight >= 3 else \"\""
         },
         {
           "type": "text",
@@ -7256,7 +7271,7 @@
         },
         {
           "type": "expression",
-          "code": "'\"I need to know if I\\'m malfunctioning, or if something else is malfunctioning around me.\"' if nyx_openness >= 1 else ''"
+          "code": "'\"I need to know if I\\'m malfunctioning, or if something else is malfunctioning around me.\"' if nyx.openness >= 1 else ''"
         },
         {
           "type": "text",
@@ -7342,7 +7357,7 @@
         },
         {
           "type": "expression",
-          "code": "\"Her breathing is controlled but shallow \u2013 someone maintaining composure through will rather than calm.\" if reader_insight >= 2 else ''"
+          "code": "\"Her breathing is controlled but shallow - someone maintaining composure through will rather than calm.\" if reader.insight >= 2 else ''"
         },
         {
           "type": "text",
@@ -7499,7 +7514,7 @@
         },
         {
           "type": "expression",
-          "code": "\"The evasion is obvious \u2013 that's not the whole story.\" if reader_insight >= 2 else ''"
+          "code": "\"The evasion is obvious - that's not the whole story.\" if reader.insight >= 2 else ''"
         },
         {
           "type": "text",
@@ -42338,7 +42353,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "# Update global state flags\nsession.current_client = None\n\n# Unlock Margaret Session 2 if she's returning\nif chen.will_return:\n    chen.session_two_available = True\n    chen.next_session_date = \"2 weeks\"\n\nchen.session_one_cards = cards\nchen.session_two_quality = session.reading_quality\n\n# Update reader stats summary\nreader.sessions_completed += 1"
+          "code": "# Update global state flags\nsession.current_client = None\n\n# Unlock Margaret Session 2 if she's returning\nif chen.will_return:\n    chen.session_two_available = True\n    chen.next_session_date = \"2 weeks\"\n\nchen.session_one_cards = cards\nchen.session_two_quality = session.reading_quality\nchen.sessions_completed += 1\n\n# Update reader stats summary\nreader.sessions_completed += 1"
         }
       ],
       "tags": []
@@ -53683,7 +53698,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "session.current_client = None\nreader.sessions_completed += 1\n\n# Record callbacks for Session 3 if unlocked\nif chen.session_three_unlocked:\n    chen.session_two_cards = cards\n    chen.session_two_quality = session.reading_quality"
+          "code": "session.current_client = None\nreader.sessions_completed += 1\nchen.sessions_completed += 1\n\n# Record callbacks for Session 3 if unlocked\nif chen.session_three_unlocked:\n    chen.session_two_cards = cards\n    chen.session_two_quality = session.reading_quality"
         }
       ],
       "tags": []
@@ -62817,7 +62832,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session.current_client = None\n    reader.sessions_completed += 1\n\n    # Special achievement for completing Chen's full arc\n    if chen.arc_complete and chen.final_state == \"thriving_in_community\":\n        reader.achievements.add(\"chen_arc_complete\")"
+          "code": "    session.current_client = None\n    reader.sessions_completed += 1\n    chen.sessions_completed += 1\n\n    # Special achievement for completing Chen's full arc\n    if chen.arc_complete and chen.final_state == \"thriving_in_community\":\n        reader.achievements.add(\"chen_arc_complete\")"
         }
       ],
       "tags": []
@@ -70670,7 +70685,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session.current_client = None\n    reader.sessions_completed += 1\n\n    # Special achievement for completing Chen's full arc via 3B\n    if chen.arc_complete and chen.final_state == \"transformed_into_matriarch\":\n        reader.achievements.add(\"chen_arc_complete_crisis_path\")"
+          "code": "    session.current_client = None\n    reader.sessions_completed += 1\n    chen.sessions_completed += 1\n\n    # Special achievement for completing Chen's full arc via 3B\n    if chen.arc_complete and chen.final_state == \"transformed_into_matriarch\":\n        reader.achievements.add(\"chen_arc_complete_crisis_path\")"
         }
       ],
       "tags": []
