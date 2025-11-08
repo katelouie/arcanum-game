@@ -1,3 +1,4 @@
+from game_logic.artifacts import get_artifact
 from game_logic.tarot import Deck, Reading
 from game_logic.characters import Client, Reader, Nyx
 from game_logic.models import Session, create_session
@@ -57,3 +58,33 @@ if nyx not in clients:
 # Additional
 + {maya in clients} [Maya Chen] -> Maya ^CLIENT
 + {eleanor in clients} [Eleanor Blackwood] -> Eleanor ^CLIENT
+# Non-Client Options
++ [Wander over to your shelf] -> ArtifactsCabinet
+
+
+:: ArtifactsCabinet
+
+~ artifact_objects = [get_artifact(aid) for aid in reader.artifacts]
+
+{len(reader.artifacts) == 0 ? The shelf is empty. No artifacts yet. | Your collection gleams in the low light.}
+
+@for artifact in artifact_objects:
+    + [{artifact.name}] -> ArtifactInspect(artifact=artifact)
+@endfor
+
++ [Return] -> ReaderTable
+
+
+:: ArtifactInspect(artifact)
+
+**{artifact.name}**
+
+{artifact.description}
+
+---
+
+{artifact.lore}
+
+*Acquired from {artifact.origin_character} during {artifact.origin_session}.*
+
++ [Back to collection] -> ArtifactsCabinet

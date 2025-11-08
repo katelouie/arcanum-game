@@ -46,6 +46,9 @@ class Reader:
     # Achievements collection
     achievements = set()
 
+    # Client completion artifacts
+    artifacts: list[str] = field(default_factory=list)
+
     ### Bounded Properties ###
     # === EMPATHY (0-10) ===
     @property
