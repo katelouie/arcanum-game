@@ -498,11 +498,8 @@ Nyx's breath catches. "That's... yeah. That's accurate."
 @endif
 
 + ["The Tower represents sudden upheaval. Your old reality - the one where you were just a corporate decker - was shattered by revelation."] -> Nyx.Session2.Position1_Tower_Analytical
-
 + ["Your old life is gone. The spirits tore it down by showing you the truth. That tower was built on lies."] -> Nyx.Session2.Position1_Tower_Intuitive
-
 + ["Every awakening begins with collapse. The tower of ignorance must fall before the temple of wisdom can be built."] -> Nyx.Session2.Position1_Tower_Storyteller
-
 + ["Everything you thought you knew was destroyed. The corporate illusion fell apart."] -> Nyx.Session2.Position1_Tower_Generic
 
 :: Nyx.Session2.Position1_Tower_Analytical
@@ -3065,7 +3062,7 @@ Nyx's eyes shine. "Thank you. I'll remember this. When I'm free. When I'm safe. 
 
 Nyx transfers the payment smoothly. Professional.
 
-"Standard rate, yes? {session.reading_fee} nuyen?"
+"Standard rate, yes? {session.reading_fee} nuyen."
 
 "Yes."
 
@@ -3593,7 +3590,7 @@ You sit up. Rub your face. Check the time.
 @if wake_time.hour < 6:
     Middle of the night. {wake_time.hour}:{wake_time.minute:02d} AM. Too early. But you're AWAKE now. Wired. That dream was too vivid to just roll over and forget.
 @elif wake_time.hour < 10:
-    Early morning. {wake_time.hour}:{wake_time.minute:02d} AM. You must have dozed off after... after what? You were doing a reading? For yourself? And then...
+    Early morning. {wake_time.hour}:{wake_time.minute:02d} AM. You must have dozed off after... after what...You were doing a reading...For yourself...And then...
 @else:
     Late morning. {wake_time.hour}:{wake_time.minute:02d}. You slept through your alarm. Lost in that dream. That VIVID, intense, overwhelming dream.
 @endif
