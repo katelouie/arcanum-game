@@ -5,14 +5,17 @@ from game_logic.models import Session, create_session
 
 import random
 
+# Prologue
 @include prologue.bard
-@include nyx/nyx.bard
-@include nyx/nyx_session_1.bard
+# Mrs. Chen
 @include chen/chen.bard
 @include chen/chen_session_1.bard
 @include chen/chen_session_2.bard
 @include chen/chen_session_3a.bard
 @include chen/chen_session_3b.bard
+# Nyx
+@include nyx/nyx.bard
+@include nyx/nyx_session_1.bard
 @include nyx/nyx_session_2.bard
 @include nyx/nyx_session_3a.bard
 @include nyx/nyx_session_3b.bard
