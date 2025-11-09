@@ -1516,12 +1516,13 @@ Nyx studies it carefully. "Reversed means... better?"
 @if session.threat_type == "counterintelligence" or session.threat_type == "digital_traces":
     "Yes, they're watching. Yes, you've left traces. <>
     @if session.protection_type == 'technical_skill':
-        But your skill makes those traces look like normal work.
+        But your skill makes those traces look like normal work.>?
     @elif session.protection_type == 'divine' or session.protection_type == 'shamanic':
-        But spiritual intervention makes Kitsune look the wrong direction at critical moments.
+        But spiritual intervention makes Kitsune look the wrong direction at critical moments.<>
     @else:
-        But luck—or something like it—makes security dismiss the anomalies as system errors.
-    @endif"
+        But luck—or something like it—makes security dismiss the anomalies as system errors.<>
+    @endif
+    "
 @elif session.threat_type == "total_loss" or session.threat_type == "isolation":
     "You feared losing everything. Being abandoned. Total ruin. Reversed Ten of Swords says: *no*. Not tonight. You keep your job, your apartment, your identity. Damaged, perhaps. Stressed, certainly. But *intact*."
 @endif

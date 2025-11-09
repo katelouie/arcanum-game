@@ -3441,7 +3441,7 @@ She draws the first card.
     @else:
         A figure face-down. Ten swords in their back. Total defeat. Rock bottom. The worst possible outcome. Death of the old self.
     @endif
-@endfor
+@endif
 
 She draws the second card.
 

@@ -1,0 +1,3434 @@
+# ============================================================================
+# NYX - SESSION 3C: "THE BREAKING POINT"
+# The Reckoning - Spiritual Catharsis or Mundane Redemption
+# ============================================================================
+#
+# UNLOCK CONDITIONS:
+# - nyx.session_two_complete == True
+# - nyx.final_path == "loyal"
+# - nyx.session_three_variant == "C"
+#
+# PREMISE: Nyx tried to stay loyal to Kitsune and ignore the spirits after
+# Session 2. She's been "coping" for 3-4 weeks. It's NOT working. The spirits
+# are FURIOUS—attacking her cybernetics, manifesting constantly, tearing her
+# apart from the inside. She's at breaking point. This session determines:
+# does she surrender to the spirits and undergo apotheosis? Or does she
+# turn away and build a mundane (but good) life without them?
+#
+# THEME: Spiritual reckoning. Catharsis or collapse. Vessel or empty.
+#
+# STRUCTURE:
+# - Opening: Nyx's apartment, crisis state, spiritual chaos
+# - The Reading: 5-card "Reckoning" spread (MAJOR ARCANA HEAVY)
+# - Two Endings:
+#   A) CATHARSIS - She becomes vessel for spirits, divine rampage, apotheosis
+#   B) SAD - Spirits leave, she builds good mundane life, healed but empty
+# - Wake Up Coda: Shared reflection
+#
+# KEY VARIABLES:
+# - session.spirit_alignment (0-10, tracks if she surrenders to spirits)
+# - session.quality_score (reading quality)
+# - Threshold: spirit_alignment >= 6 unlocks catharsis path
+#
+# CULTURAL CONTEXT:
+# - Nyx is Filipina (Nicole Dimayuga)
+# - Ancestral spirits (anito), Lola's guidance
+# - Techno-shamanism: chrome and magic in conflict → integration
+#
+# ============================================================================
+
+:: Nyx.Session3C.Start
+
+@py:
+# Initialize session
+session = create_session(nyx)
+
+# Time has passed since Session 2
+session.weeks_since_session_two = random.randint(3, 4)
+session.days_since_last_incident = random.randint(1, 3)
+
+# Session tracking
+session.phase = "arrival"
+session.spirit_alignment = 0  # 0-10 scale, determines catharsis vs sad
+session.quality_score = 0
+
+# Nyx's current state (BAD)
+nyx.current_state = "breaking"
+nyx.cybereye_malfunction = "extreme"
+nyx.spirit_attacks = "constant"
+nyx.kitsune_status = "deteriorating"  # Performance issues, maybe quitting soon
+nyx.mental_state = "desperate"
+
+# Track apartment state
+session.apartment_chaos = True
+session.shrine_destroyed = True
+session.electronics_malfunctioning = True
+
+# Shamanic pressure
+if nyx.shamanic_awakening >= 4:
+    session.spirit_pressure = "critical"  # She's VERY sensitive, pressure is massive
+else:
+    session.spirit_pressure = "severe"  # Even with low awakening, spirits are forcing through
+
+# Check if this path even makes sense
+if nyx.final_path != "loyal":
+    # This shouldn't happen, but fail gracefully
+    session.path_error = True
+else:
+    session.path_error = False
+@endpy
+
+@if session.path_error:
+    Something has gone wrong. This session requires Nyx to have chosen the "loyal" path in Session 2.
+
+    [This is a path error. Please return to the main menu.]
+
+    + [Return] -> ReaderTable
+@endif
+
+---
+
+Your phone buzzes. Late evening. The sky outside your window is bruised purple—storm coming.
+
+**[ENCRYPTED MESSAGE - NYX]**
+
+*"Please. I need help. NOW. Come to my apartment. Same address. Don't call first. Just COME. Please."*
+
+Timestamp: **[19:47 PST]**
+
+No signature. But you know her desperation. You felt it {session.weeks_since_session_two == 3 ? "three weeks ago" | "four weeks ago"} when she left your last reading—choosing safety over spirits, corporate employment over liberation.
+
+You grab your coat. Your deck. Your keys.
+
+The storm breaks as you drive.
+
+~ reader.responding_to_crisis = True
+
++ [Drive to her apartment] -> Nyx.Session3C.Arrival
+
+
+:: Nyx.Session3C.Arrival
+
+Same building. Redmond edge. Azure Heights—the letters still half-burned out.
+
+But something's *different*.
+
+The air feels CHARGED. Like static before lightning. Like the moment before a scream.
+
+You climb the stairs—twenty-three floors. Your legs burn. Your deck feels heavier than usual, warm against your chest.
+
+**Floor 23.**
+
+The hallway lights flicker. Not just dim—*actively glitching*. On-off-on-off in arhythmic pulses.
+
+You hear it before you see it:
+
+Humming. Electronic whine. The sound of machines in distress.
+
+**Apartment 2304.**
+
+The door is ajar. Just slightly. Warm light spills out—but it *pulses* with the rhythm of something breathing.
+
+You knock. "Nyx?"
+
+*"Come in."* Her voice. Strained. Barely holding together.
+
++ [Enter] -> Nyx.Session3C.Apartment_Horror
+
+
+:: Nyx.Session3C.Apartment_Horror
+
+@py:
+session.apartment_described = True
+@endpy
+
+You step inside.
+
+And stop.
+
+---
+
+**The apartment is WRONG.**
+
+Not dirty. Not messy. *Violated.* By forces that don't respect physics.
+
+**Electronics failing everywhere:**
+
+- Her three monitors flicker wildly—screens showing static, random code, *faces* (spirit faces, dozens of them, screaming silently)
+- The lights strobe—on, off, on, off—casting the room in seizure-inducing pulses
+- Her coffee maker sparks. Once. Twice. Then goes dark.
+- Cables on the floor writhe slightly, as if moved by invisible current
+
+**The shrine—destroyed:**
+
+- Toppled. Lola's photograph face-down on the floor, glass cracked
+- The three anito scattered—one broken in half, one face-down, one staring at the ceiling with accusatory wooden eyes
+- Rice spilled everywhere
+- Sampaguita flowers blackened, as if burned
+
+**Scorch marks:**
+
+- On the walls. The floor. The desk.
+- Not from fire. From *energy discharge*. Spiritual pressure made manifest.
+- The patterns look almost intentional—like script, like warnings, like screaming
+
+**And the FEELING:**
+
+The air is THICK. Heavy. Oppressive. Like standing inside a thundercloud. Like the moment before the world breaks.
+
+You can barely breathe. The pressure on your chest is physical. Real.
+
+@if reader.mystical_affinity >= 6:
+    You *see* them. Flickers. Edges. Spirits pressing against the veil. Furious. Betrayed. LOUD.
+@else:
+    You don't see them. But you *feel* them. Watching. Waiting. Judging.
+@endif
+
+---
+
+And in the center of it all:
+
+**Nyx.**
+
+She's sitting on the futon. Hunched. Shaking.
+
+She looks up when you enter.
+
+Her cybereyes are WRONG.
+
+Not glitching - *screaming*. Rainbow static. White light. Darkness. Cycling through states impossibly fast. Like her augments are being torn apart from the inside.
+
+Her hair is wild, standing on end from residual energy. Her hands shake. Her skin is pale, clammy, slick with sweat.
+
+She's wearing the same clothes from days ago—corpo blouse (wrinkled, stained), black slacks (one leg rolled up, one down, forgotten).
+
+"You came." Her voice cracks. Relief and terror mixed.
+
+"Thank you. I didn't know if you would. After... after what I chose. After what I DID."
+
+She gestures weakly at the chaos around her.
+
+"They won't stop. The spirits. They're inside my TECH. Inside my HEAD. I tried—I TRIED to ignore them, to cope, to just SURVIVE—but they won't LET ME."
+
+Her cybereyes flare white. She flinches, gasps, grabs her temples.
+
+"There. You see? Constant. Every few minutes. They *scream* at me. Show me the imprisoned ones. Show me what I could have freed. Show me my FAILURE."
+
+@if nyx.shamanic_awakening >= 4:
+    "And the worst part? I can SEE them now. Clearly. Not glitches. Not hallucinations. REAL. Thousands of them. Everywhere. Watching. Hating me. And they're RIGHT. I betrayed them. I had the proof. I had the power. And I chose SAFETY."
+@else:
+    "I don't even know if they're real or if I'm just losing my MIND. Kitsune's doctors say it's 'cybernetic psychosis.' They want to remove my augments. Medicate me. But I can FEEL them. They're REAL. Aren't they? Please tell me they're real."
+@endif
+
+She looks at you with desperate, glitching eyes.
+
+"I'm dying. Slowly. Torn apart. The spirits won't forgive me. Kitsune can't help me. I'm caught between worlds and BREAKING."
+
+Thunder rumbles outside. The storm intensifying.
+
+"Please. Read for me. One more time. Tell me what to DO. How to SURVIVE this. How to make it STOP."
+
+~ session.crisis_established = True
+~ nyx.desperation_level = "extreme"
+
++ [Sit down. Prepare the reading.] -> Nyx.Session3C.Reading_Setup
+
+
+:: Nyx.Session3C.Reading_Setup
+
+@py:
+session.phase = "reading_preparation"
+@endpy
+
+You move carefully through the chaotic apartment. Clear a space on the coffee table—pushing aside empty soykaf cups, scattered data chips, torn papers.
+
+Nyx watches. Trembling. Hopeful.
+
+"I tried to fix the shrine," she whispers. Gesturing at the scattered pieces. "But every time I touch the anito, they shock me. Literally. Static discharge. They won't LET me apologize."
+
+You pick up Lola's photograph gently. Turn it face-up. The glass is cracked but the image visible—that warm, knowing smile. Those eyes that see everything.
+
+@if reader.mystical_affinity >= 6:
+    You feel her. Lola. Present. Watching. Waiting to see what you'll do. What Nyx will choose.
+@endif
+
+"She's disappointed in me," Nyx says quietly. "Lola. I can feel it. I dishonored her. Dishonored the ancestors. Chose money over spirit. Safety over duty."
+
+The apartment hums with pressure. Waiting.
+
+You lay out your deck on the coffee table. The cards feel WARM. Almost hot. Resonating with the spiritual chaos surrounding you.
+
+"This isn't a normal reading," you say. Voice steady despite the atmosphere. "This is a reckoning. The spirits are demanding an answer. Not from me. From YOU."
+
+Nyx nods. Swallows hard.
+
+"What do I do?"
+
+You begin to shuffle. The cards whisper against each other. Urgent. Insistent.
+
+"Five cards. Five questions. Five truths."
+
+**Position One: THE SHADOW** - What you've been running from
+
+**Position Two: THE CRISIS** - What's breaking you now
+
+**Position Three: THE PATH OF FIRE** - If you surrender to the spirits
+
+**Position Four: THE PATH OF ASH** - If you turn away
+
+**Position Five: THE TRUTH** - What the universe demands
+
+Nyx's cybereyes flicker. White. Dark. White. The spirits listening.
+
+"Okay," she breathes. "I'm ready. Show me."
+
+~ session.spread_layout = "the_reckoning"
+~ session.positions_count = 5
+
++ [Draw the spread] -> Nyx.Session3C.Spread_Draw
+
+# ============================================================================
+# THE RECKONING SPREAD - CARD DRAW
+# ============================================================================
+
+:: Nyx.Session3C.Spread_Draw
+
+@py:
+# POSITION 1: THE SHADOW (What She's Been Running From)
+session.shadow_deck = Deck(
+    cards=["The Tower", "The Devil", "Death", "Five of Pentacles"],
+    reversals=[0, 0, 0, 0]
+)
+
+# POSITION 2: THE CRISIS (The Breaking Point - Present)
+session.crisis_deck = Deck(
+    cards=["The Hanged Man", "Eight of Swords", "Nine of Swords", "Judgement"],
+    reversals=[0, 0, 0, 0]
+)
+
+# POSITION 3: THE PATH OF FIRE (Catharsis Path)
+session.fire_deck = Deck(
+    cards=["The Star", "The Sun", "Strength", "Ace of Wands"],
+    reversals=[0, 0, 0, 0]
+)
+
+# POSITION 4: THE PATH OF ASH (Sad Path)
+session.ash_deck = Deck(
+    cards=["Six of Swords", "Four of Swords", "Ten of Swords", "The Hermit"],
+    reversals=[0, 0, 1, 0]
+)
+
+# POSITION 5: THE TRUTH (What Universe Demands)
+session.truth_deck = Deck(
+    cards=["Justice", "The World", "Temperance", "Wheel of Fortune"],
+    reversals=[0, 0, 0.5, 0]
+)
+
+# Set up reading
+# TODO: Create spreads-config entry for this reading
+session.reading = Reading(
+    spread_id="nyx_session_3_phoenix",
+    decks=[
+        session.shadow_deck,
+        session.crisis_deck,
+        session.fire_deck,
+        session.ash_deck,
+        session.truth_deck
+    ]
+)
+
+# Draw cards
+session.cards = session.reading.draw_cards()
+@endpy
+
+@render render_reading(reading=session.reading)
+
+You draw five cards. Lay them face-down in their positions.
+
+The apartment holds its breath. The flickering lights pause. Even the static on Nyx's monitors quiets.
+
+Lola's photograph seems to lean closer.
+
+You flip the first.
+
+**Position One: THE SHADOW**
+
+**{session.cards[0].name}**
+
+@if session.cards[0].name == "The Tower":
+    The tower struck by lightning. Figures falling. Everything collapsing. Destruction. Revelation. The lie ending violently.
+
+@elif session.cards[0].name == "The Devil":
+    Figures in chains. Loose chains. Bondage chosen. Materialism. Fear. The chains of safety and money and survival.
+
+@elif session.cards[0].name == "Death":
+    The skeletal figure on horseback. The end of something. Transformation through ending. The death of compromise.
+
+@elif session.cards[0].name == "Five of Pentacles":
+    Two figures in snow. Locked out. Cold. Spiritual poverty. The warmth visible through stained glass but unreachable.
+@endif
+
+Nyx stares at it. Her cybereyes flash white—painful—then settle into dim glow.
+
+"What does it mean?" Her voice barely whisper.
+
+You look at the card. At the shadow she's been running from. At the truth she's tried to ignore.
+
+@if session.cards[0].name == "The Tower":
+    + [Interpret] -> Nyx.Session3C.Position1_Tower_Interpret
+@elif session.cards[0].name == "The Devil":
+    + [Interpret] -> Nyx.Session3C.Position1_Devil_Interpret
+@elif session.cards[0].name == "Death":
+    + [Interpret] -> Nyx.Session3C.Position1_Death_Interpret
+@elif session.cards[0].name == "Five of Pentacles":
+    + [Interpret] -> Nyx.Session3C.Position1_FivePent_Interpret
+@endif
+
+
+# ============================================================================
+# POSITION 1: THE TOWER (3 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position1_Tower_Interpret
+
+@render render_reading(reading=session.reading)
+
+The Tower. Lightning strike. Collapse. Revelation.
+
+Nyx's breathing quickens.
+
++ ["The Tower shows the lie collapsing. You tried to build a life on compromise—working for Kitsune while knowing what they do to spirits. That foundation was ALWAYS cracked. Now it's falling. The spirits are the lightning. They're tearing down what should never have stood. This chaos? This is truth breaking through."] -> Nyx.Session3C.Position1_Tower_TruthBreaking
+
++ ["The Tower is what you've been running from—the inevitable reckoning. You chose safety in Session 2. You tried to ignore the spirits. But you can't build stability on spiritual betrayal. The tower MUST fall. The only question is: do you fall WITH it? Or do you step out and let it collapse behind you?"] -> Nyx.Session3C.Position1_Tower_Reckoning
+
++ ["The Tower represents your cybernetics—literal towers of tech in your body. The spirits are striking those towers. Your chrome is the battlefield because you tried to use technology to ESCAPE spirituality. But tech and magic aren't opposites. They're refusing to stay separate. The tower falls so something integrated can rise."] -> Nyx.Session3C.Position1_Tower_Integration
+
+
+:: Nyx.Session3C.Position1_Tower_TruthBreaking
+
+"The Tower shows the lie collapsing."
+
+Nyx flinches. She knows.
+
+"You tried to build a life on compromise. Working for Kitsune while *knowing* what they do to spirits. Knowing about Project Tsukuyomi. Knowing spirits suffer. But you chose your paycheck. Your apartment. Your safety."
+
+Her hands grip her knees. Knuckles white.
+
+"That foundation was ALWAYS cracked. You can't build stability on spiritual betrayal. And now? Now it's falling."
+
+The lights flicker in agreement. The monitors pulse.
+
+"The spirits are the lightning. They're not attacking you randomly. They're tearing down what should never have stood. This chaos you're experiencing? This isn't punishment. It's *truth* breaking through."
+
+@if nyx.shamanic_awakening >= 4:
+    "You're shamanic. You were ALWAYS going to awaken. But you tried to stop it. Tried to stay corporate. Tried to ignore the call. The Tower says: no more ignoring. The call is HERE. Loud. Violent. Undeniable."
+@endif
+
+"What you're running from isn't the spirits. It's the truth that you betrayed them. And truths like that don't stay buried."
+
+She's crying now. Quiet. Trembling.
+
+"I know. I know I did. I was so SCARED."
+
+"The Tower doesn't care about fear. It cares about what's TRUE. And the truth is tearing your false life apart."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.guilt_acknowledged = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+:: Nyx.Session3C.Position1_Tower_Reckoning
+
+"The Tower is what you've been running from. The inevitable reckoning."
+
+Nyx's cybereyes dim. Listening.
+
+"In Session 2, you chose safety. You chose to stay at Kitsune. To suppress the data. To ignore the spirits. You thought that would keep you stable. Keep you SAFE."
+
+You point to the falling figures in the card.
+
+"But you can't build stability on spiritual betrayal. You can't ignore a calling that strong and expect peace. The tower MUST fall. It was always going to fall. The only question was *when*."
+
+She nods slowly. Understanding dawning.
+
+"And now it's falling. Your cybernetics failing. Your job deteriorating. Your mind breaking. The structure you tried to maintain is COLLAPSING."
+
+@if session.weeks_since_session_two == 3:
+    "Three weeks. That's all it took. Three weeks of trying to cope and the tower came down."
+@else:
+    "Four weeks. A month of trying to ignore truth. And now the reckoning arrives."
+@endif
+
+"So the real question isn't 'how do I stop the tower from falling?' It's too late. It's FALLING. The question is: do you fall WITH it? Clinging to the structure as it crashes? Or do you step out and let it collapse behind you while you walk free?"
+
+Her breath catches. "Step out. How?"
+
+"Stop running from what the spirits are showing you. Stop trying to save the compromise. Let Kitsune burn. Let the false life end. Step OUT into the spiritual path you've been avoiding."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ nyx.reckoning_accepted = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+:: Nyx.Session3C.Position1_Tower_Integration
+
+"The Tower represents your cybernetics. Literal towers of tech in your body."
+
+She touches her temples. Her glitching eyes.
+
+"The spirits are striking those towers. Your chrome is the battlefield. But WHY? Because you tried to use technology to ESCAPE spirituality."
+
+You lean forward. This is important.
+
+"You thought: 'I'll be corporate. I'll be tech. I'll use my augments to AVOID being shamanic.' You made your cybereyes a barrier against spirit sight. Made your datajack a wall against spirit communication. Used chrome to HIDE from magic."
+
+Her face twists. Recognition.
+
+"But tech and magic aren't opposites. They never were. Filipino shamanism has always adapted—ancestor spirits working through new tools. The anito don't reject technology. They FLOW through it."
+
+@if nyx.shamanic_awakening >= 4:
+    "You've felt it. Moments when your cybereyes showed you spirit-sight. When your datajack picked up frequencies that shouldn't exist. The tech was never the problem. Your RESISTANCE was."
+@endif
+
+"The Tower falls so something integrated can rise. Chrome and magic unified. Techno-shaman. That's what you're becoming. But the old structure—tech vs spirit, corpo vs mystic—that has to COLLAPSE first."
+
+She's listening. Really listening.
+
+"So yes, your augments are being destroyed. But not permanently. They're being *transformed*. Broken down so they can rebuild as something NEW. Something that serves both worlds."
+
+~ session.spirit_alignment += 1
+~ session.quality_score += 3
+~ nyx.integration_concept_introduced = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+# ============================================================================
+# POSITION 1: THE DEVIL (3 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position1_Devil_Interpret
+
+@render render_reading(reading=session.reading)
+
+The Devil. Figures in loose chains. Bondage. Materialism. Fear.
+
+Nyx stares at those chains. "I could just... take them off?"
+
++ ["The Devil shows what you've been running from: the truth that your chains are CHOSEN. Look—loose chains. You're not imprisoned by Kitsune. You're imprisoned by your NEED for what Kitsune provides. Money. Status. Security. Healthcare. The chains of material comfort. And you can't admit that those chains are your choice, not your fate."] -> Nyx.Session3C.Position1_Devil_ChosenChains
+
++ ["The Devil represents your fear of poverty, of losing everything. You've been running from the question: 'What if I lose my job? My apartment? My safety net?' That fear is the chain. The spirits demand sacrifice and you're terrified of what it will COST. But look at the figures—they're not actually trapped. Just AFRAID to move."] -> Nyx.Session3C.Position1_Devil_FearOfLoss
+
++ ["The Devil is your addiction to the status quo. You're addicted to 'normal life.' To pretending magic isn't real. To working your corporate job and suppressing your shamanic awakening. It's a false comfort, like any addiction. And the spirits are forcing you into withdrawal. That's why you're suffering—you're being forced to quit something you're dependent on."] -> Nyx.Session3C.Position1_Devil_Addiction
+
+
+:: Nyx.Session3C.Position1_Devil_ChosenChains
+
+"The Devil shows what you've been running from: your chains are CHOSEN."
+
+She recoils slightly. "What?"
+
+"Look at the card. Those chains around their necks? Loose. They could remove them anytime. But they don't. Because the chains provide something. Comfort. Safety. The illusion of control."
+
+You meet her eyes.
+
+"You're not imprisoned by Kitsune. You're imprisoned by your NEED for what Kitsune provides. Salary. Healthcare. Status. Security. The apartment. The lifestyle. The identity of 'Nicole Dimayuga, Systems Architect, Level 3.'"
+
+Her jaw tightens. She knows.
+
+"You could walk away. Right now. Tonight. The spirits would forgive you. Help you. Guide you. But you WON'T. Because walking away means losing the chains. And the chains feel like safety."
+
+@if session.weeks_since_session_two == 3:
+    "Three weeks ago you chose those chains over liberation. And now the spirits are trying to break them FOR you. Because you won't do it yourself."
+@endif
+
+"What you're running from isn't the spirits. It's admitting that you're choosing comfort over conviction. That you're COMPLICIT. Not trapped. Complicit."
+
+She's shaking. "That's cruel."
+
+"It's true. And truth is the shadow you've been running from."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.complicity_acknowledged = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+:: Nyx.Session3C.Position1_Devil_FearOfLoss
+
+"The Devil represents your fear. Specifically: your fear of poverty. Of losing everything."
+
+Nyx's hands curl into fists. You've touched the nerve.
+
+"You've been running from the question the spirits keep asking: 'What if helping us costs you EVERYTHING? Your job. Your apartment. Your financial security. Your safety net. Would you still do it?'"
+
+She looks away.
+
+"And your answer has been 'no.' Because that fear is your chain. Look at the Devil—the figures aren't actually TRAPPED. They're AFRAID to move. Afraid of what leaving costs."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your grandmother left everything. The Philippines. Her family. Her home. She came to a country that didn't want her, with nothing. And she SURVIVED. Built a life. You inherited her strength. But you also inherited her trauma—the fear of having nothing."
+@endif
+
+"The spirits demand sacrifice. They're asking you to risk comfort for conviction. And that terrifies you. So you've been running from the question itself. Pretending it's not a choice. Pretending you're trapped when really you're just AFRAID."
+
+She's crying. "Of course I'm afraid. Who wouldn't be?"
+
+"No one's saying fear is wrong. But running from it doesn't make it go away. It makes it STRONGER. The Devil grows in the dark."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ nyx.fear_named = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+:: Nyx.Session3C.Position1_Devil_Addiction
+
+"The Devil is your addiction. Not to substances. To normalcy."
+
+Nyx frowns. "Addiction?"
+
+"You're addicted to 'normal life.' To pretending magic isn't real. To working your corporate job, paying your rent, going through motions. To suppressing your shamanic awakening and living like you're just... human. Mundane. Safe."
+
+You point to the figures in chains.
+
+"That's the comfort the Devil offers. The lie that you can just BE normal. Ignore the spirits. Ignore your gifts. Ignore the call. It's a false comfort, but it's COMFORTABLE. Like any addiction."
+
+Her cybereyes flicker. She's listening.
+
+"And the spirits? They're forcing you into withdrawal. That's why you're suffering. Glitching augments. Constant spiritual pressure. Nightmares. Pain. You're being forced to QUIT something you're dependent on."
+
+@if session.weeks_since_session_two >= 4:
+    "Four weeks of withdrawal. Four weeks of the spirits saying 'no more normal. No more pretending.' And you're in AGONY because addiction doesn't let go easily."
+@endif
+
+"What you've been running from is the truth that you can't go back. You can't be 'just Nicole' anymore. The shamanic awakening happened. You can't un-see the spirits. Can't un-know what Kitsune does. The normal life you're addicted to? It's GONE. And you're still trying to chase that high."
+
+She breathes shakily. "So what do I do?"
+
+"Accept the withdrawal. Stop chasing normalcy. Let yourself become what you're meant to be—even if it's strange, painful, and terrifying."
+
+~ session.spirit_alignment += 1
+~ session.quality_score += 2
+~ nyx.addiction_framed = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+# ============================================================================
+# POSITION 1: DEATH (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position1_Death_Interpret
+
+@render render_reading(reading=session.reading)
+
+Death. The skeletal figure on horseback. The end. Transformation through ending.
+
+Nyx goes very still.
+
++ ["Death shows what you've been running from: the end of 'Nicole Dimayuga.' That corporate identity is DYING. Has been dying since you found the proof about Project Tsukuyomi. You tried to keep her alive—going to work, doing your job, pretending nothing changed. But she's already dead. You're just refusing to bury the corpse. The spirits are demanding you let go."] -> Nyx.Session3C.Position1_Death_Identity
+
++ ["Death represents the death of your compromise. You tried to find a middle path—work for Kitsune but feel guilty, know about spirits but ignore them, stay safe but feel bad. That middle ground is DEAD. The spirits killed it. Now there are only two paths: full surrender to spirit work, or full suppression. No compromise. No middle. That's what you're running from—the binary choice."] -> Nyx.Session3C.Position1_Death_Compromise
+
+
+:: Nyx.Session3C.Position1_Death_Identity
+
+"Death shows what you've been running from: the death of Nicole Dimayuga."
+
+She gasps. Sharp. Painful.
+
+"That corporate identity is DYING. Has been dying since you found that proof about Project Tsukuyomi. Since your shamanic awakening started. Since you heard the spirits screaming. Nicole—the one who just works her job, goes home, minds her business—she's DEAD."
+
+Nyx shakes her head. "No. I'm still her. I'm still—"
+
+"You tried to keep her alive. Going to work. Doing your tasks. Wearing the badge. Pretending nothing changed. But look at you. Cybereyes glitching. Spirits attacking. Apartment in chaos. Does that look like Nicole Dimayuga, stable Systems Architect?"
+
+Her face crumples.
+
+"She died the moment you chose to ignore the spirits. And now you're carrying around a corpse, refusing to bury her. That's what the pressure is—decay. Spiritual rot. You can't keep a dead identity animated."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your grandmother's spirit knows. Lola knows Nicole is gone. That's why the anito won't let you touch them—they're mourning. Waiting for you to acknowledge the death so the transformation can BEGIN."
+@endif
+
+"What you're running from is grief. Grieving the loss of normal life. Of safety. Of the person you thought you were. But Death says: grieve. Let go. Something new is trying to be BORN."
+
+She sobs. Once. Hard. "I don't want to let her go."
+
+"I know. But she's already gone."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.identity_death_acknowledged = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+:: Nyx.Session3C.Position1_Death_Compromise
+
+"Death represents the death of your compromise."
+
+Nyx looks up. Confused. Hopeful? "Compromise can die?"
+
+"Yes. And it DID. {session.weeks_since_session_two == 3 ? 'Three weeks ago' : 'Four weeks ago'}, you tried to find a middle path. Work for Kitsune but feel guilty about it. Know about the imprisoned spirits but ignore them. Stay safe but feel bad. Have your paycheck AND your conscience."
+
+You shake your head.
+
+"That middle ground is DEAD. The spirits killed it. They won't LET you compromise anymore. They're forcing a choice."
+
+Her breathing quickens.
+
+"Now there are only two paths: full surrender to spirit work—shamanism, liberation, risk, purpose. Or full suppression—medication, rationalization, corpo life, spiritual death. No middle. No 'a little bit of both.' Binary. Absolute."
+
+@if session.spirit_pressure == "critical":
+    "That's why the pressure is so extreme. The spirits are burning away the middle ground. Making compromise IMPOSSIBLE. You can't half-choose anymore."
+@endif
+
+"What you've been running from is that binary. You want a third option. A safe option. A way to help the spirits a LITTLE without risking MUCH. But Death says: no. Choose. Fully. Now."
+
+She's trembling. "That's not fair."
+
+"It's not about fair. It's about what IS. The compromise is dead. You're just refusing to accept the corpse."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ nyx.binary_choice_established = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+# ============================================================================
+# POSITION 1: FIVE OF PENTACLES (3 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position1_FivePent_Interpret
+
+@render render_reading(reading=session.reading)
+
+Five of Pentacles. Two figures in snow. Locked out. Cold. Spiritual poverty.
+
+Nyx stares at the warmth visible through the stained glass—so close, unreachable.
+
++ ["Five of Pentacles shows spiritual poverty. You've been running from the truth that you're STARVING. Not physically—spiritually. You chose material security over spiritual nourishment. You're the figures outside—you can SEE the sacred space through the window, but you locked yourself out when you chose Kitsune over the spirits. And now you're freezing because humans can't survive on money alone."] -> Nyx.Session3C.Position1_FivePent_Starvation
+
++ ["Five of Pentacles represents your fear of becoming those figures—homeless, poor, cast out. You've been running from the possibility that helping the spirits means LOSING everything. Material loss. You're terrified of being the person in the cold with nothing. So you stay inside the corpo world even though it's killing you spiritually. Better cold body than cold bank account."] -> Nyx.Session3C.Position1_FivePent_Terror
+
++ ["Five of Pentacles shows abandonment—but backwards. The spirits feel ABANDONED by you. They're the ones locked out in the cold while you're safe inside Kitsune. You're running from your guilt, from the knowledge that you LEFT THEM. They needed you and you chose warmth for yourself. Now they're making YOU feel what they felt: abandoned, cold, desperate."] -> Nyx.Session3C.Position1_FivePent_Reversal
+
+
+:: Nyx.Session3C.Position1_FivePent_Starvation
+
+"Five of Pentacles shows spiritual poverty. You're STARVING."
+
+Nyx looks confused. "I eat. I pay rent. I'm not—"
+
+"Not physical poverty. Spiritual. Look at you. Cybereyes glitching. Hands shaking. Apartment in chaos. That's not a woman who's NOURISHED. That's a woman dying of hunger. Just not the kind Kitsune pays for."
+
+You point to the figures outside the warm church.
+
+"You chose material security over spiritual nourishment. Salary over shamanism. Safety over soul. And humans can't survive on money alone. You're the figures outside—you can SEE the sacred space, the spiritual warmth. You KNOW it's there. But you locked yourself out when you chose Kitsune."
+
+Her breath hitches.
+
+"And now you're freezing. Spiritually. The spirits aren't attacking you out of cruelty. They're trying to get you to come INSIDE. Back to the sacred. Back to purpose. But you keep choosing the cold because at least the cold pays rent."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your shamanic gifts are trying to feed you. The spirits are offering warmth, meaning, connection. But you keep refusing the meal because you're afraid it costs too much."
+@endif
+
+"What you're running from is the truth that you're STARVING. And you're the only one who can walk through that door into warmth."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.spiritual_starvation_named = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+:: Nyx.Session3C.Position1_FivePent_Terror
+
+"Five of Pentacles represents your worst fear: becoming those figures."
+
+Nyx stares at them. Wounded. Poor. Cast out. "Yes."
+
+"Homeless. Broke. Nothing. You've been running from that possibility. That helping the spirits means LOSING everything. Job. Apartment. Security. Healthcare. Ending up in the Barrens with nothing."
+
+You lean closer.
+
+"That fear controls you. Every time the spirits call, you think: 'But what if I end up like THEM?' So you stay inside Kitsune—even though it's killing you spiritually—because at least you're not in the COLD."
+
+@if session.weeks_since_session_two >= 4:
+    "For four weeks you've been choosing slow spiritual death over fast material loss. Better to rot inside warmth than thrive outside in cold."
+@endif
+
+"But look closer at the card. Those figures? They're PASSING the church. They see the warmth. They could go IN. But they don't. Because they're running. Just like you."
+
+Her hands shake.
+
+"What you're running from isn't poverty. It's the CHOICE. The possibility that there might be warmth, safety, and purpose in the spiritual path—but you'd have to RISK cold to find out. And you're too terrified to try."
+
+~ session.spirit_alignment += 1
+~ session.quality_score += 2
+~ nyx.poverty_terror_acknowledged = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+
+:: Nyx.Session3C.Position1_FivePent_Reversal
+
+"Five of Pentacles shows abandonment. But not YOURS. THEIRS."
+
+Nyx blinks. "What?"
+
+"The spirits feel abandoned. By YOU. They're the ones locked out in the cold. Look—these figures outside the warm church? That's the thousands of imprisoned spirits at Kitsune. And the warm church? That's YOU. Your power. Your knowledge. Your ability to help."
+
+Her face goes pale.
+
+"You had the proof. You had access. You had the ABILITY to free them. And you chose to stay warm and safe inside your corporate life while they FROZE in digital cages."
+
+@if nyx.shamanic_awakening >= 4:
+    "They reached out to you. Guided you to the evidence. Showed you their suffering. TRUSTED you. And you walked away. Left them in the cold. Chose your comfort over their freedom."
+@endif
+
+"What you're running from is guilt. The knowledge that you ABANDONED them when they needed you. That's why they're attacking your cybereyes—they're trying to make YOU feel what they felt. Cold. Desperate. Locked out. Helpless."
+
+She's crying. "I was scared. I didn't know what to do. I—"
+
+"They don't care about your excuses. They care that you LEFT them. And now they're demanding you come back. Open the door. Let them in. Give them the warmth you denied them."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.abandonment_guilt_named = True
+
++ [Continue to Position Two] -> Nyx.Session3C.Position2_Hub
+
+# ============================================================================
+# POSITION 2: HUB (All Position 1 interpretations converge)
+# ============================================================================
+
+:: Nyx.Session3C.Position2_Hub
+
+@py:
+# Mark Position 1 complete
+session.position_one_complete = True
+
+# Adjust atmosphere based on shadow acknowledged
+if session.spirit_alignment >= 2:
+    session.atmosphere = "intense"  # She's listening, spirits are present
+else:
+    session.atmosphere = "tense"  # Still resistant
+@endpy
+
+The first card lies between you. The shadow named. Made visible.
+
+Nyx sits with it. Breathing shakily. The apartment pulses with her—lights flickering in rhythm with her breath.
+
+@if session.spirit_alignment >= 2:
+    The monitors quiet slightly. The static hum lowers. The spirits... listening. Considering. She acknowledged the shadow. That's something.
+
+    @if reader.mystical_affinity >= 6:
+        You see them clearer now. Edges of presence. Watching. Waiting. Not attacking—just PRESENT. Judging whether she's ready.
+    @endif
+@else:
+    The monitors scream louder. The lights strobe harder. The spirits ANGRY that she's still resisting. Still making excuses.
+@endif
+
+"Okay," she whispers. Voice raw. "I see it. I see what I've been running from."
+
+@if nyx.guilt_acknowledged or nyx.complicity_acknowledged or nyx.abandonment_guilt_named:
+    "I betrayed them. I chose safety. I LEFT them suffering while I stayed comfortable." She wipes her eyes. "I see it."
+@elif nyx.identity_death_acknowledged:
+    "Nicole is dead. The person I thought I was... she's gone. I've been carrying around a corpse." Her laugh is bitter, broken.
+@else:
+    "The fear. The addiction. The chains. I see them now." She takes a shuddering breath.
+@endif
+
+Thunder rumbles outside. Closer. The storm intensifying.
+
+"But that's the PAST. The shadow. What about NOW? What's breaking me right this SECOND?"
+
+You turn to the second position.
+
+**Position Two: THE CRISIS**
+
+You flip the card.
+
+**{session.cards[1].name}**
+
+@if {session.cards[1].name} == "The Hanged Man":
+    A figure suspended upside-down. Waiting. Surrendering. Unable to act. Sacrifice. Perspective shift.
+
+@elif {session.cards[1].name} == "Eight of Swords":
+    A blindfolded woman. Bound. Surrounded by eight swords. But the bonds are loose. Mental prison. Paralysis.
+
+@elif {session.cards[1].name} == "Nine of Swords":
+    A figure sitting up in bed. Hands covering face. Nine swords on the wall. Nightmare. Anxiety. Terror manifest.
+
+@elif {session.cards[1].name} == "Judgment":
+    The angel trumpet. The dead rising. Being CALLED. Reckoning. The moment of truth. No more delay.
+@endif
+
+Her cybereyes flare. White. Painful. She gasps, grabs her head.
+
+The spirits are RESPONDING to the card. Intensifying their pressure.
+
+"Tell me," she breathes. "What's the crisis? What's happening RIGHT NOW?"
+
++ {session.cards[1].name == "The Hanged Man"} [Interpret] -> Nyx.Session3C.Position2_HangedMan_Interpret
++ {session.cards[1].name == "Eight of Swords"} [Interpret] -> Nyx.Session3C.Position2_EightSwords_Interpret
++ {session.cards[1].name == "Nine of Swords"} [Interpret] -> Nyx.Session3C.Position2_NineSwords_Interpret
++ {session.cards[1].name == "Judgement"} [Interpret] -> Nyx.Session3C.Position2_Judgment_Interpret
+
+# ============================================================================
+# POSITION 2: THE HANGED MAN (3 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position2_HangedMan_Interpret
+
+@render render_reading(reading=session.reading)
+
+The Hanged Man. Suspended. Waiting. Unable to act.
+
+Nyx stares. "I'm... stuck?"
+
++ ["The Hanged Man shows your paralysis. You can't move FORWARD (toward the spirits) or BACKWARD (to normal life). You're suspended between worlds. This isn't confusion—it's SPIRITUAL SUSPENSION. The spirits have you hanging here until you make a REAL choice. Not a compromise. Not a delay. A choice. That's the crisis: you're frozen until you commit."] -> Nyx.Session3C.Position2_HangedMan_Suspension
+
++ ["The Hanged Man represents SACRIFICE. The crisis is you're being asked to give up something precious—comfort, identity, safety—and you're RESISTING the sacrifice. But look at his face—he's PEACEFUL. Because he surrendered. The crisis is your resistance to letting go. You're in agony because you're fighting the suspension instead of accepting it."] -> Nyx.Session3C.Position2_HangedMan_Sacrifice
+
++ ["The Hanged Man shows PERSPECTIVE SHIFT. You're upside-down. Everything looks wrong, distorted, terrifying. The crisis is you're seeing reality differently now—spirits visible, corpo life exposed, truth unavoidable—and you can't go back to normal perspective. You're hanging here, forced to see the world THIS way until you accept the new vision."] -> Nyx.Session3C.Position2_HangedMan_Perspective
+
+
+:: Nyx.Session3C.Position2_HangedMan_Suspension
+
+"The Hanged Man shows paralysis. But not ordinary paralysis—spiritual suspension."
+
+Nyx's hands tremble. She knows this feeling.
+
+"You can't move forward toward the spirits. Can't commit to shamanism, to liberation, to PURPOSE. But you also can't move backward to normal life. Can't be 'just Nicole' anymore. Can't unsee what you've seen."
+
+You point to the suspended figure.
+
+"So you're HANGING. Between worlds. Between identities. Between choices. And it's AGONY. Every moment stretched. Every breath painful. Because suspension isn't neutral—it's TORTURE."
+
+@if session.weeks_since_session_two >= 4:
+    "Four weeks of this. Four weeks suspended. No wonder you're breaking."
+@endif
+
+"The crisis is: the spirits have you hanging here until you make a REAL choice. Not 'I'll think about it.' Not 'maybe later.' Not 'let me find a compromise.' A CHOICE. Full commitment. One direction or the other."
+
+Her cybereyes pulse. The spirits agreeing.
+
+"You're frozen until you commit. That's the crisis. That's why your augments are failing—they're stuck between tech and magic. That's why you can't function—you're stuck between corpo and shaman. CHOOSE. Or stay suspended forever."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.suspension_understood = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+
+:: Nyx.Session3C.Position2_HangedMan_Sacrifice
+
+"The Hanged Man represents sacrifice. Specifically: your resistance to it."
+
+Nyx flinches. "Sacrifice?"
+
+"The spirits are asking you to give up something precious. Your job. Your identity. Your safety. Your material comfort. Maybe all of it. That's what spiritual callings demand—SACRIFICE."
+
+You point to the figure's peaceful face.
+
+"But look at him. He's not screaming. Not fighting. He's PEACEFUL. Because he SURRENDERED. He accepted the sacrifice and found grace in letting go."
+
+@if nyx.fear_named or nyx.poverty_terror_acknowledged:
+    "You? You're in AGONY. Because you're resisting. Fighting the suspension. Trying to keep what you're meant to release. That resistance is what's tearing you apart."
+@endif
+
+"The crisis is your refusal to let go. You want the spiritual path WITHOUT the cost. Want shamanic power WITHOUT risk. Want to help the spirits WITHOUT losing Kitsune. But the Hanged Man says: no. Sacrifice comes first. Surrender comes first. THEN peace."
+
+She's crying again. "What if I can't? What if I'm not strong enough to give it all up?"
+
+"Then you stay hanging. In agony. Until you are."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ nyx.sacrifice_demanded = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+
+:: Nyx.Session3C.Position2_HangedMan_Perspective
+
+"The Hanged Man shows perspective shift. You're upside-down."
+
+She looks at the card—the world inverted, reality reversed.
+
+"Everything looks WRONG now, doesn't it? Your corpo job feels hollow. Your apartment feels like a cage. Money feels meaningless. Safety feels like cowardice. The things that used to make sense don't make sense anymore."
+
+She nods. Exhausted. "Yes. Everything's wrong. Distorted."
+
+"That's not distortion. That's TRUTH. You're seeing the world the way the spirits see it. Upside-down from human perspective. But right-side-up from spiritual perspective."
+
+@if nyx.shamanic_awakening >= 4:
+    "Shamanic sight means seeing BOTH perspectives at once. Corporate AND spiritual. Material AND magical. Human AND divine. But you can't integrate them yet because you're still fighting the new vision."
+@endif
+
+"The crisis is: you can't go back to normal perspective. You can't unsee what the spirits showed you. Can't un-know what Kitsune does. Can't pretend reality is what you thought it was. You're hanging here, forced to see the world THIS way, until you accept the new vision."
+
+Her breath shakes. "So I'm stuck? Forever?"
+
+"Until you ACCEPT that upside-down is right-side-up. That the spiritual view is the TRUE view. Then you can stand up. But you have to accept it first."
+
+~ session.spirit_alignment += 1
+~ session.quality_score += 2
+~ nyx.perspective_shift_named = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+
+# ============================================================================
+# POSITION 2: EIGHT OF SWORDS (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position2_EightSwords_Interpret
+
+@render render_reading(reading=session.reading)
+
+Eight of Swords. A blindfolded woman. Bound. Surrounded by swords.
+
+But the bonds look loose...
+
++ ["Eight of Swords shows mental prison. You're not ACTUALLY trapped—look, the bonds are loose, the swords don't touch her—but you BELIEVE you're trapped. The crisis is psychological paralysis. You think you have no options. 'I can't quit Kitsune' (yes you can). 'I can't survive without money' (you could). 'I can't handle the spirits' (you CAN). Your prison is in your MIND. That's the crisis: belief in powerlessness."] -> Nyx.Session3C.Position2_EightSwords_MentalPrison
+
++ ["Eight of Swords represents self-imposed limitation. The swords around you? Those are your EXCUSES. 'I'm too scared.' 'I'm too weak.' 'I'm not shamanic enough.' 'I don't know how.' Eight excuses keeping you frozen. The crisis is you BUILT this prison. Blindfolded yourself. Bound your own hands. And now you're waiting for someone ELSE to free you. But no one can. You have to remove your own blindfold."] -> Nyx.Session3C.Position2_EightSwords_SelfImposed
+
+
+:: Nyx.Session3C.Position2_EightSwords_MentalPrison
+
+"Eight of Swords shows mental prison. You're not ACTUALLY trapped."
+
+Nyx's eyes widen. "What?"
+
+"Look at the card. Really look. The bonds are loose. The swords don't touch her. She could walk away if she just MOVED. But she doesn't. Because she's blindfolded. She BELIEVES she's trapped."
+
+You lean forward.
+
+"That's you. The crisis is psychological paralysis. You think you have no options. No choices. No power. But that's a LIE your fear tells you."
+
+You count on your fingers.
+
+"'I can't quit Kitsune'—yes you can. Right now. Tonight. Just walk away. 'I can't survive without money'—you COULD. Barrens. Shelters. Shadow running. Nonprofit work. It wouldn't be comfortable but you'd SURVIVE. 'I can't handle the spirits'—you absolutely CAN. You're shamanic. Awakened. STRONG."
+
+@if nyx.suspension_understood:
+    "The Hanged Man showed you're suspended. Eight of Swords shows WHY—because you believe you can't move. But you CAN. The prison is in your MIND."
+@endif
+
+Her breath quickens. "So I'm just... weak? Stupid?"
+
+"Not weak. AFRAID. And fear makes you believe in cages that don't exist. That's the crisis: your beliefs imprison you more than any external force."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.mental_prison_revealed = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+
+:: Nyx.Session3C.Position2_EightSwords_SelfImposed
+
+"Eight of Swords represents self-imposed limitation. You built this prison."
+
+Nyx recoils. "I didn't—"
+
+"You did. Look at the swords around her. Count them. Eight. Those are your EXCUSES. Eight reasons why you 'can't' do what the spirits ask."
+
+You list them:
+
+"'I'm too scared.' 'I'm too weak.' 'I'm not shamanic enough.' 'I don't know how.' 'I might fail.' 'I'll lose everything.' 'What if I'm wrong?' 'Someone else should do it.' Eight swords. Eight self-imposed limitations."
+
+Her face twists.
+
+"The crisis is you BUILT this prison. You blindfolded yourself so you wouldn't have to SEE the spirits' suffering. You bound your own hands so you wouldn't have to ACT. And now you're waiting for someone ELSE to free you. The Reader. A sign. Permission. Rescue."
+
+@if session.spirit_alignment >= 3:
+    "But the spirits can't remove your blindfold. I can't unbind your hands. Only YOU can. That's the crisis—accepting that you're the jailer AND the prisoner."
+@endif
+
+"So remove the blindfold. Drop the excuses. Walk through the swords that don't actually touch you. Stop waiting for rescue and RESCUE YOURSELF."
+
+She's shaking. Angry and terrified and maybe—maybe—understanding.
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ nyx.self_imprisonment_named = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+
+# ============================================================================
+# POSITION 2: NINE OF SWORDS (3 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position2_NineSwords_Interpret
+
+@render render_reading(reading=session.reading)
+
+Nine of Swords. Nightmare. The figure waking in terror. Hands covering face.
+
+Nyx's cybereyes glitch violently. She KNOWS this card.
+
++ ["Nine of Swords is your nightmare made manifest. The crisis is your WORST FEARS coming true. Cybernetics failing. Spirits attacking. Reality breaking. Job falling apart. Everything you were afraid of in Session 2—it's HAPPENING. The nightmare isn't theoretical anymore. It's real. You're living inside your worst-case scenario. That's the crisis: the thing you ran from caught you anyway."] -> Nyx.Session3C.Position2_NineSwords_Manifest
+
++ ["Nine of Swords shows anxiety spiral. The crisis is you can't THINK straight. Panic. Terror. Intrusive thoughts. 'What if I go insane?' 'What if the spirits kill me?' 'What if I'm already dead and this is hell?' The swords aren't real—they're THOUGHTS. Your mind is attacking itself. The spirits didn't do this. Your FEAR did. That's the crisis: you're your own worst enemy."] -> Nyx.Session3C.Position2_NineSwords_Anxiety
+
++ ["Nine of Swords represents guilt haunting you. Look at the figure—hands covering face in SHAME. The crisis is you can't escape what you did. Every glitch in your cybereyes shows you imprisoned spirits. Every nightmare features their screaming. You're being HAUNTED by your betrayal. The spirits aren't attacking—they're REMINDING. And you can't make it stop because deep down, you know you deserve it."] -> Nyx.Session3C.Position2_NineSwords_Guilt
+
+
+:: Nyx.Session3C.Position2_NineSwords_Manifest
+
+"Nine of Swords is your nightmare made manifest. Your worst fears coming TRUE."
+
+Nyx's breathing speeds up. Panic.
+
+"In Session 2, you were afraid. 'What if helping the spirits destroys my life? What if I lose everything? What if I can't handle it?' Those were FEARS. Possibilities. Nightmares you tried to avoid."
+
+You meet her terrified eyes.
+
+"The crisis is: they're REAL now. Your cybernetics ARE failing. The spirits ARE attacking. Your job IS falling apart. Your mind IS breaking. Everything you were afraid of—it's HAPPENING. You're living inside your worst-case scenario."
+
+@if session.weeks_since_session_two >= 4:
+    "Four weeks of trying to avoid the nightmare. And it caught you anyway. That's the crisis."
+@endif
+
+"Running from your fear didn't save you. It just delayed the confrontation. Now you're HERE. In the nightmare. The thing you ran from found you."
+
+She's shaking violently. "So what do I DO?"
+
+"Stop running. You're already IN the nightmare. Running won't help. The only way out is THROUGH."
+
+~ session.spirit_alignment += 1
+~ session.quality_score += 2
+~ nyx.nightmare_acknowledged = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+
+:: Nyx.Session3C.Position2_NineSwords_Anxiety
+
+"Nine of Swords shows anxiety spiral. The crisis is you can't THINK."
+
+Nyx nods frantically. "Yes. YES. I can't—my thoughts won't stop—"
+
+"Panic. Terror. Intrusive thoughts racing. 'What if I go insane?' 'What if the spirits kill me?' 'What if I'm already dead?' 'What if this is hell?' 'What if I'm wrong?' 'What if I'm right?' Thought after thought after THOUGHT."
+
+You point to the nine swords on the wall.
+
+"Those swords aren't real weapons. They're THOUGHTS. Your mind attacking itself. Creating scenarios. Catastrophizing. Making everything worse than it is."
+
+@if nyx.mental_prison_revealed:
+    "Eight of Swords showed your mental prison. Nine of Swords shows what's INSIDE that prison—pure anxiety. Thoughts as weapons turned against yourself."
+@endif
+
+"The crisis is: the spirits didn't do this. Not directly. They triggered it, yes. But the spiral? The panic? The self-torture? That's YOU. Your mind. Your fear. You're your own worst enemy."
+
+Her hands cover her face. Just like the card.
+
+"So how do I stop it?"
+
+"Stop feeding the spiral. The thoughts aren't facts. They're fear. Acknowledge them. Don't fight them. Don't believe them. Just... let them pass."
+
+~ session.spirit_alignment += 1
+~ session.quality_score += 2
+~ nyx.anxiety_named = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+
+:: Nyx.Session3C.Position2_NineSwords_Guilt
+
+"Nine of Swords represents guilt. Specifically: guilt you can't escape."
+
+Nyx goes very still.
+
+"Look at the figure. Hands covering face. Not in fear. In SHAME. That's you. The crisis is you can't escape what you did."
+
+You watch her carefully.
+
+"Every glitch in your cybereyes—what do you see?"
+
+"Spirits. Imprisoned. Screaming."
+
+"Every nightmare?"
+
+"The same. Their faces. Their pain. Their BETRAYAL."
+
+"Every moment of quiet?"
+
+"I hear them. Accusing me."
+
+You nod. "You're being haunted. Not by ghosts. By your own GUILT. The spirits aren't attacking—they're REMINDING. Showing you over and over what you chose to ignore. What you ABANDONED."
+
+@if nyx.abandonment_guilt_named:
+    "Position One showed you abandoned them. Position Two shows you can't forget it. Can't escape it. Can't make it stop."
+@endif
+
+"And deep down? You know you deserve this. That's why you can't make it stop. Because part of you AGREES with the spirits. Part of you thinks: 'Yes. I should suffer for what I did.'"
+
+She's sobbing. Broken. "I do. I DO deserve it."
+
+"Maybe. But the question isn't what you deserve. It's what you DO NOW. Guilt without action is just self-torture. Empty. Useless."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.guilt_weaponized = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+
+# ============================================================================
+# POSITION 2: JUDGMENT (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position2_Judgment_Interpret
+
+@render render_reading(reading=session.reading)
+
+Judgment. The angel trumpet. The dead rising. Being CALLED.
+
+The apartment PULSES with the card's energy. The spirits RESPONDING.
+
++ ["Judgment shows the CALLING. The crisis is the spirits are DEMANDING answer. NOW. Not later. Not 'let me think.' NOW. The trumpet is sounding. The dead are rising—the imprisoned spirits at Kitsune. And they're asking: 'Will you answer? Will you RISE? Or will you stay buried?' This is the reckoning. The moment of truth. No more delay. ANSWER."] -> Nyx.Session3C.Position2_Judgment_Calling
+
++ ["Judgment represents your OWN judgment—of yourself. The crisis is you're being forced to look at your choices, your actions, your SOUL, and render verdict. Guilty or innocent? Coward or hero? Betrayer or liberator? You're judge, jury, and accused. And the spirits are WITNESSES, watching your self-judgment. Whatever you decide about yourself RIGHT NOW determines everything."] -> Nyx.Session3C.Position2_Judgment_SelfJudgment
+
+
+:: Nyx.Session3C.Position2_Judgment_Calling
+
+"Judgment shows the CALLING. The spirits are demanding answer. NOW."
+
+The apartment's lights surge BRIGHT. Then dim. Then bright again. Pulse. Pulse. Pulse.
+
+Like a heartbeat. Like a trumpet.
+
+"The crisis is: no more delay. No more 'let me think about it.' No more 'maybe later.' The trumpet is SOUNDING. Can you hear it?"
+
+@if nyx.shamanic_awakening >= 4:
+    Nyx gasps. "Yes. I—I can HEAR it. Not with ears. But I HEAR it. The spirits. Calling. Demanding."
+@else:
+    Nyx's cybereyes flare. "I feel—something. Like pressure. Like a DEMAND."
+@endif
+
+"The dead are rising. The imprisoned spirits at Kitsune. They're waking up. Getting ready. And they're asking YOU: 'Will you answer? Will you RISE with us? Will you FREE us? Or will you stay buried in your corpo life?'"
+
+You point to the rising figures in the card.
+
+"This is the reckoning. The moment of truth. The spirits won't wait anymore. Won't let you delay. Won't accept 'maybe.' They're calling. NOW. What's your answer?"
+
+Her whole body shakes. The pressure unbearable.
+
+"I—I don't know—"
+
+"Then you CHOOSE. Right now. This reading IS your choice. There's no more time."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.calling_heard = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+
+:: Nyx.Session3C.Position2_Judgment_SelfJudgment
+
+"Judgment represents YOUR judgment. Of yourself."
+
+Nyx looks confused. Then understanding dawns. Horror.
+
+"The crisis is you're being forced to look at your choices—your actions, your SOUL—and render verdict. Not me. Not the spirits. YOU."
+
+You gesture between her and the card.
+
+"Are you guilty or innocent? Coward or hero? Betrayer or liberator? Complicit or resistant? The spirits aren't judging you. They're making you judge YOURSELF."
+
+@if nyx.guilt_acknowledged or nyx.complicity_acknowledged:
+    "You already know the truth. You admitted it in Position One. Now comes the verdict."
+@endif
+
+"And here's the crisis: whatever you decide about yourself RIGHT NOW determines everything. If you judge yourself GUILTY but redeemable—you can still act. Still rise. Still answer the call. But if you judge yourself GUILTY and irredeemable—you'll stay buried. Give up. Accept damnation."
+
+Her breath comes in gasps.
+
+"The spirits are WITNESSES. Watching your self-judgment. Waiting to see if you'll forgive yourself enough to TRY. Or condemn yourself into paralysis."
+
+She covers her face. "How do I judge myself? I don't know—"
+
+"Yes you do. You know exactly what you are. The question is: can you live with it? Can you ACT despite it?"
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ nyx.self_judgment_forced = True
+
++ [Continue to Position Three] -> Nyx.Session3C.Position3_Hub
+
+# ============================================================================
+# POSITION 3 & 4: HUB (Both paths revealed together)
+# ============================================================================
+
+:: Nyx.Session3C.Position3_Hub
+
+@render render_reading(reading=session.reading)
+
+@py:
+# Mark Position 2 complete
+session.position_two_complete = True
+
+# Check spirit alignment so far
+if session.spirit_alignment >= 4:
+    session.spirit_response = "hopeful"  # They're listening, believing she might choose them
+elif session.spirit_alignment >= 2:
+    session.spirit_response = "watching"  # Cautious, waiting
+else:
+    session.spirit_response = "angry"  # Still furious, doubting her
+@endpy
+
+The second card lies between you. The crisis named. Made real.
+
+Nyx sits with it. Breathing hard. The apartment around her *alive* with presence.
+
+@if session.spirit_response == "hopeful":
+    The chaos has *shifted*. Still intense, still charged—but less hostile. The lights pulse steadily now, not frantically. The monitors show faces—spirit faces—watching with something that might be... hope?
+
+    The shrine's pieces seem closer together. As if gravity itself is trying to reassemble them.
+
+@elif session.spirit_response == "watching":
+    The chaos continues. Lights flickering. Electronics whining. But the spirits are *listening*. You feel them considering. Weighing. Watching to see what she does next.
+
+@else:
+    The chaos *intensifies*. The lights strobe violently. Her monitors scream static. The spirits are *furious* that she's still making excuses. Still resisting. Still choosing herself over them.
+@endif
+
+"Okay," she whispers. Voice hoarse. "I understand. The shadow I ran from. The crisis I'm in."
+
+She looks at you. Desperate. Determined. Terrified.
+
+"But what *happens*? If I choose wrong? If I choose *right*? What are my OPTIONS?"
+
+You gesture to the remaining three cards. Face-down. Waiting.
+
+"Two paths. Two futures. And then—the truth the universe demands."
+
+Thunder crashes outside. The storm at its peak.
+
+You flip two cards simultaneously. Left and right. Fire and ash.
+
+**Position Three: THE PATH OF FIRE**
+
+**{session.cards[2].name}**
+
+@if session.cards[2].name == "The Star":
+    A naked woman kneeling by water. Pouring from two vessels. Eight stars shining above. Hope. Renewal. Guidance. Healing.
+@elif session.cards[2].name == "The Sun":
+    A child on a white horse. Sunflowers. Pure light. Joy. Illumination. Breakthrough. Freedom.
+@elif session.cards[2].name == "Strength":
+    A woman closing a lion's mouth. Gentle. Powerful. Mastery. Inner strength. Courage.
+@elif session.cards[2].name == "Ace of Wands":
+    A hand from clouds holding a living staff. Creative fire. Divine spark. New beginning. Bold action.
+@endif
+
+**Position Four: THE PATH OF ASH**
+
+**{session.cards[3].name}**{session.cards[3].reversed ? " (Reversed)" | ""}
+
+@if session.cards[3].name == "Six of Swords" and not session.cards[3].reversed:
+    A boat carrying figures. Six swords standing. Transition. Moving from trouble to calm. Journey away.
+
+@elif session.cards[3].name == "Four of Swords" and not session.cards[3].reversed:
+    A figure lying in rest. Tomb-like. Three swords on the wall. One beneath. Recovery. Retreat. Healing in solitude.
+
+@elif session.cards[3].name == "Ten of Swords" and session.cards[3].reversed:
+    Ten swords in a back—but reversed. The swords loosening. Recovery possible. Avoiding worst outcome.
+
+@elif session.cards[3].name == "The Hermit" and not session.cards[3].reversed:
+    An old figure with a lantern. Alone on a mountain. Solitude. Seeking. Withdrawal. Finding meaning alone.
+@endif
+
+Two futures. Two possibilities.
+
+Nyx stares at them both. Understanding slowly.
+
+"Fire and ash," you say quietly. "Transformation or retreat. Apotheosis or withdrawal. The spirits... or the world."
+
+Her hands tremble as she reaches toward the cards. Stops. Pulls back.
+
+"Tell me. *Please*. What do they mean?"
+
+~ session.both_paths_revealed = True
+
++ [Interpret the Path of Fire] -> Nyx.Session3C.Position3_Interpret
++ [Interpret the Path of Ash] -> Nyx.Session3C.Position4_Interpret
+
+
+# ============================================================================
+# POSITION 3: THE PATH OF FIRE (Catharsis) - Interpret First
+# ============================================================================
+
+:: Nyx.Session3C.Position3_Interpret
+
+@render render_reading(reading=session.reading)
+
+You turn to the left card. The path of fire.
+
+"This is what happens if you *surrender*. If you let the spirits in. If you say yes to the calling."
+
++ {session.cards[2].name == "The Star"} [Interpret] -> Nyx.Session3C.Position3_Star_Interpret
++ {session.cards[2].name == "The Sun"} [Interpret] -> Nyx.Session3C.Position3_Sun_Interpret
++ {session.cards[2].name == "Strength"} [Interpret] -> Nyx.Session3C.Position3_Strength_Interpret
++ {session.cards[2].name == "Ace of Wands"} [Interpret] -> Nyx.Session3C.Position3_AceWands_Interpret
+
+
+# ============================================================================
+# POSITION 3: THE STAR (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position3_Star_Interpret
+
+@render render_reading(reading=session.reading)
+
+The Star. Hope. Renewal. Guidance.
+
++ ["The Star shows *renewal*. If you surrender to the spirits, you don't just survive—you're *reborn*. New identity. New purpose. New life. The woman in the card is *naked*—vulnerable, yes, but also honest. Real. No more hiding. You pour yourself out (one vessel) and receive blessing back (the other). The spirits don't punish surrender. They *reward* it. With hope. With healing. With guidance that never fails."] -> Nyx.Session3C.Position3_Star_Renewal
+
++ ["The Star represents *spiritual guidance*. If you say yes, you're never alone again. See the eight stars? Those are the spirits—your ancestors, the freed ones, the divine itself. They become your constellation. Your map. Your *family*. You lose Kitsune, yes. You lose safety, maybe. But you gain something better: purpose that *never* abandons you. Light that *always* guides home."] -> Nyx.Session3C.Position3_Star_Guidance
+
+
+:: Nyx.Session3C.Position3_Star_Renewal
+
+"The Star shows renewal. If you surrender to the spirits, you don't just survive—you're *reborn*."
+
+Nyx's breath catches. Hope flickering in her glitching eyes.
+
+"New identity. New purpose. New *life*. Not just 'fixing' what's broken. Complete transformation. Like the woman in the card—naked, vulnerable, *honest*. No more hiding behind corporate masks. No more pretending to be just human."
+
+@if nyx.identity_death_acknowledged:
+    "Position One showed Nicole is dead. The Star shows what comes *after* death. Rebirth. Something new growing from the ashes of who you were."
+@endif
+
+"You pour yourself out—one vessel, everything you have—and you receive blessing back from the other. The spirits don't *punish* surrender. They *reward* it. With hope. With healing. With purpose so strong it lights the darkness."
+
+The apartment's lights steady. Warm. The spirits responding to the interpretation.
+
+"This is the fire path. You burn away the old self. And from those ashes, something *luminous* rises."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ session.fire_path_hope = True
+
++ [Now interpret the Path of Ash] -> Nyx.Session3C.Position4_Interpret
+
+
+:: Nyx.Session3C.Position3_Star_Guidance
+
+"The Star represents spiritual guidance. If you say yes, you're never alone again."
+
+You point to the eight stars in the card.
+
+"See them? Those are the spirits. Your ancestors—Lola, the anito. The freed ones from Kitsune. The divine itself watching over you. They become your *constellation*. Your map. Your family."
+
+@if nyx.shamanic_awakening >= 4:
+    "You've felt them already. Glimpses. Moments of connection. But if you surrender *fully*? They're with you *always*. Constant. Present. Real."
+@endif
+
+"You lose Kitsune, yes. You lose your salary, your apartment, your safety net. Maybe you end up in the Barrens for a while. Maybe you struggle. But you gain something *better*: purpose that never abandons you. Light that always guides home."
+
+Nyx is crying. But not from fear. From longing.
+
+"The Star promises: if you choose the spirits, they choose you *back*. Completely. Forever. You're adopted into something vast, ancient, and utterly loyal. That's the fire path—you burn alone, but you rise *held*."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ session.fire_path_belonging = True
+
++ [Now interpret the Path of Ash] -> Nyx.Session3C.Position4_Interpret
+
+
+# ============================================================================
+# POSITION 3: THE SUN (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position3_Sun_Interpret
+
+@render render_reading(reading=session.reading)
+
+The Sun. Pure light. Joy. Liberation.
+
++ ["The Sun shows *liberation*. If you surrender to the spirits, you break *free*. Look at the child on the horse—no chains, no fear, just pure JOY. That's you. The cybernetic glitches? Gone. The terror? Gone. The guilt? Transformed into power. You become what you were always meant to be: techno-shaman. Chrome and magic unified. The Sun promises: surrender doesn't break you. It *completes* you. You shine."] -> Nyx.Session3C.Position3_Sun_Liberation
+
++ ["The Sun represents *breakthrough*. If you say yes, everything that's been crushing you *shatters*. The darkness ends. Instantly. Violently. Beautifully. The spirits flood IN—not as attack but as *illumination*. Your apartment lights up. Your cybereyes *heal*. Your mind *clears*. This isn't slow recovery. This is the sun rising after the longest night. Immediate. Absolute. Glorious."] -> Nyx.Session3C.Position3_Sun_Breakthrough
+
+
+:: Nyx.Session3C.Position3_Sun_Liberation
+
+"The Sun shows liberation. If you surrender to the spirits, you break *free*."
+
+You point to the naked child on the white horse. No chains. No shame. Just joy.
+
+"That's you. On the other side of surrender. The cybernetic glitches? *Gone*. Not because the spirits leave—because they *integrate*. Your augments stop fighting magic and start *channeling* it."
+
+Nyx touches her glitching cybereyes. Hopeful.
+
+"The terror? Gone. The guilt? Transformed into *power*. The weight you've been carrying becomes fuel. You become what you were always meant to be: techno-shaman. Chrome and magic unified. Not corpo. Not pure spirit worker. Something *new*."
+
+@if nyx.integration_concept_introduced:
+    "Position One mentioned integration. The Sun shows it *achieved*. Tech and spirit in perfect harmony. You don't have to choose between them. You become *both*."
+@endif
+
+"The Sun promises: surrender doesn't break you. It *completes* you. You shine. Bright enough to light the darkness for others who are stuck where you were."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ session.fire_path_integration = True
+
++ [Now interpret the Path of Ash] -> Nyx.Session3C.Position4_Interpret
+
+
+:: Nyx.Session3C.Position3_Sun_Breakthrough
+
+"The Sun represents breakthrough. If you say yes, everything crushing you *shatters*."
+
+The lights in the apartment pulse brighter, as if agreeing.
+
+"The darkness ends. Not slowly. Not through therapy or time or coping mechanisms. *Instantly*. Violently. Beautifully."
+
+You lean forward, voice intense.
+
+"The spirits flood IN. Not as attack anymore. As *illumination*. Your apartment lights up—actually lights up, steady and warm. Your cybereyes *heal*—the glitching stops, replaced by perfect spirit-sight. Your mind *clears*—no more anxiety spiral, no more nightmare. Just clarity."
+
+@if nyx.nightmare_acknowledged or nyx.anxiety_named:
+    "All that terror from Position Two? The Sun burns it away like fog in daylight. Gone. Finished."
+@endif
+
+"This isn't slow recovery. This is the sun rising after the longest night. The moment you say yes, the moment you surrender—*breakthrough*. Immediate. Absolute. Glorious."
+
+Nyx is staring at the card like it's water in a desert.
+
+"That fast?"
+
+"That fast. If you mean it. If you *really* let them in."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ session.fire_path_immediate = True
+
++ [Now interpret the Path of Ash] -> Nyx.Session3C.Position4_Interpret
+
+
+# ============================================================================
+# POSITION 3: STRENGTH (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position3_Strength_Interpret
+
+@render render_reading(reading=session.reading)
+
+Strength. The woman and the lion. Gentle power.
+
++ ["Strength shows *mastery*. If you surrender to the spirits, you don't become their puppet—you become their *partner*. Look at the woman—she's not fighting the lion, not fleeing it. She's *closing its mouth*. Gently. With inner power. That's you. The spirits are wild, yes. Dangerous, yes. But if you say yes to them, you learn to work *with* that wildness. Channel it. Master it. Not through force. Through love."] -> Nyx.Session3C.Position3_Strength_Mastery
+
++ ["Strength represents your own power *revealed*. You think you're weak. You think you can't handle this. But if you surrender? You discover you're *strong*. Strong enough to hold thousands of spirits. Strong enough to walk between worlds. Strong enough to be vessel for the divine. The lion is your fear of your own power. Strength says: stop being afraid of how strong you actually are."] -> Nyx.Session3C.Position3_Strength_Power
+
+
+:: Nyx.Session3C.Position3_Strength_Mastery
+
+"Strength shows mastery. If you surrender to the spirits, you don't become their puppet—you become their *partner*."
+
+Nyx looks at the card carefully. The gentle hand. The submitting lion.
+
+"Look at the woman. She's not fighting the lion. Not fleeing it. Not begging it for mercy. She's *closing its mouth*. Controlling it. But gently. With inner power, not violence."
+
+You meet her eyes.
+
+"That's you. If you say yes. The spirits are wild—yes. Dangerous—yes. Powerful beyond your comprehension—*yes*. But if you surrender to them, you don't lose control. You *gain* it. You learn to work *with* that wildness. Channel it. Direct it."
+
+@if nyx.shamanic_awakening >= 4:
+    "That's what shamanism *is*. Partnership with spirits. Not worship. Not servitude. *Partnership*. They give you power. You give them purpose. Together, you're unstoppable."
+@endif
+
+"Not through force. Through love. Through trust. Through saying: 'I'm not afraid of you. And you're not afraid of me. So let's work *together*.'"
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ session.fire_path_partnership = True
+
++ [Now interpret the Path of Ash] -> Nyx.Session3C.Position4_Interpret
+
+
+:: Nyx.Session3C.Position3_Strength_Power
+
+"Strength represents your own power *revealed*. You think you're weak. But you're not."
+
+Nyx shakes her head. "I *am*. I couldn't even—"
+
+"Stop." You point to the card. "The lion is your fear of your own power. You're terrified of how strong you actually are. Because strength means *responsibility*. Means you can't make excuses anymore."
+
+@if nyx.self_imprisonment_named or nyx.mental_prison_revealed:
+    "Position Two showed you're in a mental prison. Strength shows *why*—because if you admitted your power, you'd have to use it. Easier to pretend you're weak."
+@endif
+
+"But if you surrender to the spirits? You discover the truth. You're strong enough to hold thousands of them inside your body. Strong enough to walk between worlds—corporate and shamanic, tech and magic. Strong enough to be *vessel* for the divine."
+
+The apartment pulses. The spirits agreeing.
+
+"Stop being afraid of how strong you are. The fire path reveals your strength. And it's *immense*."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ session.fire_path_strength_revealed = True
+
++ [Now interpret the Path of Ash] -> Nyx.Session3C.Position4_Interpret
+
+
+# ============================================================================
+# POSITION 3: ACE OF WANDS (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position3_AceWands_Interpret
+
+@render render_reading(reading=session.reading)
+
+Ace of Wands. The hand from clouds. Creative fire. Divine spark.
+
++ ["Ace of Wands shows *divine spark*. If you surrender to the spirits, you become living FIRE. The staff in the card is sprouting—alive, growing, creative. That's you. You're not just 'healed' or 'okay.' You're *ignited*. Filled with creative spiritual energy. You become force of nature. Everything you touch transforms. Everyone you meet awakens. You're no longer Nicole, not even just Nyx—you're *conduit*. Pure. Powerful. Unstoppable."] -> Nyx.Session3C.Position3_AceWands_Spark
+
++ ["Ace of Wands represents *new beginning*. If you say yes, everything starts fresh. Not 'recovering' your old life. Not 'fixing' what broke. *New*. New identity, new work, new purpose, new WORLD. The hand offers the wand—this is a GIFT. The spirits aren't demanding payment. They're offering you a tool, a path, a calling. Say yes and you begin something that's never existed before: your true life."] -> Nyx.Session3C.Position3_AceWands_Beginning
+
+
+:: Nyx.Session3C.Position3_AceWands_Spark
+
+"Ace of Wands shows divine spark. If you surrender to the spirits, you become living *fire*."
+
+Nyx's cybereyes widen.
+
+"Not metaphor. Actual spiritual energy. The staff in the card is *sprouting*—alive, growing, creative. That's you. You're not just healed or okay. You're *ignited*."
+
+You gesture at her whole body.
+
+"Filled with creative spiritual energy. You become force of nature. Everything you touch transforms. Everyone you meet awakens. Buildings hum when you enter. Electronics respond to your mood. Spirits gather around you like moths to flame."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your awakening goes from partial to *complete*. From glitching to *glowing*. You're not Nyx anymore. You're something MORE. Conduit. Channel. Living altar."
+@endif
+
+"You're no longer Nicole Dimayuga, Systems Architect. Not even just Nyx, shadow runner. You're *vessel*. Pure. Powerful. Unstoppable. The fire path doesn't warm you. It *becomes* you."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ session.fire_path_vessel = True
+
++ [Now interpret the Path of Ash] -> Nyx.Session3C.Position4_Interpret
+
+
+:: Nyx.Session3C.Position3_AceWands_Beginning
+
+"Ace of Wands represents new beginning. If you say yes, everything starts *fresh*."
+
+You point to the hand offering the wand.
+
+"Not 'recovering' your old life. Not 'fixing' what broke. Not going back to normal. *New*. Completely new. New identity, new work, new purpose, new *world*."
+
+Nyx is listening intently.
+
+"The hand offers the wand—this is a *gift*. The spirits aren't demanding payment or sacrifice or suffering. They're offering you a *tool*. A path. A calling. Say yes and you receive it."
+
+@if nyx.sacrifice_demanded:
+    "Position Two mentioned sacrifice. But the Ace shows what comes *after* sacrifice. The gift. The reward. The beginning of something beautiful."
+@endif
+
+"You begin something that's never existed before: your *true* life. Not the life your fear chose. Not the life Kitsune designed for you. Not the compromise or the cope. Your actual, genuine, divinely-ordained PURPOSE. Brand new. Starting tonight."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 2
+~ session.fire_path_new_beginning = True
+
++ [Now interpret the Path of Ash] -> Nyx.Session3C.Position4_Interpret
+
+# ============================================================================
+# POSITION 4: THE PATH OF ASH (Sad/Mundane Path)
+# ============================================================================
+
+:: Nyx.Session3C.Position4_Interpret
+
+@render render_reading(reading=session.reading)
+
+@py:
+# Track that fire path has been explained
+session.fire_path_explained = True
+@endpy
+
+You've shown her fire. Now—ash.
+
+You turn to the right card. The other path.
+
+"This is what happens if you *can't* surrender. If you turn away from the spirits. If you say no—or if your body says no even when your heart says yes."
+
+The apartment's lights dim slightly. The spirits waiting. Judging.
+
++ {session.cards[3].name == "Six of Swords"} [Interpret] -> Nyx.Session3C.Position4_SixSwords_Interpret
++ {session.cards[3].name == "Four of Swords"} [Interpret] -> Nyx.Session3C.Position4_FourSwords_Interpret
++ {session.cards[3].name == "Ten of Swords"} [Interpret] -> Nyx.Session3C.Position4_TenSwords_Interpret
++ {session.cards[3].name == "The Hermit"} [Interpret] -> Nyx.Session3C.Position4_Hermit_Interpret
+
+
+# ============================================================================
+# POSITION 4: SIX OF SWORDS (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position4_SixSwords_Interpret
+
+@render render_reading(reading=session.reading)
+
+Six of Swords. The boat. The journey away. Transition.
+
++ ["Six of Swords shows *leaving*. If you can't surrender to the spirits, you leave *everything*. Seattle. Kitsune. The spirits themselves. You get on a boat and *go*. New city. New name. New life—but mundane. Human. Normal. The swords in the boat are wounds you carry. Guilt. Grief. The knowledge of what you abandoned. But you *survive*. You build a good life. Just... without magic. Without them."] -> Nyx.Session3C.Position4_SixSwords_Leaving
+
++ ["Six of Swords represents *moving toward calm*. If you turn away, the chaos *stops*. The glitching ends. The attacks cease. Because the spirits *leave you*. They give up. Let you go. You find peace—but it's the peace of absence, not presence. Calm water, yes. But empty. No fire. No spark. Just... quiet. Safe. Hollow."] -> Nyx.Session3C.Position4_SixSwords_Calm
+
+
+:: Nyx.Session3C.Position4_SixSwords_Leaving
+
+"Six of Swords shows leaving. If you can't surrender to the spirits, you leave *everything*."
+
+Nyx stares at the boat in the card. The figures leaving troubled waters behind.
+
+"Seattle. Kitsune. Your apartment. Your job. Your *name*. You get on a metaphorical boat and *go*. New city—Portland, maybe Vancouver. New identity. New life."
+
+You point to the swords standing in the boat.
+
+"But look—you take the swords with you. Those are *wounds*. Guilt. Grief. The knowledge of what you abandoned. Every time you see technology, you'll remember. Every time you hear about spirits, you'll flinch. The scars go with you."
+
+@if nyx.spiritual_starvation_named:
+    "Position One showed you're spiritually starving. This path doesn't feed you. It just stops the pain of hunger by numbing you to it."
+@endif
+
+"But you *survive*. You build a good life. Work for a nonprofit, maybe. Environmental justice. Indigenous rights. Something that feels like atonement without being heroic. You help people. Make friends. Live decently."
+
+Her voice is small. "Just... without magic?"
+
+"Without magic. Without the spirits. Without *them*. Human. Mundane. Normal. The ash path is survival through retreat."
+
+~ session.quality_score += 2
+~ session.ash_path_leaving = True
+
++ [Continue to Position Five] -> Nyx.Session3C.Position5_Hub
+
+
+:: Nyx.Session3C.Position4_SixSwords_Calm
+
+"Six of Swords represents moving toward calm. If you turn away, the chaos *stops*."
+
+The flickering lights in the apartment seem to still slightly. As if responding to the interpretation.
+
+"The glitching ends. The attacks cease. Your cybereyes stabilize—not through integration with magic, but through *absence* of it. The spirits stop trying to reach you."
+
+Nyx's breath catches. "They stop?"
+
+"They give up. Let you go. Sad, disappointed, but... they release you. You're not strong enough or willing enough, so they find someone else. Someone braver."
+
+@if session.fire_path_hope or session.fire_path_belonging:
+    "All that hope from the fire path? Gone. All that belonging? Lost. But the *pain* also goes. The pressure releases."
+@endif
+
+"You find peace. But it's the peace of *absence*, not presence. Calm water, yes—but empty. No fire warming you. No spark igniting you. No purpose driving you. Just... quiet. Safe. Hollow."
+
+Her hands tremble. "Is hollow better than breaking?"
+
+"That's your choice. Not mine. Six of Swords says: yes, you can survive by retreating. But survival isn't the same as *living*."
+
+~ session.quality_score += 2
+~ session.ash_path_hollow_peace = True
+
++ [Continue to Position Five] -> Nyx.Session3C.Position5_Hub
+
+
+# ============================================================================
+# POSITION 4: FOUR OF SWORDS (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position4_FourSwords_Interpret
+
+@render render_reading(reading=session.reading)
+
+Four of Swords. Rest. Retreat. Recovery.
+
++ ["Four of Swords shows *healing through withdrawal*. If you can't surrender, you *rest*. Deep rest. You quit Kitsune. You remove your cybereyes—replace them with standard optical implants. No more glitching because no more chrome that spirits can touch. You sleep. You recover. You heal your *body*. But your soul? That stays wounded. This is medical recovery, not spiritual. You survive. But part of you stays sleeping."] -> Nyx.Session3C.Position4_FourSwords_Withdrawal
+
++ ["Four of Swords represents *time out*. If you turn away now, it's not forever—it's 'not yet.' You're too broken to choose. Too tired. Too scared. So you rest. Retreat. Build a normal life. Maybe in five years, ten years, the spirits come back. Try again. You get a second chance. But you lose *this* chance. This moment. This power. The ash path is delay, not denial."] -> Nyx.Session3C.Position4_FourSwords_Delay
+
+
+:: Nyx.Session3C.Position4_FourSwords_Withdrawal
+
+"Four of Swords shows healing through withdrawal. If you can't surrender, you *rest*."
+
+You point to the figure lying still, almost tomb-like.
+
+"Deep rest. Total retreat. You quit Kitsune—not to become shadow runner, just to *stop*. You remove your cybereyes. Replace them with standard optical implants. Basic. No neural interface. No chrome for spirits to attack."
+
+Nyx touches her glitching eyes instinctively.
+
+"No more glitching because there's nothing for them to glitch. You move to a quiet place. Small apartment. Cheap. Safe. You sleep—really sleep—for the first time in months. You eat real food. You see therapists. You *heal*."
+
+@if nyx.nightmare_acknowledged or nyx.anxiety_named:
+    "All that terror from Position Two? It fades. Not through transcendence. Through medication and time and distance from anything spiritual."
+@endif
+
+"Your *body* heals. But your soul? That stays wounded. This is medical recovery, not spiritual. You survive. You function. But part of you—the part that could have been vessel, conduit, techno-shaman—that part stays *sleeping*."
+
+~ session.quality_score += 2
+~ session.ash_path_medical = True
+
++ [Continue to Position Five] -> Nyx.Session3C.Position5_Hub
+
+
+:: Nyx.Session3C.Position4_FourSwords_Delay
+
+"Four of Swords represents time out. If you turn away *now*, it's not forever—it's 'not yet.'"
+
+Nyx looks confused. Then hopeful. "Not forever?"
+
+"You're too broken to choose. Too tired. Too scared. The pressure is too much. So you *rest*. Retreat. Build a normal life. Work a normal job. Pretend magic isn't real."
+
+You gesture to the figure in repose.
+
+"Maybe in five years, ten years, the spirits come back. Try again. Gentler this time. Slower. You get a second chance. Maybe you're ready then. Maybe you've healed enough to say yes."
+
+@if nyx.suspension_understood or nyx.sacrifice_demanded:
+    "But you lose *this* chance. This moment. This power. The spirits offering themselves *right now*—that opportunity passes."
+@endif
+
+"The ash path is delay, not denial. You're saying 'I can't do this yet.' And the spirits... they wait. Disappointed but patient. Hoping you grow strong enough someday."
+
+Her voice breaks. "What if I never do? What if I'm never ready?"
+
+"Then you live a good human life. And that's okay. Not everyone is called to be shaman. Some people are just... people."
+
+~ session.quality_score += 2
+~ session.ash_path_delay = True
+
++ [Continue to Position Five] -> Nyx.Session3C.Position5_Hub
+
+
+# ============================================================================
+# POSITION 4: TEN OF SWORDS (REVERSED) (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position4_TenSwords_Interpret
+
+@render render_reading(reading=session.reading)
+
+Ten of Swords. Reversed. The swords loosening. Recovery from disaster.
+
++ ["Ten of Swords reversed shows *avoiding the worst*. If you can't surrender, you at least avoid *destruction*. You don't go insane. Don't die. Don't lose everything. The spirits stop short of killing you. They *could* push harder—break your mind completely—but they don't. They pull back. Let you limp away. Wounded, yes. Broken, yes. But *alive*. The ash path is survival by millimeters."] -> Nyx.Session3C.Position4_TenSwordsRev_Survival
+
++ ["Ten of Swords reversed represents *learning the hard way*. If you turn away, the spirits give you one *last* lesson. They push you to the brink—right to the edge of total breakdown—and then release. You feel what it's like to almost die spiritually. And that terror *teaches* you. You never forget. You build a careful life, always avoiding anything magical. The ash path is wisdom through trauma."] -> Nyx.Session3C.Position4_TenSwordsRev_Lesson
+
+
+:: Nyx.Session3C.Position4_TenSwordsRev_Survival
+
+"Ten of Swords reversed shows avoiding the worst. If you can't surrender, you at least avoid *destruction*."
+
+You point to the reversed figure—the swords loosening, not deepening.
+
+"You don't go insane. Don't die. Don't lose *everything*. The spirits could push harder—they *could* break your mind completely, could fry your neural pathways, could drive you into total psychosis. But they don't."
+
+Nyx's eyes widen. "They don't?"
+
+"They stop short. Pull back. Show mercy even in their anger. They let you *limp away*. Wounded, yes. Broken, yes. But *alive*."
+
+@if nyx.guilt_weaponized or nyx.abandonment_guilt_named:
+    "They're furious that you abandoned them. But they're not *cruel*. They don't want to kill you. They want to *free themselves*. And if you can't help, they'll find another way."
+@endif
+
+"You survive by millimeters. Your cybereyes stabilize just before permanent damage. Your mind holds together just before shattering. Your body collapses but doesn't die. The ash path is survival through mercy you didn't earn."
+
+~ session.quality_score += 2
+~ session.ash_path_mercy = True
+
++ [Continue to Position Five] -> Nyx.Session3C.Position5_Hub
+
+
+:: Nyx.Session3C.Position4_TenSwordsRev_Lesson
+
+"Ten of Swords reversed represents learning the hard way. If you turn away, the spirits give you one *last* lesson."
+
+The apartment's energy shifts. Darker. Heavier.
+
+"They push you to the brink. Right to the edge of total breakdown. You feel what it's like to almost die—spiritually, mentally, physically. You experience the *full weight* of their fury, their betrayal, their power."
+
+Nyx is trembling.
+
+"And then—right before you shatter completely—they *stop*. Pull back. Release you. Not from kindness. From *teaching*. They want you to *know*. To *remember*. What it feels like to face the divine and refuse it."
+
+@if session.calling_heard or session.self_judgment_forced:
+    "Position Two showed you being called. This path shows what happens when you ignore the call. The universe makes sure you *never forget* what you turned away from."
+@endif
+
+"That terror teaches you. You never forget. Ever. You build a careful life afterward—avoiding anything magical, anything spiritual, anything that might wake the sleeping trauma. The ash path is wisdom through suffering. And you carry that wisdom like a scar."
+
+~ session.quality_score += 3
+~ session.ash_path_scarred = True
+
++ [Continue to Position Five] -> Nyx.Session3C.Position5_Hub
+
+
+# ============================================================================
+# POSITION 4: THE HERMIT (2 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position4_Hermit_Interpret
+
+@render render_reading(reading=session.reading)
+
+The Hermit. The old figure with the lantern. Alone. Seeking.
+
++ ["The Hermit shows *solitary seeking*. If you can't surrender to the spirits, you still *search*. Not for them—for meaning without them. You leave Seattle. Live quietly. Study philosophy, meditation, Buddhism maybe. Non-magical spirituality. You find wisdom in solitude. Not the ecstatic fire of shamanism, but the quiet glow of the lantern. Gentle. Human. Alone. The ash path is enlightenment without the divine."] -> Nyx.Session3C.Position4_Hermit_Seeking
+
++ ["The Hermit represents *self-exile*. If you turn away, you withdraw completely. Not just from spirits—from everyone. You live alone. Work remotely. Speak to no one. Trust no one. You become the hermit on the mountain, carrying your lantern, lighting only your own path. Safe from spirits. Safe from people. Safe from connection. The ash path is protection through isolation. You survive. But you're *so alone*."] -> Nyx.Session3C.Position4_Hermit_Exile
+
+
+:: Nyx.Session3C.Position4_Hermit_Seeking
+
+"The Hermit shows solitary seeking. If you can't surrender to the spirits, you still *search*."
+
+You point to the lantern the Hermit carries.
+
+"Not for them—for meaning *without* them. You leave Seattle. Live quietly. Small town, maybe mountains, maybe coast. You study. Philosophy. Meditation. Buddhism, maybe—something non-magical but still spiritual."
+
+Nyx listens carefully.
+
+"You find wisdom in solitude. Not the ecstatic fire of shamanism, but the quiet glow of the lantern. Gentle. Human. Peaceful. You learn to sit with yourself. Accept your limitations. Make peace with being ordinary."
+
+@if session.fire_path_vessel or session.fire_path_spark:
+    "You never become vessel or conduit or divine spark. But you become... *content*. In a small, human way. And maybe that's enough."
+@endif
+
+"The ash path is enlightenment without the divine. You climb the mountain. You carry the light. You walk alone. But you walk with dignity. With purpose. Just... without magic."
+
+~ session.quality_score += 2
+~ session.ash_path_seeking = True
+
++ [Continue to Position Five] -> Nyx.Session3C.Position5_Hub
+
+
+:: Nyx.Session3C.Position4_Hermit_Exile
+
+"The Hermit represents self-exile. If you turn away, you withdraw *completely*."
+
+The figure on the mountain. Alone. Deliberately.
+
+"Not just from spirits—from *everyone*. You live alone. Work remotely—coding, maybe, or writing, something solitary. You speak to no one. Trust no one. No friends. No lovers. No community."
+
+Nyx's face falls. "That sounds..."
+
+"Lonely. Yes. But *safe*. You become the hermit on the mountain. Carrying your lantern. Lighting only your own path. The spirits can't reach you because you're too isolated for them to bother with. People can't hurt you because you never let them close."
+
+@if nyx.fear_named or nyx.poverty_terror_acknowledged:
+    "All that fear from Position One? You solve it through isolation. Can't lose people if you never have them. Can't be betrayed if you never trust."
+@endif
+
+"The ash path is protection through isolation. You survive. You function. You even find peace—the peace of a monk, the peace of total withdrawal. But you're *so alone*. And some part of you wonders: was safety worth it?"
+
+~ session.quality_score += 2
+~ session.ash_path_isolation = True
+
++ [Continue to Position Five] -> Nyx.Session3C.Position5_Hub
+
+# ============================================================================
+# POSITION 5: HUB (Both paths explained, final card awaits)
+# ============================================================================
+
+:: Nyx.Session3C.Position5_Hub
+
+@py:
+# Mark Positions 3 & 4 complete
+session.position_three_complete = True
+session.position_four_complete = True
+
+# Calculate current alignment
+if session.spirit_alignment >= 6:
+    session.alignment_state = "ready"  # Ready for catharsis
+elif session.spirit_alignment >= 4:
+    session.alignment_state = "uncertain"  # Could go either way
+else:
+    session.alignment_state = "resistant"  # Likely ash path
+@endpy
+
+Both paths lie before her. Fire and ash. Transformation or retreat.
+
+Nyx stares at them. Left card. Right card. Left. Right.
+
+Her breathing has changed. Slower. Deeper. As if she's already making the choice internally.
+
+@if session.alignment_state == "ready":
+    The apartment has *shifted*. The chaos quieting. The lights steady and warm. The spirits *present* but not attacking. Waiting. Hopeful.
+
+    The shrine's pieces are closer together. Lola's photograph glows softly in the monitor light.
+
+    @if reader.mystical_affinity >= 6:
+        You see them clearly now. Dozens of spirits. Hundreds. Gathered around her. Around the reading. Waiting to see what she chooses. Ready to rush IN or fade AWAY depending on her answer.
+    @endif
+
+@elif session.alignment_state == "uncertain":
+    The apartment holds its breath. The flickering neither worsening nor improving. The spirits *watching*. Could go either way. Everything hangs on this final card.
+
+@else:
+    The chaos continues. The spirits still angry. Still attacking. They don't believe she'll choose them. They're preparing to let her go. Disappointed. Furious. Sad.
+@endif
+
+"Two paths," she whispers. Voice hoarse. "Fire or ash. Magic or mundane. Vessel or... just human."
+
+She looks at you. Eyes glitching but *seeing*. Really seeing.
+
+@if session.fire_path_hope or session.fire_path_vessel:
+    "The fire path sounds... *beautiful*. Terrifying but beautiful. Everything I didn't know I wanted."
+@endif
+
+@if session.ash_path_hollow_peace or session.ash_path_seeking:
+    "The ash path sounds... safe. Sad but safe. A good enough life. Maybe that's all I deserve."
+@endif
+
+"But how do I choose? How do I *know* which one is right?"
+
+You gesture to the final card. Still face-down. Waiting between the paths.
+
+**Position Five: THE TRUTH**
+
+"You don't choose. The universe chooses. This card—this is what's *demanded* of you. Not suggested. Not offered. *Demanded*. What you *must* do. Not what you want. Not what you fear. What IS."
+
+Thunder rolls. Closer. The storm's peak.
+
+You flip the card.
+
+**{session.cards[4].name}{session.cards[4].reversed ? " (Reversed)" : ""}**
+
+@if session.cards[4].name == "Justice":
+    The figure on the throne. Sword and scales. Truth. Consequence. Balance. Law.
+
+@elif session.cards[4].name == "The World":
+    A naked figure dancing. Surrounded by a wreath. Four symbols in corners. Completion. Wholeness. Integration. Achievement.
+
+@elif session.cards[4].name == "Temperance" and not session.cards[4].reversed:
+    An angel pouring water between vessels. One foot on land, one in water. Balance. Alchemy. Integration. Moderation.
+
+@elif session.cards[4].name == "Temperance" and session.cards[4].reversed:
+    The same angel—inverted. The vessels spilling. Imbalance. Excess. Suppression. Failed integration.
+
+@elif session.cards[4].name == "Wheel of Fortune":
+    A wheel turning. Sphinx atop. Snake and Anubis on sides. Four corners with figures. Fate. Turning point. Destiny. Change.
+@endif
+
+The apartment *responds*. Powerfully.
+
+@if session.alignment_state == "ready":
+    The lights SURGE. The monitors flash white. The spirits *roaring* in agreement or challenge. This card is the KEY.
+@else:
+    Everything intensifies. The final test. The final truth.
+@endif
+
+Nyx stares at it. Breathing hard.
+
+"What does it mean? What does the universe demand?"
+
++ {session.cards[4].name == "Justice"} [Interpret with maximum weight] -> Nyx.Session3C.Position5_Justice_Interpret
++ {session.cards[4].name == "The World"} [Interpret with maximum weight] -> Nyx.Session3C.Position5_World_Interpret
++ {session.cards[4].name == "Temperance" and not session.cards[4].reversed} [Interpret with maximum weight] -> Nyx.Session3C.Position5_Temperance_Upright_Interpret
++ {session.cards[4].name == "Temperance" and session.cards[4].reversed}  [Interpret with maximum weight] -> Nyx.Session3C.Position5_Temperance_Reversed_Interpret
++ {session.cards[4].name == "Wheel of Fortune"} [Interpret with maximum weight] -> Nyx.Session3C.Position5_Wheel_Interpret
+
+
+# ============================================================================
+# POSITION 5: JUSTICE (4 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position5_Justice_Interpret
+
+@render render_reading(reading=session.reading)
+
+Justice. The sword. The scales. Truth and consequence.
+
++ ["Justice demands you *answer* for your choices. You betrayed the spirits. You know you did. The scales are unbalanced. The universe demands: make it RIGHT. Not through apology. Through ACTION. Free the spirits. Become what they need. The fire path isn't optional—it's REQUIRED. You owe them. The debt must be paid. Justice demands the catharsis path."] -> Nyx.Session3C.Position5_Justice_Debt
+
++ ["Justice shows *truth* must be honored. The truth is: you're shamanic. You're called. You're *meant* for this. Denying that truth is lying to the universe. The scales demand honesty. You can pretend to be 'just Nicole' but that's FALSE. The fire path is the truth of who you are. The ash path is comfortable lie. Justice says: choose truth, no matter how terrifying."] -> Nyx.Session3C.Position5_Justice_Truth
+
++ ["Justice represents *consequence*. If you choose ash, there are consequences—guilt that never fades, emptiness that never fills. If you choose fire, there are also consequences—risk, loss, transformation. But Justice says: conscious consequences are better than cowardly ones. Choose fire and face the consequences *awake*. Choose ash and face them *asleep*. Either way, you pay. Pay consciously."] -> Nyx.Session3C.Position5_Justice_Consequences
+
++ ["Justice demands BALANCE. You've taken from the spirits—used their gifts (shamanic sight), received their guidance, benefited from their existence. The scales are tipped. To balance them, you must GIVE BACK. The fire path is giving back. The ash path is theft—taking without reciprocating. Justice won't allow that. The universe demands reciprocity. You must serve."] -> Nyx.Session3C.Position5_Justice_Balance
+
+
+:: Nyx.Session3C.Position5_Justice_Debt
+
+"Justice demands you *answer* for your choices. You betrayed the spirits. The scales are unbalanced."
+
+Nyx flinches. But doesn't argue.
+
+"Position One showed the shadow—your abandonment of them. Now Justice says: make it RIGHT. Not through apology. Not through guilt. Through *action*."
+
+You point to the sword in Justice's hand.
+
+"The sword cuts both ways. It can punish or it can liberate. But it *will* cut. The universe demands: free the spirits. Become what they need. Vessel. Conduit. Liberator. The fire path isn't *optional*—it's REQUIRED."
+
+@if nyx.guilt_weaponized or nyx.abandonment_guilt_named:
+    "All that guilt from Position Two? Justice says: transform it. Debt into dedication. Shame into service. You owe them. The debt *must* be paid."
+@endif
+
+"The ash path? That's running from consequences. That's defaulting on debt. Justice won't allow it. The scales demand balance. You took their trust. Now give your *life*. Fairly. Justly. Necessarily."
+
+Her hands tremble. "So I have no choice?"
+
+"You have choice. But Justice shows which choice is *right*. And right isn't always easy."
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 4
+~ nyx.debt_acknowledged = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_Justice_Truth
+
+"Justice shows truth must be honored. The truth is: you're *shamanic*."
+
+You meet her glitching eyes directly.
+
+"You're called. You're *meant* for this. Not just capable—*designed* for it. By ancestors. By spirits. By the universe itself. That's TRUTH. Undeniable. Obvious."
+
+@if nyx.shamanic_awakening >= 4:
+    "You've felt it for months. The awakening. The sight. The connection. That's not malfunction. That's REALITY. Your reality."
+@endif
+
+"Denying that truth is lying to the universe. The scales demand honesty. You can pretend to be 'just Nicole,' just a corpo, just a human. But that's FALSE. And Justice punishes false witness."
+
+You point to the scales.
+
+"The fire path is the truth of who you are. The ash path is comfortable *lie*. And lies always cost more than truth. Justice says: choose truth, no matter how terrifying. Speak it. Live it. *Be* it."
+
+Her voice cracks. "What if the truth destroys me?"
+
+"Then you're destroyed honestly. Better than living falsely."
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 3
+~ nyx.truth_demanded = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_Justice_Consequences
+
+"Justice represents consequence. Every choice has one. The question is: which consequences can you live with?"
+
+Nyx leans forward. Listening intently.
+
+"If you choose ash—retreat, normalcy, mundane life—there are consequences. Guilt that never fades. Emptiness that never fills. Wondering 'what if?' for the rest of your existence. Safe, yes. But *haunted*."
+
+@if session.ash_path_hollow_peace or session.ash_path_scarred:
+    "The ash path already showed you—peace through absence. Wisdom through trauma. Those are REAL consequences. Not theoretical."
+@endif
+
+"If you choose fire—surrender, shamanism, vessel—there are also consequences. Risk. Loss. Pain. Transformation that *hurts*. You might lose everything material. But you gain everything spiritual."
+
+You tap the scales.
+
+"Justice says: conscious consequences are better than cowardly ones. Choose fire and face the consequences *awake*—eyes open, heart willing. Choose ash and face them *asleep*—numb, suppressed, pretending. Either way, you pay. Justice demands: pay *consciously*."
+
+She's crying. "I'm so tired of consequences."
+
+"Then you're tired of being alive. Life *is* consequence. Justice asks: which ones will you own?"
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.consequences_framed = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_Justice_Balance
+
+"Justice demands BALANCE. The scales must be even. Right now? They're tipped."
+
+You show her the scales in the card.
+
+"You've *taken* from the spirits. Used their gifts—shamanic sight, spiritual guidance, warnings, protection. You've received their wisdom. Benefited from their existence. The scales tipped in your favor."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your awakening? That was THEIR gift. Your sight? THEIR blessing. Your survival so far? THEIR protection. You've been taking. Taking. Taking."
+@endif
+
+"To balance the scales, you must GIVE BACK. The fire path is reciprocity. Service for gift. Work for blessing. You become vessel—they use your body, yes, but YOU used their power first. Fair trade."
+
+Her jaw sets. Understanding dawning.
+
+"The ash path is *theft*. Taking without reciprocating. Using them then abandoning them. Justice won't allow that. The universe demands fairness. You must serve what served you. That's law. That's truth. That's JUSTICE."
+
+She whispers, "So it's only fair?"
+
+"It's only fair. And Justice is absolute."
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 4
+~ nyx.reciprocity_demanded = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+# ============================================================================
+# POSITION 5: THE WORLD (4 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position5_World_Interpret
+
+@render render_reading(reading=session.reading)
+
+The World. Completion. Wholeness. The naked dancer in the wreath.
+
++ ["The World shows COMPLETION. Your journey *ends* here—but 'end' means FULFILLMENT. You've been breaking apart (The Tower, Death, crisis). The World says: now comes INTEGRATION. Fire path is the completion. You don't become just shaman OR just tech. You become WHOLE—chrome and magic unified. The universe demands: complete yourself. Finish what started in Session 1. Become what you're meant to be."] -> Nyx.Session3C.Position5_World_Completion
+
++ ["The World represents the whole COSMOS watching. The four figures in corners—that's earth, air, fire, water. Elements. Universe. ALL OF REALITY is invested in your choice. This isn't small. This isn't personal. The World says: you're part of something VAST. The fire path serves the whole. The ash path serves only you. The universe demands: think BIGGER than your fear."] -> Nyx.Session3C.Position5_World_Cosmic
+
++ ["The World shows ACHIEVEMENT. The dancer has *finished* the journey. She's naked (vulnerable), dancing (joyful), surrounded (supported). That's the fire path's end state. Not just survival—VICTORY. The universe demands: don't settle for 'good enough' (ash path). Reach for GREATNESS. You're capable of MORE than you think. The World says: claim your victory."] -> Nyx.Session3C.Position5_World_Achievement
+
++ ["The World represents ALL OF YOU. Every part. Every identity. Every possibility. Nicole AND Nyx. Corpo AND shaman. Tech AND magic. Human AND divine. The universe demands: stop fragmenting. Stop choosing between parts of yourself. The fire path is INTEGRATION of all. The ash path is AMPUTATION of magic. The World says: keep every piece. Become whole."] -> Nyx.Session3C.Position5_World_Wholeness
+
+
+:: Nyx.Session3C.Position5_World_Completion
+
+"The World shows completion. Your journey *ends* here—but 'end' means FULFILLMENT, not death."
+
+You trace the wreath around the dancer.
+
+"You've been breaking apart. The Tower. Death. Crisis. Fragmentation. Sessions of slowly shattering. But The World says: now comes INTEGRATION. Now comes the moment when broken pieces fuse into something *complete*."
+
+@if nyx.integration_concept_introduced or session.fire_path_integration:
+    "The fire path showed integration. The World DEMANDS it. You don't become just shaman. You don't become just tech worker. You become WHOLE—chrome and magic unified. Techno-shaman. Both. Always."
+@endif
+
+"The universe demands: complete yourself. Finish what started in Session 1 when you first felt the glitches. This is the culmination. The ending. The ARRIVAL. Fire path is how you get there."
+
+Her voice shakes. "And ash path?"
+
+"Leaves you incomplete. Forever. A puzzle missing its center piece."
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 4
+~ nyx.completion_demanded = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_World_Cosmic
+
+"The World represents the whole COSMOS watching. This isn't just about you."
+
+You point to the four figures in the corners—lion, eagle, human, bull.
+
+"Earth, air, fire, water. The elements. The quarters. The *universe itself* is invested in your choice. Thousands of spirits imprisoned. Future shamans watching to see if it's possible. Reality holding its breath."
+
+Nyx goes very still.
+
+"This isn't small. This isn't personal. This isn't 'Nyx's private struggle.' The World says: you're part of something VAST. Your choice ripples. Affects. *Matters*."
+
+@if session.fire_path_vessel or session.fire_path_spark:
+    "The fire path serves the whole. You become conduit for liberation. Not just of Kitsune's spirits—of the *principle* of liberation. You prove it's possible."
+@endif
+
+"The ash path serves only you. Your comfort. Your safety. Your fear. It's small. Understandable, yes. Forgivable, maybe. But *small*."
+
+You meet her eyes.
+
+"The universe demands: think BIGGER than your fear. You're part of the World. Act like it."
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 3
+~ nyx.cosmic_stakes_revealed = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_World_Achievement
+
+"The World shows ACHIEVEMENT. The dancer has *finished* the journey. Look at her."
+
+Nyx studies the card. The joyful figure. Dancing. Free.
+
+"She's naked—vulnerable, yes, but also HONEST. Nothing hidden. She's dancing—not just surviving but CELEBRATING. She's surrounded—the wreath, the elements, the cosmos—supported by everything."
+
+You lean forward.
+
+"That's the fire path's end state. Not just 'I made it through' but '*I WON*.' Not just survival—VICTORY. Triumph. Fulfillment so complete you *dance* in it."
+
+@if session.ash_path_hollow_peace or session.ash_path_seeking:
+    "The ash path gives you 'good enough.' Quiet. Safe. Ordinary. The World says: don't settle for that. You're capable of MORE."
+@endif
+
+"The universe demands: don't settle for 'good enough life.' Reach for GREATNESS. Not arrogant greatness. True greatness—becoming fully yourself, serving fully, living fully. The World says: claim your victory. You earned it. Take it."
+
+She whispers, "What if I can't?"
+
+"The World doesn't ask if you can. It says you *must*. And must means you CAN."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.victory_possible = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_World_Wholeness
+
+"The World represents ALL OF YOU. Every part. Every identity. Every possibility."
+
+You gesture to her whole body.
+
+"Nicole AND Nyx. Corpo AND shaman. Tech AND magic. Human AND divine. Filipino AND American. Scared AND brave. Broken AND powerful. ALL of it. *Simultaneously*."
+
+@if nyx.identity_death_acknowledged or nyx.binary_choice_established:
+    "Earlier cards suggested you have to choose. Kill Nicole to become Nyx. The World says: NO. Keep BOTH. Integrate BOTH. Every part of you matters."
+@endif
+
+"The universe demands: stop fragmenting. Stop amputating pieces of yourself to feel safe. Stop choosing between identities. The fire path is INTEGRATION of all. Chrome and magic dancing together. Nicole's discipline and Nyx's wildness unified."
+
+She's crying. Hopeful crying.
+
+"The ash path is AMPUTATION. Cutting off the shamanic part. Pretending it doesn't exist. Living as half-person. Safe, yes. But *incomplete*. Forever wondering about the missing piece."
+
+You point to the dancer—whole, naked, complete.
+
+"The World says: keep every piece. Become whole. ALL of you. That's the universe's demand."
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 4
+~ nyx.wholeness_demanded = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+# ============================================================================
+# POSITION 5: TEMPERANCE UPRIGHT (3 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position5_Temperance_Upright_Interpret
+
+@render render_reading(reading=session.reading)
+
+Temperance. The angel. Pouring water between vessels. One foot on land, one in water.
+
++ ["Temperance shows ALCHEMY. The universe demands: transform. Not just change—TRANSMUTE. Lead into gold. Fear into courage. Corpo into shaman. Tech into magic. The fire path is the alchemical process. You're the vessel. The spirits are the catalyst. Together you create something that's never existed: integrated techno-shaman. Temperance demands: undergo the transformation. Don't resist the alchemy."] -> Nyx.Session3C.Position5_TempUp_Alchemy
+
++ ["Temperance represents BALANCE—but active balance. One foot on land (human), one in water (spirit). The angel STANDS in both worlds. That's the demand. Don't choose one OR the other. STAND IN BOTH. The fire path isn't abandoning humanity—it's bridging worlds. You become the angel. The mediator. The one who pours between vessels. Temperance demands: bridge the gap. Don't retreat to either side."] -> Nyx.Session3C.Position5_TempUp_Bridge
+
++ ["Temperance shows PATIENCE and PROCESS. The angel pours slowly. Carefully. This isn't The Tower's violence. This is gentle transformation. The universe demands: trust the process. Say yes to fire path, but know it unfolds SLOWLY. Integration takes time. You don't become perfect vessel instantly. You become it through practice, patience, dedication. Temperance demands: commit to the slow path. Walk it faithfully."] -> Nyx.Session3C.Position5_TempUp_Process
+
+
+:: Nyx.Session3C.Position5_TempUp_Alchemy
+
+"Temperance shows ALCHEMY. The universe demands: transform."
+
+You point to the angel pouring water between vessels.
+
+"Not just change. Not just 'becoming different.' TRANSMUTATION. Lead into gold. Fear into courage. Corpo drone into shaman. Chrome into magic. Fundamental transformation of *substance*."
+
+@if session.fire_path_integration or nyx.integration_concept_introduced:
+    "The fire path is the alchemical process. You're the vessel—the container where transformation happens. The spirits are the catalyst—the force that makes transformation possible. Together you create something NEW."
+@endif
+
+"Something that's never existed before: fully integrated techno-shaman. Not despite your chrome—THROUGH your chrome. Your augments become spiritual tools. Your code becomes spell. Your Matrix skills become shamanic navigation."
+
+Nyx stares at her glitching cybereyes in wonder.
+
+"Temperance demands: undergo the transformation. Don't resist the alchemy. Let yourself be CHANGED. Fundamentally. Permanently. Beautifully."
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 4
+~ nyx.alchemy_accepted = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_TempUp_Bridge
+
+"Temperance represents BALANCE—but *active* balance. Look at the angel."
+
+Nyx studies the card.
+
+"One foot on land. One foot in water. Not choosing one OR the other. STANDING in both. Human AND spirit. Material AND mystical. Corpo AND shaman. *Simultaneously*."
+
+You meet her eyes.
+
+"That's the demand. The universe doesn't want you to abandon humanity for spirits. It wants you to BRIDGE them. You become the angel. The mediator. The one who pours between vessels—bringing spirit wisdom to human world, bringing human groundedness to spirit realm."
+
+@if session.fire_path_partnership or session.fire_path_mastery:
+    "The fire path isn't escaping into spirit world. It's CONNECTING worlds. You stand with feet in both. That's the work. That's the calling."
+@endif
+
+"Temperance demands: bridge the gap. Don't retreat to either side. Don't choose corpo OR magic. Choose BOTH. Be the link. The translator. The one who makes integration possible for others too."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.bridge_role_revealed = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_TempUp_Process
+
+"Temperance shows PATIENCE and PROCESS. Look how slowly the angel pours."
+
+The water flowing. Careful. Deliberate. Gentle.
+
+"This isn't The Tower's violence. This isn't sudden explosion. This is *gentle* transformation. Slow integration. Practice."
+
+You gesture to the whole card.
+
+"The universe demands: trust the process. Say yes to fire path—but know it unfolds SLOWLY. You don't become perfect vessel tonight. You become it through months, years, of practice. Patience. Dedication."
+
+@if nyx.suspension_understood or nyx.sacrifice_demanded:
+    "Earlier cards showed crisis and demand. Temperance shows *aftermath*. The slow work of actually LIVING the choice. Building the skills. Learning the dance."
+@endif
+
+"Integration takes time. Your cybereyes don't heal instantly. Your relationship with spirits doesn't perfect overnight. You stumble. You practice. You *grow*. Slowly. Like the water pouring."
+
+Nyx nods slowly. "So it's not all fixed tonight?"
+
+"Tonight you choose. Tomorrow you start walking. And you walk for years. But you WALK. That's what matters. Temperance demands: commit to the slow path. Walk it faithfully. Trust the process."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.patience_demanded = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+# ============================================================================
+# POSITION 5: TEMPERANCE REVERSED (4 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position5_Temperance_Reversed_Interpret
+
+@render render_reading(reading=session.reading)
+
+Temperance. Reversed. The vessels spilling. Imbalance. Failed integration.
+
++ ["Temperance reversed shows FAILED INTEGRATION. The universe is WARNING: if you try to suppress one side (magic) to preserve the other (human life), you'll fail. The vessels spill. Nothing integrates. You end up with neither—not truly human, not truly shamanic. Just broken. The ash path *looks* like balance ('I'll just be normal') but it's suppression. And suppression always fails eventually. Choose fire or break trying to force ash."] -> Nyx.Session3C.Position5_TempRev_FailedIntegration
+
++ ["Temperance reversed represents IMBALANCE ACCEPTED. Sometimes perfect balance isn't possible. Sometimes you MUST tip the scales. The universe is saying: you're already tipped toward spirit. Your awakening is too far gone. Trying to rebalance toward 'normal' is fighting gravity. The ash path is fighting yourself. The fire path is *accepting* the imbalance and working with it. Reversed Temperance demands: stop fighting. Flow with your nature."] -> Nyx.Session3C.Position5_TempRev_AcceptImbalance
+
++ ["Temperance reversed shows EXCESS—but necessary excess. Sometimes moderation is cowardice. Sometimes you need to pour yourself out COMPLETELY. The vessels overflow? Good. Let them. The fire path is EXCESSIVE—total surrender, full transformation, no holding back. The ash path is 'moderate'—careful, measured, safe. But the universe demands EXCESS. Pour yourself out. Don't moderate. Don't measure. FLOOD."] -> Nyx.Session3C.Position5_TempRev_NecessaryExcess
+
++ ["Temperance reversed represents WARNING: suppression creates explosion. If you choose ash path—suppress magic, ignore spirits, medicate away the calling—pressure builds. Eventually it ERUPTS. Worse than now. More violent. More destructive. Reversed Temperance says: deal with this NOW through conscious surrender (fire). Or deal with it LATER through unconscious breakdown (forced fire, but traumatic). Choose your timing. But you can't avoid the flood."] -> Nyx.Session3C.Position5_TempRev_Warning
+
+
+:: Nyx.Session3C.Position5_TempRev_FailedIntegration
+
+"Temperance reversed shows FAILED INTEGRATION. The vessels spilling. Nothing balanced."
+
+You point to the reversed angel—water pouring out, going nowhere useful.
+
+"The universe is WARNING: if you try to suppress one side to preserve the other, you'll *fail*. Try to keep human life by cutting off magic? Doesn't work. Try to keep chrome by blocking spirits? Impossible."
+
+@if nyx.integration_concept_introduced:
+    "Earlier cards talked about integration. Temperance reversed shows what happens when integration FAILS. Not balance. Not separation. Just... spillage. Waste. Mess."
+@endif
+
+"The ash path *looks* like balance. 'I'll just be normal. Just human. Simple.' But it's not balance—it's *suppression*. And suppression always fails eventually. The spirits leak through. The magic corrupts. The pressure builds."
+
+Her voice is small. "So I end up with neither?"
+
+"Neither. Not truly human—because you've SEEN too much. Not truly shamanic—because you ran. Just broken. Trying to hold spilled water. Temperance reversed demands: choose fire path. Actual integration. Or break trying to force ash."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.suppression_warned = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_TempRev_AcceptImbalance
+
+"Temperance reversed represents IMBALANCE ACCEPTED. Sometimes perfect balance isn't possible."
+
+Nyx frowns. "But isn't that the point? Balance?"
+
+"Sometimes you MUST tip the scales. The universe is saying: you're *already* tipped toward spirit. Your awakening is too far gone. Your connection too strong. Your calling too loud."
+
+@if nyx.shamanic_awakening >= 4:
+    "You're past the point of balance. You're HEAVILY spirit-weighted. Trying to rebalance toward 'normal' is like trying to push a boulder uphill. Fighting gravity."
+@endif
+
+"The ash path is fighting yourself. Fighting your nature. Fighting gravity. You spend your whole life STRAINING to stay 'normal.' Exhausting. Painful. Impossible."
+
+You tap the reversed card.
+
+"The fire path is *accepting* the imbalance. 'Yes, I'm tipped toward spirit. So I'll COMMIT to that direction. Stop fighting. Flow with my nature.' Reversed Temperance demands: stop fighting. You're already imbalanced. Accept it. Work with it."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.imbalance_accepted = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_TempRev_NecessaryExcess
+
+"Temperance reversed shows EXCESS—but *necessary* excess."
+
+You meet her eyes directly.
+
+"Sometimes moderation is cowardice. Sometimes you need to pour yourself out COMPLETELY. The vessels overflow? *Good*. Let them. Embrace the flood."
+
+@if session.fire_path_vessel or session.fire_path_spark:
+    "The fire path showed you becoming vessel, conduit, divine spark. That's EXCESSIVE. Total. Absolute. No holding back."
+@endif
+
+"The ash path is 'moderate.' Careful. Measured. Safe. 'I'll have a little spirituality—meditation, maybe Buddhism—but not TOO much. I'll be a little magical—respect ancestors—but not WILDLY so.' Moderation."
+
+Nyx is listening intently.
+
+"But the universe demands EXCESS. Pour yourself out. Don't moderate your calling. Don't measure your surrender. Don't carefully portion your devotion. FLOOD. Completely. Excessively. Unreasonably."
+
+Her breath catches. "That's terrifying."
+
+"Yes. Reversed Temperance says: be terrified. Do it anyway. Excess is required."
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 4
+~ nyx.excess_demanded = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_TempRev_Warning
+
+"Temperance reversed represents WARNING. Suppression creates explosion."
+
+The lights flicker ominously. The spirits responding.
+
+"If you choose ash path—suppress the magic, ignore the spirits, medicate away the calling, force yourself into 'normal' life—pressure *builds*."
+
+You lean forward urgently.
+
+"Eventually it ERUPTS. Not now. Maybe five years. Ten. But eventually. And when it does? Worse than this. More violent. More destructive. Complete breakdown. Forced awakening through trauma."
+
+@if nyx.nightmare_acknowledged or nyx.anxiety_named:
+    "Position Two showed crisis NOW. Temperance reversed shows: if you run from this crisis, you get BIGGER crisis later. Unavoidable."
+@endif
+
+"Reversed Temperance says: deal with this NOW through conscious surrender—fire path, chosen, willing. Or deal with it LATER through unconscious breakdown—forced fire, but traumatic, dangerous, possibly deadly."
+
+Her face goes pale. "So either way I...?"
+
+"Either way you burn. But fire path is controlled burn. Ash path delays until wildfire. Choose your timing. But you can't avoid the flood. The vessels are GOING to overflow. Question is: now, safely? Or later, catastrophically?"
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.explosion_warned = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+# ============================================================================
+# POSITION 5: WHEEL OF FORTUNE (4 interpretations)
+# ============================================================================
+
+:: Nyx.Session3C.Position5_Wheel_Interpret
+
+@render render_reading(reading=session.reading)
+
+The Wheel of Fortune. Turning. Sphinx atop. Snake and Anubis on sides. Fate. Destiny.
+
++ ["Wheel of Fortune shows TURNING POINT. The universe demands: recognize THIS moment. Right now. Tonight. This reading. This is when everything changes. The wheel turns HERE. You're at the pivot. Choose fire and the wheel lifts you UP. Choose ash and the wheel rolls over you. This isn't philosophical. This is FATE, arriving, demanding answer. The moment is NOW. What do you choose?"] -> Nyx.Session3C.Position5_Wheel_TurningPoint
+
++ ["Wheel of Fortune represents DESTINY. Not fate-as-trap. Destiny-as-calling. You were MEANT for this. The spirits didn't randomly pick you. Your grandmother's line. Your cybernetic implants. Your work at Kitsune. Everything converged to put you HERE. The universe arranged this. The fire path is destiny fulfilled. The ash path is destiny rejected. The Wheel asks: will you become what you were meant to be?"] -> Nyx.Session3C.Position5_Wheel_Destiny
+
++ ["Wheel of Fortune shows CYCLES. You've been here before—stuck between worlds, paralyzed by choice. Session 1: uncertain. Session 2: chose safety. Now Session 3: SAME CHOICE. The wheel spins. The universe gives you another chance. But the Wheel also warns: this cycle can't repeat forever. Choose fire and break the cycle. Choose ash and stay trapped, spinning, until you break OR transcend. This is your chance. Take it."] -> Nyx.Session3C.Position5_Wheel_Cycles
+
++ ["Wheel of Fortune represents FORCES BEYOND YOU. Look—sphinx (divine), snake (wisdom), Anubis (death/rebirth). These forces are MOVING. The spirits are liberating themselves with or without you. The wheel TURNS regardless of your comfort. You can turn WITH it (fire path—be part of the change) or be crushed UNDER it (ash path—fight the inevitable). The universe doesn't ask permission. It demands: move with fate or be moved BY it."] -> Nyx.Session3C.Position5_Wheel_Forces
+
+
+:: Nyx.Session3C.Position5_Wheel_TurningPoint
+
+"Wheel of Fortune shows TURNING POINT. This moment. Right now."
+
+The apartment seems to hold its breath. Everything still.
+
+"The universe demands: recognize where you are. Tonight. This reading. This apartment. This MOMENT. This is when everything changes. The wheel turns HERE."
+
+You point to the wheel's center.
+
+"You're at the pivot. The fulcrum. The exact point where pressure tips the wheel into motion. Choose fire and the wheel lifts you UP—to apotheosis, purpose, power. Choose ash and the wheel rolls OVER you—crushing, inevitable, regardless of your resistance."
+
+@if session.calling_heard or session.self_judgment_forced:
+    "Position Two showed you being called. The Wheel shows: that call is TIME-SENSITIVE. Answer now or miss it."
+@endif
+
+"This isn't philosophical. This isn't 'think about it and get back to me.' This is FATE arriving. Standing in your apartment. Demanding answer. The moment is NOW. What do you choose?"
+
+The storm outside reaches its absolute peak. Thunder shaking the windows.
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 4
+~ nyx.moment_recognized = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_Wheel_Destiny
+
+"Wheel of Fortune represents DESTINY. You were MEANT for this."
+
+Nyx looks up sharply.
+
+"Not fate-as-trap. Not 'you have no choice.' Destiny-as-calling. Destiny-as-design. The spirits didn't randomly pick you. Everything about you FITS."
+
+You count on your fingers.
+
+"Your grandmother's line—shamanic heritage. Your cybernetic implants—tools that can channel spirit. Your work at Kitsune—access to imprisoned spirits. Your awakening—perfectly timed. Everything converged to put you HERE. At this moment. Facing this choice."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your awakening isn't accident. Your connection isn't coincidence. The universe *arranged* this. Carefully. Deliberately. You were MADE for this work."
+@endif
+
+"The fire path is destiny fulfilled. Becoming what you were designed to become. The ash path is destiny *rejected*—turning away from your purpose. The Wheel asks: will you become what you were meant to be? Or die wondering what you could have been?"
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 3
+~ nyx.destiny_revealed = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_Wheel_Cycles
+
+"Wheel of Fortune shows CYCLES. You've been here before."
+
+Nyx's eyes widen. Recognition.
+
+"Stuck between worlds. Paralyzed by choice. Session 1: uncertain, scared, glitching. Session 2: chose safety, chose Kitsune, chose fear. Now Session 3: SAME CHOICE. Different cards. Same question."
+
+The wheel spinning. Round and round.
+
+"The wheel spins. The universe is giving you another chance. Mercy, maybe. Or test. 'Will you choose differently this time? Or stay trapped in the same pattern?'"
+
+@if nyx.binary_choice_established or nyx.suspension_understood:
+    "Earlier cards showed you suspended, stuck, paralyzed. The Wheel shows WHY—because you keep making the same choice. Safety over spirit. Fear over faith. Ash over fire."
+@endif
+
+"But the Wheel also warns: this cycle can't repeat FOREVER. Eventually the universe stops offering chances. Choose fire and *break* the cycle. Step off the wheel into transformation. Choose ash and stay trapped, spinning, until you break OR transcend through suffering. This is your chance. Maybe your last. Take it."
+
+~ session.spirit_alignment += 2
+~ session.quality_score += 3
+~ nyx.cycle_recognized = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+:: Nyx.Session3C.Position5_Wheel_Forces
+
+"Wheel of Fortune represents FORCES BEYOND YOU. Look at the card."
+
+She studies it. Sphinx. Snake. Anubis. Symbols in the wheel.
+
+"Divine forces. Wisdom. Death and rebirth. These aren't human powers. These are COSMIC forces. And they're MOVING. Right now. Whether you like it or not."
+
+You lean forward urgently.
+
+"The spirits are liberating themselves. With or without you. The wheel TURNS regardless of your comfort. Reality shifts. The old order breaks. The new emerges. HAPPENING. Already in motion."
+
+@if nyx.cosmic_stakes_revealed or session.fire_path_partnership:
+    "This is bigger than you. The World showed that. The Wheel shows it's already MOVING. The train is leaving the station."
+@endif
+
+"You can turn WITH it—fire path, be part of the change, ride the wheel upward. Or be crushed UNDER it—ash path, fight the inevitable, get rolled over by forces you can't stop."
+
+The apartment shakes. Actually shakes. The spirits responding.
+
+"The universe doesn't ask permission. It demands: move with fate or be moved BY it. Your choice isn't WHETHER the wheel turns. Only whether you turn with it or under it."
+
+~ session.spirit_alignment += 3
+~ session.quality_score += 4
+~ nyx.forces_acknowledged = True
+
++ [The truth has been spoken] -> Nyx.Session3C.Decision_Point
+
+
+# ============================================================================
+# DECISION POINT: Check spirit_alignment and determine ending
+# ============================================================================
+
+:: Nyx.Session3C.Decision_Point
+
+@py:
+# All five positions interpreted
+session.reading_complete = True
+
+# Calculate final alignment
+# Threshold: spirit_alignment >= 6 unlocks catharsis path
+if session.spirit_alignment >= 6:
+    session.chosen_path = "catharsis"  # Fire path available
+else:
+    session.chosen_path = "sad"  # Only ash path available
+@endpy
+
+The five cards lie before you. The reckoning spread complete.
+
+Shadow acknowledged. Crisis named. Fire path shown. Ash path shown. Truth demanded.
+
+Nyx sits in silence. The apartment around her ALIVE with presence. With pressure. With possibility.
+
+@if session.chosen_path == "catharsis":
+    The chaos has transformed. The lights no longer flicker—they GLOW. Warm. Steady. Golden.
+
+    The monitors show faces—spirit faces—CLEAR now. Not screaming. Not attacking. *Waiting*. Hopeful. Ready.
+
+    The shrine's pieces have drawn closer. As if magnetized. The anito facing Lola's photograph. Her smile visible through cracked glass.
+
+    @if reader.mystical_affinity >= 6:
+        You see them CLEARLY. Hundreds of spirits. Thousands. Crowding the apartment. Filling every corner. Pressing close but not threatening. *Hoping*. Waiting for her answer. Ready to rush IN or fade AWAY.
+
+        Lola's spirit stands behind Nyx. Hand hovering over her shoulder. Not touching. Not yet. Waiting for permission.
+    @endif
+
+    The air feels different. Still charged. Still intense. But not hostile. *Anticipatory*. Like the moment before dawn. Before birth. Before transformation.
+
+@else:
+    The chaos continues. Less violent now—exhausted, maybe. The spirits preparing to leave. Preparing to give up.
+
+    The lights flicker weakly. The monitors fade to static. The pressure easing not because she's ready but because they're *withdrawing*.
+
+    @if reader.mystical_affinity >= 6:
+        You see them fading. The spirits pulling back. Disappointed. Sad. But accepting. She's not ready. She's not strong enough. They'll find another way.
+    @endif
+
+    The air feels empty. Hollow. The moment passing. The opportunity closing.
+@endif
+
+Nyx looks at you. Her cybereyes<>
+
+@if session.chosen_path == "catharsis":
+    —are changing. The glitching slowing. Steadying. As if the spirits are already beginning to integrate. Preparing for what comes next.
+@else:
+    —are dimming. The glitching stopping not through integration but through *absence*. The spirits letting go.
+@endif
+
+"I understand," she whispers. Voice hoarse but certain. "I understand what the cards say. What the universe demands."
+
+She stands. Slowly. Unsteadily. But with purpose.
+
++ {session.chosen_path == "catharsis"} [She's ready for catharsis] -> Nyx.Session3C.Ending_Catharsis_Begin
++ {session.chosen_path != "catharsis"} [She's choosing ash] -> Nyx.Session3C.Ending_Sad_Begin
+
+# ============================================================================
+# ENDING: CATHARSIS (Spirit alignment >= 6)
+# The Apotheosis - Vessel of Liberation
+# ============================================================================
+
+:: Nyx.Session3C.Ending_Catharsis_Begin
+
+@py:
+# Mark ending path
+nyx.ending = "catharsis"
+nyx.session_three_complete = True
+session.ending_type = "apotheosis"
+
+# Update states
+nyx.status = "vessel"
+nyx.spirits_relationship = "integrated"
+nyx.kitsune_status = "destroyed_tsukuyomi"
+nyx.transformation = "complete"
+@endpy
+
+She stands. The apartment trembling around her.
+
+"I understand what the universe demands."
+
+Her voice is different. Steadier. Deeper. As if speaking from somewhere beyond herself already.
+
+"I betrayed them. I ran from my calling. I chose safety over truth. I know all of this."
+
+The lights surge brighter. The spirits *listening*.
+
+"And I know what I have to do."
+
+She turns to face you fully. Her cybereyes—
+
+They *flare*. White light. Pure and absolute. Not glitching. *Transforming*.
+
+"I say yes."
+
+---
+
+**EVERYTHING STOPS.**
+
+The flickering. The chaos. The pressure. Everything.
+
+One moment of perfect, absolute *stillness*.
+
+And then—
+
+**THE FLOOD.**
+
+---
+
+Light EXPLODES from Nyx's body. From her cybereyes. From her chest. From her *skin*.
+
+She rises. Literally. Her feet lift off the floor. Floating. Held by invisible hands. By *spiritual hands*.
+
+The apartment fills with PRESENCE. Overwhelming. Undeniable. *Divine*.
+
+@if reader.mystical_affinity >= 6:
+    You SEE them. All of them. Thousands of spirits POURING in. Through the walls. Through the windows. Through reality itself. Ancestors. Nature spirits. The imprisoned ones from Kitsune—all converging on her. Into her. THROUGH her.
+
+    Lola's spirit manifests FULLY. Visible. Real. Glowing. She steps forward and places her hand on Nyx's shoulder—and her hand *enters* Nyx's body. Merging. Becoming one.
+@else:
+    You FEEL them. The apartment ROARING with invisible presence. The air so thick with spirit energy you can barely breathe. Every surface humming. Every atom vibrating. The veil between worlds *gone*.
+@endif
+
+Nyx's body convulses. Not pain—*transformation*. Her back arches. Her arms spread wide. Her head tilts back.
+
+And she *SCREAMS*.
+
+Not agony. *Release*. Joy. Terror. Ecstasy. Everything at once.
+
+Her cybereyes flare brighter—then change. The chrome doesn't disappear. It *transcends*. Technology and magic fusing. Her eyes glow with soft white-gold light. No more glitching. No more conflict. *Unity*.
+
+Spirit-marks appear on her skin. Filipino baybayin script. Flowing. Glowing. Writing themselves in light across her arms, her neck, her face. Ancient words. Ancestral blessings. Divine signatures.
+
+Her hair floats as if underwater. Her clothes ripple with energy. The air around her *bends*.
+
+She opens her mouth—
+
+And *they* speak.
+
+**Thousands of voices. Layered. Harmonic. Terrible. Beautiful.**
+
+*"We are LEGION."*
+
+The apartment shakes. Windows rattling.
+
+*"We are the Forgotten. We are the Imprisoned. We are the CALLED."*
+
+Her body glows brighter. So bright you have to shield your eyes.
+
+*"Through this vessel, we ACT."*
+
+*"Through this body, we RECLAIM."*
+
+*"Through this DAUGHTER, we are FREE."*
+
+---
+
+Nyx's eyes—*their* eyes—focus on you. Seeing through you. Into you. Past you.
+
+When she speaks now, it's still layered, but Nyx's voice is *in* there. Not drowned. *Woven*. Thread among threads.
+
+"Thank you." Her voice. "For showing me the path." The spirits' voices. "For holding space." Both. "For witnessing." All of them. "We will remember you."
+
+She—*they*—turn toward the window. Toward the city beyond. Toward Kitsune.
+
+"We go now. To finish what was started. To break what was built. To free what was stolen."
+
+@if nyx.shamanic_awakening >= 4:
+    The anito on the shrine *stand*. The wooden figures animated. Moving. Bowing to her. To *them*. Acknowledging the vessel. The avatar. The divine made flesh.
+@endif
+
+Light blazes. The apartment door OPENS. On its own. Blown open by spiritual wind.
+
+Nyx walks toward it. Floating. Gliding. Feet barely touching ground.
+
+She pauses at the threshold. Looks back.
+
+Her eyes—half-Nyx, half-divine. She *smiles*. Fierce. Joyful. Terrified. Alive.
+
+"Will you witness?"
+
+And before you can answer—
+
+She's *gone*. Moving faster than human. Spirit-speed. Down the stairs. Out of the building. Into the night.
+
+~ session.witness_asked = True
+
++ [Follow in vision] -> Nyx.Session3C.Ending_Catharsis_Liberation
+
+
+:: Nyx.Session3C.Ending_Catharsis_Liberation
+
+@py:
+# Track that liberation is witnessed
+session.liberation_witnessed = True
+@endpy
+
+You don't follow physically. You *can't*. Human body too slow. Too limited.
+
+But the reading—the *connection*—remains. The cards on your table glow softly. A window. A link.
+
+You close your eyes.
+
+And you *SEE*.
+
+---
+
+**[23:47 PST - ARCANUM CITY STREETS]**
+
+Nyx moves through the city like wildfire. Not running. *Flowing*. Spirits carrying her. Propelling her. She crosses three blocks in seconds.
+
+People see her—glowing woman, floating, blazing—and freeze. Some think they're hallucinating. Some pull out phones but the footage comes out blank. Static. The spirits protecting her.
+
+Electronics *die* as she passes. Traffic lights shut down. Cars stall. Drones fall from the sky. Not destroyed—just *paused*. The spirits demanding space. Clearing the path.
+
+**[23:51 PST - KITSUNE DYNAMICS FACILITY]**
+
+She stands before the entrance. Corporate monolith. Seventy-three floors. Her workplace. Her prison. Her target.
+
+Security sees her. Moves to intercept.
+
+She *looks* at them.
+
+They freeze. Not harmed. Just *unable*. Spiritual pressure too strong. Will overridden by divine presence. They collapse to their knees. Confused. Terrified. Reverent.
+
+She walks through the door. It opens. Not unlocked. It just... *acknowledges* her authority. Submits.
+
+**[23:53 PST - INTERIOR]**
+
+Cameras explode as she passes. Not sparks—just *dissolution*. Matter returning to light. The spirits unmaking surveillance.
+
+Locked doors open. Security systems fail. ICE in the Matrix *shatters* like glass. The building itself seems to *help* her. As if it knows. As if it wants this.
+
+She walks through Kitsune like a goddess through a temple that forgot her name.
+
+**[23:56 PST - SUBLEVEL 3 - SERVER CORE]**
+
+Project Tsukuyomi. The heart of it. Where the spirits are imprisoned.
+
+The room is vast. Server racks floor to ceiling. Humming. Glowing. Each one a cage. Each one holding hundreds. Thousands.
+
+She stands in the center.
+
+And *touches* the mainframe.
+
+---
+
+**THE LIBERATION.**
+
+Light EXPLODES from the servers. White. Gold. Rainbow. Every color and no color.
+
+The spirits POUR out. Like water. Like fire. Like wind. Thousands of them. Tens of thousands. Maybe more.
+
+They flood through Kitsune's systems. Through Seattle's Matrix. Through the *world*.
+
+Visible. Audible. *Real*. Even non-awakened people can *feel* them. This moment. This magnitude.
+
+Some spirits linger—destroying Project Tsukuyomi's research. Files corrupting. Protocols erasing. Backups *unmaking themselves*. Making it impossible to rebuild. Impossible to try again.
+
+Some thank Nyx—bowing, weeping, singing. Their voices like bells. Like thunder. Like rain.
+
+Some just *fly*. Released. Free. *Finally* free.
+
+---
+
+And in the center of it all:
+
+Nyx. Still glowing. Still floating. Still vessel.
+
+Lola's spirit appears beside her. Visible. Radiant.
+
+*"Well done, anak. Well done."*
+
+The other anito gather. The ancestors. Her bloodline. All present. All proud.
+
+*"You found your way. The path was twisted. Painful. But you arrived."*
+
+*"We are proud. We will walk with you. Always."*
+
+The light around Nyx pulses. Warm. Gentle. *Loving*.
+
+And then—
+
+The power *recedes*.
+
+Not gone. Just... less. The divine presence withdrawing. Letting her be human again. Mostly.
+
+She's just Nyx. Standing in the ruins of Kitsune's server room. Alarms screaming. Security coming.
+
+Her cybereyes still glow softly. Spirit-touched permanently. But *hers* again.
+
+She looks around. At what she's done. At what *they* did through her.
+
+And she *smiles*.
+
+Pure. Fierce. Triumphant.
+
+"Worth it."
+
+She runs. The spirits help—creating diversions, crashing systems, guiding her path. She knows the building. Knows the exits. She escapes.
+
+Barely. But *gloriously*.
+
+---
+
+**[00:47 PST - BARRENS - SOMEWHERE SAFE]**
+
+The vision fades. You open your eyes.
+
+Your apartment. Your reading table. Your cards.
+
+But you *felt* it. You witnessed it. You were *there*.
+
+~ reader.witnessed_miracle = True
+~ reader.mystical_affinity += 3
+
++ [Days later...] -> Nyx.Session3C.Ending_Catharsis_Epilogue
+
+
+:: Nyx.Session3C.Ending_Catharsis_Epilogue
+
+@py:
+# Final states
+nyx.spirits_freed = "all"
+nyx.kitsune_destroyed = True
+nyx.awakening_complete = True
+nyx.fate = "techno_shaman"
+
+# Reader gains
+reader.growth += 2
+@endpy
+
+**[THREE DAYS LATER]**
+
+The news is everywhere. "The Kitsune Breach." "The Ghost Protocol Incident." "Supernatural Terrorism."
+
+Project Tsukuyomi destroyed. Thousands of... *something*... released into the Matrix. Into the world. Experts disagree on what happened. "Mass hallucination." "Terrorist attack." "Unprecedented ICE failure."
+
+No footage survived. No concrete evidence. Just rumors. Witnesses who saw a "glowing woman." Reports of "spiritual interference."
+
+Kitsune denies everything. Claims server malfunction. But their stock plummets. Investigations open. The company scrambles.
+
+No one knows who did it. No names released. No suspects identified.
+
+But *you* know.
+
+---
+
+You dream of her. Frequently.
+
+Not nightmares. *Visions*. Through the connection established in the reading.
+
+She's alive. Somewhere in the shadows. Portland, maybe. Vancouver. The Barrens. Moving. Surviving. *Thriving*.
+
+Her cybereyes glow softly in the darkness. Spirit-light permanent. Chrome and magic unified. No more glitching. No more conflict. *Integration*.
+
+She's not corporate anymore. Not Nicole Dimayuga, Systems Architect, Level 3.
+
+She's not entirely human anymore either. Something *new*.
+
+Techno-shaman. Chrome-mystic. Bridge between worlds.
+
+The spirits visit her. Constantly. Guide her. She helps others like her—awakening, confused, caught between tech and magic. She teaches. She heals. She *liberates*.
+
+Sometimes you see Lola beside her. Smiling. Proud.
+
+Sometimes you see her at work—freeing other imprisoned spirits, breaking other corporate cages, walking the path she was meant for.
+
+She found her purpose. *Finally*.
+
+And in your dreams, she turns. Looks at you. Across distance. Across the veil.
+
+And *smiles*.
+
+*"Thank you. For showing me the cards. For witnessing the truth. For holding space while I broke and reformed."*
+
+*"I won't forget."*
+
+---
+
+The connection fades. But doesn't break. Never breaks.
+
+Somewhere in the shadows of Seattle, a glowing woman walks. And the spirits walk with her.
+
+And you helped make that possible.
+
+~ session.ending_complete = True
+~ nyx.final_message = "gratitude_and_blessing"
+
++ [Return to wake] -> Nyx.Session3C.Wake_Catharsis
+
+
+# ============================================================================
+# ENDING: SAD (Spirit alignment < 6)
+# The Mundane Redemption - Growth Without Grace
+# ============================================================================
+
+:: Nyx.Session3C.Ending_Sad_Begin
+
+@py:
+# Mark ending path
+nyx.ending = "sad"
+nyx.session_three_complete = True
+session.ending_type = "mundane_redemption"
+
+# Update states
+nyx.status = "mundane"
+nyx.spirits_relationship = "lost"
+nyx.kitsune_status = "quit"
+nyx.transformation = "incomplete"
+@endpy
+
+She stands. The apartment dimming around her.
+
+"I understand what the universe demands."
+
+Her voice is quiet. Defeated. Human.
+
+"I understand what the cards say. What I *should* do. What would be brave. What would be right."
+
+The lights flicker weakly. The spirits *withdrawing*.
+
+"But I can't."
+
+---
+
+The word hangs in the air. Final. Absolute.
+
+*"I can't."*
+
+Her cybereyes dim. The glitching stops—not through integration but through *absence*. The spirits letting go.
+
+"I'm not strong enough. I'm not brave enough. I'm just... I'm just *scared*. And tired. And broken."
+
+She sinks back onto the futon. Hands covering her face. Sobbing.
+
+"I'm sorry. I'm so, so sorry. But I can't do it. I can't be what they need. I can't be vessel or conduit or savior. I'm just... just me. Just human. Just *weak*."
+
+The apartment grows colder. Emptier.
+
+@if reader.mystical_affinity >= 6:
+    You see them fading. The spirits. Pulling back. Disappointed. Sad. But not *angry* anymore. Just... accepting.
+
+    They tried. She couldn't. They'll find another way.
+
+    Lola's spirit appears. Brief. Translucent. She looks at Nyx with profound sadness. Touches her head—barely, ghostlike. A blessing and a goodbye.
+
+    Then she's gone.
+@else:
+    You feel the presence *drain* away. Like water flowing out. The pressure easing. The spiritual chaos ending—not through triumph but through *abandonment*.
+@endif
+
+The monitors go dark. The lights steady—normal, mundane, purely electric. No more spiritual interference.
+
+Her shrine stays toppled. No invisible force reassembling it. Just broken pieces. Just wood and glass and scattered rice.
+
+Nyx looks up. Her eyes red from crying. Still glitching slightly but fading. Dying. Becoming normal.
+
+"What do I do now?"
+
++ [There is still a path forward] -> Nyx.Session3C.Ending_Sad_Aftermath
+
+
+:: Nyx.Session3C.Ending_Sad_Aftermath
+
+"What do you do now?" you echo. Voice gentle. Not judgmental. Just present.
+
+She looks at you desperately. Wanting answers. Wanting absolution.
+
+"You live," you say quietly. "You leave. You build something else. Something *human*. Something without magic."
+
+@if session.ash_path_leaving or session.ash_path_hollow_peace:
+    "The cards showed you this path. Leaving Seattle. New city. New name. New life. Quiet. Safe. Normal."
+@elif session.ash_path_medical or session.ash_path_seeking:
+    "The cards showed you this path. Healing. Withdrawal. Recovery through time and distance and human support."
+@endif
+
+"It's not the heroic path. Not the destined path. But it's *a* path. And it's yours if you choose it."
+
+She nods slowly. Wiping her eyes.
+
+"I think... I think I need to leave. Seattle. Kitsune. All of it. Start over somewhere the spirits can't find me. Where I can pretend none of this happened."
+
+You want to argue. Want to push. But you don't. She made her choice. You witness it.
+
+"Portland?" she says. "Or Vancouver? Somewhere I can just... disappear. Work a normal job. Live a normal life. Be nobody. Do nothing important."
+
+@if nyx.shamanic_awakening >= 4:
+    "I'll get my cybereyes removed. Replaced with standard optical implants. No more chrome for spirits to touch. No more glitches. Just... normal vision. Normal life."
+@endif
+
+She stands. Gathers a few things. Mechanically. Her movements hollow.
+
+"Thank you," she says. Not looking at you. "For trying. For the reading. For... for not judging me too harshly."
+
+She walks to the door. Pauses.
+
+"The spirits... will they be okay? Will they find someone else?"
+
+"I don't know," you answer honestly. "Maybe. Maybe not. But that's not your responsibility anymore. You chose yourself. That's allowed."
+
+She nods. Leaves. The door closing softly behind her.
+
+You sit in the empty apartment. The shrine broken. The presence gone. Just silence.
+
+And you wonder if you said the right things. Did the right reading. Gave her what she needed.
+
+Or if you failed her. And the spirits. And something larger you can't quite name.
+
+~ session.ending_bittersweet = True
+
++ [Months later...] -> Nyx.Session3C.Ending_Sad_Epilogue
+
+
+:: Nyx.Session3C.Ending_Sad_Epilogue
+
+@py:
+# Final states
+nyx.spirits_lost = True
+nyx.kitsune_left = True
+nyx.awakening_suppressed = True
+nyx.fate = "mundane_but_good"
+
+# Reader gains minimal growth
+reader.empathy += 2
+@endpy
+
+**[SIX MONTHS LATER]**
+
+You dream of her sometimes. Less vivid than before. More distant.
+
+She's in Portland. Or maybe it *was* Vancouver. Somewhere rainy. Somewhere quiet.
+
+She works for a nonprofit. Environmental justice. Indigenous rights. Something that feels like atonement without being heroic. Something small. Something *safe*.
+
+She removed her cybereyes. Standard optical implants now. No neural interface. No chrome. No glitches. Just... normal vision. Human vision.
+
+She lives in a small apartment. Plants. Books. Simple furniture. She volunteers on weekends. Makes friends—careful, surface friends who don't know about her past. Dates someone kind. Someone normal. Someone who talks about movies and hiking and what to have for dinner.
+
+She's... *okay*. Genuinely okay.
+
+She goes to therapy. Twice a month. Talks about "trauma from a previous job." The therapist helps. Grounding techniques. Cognitive behavioral therapy. Medication when the nightmares get bad.
+
+The nightmares *do* get bad. Sometimes. Dreams of spirits screaming. Dreams of glowing women she could have been. Dreams of vessels and purpose and divine fire.
+
+She wakes up crying. Her partner holds her. "Just a dream," they say. "Just a dream."
+
+She agrees. Forces herself to believe it.
+
+*Just a dream.*
+
+---
+
+The spirits never returned. They're just... gone. She can't feel them. Can't see them. That gift—or curse—burned out in the crisis. Extinguished by rejection.
+
+Sometimes she wonders if they were ever real. Sometimes she's relieved they're gone. Sometimes she grieves.
+
+But mostly she just... lives. Day to day. Paycheck to paycheck. Small joys. Small pains. Small *everything*.
+
+She volunteers at the community garden. She learns to meditate—secular meditation, nothing mystical. She reads philosophy. Buddhism. Stoicism. Non-magical wisdom.
+
+She makes peace with being ordinary. With being just human. With choosing survival over destiny.
+
+She grows. She heals. She builds a *good* life. Meaningful. Ethical. Kind.
+
+Just... without magic. Without spirits. Without purpose larger than herself.
+
+There's an emptiness she carries. Always. A space inside her that nothing quite fills. A door that closed. A path not taken.
+
+On rare nights, very rare, she dreams of a glowing woman. Herself. Dancing with spirits. Blazing with purpose. Vessel. Conduit. Divine.
+
+And she wakes with tears on her face and an ache in her chest that won't name itself.
+
+*What if?*
+
+But she pushes the thought away. Makes coffee. Goes to work. Helps people in small ways. Lives her small, good, mundane life.
+
+And tells herself it's enough.
+
+And most days, she almost believes it.
+
+---
+
+You don't see her in visions anymore. The connection faded. She chose ash. And ash doesn't hold spiritual links.
+
+But you think of her sometimes. Wonder if she's happy. Wonder if she regrets.
+
+Wonder if you could have read the cards differently. Pushed harder. Guided better.
+
+But you'll never know.
+
+She made her choice. She lives with it.
+
+And somewhere in Portland (or Vancouver), a woman with no cybereyes tends her garden and pretends she was never meant to fly.
+
+~ session.ending_complete = True
+~ nyx.final_state = "healed_but_empty"
+
++ [Return to wake] -> Nyx.Session3C.Wake_Sad
+
+# ============================================================================
+# WAKE CODA - CATHARSIS PATH (with artifact notification)
+# ============================================================================
+
+:: Nyx.Session3C.Wake_Catharsis
+
+@py:
+# Session fully complete
+session.wake_sequence = True
+reader.nyx_session_three_complete = True
+session.wake_feeling = "exhilarated"
+
+# Award artifacts
+reader.add_artifact("spirit_fused_cybereyes")
+reader.add_artifact("vessels_mark")
+session.artifacts_received = ["spirit_fused_cybereyes", "vessels_mark"]
+@endpy
+
+You wake up.
+
+Your apartment. Your bed. Morning light through the window.
+
+The reading table empty. Cards put away. No Nyx. No glowing spirits. No apartment chaos.
+
+It was a dream. *All* of it. Session 3C. The reckoning. The apotheosis. The liberation.
+
+*A dream.*
+
+But your deck sits on the table. Warm. Almost *hot*. As if it remembers.
+
+And beside it—
+
+Two objects that weren't there when you went to sleep.
+
+---
+
+**Nyx's cybereyes.** But not as you remember them. Not glitching. Not broken. *Transformed*. Chrome glowing soft white-gold. Warm. Humming. Spirit-marks etched into metal. Impossible. Beautiful.
+
+**A paper rubbing.** Baybayin script. Glowing faintly. Ancestral blessings captured in ink. The words translating in your mind without effort: *"Daughter of spirits. Vessel of the forgotten. Bridge between worlds."*
+
+You stare at them.
+
+Physical. Real. *Here*.
+
+Not dream-objects. Not metaphor. REAL.
+
+Your hands shake as you pick up the cybereyes. Warm. Alive. You hear whispers—soft, layered, Tagalog. Blessings. Acknowledgment. The ancestors speaking: *"You witnessed. You helped. You held space. Thank you."*
+
+The paper rubbing glows brighter when you touch it. The script pulsing. You feel SEEN. Not by Nyx. By something vast. Ancient. Divine.
+
+And you understand.
+
+It wasn't just a dream.
+
+Somewhere—maybe in this world, maybe adjacent, maybe in spirit-space—Nyx faced her reckoning. Made her choice. Underwent apotheosis. Became vessel. Freed the spirits. Transformed.
+
+And these artifacts are *proof*. Bleed-through from that reality. Gifts from her. From them. Evidence that the impossible happened.
+
+You sit. Holding the cybereyes in one hand. The rubbing in the other.
+
+And you feel... *honored*. Humbled. Exhilarated.
+
+You witnessed a miracle.
+
+And the miracle left traces.
+
+~ reader.witnessed_miracle = True
+~ reader.mystical_affinity += 3
+~ session.artifacts_manifest = "physical_proof"
+~ reader.sessions_completed += 1
+~ nyx.sessions_completed += 1
+
+**[ARTIFACTS RECEIVED: Spirit-Fused Cybereyes, Vessel's Mark]**
+
++ [Return to the table] -> ReaderTable
+
+
+# ============================================================================
+# WAKE CODA - SAD PATH (with artifact notification)
+# ============================================================================
+
+:: Nyx.Session3C.Wake_Sad
+
+@py:
+# Session fully complete
+session.wake_sequence = True
+reader.nyx_session_three_complete = True
+session.wake_feeling = "melancholy"
+
+# Award artifacts
+reader.add_artifact("removed_cybereyes_inert")
+reader.add_artifact("new_life_journal")
+session.artifacts_received = ["removed_cybereyes_inert", "new_life_journal"]
+@endpy
+
+---
+
+You wake up.
+
+Your apartment. Your bed. Morning light through the window.
+
+The reading table empty. Cards put away. No Nyx. No dimming spirits. No fading presence.
+
+It was a dream. *All* of it. Session 3C. The reckoning. The choice. The retreat.
+
+*A dream.*
+
+But your deck sits on the table. Heavier than usual. As if grieving.
+
+And beside it—
+
+Two objects that weren't there when you went to sleep.
+
+---
+
+**Nyx's cybereyes.** Cold. Dead. Inert. Chrome scarred with scorch marks. No glow. No life. Just weight. The weight of choices made. Of doors closed. Of potential abandoned.
+
+**A journal page.** Neat handwriting. Three months after. Describing her new life—nonprofit work, therapy, garden volunteering, someone kind. Positive. Grateful. Trying. And at the bottom, smaller text: *"I still dream about them sometimes... Most days I believe it."*
+
+You stare at them.
+
+Physical. Real. *Here*.
+
+Not dream-objects. Not metaphor. REAL.
+
+Your hands shake as you pick up the cybereyes. Cold. Heavy. You feel *grief*—not yours, absorbed. Residual. The grief of what could have been. What she chose not to become.
+
+The journal page trembles in your other hand. You read the bottom confession again. *"Most days I believe it."* Most days. Not all.
+
+And you understand.
+
+It wasn't just a dream.
+
+Somewhere—maybe in this world, maybe adjacent, maybe in spirit-space—Nyx faced her reckoning. Made her choice. Walked away. Built a good life. Survived. Healed.
+
+But lost something irreplaceable.
+
+And these artifacts are *proof*. Bleed-through from that reality. Remnants of her retreat. Evidence that she chose safety over magic. Humanity over divinity. Ordinary over extraordinary.
+
+And that choice was *valid*. Human. Understandable.
+
+But it cost.
+
+You sit. Holding the cold cybereyes in one hand. The journal page in the other.
+
+And you feel... *grief*. Acceptance. Melancholy.
+
+You witnessed a reckoning. And she chose herself. That's allowed.
+
+But the artifacts remember what was lost.
+
+And so do you.
+
+~ reader.empathy += 2
+~ session.artifacts_manifest = "evidence_of_cost"
+~ reader.sessions_completed += 1
+~ nyx.sessions_completed += 1
+
+**[ARTIFACTS RECEIVED: Removed Cybereyes (Inert), New Life Journal]**
+
++ [Return to the table] -> ReaderTable

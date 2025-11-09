@@ -13,6 +13,10 @@ class Artifact:
         origin_session,
         origin_character=None,
         rarity="common",
+        physical_properties="",
+        spiritual_resonance="",
+        cultural_context="",
+        reader_effect="",
     ):
         self.id = id  # Unique identifier (e.g., "razor_lucky_token")
         self.name = name  # Display name
@@ -23,6 +27,10 @@ class Artifact:
             origin_character  # Which character gave it (if applicable)
         )
         self.rarity = rarity  # "common", "rare", "legendary" (for UI display)
+        self.physical_properties = physical_properties
+        self.spiritual_resonance = spiritual_resonance
+        self.cultural_context = cultural_context
+        self.reader_effect = reader_effect
 
     def to_dict(self):
         return {
@@ -154,6 +162,65 @@ ENCRYPTED_SKILLS_DATACORE = Artifact(
     rarity="rare",
 )
 
+# ============================================================================
+# NYX PATH C ARTIFACTS - Session 3C: The Reckoning
+# ============================================================================
+
+SPIRIT_FUSED_CYBEREYES = Artifact(
+    id="spirit_fused_cybereyes",
+    name="Spirit-Fused Cybereyes",
+    description="Chrome and circuitry. Glowing soft white-gold. Warm to touch. Baybayin script etched impossibly into metal. Hum subsonic. Spirit-marks permanent.",
+    lore="During apotheosis, the spirits didn't destroy her augments. They transformed them. Chrome became sacred. Technology became altar. The glitching stopped not through removal but through integration. These eyes saw thousands of spirits flooding IN. Saw Lola manifest fully. Saw the moment Nyx became vessel. They remember. The neural interfaces still hold traces of divine presence. When you hold them, you feel it. Not hostile. Just present. Undeniable. Occasionally faces appear in the chrome's reflection. Not yours. Spirit faces. Watching. Blessing. Acknowledging the witness. This is proof that flesh and chrome and magic can dance together. That the war between worlds can end. That techno-shamanism isn't dream—it's destiny. Nyx became it. These eyes prove it.",
+    origin_session="Nyx Session 3C (The Reckoning)",
+    origin_character="Nyx (transformed)",
+    rarity="legendary",
+    physical_properties="Warm. Subsonic hum. Glows white-gold. Never corrodes.",
+    spiritual_resonance="High. Attracts spirits. Responds to awakened presence.",
+    cultural_context="Filipino baybayin script. Ancestral blessing made tangible.",
+    reader_effect="Mystical affinity +2. Occasional spirit whispers in Tagalog.",
+)
+
+VESSELS_MARK = Artifact(
+    id="vessels_mark",
+    name="Vessel's Mark",
+    description="Paper rubbing. Baybayin script glowing faintly. Ancestral blessings captured in ink that remembers being light. Sacred. Fragile. Heavy.",
+    lore="When the ancestors inhabited Nyx, they wrote on her body. Not metaphor. Actual script. Light-made-letters flowing across her arms, neck, face. Filipino baybayin—ancient, sacred, powerful. The translations are clear: 'Daughter of spirits.' 'Vessel of the forgotten.' 'Bridge between worlds.' 'She who breaks chains.' This rubbing captured those marks before they faded from her skin. But they didn't fully fade. The paper remembers. The ink glows. Soft gold-white, persistent, gentle. You don't want to fold it. Don't want to damage it. It demands care. Reverence. The ancestors signed their names on her flesh and this paper bears witness. When you trace the characters, you feel SEEN. Not by Nyx. By them. By the vast, ancient, judging-and-blessing presence that chose her. That claimed her. That made her MORE. This is legacy. This is proof. This is the moment divinity touched humanity and said: 'You. Yes. YOU.'",
+    origin_session="Nyx Session 3C (The Reckoning)",
+    origin_character="The Ancestors (through Nyx)",
+    rarity="legendary",
+    physical_properties="Glows softly in darkness. Paper feels warm. Ink never fades.",
+    spiritual_resonance="Ancestral. Spirits recognize and honor it.",
+    cultural_context="Filipino shamanic tradition. Baybayin script. Lola's bloodline.",
+    reader_effect="Mystical affinity +1. Feel witnessed by something vast.",
+)
+
+REMOVED_CYBEREYES_INERT = Artifact(
+    id="removed_cybereyes_inert",
+    name="Removed Cybereyes (Inert)",
+    description="Chrome and circuitry. Cold. Dead. Silent. Scorch marks visible on neural interfaces. No glow. No life. Just weight.",
+    lore="She chose safety. She chose herself. She chose to walk away from magic and build something human instead. These eyes—once glitching with spirit pressure, once potential vessels for divine sight—were surgically removed three weeks after the reckoning. Replaced with standard optical implants. Mundane. Safe. Normal. The chrome is scarred. Scorch marks where spirits tried to break through. Evidence of the war her body fought. But now? Silent. The spirits gave up. Let her go. Sad but accepting. She wasn't strong enough. Wasn't ready. That's allowed. That's human. These eyes remember what they could have become. Chrome-and-magic unified. Spirit-sight permanent. Techno-shamanic transcendence. But she said no. And they died. Not destroyed—abandoned. When you hold them, you feel grief. Not yours. Absorbed. Residual. The grief of doors closing. Of potential unrealized. Of 'what if.' They're heavier than they should be. Not physically. Emotionally. The weight of retreat. Of choosing survival over purpose. She built a good life after. Meaningful. Ethical. Kind. But these eyes will never see spirits again. And they mourn.",
+    origin_session="Nyx Session 3C (The Reckoning)",
+    origin_character="Nyx (withdrawn)",
+    rarity="uncommon",
+    physical_properties="Cold. Heavy. Inert. Scorch marks permanent.",
+    spiritual_resonance="Absent. Spirits avoid—too painful.",
+    reader_effect="Empathy +2. Feel her choice's cost.",
+)
+
+NEW_LIFE_JOURNAL = Artifact(
+    id="new_life_journal",
+    name="New Life Journal",
+    description="Single journal page. Three months after. Neat handwriting. Describes nonprofit work, therapy, garden volunteering. Small confession at bottom.",
+    lore="Portland. Or maybe Vancouver. Somewhere rainy. Somewhere quiet. Somewhere she could disappear and rebuild as someone ordinary. Three months after choosing ash, she writes in her journal. Daily practice. Therapist recommended it. Helps with 'processing trauma from previous employment.' She describes her new life carefully. Gratefully. Nonprofit environmental justice work. Therapy twice monthly. Community garden on weekends. Coffee dates with someone kind who doesn't ask about her past. She's healing. She's growing. She's building something small but good. The entry is positive. Deliberately positive. Convince herself. Convince the universe. Convince anyone who might read this that she made the right choice. That survival is enough. That ordinary is okay. But at the bottom—smaller text, almost hidden, written late at night when the mask slips—the truth: 'I still dream about them sometimes. The spirits. The light. What I could have been. I wake up crying and tell myself it's okay. That I made the right choice. That survival is enough. Most days I believe it.' Most days. Not all. The ink is ordinary but the words are heavy. When you read them, you feel her trying. Trying so hard. To be okay. To accept. To move on. And you wonder: did she succeed? Is the life she built enough to fill the space where magic used to be? You don't know. Neither does she. But she keeps trying. That's something. Maybe that's everything.",
+    origin_session="Nyx Session 3C (The Reckoning)",
+    origin_character="Nyx (three months after)",
+    rarity="uncommon",
+    physical_properties="Ordinary paper. Neat handwriting. Bottom text smaller, shakier.",
+    spiritual_resonance="Absent. Painful absence. Spirits can't bear it.",
+    reader_effect="Empathy +2. Understand the cost of choosing safety.",
+)
+
+
 # Registry for easy lookup
 ARTIFACTS = {
     "razor_lucky_token": RAZOR_LUCKY_TOKEN,
@@ -167,6 +234,12 @@ ARTIFACTS = {
     "wanderers_compass": WANDERERS_COMPASS,
     "ancestral_travel_blessing": ANCESTRAL_TRAVEL_BLESSING,
     "encrypted_skills_datacore": ENCRYPTED_SKILLS_DATACORE,
+    # Nyx Session 3C - Path C (Catharsis)
+    "spirit_fused_cybereyes": SPIRIT_FUSED_CYBEREYES,
+    "vessels_mark": VESSELS_MARK,
+    # Nyx Session 3C - Path C (Sad)
+    "removed_cybereyes_inert": REMOVED_CYBEREYES_INERT,
+    "new_life_journal": NEW_LIFE_JOURNAL,
 }
 
 

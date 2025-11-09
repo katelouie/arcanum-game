@@ -14,6 +14,9 @@ import random
 @include chen/chen_session_3a.bard
 @include chen/chen_session_3b.bard
 @include nyx/nyx_session_2.bard
+@include nyx/nyx_session_3a.bard
+@include nyx/nyx_session_3b.bard
+@include nyx/nyx_session_3c.bard
 
 @metadata
   title: Arcanum
@@ -52,12 +55,12 @@ if nyx not in clients:
 + {nyx in clients} [Nyx] -> Nyx ^CLIENT:SPECIAL
 # Starter
 + {chen in clients} [Margaret Chen] -> Chen ^CLIENT
-+ {david in clients} [David Morrison] -> David ^CLIENT
-+ {alex in clients} [Alex] -> Alex ^CLIENT
-+ {sarah in clients} [Sarah Kim] -> Sarah ^CLIENT
-# Additional
-+ {maya in clients} [Maya Chen] -> Maya ^CLIENT
-+ {eleanor in clients} [Eleanor Blackwood] -> Eleanor ^CLIENT
+# + {david in clients} [David Morrison] -> David ^CLIENT
+# + {alex in clients} [Alex] -> Alex ^CLIENT
+# + {sarah in clients} [Sarah Kim] -> Sarah ^CLIENT
+# # Additional
+# + {maya in clients} [Maya Chen] -> Maya ^CLIENT
+# + {eleanor in clients} [Eleanor Blackwood] -> Eleanor ^CLIENT
 # Non-Client Options
 + [Wander over to your shelf] -> ArtifactsCabinet
 

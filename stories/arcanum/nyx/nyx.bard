@@ -1,10 +1,17 @@
 :: Nyx
-<<if nyx.sessions_completed == 0>>
+@if nyx.sessions_completed == 0:
     -> Nyx.Session1
-<<elif nyx.sessions_completed == 1>>
+@elif nyx.sessions_completed == 1:
     -> Nyx.Session2.Start
-<<elif nyx.sessions_completed == 2>>
-    -> Nyx.Session3
-<<else>>
+@elif nyx.sessions_completed == 2:
+    @if nyx.final_path == "runner":
+        -> Nyx.Session3A.Start
+    @elif nyx.final_path == "ghost":
+        -> Nyx.Session3B.Start
+    @else:
+        # Loyalty path
+        -> Nyx.Session3C.Start
+@else:
+    # Session 3 completed
     Nyx's story is complete.
-<<endif>>
+@endif

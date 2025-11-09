@@ -249,6 +249,15 @@ class Reader:
         """Uses readings to manipulate clients"""
         return self.manipulation >= 3
 
+    # === COLLECTIONS: ACHIEVEMENTS AND ARTIFACTS ===
+    def add_artifact(self, artifact_name: str):
+        """Add artifact ID to collection."""
+        self.artifacts.append(artifact_name)
+
+    def add_achievement(self, achievement: str):
+        """Add achievement to set."""
+        self.achievements.add(achievement)
+
 
 @dataclass
 class Client:
