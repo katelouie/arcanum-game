@@ -1,140 +1,97 @@
 # Arcanum: A Digital Cartomancer's Tale
 
-An interactive fiction game about becoming a tarot reader, built with [Bardic](https://github.com/katelouie/bardic).
+![Cover Image](images/itchio_cover.png)
 
-## About
+This is the open-source repository for **Arcanum**, the flagship demo game for the **[Bardic](https://github.com/katelouie/bardic)** interactive fiction engine.
 
-Arcanum is a narrative game where you play as an aspiring tarot reader building your practice. Meet clients, perform readings, manage your schedule, and grow your skills.
+> ## For Players: Play the Game
+>
+> **You don't need to download any code.** The full game is free to play in your browser right now on Itch.io.
+>
+> ### [Play *Arcanum* on Itch.io](https://katehlouie.itch.io/arcanum)
 
-This game demonstrates what you can build with the Bardic interactive fiction engine:
+-----
 
-- Custom Python classes (Card, Client objects)
-- Dynamic UI with passage-level tags
-- Save/load functionality
-- Dashboard systems
-- Object-oriented game state
+## For Developers: About This Repository
 
-## Features
+This repository is a complete, open-source example of what you can build with the **[Bardic](https://github.com/katelouie/bardic)** engine. It's designed to be a "batteries-included" project that you can download, run, and learn from.
 
-- 📖 **Branching narrative** - Your choices shape your journey
-- 🃏 **Tarot reading system** - Work with actual tarot card objects
-- 👥 **Client management** - Build relationships with different clients
-- 📊 **Progress tracking** - Level up and earn money
-- 💾 **Save/load** - Save your progress at any time
-- 🎨 **Beautiful UI** - Mystical purple/gold aesthetic
+It demonstrates how Bardic uses Python-first principles to build complex, data-driven narrative games.
 
-## Quick Start
+### Features Showcased
+
+This demo isn't just a simple story; it's a showcase of Bardic's core power:
+
+* **Object-Oriented Storytelling:** See how custom Python classes like `Card`, `Client`, and `Session` are imported and used directly in the narrative to manage state.
+* **Complex State Management:** Go beyond simple variables. This game tracks client trust, reputation, money, full tarot spreads, and branching story flags.
+* **Reusable Logic:** Uses **passage parameters** to create reusable, data-driven passages for client readings.
+* **Custom UI Integration:** Shows how Bardic's tags (`^UI:DASHBOARD`) and `@render` directives can control a NiceGUI frontend.
+* **Full Save/Load System:** A working example of a persistent save manager.
+
+## Getting Started (Running Locally)
 
 ### Prerequisites
 
-- Python 3.12+
-- pyenv (recommended)
+* Python 3.12+
+* `pyenv` (recommended)
 
-### Installation
+### Installation & Running
 
 ```bash
-# Create and activate virtual environment
+# 1. Create and activate a virtual environment
 pyenv virtualenv 3.12 arcanum
 pyenv activate arcanum
 
-# Install dependencies
+# 2. Install dependencies
 pip install -r requirements.txt
+
+# 3. Compile the story
+# This reads the .bard files and creates the final .json story file
+bardic compile stories/arcanum/main.bard -o compiled_stories/arcanum.json
+
+# 4. Run the player
+python player/nicegui_player.py
 ```
 
-### Running the Game
-
-```bash
-# Compile the story (first time or after changes)
-bardic compile stories/reader_journey.bard -o compiled_stories/reader_journey.json
-
-# Run the player
-python player/nicegui_test_player.py
-```
-
-Open your browser to `http://localhost:8080` and start playing!
+Once running, just open your browser to **`http://localhost:8080`** to play the game locally.
 
 ## Project Structure
+
+Here are the most important files to look at:
 
 ```sh
 arcanum-game/
 ├── player/
-│   ├── nicegui_test_player.py  # Main NiceGUI player application
-│   └── save_manager.py         # Save/load system
+│   ├── nicegui_player.py   # The main NiceGUI frontend. This is what you run.
+│   └── save_manager.py       # A Python-based save/load system.
 ├── game_logic/
-│   └── test_tarot_objects.py   # Card and Client classes
-├── stories/
-│   └── reader_journey.bard     # Main story file
-├── compiled_stories/           # Compiled JSON stories
-├── assets/                     # Images, card meanings, etc.
-├── saves/                      # Save game files
-├── requirements.txt           # Python dependencies
-└── README.md                  # This file
+│   └── tarot.py              # Custom Python classes (Card, Client) imported by Bardic.
+├── stories/arcanum/
+│   ├── main.bard             # The main story entry point.
+│   ├── prologue.bard         # The game's introduction.
+│   ├── chen/                 # The full text and logic for Margaret Chen's arc.
+│   └── nyx/                  # The full text and logic for Nyx's arc.
+├── compiled_stories/
+│   └── arcanum.json          # The final, compiled JSON that the player runs.
+├── assets/                   # Images, card meanings, etc.
+└── requirements.txt         # Python dependencies
 ```
 
 ## Built With Bardic
 
-This game is built with [Bardic](https://github.com/katelouie/bardic), a Python-first interactive fiction engine.
+This entire game is powered by **[Bardic](https://github.com/katelouie/bardic)**, a Python-first interactive fiction engine built for writers who want more power and developers who love narrative.
 
-Want to create your own IF game? Check out Bardic:
+If you're interested in making your own game, you can get started in seconds:
 
 ```bash
 pip install bardic
 bardic init my-game
 ```
 
-## Game Development
-
-### Adding New Content
-
-Edit `stories/reader_journey.bard` and recompile:
-
-```bash
-bardic compile stories/reader_journey.bard -o compiled_stories/reader_journey.json
-```
-
-### Custom Classes
-
-The game uses custom Python classes defined in `game_logic/test_tarot_objects.py`:
-
-- `Card` - Tarot card objects with serialization
-- `Client` - Client profiles with flavor text
-
-These objects are imported in the story and persist through saves.
-
-### UI Customization
-
-The player UI in `player/nicegui_test_player.py` includes:
-
-- Landing page with gradient background
-- Story player with centered layout
-- Client cards with business card styling
-- Dashboard for client management
-- Save/load dialogs
-
-All styling uses Tailwind CSS classes and can be customized.
-
-## Story Features
-
-Arcanum demonstrates advanced Bardic features:
-
-- **@metadata** - Story metadata for save/load
-- **Python blocks** - Dynamic variable calculations
-- **Conditionals** - Branching based on state
-- **Loops** - Iterating over collections
-- **Tags** - Passage-level UI routing (`^UI:DASHBOARD`)
-- **Custom objects** - Full Python class integration
-
-## License
-
-This game is an example project demonstrating the Bardic engine.
-
 ## Credits
 
-Built with:
-
-- [Bardic](https://github.com/katelouie/bardic) - Interactive fiction engine
-- [NiceGUI](https://nicegui.io/) - Python UI framework
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [vectorsmarket15](https://www.flaticon.com/free-icons/tarot) - Flaticon
-
-Tarot card images and meanings sourced from public domain resources.
+* **Engine:** [Bardic](https://github.com/katelouie/bardic)
+* **UI Framework:** [NiceGUI](https://nicegui.io/)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **Icons:** [vectorsmarket15](https://www.flaticon.com/free-icons/tarot) via Flaticon
+* **Card Images:** Sourced from public domain resources.
