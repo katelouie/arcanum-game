@@ -45,6 +45,9 @@ class Session:
     client_walked_out: bool = False
     mystical_event_happened: bool = False
 
+    # === ARC-END SESSION REWARDS ===
+    artifacts_awarded: list = field(default_factory=list)
+
     # === ATMOSPHERE (-3 to +5) ===
 
     @property
