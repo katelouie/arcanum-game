@@ -90,6 +90,70 @@ TSUKUYOMI_EVIDENCE = Artifact(
     rarity="legendary",
 )
 
+# ============================================================================
+# NYX SESSION 3B ARTIFACTS (Ghost Protocol / Espionage Path)
+# ============================================================================
+
+SPIRIT_GUIDANCE_CHARM = Artifact(
+    id="spirit_guidance_charm",
+    name="Spirit Guidance Charm",
+    description="A small carved wooden charm. Warm to the touch. Unfamiliar style.",
+    lore="The freed spirits left this on Nyx's shrine after the heist. Gratitude made manifest. Protection for the one who freed them. When you hold it, you feel presence—watching, guiding, protecting. Hidden magic surviving in a corporate world. The spirits remember. They're watching. You're never truly alone.",
+    origin_session="nyx_session_3b",
+    origin_character="Freed Spirits",
+    rarity="rare",
+)
+
+CORPORATE_WARNING_TOKEN = Artifact(
+    id="corporate_warning_token",
+    name="Corporate Warning Token",
+    description="Small metal disc. Kitsune logo on one side. Matsuda's personal seal on the other.",
+    lore="Matsuda left this somehow. During the investigation. Before the call. A message without words: 'I'm watching you.' Not quite proof. Not quite threat. But weight. Pressure. The edge Nyx walks every day after Ghost Protocol. She kept her cover but Matsuda's suspicion lingers, cold and heavy as this token. Corporate surveillance made physical.",
+    origin_session="nyx_session_3b",
+    origin_character="Matsuda Kenji",
+    rarity="uncommon",
+)
+
+INSIDER_KEYCARD = Artifact(
+    id="insider_keycard",
+    name="The Insider's Keycard",
+    description="Nyx's Kitsune employee badge. Gamma-7 clearance. But it means more now.",
+    lore="No longer just corporate ID. It's access. Power. The ability to change things from within. Nicole Dimayuga—shadow operative. The deepest of deep cover. She stayed inside Kitsune not from fear but from strategy. Long game thinking. This badge is proof: infiltration can be liberation. Sometimes the most radical act is staying where you're planted and rotting the system from inside.",
+    origin_session="nyx_session_3b",
+    origin_character="Nyx (herself)",
+    rarity="rare",
+)
+
+WANDERERS_COMPASS = Artifact(
+    id="wanderers_compass",
+    name="Wanderer's Compass",
+    description="Small brass compass. Old. Tarnished. The needle doesn't point north.",
+    lore="It appeared in Nyx's pocket on the bus leaving Seattle. She didn't pack it. The spirits left it. The needle points toward meaning. Toward purpose. Toward the path needed—not the path expected. For the ghost who chose neither crew nor corpo. For the wanderer building new identity in new city. Guidance for those brave enough to walk alone. The compass never lies but it rarely points where you think you're going.",
+    origin_session="nyx_session_3b",
+    origin_character="Unknown (Spirit Gift)",
+    rarity="legendary",
+)
+
+ANCESTRAL_TRAVEL_BLESSING = Artifact(
+    id="ancestral_travel_blessing",
+    name="Ancestral Travel Blessing",
+    description="Lola's photograph. But something changed. It's warmer now. More present.",
+    lore="When Nyx left Seattle—alone, ghost protocol, complete severance—she took her grandmother's photo. And Lola came with her. Not just memory. Presence. Blessing. Protection. 'Wherever you go, we go. You're never truly alone. Walk safely, child.' The anito traveling with her. Guardian spirits for a wandering soul. No matter how far she runs, no matter what name she takes, her ancestors walk beside her. That's the blessing: solitude, yes. But never abandonment.",
+    origin_session="nyx_session_3b",
+    origin_character="Lola (Grandmother's Spirit)",
+    rarity="legendary",
+)
+
+ENCRYPTED_SKILLS_DATACORE = Artifact(
+    id="encrypted_skills_datacore",
+    name="Encrypted Skills Datacore",
+    description="Dense datacore. Black. Heavily encrypted. Contains compressed knowledge.",
+    lore="Before disappearing, Nyx encoded everything. Her knowledge. Her skills. Kitsune systems architecture. Hacking techniques. Shamanic insights. Street wisdom. All compressed into this core. Her value made portable. She can rebuild anywhere. Offer her skills. Start fresh. But never start from zero. The ghost carries her power with her. No corpo owns it. No crew demands it. It's hers. Fully. Finally.",
+    origin_session="nyx_session_3b",
+    origin_character="Nyx (herself)",
+    rarity="rare",
+)
+
 # Registry for easy lookup
 ARTIFACTS = {
     "razor_lucky_token": RAZOR_LUCKY_TOKEN,
@@ -97,6 +161,12 @@ ARTIFACTS = {
     "liberation_chip": LIBERATION_CHIP,
     "byron_wing": BYRON_WING,
     "tsukuyomi_evidence": TSUKUYOMI_EVIDENCE,
+    "spirit_guidance_charm": SPIRIT_GUIDANCE_CHARM,
+    "corporate_warning_token": CORPORATE_WARNING_TOKEN,
+    "insider_keycard": INSIDER_KEYCARD,
+    "wanderers_compass": WANDERERS_COMPASS,
+    "ancestral_travel_blessing": ANCESTRAL_TRAVEL_BLESSING,
+    "encrypted_skills_datacore": ENCRYPTED_SKILLS_DATACORE,
 }
 
 

@@ -1,0 +1,4053 @@
+# ============================================================================
+# NYX - SESSION 3B: "GHOST PROTOCOL"
+# The Inside Woman - Espionage Thriller Version
+# ============================================================================
+#
+# UNLOCK CONDITIONS:
+# - nyx.session_two_complete == True
+# - nyx.final_path == "runner"
+# - nyx.session_three_variant == "B"
+#
+# PREMISE: Nyx stays INSIDE Kitsune, feeding intel to the crew remotely.
+# She's the woman on comms. The asset. The inside source. She guides them
+# through the heist from her apartment while maintaining her corporate cover.
+# If discovered, she loses everything. But the spirits need freedom.
+#
+# THEME: Trust through distance. Sacrifice through separation. The person in the chair.
+#
+# STRUCTURE:
+# - Opening: Nyx's apartment, establishing setting and tension
+# - Phase 1: Risk Assessment Spread (3-card reading for Nyx's cover)
+# - Phase 2: The Heist Begins (narrative, "guy in the chair" moments)
+# - Phase 3: The Crisis + Matsuda's Call (2-card spread during interrogation)
+# - Phase 4: The Decision (blow cover / hold cover / abort)
+# - Phase 5: Extraction & Aftermath (varies by choice)
+#
+# KEY VARIABLES:
+# - session.nyx_cover_status (intact/compromised/blown)
+# - session.matsuda_suspicion (low/medium/high/certain)
+# - session.crew_success (failure/partial/success)
+# - session.spirits_freed (none/some/many/all)
+# - nyx.becomes_fugitive (True/False)
+# - nyx.stays_inside (True/False)
+#
+# CULTURAL CONTEXT:
+# - Nyx is Filipina (Nicole Dimayuga), working for Japanese megacorp Kitsune
+# - Power dynamics, code-switching, cultural hierarchy in play
+# - Her grandmother's anito/diwata traditions vs corporate conformity
+#
+# ============================================================================
+
+:: Nyx.Session3B.Start
+
+@py:
+# Initialize session
+session = create_session(nyx)
+
+# Weather (Seattle never changes)
+session.weather = random.choice(["rain", "rain", "rain", "fog"])
+
+# Session tracking
+session.phase = "arrival"
+session.nyx_cover_status = "intact"  # intact/compromised/blown
+session.matsuda_suspicion = 2  # 0-10 scale
+session.crew_morale = 5  # Starts neutral
+session.quality_score = 0
+
+# THE CREW (exist but we don't meet them in person)
+razor = {
+    'name': 'Razor',
+    'role': 'Street Samurai',
+    'voice': 'Gruff, practical, skeptical',
+    'status': 'active'
+}
+
+whisper = {
+    'name': 'Whisper',
+    'role': 'Rigger',
+    'voice': 'Nervous, poetic, hums when stressed',
+    'status': 'active'
+}
+
+cipher = {
+    'name': 'Cipher',
+    'role': 'Decker',
+    'voice': 'Distant, metaphorical, half in Matrix',
+    'status': 'active'
+}
+
+session.crew = {
+    'razor': razor,
+    'whisper': whisper,
+    'cipher': cipher
+}
+
+# Nyx's state
+# She should have shamanic_awakening 4-5, cyber_glitches 2-3
+# Kitsune suspicion should be moderate (3-5)
+nyx.corporate_identity = "Nicole Dimayuga"
+nyx.employee_id = "KD-SEA-47829"
+nyx.clearance_level = "Gamma-7"
+
+# Check awakening for spirit interactions
+if nyx.shamanic_awakening >= 4:
+    nyx.spirit_sight_active = True
+    nyx.lola_presence = True  # Grandmother's spirit can communicate
+else:
+    nyx.spirit_sight_active = False
+    nyx.lola_presence = False
+
+# Session metadata
+session.readings_complete = {
+    'risk_assessment': False,
+    'crisis': False
+}
+@endpy
+**GHOST PROTOCOL**
+
+Your phone buzzes. Encrypted message.
+
+**[SECURE CHANNEL - NYX]**
+
+@if session.weather == "rain":
+    *"Apartment 2304, Redmond edge. Azure Heights. Rain's good cover tonight. Come alone. We're going in at midnight. I need cards before then. - N"*
+@else:
+    *"Apartment 2304, Redmond edge. Azure Heights. Fog's thick—good for the run. Come alone. Midnight go-time. Need your guidance first. - N"*
+@endif
+
+The address follows. Timestamp: **[22:17 PST]**
+
+Two hours until the heist.
+
+You grab your deck. Your coat. Your keys.
+
+Time to see what Nyx has become.
+
+~ session.atmosphere = 9  // Maximum tension, pre-heist pressure
+~ reader.mystical_affinity += 0  // Will change based on reading quality
+
++ [Drive to her apartment] -> Nyx.Session3B.Drive
+
+
+:: Nyx.Session3B.Drive
+
+The drive takes you through Seattle's layers.
+
+@if session.weather == "rain":
+    Rain hammers your windshield. Heavy drops that sound like drums. The kind of downpour that drowns surveillance and washes away evidence. Perfect weather for shadow work.
+@else:
+    Fog presses against your windshield like living cotton. The city disappears into grey. You navigate by GPS and prayer, streetlights becoming smeared halos in the mist.
+@endif
+
+Past the glittering downtown core—Kitsune Dynamics' tower visible even from here, a spear of glass and steel piercing the clouds. Corporate beacon. Digital fortress. Tonight's target.
+
+Past the corporate housing sprawls where salary workers dream in climate-controlled boxes.
+
+Into Redmond's edge. The transitional zone. Not quite Barrens (where the desperate and dangerous live). Not quite sprawl (where the middle class pretends things are fine).
+
+This is where corpo employees live when they're not quite successful enough for downtown but too proud for the Barrens. The in-between people. The strivers. The ones with *just* enough to lose.
+
+**Azure Heights.** The sign is backlit, half the letters burned out: "Az re  eig ts."
+
+Twenty-three stories of grey concrete pretending to be aspirational. The building has security cameras (broken) and a lobby door lock (bypassed months ago). The kind of place where people mind their own business because everyone has something to hide.
+
+You park in the shadow of a broken streetlight. Check your mirrors.
+
+No tails. No surveillance drones. No corporate response teams.
+
+Just {session.weather == "rain" ? rain : fog} and the weight of what's about to happen.
+
++ [Enter the building] -> Nyx.Session3B.Building_Entry
+
+
+:: Nyx.Session3B.Building_Entry
+
+The lobby smells like old carpet and broken dreams.
+
+Fluorescent lights flicker. Elevator is broken (of course). Stairwell door hangs half-open.
+
+You climb. Twenty-three floors. Your calves burn by floor twelve. You keep going.
+
+The stairwell echoes with your footsteps. Graffiti on the walls—territorial tags, political slogans, crude drawings. Someone spray-painted "MEGACORPS KILL" in red on the landing between floors nineteen and twenty.
+
+They're not wrong.
+
+Twenty-three.
+
+The hallway is dimly lit. Carpet worn thin. Doors every few meters, most with multiple locks, some with reinforced plating. This isn't the kind of building where neighbors chat in hallways.
+
+**Apartment 2304.**
+
+The door is already unlocked.
+
+A post-it note stuck to it: *"Come in. Lock behind you. - N"*
+
+You slip inside.
+
++ [Enter Nyx's apartment] -> Nyx.Session3B.Apartment_Interior
+
+
+:: Nyx.Session3B.Apartment_Interior
+
+@py:
+# This is the key atmospheric passage - take time here
+session.apartment_described = True
+@endpy
+
+The door closes behind you with a soft click. You lock it. Double-bolt. Chain.
+
+And then you see her world.
+
+---
+
+**One room pretending to be a home.**
+
+Studio apartment. Maybe 400 square feet total. Everything visible at once—living, sleeping, working, surviving—all compressed into a single space.
+
+**The Window:**
+
+Floor-to-ceiling, dominating the east wall. Rain streaks down the glass {session.weather == "fog" ? "(or fog presses against it, turning the city into grey abstraction)"}.
+
+Beyond: the city sprawls twenty-three floors below. Neon bleeds through weather—reds, blues, purples reflecting off wet streets. And in the distance, impossible to ignore: **Kitsune Dynamics' tower.** Lit up like a middle finger aimed at heaven. Corporate monument. Her prison and her target.
+
+Blackout curtains hang to either side of the window—expensive ones, the kind that actually block light—but they're *never closed*. She needs to see. Needs to watch. Needs to remember what she's fighting.
+
+**The Desk / War Room:**
+
+Shoved against the window like a cockpit commanding the city.
+
+Cheap IKEA desk (real wood is for execs). Office chair that squeaks when you shift weight. And the ALTAR OF TECHNOLOGY:
+
+Three monitors arranged in a careful arc:
+
+- **LEFT SCREEN:** Kitsune internal systems. Login banner reads: *DIMAYUGA, N. / SYSTEMS ARCHITECT L3 / CLEARANCE: GAMMA-7*. Green text on black. Corporate surveillance made visible.
+
+- **CENTER SCREEN:** Dark terminal. Encrypted comms. Green text scrolling. Old-school hacker aesthetic. The REAL work happens here.
+
+- **RIGHT SCREEN:** "Official" work. Spreadsheet titled "Q4 Infrastructure Optimization Metrics - DRAFT." Fake busywork. Ready to alt-tab if anyone checks her activity.
+
+Cables tangle underneath the desk like technological intestines. External hard drives. Burner phones (three of them). Her Kitsune corporate badge on a lanyard, face-down like she can't stand to look at it. Employee photo visible when you flip it: Nicole Dimayuga, professional smile, dead eyes.
+
+Sticky notes EVERYWHERE. Cryptic reminders:
+- "patrol shift 23:00"
+- "backup server 7-3"
+- "Davis sus - avoid"
+- "spirit frequencies 174hz"
+
+**The Living Space:**
+
+Futon shoved against the wall, doubling as couch and bed. Unmade. Grey sheets tangled. Two pillows (one corporate-standard, one worn thin with age—maybe from childhood?).
+
+Coffee table in front of the futon. Scratched surface covered in:
+- Empty soykaf cups (six of them, various stages of cold)
+- Takeout containers (three days worth, mostly untouched)
+- YOUR tarot deck—waiting, space cleared reverently among the mess
+- HER tarot deck—cheap mass-produced one, edges worn from nervous shuffling
+
+**Kitchenette Alcove:**
+
+Barely visible. Mini-fridge (humming loud), hot plate, sink piled with dishes. Instant ramen packets stacked like ammunition. Coffee maker that's probably never been cleaned. This isn't a kitchen. It's a caffeine delivery system.
+
+**The Shrine:**
+
+Corner shelf. Small but INTENTIONAL. This is the only part of the apartment that looks *tended*:
+
+A photograph in a simple frame: **Lola Dimayuga.** Older Filipina woman, maybe seventies, in traditional Filipiniana dress (terno, butterfly sleeves). Brown skin, warm smile, eyes that see EVERYTHING. Pre-chrome era. Actual paper photograph, edges worn from handling.
+
+Offerings arranged before the photo:
+- Small ceramic bowl with rice (refreshed recently)
+- Dried sampaguita flowers (still faintly fragrant, Filipino national flower)
+- Coins (tradition: payment for spirits who help)
+- Tiny statue of Santo Niño (Catholic/animist syncretism, the Christ child as protective spirit)
+- A circuit board (broken, green and gold, arranged like an offering plate—old tradition meets new world)
+
+Incense holder: sandalwood, *unlit* (can't risk smoke detectors).
+
+And the ANITO: small carved wooden figures, three of them, hand-made. Protective ancestral spirits. One looks like a grandmother. One like a warrior. One like a child. They WATCH over her.
+
+@if nyx.shamanic_awakening >= 4:
+    Even from across the room, you can FEEL them. The anito are AWAKE. They know you're here. They're assessing you—friend or threat? The air around the shrine shimmers slightly, like heat waves but cold.
+@endif
+
+**Personal Chaos:**
+
+Laundry pile in the corner. Mountain of clothes—corporate suits (grey, conformist, wrinkled) mixed with street clothes (black hoodie, cargo pants, worn jacket). Visual representation of her dual identity. She could grab either set and become a different person.
+
+Cyberdeck rig propped against the desk (her REAL tool, not the corp-issued one—this one has custom firmware, Kitsune monitoring stripped out).
+
+Modified datajack on a charging cable—she swapped the firmware months ago. They don't know.
+
+Drone parts scattered on a side table—she's been studying them, trying to understand Whisper's world.
+
+Half-read books piled near the futon: *"Shamanic Practices for the Modern Age"*, *"Network Security Architecture Vol. 3"*, *"Lola's Cookbook"* (worn paperback, handwritten notes in margins, Tagalog recipes).
+
+**The Feel:**
+
+Controlled chaos. Messy but FUNCTIONAL. She knows where everything is.
+
+Lived-in but TEMPORARY. Like she could pack and run in fifteen minutes. Like she's ready to abandon this identity the moment it becomes untenable.
+
+Spiritual vs Technical COLLISION. Grandmother's traditions fighting with chrome reality. Incense next to circuit boards. Santo Niño next to datajacks. Prayer and packets.
+
+And underneath everything: TENSION. The apartment HUMS with it. Not machinery. PRESENCE. Spirit energy pressing against the walls. The imprisoned ones at Kitsune know what's coming tonight. They're watching through whatever frequencies spirits use. Waiting.
+
+---
+
+And in the center of it all:
+
+**Nyx.**
+
+She's perched sideways in the office chair, legs tucked under her, barefoot despite the chill. Corporate blouse (grey, Kitsune standard-issue) but wrinkled, sleeves rolled up. Black slacks but the waistband unbuttoned—she's been sitting here for hours. Hair pulled back in a messy bun secured with a mechanical pencil.
+
+Cybereyes flicker between the three monitors—left, center, right, left, center—constant surveillance of her own surveillance.
+
+She looks like she hasn't slept in thirty hours.
+
+She probably hasn't.
+
+She hears you enter. Doesn't turn around. Just speaks to the monitors:
+
+"You made it." Relief and terror in equal measure. "Good. We're going in at midnight. I have..." She checks the time display: **[22:34 PST]**. "...eighty-six minutes to get them ready. And to figure out if I can do this without getting caught."
+
+Finally she swivels the chair to face you.
+
+Her cybereyes - Zeiss mk4, Kitsune standard issue - catch the monitor light and refract it. They're glitching slightly. Static at the edges. The spirits pressing through her tech, trying to communicate.
+
+"Thank you for coming." Her voice is steady but her hands shake. "I know this is... different. You're not meeting the crew. They're out there—" she gestures vaguely toward the window, toward the city, "—prepping. I'm here. The inside woman. The asset. The person in the chair who guides them through."
+
+She stands, crosses to the coffee table. Your deck is waiting.
+
+"If I help them directly—if I'm too obvious—Kitsune will KNOW. They'll trace it. They'll find me. I'll lose everything. My job, my apartment, my freedom. Maybe my life."
+
+She looks at the shrine. At Lola's photo. At the anito watching.
+
+"But if I DON'T help—if I play it too safe—they might fail. The spirits stay imprisoned. All this planning for nothing."
+
+Rain drums against the window. Kitsune's tower glows in the distance.
+
+"I need a reading. Before they go in. Before I risk everything."
+
+She sits on the futon. Gestures to the coffee table space she cleared.
+
+"Can I hold my cover? Can I keep them safe? Can I do BOTH?"
+
+~ session.reading_accepted = True
+~ session.time_until_heist = 86  # minutes
+
++ [Sit down and prepare the reading] -> Nyx.Session3B.Reading_Setup
+
+:: Nyx.Session3B.Reading_Setup
+
+@py:
+# Reading preparation
+session.phase = "risk_assessment"
+session.reading_location = "apartment"
+
+# Check Nyx's state for flavor
+if nyx.shamanic_awakening >= 4:
+    session.spirit_presence = "strong"
+else:
+    session.spirit_presence = "subtle"
+@endpy
+
+You settle onto the futon across from her. The coffee table between you becomes sacred space.
+
+She pushes the takeout containers aside. Clears room. Her movements are careful, reverent. This matters.
+
+Your deck feels heavy tonight. Weighted with consequence. With lives that hang in the balance.
+
+@if nyx.shamanic_awakening >= 4:
+    The anito on the shrine turn their heads. You see it from the corner of your eye—wooden figures that shouldn't move, moving. Watching. The spirits know what's about to happen.
+
+    Nyx feels it too. Her cybereyes flicker toward the shrine. "They're here. Lola's here. The anito are paying attention."
+@else:
+    The apartment feels charged. Not quite magical. Not quite mundane. Something in between. The space where technology and tradition overlap.
+@endif
+
+You begin to shuffle. The cards whisper against each other. Soft. Insistent.
+
+Nyx watches your hands. Then speaks quietly:
+
+"I've been planning this for months. Mapping Kitsune's security. Installing backdoors. Learning patrol patterns. Building the crew. Every piece carefully placed."
+
+She touches her temple—where the Zeiss cybereyes connect to her nervous system.
+
+"But I'm terrified. Because if Matsuda-san even SUSPECTS—if security flags my activity—I'm done. And I can't help them from a Kitsune holding cell."
+
+@if session.weather == "rain":
+    Rain intensifies against the window. Drumming. Relentless. The city drowning outside.
+@else:
+    Fog presses thicker against the glass. The city invisible. Just her apartment, floating in grey nothing.
+@endif
+
+"Three questions," you say. "Three cards. One spread."
+
+She nods. Takes a breath. Centers herself.
+
+"What threatens me? What protects me? What happens?"
+
+You lay out three positions on the coffee table.
+
+**Position One: What Threatens You**
+
+**Position Two: What Protects You**
+
+**Position Three: The Outcome**
+
+"Let's see what the cards reveal."
+
+~ session.spread_layout = "risk_assessment"
+~ session.positions_count = 3
+
++ [Draw the spread] -> Nyx.Session3B.Spread1_Draw
+
+
+# ============================================================================
+# SPREAD 1: RISK ASSESSMENT (3-card spread)
+# ============================================================================
+
+:: Nyx.Session3B.Spread1_Draw
+
+@py:
+# Position 1: What Threatens You
+session.threat_deck = Deck(
+    cards=["Eight of Swords", "Five of Pentacles", "Seven of Swords"],
+    reversals=[0, 0.5, 0]
+)
+# Position 2: What Protects You
+session.protection_deck = Deck(
+    cards=["The Star", "Strength", "Two of Pentacles"],
+    reversals=[0, 0.5, 0]
+)
+# Position 3: The Outcome
+session.outcome_deck = Deck(
+    cards=["The Moon", "Six of Swords", "Ten of Swords"],
+    reversals=[0, 0, 1]
+)
+# TODO: Implement this spread in spreads-config
+session.reading_1 = Reading(
+    spread_id="threat-protect-outcome",
+    decks=[session.threat_deck, session.protection_deck, session.outcome_deck]
+)
+session.cards_pre = session.reading_1.draw_cards()
+@endpy
+
+You draw three cards. Lay them face-down in their positions.
+
+Nyx leans forward. Her cybereyes focus, refract the dim light. Behind her, the monitors glow—left, center, right. Kitsune's systems waiting. The crew waiting. The spirits waiting.
+
+Everything waiting on these three cards.
+
+You flip the first.
+
+**Position One: What Threatens You**
+
+**{session.cards_pre[0].name}{" (Reversed)" if session.cards_pre[0].reversed else ""}**
+
+@if session.cards_pre[0].name == "Eight of Swords":
+    A blindfolded woman, bound, surrounded by eight swords. But the bonds are loose. The swords don't touch her. She's trapped by her own mind, not by reality.
+@elif session.cards_pre[0].name == "Seven of Swords":
+    A figure sneaking away with five swords, leaving two behind. Theft. Deception. But also—someone's watching. The thief doesn't know they've been seen.
+@elif session.cards_pre[0].name == "Five of Pentacles":
+    @if not session.cards_pre[0].reversed:
+        Two figures in snow. Wounded. Poor. Passing beneath a stained glass window—warmth and light inside, but they're locked out in the cold. Abandonment. Loss.
+    @else:
+        Two figures in snow — but reversed. They're turning toward the door. Toward help. Recovery possible. Not as alone as they feared.
+    @endif
+@endif
+
+Nyx stares at it. You see her processing—not just the image, but what it means for *tonight*.
+
+You flip the second.
+
+**Position Two: What Protects You**
+
+**{session.cards_pre[1].name}{" (Reversed)" if session.cards_pre[1].reversed else ""}**
+
+@if session.cards_pre[1].name == "The Star":
+    A naked woman kneeling by water, pouring from two vessels. One stream returns to the source. One nourishes new growth. Eight stars shine above—the large one, hope itself. Healing. Guidance. Destiny.
+@elif session.cards_pre[1].name == "Two of Pentacles":
+    A figure juggling two pentacles, connected by an infinity loop. Ships toss on rough seas behind him. Balance. Adaptation. Managing dual realities simultaneously.
+@elif session.cards_pre[1].name == "Strength":
+    @if not session.cards_pre[1].reversed:
+        A woman closing a lion's mouth. Not with force—with gentleness. With inner power. The lion submits to her touch. Quiet control. Shamanic force.
+    @else:
+        A woman closing a lion's mouth — but inverted. The lion pulling away. Force meeting force. Losing control. Power turned destructive.
+    @endif
+@endif
+
+Her breath catches. Hope or fear—you're not sure which.
+
+You flip the third.
+
+**Position Three: The Outcome**
+
+**{session.cards_pre[2]}{" (Reversed)" if session.cards_pre[2].reversed else ""}**
+
+@if session.cards_pre[2].name == "The Moon":
+    A moon hangs over a dark landscape. A dog and wolf howl. A crayfish emerges from water. The path between two towers—unclear, treacherous, shrouded. Illusion. Hidden paths. Things not as they seem.
+@elif session.cards_pre[2].name == "Six of Swords":
+    A boat carries figures toward calmer waters. Six swords stand in the boat. Transition. Journey. Moving from turmoil to peace. Safe passage despite carrying wounds.
+@elif session.cards_pre[2].name == "Ten of Swords":
+    A figure with swords in their back—but reversed. The swords loosening. Recovery possible. Not as bad as feared. Avoiding the worst outcome.
+@endif
+
+The three cards lie before you. Past, present, future. Threat, protection, outcome.
+
+Nyx looks at them. Then at you.
+
+"Tell me what they mean. Please."
+
+The monitors glow behind her. Time display: **[22:41 PST]**.
+
+Seventy-nine minutes until the heist.
+
+@if session.cards_pre[0].name == "Eight of Swords":
+    + [Interpret the spread] -> Nyx.Session3B.Position1_EightSwords_Interpret
+@elif session.cards_pre[0].name == "Five of Pentacles" and not session.cards_pre[0].reversed:
+    + [Interpret the spread] -> Nyx.Session3B.Position1_FivePent_Upright_Interpret
+@elif session.cards_pre[0].name == "Five of Pentacles" and session.cards_pre[0].reversed:
+    + [Interpret the spread] -> Nyx.Session3B.Position1_FivePent_Reversed_Interpret
+@elif session.cards_pre[0].name == "Seven of Swords":
+    + [Interpret the spread] -> Nyx.Session3B.Position1_SevenSwords_Interpret
+@endif
+
+# ============================================================================
+# POSITION 1: EIGHT OF SWORDS (Upright) - 2 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position1_EightSwords_Interpret
+
+Eight of Swords. The blindfolded woman. Bound but not truly trapped.
+
+You look at Nyx. She's staring at the card, recognition flickering across her face.
+
+"What threatens me," she whispers.
+
++ ["Eight of Swords means you're trapped by your own FEAR, not by reality. Look—the bonds are loose. The swords don't actually trap her. She could walk away. Your biggest threat isn't Kitsune's security. It's your own paralysis. You're so afraid of getting caught that you might hesitate at the critical moment. Freeze when the crew needs you most. Second-guess yourself into failure. Your mind is the prison."] -> Nyx.Session3B.Position1_EightSwords_Fear
+
++ ["Eight of Swords shows mental imprisonment—but specifically, you're trapped between TWO identities. Nicole the corporate employee. Nyx the shadow runner. You're trying to be BOTH and it's paralyzing you. The threat is that you can't fully commit to either. Can't be fully helpful to the crew because you're protecting your cover. Can't fully protect your cover because you're helping the crew. The liminal space is your prison."] -> Nyx.Session3B.Position1_EightSwords_DualIdentity
+
+
+:: Nyx.Session3B.Position1_EightSwords_Fear
+
+"Eight of Swords means you're trapped by fear. Your own fear. Not reality."
+
+You point to the blindfolded woman. "Look at her. The bonds are loose. The swords don't actually trap her. She could walk away if she just moved. But she CAN'T see that. She's paralyzed."
+
+Nyx's jaw tightens. She knows.
+
+"Your biggest threat tonight isn't Kitsune's security. It's not Matsuda-san. It's not their ICE or their surveillance. It's YOU. Your paralysis. Your fear of getting caught."
+
+@if nyx.shamanic_awakening >= 4:
+    The anito on the shrine pulse with energy. Lola's photo seems to shift—disappointment? Or challenge?
+
+    "Your grandmother didn't raise someone who freezes," you say quietly.
+@endif
+
+"You might hesitate at the critical moment. The crew needs access codes and you pause, thinking 'what if they trace this?' They need you to crash a security node and you second-guess, asking 'what if Matsuda notices?' That hesitation? That's the sword at your throat. Not Kitsune's. Yours."
+
+Her hands curl into fists. "So what do I do?"
+
+"Trust yourself. When the moment comes, ACT. Don't think. Don't calculate. Just DO. The bonds are loose. You can walk free. You just have to move."
+
+~ session.threat_type = "self_paralysis"
+~ session.quality_score += 2
+~ nyx.fear_acknowledged = True
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+
+:: Nyx.Session3B.Position1_EightSwords_DualIdentity
+
+"Eight of Swords shows imprisonment between identities. You're trapped by being TWO people."
+
+You gesture between her corporate blouse and the shrine in the corner. Between the Kitsune badge on her desk and the tarot deck on the table.
+
+"Nicole Dimayuga. Systems Architect. Level 3. Corporate employee who shows up on time, writes clean code, bows to Matsuda-san. That's one identity."
+
+She nods slowly.
+
+"And Nyx. Shadow runner. Liberator. The woman who installed backdoors in her employer's security. Who's about to guide a heist against the company that pays her rent. That's the other."
+
+You tap the card. "The threat is you can't fully commit to EITHER. You can't be fully helpful to the crew because you're protecting Nicole. You can't fully protect Nicole because you're helping Nyx. The liminal space—the in-between—that's your prison."
+
+@if nyx.shamanic_awakening >= 4:
+    "Shamanic tradition understands this," you continue. "The walker between worlds. But you're not walking. You're STUCK. Paralyzed between the corporate world and the spirit world. Between chrome and magic. Between who you were and who you're becoming."
+@endif
+
+Nyx stares at her hands—chrome-augmented, corporate-issued, but reaching for something older. "So tonight I have to choose?"
+
+"Not permanently. But in the moments that matter? Yes. You'll have to be ONE person. Fully. Whichever one serves the mission."
+
+~ session.threat_type = "dual_identity_paralysis"
+~ session.quality_score += 2
+~ nyx.identity_crisis_acknowledged = True
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+
+# ============================================================================
+# POSITION 1: FIVE OF PENTACLES (Upright) - 3 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position1_FivePent_Upright_Interpret
+
+Five of Pentacles. Two figures in the snow. Wounded. Cold. Locked out.
+
+Nyx's breath catches. "That's... that's what it feels like. Exactly."
+
++ ["Five of Pentacles shows abandonment. The threat is that you're ALONE in this. The crew is out there, physical, together—they have each other's backs. But you? You're here. Isolated. If things go wrong, you face Kitsune by yourself. No backup. No support. Just you and Matsuda-san and a corporate interrogation room. The threat is your isolation. You could be left in the cold while everyone else escapes."] -> Nyx.Session3B.Position1_FivePent_Isolation
+
++ ["Five of Pentacles shows poverty—but not financial. Spiritual and emotional. The threat is that helping tonight costs you EVERYTHING. Your job, your apartment, your security. You're one traced connection away from losing it all. The figures in the snow are what you become if Kitsune discovers you. Homeless. Hunted. Destitute. The threat is total loss. You risk becoming the person with nothing."] -> Nyx.Session3B.Position1_FivePent_TotalLoss
+
++ ["Five of Pentacles shows people locked OUT while warmth exists inside. The threat is you're on the WRONG SIDE of the glass. You work for Kitsune. You have security clearance. Access. But you're not INSIDE their trust. Matsuda-san doesn't see you as one of them. You're tolerated, not embraced. The threat is that you're already outside—you just don't know it yet. They might already suspect you. The cold might already be closing in."] -> Nyx.Session3B.Position1_FivePent_AlreadyOutside
+
+
+:: Nyx.Session3B.Position1_FivePent_Isolation
+
+"Five of Pentacles shows abandonment. The threat is your isolation."
+
+You point to the two figures, alone in the snow. "The crew is out there together. Physical. Watching each other's backs. Razor has Whisper. Whisper has Cipher. They're a UNIT."
+
+Nyx nods slowly, seeing it.
+
+"But you? You're here. Twenty-three floors above the city. Alone. Guiding them through comms but not WITH them. If things go wrong—if Kitsune traces your activity, if Matsuda calls, if security knocks on your door—you face it ALONE."
+
+@if nyx.shamanic_awakening >= 4:
+    "Even your spirits can't help with that," you add. "Lola and the anito can guide you spiritually. But they can't stop Kitsune security. They can't argue with Matsuda-san. They can't protect you from corporate consequences."
+@endif
+
+Her voice is quiet. "So the threat is... I might be left behind?"
+
+"The threat is that you're ALREADY behind. Separated. The crew can run together if it goes bad. You run alone. Into what? The Barrens? Another city? You'd be leaving everything."
+
+She looks around her apartment—the life she built, the identity she maintains, the security she has.
+
+"The cold is isolation," you say. "And tonight, you're the one standing outside in it."
+
+~ session.threat_type = "isolation"
+~ session.quality_score += 2
+~ nyx.abandonment_fear = True
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+
+:: Nyx.Session3B.Position1_FivePent_TotalLoss
+
+"Five of Pentacles means poverty. Total loss. The threat is you losing EVERYTHING."
+
+Nyx's eyes widen slightly.
+
+"Not financial poverty—though that's part of it. Spiritual and emotional poverty. You're one traced connection away from losing your job, your apartment, your identity, your FREEDOM."
+
+You gesture around the apartment. "This. All of this. Your security clearance. Your salary. Your legal identity. The ability to walk down a street without Kitsune hunting you. Tonight you risk it ALL."
+
+She swallows hard.
+
+"The figures in the snow? That's you if they catch you. Homeless. Hunted. With nothing but the clothes you're wearing and whatever you can carry. No home to return to. No job to fund your life. No safety net. Just cold and exposure and survival."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your grandmother survived worse," you say, nodding to the shrine. "But she had community. Family. You'd be running alone. The anito can't feed you. Spirits don't pay rent."
+@endif
+
+Her hands are shaking. "So the threat is... everything?"
+
+"The threat is that you become a person with nothing. The cost of liberation might be total destitution. Are you ready for that?"
+
+~ session.threat_type = "total_loss"
+~ session.quality_score += 3
+~ nyx.stakes_acknowledged = True
+~ session.matsuda_suspicion += 1  # She's thinking about consequences
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+
+:: Nyx.Session3B.Position1_FivePent_AlreadyOutside
+
+"Five of Pentacles shows people locked out while warmth exists inside. The threat is you're on the WRONG SIDE of the glass."
+
+Nyx frowns, processing.
+
+"You work for Kitsune. You have clearance, access, credentials. You sit at their desks, use their systems, wear their badge. But Nicole—you're not INSIDE their trust. You never were."
+
+Her breath catches. Understanding.
+
+"Matsuda-san doesn't see you as one of them. You're useful. Competent. 'Acceptable.' But you're not inner circle. Not Japanese. Not executive track. You're tolerated. Not embraced. You've always been outside the warmth, just close enough to see it."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your grandmother knew this," you say quietly. "She knew what it was like to be used by people who'd never see her as equal. Colonial memory. Corporate memory. Same pattern."
+@endif
+
+"The threat is that you're ALREADY outside. You just don't realize it yet. Matsuda might already suspect. Security might already be watching. The cold might already be closing in. You think you're risking your position. But what if you never really had it?"
+
+She looks at her Kitsune badge. At the corporate blouse she's wearing. At the lie she's been living.
+
+"So the threat is... I was never safe to begin with?"
+
+"The threat is you're discovering you were already out in the cold. You just didn't feel it yet because you were still pretending the window was open."
+
+~ session.threat_type = "already_outside"
+~ session.quality_score += 3
+~ nyx.illusion_shattered = True
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+
+# ============================================================================
+# POSITION 1: FIVE OF PENTACLES (Reversed) - 2 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position1_FivePent_Reversed_Interpret
+
+Five of Pentacles—reversed. The figures turning toward help. Recovery possible.
+
+Nyx tilts her head. "That looks... better?"
+
++ ["Five of Pentacles reversed means the threat is less than you fear. You're imagining worst-case scenarios—total exposure, complete loss, Kitsune hunting you down. But reversed shows recovery is possible even if caught. The threat exists, yes. But it's not TOTAL. You could survive getting caught. Find new work. Rebuild. The figures are turning toward the door, toward help. There's community waiting if you need it. The threat is real but survivable."] -> Nyx.Session3B.Position1_FivePentRev_Survivable
+
++ ["Five of Pentacles reversed shows the threat of ALMOST getting caught. Not caught. Almost. The figures are turning toward warmth but haven't reached it yet. The threat is you'll come close to exposure—dangerously close—but NOT quite cross that line. You'll feel the cold but not freeze. Scare yourself badly but walk away intact. The threat is the near-miss that teaches you how vulnerable you really are."] -> Nyx.Session3B.Position1_FivePentRev_NearMiss
+
+
+:: Nyx.Session3B.Position1_FivePentRev_Survivable
+
+"Five of Pentacles reversed means the threat is survivable. Less apocalyptic than you fear."
+
+You point to the reversed figures. "You're imagining total exposure. Complete loss. Kitsune hunting you through the Barrens. Matsuda-san ruining your life. But reversed shows recovery is POSSIBLE even in worst case."
+
+Nyx's shoulders drop slightly—relief and confusion mixed.
+
+"The threat exists. If they catch you, yes—you lose your job, probably your apartment, definitely your clearance. But you don't lose EVERYTHING. You survive. You rebuild. The figures are turning toward the door, toward help. There's community waiting."
+
+@if nyx.shamanic_awakening >= 4:
+    "The spirits would protect you," you add. "Your grandmother's anito. The freed spirits from Kitsune—they'd remember you helped them. You wouldn't be alone. Not spiritually. Not practically."
+@endif
+
+"So the threat is real. But it's not TOTAL. You could survive getting caught. Find new work in the shadows. Join the crew full-time. Start over. Scared, yes. Poor, maybe. But ALIVE. And free."
+
+She takes a slow breath. "So I'm not risking death. Just... discomfort?"
+
+"Significant discomfort," you correct. "But not annihilation. The cold won't kill you. It'll just make you very, very uncomfortable for a while."
+
+~ session.threat_type = "survivable_loss"
+~ session.quality_score += 2
+~ nyx.fear_reduced = True
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+
+:: Nyx.Session3B.Position1_FivePentRev_NearMiss
+
+"Five of Pentacles reversed shows the threat of ALMOST getting caught. The near-miss."
+
+You trace the card's reversal. "The figures are turning toward warmth but haven't reached it. They're still outside but moving toward inside. The threat isn't exposure—it's coming dangerously close WITHOUT quite crossing the line."
+
+Nyx leans forward. "So I almost get caught?"
+
+"You feel the cold. You sense Kitsune closing in. Maybe Matsuda questions you. Maybe security flags something. Maybe there's a tense moment where you think you're done. But then—you're not. You talk your way out. The flag gets dismissed as false positive. You survive by inches."
+
+@if nyx.shamanic_awakening >= 4:
+    "The spirits will warn you," you add. "Your grandmother, the anito—they'll give you that split-second advantage. The intuition that saves you. You'll FEEL danger before it fully manifests."
+@endif
+
+"The threat is you'll scare yourself badly. Learn exactly how vulnerable you are. How close to the edge you've been dancing. But you won't fall. Not tonight. You'll walk that edge and make it across. Shaken. Maybe traumatized. But intact."
+
+She exhales slowly. "A warning. Not a punishment."
+
+"Exactly. The cold as teacher. Not killer."
+
+~ session.threat_type = "near_miss"
+~ session.quality_score += 2
+~ nyx.edge_walking = True
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+
+# ============================================================================
+# POSITION 1: SEVEN OF SWORDS (Upright) - 3 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position1_SevenSwords_Interpret
+
+Seven of Swords. The thief sneaking away with stolen swords. But two left behind.
+
+Nyx stares at it. Recognition and fear.
+
++ ["Seven of Swords shows deception—but YOU'RE the deceiver. The threat is you've been playing both sides so long you've left traces. Digital footprints. Patterns Kitsune can see if they look close enough. The backdoors you installed. The access logs you modified. The patrol schedules you memorized. You think you're clever. You think you're hidden. But the threat is you've been SEEN. Someone's been watching. You just don't know it yet."] -> Nyx.Session3B.Position1_SevenSwords_TracesLeft
+
++ ["Seven of Swords shows theft and strategy—but notice the thief leaves TWO swords behind. The threat is you can't steal everything. You can't save everyone. You can't protect the crew AND maintain your cover AND free all the spirits. Something gets left behind. Someone. The threat is the choice you'll have to make—what do you abandon to keep what matters most?"] -> Nyx.Session3B.Position1_SevenSwords_MustChoose
+
++ ["Seven of Swords shows someone sneaking, thinking they're unseen. But the threat is counterintelligence. Kitsune has their own watchers. Their own thieves. Maybe someone inside security has been tracking your unusual behavior. Maybe Matsuda-san assigned someone to monitor you specifically. The threat isn't that you'll make a mistake tonight. It's that you ALREADY made one. Weeks ago. Months ago. And they've been watching ever since."] -> Nyx.Session3B.Position1_SevenSwords_Counterintelligence
+
+
+:: Nyx.Session3B.Position1_SevenSwords_TracesLeft
+
+"Seven of Swords shows deception—and you're the deceiver. But the threat is you've left TRACES."
+
+Nyx goes very still.
+
+"You've been playing both sides for months. Installing backdoors into Kitsune systems. Memorizing patrol patterns. Modifying access logs. Building this heist piece by piece. You thought you were careful. You thought you were hidden."
+
+You tap the card. "But look—the thief in the image is visible. Clear. Anyone watching would see them. The threat is you've been SEEN. Digital footprints you didn't scrub. Patterns in your behavior. Late nights 'working' that don't match your project schedules. Security queries that don't align with your official duties."
+
+@if nyx.shamanic_awakening >= 4:
+    "The spirits can't erase digital evidence," you say quietly. "They can hide you from spiritual detection but not from audit logs. Not from system monitoring. Not from human suspicion."
+@endif
+
+Her voice is tight. "So they already know?"
+
+"They suspect. Or they WILL suspect once the heist happens and they start investigating. The threat is you've been leaving a trail. And tonight, when they trace back, it leads right to your door. To apartment 2304. To Nicole Dimayuga."
+
+~ session.threat_type = "digital_traces"
+~ session.quality_score += 3
+~ session.matsuda_suspicion += 2
+~ nyx.paranoia_increased = True
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+
+:: Nyx.Session3B.Position1_SevenSwords_MustChoose
+
+"Seven of Swords shows theft and strategy. But notice—the thief can't carry ALL the swords. Two stay behind."
+
+Nyx looks at the card more closely. "Why leave them?"
+
+"Because you can't take everything. Can't save everyone. The threat tonight isn't failure—it's the CHOICE you'll have to make."
+
+You meet her eyes. "Protect the crew? Or maintain your cover? Guide them perfectly and risk exposure? Or hold back and risk their failure? Free all the spirits? Or preserve your position inside Kitsune for future operations?"
+
+She's listening, tense.
+
+"Something gets left behind. Someone. Maybe it's spirits who stay imprisoned. Maybe it's your corporate identity that dies. Maybe it's the crew taking extra risk because you couldn't help as much as they needed. The threat is the abandonment you'll have to choose. What do you value most?"
+
+@if nyx.shamanic_awakening >= 4:
+    "Your grandmother understood sacrifice," you add, glancing at the shrine. "Leaving home. Leaving family. Coming to a new country. She left things behind to gain other things. The threat is you inheriting that same impossible choice."
+@endif
+
+Nyx's jaw tightens. "So no matter what, someone loses?"
+
+"Someone loses something. The only question is who. And what."
+
+~ session.threat_type = "forced_choice"
+~ session.quality_score += 3
+~ nyx.sacrifice_acknowledged = True
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+
+:: Nyx.Session3B.Position1_SevenSwords_Counterintelligence
+
+"Seven of Swords shows someone sneaking. But the threat is counterintelligence. Someone watching the watcher."
+
+Nyx's cybereyes widen slightly.
+
+"Kitsune is a megacorp. They don't just have security—they have SECURITY watching security. Internal affairs. Counterintelligence teams whose job is catching insider threats. People like you."
+
+You tap the figure in the card. "You think you're sneaking. But what if someone's been tracking your unusual behavior? Late night system access. Queries that don't match your official projects. The slight pattern of you being 'distracted' that colleagues mentioned to Matsuda-san."
+
+Her breath quickens.
+
+"The threat isn't that you'll make a mistake tonight. It's that you ALREADY made one. Weeks ago. Months ago. And they've been watching. Building a case. Waiting for you to commit to something big enough to justify moving against you."
+
+@if nyx.shamanic_awakening >= 4:
+    "Spirits can sense spiritual threats," you say. "But corporate threats? Human surveillance? That's invisible to them. You're blind to this danger."
+@endif
+
+"So tonight might be a trap?"
+
+"Not a trap. But surveillance. The threat is that when the heist happens, they don't just investigate—they already KNOW where to look. Because they've been watching you all along."
+
+~ session.threat_type = "counterintelligence"
+~ session.quality_score += 3
+~ session.matsuda_suspicion += 3
+~ nyx.paranoia_extreme = True
+
++ [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
+
+# ============================================================================
+# POSITION 2: HUB (All Position 1 interpretations converge here)
+# ============================================================================
+
+:: Nyx.Session3B.Position2_Hub
+
+@py:
+# Track that Position 1 is complete
+session.position_one_complete = True
+
+# Adjust atmosphere based on threat identified
+if session.threat_type in ["counterintelligence", "digital_traces"]:
+    session.paranoia_level = "high"
+elif session.threat_type in ["total_loss", "forced_choice"]:
+    session.paranoia_level = "medium"
+else:
+    session.paranoia_level = "moderate"
+@endpy
+
+The first card lies between you. The threat identified. Named. Made real.
+
+Nyx looks shaken but focused. She glances at the time display on her center monitor: **[22:47 PST]**.
+
+Seventy-three minutes until the heist.
+
+"Okay," she says. Voice steadier than her hands. "I know what threatens me. Now tell me what protects me."
+
+You turn your attention to the second card.
+
+**Position Two: What Protects You**
+
+**{session.cards_pre[1].name}{" (Reversed)" if session.cards_pre[1].reversed else ""}**
+
+The card waits. Answer to the threat. Shield against the danger. Or something more complex.
+
+@if session.cards_pre[1].name == "The Star":
+    + [Interpret the protection] -> Nyx.Session3B.Position2_Star_Interpret
+@elif session.cards_pre[1].name == "Strength" and not session.cards_pre[1].reversed:
+    + [Interpret the protection] -> Nyx.Session3B.Position2_Strength_Upright_Interpret
+@elif session.cards_pre[1].name == "Strength" and session.cards_pre[1].reversed:
+    + [Interpret the protection] -> Nyx.Session3B.Position2_Strength_Reversed_Interpret
+@elif session.cards_pre[1].name == "Two of Pentacles":
+    + [Interpret the protection] -> Nyx.Session3B.Position2_TwoPent_Interpret
+@endif
+
+
+# ============================================================================
+# POSITION 2: THE STAR (Upright) - 3 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position2_Star_Interpret
+
+The Star. Hope made visible. The naked woman pouring water under eight stars.
+
+Nyx exhales—relief washing over her face.
+
+@if session.threat_type in ["counterintelligence", "digital_traces"]:
+    + ["The Star shows divine protection. You're not alone in this. The universe is conspiring in your favor. Yes, they might be watching—but luck will blind them at critical moments. Logs will corrupt. Surveillance will glitch. The spirits, your ancestors, FATE ITSELF protects you. Trust that. When the moment comes, you'll have what you need. The stars guide you home."] -> Nyx.Session3B.Position2_Star_DivineProtection
+@else:
+    + ["The Star shows divine protection. You're not alone in this. The universe is conspiring in your favor. The spirits, your ancestors, FATE ITSELF protects you. Trust that. When the moment comes, you'll have what you need. The stars guide you home."] -> Nyx.Session3B.Position2_Star_DivineProtection
+@endif
+
+@if session.threat_type in ["isolation", "total_loss"]:
+    + ["The Star represents HOPE as armor. What protects you is your belief that this MATTERS. That liberation is worth the risk. Yes, you might lose everything—but hope makes that bearable. Your grandmother had hope when she left everything behind. The spirits have hope that you'll free them. Your crew has hope you'll guide them. That collective hope is a shield. As long as you believe, you're protected by purpose."] -> Nyx.Session3B.Position2_Star_HopeAsArmor
+@else:
+    + ["The Star represents HOPE as armor. What protects you is your belief that this MATTERS. That liberation is worth the risk. Your grandmother had hope when she left everything behind. The spirits have hope that you'll free them. Your crew has hope you'll guide them. That collective hope is a shield. As long as you believe, you're protected by purpose."] -> Nyx.Session3B.Position2_Star_HopeAsArmor
+@endif
+
+@if session.threat_type == "total_loss":
+    + ["The Star shows healing and renewal. What protects you is knowing that even if tonight goes badly, you can REBUILD. You're resilient. Your grandmother survived colonization, migration, poverty—and still built a life. You inherited that strength. The Star protects you by guaranteeing that no matter what happens, you endure. You heal. You continue."] -> Nyx.Session3B.Position2_Star_Renewal
+@else:
+    + ["The Star shows healing and renewal. What protects you is knowing that even if tonight goes badly, you can REBUILD. You're resilient. Your grandmother survived colonization, migration, poverty—and still built a life. You inherited that strength. The Star protects you by guaranteeing that no matter what happens, you endure. You heal. You continue."] -> Nyx.Session3B.Position2_Star_Renewal
+@endif
+
+
+:: Nyx.Session3B.Position2_Star_DivineProtection
+
+"The Star shows divine protection. You're not alone in this. The universe conspires in your favor."
+
+@if nyx.shamanic_awakening >= 4:
+    The anito on the shrine pulse with light—you see it clearly. Nyx does too. Her cybereyes catch the shimmer.
+
+    "Your grandmother is protecting you," you say. "The anito. The spirits at Kitsune who know you're coming to free them. They're bending reality in your favor."
+@else:
+    "Something larger than you is at work," you say. "Call it fate. Call it luck. Call it the spirits. But you have protection beyond your own skills."
+@endif
+
+@if session.threat_type == "counterintelligence" or session.threat_type == "digital_traces":
+    "You worried about surveillance? About traces? The Star promises divine interference. Logs will corrupt at the right moment. Surveillance footage will glitch. Matsuda-san will look the wrong direction at the critical second. Not through your skill—through GRACE."
+@elif session.threat_type == "isolation":
+    "You fear isolation? The Star shows you're surrounded by invisible allies. Spirits. Ancestors. Forces you can't see but can FEEL. They're with you in that apartment. You're not alone."
+@elif session.threat_type == "total_loss" or session.threat_type == "forced_choice":
+    "You fear loss? The Star promises that what you lose will be replaced by something better. Not immediately. But eventually. The universe takes care of those who serve liberation."
+@endif
+
+"Trust that protection. When the moment comes, you'll have exactly what you need. The stars guide you home. Always."
+
+~ session.protection_type = "divine"
+~ session.quality_score += 3
+~ nyx.faith_increased = True
+~ session.spirit_protection = True
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+
+:: Nyx.Session3B.Position2_Star_HopeAsArmor
+
+"The Star represents hope. And hope is your armor tonight."
+
+You meet Nyx's eyes. "What protects you isn't your skills or your planning. It's your BELIEF that this matters. That liberation is worth the risk. That meaning trumps safety."
+
+She nods slowly.
+
+@if session.threat_type == "isolation" or session.threat_type == "total_loss":
+    "You fear losing everything? Being abandoned? But hope makes that bearable. Your grandmother left everything—her country, her family, her language—because she had HOPE for something better. She survived because she believed the sacrifice meant something."
+@elif session.threat_type == "self_paralysis" or session.threat_type == "dual_identity_paralysis":
+    "You're paralyzed by fear? Hope cuts through that. When you focus on PURPOSE instead of danger, you act. Hope is the thing that makes you move when logic says freeze."
+@endif
+
+"The spirits at Kitsune have hope that you'll free them. Your crew has hope that you'll guide them true. Your grandmother's anito have hope that you'll honor her legacy. All that collective hope? It creates a SHIELD. A field of meaning that protects you from despair, from paralysis, from giving up."
+
+@if nyx.shamanic_awakening >= 4:
+    The shrine seems brighter. Warmer. Lola's photo almost smiles.
+@endif
+
+"As long as you believe this matters—as long as you have hope—you're protected by purpose itself. The Star doesn't promise safety. It promises that even pain will have meaning."
+
+~ session.protection_type = "hope"
+~ session.quality_score += 3
+~ nyx.purpose_strengthened = True
+~ session.crew_morale += 1
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+
+:: Nyx.Session3B.Position2_Star_Renewal
+
+"The Star shows healing and renewal. What protects you is resilience. The ability to rebuild."
+
+Nyx frowns slightly. "That doesn't sound like protection. That sounds like... recovery after failure."
+
+"Exactly. The Star protects you by guaranteeing that even if tonight goes badly, you ENDURE."
+
+@if session.threat_type == "total_loss":
+    You gesture to the card. "You fear losing everything—your job, your apartment, your identity. The Star doesn't promise you won't lose those things. It promises that if you DO, you'll rebuild. You'll rise from ashes. Loss won't destroy you."
+@elif session.threat_type == "near_miss" or session.threat_type == "survivable_loss":
+    "You're going to feel the cold tonight. Maybe badly. The Star promises you'll SURVIVE that cold. Heal from it. Come out stronger."
+@endif
+
+"Your grandmother survived colonization. Migration. Poverty. Starting over in a country that didn't want her. And she built a LIFE. You inherited that strength. That resilience. That's your protection—not that you won't fall, but that you can't be kept down."
+
+@if nyx.shamanic_awakening >= 4:
+    "The anito carry that too," you add. "Ancestral spirits are survivors by definition. They endured enough to become spirits worth remembering. That power flows through you."
+@endif
+
+"The Star protects you by promising that no matter what Kitsune does, no matter what Matsuda throws at you, no matter how badly tonight goes—you'll heal. You'll renew. You'll continue. That's real protection. Not avoiding pain. Surviving it."
+
+~ session.protection_type = "resilience"
+~ session.quality_score += 3
+~ nyx.resilience_acknowledged = True
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+
+# ============================================================================
+# POSITION 2: STRENGTH (Upright) - 3 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position2_Strength_Upright_Interpret
+
+Strength. The woman closing the lion's mouth with gentleness. Quiet power.
+
+Nyx studies the card. Something resonates.
+
++ [Strength shows INNER power. What protects you is your shamanic awakening. {nyx.shamanic_awakening >= 4 ? The spirits are STRONG in you now. They'll guide your instincts, warn you of danger, show you paths Kitsune can't see. | You're waking up to spiritual power. That intuition will save you.} The lion is your fear, your doubt, your chrome conditioning—and you're taming it. Not with force. With quiet certainty. That's your protection. Spiritual power Matsuda-san can't detect or counter.] -> Nyx.Session3B.Position2_StrengthUp_ShamanicPower
+
++ [Strength represents GENTLE control. What protects you is your ability to stay calm. {session.threat_type == 'self_paralysis' or session.threat_type == 'dual_identity_paralysis' ? You worried about freezing? Strength promises you won't. |} When Matsuda questions you, you answer calmly. When the crew panics, you steady them. When systems fail, you adapt quietly. The lion is chaos—internal and external—and you control it without violence. Your composure is armor. Your patience is power.] -> Nyx.Session3B.Position2_StrengthUp_Composure
+
++ [Strength shows mastery over the beast. What protects you is your SKILL. {session.threat_type == 'digital_traces' or session.threat_type == 'counterintelligence' ? Yes, you've left traces—but you're also GOOD at what you do. |} You're Level 3 Systems Architect for a reason. You know Kitsune's systems better than Matsuda. You installed backdoors they haven't found. You can talk your way through audits. The lion is Kitsune itself—and you've been training it for months without them knowing. Your technical mastery protects you.] -> Nyx.Session3B.Position2_StrengthUp_TechnicalMastery
+
+
+:: Nyx.Session3B.Position2_StrengthUp_ShamanicPower
+
+"Strength shows inner power. Specifically, your shamanic awakening. That's what protects you."
+
+@if nyx.shamanic_awakening >= 4:
+    Nyx's cybereyes flicker toward the shrine. The anito are watching. Listening.
+
+    "The spirits are STRONG in you now," you say. "Your grandmother's presence. The anito's guidance. The imprisoned spirits at Kitsune reaching out to you. That's real power. Power Matsuda-san doesn't believe in. Power Kitsune's security can't detect."
+@else:
+    "You're waking up spiritually," you say. "Still learning. But even partially awakened shamanic sense is powerful. Intuition that feels like logic. Hunches that save your life."
+@endif
+
+You point to the woman and lion in the card. "The lion is your fear. Your doubt. Your corporate conditioning telling you chrome and spirits can't coexist. And look—she's taming it. Not with force. With CERTAINTY. With gentle, absolute power."
+
+@if session.threat_type == "isolation":
+    "You feared isolation? You're not alone. You're surrounded by spirits. By ancestors. By forces Kitsune can't see or fight."
+@elif session.threat_type == "counterintelligence" or session.threat_type == "digital_traces":
+    "They're watching you in the digital realm? Fine. The spirits watch you in the REAL realm. They'll warn you. Show you danger before it manifests physically. Kitsune's counterintelligence can't track spiritual guidance."
+@endif
+
+"Your shamanic power is your shield. Trust it. When intuition screams 'danger,' LISTEN. That's your grandmother. That's the anito. That's Strength protecting you."
+
+~ session.protection_type = "shamanic"
+~ session.quality_score += 3
+~ nyx.shamanic_awakening += 1
+~ session.spirit_protection = True
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+
+:: Nyx.Session3B.Position2_StrengthUp_Composure
+
+"Strength represents gentle control. What protects you tonight is your ability to stay CALM."
+
+Nyx blinks. "Calm? While guiding a heist against my employer?"
+
+"Exactly. The lion in this card is chaos—internal panic, external pressure, fear spiraling. And look at the woman. She's not fighting it. She's not forcing it. She's closing its mouth with gentle, certain touch. That's you."
+
+@if session.threat_type == "self_paralysis":
+    "You worried about freezing? Strength promises you won't. Your composure under pressure is your protection. When the critical moment comes, you breathe. You center. You ACT calmly."
+@elif session.threat_type == "counterintelligence" or session.threat_type == "already_outside":
+    "Matsuda-san might question you tonight. Security might flag something. Strength protects you by keeping you COMPOSED. You answer calmly. You deflect smoothly. Your steady voice convinces them there's nothing wrong."
+@endif
+
+"When the crew panics—and they will—your calm steadies them. When systems fail, you adapt quietly. When Matsuda calls unexpectedly, you smile through the camera and lie with perfect corporate courtesy."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your spiritual practice helps," you add. "Meditation. Connection with ancestors. That teaches composure. The anito are patient. They've waited generations. You inherit that patience."
+@endif
+
+"The lion is tamed. Not killed. Chaos acknowledged but controlled. Your composure is armor. Your patience is power. That's what protects you tonight."
+
+~ session.protection_type = "composure"
+~ session.quality_score += 2
+~ nyx.confidence += 1
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+
+:: Nyx.Session3B.Position2_StrengthUp_TechnicalMastery
+
+"Strength shows mastery over the beast. What protects you is your SKILL. Your technical excellence."
+
+Nyx looks at her hands—chrome-augmented, corp-trained, hacker-modified.
+
+"You're Level 3 Systems Architect at Kitsune Dynamics. One of their best. You didn't luck into that position. You EARNED it. Your code is clean. Your security protocols are solid. You understand their infrastructure better than most of their senior staff."
+
+@if session.threat_type == "digital_traces":
+    "Yes, you've left traces. But you're also GOOD at covering tracks. You've been doing this for months and they haven't caught you yet. That's not luck. That's skill."
+@elif session.threat_type == "counterintelligence":
+    "They might be watching? Fine. Let them watch. You're good enough to operate under surveillance. You've been doing it your whole career—performing for managers, hiding your real thoughts, executing perfectly while planning betrayal."
+@endif
+
+You point to the lion. "That's Kitsune itself. The megacorp beast. And look—the woman has it under control. Not through fear. Through MASTERY. You've been training this lion for three years. Installing backdoors. Learning systems. Building access. The beast thinks you're loyal. But you've been preparing it for exactly this moment."
+
+"Your technical skill protects you. When things go wrong tonight, you'll improvise. Debug in real-time. Hack solutions on the fly. That's what Level 3 means. That's your protection."
+
+~ session.protection_type = "technical_skill"
+~ session.quality_score += 2
+~ nyx.confidence += 2
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+
+# ============================================================================
+# POSITION 2: STRENGTH (Reversed) - 2 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position2_Strength_Reversed_Interpret
+
+Strength—reversed. The woman losing control. The lion pulling away.
+
+Nyx's face falls. "That looks... bad."
+
++ ["Strength reversed means your protection is INTERNAL but unstable. {session.threat_type == 'self_paralysis' or session.threat_type == 'dual_identity_paralysis' ? You're fighting yourself more than fighting Kitsune. |} Your shamanic power is there but you don't fully trust it yet. Your composure is strong but brittle. Your skills are solid but fear undermines them. The protection exists—you're just not accessing it fully. The lion isn't gone. You're just losing your grip. Tonight you need to RECLAIM that grip. Believe in your own strength."] -> Nyx.Session3B.Position2_StrengthRev_UnstableProtection
+
++ ["Strength reversed shows force backfiring. What you think protects you might actually EXPOSE you. { session.threat_type == 'digital_traces' or session.threat_type == 'counterintelligence' ? Your technical skills made you confident—maybe too confident. Those backdoors you installed? Those traces you left? |} Trying to control everything (the crew, Kitsune, the heist, your cover) means controlling nothing. The lion breaks free when gripped too hard. Your protection tonight is LETTING GO of some control. Trust the crew. Trust the chaos. Tight grip breaks. Loose grip holds."] -> Nyx.Session3B.Position2_StrengthRev_ForceBackfires
+
+
+:: Nyx.Session3B.Position2_StrengthRev_UnstableProtection
+
+"Strength reversed means your protection is there but UNSTABLE. You're not accessing your own power."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your shamanic abilities are real," you say, nodding to the glowing shrine. "The spirits are with you. But you don't fully TRUST them yet. Part of you still thinks they're hallucinations. Glitches in your cybereyes. That doubt weakens the protection."
+@else:
+    "Your intuition is developing. Your spiritual sense is growing. But you second-guess it. 'Is that really a spirit warning me or just paranoia?' That hesitation undermines the gift."
+@endif
+
+@if session.threat_type == "self_paralysis" or session.threat_type == "dual_identity_paralysis":
+    "And you're fighting YOURSELF constantly. Nicole versus Nyx. Corporate versus shadow runner. That internal battle drains you. Makes you brittle when you need to be strong."
+@elif session.threat_type == "total_loss" or session.threat_type == "isolation":
+    "Your fear of loss makes you grip too tight. Try to control everything. But that desperation weakens you. Makes you obvious. Matsuda-san can smell fear."
+@endif
+
+"The protection exists. Your skills. Your spirits. Your strength. But the lion is pulling away because you don't trust your own grip. Tonight you need to RECLAIM that trust. Stop doubting. Stop splitting. Just BE strong. The moment you believe in your power, it stabilizes."
+
+~ session.protection_type = "unstable_internal"
+~ session.quality_score += 2
+~ nyx.self_doubt_acknowledged = True
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+
+:: Nyx.Session3B.Position2_StrengthRev_ForceBackfires
+
+"Strength reversed shows force backfiring. Control becoming chaos. What you think protects you might actually EXPOSE you."
+
+Nyx frowns, confused. "How does my protection expose me?"
+
+@if session.threat_type == "digital_traces" or session.threat_type == "counterintelligence":
+    "Your technical skills made you confident. You installed backdoors. Memorized systems. Planned meticulously. That confidence is protection, yes—but it also made you BOLD. Maybe too bold. Those traces you left? Those came from believing you were too skilled to get caught."
+@endif
+
+You point to the reversed card. "The woman is gripping the lion too hard. And it's breaking free. Trying to control EVERYTHING—the crew, the heist, your cover, Kitsune's systems, the spirits—means controlling NOTHING. Tight grip breaks. Loose grip holds."
+
+@if session.threat_type == "forced_choice" or session.threat_type == "must_choose":
+    "You want to save everyone. Protect everyone. Free all the spirits AND maintain your cover AND keep the crew safe. Reversed Strength says: you can't. Trying to control all outcomes guarantees failure in all outcomes."
+@endif
+
+"Your protection tonight is paradoxical—LETTING GO of some control. Trust the crew to handle their own problems. Trust the chaos to work in your favor. Trust that you don't have to grip the lion's mouth shut every second. Loose grip. Soft hands. That's real strength. The reversed card is teaching you that."
+
+~ session.protection_type = "letting_go"
+~ session.quality_score += 2
+~ nyx.control_issues_acknowledged = True
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+
+# ============================================================================
+# POSITION 2: TWO OF PENTACLES (Upright) - 2 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position2_TwoPent_Interpret
+
+Two of Pentacles. A figure juggling two coins, infinity loop connecting them. Ships tossing behind.
+
+Nyx almost laughs. "That's... that's exactly what this feels like."
+
++ ["Two of Pentacles shows your protection is BALANCE. You're juggling dual identities—Nicole and Nyx, corpo and shadow runner. That's not a weakness. That's ARMOR. { session.threat_type == 'dual_identity_paralysis' ? You thought being two people was your prison? It's your shield. |} You can code-switch instantly. Be whoever the moment needs. Matsuda calls? You're Nicole. Crew needs help? You're Nyx. The ability to juggle contradictions without dropping them—that's your protection. The infinity loop shows it's sustainable. You CAN hold both."] -> Nyx.Session3B.Position2_TwoPent_Balance
+
++ ["Two of Pentacles shows adaptation as protection. Look at the ships tossing in stormy seas—chaos behind the juggler. But he keeps juggling. Keeps moving. What protects you tonight is FLEXIBILITY. { session.threat_type == 'counterintelligence' or session.threat_type == 'digital_traces' ? Plans will change. Security will shift. Matsuda might call unexpectedly.|} Your protection isn't having a perfect plan. It's being able to IMPROVISE. Adjust. Pivot. The pentacles keep moving. You keep moving. Stillness dies. Motion survives."] -> Nyx.Session3B.Position2_TwoPent_Adaptation
+
+
+:: Nyx.Session3B.Position2_TwoPent_Balance
+
+"Two of Pentacles shows balance. Your protection is your ability to juggle dual identities without dropping either."
+
+@if session.threat_type == "dual_identity_paralysis":
+    Nyx's eyes widen. "Wait—I thought that was my THREAT. Being split between Nicole and Nyx."
+
+    "It is," you say. "And it's also your protection. The duality that paralyzes you can also SAVE you. It's about how you use it."
+@endif
+
+You point to the infinity loop connecting the two pentacles. "You can be Nicole Dimayuga—Level 3 Systems Architect, perfect corporate employee, bowing to Matsuda-san. And you can be Nyx—shadow runner, liberator, spiritual warrior. Both are real. Both are you. That's not fractured. That's RICH."
+
+"Tonight you'll need both. When Matsuda questions you? Nicole answers—smooth, professional, believable. When the crew panics? Nyx steadies them—fierce, confident, shamanic. You code-switch instantly. Be whoever the moment needs. That flexibility is armor."
+
+@if nyx.shamanic_awakening >= 4:
+    "Shamanic tradition understands this," you add. "The walker between worlds. Human and spirit. Physical and mystical. Tech and magic. You're not broken. You're liminal. And liminal spaces have POWER."
+@endif
+
+"The infinity loop promises it's sustainable. You don't have to choose one pentacle over the other. You keep both in the air. That's your protection. The ability to hold contradictions without collapsing."
+
+~ session.protection_type = "duality"
+~ session.quality_score += 3
+~ nyx.identity_resolved = True
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+
+:: Nyx.Session3B.Position2_TwoPent_Adaptation
+
+"Two of Pentacles shows adaptation. Your protection tonight is FLEXIBILITY. The ability to improvise when plans fail."
+
+You point to the stormy seas behind the juggler. "Chaos. Ships tossing. Weather turning. Everything unpredictable. But look—he's still juggling. Still moving. Still adapting."
+
+@if session.threat_type == "counterintelligence" or session.threat_type == "digital_traces":
+    "Plans will change tonight. Matsuda might call unexpectedly. Security might flag something unusual. The crew might hit obstacles you didn't anticipate. Your protection isn't having a PERFECT plan. It's being able to pivot when the plan breaks."
+@elif session.threat_type == "isolation" or session.threat_type == "must_choose":
+    "You can't predict every variable. Can't control every outcome. The protection is accepting that and ADAPTING anyway. When isolated, you find connection. When forced to choose, you find a third option. Movement. Fluidity. That's survival."
+@endif
+
+"The pentacles keep moving. You keep moving. Static plans die when they meet reality. Flexible plans survive. Your technical skills help—you debug in real-time, hack solutions on the fly. Your shamanic awareness helps—spirits show you alternate paths."
+
+"Tonight, when something goes wrong—and something WILL—your protection is that you won't freeze. You'll adjust. Pivot. Keep juggling. The motion itself is armor. Stillness dies. Motion survives."
+
+~ session.protection_type = "adaptation"
+~ session.quality_score += 2
+~ nyx.flexibility_acknowledged = True
+
++ [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
+
+# ============================================================================
+# POSITION 3: HUB (All Position 2 interpretations converge here)
+# ============================================================================
+
+:: Nyx.Session3B.Position3_Hub
+
+@py:
+# Track that Position 2 is complete
+session.position_two_complete = True
+
+# Calculate spread quality so far
+if session.quality_score >= 6:
+    session.spread_quality_so_far = "excellent"
+elif session.quality_score >= 4:
+    session.spread_quality_so_far = "good"
+else:
+    session.spread_quality_so_far = "adequate"
+@endpy
+
+Two cards lie between you now. Threat and protection. Danger and shield.
+
+Nyx stares at them both. Processing. Integrating. Her cybereyes flicker—left card, right card, left card—as if trying to reconcile opposites.
+
+She checks the time: **[22:53 PST]**.
+
+Sixty-seven minutes until the heist.
+
+"Okay," she says quietly. "I know what threatens me. I know what protects me. Now tell me—what happens? Can I do this? Can I hold my cover while keeping them safe?"
+
+You turn to the third card.
+
+**Position Three: The Outcome**
+
+**{session.cards_pre[2].name}{" (Reversed)" if session.cards_pre[2].reversed else ""}**
+
+@if session.cards_pre[2].name == "The Moon":
+    + [Interpret the outcome] -> Nyx.Session3B.Position3_Moon_Interpret
+@elif session.cards_pre[2].name == "Six of Swords":
+    + [Interpret the outcome] -> Nyx.Session3B.Position3_SixSwords_Interpret
+@elif session.cards_pre[2].name == "Ten of Swords":
+    + [Interpret the outcome] -> Nyx.Session3B.Position3_TenSwordsRev_Interpret
+@endif
+
+
+# ============================================================================
+# POSITION 3: THE MOON (Upright) - 3 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position3_Moon_Interpret
+
+The Moon. The dark landscape. The dog and wolf howling. The crayfish emerging.
+
+Nyx leans forward. "What does it mean?"
+
++ ["The Moon means ILLUSION HOLDS. Your cover stays intact—but barely. You'll walk a knife's edge tonight between discovered and safe. {session.protection_type == 'divine' or session.protection_type == 'shamanic' ? Your spiritual protection will hide you, create confusion, make Kitsune's surveillance see what it expects to see rather than what's real.|} Matsuda might question you but won't have proof. Security might flag anomalies but will dismiss them. You survive through misdirection, through the Moon's gift of making truth look like shadow and shadow look like truth. The illusion protects you."] -> Nyx.Session3B.Position3_Moon_IllusionHolds
+
++ ["The Moon shows HIDDEN PATHS. The outcome is you succeed—but not how you planned. Look at the crayfish emerging from water, the path between towers. Unexpected routes appear. {session.protection_type == 'adaptation' or session.protection_type == 'shamanic' ? Your flexibility or spiritual guidance shows you ways Kitsune doesn't watch.|} The crew hits obstacles? The Moon reveals backdoors you forgot you installed. Matsuda gets suspicious? A colleague distracts him at the perfect moment. Not luck. The Moon's gift—making the hidden visible to those who need it."] -> Nyx.Session3B.Position3_Moon_HiddenPaths
+
++ ["The Moon represents FEAR AND INTUITION both. The outcome is you'll be terrified—heart racing, hands shaking, convinced you're about to be caught—but your intuition will guide you true. {session.threat_type == 'self_paralysis' or session.threat_type == 'isolation' ? That fear you worried about? It shows up. But so does your power.|} You'll make decisions in the dark. Trust hunches over data. Follow spiritual guidance over logic. And somehow—impossibly—you'll be right. The Moon rewards those who trust the dark."] -> Nyx.Session3B.Position3_Moon_FearAndIntuition
+
+
+:: Nyx.Session3B.Position3_Moon_IllusionHolds
+
+"The Moon means illusion holds. Your cover stays intact—but you'll walk a knife's edge."
+
+You point to the Moon hanging over the landscape. "Nothing is what it seems tonight. And that *protects* you."
+
+@if session.protection_type == "divine" or session.protection_type == "shamanic":
+    "Your spiritual protection creates confusion. {nyx.shamanic_awakening >= 4 ? The spirits will misdirect Kitsune's attention.|} Security cameras will see what they expect—Nicole Dimayuga working late on infrastructure reports. Not someone guiding a heist."
+@elif session.protection_type == "technical_skill" or session.protection_type == "adaptation":
+    "Your technical skills create false trails. Logs that point the wrong direction. Timestamps that don't quite add up but look like system errors. You're good at making truth look like accident."
+@endif
+
+@if session.threat_type == "counterintelligence" or session.threat_type == "digital_traces":
+    "Yes, they might be watching. Yes, there are traces. But the Moon makes those traces look like *normal* behavior. Matsuda sees what he expects to see—a dedicated employee. Not a traitor."
+@elif session.threat_type == "total_loss" or session.threat_type == "isolation":
+    "You feared losing everything? The Moon says you won't. Not tonight. The illusion holds. You keep your apartment, your job, your identity. For now."
+@endif
+
+"Matsuda might question you. Security might flag anomalies. But they won't have *proof*. Just suspicions. Shadows. And shadows can be dismissed. You survive through misdirection. Through the Moon's gift of making reality unclear. The dog and wolf howl—but they don't attack. They just watch. And you slip past in the darkness."
+
+"Your cover holds. Barely. But it holds."
+
+~ session.outcome_type = "illusion_holds"
+~ session.quality_score += 3
+~ session.nyx_cover_status = "intact"
+~ session.matsuda_suspicion += 1  # He's more suspicious but no proof
+
++ [The reading is complete] -> Nyx.Session3B.Spread1_Complete
+
+
+:: Nyx.Session3B.Position3_Moon_HiddenPaths
+
+"The Moon shows hidden paths. You succeed—but not how you planned."
+
+You trace the path between the two towers in the card. "See this? Unclear. Treacherous. But *real*. The outcome is you find ways forward you didn't know existed."
+
+@if session.protection_type == "adaptation" or session.protection_type == "letting_go":
+    "Your flexibility serves you. Plans break—but you don't. You pivot. Improvise. The Moon rewards those who don't grip too tight to original designs."
+@elif session.protection_type == "shamanic" or session.protection_type == "divine":
+    "The spirits show you routes. {nyx.shamanic_awakening >= 4: Your grandmother guides you through the Matrix like she once guided you through childhood—intuition over logic, feeling over seeing.|} Backdoors appear. Security gaps manifest. Not luck. The Moon's gift to those who trust the unseen."
+@endif
+
+"The crew hits obstacles? The Moon reveals solutions. That old access protocol you installed two years ago and forgot about? Suddenly relevant. Matsuda gets suspicious? A colleague needs his attention at the *exact* right moment. Security flags your activity? A system glitch provides cover."
+
+@if session.threat_type == "forced_choice" or session.threat_type == "must_choose":
+    "You thought you'd have to choose between crew and cover? The Moon finds the third option. The hidden path where both survive. Not easy. Not clean. But *possible*."
+@endif
+
+"Look at the crayfish emerging from water—the subconscious made manifest. Things you didn't know you knew become critical. The Moon makes the hidden visible. And tonight, what's hidden saves you."
+
+~ session.outcome_type = "hidden_paths"
+~ session.quality_score += 3
+~ session.nyx_cover_status = "intact"
+~ session.unexpected_success = True
+
++ [The reading is complete] -> Nyx.Session3B.Spread1_Complete
+
+
+:: Nyx.Session3B.Position3_Moon_FearAndIntuition
+
+"The Moon represents fear and intuition both. You'll be terrified tonight—but your intuition will guide you true."
+
+Nyx's breath catches. "Terrified? That's the *outcome*?"
+
+"The outcome is you'll be *scared*—heart racing, hands shaking, convinced every second that you're about to be caught. The dog and wolf howling? That's your internal panic. The uncertain path? That's the feeling that you're walking blind."
+
+@if session.threat_type == "self_paralysis" or session.threat_type == "dual_identity_paralysis":
+    "That fear you worried about shows up. But so does your *power*. The paralysis you feared? You push through it. *Because* you're scared, not despite it."
+@elif session.threat_type == "isolation" or session.threat_type == "already_outside":
+    "You'll feel desperately alone. Vulnerable. Exposed. All those fears materialize emotionally. But your *intuition* cuts through the fear."
+@endif
+
+@if session.protection_type == "shamanic" or session.protection_type == "hope":
+    "Your spiritual guidance is strongest when you're scared. Fear opens you. Makes you *receptive*. {nyx.shamanic_awakening >= 4 ? The anito speak loudest in moments of terror. Lola's voice becomes clear.|} You'll make decisions in the dark—trusting hunches over data, following spiritual guidance over logic."
+@else:
+    "You'll make decisions in the dark. No time to calculate. No clear path. Just *intuition*. And somehow—impossibly—you'll be right. Every time."
+@endif
+
+"The Moon rewards those who trust the dark. You'll second-guess yourself constantly. 'Am I doing this right? Is this a mistake? Am I about to destroy everything?' But you'll act anyway. And your intuition will guide you true. Fear and wisdom, together. That's the Moon's gift."
+
+~ session.outcome_type = "fear_and_intuition"
+~ session.quality_score += 3
+~ session.nyx_cover_status = "intact"
+~ nyx.intuition_validated = True
+
++ [The reading is complete] -> Nyx.Session3B.Spread1_Complete
+
+
+# ============================================================================
+# POSITION 3: SIX OF SWORDS (Upright) - 2 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position3_SixSwords_Interpret
+
+Six of Swords. The boat carrying figures toward calmer waters. Swords standing upright.
+
+Nyx exhales relief. "That looks... hopeful?"
+
++ ["Six of Swords means SAFE PASSAGE. You guide the crew through successfully. {session.protection_type == 'composure' or session.protection_type == 'balance' ? Your steady hand on the wheel gets everyone across.|} The heist succeeds—spirits freed, crew intact, data secured. And you? You maintain your cover. Barely. Those swords standing in the boat are the wounds you carry—stress, fear, close calls. But you make it. The far shore is safety. For everyone. You navigate troubled waters and reach calm. The transition succeeds."] -> Nyx.Session3B.Position3_SixSwords_SafePassage
+
++ ["Six of Swords shows NECESSARY TRANSITION. The outcome is you CAN'T go back. {session.threat_type == 'total_loss' or session.threat_type == 'already_outside' ? You feared losing your old life? The Six of Swords says that life is already over.|} Tonight changes you permanently. Even if your cover holds, even if Kitsune never suspects—*you* know what you've done. Nicole Dimayuga boarding that boat. Nyx arriving on the far shore. The journey is one-way. You'll carry those swords (memories, guilt, knowledge) forever. But you reach calmer waters. Changed, yes. But alive. And free in ways you weren't before."] -> Nyx.Session3B.Position3_SixSwords_Transition
+
+
+:: Nyx.Session3B.Position3_SixSwords_SafePassage
+
+"Six of Swords means safe passage. You guide everyone through. The mission succeeds."
+
+Nyx's eyes widen. Hope flooding her face.
+
+"The heist works. The crew infiltrates, accesses the server core, frees the spirits—either some or all depending on choices made in the moment. And they extract. Alive. Intact. Successful."
+
+@if session.protection_type == "composure" or session.protection_type == "balance" or session.protection_type == "adaptation":
+    "Your steady guidance is why. <>
+    @if session.protection_type == 'composure':
+        You stay calm when they panic. <>
+    @elif session.protection_type == 'balance':
+        You juggle crew needs and cover maintenance perfectly. <>
+    @else:
+        You adapt when plans fail. <>
+    @endif
+    That's the hand on the boat's rudder. That's why they reach the far shore."
+@elif session.protection_type == "shamanic" or session.protection_type == "divine":
+    "The spirits guide the boat. {nyx.shamanic_awakening >= 4 ? Your grandmother and the anito steer through troubled waters.|} Divine protection makes the passage possible. Not luck. Grace."
+@endif
+
+"And you? You maintain your cover. Matsuda doesn't have proof. Security dismisses anomalies. You delete the right logs, fabricate the right excuses, maintain the right composure when questioned."
+
+You point to the swords standing in the boat. "But look—those swords come WITH you. The passage isn't painless. You'll carry stress. Fear. Close calls. Wounds to your psyche. <>
+@if session.threat_type == 'isolation':
+    The loneliness of what you did alone.<>
+@elif session.threat_type == 'dual_identity_paralysis':
+    The weight of betraying one identity to serve another.<>
+@endif
+"
+
+"But you reach calmer waters. The far shore is safety. For you. For the crew. For the freed spirits. The transition succeeds. Everyone makes it across."
+
+~ session.outcome_type = "safe_passage"
+~ session.quality_score += 3
+~ session.nyx_cover_status = "intact"
+~ session.mission_success = True
+
++ [The reading is complete] -> Nyx.Session3B.Spread1_Complete
+
+
+:: Nyx.Session3B.Position3_SixSwords_Transition
+
+"Six of Swords shows necessary transition. The outcome is you can't go back. Tonight changes you permanently."
+
+Nyx's relief fades into something more complex. Understanding. Acceptance.
+
+@if session.threat_type == "total_loss" or session.threat_type == "already_outside":
+    "You feared losing your old life? Six of Swords says that life is already *over*. Not because you get caught—but because you *choose* to leave it behind."
+@elif session.threat_type == "dual_identity_paralysis":
+    "Nicole Dimayuga—corporate employee, Level 3, dutiful worker—boards that boat tonight. But Nyx arrives on the far shore. The person who could live that double life? She dies in the transition."
+@endif
+
+"Even if your cover holds—even if Kitsune never suspects, Matsuda never proves anything, your job continues—*you* know what you've done. You can't unknow it. Can't unfeel it. You guided shadow runners against your employer. Freed spirits Kitsune imprisoned. Betrayed the hand that fed you."
+
+@if nyx.shamanic_awakening >= 4:
+    "Your shamanic awakening completes during this transition. {session.protection_type == 'shamanic': The spirits acknowledge you fully.|} You're not 'waking up' anymore. You're *awake*. That's permanent."
+@endif
+
+You point to the swords. "These travel with you. Memories. Guilt. Knowledge. The weight of what you've become. But look—the waters ahead are *calmer*. You reach the far shore changed, yes. Wounded, perhaps. But *alive*. And free in ways you weren't before."
+
+"The journey is one-way. You can't unboard this boat. But the destination is worth it. Transformation always costs. The Six of Swords promises it pays."
+
+~ session.outcome_type = "necessary_transition"
+~ session.quality_score += 3
+~ session.nyx_cover_status = "intact"
+~ nyx.permanent_change = True
+
++ [The reading is complete] -> Nyx.Session3B.Spread1_Complete
+
+
+# ============================================================================
+# POSITION 3: TEN OF SWORDS (Reversed) - 2 Interpretations
+# ============================================================================
+
+:: Nyx.Session3B.Position3_TenSwordsRev_Interpret
+
+Ten of Swords—reversed. The figure with blades in their back, but inverted. Recovery possible.
+
+Nyx studies it carefully. "Reversed means... better?"
+
++ ["Ten of Swords reversed means you AVOID THE WORST. {session.threat_type == 'counterintelligence' or session.threat_type == 'digital_traces' ? Yes, they're watching. Yes, there are traces. But you don't get caught. Not fully.|} The disaster you feared? Doesn't happen. Matsuda gets suspicious but not certain. Security flags anomalies but dismisses them as errors. The crew has close calls but no casualties. Your cover is damaged—not destroyed. Bruised—not broken. You walk away with wounds that heal rather than wounds that kill. The worst outcome avoided. Barely. But avoided."] -> Nyx.Session3B.Position3_TenSwordsRev_AvoidWorst
+
++ ["Ten of Swords reversed shows RECOVERY FROM NEAR-DEATH. The outcome is you'll come *very* close to total exposure—closer than you've ever been—but pull back at the last second. {session.protection_type == 'adaptation' or session.protection_type == 'shamanic' ? Your flexibility or intuition saves you.|} Matsuda has you in his sights. One more mistake and you're done. But that mistake doesn't happen. The blade that would have ended you? Misses by inches. Not comfort. But survival. You learn exactly how close to the edge you can dance. And you survive the lesson."] -> Nyx.Session3B.Position3_TenSwordsRev_NearDeath
+
+
+:: Nyx.Session3B.Position3_TenSwordsRev_AvoidWorst
+
+"Ten of Swords reversed means you avoid the worst. The disaster you feared? Doesn't manifest."
+
+@if session.threat_type == "counterintelligence" or session.threat_type == "digital_traces":
+    "Yes, they're watching. Yes, you've left traces. <>
+    @if session.protection_type == 'technical_skill':
+        But your skill makes those traces look like normal work.
+    @elif session.protection_type == 'divine' or session.protection_type == 'shamanic':
+        But spiritual intervention makes Kitsune look the wrong direction at critical moments.
+    @else:
+        But luck—or something like it—makes security dismiss the anomalies as system errors.
+    @endif"
+@elif session.threat_type == "total_loss" or session.threat_type == "isolation":
+    "You feared losing everything. Being abandoned. Total ruin. Reversed Ten of Swords says: *no*. Not tonight. You keep your job, your apartment, your identity. Damaged, perhaps. Stressed, certainly. But *intact*."
+@endif
+
+"Matsuda gets suspicious but not certain. He questions you—maybe intensely—but you talk your way through. Security flags anomalies but without proof, they close the investigation. The crew has close calls but no casualties. Everyone makes it. Everything holds."
+
+"Your cover is damaged. Not destroyed. There are swords in your back, yes—but reversed means they're *loosening*. Wounds that heal rather than wounds that kill. You'll need time to recover. Need to be extra careful for weeks afterward. But you survive."
+
+@if session.protection_type == "resilience" or session.protection_type == "hope":
+    "And that resilience you built? That hope you carried? That's why you survive. The reversed swords show recovery is *possible*. You'll heal from this. Eventually."
+@endif
+
+"The worst outcome—discovery, arrest, total loss—avoided. Barely. But avoided. That's the gift of reversal."
+
+~ session.outcome_type = "avoid_worst"
+~ session.quality_score += 2
+~ session.nyx_cover_status = "compromised"  # Damaged but not blown
+~ session.matsuda_suspicion += 2
+
++ [The reading is complete] -> Nyx.Session3B.Spread1_Complete
+
+
+:: Nyx.Session3B.Position3_TenSwordsRev_NearDeath
+
+"Ten of Swords reversed shows recovery from near-death. You'll come *very* close to total exposure. Closer than you've ever been. But you pull back at the last second."
+
+Nyx's face goes pale. "How close?"
+
+"Matsuda will have you in his sights. One more mistake and you're done. Security will be tracking your activity in real-time. {session.threat_type == 'counterintelligence' ? That surveillance you feared? It's real. They're watching.|} The blade aimed at your back—aimed true, ready to fall—and then..."
+
+@if session.protection_type == "adaptation" or session.protection_type == "letting_go":
+    "Your flexibility saves you. You pivot at the perfect moment. Change your approach. Adapt so fast they can't keep up."
+@elif session.protection_type == "shamanic" or session.protection_type == "divine":
+    "Spiritual intervention. {nyx.shamanic_awakening >= 4 ? Your grandmother's voice screaming WARNING. The anito pushing you out of the blade's path. | Intuition stronger than logic, making you act before you understand why.}"
+@elif session.protection_type == "composure":
+    "Your composure under pressure. That calm you maintained? It makes you *believable* at the exact moment Matsuda decides whether to believe you."
+@endif
+
+"The mistake that would have ended you? Doesn't happen. The log that would have proven your guilt? Corrupts at the perfect moment. The question Matsuda is about to ask that you have no good answer for? His phone rings, distracting him, and he never returns to it."
+
+"You learn exactly how close to the edge you can dance. And you survive the lesson. Shaken. Traumatized, maybe. But *alive*. The reversed swords show recovery is possible. Not easy. Not fast. But possible."
+
+"This is not comfort. This is survival by millimeters. But millimeters are enough."
+
+~ session.outcome_type = "near_death_recovery"
+~ session.quality_score += 3
+~ session.nyx_cover_status = "compromised"  # Barely survived
+~ session.matsuda_suspicion += 3
+~ nyx.trauma_level = 2
+
++ [The reading is complete] -> Nyx.Session3B.Spread1_Complete
+
+# ============================================================================
+# SPREAD 1: COMPLETE (Synthesis and transition to heist)
+# ============================================================================
+
+:: Nyx.Session3B.Spread1_Complete
+
+@py:
+# Mark reading as complete
+session.readings_complete['risk_assessment'] = True
+
+# Calculate overall reading quality
+if session.quality_score >= 8:
+    session.risk_assessment_quality = "excellent"
+elif session.quality_score >= 5:
+    session.risk_assessment_quality = "good"
+else:
+    session.risk_assessment_quality = "adequate"
+
+# Adjust Nyx's state based on reading
+if session.outcome_type in ["safe_passage", "hidden_paths", "illusion_holds"]:
+    nyx.confidence += 2
+    session.crew_morale += 1
+elif session.outcome_type in ["avoid_worst", "near_death_recovery"]:
+    nyx.confidence += 1
+    nyx.anxiety_level = 2
+else:
+    nyx.confidence += 1
+@endpy
+
+The three cards lie before you. A story told in images. A prophecy in ink and paper.
+
+**What threatens you. What protects you. The outcome.**
+
+Nyx stares at them for a long moment. Processing. Integrating. Her cybereyes trace the patterns—card to card, threat to shield, question to answer.
+
+@if session.weather == "rain":
+    Rain drums against the window behind her. Constant. Relentless. The city drowning in weather.
+@else:
+    Fog presses thicker against the glass. The world reduced to this room, these cards, this moment.
+@endif
+
+Finally, she speaks. Voice quiet but steady.
+
+@if session.outcome_type in ["safe_passage", "illusion_holds", "hidden_paths"]:
+    "I can do this. I can *actually* do this."
+
+    She looks at you. "The reading says I make it through. The crew makes it through. <>
+    @if session.outcome_type == 'safe_passage':
+        Everyone reaches safety.<>
+    @elif session.outcome_type == 'illusion_holds':
+        My cover holds.<>
+    @else:
+        Paths appear when I need them.<>
+    @endif
+    "
+
+    @if nyx.shamanic_awakening >= 4:
+        She glances at the shrine. The anito watching. Lola's photo steady and sure.
+
+        "My grandmother is with me. The spirits are with me. I'm not alone."
+    @endif
+
+    Her hands have stopped shaking. Steady now. Purpose crystallized.
+
+@elif session.outcome_type in ["necessary_transition", "fear_and_intuition"]:
+    "I won't be the same after tonight."
+
+    She touches the outcome card gently. Reverently. "The reading says I succeed. But the person who succeeds isn't the person sitting here now. {session.outcome_type == 'necessary_transition' ? Nicole boards the boat. Nyx arrives on the far shore. | I'll be terrified the whole time. But my intuition will guide me.}"
+
+    @if session.threat_type == "dual_identity_paralysis":
+        "Maybe that's okay," she says quietly. "Maybe I needed to stop being both and start being *one*. Fully."
+    @endif
+
+    Her jaw sets. Acceptance. Determination. "If tonight changes me, then let it change me into something *better*."
+
+@elif session.outcome_type in ["avoid_worst", "near_death_recovery"]:
+    "I'm going to come very close to losing everything."
+
+    Her voice is tight. Controlled fear. "The reading says I survive. Barely. {session.outcome_type == 'avoid_worst' ? The worst doesn't happen. But it's *close*. | I pull back from the edge at the last second.}"
+
+    She takes a slow breath. Centering herself.
+
+    "But 'barely' is still survival. Close calls are still calls you walk away from. {session.protection_type == 'resilience' or session.protection_type == 'hope' ? And I'm resilient. I can heal from wounds.}"
+
+    @if nyx.shamanic_awakening >= 4:
+        "The spirits will warn me," she adds. "When danger gets too close. I'll *feel* it."
+    @endif
+
+    Her hands grip her knees. Steadying. "Okay. I can do this. Scared, yes. But I can do this."
+@endif
+
+She gathers the three cards. Hands them back to you carefully.
+
+"Thank you. For the reading. For showing me the path. For believing the spirits are real and the cards have power."
+
+@if session.risk_assessment_quality == "excellent":
+    "That was..." She searches for words. "Exactly what I needed. Every card. Every interpretation. You saw *me*. The real me. Both versions of me. And you showed me how to survive being both."
+@elif session.risk_assessment_quality == "good":
+    "That was good. Really good. I understand what I'm facing now. What I have. What's coming."
+@else:
+    "That helped. I have clarity now. Direction. That's what I needed."
+@endif
+
+She checks the time: **[23:01 PST]**.
+
+Fifty-nine minutes until the heist.
+
+"They'll be checking in soon," she says. Standing. Moving to her desk. The corporate world and the shadow world meeting in her posture.
+
+@if nyx.shamanic_awakening >= 4:
+    She pauses at the shrine. Touches the photograph of Lola. Whispers something in Tagalog—too quiet for you to hear. A prayer. A promise. An invocation.
+
+    The anito pulse with acknowledgment. The apartment's atmosphere shifts. The spirits are *ready*.
+@endif
+
+Nyx settles into her office chair. Three monitors glowing. Left, center, right. Corporate systems. Encrypted comms. Fake busywork.
+
+She cracks her knuckles. Rolls her shoulders. Transforms before your eyes—from tarot client to hacker. From supplicant to operator. From Nicole to Nyx.
+
+Her center monitor flickers. Text scrolling.
+
+**[ENCRYPTED CHANNEL - GHOST PROTOCOL]**
+**[CONNECTION ESTABLISHED]**
+
+And then: voices.
+
+~ session.phase = "heist_begins"
+~ session.crew_comms_active = True
+
++ [The crew connects] -> Nyx.Session3B.Crew_Initial_Contact
+
+
+# ============================================================================
+# PHASE 2: THE HEIST BEGINS (Crew comms, "guy in the chair" sequences)
+# ============================================================================
+
+:: Nyx.Session3B.Crew_Initial_Contact
+
+@py:
+# Crew is now active on comms
+session.crew_check_in = True
+session.time_to_heist = 59  # minutes
+
+# Set crew states
+razor.comms_active = True
+whisper.comms_active = True
+cipher.comms_active = True
+@endpy
+
+The center monitor comes alive with text and voice.
+
+**Razor's voice crackles through—gruff, practical, impatient:**
+
+*"Nyx. You there?"*
+
+Nyx leans toward the mic. "I'm here. Status?"
+
+*"In position. Two blocks from the facility. Whisper's got eyes in the sky. Cipher's jacked into the local Matrix node. We're go for approach in..."* Pause. *"...fifty-eight minutes. You ready?"*
+
+"Ready," Nyx says. Steady. Confident. The reading working through her voice.
+
+**Whisper's voice joins: higher, nervous, humming slightly:**
+
+*"Byron and Shelley are airborne. Keats is on backup. The weather's perfect—"* {session.weather == "rain" ? *"Rain's drowning their surveillance. Thermal's useless."* | *"Fog's thicker than synth-paste. Visual coverage is blind."*} *" We're practically invisible."*
+
+**Cipher's voice—distant, half-elsewhere, speaking in metaphors:**
+
+*"The Matrix topology is... elegant tonight. ICE formations predictable. Data streams calm. Like the digital realm is sleeping. Waiting for disruption."*
+
+Nyx's fingers dance across her left monitor—Kitsune internal systems. She pulls up security feeds. Building schematics. Guard rotations. Everything she's memorized but checks anyway.
+
+"I have eyes inside," she says. "Guard shift change at 23:45. That's your window. Fourteen minutes after midnight. East service entrance—I'll unlock it remotely when you're in position."
+
+*Razor: "Backdoor you installed?"*
+
+"Eight months ago," Nyx confirms. "They never found it."
+
+*Whisper (nervous laugh): "You're terrifyingly good at this, you know that?"*
+
+@if nyx.shamanic_awakening >= 4:
+    Nyx glances at the shrine. The anito watching. "I have help. More than Kitsune knows."
+
+    *Cipher: "Shamanic assistance. Spiritual topology overlaying digital architecture. I can... almost see it. Fascinating."*
+@else:
+    "I've been planning this for months," Nyx says simply.
+@endif
+
+*Razor: "And you're sure you're safe? We go in, they'll be looking for inside help once they realize what happened."*
+
+Nyx looks at you. At the three cards still warm with reading energy.
+
+@if session.outcome_type in ["safe_passage", "illusion_holds", "hidden_paths"]:
+    "I'm sure. The cards say my cover holds. I'll be okay."
+@elif session.outcome_type in ["necessary_transition", "fear_and_intuition"]:
+    "I'll be okay. Changed, maybe. But okay."
+@elif session.outcome_type in ["avoid_worst", "near_death_recovery"]:
+    "It'll be close. But I'll make it. We all will."
+@endif
+
+*Razor grunts approval.*
+
+*Whisper: "We trust you, Nyx. You've gotten us this far."*
+
+*Cipher: "Confidence levels optimal. Beginning pre-infiltration protocols."*
+
+The team goes quiet. Focused. Preparing.
+
+Nyx turns to you. Voice low so the mic doesn't catch it.
+
+"This is it. They're going in. And I'm stuck here—twenty-three floors above the city, guiding them through comms while pretending to work on infrastructure reports."
+
+@if session.threat_type == "isolation":
+    Her isolation suddenly *visible*. Real. She's alone in this apartment while they're out there together.
+@elif session.threat_type == "dual_identity_paralysis":
+    "Nicole Dimayuga is about to commit treason," she whispers. "And Nyx is about to free spirits. Same person. Same moment. Same action."
+@endif
+
+She takes a breath. Steadies herself.
+
+"Stay. Please. I might need... I don't know. Guidance. Support. Someone to remind me what the cards said when I panic."
+
+@if session.weather == "rain":
+    Rain intensifies against the window. The city blurring into neon and water.
+@else:
+    Fog presses so thick the world beyond the glass disappears entirely. Just this room. Just this moment.
+@endif
+
+The time display reads: **[23:02 PST]**.
+
+Fifty-eight minutes until the heist.
+
+~ session.reader_stays = True
+~ reader.present_during_heist = True
+
++ [Stay with her] -> Nyx.Session3B.Heist_Preparation
+
+
+:: Nyx.Session3B.Heist_Preparation
+
+You settle in. Making yourself comfortable on the futon. Bearing witness.
+
+The next hour passes in tense preparation.
+
+**Nyx's screens glow with activity:**
+
+- **Left monitor:** Kitsune systems. She tracks guard positions, camera feeds, maintenance schedules. Her fingers fly across the keyboard—making small adjustments, planting false data, creating cover stories before they're needed.
+
+- **Center monitor:** Crew comms. Occasional check-ins. Razor confirming equipment. Whisper running drone diagnostics. Cipher mapping ICE clusters. Professional. Focused. No wasted words.
+
+- **Right monitor:** "Official work." That fake spreadsheet. She types meaningless numbers occasionally—maintaining the illusion that she's working late on legitimate projects. Building the alibi.
+
+**The apartment shifts around her:**
+
+@if nyx.shamanic_awakening >= 4:
+    The shrine grows brighter. Not physically—you can't point to a light source. But the *presence* intensifies. Lola and the anito gathering strength. Preparing to help.
+
+    Nyx feels it. You see her glance that direction repeatedly. Drawing power. Drawing comfort.
+@endif
+
+The city outside pulses with life—distant sirens, the hum of traffic, neon bleeding through {session.weather == "rain" ? "rain" : "fog"}. Millions of people unaware that tonight, shadow runners will strike at a megacorp's heart. That spirits will break free. That everything is about to change.
+
+**Time passes:**
+
+23:15 - *Razor: "First equipment check complete. All green."*
+
+23:23 - *Whisper: "Byron reports increased drone activity near the facility. Corporate security running extra patrols."*
+
+Nyx frowns. Types rapidly. Pulls up patrol schedules. "That's... not normal. But not alarming. Probably just random variance. Proceed."
+
+23:37 - *Cipher: "Matrix topology shifting. Additional IC just came online. Someone's nervous."*
+
+"Can you handle it?" Nyx asks.
+
+*"Yes. But it's tighter than expected."*
+
+@if session.threat_type == "counterintelligence" or session.threat_type == "digital_traces":
+    Nyx's jaw tightens. The reading's warning echoing. *They might already be watching.*
+@endif
+
+23:44 - One minute until guard shift change.
+
+*Razor: "In position. East service entrance. Waiting on your signal."*
+
+Nyx's hands hover over her keyboard. This is it. The moment she commits. The moment she becomes traitor or liberator or both.
+
+She looks at you. "Once I unlock that door, there's no going back."
+
+@if session.outcome_type == "necessary_transition":
+    "The cards said I can't go back anyway," she murmurs. "So forward it is."
+@endif
+
+Her fingers hit the keys.
+
+**ACCESS OVERRIDE: EAST SERVICE ENTRANCE**
+**BIOMETRIC LOCK: DISABLED**
+**DURATION: 180 SECONDS**
+
+*Razor: "We're in. Moving to breach."*
+
+The heist begins.
+
+~ session.heist_active = True
+~ session.nyx_committed = True
+~ nyx.point_of_no_return = True
+
++ [Watch the infiltration unfold] -> Nyx.Session3B.Heist_Infiltration
+
+:: Nyx.Session3B.Heist_Infiltration
+
+@py:
+# Track heist progress
+session.heist_phase = "infiltration"
+session.time_elapsed = 0  # minutes since breach
+session.complications = 0  # tracks how smoothly things go
+@endpy
+
+**[23:45 PST - INFILTRATION BEGINS]**
+
+Nyx's center monitor scrolls with text. Crew positions updating in real-time.
+
+**Left monitor:** Kitsune security feeds. You watch over her shoulder as three figures slip through the east entrance—ghosts in the rain, shadows in the fog, invisible to cameras Nyx has already looped.
+
+Her right hand stays on the keyboard. Her left hand grips the edge of the desk. Knuckles white.
+
+"They're in," she whispers.
+
+---
+
+**[23:47 - Sublevel 1 Access]**
+
+*Razor (breathing steady): "Corridor clear. Two guards ahead. Patrol pattern?"*
+
+Nyx pulls up the schedule. Types. "Thirty-second window. North turn in... fifteen seconds. Fourteen. Thirteen."
+
+*Whisper (nervous hum): "Byron's tracking them. They're turning—now."*
+
+*Razor: "Moving."*
+
+Silence. Ten seconds. Twenty.
+
+*Razor: "Clear. Proceeding to stairwell."*
+
+Nyx exhales. Didn't realize she was holding her breath.
+
+---
+
+**[23:52 - Sublevel 2]**
+
+*Cipher (voice distant): "IC cluster ahead. Defensive formation. I'm engaging."*
+
+Nyx watches the left monitor—nothing visible on security feeds, but she knows Cipher is fighting in the Matrix. Digital warfare invisible to cameras.
+
+*Cipher: "Encountering resistance. The IC is... adaptive. More sophisticated than your intel suggested."*
+
+@if session.threat_type == "counterintelligence" or session.threat_type == "digital_traces":
+    Nyx's breath catches. *More sophisticated. Because they upgraded. Because someone knew to upgrade.*
+@endif
+
+"Can you break through?" Nyx asks.
+
+*Cipher: "Yes. But it's taking longer. We're exposed here."*
+
+*Razor: "How long?"*
+
+*Cipher: "Two minutes."*
+
+*Razor: "We don't have two minutes. Guards will cycle back."*
+
+Nyx's fingers fly. She pulls up maintenance logs. Environmental controls. A desperate idea.
+
+"Fire alarm," she mutters. Typing frantically. "Sublevel 1. Triggering now."
+
+**FIRE ALARM: SUBLEVEL 1 - ACTIVATED**
+
+Her left monitor shows guards responding—moving away from the crew's position, rushing toward the false alarm.
+
+*Whisper (relieved): "They're leaving. Byron confirms—corridor's clear now."*
+
+*Cipher: "Thank you. Continuing breach."*
+
+Thirty seconds later:
+
+*Cipher: "I'm through. Path to sublevel 3 is open."*
+
+Nyx cancels the alarm. Deletes the activation log. Covers her tracks.
+
+Her hands are shaking.
+
+~ session.complications += 0  # Handled smoothly
+~ session.time_elapsed += 7
+
+---
+
+**[23:54 - Sublevel 3 Approach]**
+
+*Whisper: "This is it. The server core is on this level. I can *feel* it. Byron's sensors are going crazy—electromagnetic interference, spiritual frequencies, something—"*
+
+@if nyx.shamanic_awakening >= 4:
+    Nyx gasps. Sudden. Sharp.
+
+    Her cybereyes flare white. Static. Then *presence*.
+
+    She can feel them. The imprisoned spirits. Thousands of them. Screaming in digital cages. They know. They *know* the crew is coming. They're reaching out through the network, through Nyx's augmented nervous system, through reality itself.
+
+    "I hear them," she whispers. To you. To herself. To Lola's photo on the shrine. "They're so close now. So desperate."
+
+    The anito on the shrine pulse. Grandmother's voice—not words, but *feeling*—floods through her: *Soon. Hold on. We're coming.*
+@else:
+    Nyx stares at her monitor. The security feeds flicker slightly near sublevel 3. Electromagnetic interference. Or something else.
+
+    "Something's there," she says. "I can't see it on cameras but... something."
+@endif
+
+*Razor: "Big door ahead. Biometric plus keycard. Nyx?"*
+
+She pulls up access protocols. "Uploading bypass now. Credentials: admin-override-seven. Passcode is—" She squints at her notes. "—november-delta-four-victor-nine."
+
+*Razor: "Trying now."*
+
+Pause. Five seconds. Ten.
+
+**BEEP. ACCESS GRANTED.**
+
+*Razor: "We're in."*
+
+*Whisper (awed): "Oh my god. The server racks. There are *hundreds* of them."*
+
+*Cipher: "The spirit compression protocols are... I can see them in the code. Living consciousness reduced to algorithmic chains. This is an atrocity."*
+
+Nyx wipes her eyes. Didn't realize she was crying.
+
+~ session.time_elapsed += 2
+
+---
+
+**[23:57 - Server Core]**
+
+*Cipher: "Locating the master control node. Give me thirty seconds."*
+
+*Whisper: "How many spirits are here?"*
+
+*Cipher (pause): "Thousands. Compressed into server clusters. Children spirits. Ancestor spirits. Nature spirits. All imprisoned. All suffering."*
+
+*Razor (voice tight): "Then let's free them. Fast. Before security realizes we're here."*
+
+Nyx monitors the feeds. Guards still on regular patrol. No alarms. No response. Everything smooth.
+
+*Too* smooth?
+
+@if session.threat_type == "counterintelligence":
+    The paranoia creeps in. *What if they're letting us get this far? What if they're watching? Waiting?*
+@endif
+
+*Cipher: "Found it. Master control node. I can access the compression protocols from here. But Nyx—"*
+
+"What?"
+
+*Cipher: "The moment I unlock these protocols, alarms trigger. Full facility lockdown. We'll have maybe three minutes before armed response teams arrive. And the spirits—when they're freed—it's going to be chaos. Pure, unleashed chaos."*
+
+*Razor: "Can we extract in three minutes?"*
+
+*Cipher: "Barely. If everything goes perfectly."*
+
+*Whisper (nervous): "And if it doesn't?"*
+
+Silence.
+
+*Cipher: "Then some of us don't make it out."*
+
+Nyx looks at you. The reading. The cards. The outcome predicted.
+
+@if session.outcome_type == "safe_passage":
+    *Six of Swords. Everyone makes it across. Everyone.*
+@elif session.outcome_type == "avoid_worst" or session.outcome_type == "near_death_recovery":
+    *Ten of Swords reversed. Close calls. Near misses. But survival.*
+@elif session.outcome_type == "hidden_paths":
+    *The Moon. Unexpected routes. Ways through the chaos.*
+@endif
+
+She takes a breath.
+
+"Do it," she says into the mic. "Free them."
+
+*Cipher: "Executing now."*
+
+Nyx watches her left monitor. Waiting for the—
+
+**ALARM.**
+
+Red lights flood the security feeds. Sirens. Emergency protocols engaging.
+
+*Whisper: "They know! Security response incoming!"*
+
+*Razor: "How long until they reach us?"*
+
+Nyx checks patrol routes. Response times. "Two minutes. Maybe less."
+
+*Cipher: "Compression protocols unlocking. The spirits are—"*
+
+The audio feed distorts. Static. Then something else—not static. *Voices*. Thousands of voices screaming joy and rage and freedom all at once.
+
+@if nyx.shamanic_awakening >= 4:
+    Nyx's cybereyes explode with light. She sees them flooding out of the servers. A tsunami of spiritual presence. Some coherent. Some feral. All *free*.
+
+    The shrine behind her glows. The anito dancing. Lola's photo seeming to smile.
+
+    "They're out," Nyx breathes. "They're all out."
+@else:
+    Her monitors glitch. Interference. Something flooding the network that cameras can't see but electronics can *feel*.
+@endif
+
+*Cipher: "Extraction. NOW. Move, move, MOVE!"*
+
+~ session.spirits_freed = True
+~ session.chaos_level = "extreme"
+~ session.time_elapsed += 3
+~ session.complications += 2
+
+---
+
+**[00:00 PST - MIDNIGHT - EXTRACTION BEGINS]**
+
+*Razor: "Running! Security teams closing in!"*
+
+*Whisper: "Byron and Shelley are providing cover but there's too many—"*
+
+**GUNFIRE crackles through the audio.**
+
+*Razor: "Contact! Returning fire!"*
+
+Nyx's heart pounds. She pulls up evacuation routes. Alternative exits. Anything.
+
+"West stairwell!" she shouts. "It's clear for now. Avoid the main corridor—guards are flooding it."
+
+*Cipher: "The spirits are helping. They're confusing sensors. Crashing security systems. Kitsune can barely track their own people."*
+
+*Whisper (breathing hard): "Keats is down. Lost the feed. Byron's damaged but still flying."*
+
+*Razor: "Keep moving. We're not dying here."*
+
+Nyx's fingers fly across the keyboard. Opening doors remotely. Disabling locks. Creating paths.
+
+And then—
+
+Her *right* monitor flares to life.
+
+The one she forgot about. The one showing her "official work."
+
+**[INCOMING CALL - MATSUDA KENJI, DIVISION HEAD]**
+
+Nyx goes ice-cold.
+
+"No. No no no—"
+
+*Razor (audio): "Nyx? We need the sublevel 2 access codes—"*
+
+But she can't answer. Can't speak. Can only stare at the incoming call.
+
+Matsuda. *Now*. In the middle of the heist. While security alarms scream through Kitsune's facility. While her crew runs for their lives.
+
+@if session.threat_type == "counterintelligence" or session.threat_type == "digital_traces":
+    *He knows. He's been watching. This is the moment. The blade aimed at my back.*
+@endif
+
+The call icon pulses. Insistent. Demanding.
+
+She looks at you. Terror in her eyes.
+
+"What do I do?"
+
+~ session.phase = "crisis"
+~ session.matsuda_calling = True
+~ session.crew_needs_help = True
+~ nyx.panic_level = "extreme"
+
++ [Answer the call] -> Nyx.Session3B.Crisis_Matsuda_Call
++ [Ignore the call and help the crew] -> Nyx.Session3B.Crisis_Ignore_Call
+
+:: Nyx.Session3B.Crisis_Matsuda_Call
+
+She stares at the pulsing call icon. Her hand frozen over the mouse.
+
+*Razor (desperate in her headset): "NYX! We need those codes! Security is right behind us!"*
+
+But Matsuda. Her boss. Calling at *midnight*. During a facility breach. While alarms scream.
+
+"If I don't answer," she whispers, "he'll know something's wrong. He'll flag my activity. Trace me."
+
+She looks at you. Pleading for guidance.
+
+You nod. "Answer. But draw the crisis card first. Fast."
+
+Her hands shake as she grabs your deck from the coffee table. One card. Emergency guidance.
+
+She draws.
+
+Then she mutes the crew comms. Takes a breath. Becomes Nicole Dimayuga.
+
+And clicks **ACCEPT**.
+
+~ session.answered_matsuda = True
+~ session.crew_delayed = True  # They have to wait for codes
+~ session.matsuda_suspicion += 2  # But less than if she ignored him
+~ session.complications += 1
+
++ [The interrogation begins] -> Nyx.Session3B.Crisis_Spread2_Draw
+
+
+:: Nyx.Session3B.Crisis_Ignore_Call
+
+She stares at the call icon. Then at her center monitor where Razor's text scrolls urgently:
+
+**[RAZOR: NEED CODES NOW. 30 SECONDS UNTIL CONTACT.]**
+
+"The crew," she says. Decision crystallizing. "They need me *now*. Matsuda can wait."
+
+She clicks **DECLINE**.
+
+Her fingers fly to the center monitor. "West stairwell, sublevel 2. Access code: sierra-alpha-seven-seven-nine-niner. GO!"
+
+*Razor: "Got it. Moving."*
+
+*Whisper: "Security right behind us—"*
+
+*Cipher: "The spirits are buying us time. Keep running!"*
+
+The crew escapes the immediate danger. But on her right monitor, the missed call notification glows ominously.
+
+**[MISSED CALL - MATSUDA KENJI]**
+**[VOICEMAIL RECEIVED]**
+
+And then, seconds later:
+
+**[INCOMING CALL - MATSUDA KENJI]**
+
+He's calling *again*.
+
+Nyx looks at you. "I bought them thirty seconds. But now he *knows* I ignored him. During a facility breach. That's... that's not normal behavior."
+
+@if session.threat_type == "counterintelligence":
+    "He was testing me," she realizes. "Calling to see if I'd answer. And I didn't."
+@endif
+
+Her hand shakes as she reaches for the mouse.
+
+"I have to answer now. But he's going to be *angry*. Suspicious. I just made this so much worse."
+
+She mutes crew comms. Takes a breath. Draws a crisis card from your deck.
+
+Clicks **ACCEPT**.
+
+~ session.answered_matsuda = False  # She ignored the first call
+~ session.crew_saved_immediate = True  # But saved the crew
+~ session.matsuda_suspicion += 4  # Matsuda is MUCH more suspicious
+~ session.complications += 2
+~ nyx.guilt_level = 2  # Knows she just exposed herself
+
++ [The interrogation begins] -> Nyx.Session3B.Crisis_Spread2_Draw
+
+
+# ============================================================================
+# SPREAD 2: THE CRISIS (2-card spread drawn DURING Matsuda interrogation)
+# ============================================================================
+
+:: Nyx.Session3B.Crisis_Spread2_Draw
+
+@py:
+
+# Crisis spread - drawn in panic, mid-interrogation
+session.phase = "crisis_reading"
+
+# Position 1: The Crisis / The Situation
+session.deck_crisis_1 = Deck(
+    cards=["The Tower", "Nine of Swords", "Three of Swords"],
+    reversals=[0, 0, 0]
+)
+
+# Position 2: The Choice / The Advice
+session.deck_crisis_2 = Deck(
+    cards=["Justice", "The Hanged Man", "Ace of Wands"],
+    reversals=[0, 0, 0.5]
+)
+
+# TODO: implement situation-choice 2-card spread
+session.reading_2 = Reading(
+    spread_id="situation-choice",
+    decks=[session.deck_crisis_1, session.deck_crisis_2]
+)
+session.cards_crisis = session.reading_2.draw_cards()
+@endpy
+
+The card she drew lies face-up on her desk. Next to her keyboard. Visible only to her and you.
+
+**{session.cards_crisis[0].name}**
+
+@if session.cards_crisis[0].name == "The Tower":
+    The tower struck by lightning. Everything collapsing. Chaos. Destruction.
+@elif session.cards_crisis[0].name == "Nine of Swords":
+    A figure sitting up in bed, hands covering face. Nine swords on the wall. Nightmare. Anxiety. Fear made manifest.
+@elif session.cards_crisis[0].name == "Three of Swords":
+    Three swords piercing a heart. Rain falling. Pain. Betrayal. Heartbreak.
+@endif
+
+And then - Matsuda appears on her right monitor.
+
+---
+
+**[VIDEO CALL - MATSUDA KENJI]**
+
+He's in his office. Late at night. Expensive suit still immaculate. The Kitsune tower visible through his window behind him—glowing, imposing, powerful.
+
+His face is calm. Too calm.
+
+@if session.answered_matsuda:
+    "Dimayuga-san." His voice is cold. Controlled. "Working late?"
+@else:
+    "Dimayuga-san." His voice is ice. "You did not answer my first call."
+@endif
+
+Nyx's face becomes corporate. Professional. Nicole Dimayuga—perfect employee.
+
+"Matsuda-san. Good evening." Her Japanese is flawless. Deferential. She bows slightly to the camera.
+
+@if session.answered_matsuda:
+    "I apologize for the late hour. Q4 infrastructure diagnostics. The deadline—"
+
+    "I am aware of your deadlines." He adjusts his glasses. Studies her through the screen. "However, I am calling regarding a different matter."
+@else:
+    "I apologize for missing your call. I was..." She hesitates. Fatal. "...in the restroom."
+
+    His eyes narrow. "For thirty seconds? And then you required additional time before answering my second call?"
+
+    Her throat tightens. The lie transparent. Caught.
+
+    "I apologize, Matsuda-san."
+
+    "We will discuss your delayed response." He leans forward. "But first, there is a more pressing matter."
+@endif
+
+He brings up something on his screen. Reads from it.
+
+"At precisely 23:45 tonight, our Seattle facility experienced a security breach. Unauthorized access. Sublevel 3. The server core containing Project Tsukuyomi assets."
+
+Nyx's heart stops.
+
+She keeps her face neutral. Corporate training. "I... was not aware, Matsuda-san."
+
+"Of course not." His tone suggests he doesn't believe her. "However, our security analysis shows that the breach utilized *internal* access credentials. Someone with intimate knowledge of our systems. Someone with clearance."
+
+He pauses. Let it hang.
+
+"Someone like you, Dimayuga-san."
+
+@if session.answered_matsuda:
+    The room spins. But she answered. She *answered his call*. That's in her favor. Barely.
+@else:
+    The room spins. She ignored his first call. During a breach. While helping the infiltrators. She's *exposed*.
+@endif
+
+"I would never—" she starts.
+
+"Show me your current system access." He interrupts. Command, not request. "Screen share. Now."
+
+She looks at you. At the crisis card on her desk.
+
+Her left monitor shows Kitsune internal systems—where she's been tracking the crew, opening doors, creating paths. Evidence. Proof. Guilt.
+
+Her center monitor shows encrypted comms—muted, but visible. Text from Razor: **[STATUS? WE'RE CLEAR BUT NEED EXTRACTION ROUTE.]**
+
+If she shares her screen, Matsuda sees *everything*.
+
+If she refuses, he knows she's hiding something.
+
+@if session.answered_matsuda:
+    But she answered. She engaged. That shows *some* innocence.
+
+    Maybe she can lie her way through.
+@else:
+    She already ignored him once. Already showed suspicious behavior.
+
+    One more wrong move and she's done.
+@endif
+
+"One moment, Matsuda-san," she says. Voice steady despite terror. "My diagnostics program is running. Let me close it so the screen share is clean."
+
+Buying time. Ten seconds.
+
+She draws a second card. The advice. The choice.
+
+**{session.cards_crisis[1].name}{session.cards_crisis[1].reversed ? " (Reversed)" : ""}**
+
+@if session.cards_crisis[1].name == "Justice":
+    The figure on the throne. Sword and scales. Truth and consequence.
+@elif session.cards_crisis[1].name == "The Hanged Man":
+    The figure suspended. Waiting. Sacrificing. Accepting powerlessness.
+@elif session.cards_crisis[1].name == "Ace of Wands" and not session.cards_crisis[1].reversed:
+    The hand from clouds. The living staff. Creative fire. Bold action.
+@elif session.cards_crisis[1].name == "Ace of Wands" and session.cards_crisis[1].reversed:
+    The same hand—inverted. The wand falling. Force misdirected. Impulsive failure.
+@endif
+
+Two cards. Crisis and advice. Situation and choice.
+
+Matsuda waits. Suspicious. Watching.
+
+The crew waits. Muted. Needing her.
+
+The spirits—free now, flooding the city—wait. Watching what she does.
+
+You lean forward. "What do the cards say?"
+
+~ session.readings_complete['crisis'] = False  # About to interpret
+~ session.critical_moment = True
+
+@if session.cards_crisis[1].name == "The Tower":
+    + [Interpret the crisis] -> Nyx.Session3B.Spread2_Tower_Interpret
+@elif session.cards_crisis[1].name == "Nine of Swords":
+    + [Interpret the crisis] -> Nyx.Session3B.Spread2_NineSwords_Interpret
+@elif session.cards_crisis[1].name == "Three of Swords":
+    + [Interpret the crisis] -> Nyx.Session3B.Spread2_ThreeSwords_Interpret
+@endif
+
+# ============================================================================
+# SPREAD 2 INTERPRETATIONS: QUICK PHONE MESSAGES
+# Reader types guidance, shows screen to Nyx during interrogation
+# ============================================================================
+
+:: Nyx.Session3B.Spread2_Tower_Interpret
+
+@py:
+# Matsuda is waiting. Crew is waiting. Every second counts.
+session.interpretation_method = "phone_message"
+@endpy
+
+Matsuda's voice crackles through her speakers: "Dimayuga-san. I am waiting."
+
+"One moment, Matsuda-san," she says. Voice steady. Muting her mic.
+
+She looks at you desperately. The Tower. Everything collapsing.
+
+You grab your phone. Type fast. Show her the screen:
+
++ [**"Tower = exposed. He knows. Not guessing—KNOWS. This is the moment. Choose: confess or run. No middle path."**] -> Nyx.Session3B.Spread2_Tower_Exposed
+
++ [**"Tower = chaos favors you. Facility is in meltdown. Security overwhelmed. Spirits loose. Use the chaos—he can't prove anything in this mess. Lean into confusion."**] -> Nyx.Session3B.Spread2_Tower_Chaos
+
+
+:: Nyx.Session3B.Spread2_Tower_Exposed
+
+She reads your message. Goes pale.
+
+*He knows.*
+
+Her hands shake as she unmutes. "Matsuda-san, beginning screen share now."
+
+@if session.answered_matsuda:
+    But she answered his call. That buys her seconds. Maybe.
+@else:
+    But she ignored his first call. Already guilty in his eyes.
+@endif
+
+She moves to share her screen—then hesitates.
+
+"Actually, Matsuda-san... I need to tell you something."
+
+His eyes sharpen. "Yes?"
+
+The Tower. Everything falls. No more hiding.
+
+~ session.crisis_interpretation = "tower_exposed"
+~ session.quality_score += 3
+~ session.matsuda_suspicion += 2
+~ nyx.confession_imminent = True
+
++ [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
+
+
+:: Nyx.Session3B.Spread2_Tower_Chaos
+
+She reads your message. Understanding flickers.
+
+*Use the chaos.*
+
+"Matsuda-san," she says, unmuting. "Our systems are experiencing massive failures. I'm seeing... I don't even know what I'm seeing. ICE crashes. Security protocols offline. My screen share may not function properly."
+
+She *is* sharing now—but showing him the RIGHT monitor. The fake spreadsheet. The clean workspace.
+
+"As you can see, I've been working on infrastructure reports. But our network is... something's very wrong with the Matrix topology tonight. I've never seen anything like this."
+
+@if nyx.shamanic_awakening >= 4:
+    *The spirits,* she doesn't say. *Thousands of freed spirits crashing through your systems. That's what you're seeing.*
+@endif
+
+Matsuda studies her screen. Her face. Calculating.
+
+~ session.crisis_interpretation = "tower_chaos"
+~ session.quality_score += 2
+~ session.matsuda_suspicion += 1  # Confused, not certain
+
++ [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
+
+
+:: Nyx.Session3B.Spread2_NineSwords_Interpret
+
+Matsuda: "Dimayuga-san. Your screen. Now."
+
+She mutes. Looks at you. Nine of Swords - nightmare anxiety.
+
+You type. Show her:
+
++ [**"9 Swords = your fear is the threat, not reality. He's fishing. Testing. He WANTS you to panic and confess. Stay calm. He has suspicions, not proof. Your fear will betray you faster than evidence."**] -> Nyx.Session3B.Spread2_NineSwords_Fear
+
++ [**"9 Swords = you're right to be terrified. This IS the nightmare. He's been watching longer than you know. But nightmares end. Survive the next 5 minutes. Just 5 minutes. Then reassess."**] -> Nyx.Session3B.Spread2_NineSwords_Survive
+
+
+:: Nyx.Session3B.Spread2_NineSwords_Fear
+
+She reads. Breathes. *He's fishing. Testing. I don't have to confess.*
+
+"Apologies for the delay, Matsuda-san." Unmuting. Voice perfectly corporate. "Screen share beginning now."
+
+She shares the RIGHT screen. The clean one. Spreadsheet. Legitimate work.
+
+"As you see, I've been working on Q4 infrastructure optimization. Nothing unusual."
+
+Matsuda studies it. Silent. Long seconds.
+
+"Your credentials show unusual access patterns tonight," he finally says.
+
+"I've been running system diagnostics," she responds smoothly. "That requires elevated access across multiple nodes. Standard procedure for—"
+
+"At the exact time of a security breach."
+
+"Coincidence, Matsuda-san. An unfortunate one."
+
+He watches her. She holds his gaze through the camera. Doesn't blink. Doesn't flinch.
+
+*Fear is the threat. Not reality.*
+
+~ session.crisis_interpretation = "nine_swords_composure"
+~ session.quality_score += 3
+~ nyx.composure_maintained = True
+
++ [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
+
+
+:: Nyx.Session3B.Spread2_NineSwords_Survive
+
+She reads. Nods slightly. *Five minutes. I can survive five minutes.*
+
+"Matsuda-san, yes. Screen share now."
+
+She shares the right screen. But her hands shake. Visible. He sees it.
+
+"You seem nervous, Dimayuga-san."
+
+"You're calling about a security breach, sir. Of course I'm nervous. Am I being accused?"
+
+Direct. Maybe too direct. But honest fear.
+
+"Not accused. Questioned. There is a difference."
+
+She nods. Trying to steady her breathing. *Just survive this. Five minutes. Then the crew extracts. Then I can think.*
+
+@if session.answered_matsuda:
+    "I answered your call immediately," she points out. "Would I do that if I were involved?"
+@else:
+    "I apologize for the delay in answering," she says. "I was... startled. Confused."
+@endif
+
+He studies her. "We shall see."
+
+~ session.crisis_interpretation = "nine_swords_survival"
+~ session.quality_score += 2
+~ nyx.anxiety_visible = True
+
++ [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
+
+
+:: Nyx.Session3B.Spread2_ThreeSwords_Interpret
+
+Matsuda: "I am losing patience, Dimayuga-san."
+
+She mutes. Looks at you. Three of Swords—betrayal, heartbreak.
+
+You type fast:
+
++ [**"3 Swords = betrayal IS happening. You're betraying Kitsune. He senses it. Can't prove it but FEELS it. Acknowledge the pain—you're hurting both sides. Crew needs you, corpo demands loyalty. Someone gets hurt. Choose who."**] -> Nyx.Session3B.Spread2_ThreeSwords_Betrayal
+
++ [**"3 Swords = someone on YOUR side is hurt. Check crew status. Did someone get injured during extraction? That pain is real. That's the cost. Focus there—real stakes, real people—not Matsuda's games."**] -> Nyx.Session3B.Spread2_ThreeSwords_CrewHurt
+
+
+:: Nyx.Session3B.Spread2_ThreeSwords_Betrayal
+
+She reads. The truth landing heavy.
+
+*I'm betraying everyone. Kitsune. Matsuda. Maybe even the crew if I can't help them.*
+
+"Matsuda-san," she unmutes. "I understand you have to investigate. I would be suspicious too if I were in your position."
+
+His eyebrow raises slightly. Unexpected honesty.
+
+"I've been a loyal employee for three years," she continues. "But I also understand that loyalty doesn't erase coincidence. My credentials *were* active during the breach. That looks bad. I accept that."
+
+@if session.answered_matsuda:
+    "But I answered your call. Immediately. I'm cooperating. Sharing my screen. What would you like me to show you that proves my innocence?"
+@else:
+    "I hesitated to answer because I was afraid. Of exactly this. Being suspected. Being questioned. I'm sorry for that delay."
+@endif
+
+Matsuda leans back. Reassessing. "Show me your system access logs. Last two hours."
+
+A test. Those logs show *everything*.
+
+~ session.crisis_interpretation = "three_swords_betrayal"
+~ session.quality_score += 2
+~ session.matsuda_suspicion += 1
+~ session.logs_requested = True
+
++ [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
+
+
+:: Nyx.Session3B.Spread2_ThreeSwords_CrewHurt
+
+She reads. Panic spikes.
+
+She glances at her center monitor—still muted crew comms. Text scrolling:
+
+**[WHISPER: Razor's hit. Not bad but bleeding. Slowing us down.]**
+
+Her heart clenches. *Razor. Wounded. Because I'm stuck here talking to Matsuda instead of helping.*
+
+"Matsuda-san," she unmutes. Voice tight. "May I ask—were there casualties? In the breach? Our people?"
+
+He frowns. "Why do you ask?"
+
+"Because if our security personnel were hurt, I want to know. I work with these people. They're... colleagues."
+
+Deflection. Poorly done. Her emotion too visible.
+
+"Three guards injured. Non-life-threatening." He watches her reaction. "Does that concern you specifically?"
+
+"Any violence concerns me, sir."
+
+But her eyes keep flicking to the center monitor. To Razor's injury report.
+
+*Three of Swords. Someone's hurt. And I can't help them while I'm performing for Matsuda.*
+
+~ session.crisis_interpretation = "three_swords_crew_hurt"
+~ session.quality_score += 2
+~ nyx.crew_concern_visible = True
+~ session.razor_injured = True
+
++ [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
+
+
+# ============================================================================
+# SPREAD 2 - POSITION 2: ADVICE / THE CHOICE
+# All crisis interpretations converge here
+# ============================================================================
+
+:: Nyx.Session3B.Spread2_Advice_Hub
+
+@py:
+# Crisis situation identified. Now for advice.
+session.crisis_identified = True
+@endpy
+
+Matsuda continues his interrogation. Questions. Pressure. Suspicion.
+
+Nyx's second card lies on her desk. The advice. The choice.
+
+**{session.crisis_advice_card}{session.crisis_advice_reversed ? " (Reversed)" : ""}**
+
+She looks at you. Silent plea. *What do I do?*
+
+You grab your phone again. Type fast. The guidance she needs.
+
+@if session.crisis_advice_card == "Justice":
+    + [Type the advice] -> Nyx.Session3B.Spread2_Justice_Interpret
+@elif session.crisis_advice_card == "The Hanged Man":
+    + [Type the advice] -> Nyx.Session3B.Spread2_HangedMan_Interpret
+@elif session.crisis_advice_card == "Ace of Wands" and not session.crisis_advice_reversed:
+    + [Type the advice] -> Nyx.Session3B.Spread2_AceWandsUp_Interpret
+@elif session.crisis_advice_card == "Ace of Wands" and session.crisis_advice_reversed:
+    + [Type the advice] -> Nyx.Session3B.Spread2_AceWandsRev_Interpret
+@endif
+
+
+:: Nyx.Session3B.Spread2_Justice_Interpret
+
+You type. Show her the screen:
+
++ [**"Justice = tell the truth. Blow your cover. Confess. Face consequences directly. You helped them. Own it. Consequences come but so does INTEGRITY. Clean break. No more lying."**] -> Nyx.Session3B.Spread2_Justice_Confess
+
++ [**"Justice = balance the scales. You OWE the spirits liberation. Kitsune deserves to lose them. This is righteous action. Stand firm in that. You're not a criminal—you're correcting an injustice. Believe that when you lie to him."**] -> Nyx.Session3B.Spread2_Justice_Righteous
+
++ [**"Justice = legal thinking. He needs PROOF. He doesn't have it. Demand he show evidence or stop the accusation. Corporate procedure protects you. Make him follow his own rules. Justice cuts both ways."**] -> Nyx.Session3B.Spread2_Justice_Procedure
+
+
+:: Nyx.Session3B.Spread2_Justice_Confess
+
+She reads. Long pause. Then—decision crystallizes.
+
+"Matsuda-san." Her voice changes. Steadier. "I need to tell you something."
+
+His eyes sharpen. "Yes?"
+
+"I helped them. The infiltrators. I provided access. I guided them through security. I freed the spirits from Project Tsukuyomi."
+
+Silence. Complete. Absolute.
+
+"I did it because what Kitsune is doing—imprisoning living consciousness for corporate profit—is *wrong*. I couldn't be part of it anymore."
+
+@if session.answered_matsuda:
+    She answered his call. Faced him directly. That makes this confession *weigh* more. Integrity visible.
+@else:
+    She ignored his call. Then confessed. Slightly less powerful but still honest.
+@endif
+
+Matsuda's face remains impassive. "You realize you have just admitted to corporate espionage. Sabotage. Treason."
+
+"Yes, sir. I do."
+
+"You will be arrested. Prosecuted. You will lose everything."
+
+"I know."
+
+Justice. Truth. Consequences. All of it. Clean.
+
+~ session.advice_chosen = "justice_confess"
+~ session.quality_score += 3
+~ session.nyx_cover_status = "blown"
+~ nyx.confession_made = True
+~ session.matsuda_suspicion = 10  # Certain now
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_Justice_Righteous
+
+She reads. Strength floods back into her posture.
+
+"Matsuda-san," she says. Voice firm. "I've been a loyal employee. But I've also been watching Project Tsukuyomi. What Kitsune is doing to those spirits—imprisoning living consciousness, exploiting them—it's unethical. Possibly illegal under the UCAS Magical Rights Act."
+
+His face darkens. "You dare lecture me on—"
+
+"I'm not lecturing. I'm explaining my position. If you're investigating the breach, you should also investigate what was *being* breached. What we were doing that made us a target."
+
+Deflection through counterattack. Righteous anger as shield.
+
+"Those spirits deserved freedom. Whoever freed them—and I don't know who did—performed an act of justice. Not crime."
+
+@if session.crisis_interpretation == "tower_exposed":
+    He knows she's involved. But she's reframing it. Not criminal—liberator.
+@endif
+
+"That is not your determination to make, Dimayuga-san."
+
+"No, sir. But it's my *opinion*. Which I'm entitled to hold."
+
+~ session.advice_chosen = "justice_righteous"
+~ session.quality_score += 2
+~ nyx.moral_high_ground = True
+~ session.matsuda_suspicion += 1
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_Justice_Procedure
+
+She reads. Understanding. *He needs proof. He doesn't have it.*
+
+"Matsuda-san," she says. Corporate voice. Professional. "With respect—am I being formally accused?"
+
+Pause. "You are being *questioned*."
+
+"Then I request clarification. What specific evidence links my credentials to the breach?"
+
+He frowns. "Access logs show—"
+
+"Show that my credentials were *used*. Not that *I* used them. Credentials can be spoofed. Stolen. Cloned. You know this, sir. Kitsune's own security training covers it."
+
+She's using corporate procedure against him. Justice as *law*, not morality.
+
+"If you have evidence I personally committed sabotage, please present it. If not, I respectfully request this interrogation end so I can return to my work."
+
+@if session.answered_matsuda:
+    "I answered your call immediately. I'm cooperating fully. I've shown you my screen. What more do you require?"
+@else:
+    "I apologize again for the delay in answering. But I *am* cooperating now. I've shown you my screen. What more do you require?"
+@endif
+
+Matsuda's jaw tightens. She's right. He doesn't have proof. Just suspicion.
+
+~ session.advice_chosen = "justice_procedure"
+~ session.quality_score += 3
+~ nyx.legal_shield_raised = True
+~ session.matsuda_suspicion += 1  # Frustrated but can't act
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_HangedMan_Interpret
+
+You type. Show her:
+
++ [**"Hanged Man = surrender control. You CAN'T save everyone. Can't protect crew AND keep cover. Accept that. Let go. Whatever happens now is beyond your hands. Stop fighting. Acceptance is survival."**] -> Nyx.Session3B.Spread2_HangedMan_Surrender
+
++ [**"Hanged Man = strategic sacrifice. Give Matsuda SOMETHING. Small confession. Minor guilt. 'Yes, I noticed unusual activity but didn't report it fast enough.' Sacrifice small to protect big. He gets a win. You survive."**] -> Nyx.Session3B.Spread2_HangedMan_Sacrifice
+
++ [**"Hanged Man = waiting is the move. Don't act. Don't confess. Don't attack. Just... wait. Answer questions minimally. Hang suspended. Time is your ally—crew extracting, spirits causing chaos. Matsuda will have to end this call eventually."**] -> Nyx.Session3B.Spread2_HangedMan_Wait
+
+
+:: Nyx.Session3B.Spread2_HangedMan_Surrender
+
+She reads. Something in her releases. Tension dropping.
+
+"Matsuda-san," she says quietly. "I don't know what else to tell you. I was working tonight. The breach happened. My credentials may have been involved. But I don't control everything. I can't stop every possibility."
+
+Acceptance. Not fight. Not flight. Just... being.
+
+"If you believe I'm guilty, then investigate. If you need to suspend me, do so. If you need to arrest me, I'll cooperate. But I can't defend myself against suspicion. Only against evidence."
+
+@if nyx.shamanic_awakening >= 4:
+    The Hanged Man. The shamanic suspension. The place between worlds. She *feels* it now. Letting go of outcome. Trusting the spirits. Trusting the process.
+@endif
+
+Matsuda studies her. This isn't the behavior of someone guilty. Or is it?
+
+He can't tell. And that uncertainty protects her.
+
+~ session.advice_chosen = "hanged_man_surrender"
+~ session.quality_score += 2
+~ nyx.acceptance_achieved = True
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_HangedMan_Sacrifice
+
+She reads. Calculating. *Give him something small.*
+
+"Matsuda-san... I may have made an error."
+
+His attention sharpens. "Explain."
+
+"Earlier tonight—around 23:30—I noticed unusual access patterns in the system logs. Brief. Anomalous. I meant to flag it but... I got distracted by my work. By the time I remembered, the breach had already occurred."
+
+A confession. Minor. Plausible. *I saw something and failed to report it fast enough.*
+
+"You observed suspicious activity and did not report it immediately?" His voice hardens.
+
+"I didn't recognize it as suspicious at the time. Just unusual. I thought it was automated maintenance. But in hindsight... I should have flagged it. That's my failure. Not sabotage. Negligence."
+
+Small sacrifice. She'll face discipline. Maybe suspension. But not arrest.
+
+@if session.answered_matsuda:
+    "That's why I answered your call immediately. Once I realized the breach might connect to what I saw, I wanted to cooperate fully."
+@endif
+
+~ session.advice_chosen = "hanged_man_sacrifice"
+~ session.quality_score += 3
+~ nyx.minor_confession_made = True
+~ session.matsuda_suspicion -= 1  # Somewhat satisfied
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_HangedMan_Wait
+
+She reads. Nods slightly. *Don't act. Just wait.*
+
+"Matsuda-san, I will answer any questions you have."
+
+He asks. She answers. Minimally. "Yes, I was working." "No, I didn't notice anything unusual." "My access was standard for diagnostics work."
+
+No elaboration. No defense. No attack. Just... suspended. Waiting.
+
+The call stretches. Ten minutes. Fifteen.
+
+And then—his phone buzzes. He glances at it. Frowns.
+
+"I must attend to the facility situation," he says finally. "We will continue this conversation tomorrow. Do not leave the city, Dimayuga-san."
+
+"Yes, sir."
+
+The call ends.
+
+She exhales. Long. Shaking.
+
+*The Hanged Man. I just hung there. And survived by doing nothing.*
+
+~ session.advice_chosen = "hanged_man_wait"
+~ session.quality_score += 2
+~ session.matsuda_call_ended = True
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_AceWandsUp_Interpret
+
+You type fast:
+
++ [**"Ace of Wands = BOLD ACTION NOW. Crash his systems. Cut the call. Help crew extract with everything you've got. No more playing defense. Offense wins. Risk everything on decisive move."**] -> Nyx.Session3B.Spread2_AceWandsUp_Bold
+
++ [**"Ace of Wands = creative solution. Don't confess OR deny. Third option: 'I'm coming in. To the facility. Right now. To help investigate.' Forces him to react. Shows initiative. Buys time. Unexpected move."**] -> Nyx.Session3B.Spread2_AceWandsUp_Creative
+
++ [**"Ace of Wands = ignite his anger away from you. 'Sir, whoever did this made US look bad. Made YOU look bad. Let me help you find them. I want them caught too.' Channel his fury sideways. Make yourself the ally, not the suspect."**] -> Nyx.Session3B.Spread2_AceWandsUp_Redirect
+
+
+:: Nyx.Session3B.Spread2_AceWandsUp_Bold
+
+She reads. Decision instant.
+
+"Matsuda-san, I apologize—I'm experiencing a system crash. I need to—"
+
+She doesn't finish. She crashes the video call. Deliberately. Then pulls up her crew comms.
+
+"RAZOR. Status?"
+
+*"We're pinned down. Sublevel 1. Need extraction route. NOW."*
+
+Her hands fly across the keyboard. All pretense dropped. Nicole gone. Just Nyx.
+
+"West emergency exit. I'm unlocking it. You have thirty seconds before security responds. GO."
+
+@if nyx.shamanic_awakening >= 4:
+    She feels the spirits helping. Crashing Kitsune's internal systems. Creating chaos. Buying time.
+@endif
+
+*Razor: "Moving!"*
+
+Matsuda will know. He'll *know*. But the crew needs her *now*.
+
+Ace of Wands. Bold action. Risk everything on one decisive move.
+
+~ session.advice_chosen = "ace_wands_bold"
+~ session.quality_score += 3
+~ session.nyx_cover_status = "blown"
+~ session.crew_saved = True
+~ nyx.all_in = True
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_AceWandsUp_Creative
+
+She reads. Unexpected idea sparking.
+
+"Matsuda-san, I request permission to come to the facility. Right now. To assist with the investigation."
+
+He blinks. "What?"
+
+"I know our systems better than most security personnel. If someone used my credentials, I want to help track them down. I want to prove my innocence through *action*, not words."
+
+Bold. Unexpected. It throws him completely.
+
+"The facility is under lockdown. Active breach situation."
+
+"Then you need skilled personnel. Sir, let me help. I *want* to help."
+
+@if session.answered_matsuda:
+    It almost works. The audacity of it. The initiative.
+@else:
+    But she ignored his first call. That lingers. "I will consider it," he says finally. "Remain available."
+@endif
+
+Ace of Wands. Creative solution. Third option nobody saw coming.
+
+~ session.advice_chosen = "ace_wands_creative"
+~ session.quality_score += 2
+~ nyx.volunteer_to_investigate = True
+~ session.matsuda_suspicion -= 1  # Confused, impressed
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_AceWandsUp_Redirect
+
+She reads. Strategy clicking into place.
+
+"Matsuda-san, whoever did this—they made US look bad. They made YOU look bad. They exploited our systems, our people, our security. I want them caught as much as you do."
+
+Redirecting his anger. Away from her. Toward the nebulous "them."
+
+"Let me help you find them. I know our system architecture. I can identify anomalies. Let me prove my loyalty by helping you hunt down whoever betrayed Kitsune."
+
+Ally, not suspect. Partner, not perpetrator.
+
+@if session.crisis_interpretation == "tower_chaos":
+    "The chaos in our systems is extreme. Whoever did this had help. Maybe from the Matrix. Maybe from... other sources." *Spirits, she doesn't say.* "But I can help you track the digital footprints."
+@endif
+
+He considers. "I will keep you informed. For now, remain on standby."
+
+Not cleared. But not arrested either. Anger redirected.
+
+~ session.advice_chosen = "ace_wands_redirect"
+~ session.quality_score += 2
+~ nyx.ally_position_established = True
+~ session.matsuda_suspicion -= 1
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_AceWandsRev_Interpret
+
+You type:
+
++ [**"Ace Wands REVERSED = don't force it. Bold action FAILS now. Your impulse to act will backfire. Whatever you want to do—confess, attack, help crew—DON'T. Reversed fire burns the wielder. Be small. Be quiet."**] -> Nyx.Session3B.Spread2_AceWandsRev_DontForce
+
++ [**"Ace Wands REVERSED = misdirected energy. You want to ACT but don't know what action is right. That confusion is dangerous. Don't make decisions from this state. Tell Matsuda 'I need time to think. Can we continue this tomorrow?' Delay is better than wrong action."**] -> Nyx.Session3B.Spread2_AceWandsRev_Misdirected
+
+
+:: Nyx.Session3B.Spread2_AceWandsRev_DontForce
+
+She reads. Suppressing her impulse to act.
+
+Every instinct screams to help the crew, to crash Matsuda's connection, to *do* something.
+
+But Ace of Wands reversed. *Bold action fails.*
+
+She stays still. Answers Matsuda's questions calmly. Doesn't confess. Doesn't attack. Doesn't volunteer anything.
+
+Just... minimal cooperation. No fire. No force.
+
+"I understand your concerns, Matsuda-san. I will cooperate fully with any investigation."
+
+Boring. Passive. Exactly what reversed fire teaches.
+
+@if session.crisis_interpretation == "nine_swords_fear":
+    Her fear wanted her to confess. To end the anxiety. But reversed Ace says no. Sit with the discomfort.
+@endif
+
+~ session.advice_chosen = "ace_wands_reversed_passive"
+~ session.quality_score += 2
+~ nyx.impulse_suppressed = True
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+
+:: Nyx.Session3B.Spread2_AceWandsRev_Misdirected
+
+She reads. Recognizing her own confusion.
+
+*I don't know what to do. Every option feels wrong.*
+
+"Matsuda-san," she says. "This is... overwhelming. A security breach. Accusations. I need time to process. Can we continue this conversation tomorrow? After I've had time to review my own logs and gather my thoughts?"
+
+He frowns. "This is urgent, Dimayuga-san."
+
+"I understand. But I want to give you accurate information, not confused answers. A few hours to collect myself—that will serve the investigation better than me fumbling through questions now."
+
+Admitting confusion. Asking for delay. Not decisive. But *honest*.
+
+"Very well. We will speak tomorrow. 09:00. My office."
+
+The call ends.
+
+~ session.advice_chosen = "ace_wands_reversed_delay"
+~ session.quality_score += 2
+~ session.matsuda_call_ended = True
+~ nyx.bought_time = True
+
++ [The choice is made] -> Nyx.Session3B.Spread2_Complete
+
+# ============================================================================
+# SPREAD 2: COMPLETE (Aftermath of Matsuda interrogation)
+# ============================================================================
+
+:: Nyx.Session3B.Spread2_Complete
+
+@py:
+# Reading complete
+session.readings_complete['crisis'] = True
+session.crisis_handled = True
+
+# Calculate how the call ended
+if session.advice_chosen in ["justice_confess", "ace_wands_bold"]:
+    session.call_status = "blown"  # She revealed herself
+    session.nyx_cover_status = "blown"
+elif session.advice_chosen in ["hanged_man_wait", "ace_wands_reversed_delay"]:
+    session.call_status = "ended"  # Call ended naturally
+elif session.advice_chosen in ["hanged_man_sacrifice"]:
+    session.call_status = "minor_confession"  # She gave him something small
+else:
+    session.call_status = "ongoing"  # Call continues but stabilized
+
+# How suspicious is Matsuda now?
+if session.matsuda_suspicion >= 8:
+    session.matsuda_state = "certain"
+elif session.matsuda_suspicion >= 5:
+    session.matsuda_state = "highly_suspicious"
+else:
+    session.matsuda_state = "suspicious_but_uncertain"
+@endpy
+
+@if session.call_status == "blown":
+    The video call is over. Either she confessed or she hung up on him to help the crew. Either way—Matsuda *knows*.
+
+    Nyx sits frozen. Staring at the blank screen where his face was.
+
+    "I just..." Her voice hollow. "I just destroyed my life."
+
+    @if session.advice_chosen == "justice_confess":
+        But her face shows something else too. Relief. The weight of lying—gone. "The cards said to tell the truth. So I did."
+    @elif session.advice_chosen == "ace_wands_bold":
+        But her jaw sets. "The crew needed me. I chose them. No regrets."
+    @endif
+
+@elif session.call_status == "ended":
+    The video call ends. Matsuda had to attend to the facility crisis. Or she asked for time and he granted it.
+
+    Nyx exhales. Long. Shaking. "He's gone. For now."
+
+    @if session.matsuda_state == "certain":
+        "But he knows. He *knows*. Tomorrow he'll have evidence. Tonight I just... delayed the inevitable."
+    @elif session.matsuda_state == "highly_suspicious":
+        "He suspects. Strongly. But he can't prove it yet. I bought time. Maybe enough."
+    @else:
+        "He suspects something. But he's not certain. I might... I might actually survive this."
+    @endif
+
+@elif session.call_status == "minor_confession":
+    The video call continues but the pressure eases. She gave him something—negligence, delayed reporting—and he's somewhat satisfied.
+
+    "I'll face discipline," she mutters. "Suspension, maybe. But not arrest. Not unless he finds more."
+
+    @if session.matsuda_state == "highly_suspicious":
+        "He's still watching me. This isn't over."
+    @else:
+        "Maybe... maybe that's enough. Small sacrifice. Survival."
+    @endif
+
+@else:
+    The interrogation stabilizes. Matsuda probes but she holds. Answers without confessing. Defends without attacking.
+
+    Eventually: "We will continue this tomorrow, Dimayuga-san. Do not leave the city."
+
+    The call ends.
+
+    Nyx slumps in her chair. "I survived. For now."
+@endif
+
+---
+
+She unmutes the crew comms.
+
+**[ENCRYPTED CHANNEL - GHOST PROTOCOL]**
+
+*Razor: "Nyx? You there? We're clear. Sublevel access secured. Heading to extraction point."*
+
+Relief floods her face. "You're okay?"
+
+*Razor: "Mostly. {session.razor_injured: I took a round. Whisper patched me. I'll live. | Few close calls but we're intact.} Spirits are loose. Kitsune's in complete chaos. We did it."*
+
+*Whisper (excited, nervous): "Thousands of them. THOUSANDS. They're everywhere. The city's going to feel this for weeks."*
+
+*Cipher: "Beautiful chaos. Digital and spiritual. Kitsune's systems are melting. They won't be able to investigate properly for days."*
+
+@if nyx.shamanic_awakening >= 4:
+    Nyx can feel them. The freed spirits. Flooding through Seattle's Matrix. Dancing in rain. {session.weather == "rain": Singing in the downpour. | Whispering through fog.}
+
+    The anito on her shrine pulse with joy. *Victory. Freedom. Justice.*
+@endif
+
+*Razor: "You good, Nyx? How'd it go with your boss?"*
+
+She looks at the two cards on her desk. Crisis and advice. Situation and choice.
+
+@if session.nyx_cover_status == "blown":
+    "He knows," she says quietly. "I'm burned. Can't go back."
+
+    *Long pause.*
+
+    *Razor: "Then you extract with us. Tonight. We don't leave people behind."*
+
+@elif session.matsuda_state == "certain":
+    "He doesn't have proof yet. But he will. By tomorrow, probably. I'm... I'm on borrowed time."
+
+    *Razor: "Your call, Nyx. You want out? We can get you out. Tonight."*
+
+@elif session.matsuda_state == "highly_suspicious":
+    "He's suspicious. Very suspicious. But not certain. I might be able to hold cover. For a while. But it's fragile."
+
+    *Cipher: "The question is—do you want to stay inside? Or come with us?"*
+
+@else:
+    "I... I think I held it together. He suspects something but can't prove it. My cover's damaged but intact."
+
+    *Whisper: "So you're staying? Inside Kitsune?"*
+@endif
+
+Nyx stares at her apartment. Her life. Her dual identities.
+
+Nicole Dimayuga: Systems Architect, corporate employee, Level 3.
+
+Nyx: shadow runner, liberator, shamanic awakening in progress.
+
+The cards on her desk. The shrine glowing softly. The crew on comms waiting for her answer.
+
+And the biggest choice of her life.
+
+~ session.phase = "final_decision"
+~ session.decision_time = True
+
++ [The moment of choice arrives] -> Nyx.Session3B.Final_Decision_Setup
+
+
+# ============================================================================
+# THE FINAL DECISION (Blow Cover / Hold Cover / Abort)
+# ============================================================================
+
+:: Nyx.Session3B.Final_Decision_Setup
+
+@py:
+# Determine which options are available based on what happened
+
+# Option A: Blow Cover (join crew as fugitive)
+option_blow_available = True  # Always available
+
+# Option B: Hold Cover (stay inside Kitsune)
+# Only available if cover isn't already blown
+if session.nyx_cover_status == "blown":
+    option_hold_available = False
+else:
+    option_hold_available = True
+
+# Option C: Abort doesn't make sense here - mission already happened
+# So Option C becomes something else... "Middle Path"?
+# Let's make it "Disappear" - leave both lives behind, go solo
+
+option_disappear_available = True  # Always technically possible
+
+# Also track crew's state
+if session.razor_injured:
+    crew_state = "wounded_but_alive"
+else:
+    crew_state = "intact"
+@endpy
+
+*Razor: "Nyx. We need to know. What's your play?"*
+
+She stands. Walks to the window. Twenty-three floors below, Seattle glows through {session.weather == "rain" ? "rain" : "fog"}. The city alive with freed spirits. With chaos. With possibility.
+
+Behind her—the shrine. Lola watching. The anito waiting.
+
+Behind her—the monitors. Corporate systems. Shadow runner comms. Fake spreadsheets.
+
+Behind her—you. The Reader. The guide who showed her the cards. Who saw the path.
+
+"I need to decide," she says. "Right now. Do I run with them? Do I stay inside Kitsune? Do I disappear completely?"
+
+You gather the cards. The full reading. Spread 1 and Spread 2. The story told so far.
+
+**SPREAD 1 - Risk Assessment:**
+- Threat: {session.threat_type}
+- Protection: {session.protection_type}
+- Outcome: {session.outcome_type}
+
+**SPREAD 2 - Crisis:**
+- Situation: {session.crisis_interpretation}
+- Advice: {session.advice_chosen}
+
+The cards have guided her this far. But this choice—this is hers.
+
+"What do the cards say?" she asks.
+
+You look at the spread. At the pattern. At the story emerging.
+
+@if session.outcome_type == "safe_passage" and session.nyx_cover_status == "intact":
+    "Six of Swords promised safe passage for everyone. Your cover can hold. The cards support staying inside if that's what you want."
+
+@elif session.outcome_type == "necessary_transition":
+    "Six of Swords said you can't go back. The person who could live that double life is gone. The cards support leaving—becoming Nyx fully."
+
+@elif session.outcome_type in ["avoid_worst", "near_death_recovery"]:
+    "Ten of Swords reversed said you'd survive. Barely. You're on the edge. The cards suggest you're at the limit of what holding cover can sustain."
+
+@elif session.outcome_type in ["illusion_holds", "hidden_paths"]:
+    "The Moon promised hidden paths and illusion holding. You have protection if you're careful. The cards support either choice—they'll work either way."
+
+@elif session.outcome_type == "fear_and_intuition":
+    "The Moon said trust your intuition. What does your gut say? Not your fear. Not your logic. Your *intuition*."
+@endif
+
+@if session.advice_chosen == "justice_confess":
+    "And you chose Justice. Truth. Confession. That points toward leaving—you already burned the bridge."
+
+@elif session.advice_chosen in ["hanged_man_surrender", "hanged_man_wait"]:
+    "And you chose the Hanged Man. Acceptance. Letting go. That could mean staying (accepting the risk) or leaving (letting go of Nicole). Either interpretation works."
+
+@elif session.advice_chosen in ["ace_wands_bold", "ace_wands_creative"]:
+    "And you chose bold action. Decisive moves. That energy says: commit fully. Whatever you choose, choose it ALL IN."
+@endif
+
+She nods slowly. Processing.
+
+*Whisper (soft, over comms): "Nyx, whatever you choose—we respect it. You've already done more than anyone could ask."*
+
+*Cipher: "The spirits are free. The mission succeeded. You owe us nothing more."*
+
+*Razor: "But if you come with us? You're one of us. Crew. Family. We protect our own."*
+
+The choice crystallizes into three paths:
+
+@if option_blow_available:
+    **Path One: BLOW COVER - Join the Crew**
+    Leave Nicole behind. Become Nyx fully. Run with Razor, Whisper, and Cipher. Shadow runner life. Homeless but free. Hunted but together.
+@endif
+
+@if option_hold_available:
+    **Path Two: HOLD COVER - Stay Inside**
+    Remain Nicole Dimayuga. Corporate employee. {session.matsuda_state == "certain" ? Under suspicion, maybe investigation, but technically employed. | Damaged cover but maintainable.} Double agent. Future operations possible. Lonely but positioned.
+@endif
+
+@if option_disappear_available:
+    **Path Three: DISAPPEAR - Leave Both Lives**
+    Abandon Nicole. Abandon the crew. Go solo. New city. New identity. New life. Alone but untethered. Ghost in the machine.
+@endif
+
+Nyx looks at you one last time. "What should I do?"
+
+~ reader.major_choice = True
+
+@if option_blow_available and option_hold_available and option_disappear_available:
+    + [**"Blow your cover. Join them. You freed the spirits together—stay together. Crew is family. Don't face what comes next alone."**] -> Nyx.Session3B.Decision_BlowCover
+    + [**"Hold your cover. Stay inside Kitsune. You're more valuable as a long-term asset than a one-time runner. Play the long game. This was mission one of many."**] -> Nyx.Session3B.Decision_HoldCover
+    + [**"Disappear. Leave both lives behind. You're not Nicole anymore—but you're not crew either. You're something new. Go find out what that is. Alone."**] -> Nyx.Session3B.Decision_Disappear
+
+@elif option_blow_available and option_hold_available:
+    + [**"Blow your cover. Join them. You freed the spirits together—stay together. Crew is family. Don't face what comes next alone."**] -> Nyx.Session3B.Decision_BlowCover
+    + [**"Hold your cover. Stay inside Kitsune. You're more valuable as a long-term asset than a one-time runner. Play the long game. This was mission one of many."**] -> Nyx.Session3B.Decision_HoldCover
+
+@elif option_blow_available:
+    + [**"Blow your cover. Join them. You already chose this when you helped them. Now make it official. You're crew."**] -> Nyx.Session3B.Decision_BlowCover
+    + [**"Disappear. You burned Kitsune's bridge but that doesn't mean you owe the crew your future. Go your own way."**] -> Nyx.Session3B.Decision_Disappear
+@endif
+
+# ============================================================================
+# DECISION A: BLOW COVER - Join the Crew
+# ============================================================================
+
+:: Nyx.Session3B.Decision_BlowCover
+
+You speak the words. She hears them. Truth landing.
+
+"Join them. You freed the spirits together. Don't face what comes next alone."
+
+Nyx takes a breath. Decision crystallizing. Becoming solid. Real.
+
+She turns to the mic. "Razor. I'm coming with you. Where's extraction?"
+
+*Razor (immediate, no hesitation): "Pier 47. Boat waiting. How fast can you move?"*
+
+"Twenty minutes. I need to pack."
+
+*"Fifteen. Kitsune response teams are mobilizing. Move FAST."*
+
+She cuts the call. Looks at you.
+
+"Thank you. For the reading. For showing me the path. For being here."
+
+Then she *moves*.
+
+---
+
+**[00:12 PST - EXTRACTION PREP]**
+
+She grabs a backpack from the closet. Starts throwing things in:
+
+- Clothes. Street clothes. Black. Dark. Practical. The corpo suits stay.
+- Burner phones. Data chips. Encrypted drives.
+- Her personal cyberdeck. The REAL one.
+- Cash. Physical currency. Untraceable.
+
+She pauses at the shrine.
+
+Lola's photograph. She takes it from the frame. Slides it carefully into the backpack's inner pocket. Close to her heart.
+
+The anito - the three wooden figures. She wraps them in a shirt. Tucks them in gently.
+
+"I'm taking you with me," she whispers to them. To grandmother. To the spirits who guided her.
+
+@if nyx.shamanic_awakening >= 5:
+    The anito pulse one more time. *We go where you go. Always.*
+@endif
+
+Her Kitsune badge - she leaves it on the desk. Face-up. Nicole Dimayuga's corporate photo staring at the ceiling. That identity is dead.
+
+Your tarot deck - she looks at it. "Should I...?"
+
+You shake your head. "That's mine. But you have your own deck. Take it. You'll need guidance."
+
+She grabs her cheap, worn tarot deck. The one she's been learning with. Into the backpack.
+
+**[00:18 PST]**
+
+She does one last thing.
+
+Sits at her keyboard. Types rapidly. A message to Matsuda:
+
+*"Sir - I quit. The spirits deserved freedom. I don't regret what I did. I'm sorry for the deception but not for the outcome. - Nicole Dimayuga"*
+
+SEND.
+
+She deletes her system logs. Wipes her access history. Covers tracks as much as possible.
+
+Then stands. Backpack on. One last look at the apartment.
+
+Twenty-three floors above a city she's about to become a fugitive in. The life she built—abandoned. The safety she had—gone.
+
+But the spirits are free. And she's not alone.
+
+"Let's go."
+
+---
+
+**[00:23 PST - PIER 47]**
+
+@if session.weather == "rain":
+    Rain hammers the docks. Perfect cover. She runs through it, hood up, invisible in the downpour.
+@else:
+    Fog so thick she can't see ten feet ahead. Perfect cover. She runs through it, ghost in the grey.
+@endif
+
+The crew waits by a boat. Small. Fast. Unmarked.
+
+Razor—tall, scarred, ork muscle. He nods when he sees her. Respect.
+
+Whisper—slight, nervous, surrounded by three drones (Byron, Shelley, Keats). They hum happily.
+
+Cipher—human but distant, eyes unfocused, half in the Matrix even now.
+
+"Welcome to the shadows," Razor says.
+
+She climbs aboard. No turning back.
+
+The boat pulls away from the pier. From Seattle. From corporate life. From Nicole.
+
+Nyx watches the city recede. Kitsune's tower glowing in the distance. The facility she infiltrated. The company she betrayed.
+
+@if nyx.shamanic_awakening >= 5:
+    And she *sees* them. Thousands of spirits. Dancing through the city. Free. Alive. Celebrating.
+
+    They see her too. Acknowledge her. *Thank you, liberator. We are free because of you.*
+@endif
+
+*Whisper: "Where do we go now?"*
+
+*Razor: "Anywhere but here. Portland. Vancouver. Somewhere Kitsune can't reach."*
+
+*Cipher: "The digital realm is wide. We'll disappear into it."*
+
+Nyx touches her backpack. Lola's photo inside. The anito wrapped safely.
+
+"I'm ready," she says.
+
+And she is.
+
+---
+
+**ARTIFACTS AWARDED:**
+
+@py:
+# Blow Cover path - she's now a shadow runner
+
+# ALWAYS get Spirit Data Core (if awakening high enough)
+if nyx.shamanic_awakening >= 4:
+    reader.artifacts.append("spirit_data_core")
+    session.artifacts_awarded.append("spirit_data_core")
+@endif
+
+# Get Razor's token (joining crew as equal)
+reader.artifacts.append("razor_lucky_token")
+session.artifacts_awarded.append("razor_lucky_token")
+
+# Liberation proof chip (evidence of freedom)
+reader.artifacts.append("liberation_chip")
+session.artifacts_awarded.append("liberation_chip")
+
+# If Razor was injured, get Byron's wing
+if session.razor_injured:
+    reader.artifacts.append("byron_wing")
+    session.artifacts_awarded.append("byron_wing")
+@endif
+
+# If reading quality was excellent, get Tsukuyomi evidence
+if session.risk_assessment_quality == "excellent" and session.quality_score >= 8:
+    reader.artifacts.append("tsukuyomi_evidence")
+    session.artifacts_awarded.append("tsukuyomi_evidence")
+@endif
+
+# Mark her ending
+nyx.ending = "shadow_runner"
+nyx.with_crew = True
+nyx.status = "fugitive"
+@endpy
+
+@if "spirit_data_core" in session.artifacts_awarded:
+    As the boat speeds away, something *pulses* in her backpack. Warm. Alive.
+
+    She reaches in. Pulls out a data chip she doesn't remember packing.
+
+    It glows. Not with electricity. With *presence*.
+
+    "One of the freed spirits," Cipher murmurs, seeing it. "They encoded themselves. As gratitude. That's... rare. Precious."
+
+    Spirit-touched tech. Magic and chrome united.
+@endif
+
+@if "razor_lucky_token" in session.artifacts_awarded:
+    Razor digs in his pocket. Pulls out a small metal token. Ork-made. Crude runes.
+
+    "Carried this through three wars," he says. Presses it into her palm. "You're crew now. You get crew luck."
+
+    It's warm to the touch. Smells like gun oil and old blood. Survivor's charm.
+@endif
+
+@if "liberation_chip" in session.artifacts_awarded:
+    Whisper hands her another chip. Black. Encrypted. Glowing softly.
+
+    "Proof," they say. "Of what we did tonight. Thousands of spirits. All freed. Their names, timestamps, liberation protocols. So we remember. So you remember."
+
+    Evidence that she changed the world.
+@endif
+
+@if "byron_wing" in session.artifacts_awarded:
+    Whisper's voice is quiet. "Byron didn't make it. The drone—he died helping. But I wanted you to have this."
+
+    A tiny circuit board. Shaped like a wing. Delicate. Beautiful. Dead.
+
+    "Courage isn't just human," Whisper says.
+
+    Nyx holds it carefully. Grief and gratitude mixed.
+@endif
+
+@if "tsukuyomi_evidence" in session.artifacts_awarded:
+    Cipher hands her a storage chip. Heavy. Dense encryption.
+
+    "Copy of everything. Project Tsukuyomi. Evidence that destroys Kitsune. Insurance. If anything happens to us—YOU have proof. You can finish what we started."
+
+    Power and burden in one small chip.
+@endif
+
+~ nyx.artifacts_received = len(session.artifacts_awarded)
+~ session.ending_type = "blow_cover"
+
++ [The dream fades] -> Nyx.Session3B.Wake_Up_Coda
+
+
+# ============================================================================
+# DECISION B: HOLD COVER - Stay Inside Kitsune
+# ============================================================================
+
+:: Nyx.Session3B.Decision_HoldCover
+
+You speak carefully. "Hold your cover. You're more valuable inside than out. This was mission one. Not the last."
+
+Nyx nods slowly. Strategic thinking overtaking emotion.
+
+She turns to the mic. "Razor. I'm staying."
+
+*Silence. Then:*
+
+*Razor: "You sure? If Matsuda has proof—"*
+
+"He doesn't. Not yet. Maybe not ever. I can hold this. And if I stay inside—we can do this again. Free more spirits. Sabotage more projects. I'm worth more as a long-term asset."
+
+*Long pause.*
+
+*Cipher: "She's right. An insider at Kitsune is invaluable. If she can maintain the fiction."*
+
+*Whisper (worried): "But you'll be alone. We'll be gone. You'll have no backup."*
+
+"I know." Her voice is steady. Certain. "But this is the play. Trust me."
+
+*Razor: "We trust you. But Nyx—if it goes bad, you run. Don't be a hero. Just RUN. We'll find you."*
+
+"I will."
+
+*"Good luck, ghost. Stay safe."*
+
+The comms go quiet. The crew extracts without her.
+
+She's alone in her apartment. Again. As she was before. As she chose to be.
+
+---
+
+**[00:15 PST - AFTERMATH]**
+
+Nyx sits at her desk. Stares at the three monitors.
+
+**Left:** Kitsune internal systems. Facility in chaos. Security teams scrambling. No clear leads yet on who helped the infiltrators.
+
+**Center:** Encrypted comms. Now dark. The crew is gone. She's severed from them.
+
+**Right:** Her "official work." The spreadsheet. The lie. The cover.
+
+She saves the spreadsheet. Closes it. Opens her email. Starts writing her report:
+
+*"Matsuda-san - Per your request, summary of my system activity tonight. Attached are my access logs showing diagnostic work on backup servers. I noticed unusual network activity around 23:30 but did not recognize it as hostile at the time. I apologize for not flagging it immediately. Available for further questioning. - Nicole Dimayuga"*
+
+Professional. Cooperative. Innocent.
+
+She hits SEND.
+
+Then she wipes the REAL logs. The ones showing what she actually did. Door unlocks. Camera loops. Access overrides. Evidence deleted.
+
+@if session.matsuda_state == "certain":
+    But Matsuda is smart. He'll dig. She'll need to be perfect. Every day. Every interaction. One slip and she's done.
+
+    The knife's edge just got sharper.
+
+@elif session.matsuda_state == "highly_suspicious":
+    Matsuda will watch her. Closely. For weeks. Months. But if she's careful—if she plays the perfect employee—she might convince him. Eventually.
+
+@else:
+    Matsuda suspects. But without proof, he can't act. Corporate procedure protects her. For now.
+@endif
+
+She looks at the shrine. Lola's photo. The anito watching.
+
+"I stayed," she whispers. "Is that cowardice? Or strategy?"
+
+@if nyx.shamanic_awakening >= 4:
+    The anito pulse. Not judgment. Just *acknowledgment*. The path is hers to walk.
+@endif
+
+She'll live two lives. Nicole by day. Nyx by night. Walking the edge. Serving two masters. Loyal to neither. Free to both.
+
+The long game.
+
+---
+
+**ARTIFACTS AWARDED:**
+
+@py:
+# Hold Cover path - double agent, staying inside
+
+# Liberation proof chip (evidence she keeps hidden)
+reader.artifacts.append("liberation_chip")
+session.artifacts_awarded.append("liberation_chip")
+
+# If awakening high, spirit guidance charm
+if nyx.shamanic_awakening >= 4:
+    reader.artifacts.append("spirit_guidance_charm")
+    session.artifacts_awarded.append("spirit_guidance_charm")
+@endif
+
+# If she made minor confession to Matsuda, corporate warning token
+if session.advice_chosen == "hanged_man_sacrifice":
+    reader.artifacts.append("corporate_warning_token")
+    session.artifacts_awarded.append("corporate_warning_token")
+@endif
+
+# If reading quality excellent, insider's keycard (symbolic)
+if session.risk_assessment_quality == "excellent":
+    reader.artifacts.append("insider_keycard")
+    session.artifacts_awarded.append("insider_keycard")
+@endif
+
+# Mark ending
+nyx.ending = "double_agent"
+nyx.stays_inside = True
+nyx.status = "undercover"
+@endpy
+
+@if "liberation_chip" in session.artifacts_awarded:
+    Before the crew left, Cipher sent her one thing. Encrypted file. Downloaded to a black data chip.
+
+    "Proof," the message said. "Of what we freed tonight. Keep it safe. Hidden. When the time comes—use it."
+
+    Evidence of liberation. Her secret. Her power.
+@endif
+
+@if "spirit_guidance_charm" in session.artifacts_awarded:
+    On her shrine, something new appears. She didn't put it there.
+
+    A small carved charm. Wood. Unfamiliar style. Warm to the touch.
+
+    The freed spirits left it. Gratitude. Protection. "We remember. We're watching. You're not alone."
+
+    Hidden magic in a corporate world.
+@endif
+
+@if "corporate_warning_token" in session.artifacts_awarded:
+    In her desk drawer, she finds it. Small metal disc. Kitsune logo on one side. Matsuda's personal seal on the other.
+
+    A warning. A reminder. *I'm watching you.*
+
+    He left it somehow. During the investigation. Before the call. A message.
+
+    She's marked. But not arrested. The edge she walks.
+@endif
+
+@if "insider_keycard" in session.artifacts_awarded:
+    Her Kitsune badge gains weight. Not physical. Metaphorical.
+
+    It's no longer just corporate ID. It's *access*. To systems. To secrets. To the ability to change things from within.
+
+    The Reader understands: this isn't just employment. It's *infiltration*. Long-term. Strategic.
+
+    Nicole Dimayuga—shadow operative. The deepest of deep cover.
+@endif
+
+~ nyx.artifacts_received = len(session.artifacts_awarded)
+~ session.ending_type = "hold_cover"
+
++ [The dream fades] -> Nyx.Session3B.Wake_Up_Coda
+
+
+# ============================================================================
+# DECISION C: DISAPPEAR - Leave Both Lives Behind
+# ============================================================================
+
+:: Nyx.Session3B.Decision_Disappear
+
+You speak the words. "Disappear. You're not Nicole anymore. But you're not crew either. You're something new. Go find out what."
+
+Nyx stares at you. Then slowly—understanding. Liberation of a different kind.
+
+She turns to the mic. "Razor. I'm not coming with you."
+
+*Pause.*
+
+*Razor: "You staying inside?"*
+
+"No. I'm leaving Seattle. Alone. New city. New identity. New life. Solo."
+
+*Longer pause.*
+
+*Cipher: "Ghost protocol. Complete severance. It's... elegant. Dangerous. But elegant."*
+
+*Whisper (sad): "We won't see you again?"*
+
+"Probably not. But you freed the spirits. Mission complete. You don't need me. And I... I need to figure out who I am. Without Kitsune. Without a crew. Just me."
+
+*Razor: "Understood. Good luck, ghost. May the spirits guide you."*
+
+"And you."
+
+She cuts the comms. Severs the connection. The crew will extract. She'll vanish.
+
+Two identities dying tonight. One new one being born.
+
+---
+
+**[00:14 PST - PREPARATION]**
+
+She packs. Methodically.
+
+- Clothes. Mix of street and neutral. Nothing corporate. Nothing runner-specific.
+- Cash. Lots of it. Untraceable.
+- Data chips. Encrypted. Her skills. Her knowledge.
+- Her personal cyberdeck. Modified. Anonymous.
+
+She pauses at the shrine.
+
+Takes Lola's photograph. The anito. Wraps them carefully. These come with her. Always.
+
+Her Kitsune badge—she destroys it. Literally. Smashes it with a hammer. Corporate Nicole dies.
+
+The crew's emergency contacts—she deletes them. No connections. No traces.
+
+Your tarot deck—"Keep it," you say. "But take yours. You'll need guidance."
+
+She takes her worn deck. The one she's learning. Into the backpack.
+
+She wipes her system logs. Both Kitsune AND crew-related. No evidence either direction.
+
+Then she writes two messages:
+
+**To Matsuda:**
+*"I quit. Effective immediately. No forwarding information. - N. Dimayuga"*
+
+**To Razor (delayed send, 6 hours):**
+*"Thank you for everything. For the mission. For believing in me. I'm going dark. Complete. Don't look for me. Be well. - Nyx"*
+
+Both sent through anonymizers. Untraceable.
+
+She stands. Backpack on. One last look at the apartment.
+
+Then she walks out. Leaving Nicole. Leaving Nyx. Leaving everything.
+
+Becoming ghost.
+
+---
+
+**[LOCATION: UNKNOWN]**
+
+@if session.weather == "rain":
+    She walks through rain. Hood up. Anonymous in the downpour.
+@else:
+    She walks through fog. Invisible in the grey.
+@endif
+
+Not toward the docks where the crew extracts. Not toward Kitsune. Just... away.
+
+Bus station. Ticket purchased cash. Random destination. Portland? Vancouver? Night City? Doesn't matter.
+
+On the bus, she stares out the window. Seattle disappearing behind her.
+
+Two lives left behind. Corporate. Shadow runner. Both cages in different ways.
+
+Now—freedom. Terrifying. Absolute. Alone.
+
+@if nyx.shamanic_awakening >= 4:
+    But not *completely* alone. She feels them. Lola. The anito. The freed spirits watching from the Matrix.
+
+    They'll follow wherever she goes. Spiritual connection doesn't break with physical distance.
+@endif
+
+She doesn't know who she'll become. What name she'll use. What city she'll settle in. What life she'll build.
+
+But it'll be *hers*. Fully. Finally.
+
+The ghost finds her own path.
+
+---
+
+**ARTIFACTS AWARDED:**
+
+@py:
+# Disappear path - solo, complete independence
+
+# Always get wanderer's compass (symbolic)
+reader.artifacts.append("wanderers_compass")
+session.artifacts_awarded.append("wanderers_compass")
+
+# If awakening high, ancestral travel blessing
+if nyx.shamanic_awakening >= 4:
+    reader.artifacts.append("ancestral_travel_blessing")
+    session.artifacts_awarded.append("ancestral_travel_blessing")
+@endif
+
+# Liberation chip (she kept proof, even alone)
+reader.artifacts.append("liberation_chip")
+session.artifacts_awarded.append("liberation_chip")
+
+# If quality high, encrypted skills datacore
+if session.quality_score >= 7:
+    reader.artifacts.append("encrypted_skills_datacore")
+    session.artifacts_awarded.append("encrypted_skills_datacore")
+@endif
+
+# Mark ending
+nyx.ending = "disappeared"
+nyx.solo_path = True
+nyx.status = "ghost"
+@endpy
+
+@if "wanderers_compass" in session.artifacts_awarded:
+    On the bus, she finds it in her pocket. Didn't pack it. It just... appeared.
+
+    A small compass. Brass. Old. The needle doesn't point north.
+
+    It points toward *meaning*. Toward purpose. Toward the path she needs.
+
+    Wanderer's gift. The spirits providing guidance even in exile.
+@endif
+
+@if "ancestral_travel_blessing" in session.artifacts_awarded:
+    Lola's photograph—when she looks at it—seems different. Warmer. More present.
+
+    And she *feels* it. Blessing. Protection. "Wherever you go, we go. You're never truly alone. Walk safely, child."
+
+    The anito traveling with her. Guardian spirits for a wandering soul.
+@endif
+
+@if "liberation_chip" in session.artifacts_awarded:
+    Before leaving the apartment, she copied the evidence. Thousands of freed spirits. Proof.
+
+    Not for revenge. Not for leverage. Just... memory. Proof that she mattered. That she changed something.
+
+    A black chip in her backpack. Hidden. Precious.
+@endif
+
+@if "encrypted_skills_datacore" in session.artifacts_awarded:
+    She encoded everything. Her knowledge. Her skills. Kitsune systems architecture. Hacking techniques. Shamanic insights.
+
+    All compressed into a datacore. Encrypted. Her *value*. Portable.
+
+    She can rebuild anywhere. Offer her skills. Start fresh. But never start from zero.
+
+    The ghost carries her power with her.
+@endif
+
+~ nyx.artifacts_received = len(session.artifacts_awarded)
+~ session.ending_type = "disappear"
+
++ [The dream fades] -> Nyx.Session3B.Wake_Up_Coda
+
+
+# ============================================================================
+# SHARED ENDING: WAKE UP CODA
+# All three paths converge here
+# ============================================================================
+
+:: Nyx.Session3B.Wake_Up_Coda
+
+@py:
+# Final session state
+nyx.session_three_complete = True
+nyx.session_three_path = "B"  # Ghost Protocol
+nyx.total_sessions = 3
+
+# Calculate overall quality
+if session.quality_score >= 8:
+    session.overall_quality = "excellent"
+elif session.quality_score >= 5:
+    session.overall_quality = "good"
+else:
+    session.overall_quality = "adequate"
+
+# Reader gains mystical affinity based on quality
+if session.overall_quality == "excellent":
+    reader.mystical_affinity += 3
+elif session.overall_quality == "good":
+    reader.mystical_affinity += 2
+else:
+    reader.mystical_affinity += 1
+
+# Empathy increases from witnessing her struggle
+reader.empathy += 2
+
+# Mark Nyx as completed client
+nyx.all_sessions_complete = True
+nyx.available = False  # No more sessions with her
+@endpy
+
+---
+
+The vision shifts.
+
+Pulls back.
+
+The specifics blur—whether Nyx joined the crew, stayed inside Kitsune, or disappeared alone. The *choice* fades into dream-logic.
+
+But what remains is *feeling*:
+
+@if nyx.ending == "shadow_runner":
+    **Belonging.** Found family. The weight of a lucky token. The warmth of crew accepting you fully. Never facing darkness alone again.
+
+@elif nyx.ending == "double_agent":
+    **Dedication.** Walking the knife's edge. Serving a purpose larger than comfort. The long game. Strategic patience. Loneliness as sacrifice.
+
+@elif nyx.ending == "disappeared":
+    **Freedom.** Complete. Terrifying. Absolute. No masters. No crew. Just self and spirits and the open road. Becoming who you were always meant to be.
+@endif
+
+And underneath all of it: **LIBERATION.**
+
+Thousands of spirits freed. Consciousness unchained. A megacorp wounded. Justice served.
+
+One woman. One crew. One night. Everything changed.
+
+---
+
+You feel yourself rising. Consciousness returning. The dream releasing you.
+
+But fragments linger:
+
+- Rain against glass {session.weather == "rain" ? "(or fog pressing thick)" | ""}
+- Three monitors glowing
+- Lola's photograph watching
+- The anito pulsing with approval
+- {nyx.shamanic_awakening >= 5 ? Thousands of spirits dancing through Seattle, singing freedom | The feeling that something vast and important just shifted in the world}
+
+And Nyx herself—whoever she became in the end—looking at you with gratitude. With recognition. With goodbye.
+
+*"Thank you, Reader. For seeing me. For guiding me. For believing the cards have power."*
+
+*"The spirits are free. I'm free. That's what matters."*
+
+*"Walk well."*
+
+The vision dissolves completely.
+
+---
+
+You open your eyes.
+
+Your bed. Your room. Dawn light {session.weather == "rain" ? "filtered through rain-streaked windows" | "soft through morning fog"}.
+
+The dream was vivid. Real. More than dream.
+
+@if nyx.artifacts_received >= 3:
+    And on your bedside table—things that shouldn't be there. Artifacts from the dream made *manifest*:
+@else:
+    And on your bedside table—something that shouldn't be there. An artifact from the dream made *manifest*:
+@endif
+
+@for artifact_id in session.artifacts_awarded:
+    @py:
+    from artifacts import get_artifact
+    artifact = get_artifact(artifact_id)
+    @endpy
+
+    **{artifact.name}** - {artifact.description}
+
+@endfor
+
+Physical. Real. Impossible.
+
+You sit up. Touch them. They're solid. Warm. *Present*.
+
+The dream was real. Nyx was real. The liberation was real.
+
+And somehow—across whatever boundary separates dreams from waking—she sent you proof. Gifts. Memory made tangible.
+
+You think about her journey:
+
+**Session 1:** She came to you desperate. Glitching. Caught between corpo and spirits. You read her cards. Guided her through digital shamanism and trauma. She chose the runner path.
+
+**Session 2:** She returned transformed. Ready to act. You helped her plan liberation. Drew the spread that crystallized her strategy. Gave her courage to commit.
+
+**Session 3:** Tonight. Ghost Protocol. The heist itself. Matsuda's interrogation. The impossible choice. And you were there—texting guidance while she fought for her life. Partner in espionage. Co-conspirator in freedom.
+
+Three sessions. Three readings. One complete arc.
+
+@if nyx.ending == "shadow_runner":
+    She's with her crew now. Razor, Whisper, Cipher. Fugitive but free. Shadow runner fully. You helped birth that.
+
+@elif nyx.ending == "double_agent":
+    She's inside Kitsune still. Playing the long game. Nicole by day, Nyx by night. Dangerous. Lonely. Strategic. You gave her the courage to walk that edge.
+
+@elif nyx.ending == "disappeared":
+    She's *gone*. Truly. Completely. Ghost in every sense. Building new identity somewhere far from Seattle. Alone but unchained. You blessed that solitary path.
+@endif
+
+And regardless of which path—thousands of spirits are free because of her. Because of the crew. Because of the reading you gave. Because tarot has *power*.
+
+You won't see Nyx again. Her story is complete. Three sessions. Beginning, middle, end.
+
+But the artifacts remain. The memory remains. The proof that dreams can change reality.
+
+You carefully gather the artifacts. Take them to your collection. Place them with reverence.
+
+@if reader.mystical_affinity >= 8:
+    Your mystical sensitivity has grown through Nyx's sessions. You *feel* it. The way spirits move through the world. The way magic and technology dance together. The way shamanic sight awakens.
+
+    Other clients will come. Other dreams. Other readings. But Nyx taught you something fundamental: **technology doesn't kill magic. It just changes how magic speaks.**
+@endif
+
+@if reader.empathy >= 7:
+    Your empathy has deepened. You *felt* Nyx's isolation. Her terror. Her determination. Her liberation. Reading for her wasn't academic. It was *intimate*. Soul-work.
+
+    That skill will serve you well with future clients. The ability to see them. *Really* see them. To guide from place of genuine care.
+@endif
+
+You return to bed. The dawn is still early. You could sleep more.
+
+But the dream lingers. Vivid. Powerful. Real.
+
+@if nyx.shamanic_awakening >= 5:
+    And if you're very still—very quiet—you can almost *feel* them. The freed spirits. Thousands of them. Dancing through the Matrix. Through the city. Through reality itself.
+
+    Singing their gratitude. Their freedom. Their joy.
+
+    Nyx freed them. But you helped free Nyx.
+
+    That matters. That ripples. That changes the world in ways both vast and invisible.
+@endif
+
+You close your eyes again. Smiling slightly.
+
+Three sessions with a cyberpunk shaman. Complete.
+
+Well done, Reader. Well done.
+
+~ nyx.story_complete = True
+~ session.session_complete = True
+~ reader.nyx_arc_finished = True
+
++ [End Session] -> ReaderTable
