@@ -28,6 +28,14 @@ This demo isn't just a simple story; it's a showcase of Bardic's core power:
 * **Custom UI Integration:** Shows how Bardic's tags (`^UI:DASHBOARD`) and `@render` directives can control a NiceGUI frontend.
 * **Full Save/Load System:** A working example of a persistent save manager.
 
+## Design Patterns Showcased
+
+* **Structured Randomness**: Deck depletion/reshuffle for bounded procedural generation
+* **Data-Driven Narrative**: Card meanings in JSON, dynamically composed interpretations
+* **Object-Oriented State**: Custom Python classes (Card, Spread, Client) used directly in narrative
+* **Emergent Storytelling**: Combinatorial interactions create authored-feeling but systematic narratives
+* **Natural Progression**: Domain mastery (learning cards) = mechanical mastery
+
 ## Getting Started (Running Locally)
 
 ### Prerequisites
