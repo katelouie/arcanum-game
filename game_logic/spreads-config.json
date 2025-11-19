@@ -1974,6 +1974,151 @@
           "rag_mapping": "temporal_positions.present"
         }
       ]
+    },
+    {
+      "id": "nyx-session2-horseshoe",
+      "name": "7-Card Horseshoe (Nyx Variant)",
+      "description": "Horseshoe spread variant with straightforward temporal and guidance positions",
+      "layout": "horseshoe-7",
+      "cardSize": "small",
+      "aspectRatio": 1.5,
+      "category": "comprehensive",
+      "difficulty": "intermediate",
+      "positions": [
+        {
+          "name": "Past",
+          "short_description": "Past influences affecting the situation",
+          "detailed_description": "What foundational experiences, decisions, or patterns from your past are actively influencing this situation? These could be recent events or deeper patterns that established the conditions you're now working with. What history has brought you to this moment?",
+          "keywords": [
+            "past",
+            "influences",
+            "history",
+            "foundation",
+            "patterns",
+            "background"
+          ],
+          "question_adaptations": {
+            "general": "Past events shaping your current situation",
+            "decision": "Historical factors influencing this choice",
+            "crisis": "What led you to this crisis point"
+          },
+          "rag_mapping": "temporal_positions.past"
+        },
+        {
+          "name": "Present",
+          "short_description": "Current state of affairs",
+          "detailed_description": "The immediate reality of your situation right now. What energies, circumstances, and dynamics are active in your current experience? This is your starting point - where you stand at this moment in time.",
+          "keywords": [
+            "present",
+            "current",
+            "now",
+            "reality",
+            "circumstances",
+            "immediate"
+          ],
+          "question_adaptations": {
+            "general": "Your current situation and state",
+            "decision": "Where you are right now in this choice",
+            "crisis": "The present reality of your crisis"
+          },
+          "rag_mapping": "temporal_positions.present"
+        },
+        {
+          "name": "Future",
+          "short_description": "Where things are heading",
+          "detailed_description": "The natural direction and likely outcome if current patterns continue. What is emerging, what wants to manifest, or what trajectory are you on based on present circumstances? This shows potential, not fate.",
+          "keywords": [
+            "future",
+            "direction",
+            "trajectory",
+            "emerging",
+            "potential",
+            "outcome"
+          ],
+          "question_adaptations": {
+            "general": "Where your current path is leading",
+            "decision": "The likely result of this direction",
+            "goal": "What's trying to manifest"
+          },
+          "rag_mapping": "temporal_positions.future"
+        },
+        {
+          "name": "Hidden",
+          "short_description": "Unseen factors affecting the situation",
+          "detailed_description": "What forces, motivations, or dynamics are operating beneath the surface that you may not be fully aware of? This could include other people's hidden agendas, your own unconscious patterns, or spiritual influences guiding this situation from behind the veil.",
+          "keywords": [
+            "hidden",
+            "unseen",
+            "beneath",
+            "unconscious",
+            "secret",
+            "spiritual"
+          ],
+          "question_adaptations": {
+            "general": "What you're not seeing clearly",
+            "relationships": "Hidden dynamics or motivations at play",
+            "decision": "Unconscious factors influencing your choice"
+          },
+          "rag_mapping": "external_influences.hidden_influences"
+        },
+        {
+          "name": "Obstacles",
+          "short_description": "What stands in your way",
+          "detailed_description": "What primary obstacle, challenge, or resistance must you navigate? This reveals the barriers - internal or external - that you need to understand and work with to move forward. What difficulty requires your attention and skillful handling?",
+          "keywords": [
+            "obstacles",
+            "challenges",
+            "barriers",
+            "resistance",
+            "difficulties",
+            "blocks"
+          ],
+          "question_adaptations": {
+            "general": "The main challenge you're facing",
+            "goal": "What's blocking your path to success",
+            "growth": "The barrier to your development"
+          },
+          "rag_mapping": "challenge_and_growth.obstacle"
+        },
+        {
+          "name": "Advice",
+          "short_description": "Guidance for navigating this situation",
+          "detailed_description": "What wisdom, guidance, and practical steps will help you navigate this situation most skillfully? What approach, perspective, or action will serve your highest good? How can you work with all these energies to create the most positive outcome?",
+          "keywords": [
+            "advice",
+            "guidance",
+            "wisdom",
+            "approach",
+            "action",
+            "strategy"
+          ],
+          "question_adaptations": {
+            "general": "The best approach for this situation",
+            "decision": "How to make this choice wisely",
+            "challenge": "The strategy for overcoming obstacles"
+          },
+          "rag_mapping": "guidance_and_action.advice"
+        },
+        {
+          "name": "Outcome",
+          "short_description": "The likely final result",
+          "detailed_description": "What is the most probable outcome or resolution of this situation based on all the factors at play? This represents where all the influences, actions, and energies in this reading are ultimately leading you. What final destination or new beginning awaits?",
+          "keywords": [
+            "outcome",
+            "result",
+            "conclusion",
+            "resolution",
+            "final",
+            "destination"
+          ],
+          "question_adaptations": {
+            "general": "The ultimate result of this situation",
+            "decision": "Where this choice will lead you",
+            "journey": "The destination you're heading toward"
+          },
+          "rag_mapping": "outcome_and_result.final_outcome"
+        }
+      ]
     }
   ],
   "categories": {

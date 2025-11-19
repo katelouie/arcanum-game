@@ -416,7 +416,7 @@ You lay them out one by one. The Horseshoe formation takes shape on the table:
     position_6_deck = Deck(cards=["The Fool", "Strength", "Temperance"], reversals=[0.5, 0.5, 0.5])
     position_7_deck = Deck(cards=["Six of Swords", "The World"], reversals=[0, 0])
 
-    reading = Reading(spread_id="horseshoe-7", decks=
+    reading = Reading(spread_id="nyx-session2-horseshoe", decks=
         [
             position_1_deck,
             position_2_deck,
