@@ -579,10 +579,9 @@ deck_outcome = Deck(
     reversals=[0, 0.5, 0]
 )
 
-# TODO: Implement Obstable-Action-Outcome spread
 session.reading_1 = Reading(
     spread_id="obstable-action-outcome",
-    decks=[deck_obstable, deck_action, deck_outcome]
+    decks=[deck_obstacle, deck_action, deck_outcome]
 )
 session.cards_debrief = reading.draw_cards()
 # Quality score baseline

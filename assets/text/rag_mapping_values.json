@@ -1,0 +1,131 @@
+{
+  "description": "Valid rag_mapping values for use in spreads-config.json. These correspond to position_interpretations in card meaning files.",
+  "categories": {
+    "temporal_positions": {
+      "description": "Time-based positions showing past, present, and future influences",
+      "values": [
+        "temporal_positions.past",
+        "temporal_positions.distant_past",
+        "temporal_positions.recent_past",
+        "temporal_positions.present",
+        "temporal_positions.present_situation",
+        "temporal_positions.future",
+        "temporal_positions.near_future",
+        "temporal_positions.distant_future"
+      ]
+    },
+    "challenge_and_growth": {
+      "description": "Positions related to obstacles, lessons, and personal development",
+      "values": [
+        "challenge_and_growth.challenge",
+        "challenge_and_growth.cross",
+        "challenge_and_growth.obstacle",
+        "challenge_and_growth.lesson",
+        "challenge_and_growth.shadow",
+        "challenge_and_growth.what_hinders"
+      ]
+    },
+    "guidance_and_action": {
+      "description": "Positions offering advice and actionable guidance",
+      "values": [
+        "guidance_and_action.advice",
+        "guidance_and_action.action",
+        "guidance_and_action.your_approach",
+        "guidance_and_action.what_helps",
+        "guidance_and_action.guidance",
+        "guidance_and_action.best_course"
+      ]
+    },
+    "emotional_and_internal": {
+      "description": "Positions related to internal states and emotional landscape",
+      "values": [
+        "emotional_and_internal.hopes_fears",
+        "emotional_and_internal.hopes",
+        "emotional_and_internal.fears",
+        "emotional_and_internal.subconscious",
+        "emotional_and_internal.conscious",
+        "emotional_and_internal.emotional_state",
+        "emotional_and_internal.heart",
+        "emotional_and_internal.mind"
+      ]
+    },
+    "external_influences": {
+      "description": "Positions showing outside forces and how others perceive the situation",
+      "values": [
+        "external_influences.external_influences",
+        "external_influences.others",
+        "external_influences.environment",
+        "external_influences.others_see_you",
+        "external_influences.hidden_influences"
+      ]
+    },
+    "outcome_and_result": {
+      "description": "Positions indicating potential outcomes and final results",
+      "values": [
+        "outcome_and_result.outcome",
+        "outcome_and_result.final_outcome",
+        "outcome_and_result.possible_outcome",
+        "outcome_and_result.best_case",
+        "outcome_and_result.worst_case"
+      ]
+    },
+    "relationships": {
+      "description": "Positions specific to relationship dynamics",
+      "values": [
+        "relationships.relationship_dynamic"
+      ]
+    }
+  },
+  "all_valid_values": [
+    "temporal_positions.past",
+    "temporal_positions.distant_past",
+    "temporal_positions.recent_past",
+    "temporal_positions.present",
+    "temporal_positions.present_situation",
+    "temporal_positions.future",
+    "temporal_positions.near_future",
+    "temporal_positions.distant_future",
+    "challenge_and_growth.challenge",
+    "challenge_and_growth.cross",
+    "challenge_and_growth.obstacle",
+    "challenge_and_growth.lesson",
+    "challenge_and_growth.shadow",
+    "challenge_and_growth.what_hinders",
+    "guidance_and_action.advice",
+    "guidance_and_action.action",
+    "guidance_and_action.your_approach",
+    "guidance_and_action.what_helps",
+    "guidance_and_action.guidance",
+    "guidance_and_action.best_course",
+    "emotional_and_internal.hopes_fears",
+    "emotional_and_internal.hopes",
+    "emotional_and_internal.fears",
+    "emotional_and_internal.subconscious",
+    "emotional_and_internal.conscious",
+    "emotional_and_internal.emotional_state",
+    "emotional_and_internal.heart",
+    "emotional_and_internal.mind",
+    "external_influences.external_influences",
+    "external_influences.others",
+    "external_influences.environment",
+    "external_influences.others_see_you",
+    "external_influences.hidden_influences",
+    "outcome_and_result.outcome",
+    "outcome_and_result.final_outcome",
+    "outcome_and_result.possible_outcome",
+    "outcome_and_result.best_case",
+    "outcome_and_result.worst_case",
+    "relationships.relationship_dynamic"
+  ],
+  "usage_notes": [
+    "When creating spreads in spreads-config.json, each position's rag_mapping must be one of the values listed above",
+    "These mappings connect spread positions to specific interpretations in the card meaning files",
+    "The mapping helps the system provide contextually appropriate card interpretations based on position",
+    "All card meaning JSON files in assets/text/card_meanings/ should have these position_interpretations defined"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2025-11-19",
+    "source": "Extracted from card meaning files position_interpretations structure"
+  }
+}

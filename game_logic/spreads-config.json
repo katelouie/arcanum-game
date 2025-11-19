@@ -9,6 +9,19 @@
         }
       ]
     },
+    "horizontal-2": {
+      "name": "Two Cards Horizontal",
+      "positions": [
+        {
+          "x": 35,
+          "y": 30
+        },
+        {
+          "x": 65,
+          "y": 30
+        }
+      ]
+    },
     "horizontal-3": {
       "name": "Three Cards Horizontal",
       "positions": [
@@ -307,6 +320,31 @@
         {
           "x": 50,
           "y": 35
+        }
+      ]
+    },
+    "phoenix-5": {
+      "name": "Five Card Phoenix",
+      "positions": [
+        {
+          "x": 50,
+          "y": 70
+        },
+        {
+          "x": 50,
+          "y": 40
+        },
+        {
+          "x": 25,
+          "y": 15
+        },
+        {
+          "x": 75,
+          "y": 15
+        },
+        {
+          "x": 50,
+          "y": 5
         }
       ]
     }
@@ -1489,6 +1527,596 @@
             "reframe"
           ],
           "rag_mapping": "guidance_and_action.guidance"
+        }
+      ]
+    },
+    {
+      "id": "threat-protect-outcome",
+      "name": "3 Cards (Threat, Protection, Outcome)",
+      "description": "A defensive spread for understanding dangers, resources, and likely results",
+      "layout": "triangle-3",
+      "cardSize": "large",
+      "aspectRatio": 1.8,
+      "category": "decision",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "What Threatens You",
+          "short_description": "The danger, challenge, or obstacle you face",
+          "detailed_description": "What force, situation, or internal pattern poses a threat to your well-being or success? This card reveals the nature of the challenge you're confronting - whether it's an external obstacle, an internal fear, a limiting belief, or a dangerous situation. Understanding the threat is the first step to defending against it.",
+          "keywords": [
+            "threat",
+            "danger",
+            "challenge",
+            "obstacle",
+            "risk",
+            "vulnerability"
+          ],
+          "question_adaptations": {
+            "general": "The primary threat or challenge facing you right now",
+            "decision": "The main risk or danger in making this choice",
+            "conflict": "What poses the greatest threat in this conflict"
+          },
+          "rag_mapping": "challenge_and_growth.challenge"
+        },
+        {
+          "name": "What Protects You",
+          "short_description": "Your defenses, resources, and sources of strength",
+          "detailed_description": "What resources, strengths, support systems, or protective energies are available to shield you from the threat? This card reveals your allies, skills, inner resilience, or favorable circumstances that you can draw upon. What armor - physical, emotional, or spiritual - do you have to defend yourself and navigate this challenge?",
+          "keywords": [
+            "protection",
+            "defense",
+            "resources",
+            "strength",
+            "support",
+            "resilience"
+          ],
+          "question_adaptations": {
+            "general": "The resources and strengths you can rely on for protection",
+            "decision": "What supports and protects you if you make this choice",
+            "conflict": "Your defenses and sources of strength in this situation"
+          },
+          "rag_mapping": "guidance_and_action.what_helps"
+        },
+        {
+          "name": "The Outcome",
+          "short_description": "The likely result of this confrontation",
+          "detailed_description": "What is the probable outcome when your protections meet this threat? How will this situation resolve based on the interplay between the danger you face and the resources you possess? This card shows the likely consequence - victory, compromise, transformation, or the need for a new approach.",
+          "keywords": [
+            "outcome",
+            "result",
+            "resolution",
+            "consequence",
+            "future",
+            "conclusion"
+          ],
+          "question_adaptations": {
+            "general": "How this situation will likely resolve",
+            "decision": "The probable outcome if you proceed with this choice",
+            "conflict": "How this confrontation will end"
+          },
+          "rag_mapping": "outcome_and_result.possible_outcome"
+        }
+      ]
+    },
+    {
+      "id": "obstacle-action-outcome",
+      "name": "3 Cards (Obstacle, Action, Outcome)",
+      "description": "A problem-solving spread for identifying obstacles and determining effective action",
+      "layout": "horizontal-3",
+      "cardSize": "large",
+      "aspectRatio": 3,
+      "category": "decision",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "The Obstacle",
+          "short_description": "The primary obstacle or challenge blocking your path",
+          "detailed_description": "What barrier, resistance, or difficulty stands in your way? This card reveals the core obstacle you must understand and navigate - whether it's an external challenge, internal resistance, limiting belief, or structural barrier. Identifying the obstacle clearly is the first step toward overcoming it.",
+          "keywords": [
+            "obstacle",
+            "barrier",
+            "challenge",
+            "resistance",
+            "difficulty",
+            "block"
+          ],
+          "question_adaptations": {
+            "general": "The main obstacle preventing your progress",
+            "career": "What's blocking your professional advancement",
+            "personal": "The primary challenge in your personal growth"
+          },
+          "rag_mapping": "challenge_and_growth.obstacle"
+        },
+        {
+          "name": "The Action",
+          "short_description": "What action or approach will help you move forward",
+          "detailed_description": "What specific action, strategy, or approach will help you overcome the obstacle and make progress? This card provides practical guidance on how to navigate the challenge effectively. What energy should you embody, what steps should you take, or what perspective shift is needed?",
+          "keywords": [
+            "action",
+            "strategy",
+            "approach",
+            "solution",
+            "method",
+            "movement"
+          ],
+          "question_adaptations": {
+            "general": "The best action to take right now",
+            "problem": "How to solve this specific problem",
+            "decision": "The approach that will lead to success"
+          },
+          "rag_mapping": "guidance_and_action.action"
+        },
+        {
+          "name": "The Outcome",
+          "short_description": "The likely result if you take this action",
+          "detailed_description": "What outcome can you expect if you follow the recommended action? This shows the likely results, consequences, or new situation that will emerge from taking the guided approach. How will things change, and what new opportunities or challenges might arise from your action?",
+          "keywords": [
+            "outcome",
+            "result",
+            "consequence",
+            "resolution",
+            "change",
+            "future"
+          ],
+          "question_adaptations": {
+            "general": "Where this action will lead you",
+            "decision": "The result of following this path",
+            "goal": "Whether you'll achieve your desired outcome"
+          },
+          "rag_mapping": "outcome_and_result.possible_outcome"
+        }
+      ]
+    },
+    {
+      "id": "obstable-action-outcome",
+      "name": "3 Cards (Obstacle, Action, Outcome)",
+      "description": "A problem-solving spread for identifying obstacles and determining effective action (alternate spelling)",
+      "layout": "horizontal-3",
+      "cardSize": "large",
+      "aspectRatio": 3,
+      "category": "decision",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "The Obstacle",
+          "short_description": "The primary obstacle or challenge blocking your path",
+          "detailed_description": "What barrier, resistance, or difficulty stands in your way? This card reveals the core obstacle you must understand and navigate - whether it's an external challenge, internal resistance, limiting belief, or structural barrier. Identifying the obstacle clearly is the first step toward overcoming it.",
+          "keywords": [
+            "obstacle",
+            "barrier",
+            "challenge",
+            "resistance",
+            "difficulty",
+            "block"
+          ],
+          "question_adaptations": {
+            "general": "The main obstacle preventing your progress",
+            "career": "What's blocking your professional advancement",
+            "personal": "The primary challenge in your personal growth"
+          },
+          "rag_mapping": "challenge_and_growth.obstacle"
+        },
+        {
+          "name": "The Action",
+          "short_description": "What action or approach will help you move forward",
+          "detailed_description": "What specific action, strategy, or approach will help you overcome the obstacle and make progress? This card provides practical guidance on how to navigate the challenge effectively. What energy should you embody, what steps should you take, or what perspective shift is needed?",
+          "keywords": [
+            "action",
+            "strategy",
+            "approach",
+            "solution",
+            "method",
+            "movement"
+          ],
+          "question_adaptations": {
+            "general": "The best action to take right now",
+            "problem": "How to solve this specific problem",
+            "decision": "The approach that will lead to success"
+          },
+          "rag_mapping": "guidance_and_action.action"
+        },
+        {
+          "name": "The Outcome",
+          "short_description": "The likely result if you take this action",
+          "detailed_description": "What outcome can you expect if you follow the recommended action? This shows the likely results, consequences, or new situation that will emerge from taking the guided approach. How will things change, and what new opportunities or challenges might arise from your action?",
+          "keywords": [
+            "outcome",
+            "result",
+            "consequence",
+            "resolution",
+            "change",
+            "future"
+          ],
+          "question_adaptations": {
+            "general": "Where this action will lead you",
+            "decision": "The result of following this path",
+            "goal": "Whether you'll achieve your desired outcome"
+          },
+          "rag_mapping": "outcome_and_result.possible_outcome"
+        }
+      ]
+    },
+    {
+      "id": "situation-choice",
+      "name": "2 Cards (Situation, Choice)",
+      "description": "A simple two-card spread for understanding a situation and receiving guidance",
+      "layout": "horizontal-2",
+      "cardSize": "large",
+      "aspectRatio": 2,
+      "category": "decision",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "The Situation",
+          "short_description": "The current situation or crisis you're facing",
+          "detailed_description": "What is the true nature of the situation or crisis you're dealing with? This card reveals the core dynamics, underlying energies, and essential character of your current challenge or crossroads. What is really happening beneath the surface that you need to understand?",
+          "keywords": [
+            "situation",
+            "crisis",
+            "current state",
+            "reality",
+            "dynamics",
+            "truth"
+          ],
+          "question_adaptations": {
+            "general": "The reality of your current situation",
+            "crisis": "The true nature of this crisis",
+            "crossroads": "What you're really facing at this decision point"
+          },
+          "rag_mapping": "temporal_positions.present_situation"
+        },
+        {
+          "name": "The Choice",
+          "short_description": "The choice, advice, or path forward",
+          "detailed_description": "What choice should you make or what advice does the universe offer? This card provides guidance on how to navigate the situation wisely. What decision, perspective, or action will serve your highest good? What path forward aligns with your truth?",
+          "keywords": [
+            "choice",
+            "advice",
+            "guidance",
+            "path",
+            "decision",
+            "wisdom"
+          ],
+          "question_adaptations": {
+            "general": "The best choice or path available to you",
+            "crisis": "How to handle this crisis skillfully",
+            "decision": "The wisest decision you can make"
+          },
+          "rag_mapping": "guidance_and_action.advice"
+        }
+      ]
+    },
+    {
+      "id": "risk-reward",
+      "name": "2 Cards (Risk, Reward)",
+      "description": "A two-card spread for weighing risks against potential rewards",
+      "layout": "horizontal-2",
+      "cardSize": "large",
+      "aspectRatio": 2,
+      "category": "decision",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "The Risk",
+          "short_description": "The risk, danger, or potential cost",
+          "detailed_description": "What do you risk by taking this action or making this choice? This card reveals the potential dangers, costs, losses, or negative consequences you might face. What could go wrong, what might you lose, or what price might you pay? Understanding the risk helps you make an informed decision.",
+          "keywords": [
+            "risk",
+            "danger",
+            "cost",
+            "loss",
+            "consequence",
+            "price"
+          ],
+          "question_adaptations": {
+            "general": "What you're risking in this situation",
+            "decision": "The potential downsides of this choice",
+            "venture": "What could go wrong with this endeavor"
+          },
+          "rag_mapping": "outcome_and_result.worst_case"
+        },
+        {
+          "name": "The Reward",
+          "short_description": "The reward, benefit, or potential gain",
+          "detailed_description": "What reward or benefit could you gain by taking this action or making this choice? This card reveals the potential positive outcomes, gains, opportunities, or blessings that might result. What could you win, what might you achieve, or what gifts might come your way? Understanding the reward helps you evaluate if the risk is worth taking.",
+          "keywords": [
+            "reward",
+            "benefit",
+            "gain",
+            "opportunity",
+            "success",
+            "blessing"
+          ],
+          "question_adaptations": {
+            "general": "What you could gain from this situation",
+            "decision": "The potential benefits of this choice",
+            "venture": "What success might look like"
+          },
+          "rag_mapping": "outcome_and_result.best_case"
+        }
+      ]
+    },
+    {
+      "id": "nyx_session_3_phoenix",
+      "name": "5 Cards (Phoenix Rising)",
+      "description": "A transformational spread for navigating crisis and choosing between paths of fire and ash",
+      "layout": "phoenix-5",
+      "cardSize": "medium",
+      "aspectRatio": 1.2,
+      "category": "comprehensive",
+      "difficulty": "advanced",
+      "positions": [
+        {
+          "name": "The Shadow",
+          "short_description": "What you're running from - the past",
+          "detailed_description": "What shadow from your past are you fleeing? This card reveals the deep fears, unresolved traumas, or painful experiences you've been avoiding. What old wound, failure, or darkness haunts you and drives your current behavior? To rise like the phoenix, you must first acknowledge what you're leaving behind in the ashes.",
+          "keywords": [
+            "shadow",
+            "past",
+            "fear",
+            "trauma",
+            "avoidance",
+            "darkness"
+          ],
+          "question_adaptations": {
+            "crisis": "The past trauma driving this crisis",
+            "transformation": "What you must release to transform",
+            "healing": "The shadow that needs integration"
+          },
+          "rag_mapping": "challenge_and_growth.shadow"
+        },
+        {
+          "name": "The Crisis",
+          "short_description": "The breaking point - present moment",
+          "detailed_description": "What is the nature of this crisis or breaking point you've reached? This card reveals the present moment of rupture, the point where old patterns can no longer hold and transformation becomes inevitable. What is breaking, what can no longer be sustained, and what truth is forcing its way to the surface?",
+          "keywords": [
+            "crisis",
+            "present",
+            "breaking point",
+            "rupture",
+            "transformation",
+            "truth"
+          ],
+          "question_adaptations": {
+            "crisis": "The core nature of your current crisis",
+            "change": "What's forcing this transformation",
+            "turning point": "What's breaking in this moment"
+          },
+          "rag_mapping": "temporal_positions.present_situation"
+        },
+        {
+          "name": "The Path of Fire",
+          "short_description": "The catharsis path - burning away the old",
+          "detailed_description": "What does the path of fire offer? This is the way of catharsis, destruction, and burning away everything that no longer serves. If you choose this path, what will be consumed in the flames? What intense transformation, painful release, or explosive change awaits? Fire destroys but also purifies and clears space for new growth.",
+          "keywords": [
+            "fire",
+            "catharsis",
+            "destruction",
+            "purification",
+            "intensity",
+            "release"
+          ],
+          "question_adaptations": {
+            "choice": "The outcome if you choose radical change",
+            "transformation": "The path of intense catharsis",
+            "release": "What happens if you burn it all down"
+          },
+          "rag_mapping": "outcome_and_result.possible_outcome"
+        },
+        {
+          "name": "The Path of Ash",
+          "short_description": "The quiet path - acceptance and grief",
+          "detailed_description": "What does the path of ash offer? This is the way of quiet acceptance, mourning what was, and letting it gently fade to ash. If you choose this path, what grief must you process? What gentle release, sad wisdom, or melancholy peace awaits? Ash is softer than fire but equally final - the remains of what was burned long ago.",
+          "keywords": [
+            "ash",
+            "acceptance",
+            "grief",
+            "mourning",
+            "quiet",
+            "ending"
+          ],
+          "question_adaptations": {
+            "choice": "The outcome if you choose gentle release",
+            "transformation": "The path of quiet acceptance",
+            "grief": "What happens if you let it fade to ash"
+          },
+          "rag_mapping": "outcome_and_result.possible_outcome"
+        },
+        {
+          "name": "The Truth",
+          "short_description": "What the universe demands",
+          "detailed_description": "What truth does the universe demand you acknowledge regardless of which path you choose? This card reveals the non-negotiable wisdom, the essential lesson, or the core truth that both paths must honor. What does reality require of you? What must you accept, integrate, or become regardless of fire or ash?",
+          "keywords": [
+            "truth",
+            "universe",
+            "wisdom",
+            "lesson",
+            "essential",
+            "non-negotiable"
+          ],
+          "question_adaptations": {
+            "guidance": "The essential truth you must honor",
+            "wisdom": "What reality demands of you",
+            "lesson": "The core lesson in this transformation"
+          },
+          "rag_mapping": "guidance_and_action.guidance"
+        }
+      ]
+    },
+    {
+      "id": "chen-session3c-blooming",
+      "name": "Single Card (Blooming)",
+      "description": "A single-card reading focused on growth, home, and nurturing",
+      "layout": "single-center",
+      "cardSize": "large",
+      "aspectRatio": 2,
+      "category": "simple",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "The Blooming",
+          "short_description": "How you're growing and what's blooming in your life",
+          "detailed_description": "What is blooming in your life right now? This card reveals the growth, nurturing, and flowering happening in your world - particularly related to home, family, legacy, and the garden of your life. What seeds have you planted that are now ready to bloom? What beauty, abundance, or new life is emerging from the soil of your efforts?",
+          "keywords": [
+            "growth",
+            "blooming",
+            "nurturing",
+            "home",
+            "family",
+            "abundance"
+          ],
+          "question_adaptations": {
+            "home": "What's flowering in your home and family life",
+            "growth": "How your personal growth is manifesting",
+            "legacy": "What you're creating that will last"
+          },
+          "rag_mapping": "temporal_positions.present"
+        }
+      ]
+    },
+    {
+      "id": "nyx-session2-horseshoe",
+      "name": "7-Card Horseshoe (Nyx Variant)",
+      "description": "Horseshoe spread variant with straightforward temporal and guidance positions",
+      "layout": "horseshoe-7",
+      "cardSize": "small",
+      "aspectRatio": 1.5,
+      "category": "comprehensive",
+      "difficulty": "intermediate",
+      "positions": [
+        {
+          "name": "Past",
+          "short_description": "Past influences affecting the situation",
+          "detailed_description": "What foundational experiences, decisions, or patterns from your past are actively influencing this situation? These could be recent events or deeper patterns that established the conditions you're now working with. What history has brought you to this moment?",
+          "keywords": [
+            "past",
+            "influences",
+            "history",
+            "foundation",
+            "patterns",
+            "background"
+          ],
+          "question_adaptations": {
+            "general": "Past events shaping your current situation",
+            "decision": "Historical factors influencing this choice",
+            "crisis": "What led you to this crisis point"
+          },
+          "rag_mapping": "temporal_positions.past"
+        },
+        {
+          "name": "Present",
+          "short_description": "Current state of affairs",
+          "detailed_description": "The immediate reality of your situation right now. What energies, circumstances, and dynamics are active in your current experience? This is your starting point - where you stand at this moment in time.",
+          "keywords": [
+            "present",
+            "current",
+            "now",
+            "reality",
+            "circumstances",
+            "immediate"
+          ],
+          "question_adaptations": {
+            "general": "Your current situation and state",
+            "decision": "Where you are right now in this choice",
+            "crisis": "The present reality of your crisis"
+          },
+          "rag_mapping": "temporal_positions.present"
+        },
+        {
+          "name": "Future",
+          "short_description": "Where things are heading",
+          "detailed_description": "The natural direction and likely outcome if current patterns continue. What is emerging, what wants to manifest, or what trajectory are you on based on present circumstances? This shows potential, not fate.",
+          "keywords": [
+            "future",
+            "direction",
+            "trajectory",
+            "emerging",
+            "potential",
+            "outcome"
+          ],
+          "question_adaptations": {
+            "general": "Where your current path is leading",
+            "decision": "The likely result of this direction",
+            "goal": "What's trying to manifest"
+          },
+          "rag_mapping": "temporal_positions.future"
+        },
+        {
+          "name": "Hidden",
+          "short_description": "Unseen factors affecting the situation",
+          "detailed_description": "What forces, motivations, or dynamics are operating beneath the surface that you may not be fully aware of? This could include other people's hidden agendas, your own unconscious patterns, or spiritual influences guiding this situation from behind the veil.",
+          "keywords": [
+            "hidden",
+            "unseen",
+            "beneath",
+            "unconscious",
+            "secret",
+            "spiritual"
+          ],
+          "question_adaptations": {
+            "general": "What you're not seeing clearly",
+            "relationships": "Hidden dynamics or motivations at play",
+            "decision": "Unconscious factors influencing your choice"
+          },
+          "rag_mapping": "external_influences.hidden_influences"
+        },
+        {
+          "name": "Obstacles",
+          "short_description": "What stands in your way",
+          "detailed_description": "What primary obstacle, challenge, or resistance must you navigate? This reveals the barriers - internal or external - that you need to understand and work with to move forward. What difficulty requires your attention and skillful handling?",
+          "keywords": [
+            "obstacles",
+            "challenges",
+            "barriers",
+            "resistance",
+            "difficulties",
+            "blocks"
+          ],
+          "question_adaptations": {
+            "general": "The main challenge you're facing",
+            "goal": "What's blocking your path to success",
+            "growth": "The barrier to your development"
+          },
+          "rag_mapping": "challenge_and_growth.obstacle"
+        },
+        {
+          "name": "Advice",
+          "short_description": "Guidance for navigating this situation",
+          "detailed_description": "What wisdom, guidance, and practical steps will help you navigate this situation most skillfully? What approach, perspective, or action will serve your highest good? How can you work with all these energies to create the most positive outcome?",
+          "keywords": [
+            "advice",
+            "guidance",
+            "wisdom",
+            "approach",
+            "action",
+            "strategy"
+          ],
+          "question_adaptations": {
+            "general": "The best approach for this situation",
+            "decision": "How to make this choice wisely",
+            "challenge": "The strategy for overcoming obstacles"
+          },
+          "rag_mapping": "guidance_and_action.advice"
+        },
+        {
+          "name": "Outcome",
+          "short_description": "The likely final result",
+          "detailed_description": "What is the most probable outcome or resolution of this situation based on all the factors at play? This represents where all the influences, actions, and energies in this reading are ultimately leading you. What final destination or new beginning awaits?",
+          "keywords": [
+            "outcome",
+            "result",
+            "conclusion",
+            "resolution",
+            "final",
+            "destination"
+          ],
+          "question_adaptations": {
+            "general": "The ultimate result of this situation",
+            "decision": "Where this choice will lead you",
+            "journey": "The destination you're heading toward"
+          },
+          "rag_mapping": "outcome_and_result.final_outcome"
         }
       ]
     }
