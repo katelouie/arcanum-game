@@ -325,7 +325,6 @@ session.truth_deck = Deck(
 )
 
 # Set up reading
-# TODO: Create spreads-config entry for this reading
 session.reading = Reading(
     spread_id="nyx_session_3_phoenix",
     decks=[

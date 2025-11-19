@@ -2257,7 +2257,6 @@ session.deck_crisis_2 = Deck(
     reversals=[0, 0, 0.5]
 )
 
-# TODO: implement situation-choice 2-card spread
 session.reading_2 = Reading(
     spread_id="situation-choice",
     decks=[session.deck_crisis_1, session.deck_crisis_2]
