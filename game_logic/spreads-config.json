@@ -1491,6 +1491,75 @@
           "rag_mapping": "guidance_and_action.guidance"
         }
       ]
+    },
+    {
+      "id": "threat-protect-outcome",
+      "name": "3 Cards (Threat, Protection, Outcome)",
+      "description": "A defensive spread for understanding dangers, resources, and likely results",
+      "layout": "triangle-3",
+      "cardSize": "large",
+      "aspectRatio": 1.8,
+      "category": "decision",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "What Threatens You",
+          "short_description": "The danger, challenge, or obstacle you face",
+          "detailed_description": "What force, situation, or internal pattern poses a threat to your well-being or success? This card reveals the nature of the challenge you're confronting - whether it's an external obstacle, an internal fear, a limiting belief, or a dangerous situation. Understanding the threat is the first step to defending against it.",
+          "keywords": [
+            "threat",
+            "danger",
+            "challenge",
+            "obstacle",
+            "risk",
+            "vulnerability"
+          ],
+          "question_adaptations": {
+            "general": "The primary threat or challenge facing you right now",
+            "decision": "The main risk or danger in making this choice",
+            "conflict": "What poses the greatest threat in this conflict"
+          },
+          "rag_mapping": "challenge_and_growth.challenge"
+        },
+        {
+          "name": "What Protects You",
+          "short_description": "Your defenses, resources, and sources of strength",
+          "detailed_description": "What resources, strengths, support systems, or protective energies are available to shield you from the threat? This card reveals your allies, skills, inner resilience, or favorable circumstances that you can draw upon. What armor - physical, emotional, or spiritual - do you have to defend yourself and navigate this challenge?",
+          "keywords": [
+            "protection",
+            "defense",
+            "resources",
+            "strength",
+            "support",
+            "resilience"
+          ],
+          "question_adaptations": {
+            "general": "The resources and strengths you can rely on for protection",
+            "decision": "What supports and protects you if you make this choice",
+            "conflict": "Your defenses and sources of strength in this situation"
+          },
+          "rag_mapping": "guidance_and_action.what_helps"
+        },
+        {
+          "name": "The Outcome",
+          "short_description": "The likely result of this confrontation",
+          "detailed_description": "What is the probable outcome when your protections meet this threat? How will this situation resolve based on the interplay between the danger you face and the resources you possess? This card shows the likely consequence - victory, compromise, transformation, or the need for a new approach.",
+          "keywords": [
+            "outcome",
+            "result",
+            "resolution",
+            "consequence",
+            "future",
+            "conclusion"
+          ],
+          "question_adaptations": {
+            "general": "How this situation will likely resolve",
+            "decision": "The probable outcome if you proceed with this choice",
+            "conflict": "How this confrontation will end"
+          },
+          "rag_mapping": "outcome_and_result.possible_outcome"
+        }
+      ]
     }
   ],
   "categories": {

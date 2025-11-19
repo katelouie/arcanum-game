@@ -424,7 +424,6 @@ session.outcome_deck = Deck(
     cards=["The Moon", "Six of Swords", "Ten of Swords"],
     reversals=[0, 0, 1]
 )
-# TODO: Implement this spread in spreads-config
 session.reading_1 = Reading(
     spread_id="threat-protect-outcome",
     decks=[session.threat_deck, session.protection_deck, session.outcome_deck]
