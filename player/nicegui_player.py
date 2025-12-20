@@ -221,7 +221,7 @@ def show_save_dialog():
     dialog.open()
 
 
-def save_game_action(save_name: str, dialog):
+async def save_game_action(save_name: str, dialog):
     """Actually perform the save."""
     if not save_name:
         ui.notify("Please enter a save name", type="warning")
@@ -231,8 +231,8 @@ def save_game_action(save_name: str, dialog):
         # Get engine state
         engine_state = engine.save_state()
 
-        # Save using SaveManager
-        result = save_manager.save_game(save_name, engine_state)
+        # Save using SaveManager (async for browser localStorage)
+        result = await save_manager.save_game(save_name, engine_state)
 
         ui.notify(f"Saved: {save_name}", type="positive")
         dialog.close()
@@ -241,9 +241,9 @@ def save_game_action(save_name: str, dialog):
         ui.notify(f"Save failed: {str(e)}", type="negative")
 
 
-def show_load_dialog():
+async def show_load_dialog():
     """Show dialog to load a saved game."""
-    saves = save_manager.list_saves()
+    saves = await save_manager.list_saves()
 
     with (
         ui.dialog() as dialog,
@@ -285,11 +285,11 @@ def show_load_dialog():
     dialog.open()
 
 
-def load_game_action(save_id: str, dialog):
+async def load_game_action(save_id: str, dialog):
     """Actually perform the load."""
     try:
-        # Load save data
-        save_data = save_manager.load_game(save_id)
+        # Load save data (async for browser localStorage)
+        save_data = await save_manager.load_game(save_id)
 
         # Load the story first (in case we're not already in a game)
         story_id = save_data.get("story_id", STORY_ID)
@@ -1176,10 +1176,6 @@ if __name__ in {"__main__", "__mp_main__"}:
     port = int(os.environ.get("PORT", 8080))
     is_production = os.environ.get("RAILWAY_ENVIRONMENT") is not None
 
-    # Storage secret for browser localStorage support
-    # In production, use an environment variable; fallback for local dev
-    storage_secret = os.environ.get("STORAGE_SECRET", "arcanum-local-dev-secret")
-
     if is_production:
         # Production: Railway deployment
         ui.run(
@@ -1189,8 +1185,7 @@ if __name__ in {"__main__", "__mp_main__"}:
             port=port,
             reload=False,
             show=False,
-            storage_secret=storage_secret,
         )
     else:
         # Local development
-        ui.run(title="Arcanum", favicon="🔮", storage_secret=storage_secret)
+        ui.run(title="Arcanum", favicon="🔮")

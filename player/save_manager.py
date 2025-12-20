@@ -13,29 +13,45 @@ from typing import Any
 
 
 class BrowserSaveManager:
-    """Manages save games using browser localStorage via NiceGUI.
+    """Manages save games using browser localStorage via direct JavaScript.
 
     Each player's saves are stored in their own browser, so players
     can only see their own saves when deployed as a web app.
+
+    Uses ui.run_javascript() for direct localStorage access, which works
+    in async callbacks (unlike app.storage.browser which only works during
+    initial page build).
     """
 
     STORAGE_KEY = "arcanum_saves"
 
     def __init__(self):
         """Initialize BrowserSaveManager."""
-        # Note: We don't access app.storage.browser here because
-        # it's only available during request handling
         pass
 
-    def _get_storage(self):
-        """Get the browser storage dict, initializing if needed."""
-        from nicegui import app
+    async def _get_saves_from_browser(self) -> dict:
+        """Fetch saves dict from browser localStorage."""
+        from nicegui import ui
 
-        if self.STORAGE_KEY not in app.storage.browser:
-            app.storage.browser[self.STORAGE_KEY] = {}
-        return app.storage.browser[self.STORAGE_KEY]
+        js_code = f"""
+            const data = localStorage.getItem('{self.STORAGE_KEY}');
+            return data ? JSON.parse(data) : {{}};
+        """
+        result = await ui.run_javascript(js_code)
+        return result if result else {}
 
-    def save_game(self, save_name: str, engine_state: dict[str, Any]) -> dict:
+    async def _set_saves_in_browser(self, saves: dict):
+        """Write saves dict to browser localStorage."""
+        from nicegui import ui
+
+        # Escape the JSON string for JavaScript
+        saves_json = json.dumps(saves)
+        js_code = f"""
+            localStorage.setItem('{self.STORAGE_KEY}', {json.dumps(saves_json)});
+        """
+        await ui.run_javascript(js_code)
+
+    async def save_game(self, save_name: str, engine_state: dict[str, Any]) -> dict:
         """
         Save game state to browser localStorage.
 
@@ -46,7 +62,8 @@ class BrowserSaveManager:
         Returns:
             Dict with save metadata (save_id, etc.)
         """
-        saves = self._get_storage()
+        # Get current saves from browser
+        saves = await self._get_saves_from_browser()
 
         # Add user-provided save name to the state
         save_data = engine_state.copy()
@@ -56,12 +73,11 @@ class BrowserSaveManager:
         # Generate unique save ID (timestamp-based)
         save_id = f"save_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
-        # Store in browser localStorage
+        # Store in saves dict
         saves[save_id] = save_data
 
-        # Trigger storage sync by reassigning
-        from nicegui import app
-        app.storage.browser[self.STORAGE_KEY] = saves
+        # Write back to browser localStorage
+        await self._set_saves_in_browser(saves)
 
         return {
             "success": True,
@@ -73,7 +89,7 @@ class BrowserSaveManager:
             },
         }
 
-    def load_game(self, save_id: str) -> dict[str, Any]:
+    async def load_game(self, save_id: str) -> dict[str, Any]:
         """
         Load a saved game from browser localStorage.
 
@@ -86,21 +102,21 @@ class BrowserSaveManager:
         Raises:
             KeyError: If save doesn't exist
         """
-        saves = self._get_storage()
+        saves = await self._get_saves_from_browser()
 
         if save_id not in saves:
             raise KeyError(f"Save not found: {save_id}")
 
         return saves[save_id]
 
-    def list_saves(self) -> list[dict]:
+    async def list_saves(self) -> list[dict]:
         """
         List all available saves from browser localStorage.
 
         Returns:
             List of save metadata dicts, sorted by timestamp (newest first)
         """
-        saves = self._get_storage()
+        saves = await self._get_saves_from_browser()
         result = []
 
         for save_id, save_data in saves.items():
@@ -119,7 +135,7 @@ class BrowserSaveManager:
 
         return result
 
-    def delete_save(self, save_id: str) -> bool:
+    async def delete_save(self, save_id: str) -> bool:
         """
         Delete a save from browser localStorage.
 
@@ -132,16 +148,15 @@ class BrowserSaveManager:
         Raises:
             KeyError: If save doesn't exist
         """
-        saves = self._get_storage()
+        saves = await self._get_saves_from_browser()
 
         if save_id not in saves:
             raise KeyError(f"Save not found: {save_id}")
 
         del saves[save_id]
 
-        # Trigger storage sync
-        from nicegui import app
-        app.storage.browser[self.STORAGE_KEY] = saves
+        # Write back to browser localStorage
+        await self._set_saves_in_browser(saves)
 
         return True
 
