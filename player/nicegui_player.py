@@ -145,7 +145,7 @@ def show_landing():
     """Display the landing page."""
     print("🎭 show_landing() called")
     with ui.column().classes(
-        "min-h-screen w-screen bg-gradient-to-b from-purple via-purple-950 to-black flex items-center justify-center m-0 p-8"
+        "min-h-screen w-screen bg-[#2D1B4E] flex items-center justify-center m-0 p-8"
     ):
         print("   Creating landing page elements...")
         # Main title
@@ -351,7 +351,7 @@ def show_player():
 
     # Otherwise, show normal player UI
     with ui.column().classes(
-        "min-h-screen w-screen bg-gradient-to-b from-purple via-purple-950 to-black flex items-center justify-start m-0 p-8"
+        "min-h-screen w-screen bg-[#2D1B4E] flex items-center justify-start m-0 p-8"
     ):
         # Header bar
         with ui.row().classes("w-full max-w-4xl justify-between items-center mb-8"):
@@ -957,7 +957,7 @@ def show_dashboard(output=None):
                 renders dynamically from passage content/choices.
     """
     with ui.column().classes(
-        "min-h-screen w-screen bg-gradient-to-b from-purple via-purple-950 to-black flex items-center justify-start m-0 p-8"
+        "min-h-screen w-screen bg-[#2D1B4E] flex items-center justify-start m-0 p-8"
     ):
         # Header
         with ui.row().classes("w-full max-w-6xl justify-between items-center mb-8"):
