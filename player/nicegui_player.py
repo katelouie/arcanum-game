@@ -145,7 +145,7 @@ def show_landing():
     """Display the landing page."""
     print("🎭 show_landing() called")
     with ui.column().classes(
-        "min-h-screen w-screen bg-[#2D1B4E] flex items-center justify-center m-0 p-8"
+        "min-h-screen w-screen bg-purple-950 flex items-center justify-center m-0 p-8"
     ):
         print("   Creating landing page elements...")
         # Main title
