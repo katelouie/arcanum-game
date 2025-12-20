@@ -9,7 +9,7 @@ from bardic.runtime.engine import BardEngine
 
 # Import local save manager (from same directory)
 sys.path.insert(0, str(Path(__file__).parent))
-from save_manager import SaveManager
+from save_manager import BrowserSaveManager
 
 # Make sure to include game_logic directory
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -86,9 +86,9 @@ main_container = None
 card_drawer = None
 card_drawer_content = None
 
-# SaveManager instance
+# SaveManager instance (uses browser localStorage for per-player saves)
 project_root = Path(__file__).resolve().parent.parent
-save_manager = SaveManager(project_root / "saves")
+save_manager = BrowserSaveManager()
 
 # ============================================================================
 # STORY LOADING
@@ -1176,6 +1176,10 @@ if __name__ in {"__main__", "__mp_main__"}:
     port = int(os.environ.get("PORT", 8080))
     is_production = os.environ.get("RAILWAY_ENVIRONMENT") is not None
 
+    # Storage secret for browser localStorage support
+    # In production, use an environment variable; fallback for local dev
+    storage_secret = os.environ.get("STORAGE_SECRET", "arcanum-local-dev-secret")
+
     if is_production:
         # Production: Railway deployment
         ui.run(
@@ -1185,7 +1189,8 @@ if __name__ in {"__main__", "__mp_main__"}:
             port=port,
             reload=False,
             show=False,
+            storage_secret=storage_secret,
         )
     else:
         # Local development
-        ui.run(title="Arcanum", favicon="🔮")
+        ui.run(title="Arcanum", favicon="🔮", storage_secret=storage_secret)
