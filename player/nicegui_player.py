@@ -720,7 +720,7 @@ class GameSession:
         card_widths = {"large": 180, "medium": 140, "small": 100}
         card_width = card_widths.get(spread.card_size, 140)
 
-        base_height = 600
+        base_height = 850
         if spread.aspect_ratio:
             container_height = max(500, int(base_height / spread.aspect_ratio))
         else:
@@ -729,7 +729,7 @@ class GameSession:
         with (
             ui.element("div")
             .classes("relative w-full mx-auto")
-            .style(f"height: {container_height}px; max-width: 800px;")
+            .style(f"height: {container_height}px; max-width: 900px; margin-top: 16px; overflow: hidden;")
         ):
             for card_data in positioned_cards:
                 x = card_data["x"]
@@ -901,8 +901,8 @@ class GameSession:
         reader = state.get("reader")
 
         return {
-            "sessions_completed": state.get("completed_sessions", 0),
-            "coins_earned": state.get("total_earnings", 0),
+            "sessions_completed": reader.sessions_completed if reader else 0,
+            "coins_earned": reader.money if reader else 0,
             "reader_level": reader.get_level() if reader else "Novice",
             "experience": reader.experience if reader else 0,
         }
@@ -917,6 +917,15 @@ class GameSession:
 def index():
     session = GameSession()
     session.build()
+
+
+# Debug mode (only in development)
+import os
+
+if not os.environ.get("RAILWAY_ENVIRONMENT"):
+    from debug_page import register_debug_routes
+
+    register_debug_routes()
 
 
 # ============================================================================

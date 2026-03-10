@@ -1003,7 +1003,7 @@ def show_readers_desk(
                 if client_obj:
                     flavor = getattr(client_obj, "flavor_text", "")
                     trust = getattr(client_obj, "trust", 0)
-                    completed = getattr(client_obj, "completed_sessions", 0)
+                    completed = getattr(client_obj, "sessions_completed", 0)
                     total = getattr(client_obj, "total_sessions", 3)
                     session_text = f"Session {completed + 1} of {total}"
                 break
