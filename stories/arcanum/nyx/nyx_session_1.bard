@@ -1,4 +1,4 @@
-:: Nyx.Session1
+:: Nyx.Session1 ^DREAM:CYBERPUNK
 ~ session = create_session(nyx)
 # Nyx brings her own tech issues
 ~ session.tech_interference = 1

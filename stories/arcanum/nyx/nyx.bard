@@ -1,4 +1,4 @@
-:: Nyx
+:: Nyx ^DREAM:CYBERPUNK
 @if nyx.sessions_completed == 0:
     -> Nyx.Session1
 @elif nyx.sessions_completed == 1:

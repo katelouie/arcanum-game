@@ -43,7 +43,7 @@
 #
 # ============================================================================
 
-:: Nyx.Session2.Start
+:: Nyx.Session2.Start ^DREAM:CYBERPUNK
 @py:
 session = create_session(nyx)
 

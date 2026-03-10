@@ -37,7 +37,7 @@
 #
 # ============================================================================
 
-:: Nyx.Session3C.Start
+:: Nyx.Session3C.Start ^DREAM:CYBERPUNK
 
 @py:
 # Initialize session
