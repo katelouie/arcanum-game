@@ -27,7 +27,7 @@ session.reversals_handled = 0
 # If she decided to move, she's started the process
 # If she decided to stay, she's made changes to the house
 chen.took_action = chen.clarity >= 8
-chen.feeling_overwhelmed = chance(0.4)
+chen.feeling_overwhelmed = random.random() < 0.4
 
 # Session atmosphere tracking
 session.atmosphere = 0
@@ -35,8 +35,9 @@ session.room_energy = 1
 session.weather_intensity = random.choice([1, 2, 3])
 session.time_of_day = random.choice(["afternoon", "morning"])
 
-# Flag tracking
-chen.discussed_grief = False
+# Flag tracking — only reset Session 2-specific flags
+# Session 1 flags (discussed_grief, discussed_culture, discussed_guilt,
+# discussed_practical) are preserved for determine_session_three_path()
 chen.discussed_fear = False
 chen.discussed_house = False
 chen.discussed_daughter = False
@@ -1304,7 +1305,7 @@ if cards[1].reversed:
 
 "Is that how you want to be?"
 
-{chen.took_action ? "I don't know anymore." : "I don't know if I have a choice."}
+{chen.took_action ? "I don't know anymore." | "I don't know if I have a choice."}
 
 + [Continue to the guidance card] -> Chen.Session2.Position3_Hub
 
@@ -1877,7 +1878,7 @@ The silence stretches. Margaret waits for you to weave it together.
         "You were trapped between two equal choices, {cards[0].reversed ? and then you finally lowered the swords | paralyzed}. You took off the blindfold and chose to see, even though seeing was terrifying."
     @endif
 
-    "But {cards[1].name}{cards[1].reversed ? ", reversed," : ""} shows you're still carrying the weight of it."
+    "But {cards[1].name}{cards[1].reversed ? ", reversed," | ""} shows you're still carrying the weight of it."
 
     @if cards[1].name == "Five of Cups":
         @if cards[1].reversed:
@@ -1898,10 +1899,10 @@ The silence stretches. Margaret waits for you to weave it together.
             "You're holding onto hope, even though it's fragile. After such loss, that's remarkable. Hope isn't constant - it comes and goes like breathing."
         @endif
     @else:
-        "The Nine of Pentacles - {cards[1].reversed ? "independence becoming isolation" : "independent but questioning if that's what you want"}. You've been taking care of yourself, but somewhere it became a fortress instead of a choice."
+        "The Nine of Pentacles - {cards[1].reversed ? "independence becoming isolation" | "independent but questioning if that's what you want"}. You've been taking care of yourself, but somewhere it became a fortress instead of a choice."
     @endif
 
-    "And {cards[2].name}{cards[2].reversed ? ", reversed," : ""} - the guidance - says:"
+    "And {cards[2].name}{cards[2].reversed ? ", reversed," | ""} - the guidance - says:"
 
     @if cards[2].name == "Temperance":
         @if cards[2].reversed:
@@ -1932,14 +1933,14 @@ The silence stretches. Margaret waits for you to weave it together.
     @if cards[0].name == "Eight of Wands":
         "The Eight of Wands reversed. You've been holding those wands frozen in mid-air, terrified to release them. You want to move but you're paralyzed."
     @elif cards[0].name == "Four of Swords":
-        "{cards[0].reversed ? "You've been resting too long" : "You've been resting - maybe hiding"}. The stillness that was healing has become a cage. Grief needed quiet, but quiet has become stagnation."
+        "{cards[0].reversed ? "You've been resting too long" | "You've been resting - maybe hiding"}. The stillness that was healing has become a cage. Grief needed quiet, but quiet has become stagnation."
     @else:
-        "The Two of Swords{cards[0].reversed ? " reversed - you're close to choosing, but not there yet" : " - perfect paralysis"}. Two equal weights on a scale that won't tip. You've been trapped between stay and go, remember and forget, hold on and let go."
+        "The Two of Swords{cards[0].reversed ? " reversed - you're close to choosing, but not there yet" | " - perfect paralysis"}. Two equal weights on a scale that won't tip. You've been trapped between stay and go, remember and forget, hold on and let go."
     @endif
 
     ~ chen.discussed_fear = True
 
-    "And {cards[1].name}{cards[1].reversed ? " reversed" : ""} shows what that paralysis costs you:"
+    "And {cards[1].name}{cards[1].reversed ? " reversed" | ""} shows what that paralysis costs you:"
 
     @if cards[1].name == "Five of Cups":
         "Grief has become your whole world. You're staring at what's gone and you can't see the two cups still standing. Your health. Your mind. Your daughter needing you. Your grandchild coming. They're there, but grief is too loud."
@@ -1955,7 +1956,7 @@ The silence stretches. Margaret waits for you to weave it together.
         "Independence that's become isolation. You've built a garden but it's become a cage. You tell yourself you're self-sufficient, but really you're just alone."
     @endif
 
-    "The guidance - {cards[2].name}{cards[2].reversed ? " reversed" : ""} - says:"
+    "The guidance - {cards[2].name}{cards[2].reversed ? " reversed" | ""} - says:"
 
     @if cards[2].name == "Temperance":
         @if cards[2].reversed:
@@ -1998,7 +1999,7 @@ The silence stretches. Margaret waits for you to weave it together.
 @if chen.took_action:
     "{cards[0].name} shows your brave action - listing the house, choosing movement. {cards[1].name} shows where you are emotionally right now - carrying the weight of that choice. And {cards[2].name} offers guidance for moving forward."
 @else:
-    "{cards[0].name} shows what's kept you stuck - {cards[0].name == "Two of Swords" ? "indecision" : cards[0].name == "Four of Swords" ? "excessive rest" : "frozen momentum"}. {cards[1].name} shows the emotional cost. {cards[2].name} points toward the path forward."
+    "{cards[0].name} shows what's kept you stuck - {cards[0].name == "Two of Swords" ? "indecision" | cards[0].name == "Four of Swords" ? "excessive rest" | "frozen momentum"}. {cards[1].name} shows the emotional cost. {cards[2].name} points toward the path forward."
 @endif
 
 @if cards[2].name == "Temperance":
@@ -2148,7 +2149,7 @@ if chen.session_three_unlocked:
 **Session 2 Complete**
 
 **Money Earned:** ${reader.money}
-**Reputation Gained:** +{reader.reputation if session.reading_quality == "profound" else (5 if session.reading_quality == "helpful" else 2)}
+**Reputation Gained:** +{10 if session.reading_quality == "profound" else (5 if session.reading_quality == "helpful" else 2)}
 **Reading Quality:** *{session.reading_quality.capitalize()}*
 
 @if chen.will_return:

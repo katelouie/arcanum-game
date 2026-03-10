@@ -61,23 +61,44 @@
       "positions": [
         {
           "x": 50,
-          "y": 35
+          "y": 48
         },
         {
           "x": 50,
-          "y": 5
+          "y": 12
         },
         {
-          "x": 25,
-          "y": 35
+          "x": 20,
+          "y": 48
         },
         {
-          "x": 75,
-          "y": 35
+          "x": 80,
+          "y": 48
         },
         {
           "x": 50,
-          "y": 70
+          "y": 85
+        }
+      ]
+    },
+    "gentle-arc-4": {
+      "name": "Four Card Gentle Arc",
+      "positions": [
+        {
+          "x": 15,
+          "y": 35
+        },
+        {
+          "x": 38,
+          "y": 25
+        },
+        {
+          "x": 62,
+          "y": 25
+        },
+        {
+          "x": 85,
+          "y": 35
         }
       ]
     },
@@ -86,19 +107,19 @@
       "positions": [
         {
           "x": 30,
-          "y": 10
+          "y": 20
         },
         {
           "x": 70,
-          "y": 10
+          "y": 20
         },
         {
           "x": 30,
-          "y": 55
+          "y": 75
         },
         {
           "x": 70,
-          "y": 55
+          "y": 75
         }
       ]
     },
@@ -303,23 +324,23 @@
       "positions": [
         {
           "x": 50,
-          "y": 5
+          "y": 12
         },
         {
-          "x": 25,
-          "y": 35
+          "x": 20,
+          "y": 48
         },
         {
-          "x": 75,
-          "y": 35
-        },
-        {
-          "x": 50,
-          "y": 70
+          "x": 80,
+          "y": 48
         },
         {
           "x": 50,
-          "y": 35
+          "y": 85
+        },
+        {
+          "x": 50,
+          "y": 48
         }
       ]
     },
@@ -328,23 +349,48 @@
       "positions": [
         {
           "x": 50,
-          "y": 70
+          "y": 85
         },
         {
           "x": 50,
-          "y": 40
+          "y": 48
         },
         {
-          "x": 25,
+          "x": 20,
           "y": 15
         },
         {
-          "x": 75,
+          "x": 80,
           "y": 15
         },
         {
           "x": 50,
           "y": 5
+        }
+      ]
+    },
+    "seance-arc-5": {
+      "name": "Séance Arc (5 Cards)",
+      "positions": [
+        {
+          "x": 15,
+          "y": 55
+        },
+        {
+          "x": 35,
+          "y": 25
+        },
+        {
+          "x": 50,
+          "y": 55
+        },
+        {
+          "x": 65,
+          "y": 25
+        },
+        {
+          "x": 85,
+          "y": 55
         }
       ]
     }
@@ -2119,6 +2165,373 @@
           "rag_mapping": "outcome_and_result.final_outcome"
         }
       ]
+    },
+    {
+      "id": "breaking-chains",
+      "name": "Breaking Chains",
+      "description": "A five-card spread for reading bondage, curse, and liberation. Designed to reveal what holds someone, the original wound, the mechanism of freedom, its cost, and what life looks like after. From Chapter 9 of a tarot book read by candlelight in a Gothic manor.",
+      "layout": "seance-arc-5",
+      "cardSize": "medium",
+      "aspectRatio": 1.2,
+      "category": "spiritual",
+      "difficulty": "advanced",
+      "positions": [
+        {
+          "name": "The Binding",
+          "short_description": "What holds you — the nature of the constraint or curse",
+          "detailed_description": "What is the actual mechanism of captivity? Not the story about it, not the narrative the captive tells themselves — the real thing. Curses, contracts, guilt, obligation, love twisted into a leash. This card reveals whether the binding is external (imposed) or internal (maintained by the bound person themselves, sometimes without knowing it).",
+          "keywords": ["bondage", "constraint", "curse", "obligation", "trapped", "binding"],
+          "rag_mapping": "challenge_and_growth.what_hinders"
+        },
+        {
+          "name": "The Wound",
+          "short_description": "The original wrong — how the binding began",
+          "detailed_description": "Every chain has a first link. This card reveals the original event, choice, or betrayal that created the binding. Sometimes the wound is ancient — generations old, passed down like a family heirloom nobody wanted. Sometimes it's recent and raw. The wound position doesn't judge; it simply shows what happened and to whom.",
+          "keywords": ["origin", "betrayal", "wound", "history", "first cause", "trauma"],
+          "rag_mapping": "emotional_and_internal.shadow"
+        },
+        {
+          "name": "The Key",
+          "short_description": "How to break free — the mechanism of liberation",
+          "detailed_description": "Not all keys are comfortable to hold. This card reveals what action, truth, sacrifice, or change will break the binding. Sometimes the key is forgiveness. Sometimes it's confrontation. Sometimes it's walking away from something you've been told you can't live without. The key is always available; the question is whether the bound person is willing to use it.",
+          "keywords": ["liberation", "solution", "key", "freedom", "action", "truth"],
+          "rag_mapping": "guidance_and_action.advice"
+        },
+        {
+          "name": "The Cost",
+          "short_description": "What must be given up — freedom is never free",
+          "detailed_description": "Liberation always costs something. This card reveals the price: a relationship, a comfort, an identity, a story you've been telling yourself. Sometimes the cost is grief — mourning the person you were while bound, even if that person was suffering. The cost position is honest about what will be lost, because pretending freedom is painless is its own kind of binding.",
+          "keywords": ["sacrifice", "cost", "loss", "price", "grief", "release"],
+          "rag_mapping": "outcome_and_result.consequence"
+        },
+        {
+          "name": "The Other Side",
+          "short_description": "What freedom looks like — life after the chains",
+          "detailed_description": "The hardest card to read honestly, because freedom rarely looks the way the bound person imagined. This card reveals the actual landscape of liberation: not a triumphant sunrise, usually, but something quieter and stranger. A room that feels too big. Silence where there used to be a voice. The disorienting lightness of a weight you'd forgotten you were carrying. Freedom is real and it is good and it takes getting used to.",
+          "keywords": ["freedom", "future", "new life", "possibility", "healing", "lightness"],
+          "rag_mapping": "outcome_and_result.final_outcome"
+        }
+      ]
+    },
+    {
+      "id": "the-mask",
+      "name": "The Mask",
+      "description": "A five-card spread for reading performance, persona, and authenticity. Designed for someone who has been playing a character so long they've forgotten they're acting. Useful for Gothic lords, method actors, and anyone who can't remember which version of themselves is real.",
+      "layout": "seance-arc-5",
+      "cardSize": "medium",
+      "aspectRatio": 1.2,
+      "category": "spiritual",
+      "difficulty": "advanced",
+      "positions": [
+        {
+          "name": "The Mask",
+          "short_description": "The persona you present — the character you perform",
+          "detailed_description": "Who do people see when they look at you? This card reveals the constructed self: the voice, the posture, the dramatic entrance, the careful performance of a personality assembled from novels and expectations and the desperate desire to be *interesting.* The mask isn't necessarily false — it may contain real pieces of you — but it is curated, polished, and maintained at significant cost.",
+          "keywords": ["persona", "performance", "facade", "character", "presentation", "constructed"],
+          "rag_mapping": "emotional_and_internal.identity"
+        },
+        {
+          "name": "The Face",
+          "short_description": "Who you actually are underneath — the real person",
+          "detailed_description": "Beneath every mask is a face, and faces are always more interesting than masks because they can't help being honest. This card reveals the actual person: their quiet preferences, their real fears, their genuine enthusiasms that don't fit the persona. The face is often younger than the mask, more uncertain, more tender. It's the version of you that exists when nobody is watching.",
+          "keywords": ["authenticity", "true self", "vulnerability", "genuine", "unguarded", "real"],
+          "rag_mapping": "emotional_and_internal.subconscious"
+        },
+        {
+          "name": "Why You Wear It",
+          "short_description": "The reason for the performance — what the mask protects",
+          "detailed_description": "Nobody builds a persona for fun. This card reveals the original need: rejection, inadequacy, a childhood where being yourself wasn't safe or wasn't enough. The mask was a solution to a problem, and understanding the problem is the first step to outgrowing the solution. Sometimes the reason is noble. Sometimes it's just fear. Usually it's both.",
+          "keywords": ["motivation", "protection", "fear", "origin", "need", "defense"],
+          "rag_mapping": "challenge_and_growth.what_hinders"
+        },
+        {
+          "name": "What It Costs",
+          "short_description": "The price of performance — what the mask takes from you",
+          "detailed_description": "Every performance costs energy, and personas that run twenty-four hours a day are exhausting. This card reveals what the mask has taken: real relationships replaced by audience dynamics, genuine emotions suppressed in favor of dramatic ones, the slow erosion of knowing who you actually are versus who you're pretending to be. The cost is always loneliness, even when surrounded by admirers.",
+          "keywords": ["exhaustion", "loneliness", "loss", "isolation", "erosion", "price"],
+          "rag_mapping": "outcome_and_result.consequence"
+        },
+        {
+          "name": "The First Step",
+          "short_description": "How to begin removing the mask — the first honest act",
+          "detailed_description": "You don't remove a mask all at once. You start with one honest moment. This card reveals what that moment looks like: a conversation without scripts, a quiet evening without performance, a single sentence spoken in your own voice instead of the character's. The first step is always small and always terrifying and always worth it.",
+          "keywords": ["beginning", "honesty", "courage", "authenticity", "first step", "change"],
+          "rag_mapping": "guidance_and_action.advice"
+        }
+      ]
+    },
+    {
+      "id": "forgotten-catherine",
+      "name": "Forgotten: Catherine",
+      "description": "A two-card micro-spread for reading a ghost trapped in the walls. How she lived, how she was taken. Quick, urgent, performed in a haunted corridor while the house resists.",
+      "layout": "horizontal-2",
+      "cardSize": "large",
+      "aspectRatio": 1.5,
+      "category": "spiritual",
+      "difficulty": "intermediate",
+      "positions": [
+        {
+          "name": "How She Lived",
+          "short_description": "Who Catherine was in life — her nature, her joys, her place in the house",
+          "detailed_description": "Before the house took her, before she became a shape in the plaster, Catherine was a person. This card reveals who: what she cared about, how she moved through the world, what made her laugh or cry or stay up late. Giving a ghost back their story is the first step to freeing them.",
+          "keywords": ["life", "identity", "character", "joy", "humanity", "memory"],
+          "rag_mapping": "emotional_and_internal.identity"
+        },
+        {
+          "name": "How She Was Taken",
+          "short_description": "How the house consumed her — the mechanism of her imprisonment",
+          "detailed_description": "The house takes people in different ways. Some it seduces. Some it traps. Some it simply wears down over decades until they forget they were ever separate from the walls. This card reveals Catherine's specific fate: what the house used against her, what vulnerability it exploited, what moment she stopped being a person and became architecture.",
+          "keywords": ["death", "consumption", "trap", "loss", "imprisonment", "fate"],
+          "rag_mapping": "emotional_and_internal.shadow"
+        }
+      ]
+    },
+    {
+      "id": "forgotten-samuel",
+      "name": "Forgotten: Samuel",
+      "description": "A two-card micro-spread for reading an angry ghost who knows what the house is. Performed under duress while the corridor compresses.",
+      "layout": "horizontal-2",
+      "cardSize": "large",
+      "aspectRatio": 1.5,
+      "category": "spiritual",
+      "difficulty": "intermediate",
+      "positions": [
+        {
+          "name": "How He Lived",
+          "short_description": "Who Samuel was in life — his strength, his defiance, his awareness",
+          "detailed_description": "Samuel figured it out. He understood what the house was doing before it took him, and that knowledge made him dangerous and made his imprisonment especially cruel. This card reveals the man: his courage, his anger, his refusal to pretend the walls weren't closing in.",
+          "keywords": ["strength", "defiance", "awareness", "courage", "anger", "truth"],
+          "rag_mapping": "emotional_and_internal.identity"
+        },
+        {
+          "name": "How He Was Taken",
+          "short_description": "How the house silenced him — what it feared about his knowledge",
+          "detailed_description": "The house took Samuel not because he was vulnerable but because he was *right.* This card reveals how a building silences someone who can name what it is: force, isolation, the slow burial of truth under stone and plaster and generations of polite denial.",
+          "keywords": ["silencing", "force", "suppression", "burial", "violence", "fear"],
+          "rag_mapping": "emotional_and_internal.shadow"
+        }
+      ]
+    },
+    {
+      "id": "forgotten-margaret",
+      "name": "Forgotten: Margaret",
+      "description": "A two-card micro-spread for reading a warm ghost who has been protecting the house from itself for thirty years. The final ghost reading before the confrontation.",
+      "layout": "horizontal-2",
+      "cardSize": "large",
+      "aspectRatio": 1.5,
+      "category": "spiritual",
+      "difficulty": "intermediate",
+      "positions": [
+        {
+          "name": "How She Lived",
+          "short_description": "Who Margaret was in life — her warmth, her care, her quiet resistance",
+          "detailed_description": "Margaret the cook. Thirty years making meals and making sure the house didn't take anyone else. This card reveals the woman behind the nutmeg and the practical kindness: someone who understood what the house was and chose to fight it not with dramatics but with daily acts of protection. The Empress energy of someone who nurtures the people around her even from inside the walls.",
+          "keywords": ["warmth", "nurturing", "protection", "resistance", "care", "strength"],
+          "rag_mapping": "emotional_and_internal.identity"
+        },
+        {
+          "name": "How She Was Taken",
+          "short_description": "How the house consumed her — and how she turned her imprisonment into a shield",
+          "detailed_description": "The house took Margaret, but Margaret took back. This card reveals the unusual nature of her imprisonment: she wasn't consumed the way the others were. She was absorbed, and from inside, she held. She held the house back from taking Mrs. Winters, from taking Thomas, from taking the cook who replaced her. Thirty years of holding. She's tired. She needs someone to take over.",
+          "keywords": ["sacrifice", "holding", "protection", "exhaustion", "transformation", "shield"],
+          "rag_mapping": "emotional_and_internal.shadow"
+        }
+      ]
+    },
+    {
+      "id": "through-the-veil",
+      "name": "Through the Veil (Séance Spread)",
+      "description": "A five-card spread for communing with the departed. Designed to reveal who the deceased was, what message they carry, what they left behind, what remains hidden, and the underlying truth. Traditionally performed at a séance table with black cloth, though the cards work just as well in a well-lit room in Bath.",
+      "layout": "seance-arc-5",
+      "cardSize": "medium",
+      "aspectRatio": 1.2,
+      "category": "spiritual",
+      "difficulty": "advanced",
+      "positions": [
+        {
+          "name": "The Departed",
+          "short_description": "Who the departed was in life — their nature, their role, their defining qualities",
+          "detailed_description": "Who was this person at their core? Not the eulogy version — the real one. This card reveals the departed's true nature: how they wielded power, how they treated those around them, what drove them. In a séance context, this card often shows what the living remember versus what was actually true. The dead don't get to edit their legacy once the cards are on the table.",
+          "keywords": [
+            "identity",
+            "character",
+            "legacy",
+            "nature",
+            "authority",
+            "memory"
+          ],
+          "question_adaptations": {
+            "grief": "Who the person you lost truly was — beyond the grief and nostalgia",
+            "estate": "The departed's relationship with power, control, and material possessions",
+            "closure": "The authentic character of the person you're seeking closure with"
+          },
+          "rag_mapping": "emotional_and_internal.identity"
+        },
+        {
+          "name": "Their Message",
+          "short_description": "What the departed wishes to communicate from beyond",
+          "detailed_description": "If the dead could speak — and in this spread, they sometimes do — what would they say? This card captures the unfinished communication: the apology never given, the warning never heeded, the confession that death interrupted. This position often reveals whether the departed's message is one of love, manipulation, or desperate self-justification. The cards don't distinguish between what the dead want to say and what they need to say. Those aren't always the same thing.",
+          "keywords": [
+            "communication",
+            "unfinished",
+            "confession",
+            "warning",
+            "apology",
+            "revelation"
+          ],
+          "question_adaptations": {
+            "grief": "What your loved one would want you to know or understand",
+            "estate": "What the departed was trying to accomplish or communicate about material affairs",
+            "closure": "The message that was left unspoken and still needs to be heard"
+          },
+          "rag_mapping": "emotional_and_internal.subconscious"
+        },
+        {
+          "name": "What They Left Behind",
+          "short_description": "The tangible and intangible legacy — what remains after departure",
+          "detailed_description": "Death is an interruption, not a conclusion. This card reveals what the departed left in their wake: debts and inheritances, both financial and emotional. Unresolved relationships. Half-finished projects. Secrets embedded in the architecture of the family they left behind. This position speaks to the practical aftermath — the mess that someone living now has to sort through. It also reveals whether what was left behind was a gift or a burden, and whether the departed knew the difference.",
+          "keywords": [
+            "legacy",
+            "inheritance",
+            "aftermath",
+            "burden",
+            "gift",
+            "unresolved"
+          ],
+          "question_adaptations": {
+            "grief": "What your loved one's passing left you carrying — emotionally and practically",
+            "estate": "The financial, legal, or material legacy and its true condition",
+            "closure": "The unresolved business or emotional weight that still needs addressing"
+          },
+          "rag_mapping": "outcome_and_result.consequence"
+        },
+        {
+          "name": "What's Hidden",
+          "short_description": "Secrets concealed by or about the departed — things deliberately buried",
+          "detailed_description": "The dead keep secrets. This card pierces them. What was deliberately concealed — not lost to time or faded from memory, but actively hidden? False accounts, double lives, betrayals papered over with respectability, love affairs conducted behind closed doors, money moved in the dark. This position reveals what the departed made sure nobody would find, and whether that concealment was self-serving or protective. Sometimes people hide things to save themselves. Sometimes they hide things to save someone else. The card knows which.",
+          "keywords": [
+            "secrets",
+            "deception",
+            "concealment",
+            "hidden",
+            "buried",
+            "shadow"
+          ],
+          "question_adaptations": {
+            "grief": "What you didn't know about your loved one that changes how you understand them",
+            "estate": "Hidden assets, concealed debts, or financial secrets yet to surface",
+            "closure": "The truth that was deliberately kept from you and why"
+          },
+          "rag_mapping": "emotional_and_internal.shadow"
+        },
+        {
+          "name": "The Truth",
+          "short_description": "The final accounting — the irreducible reality beneath everything else",
+          "detailed_description": "Every reading has a fulcrum — the card that makes the rest of the spread click into focus. In Through the Veil, this is it. The Truth position strips away justification, performance, and self-deception to reveal the bedrock reality of the departed's life, death, and unfinished business. This card answers the question that nobody at the séance table actually asked but everyone needed answered. It is often the card that makes the ghost flinch. Whether the truth is betrayal, justice, or judgement, this position delivers it without softening — because the dead are past the point where softening helps.",
+          "keywords": [
+            "truth",
+            "reckoning",
+            "justice",
+            "revelation",
+            "accounting",
+            "judgement"
+          ],
+          "question_adaptations": {
+            "grief": "The essential truth about this loss and what it means for your life going forward",
+            "estate": "The final accounting — what really happened and what justice requires",
+            "closure": "The truth you need to accept before you can truly move on"
+          },
+          "rag_mapping": "outcome_and_result.final_outcome"
+        }
+      ]
+    },
+    {
+      "id": "lost-and-found",
+      "name": "Lost and Found",
+      "description": "A four-card spread for finding what's been lost — not the object itself, but the shape of its absence and the form its return will take. Designed for Kind Of record shop, where everything that's loved enough eventually turns up.",
+      "layout": "gentle-arc-4",
+      "cardSize": "large",
+      "aspectRatio": 1.5,
+      "category": "spiritual",
+      "difficulty": "intermediate",
+      "positions": [
+        {
+          "name": "What Was Lost",
+          "short_description": "The true nature of what you're seeking — the thing beneath the thing",
+          "detailed_description": "Not what you think you lost, but what you actually lost. The record might be the search object, but this card reveals the real absence: a feeling, a relationship, a version of yourself that existed in a specific time and place. This position often surprises the seeker because the thing they're looking for and the thing they need are rarely identical.",
+          "keywords": [
+            "loss",
+            "memory",
+            "origin",
+            "absence",
+            "longing",
+            "nostalgia"
+          ],
+          "question_adaptations": {
+            "grief": "What the person you lost truly meant to you — the specific shape of their absence",
+            "creative": "The creative impulse or inspiration that went quiet",
+            "identity": "The part of yourself that feels missing or inaccessible"
+          },
+          "rag_mapping": "emotional_and_internal.identity"
+        },
+        {
+          "name": "Where It Lives Now",
+          "short_description": "Where the lost thing currently resides — in memory, in habit, in the world",
+          "detailed_description": "Nothing truly disappears. It transforms, it relocates, it embeds itself in your daily life wearing different clothes. This card reveals where the lost thing has been hiding: in your habits, in your relationships, in the songs you hum without thinking, in the way you arrange your bookshelves. Sometimes the lost thing has been with you all along and you've been looking past it.",
+          "keywords": [
+            "presence",
+            "hidden",
+            "transformed",
+            "embedded",
+            "unconscious",
+            "habitat"
+          ],
+          "question_adaptations": {
+            "grief": "How the person's influence still moves through your daily life",
+            "creative": "Where the creative energy redirected itself",
+            "identity": "Where the missing part of you is actually expressing itself"
+          },
+          "rag_mapping": "emotional_and_internal.subconscious"
+        },
+        {
+          "name": "What Blocks the Finding",
+          "short_description": "The obstacle between you and what you seek",
+          "detailed_description": "The block is rarely external. It's the story you tell yourself about the search, the identity you've built around being a seeker, the fear of what finding would actually mean. This position reveals whether the search has become a displacement behavior — a way to stay connected to the loss without processing it — or whether there's a genuine practical obstacle that can be addressed.",
+          "keywords": [
+            "obstacle",
+            "resistance",
+            "fear",
+            "displacement",
+            "pattern",
+            "self-sabotage"
+          ],
+          "question_adaptations": {
+            "grief": "What in the grieving process is being avoided through the search",
+            "creative": "The fear or habit preventing creative flow",
+            "identity": "The narrative about yourself that keeps the missing piece at arm's length"
+          },
+          "rag_mapping": "challenge_and_growth.what_hinders"
+        },
+        {
+          "name": "What Finding Looks Like",
+          "short_description": "The form the resolution will take — rarely what you expect",
+          "detailed_description": "The key position. Finding almost never looks like what the seeker imagined. You don't find the exact record — you find a night that feels like that night. You don't recover the lost relationship — you build a new one that carries the same warmth. This card reveals the actual shape of resolution: not the fantasy of finding, but the reality of it. Sometimes finding looks like letting go. Sometimes it looks like a warm store on a rainy night with people who are listening.",
+          "keywords": [
+            "resolution",
+            "healing",
+            "transformation",
+            "completion",
+            "surprise",
+            "arrival"
+          ],
+          "question_adaptations": {
+            "grief": "What genuine healing and closure will look and feel like for you",
+            "creative": "How the creative impulse will return — in what form and medium",
+            "identity": "How you'll recognize yourself as whole again"
+          },
+          "rag_mapping": "outcome_and_result.final_outcome"
+        }
+      ]
     }
   ],
   "categories": {
@@ -2145,6 +2558,10 @@
     "comprehensive": {
       "name": "Comprehensive",
       "description": "Detailed spreads for complex situations"
+    },
+    "spiritual": {
+      "name": "Spiritual & Séance",
+      "description": "Spreads for communing with the departed, ancestral work, and crossing the veil"
     }
   },
   "metadata": {

@@ -85,6 +85,7 @@ session.crew = {
 # Nyx's state
 # She should have shamanic_awakening 4-5, cyber_glitches 2-3
 # Kitsune suspicion should be moderate (3-5)
+nyx.confidence = 0
 nyx.corporate_identity = "Nicole Dimayuga"
 nyx.employee_id = "KD-SEA-47829"
 nyx.clearance_level = "Gamma-7"
@@ -155,7 +156,7 @@ You park in the shadow of a broken streetlight. Check your mirrors.
 
 No tails. No surveillance drones. No corporate response teams.
 
-Just {session.weather == "rain" ? rain : fog} and the weight of what's about to happen.
+Just {session.weather == "rain" ? rain | fog} and the weight of what's about to happen.
 
 + [Enter the building] -> Nyx.Session3B.Building_Entry
 
@@ -1833,7 +1834,7 @@ The next hour passes in tense preparation.
     Nyx feels it. You see her glance that direction repeatedly. Drawing power. Drawing comfort.
 @endif
 
-The city outside pulses with life—distant sirens, the hum of traffic, neon bleeding through {session.weather == "rain" ? "rain" : "fog"}. Millions of people unaware that tonight, shadow runners will strike at a megacorp's heart. That spirits will break free. That everything is about to change.
+The city outside pulses with life—distant sirens, the hum of traffic, neon bleeding through {session.weather == "rain" ? "rain" | "fog"}. Millions of people unaware that tonight, shadow runners will strike at a megacorp's heart. That spirits will break free. That everything is about to change.
 
 **Time passes:**
 
@@ -2362,7 +2363,7 @@ Buying time. Ten seconds.
 
 She draws a second card. The advice. The choice.
 
-**{session.cards_crisis[1].name}{session.cards_crisis[1].reversed ? " (Reversed)" : ""}**
+**{session.cards_crisis[1].name}{session.cards_crisis[1].reversed ? " (Reversed)" | ""}**
 
 @if session.cards_crisis[1].name == "Justice":
     The figure on the throne. Sword and scales. Truth and consequence.
@@ -2645,7 +2646,7 @@ Matsuda continues his interrogation. Questions. Pressure. Suspicion.
 
 Nyx's second card lies on her desk. The advice. The choice.
 
-**{session.crisis_advice_card}{session.crisis_advice_reversed ? " (Reversed)" : ""}**
+**{session.crisis_advice_card}{session.crisis_advice_reversed ? " (Reversed)" | ""}**
 
 She looks at you. Silent plea. *What do I do?*
 
@@ -3135,7 +3136,7 @@ Relief floods her face. "You're okay?"
 *Cipher: "Beautiful chaos. Digital and spiritual. Kitsune's systems are melting. They won't be able to investigate properly for days."*
 
 @if nyx.shamanic_awakening >= 4:
-    Nyx can feel them. The freed spirits. Flooding through Seattle's Matrix. Dancing in rain. {session.weather == "rain": Singing in the downpour. | Whispering through fog.}
+    Nyx can feel them. The freed spirits. Flooding through Seattle's Matrix. Dancing in rain. {session.weather == "rain" ? Singing in the downpour. | Whispering through fog.}
 
     The anito on her shrine pulse with joy. *Victory. Freedom. Justice.*
 @endif
@@ -3217,7 +3218,7 @@ else:
 
 *Razor: "Nyx. We need to know. What's your play?"*
 
-She stands. Walks to the window. Twenty-three floors below, Seattle glows through {session.weather == "rain" ? "rain" : "fog"}. The city alive with freed spirits. With chaos. With possibility.
+She stands. Walks to the window. Twenty-three floors below, Seattle glows through {session.weather == "rain" ? "rain" | "fog"}. The city alive with freed spirits. With chaos. With possibility.
 
 Behind her—the shrine. Lola watching. The anito waiting.
 

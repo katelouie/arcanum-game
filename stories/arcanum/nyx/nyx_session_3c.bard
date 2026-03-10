@@ -676,7 +676,7 @@ She sobs. Once. Hard. "I don't want to let her go."
 
 Nyx looks up. Confused. Hopeful? "Compromise can die?"
 
-"Yes. And it DID. {session.weeks_since_session_two == 3 ? 'Three weeks ago' : 'Four weeks ago'}, you tried to find a middle path. Work for Kitsune but feel guilty about it. Know about the imprisoned spirits but ignore them. Stay safe but feel bad. Have your paycheck AND your conscience."
+"Yes. And it DID. {session.weeks_since_session_two == 3 ? 'Three weeks ago' | 'Four weeks ago'}, you tried to find a middle path. Work for Kitsune but feel guilty about it. Know about the imprisoned spirits but ignore them. Stay safe but feel bad. Have your paycheck AND your conscience."
 
 You shake your head.
 
@@ -861,16 +861,16 @@ You flip the card.
 
 **{session.cards[1].name}**
 
-@if {session.cards[1].name} == "The Hanged Man":
+@if session.cards[1].name == "The Hanged Man":
     A figure suspended upside-down. Waiting. Surrendering. Unable to act. Sacrifice. Perspective shift.
 
-@elif {session.cards[1].name} == "Eight of Swords":
+@elif session.cards[1].name == "Eight of Swords":
     A blindfolded woman. Bound. Surrounded by eight swords. But the bonds are loose. Mental prison. Paralysis.
 
-@elif {session.cards[1].name} == "Nine of Swords":
+@elif session.cards[1].name == "Nine of Swords":
     A figure sitting up in bed. Hands covering face. Nine swords on the wall. Nightmare. Anxiety. Terror manifest.
 
-@elif {session.cards[1].name} == "Judgment":
+@elif session.cards[1].name == "Judgement":
     The angel trumpet. The dead rising. Being CALLED. Reckoning. The moment of truth. No more delay.
 @endif
 
@@ -2011,7 +2011,7 @@ Thunder rolls. Closer. The storm's peak.
 
 You flip the card.
 
-**{session.cards[4].name}{session.cards[4].reversed ? " (Reversed)" : ""}**
+**{session.cards[4].name}{session.cards[4].reversed ? " (Reversed)" | ""}**
 
 @if session.cards[4].name == "Justice":
     The figure on the throne. Sword and scales. Truth. Consequence. Balance. Law.

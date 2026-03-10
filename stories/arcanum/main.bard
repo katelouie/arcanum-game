@@ -1,6 +1,6 @@
 from game_logic.artifacts import get_artifact
 from game_logic.tarot import Deck, Reading
-from game_logic.characters import Client, Reader, Nyx
+from game_logic.characters import Chen, Client, Reader, Nyx, BlackthornManor, TheKind
 from game_logic.models import Session, create_session
 
 import random
@@ -13,6 +13,7 @@ import random
 @include chen/chen_session_2.bard
 @include chen/chen_session_3a.bard
 @include chen/chen_session_3b.bard
+@include chen/chen_session_3c.bard
 # Nyx
 @include nyx/nyx.bard
 @include nyx/nyx_session_1.bard
@@ -20,6 +21,14 @@ import random
 @include nyx/nyx_session_3a.bard
 @include nyx/nyx_session_3b.bard
 @include nyx/nyx_session_3c.bard
+# Blackthorn
+@include blackthorn/blackthorn.bard
+@include blackthorn/blackthorn_session1.bard
+@include blackthorn/blackthorn_session2.bard
+@include blackthorn/blackthorn_session3.bard
+# The Kind
+@include kind/kind.bard
+@include kind/kind_session1.bard
 
 @metadata
   title: Arcanum
@@ -35,7 +44,7 @@ import random
 reader = Reader("Reader") # Will get name input in prologue
 clients = []  # Use list instead of set for unhashable objects
 # Starting Clients
-chen = Client(name="Margaret Chen", age=68, total_sessions=3)
+chen = Chen(name="Margaret Chen", age=68, total_sessions=3)
 david = Client(name="David Morrison", age=34, total_sessions=3)
 alex = Client(name="Alex", age=28, total_sessions=3)
 sarah = Client(name="Sarah Kim", age=30, total_sessions=3)
@@ -44,18 +53,26 @@ maya = Client(name="Maya Chen", age=24, total_sessions=3)
 eleanor = Client(name="Eleanor Blackwood", age=50, total_sessions=3)
 # Special Clients
 nyx = Nyx(name="Nyx", age=28, total_sessions=3, flavor_text="???")
+blackthorn = BlackthornManor(name="Blackthorn Manor", age=100, total_sessions=3, flavor_text="???")
+the_kind = TheKind(name="The Kind", age=50, total_sessions=3, flavor_text="???")
 @endpy
 -> Start
 
 :: ReaderTable ^UI:DASHBOARD
 @py:
-if nyx not in clients:
+if nyx not in clients and chen.sessions_completed == 3:
     clients.append(nyx)
+if blackthorn not in clients and nyx.sessions_completed == 3:
+    clients.append(blackthorn)
+if the_kind not in clients and reader.sessions_completed >= 3 and reader.empathy >= 2:
+    clients.append(the_kind)
 @endpy
 *Your sanctuary. Candles flicker. Cards wait.*
 
 # Special
 + {nyx in clients} [Nyx] -> Nyx ^CLIENT:SPECIAL
++ {blackthorn in clients} [Blackthorn Manor] -> Blackthorn ^CLIENT:SPECIAL
++ {the_kind in clients} [The Kind] -> TheKind.Router ^CLIENT:SPECIAL
 # Starter
 + {chen in clients} [Margaret Chen] -> Chen ^CLIENT
 # + {david in clients} [David Morrison] -> David ^CLIENT

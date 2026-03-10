@@ -1607,7 +1607,7 @@ The crew's energy SURGES. No more waiting. ACTION.
 
 @py:
 # If heist delayed, that's a MAJOR flag
-if session.get('heist_delayed'):
+if getattr(session, 'heist_delayed'):
     session.heist_happens_tonight = False
 else:
     session.heist_happens_tonight = True
@@ -1615,7 +1615,7 @@ else:
 
 The crew processes the second card.
 
-@if session.get('heist_delayed'):
+@if getattr(session, 'heist_delayed'):
     Nyx looks at the holo-map. "We need more intel. Better data. THEN we strike."
 
     Cipher: "I'll run deep Matrix probes tonight. Risk be damned."
@@ -1623,7 +1623,7 @@ The crew processes the second card.
     Whisper: "All drones deployed for surveillance. Rotating shifts."
 
     Razor grumbles but accepts. "Fine. We WAIT. But not for LONG."
-@elif session.get('immediate_action'):
+@elif getattr(session, 'immediate_action'):
     Nyx looks at her crew. "We move in TWO HOURS. Gear up. Final checks. Then we HIT them."
 
     Razor: "Now THAT'S what I like to hear."
@@ -1631,22 +1631,22 @@ The crew processes the second card.
     Whisper: "Two hours. Okay. I can be ready."
 
     Cipher: "Compressed timeline. Acceptable."
-@elif session.get('magic_primary'):
+@elif getattr(session, 'magic_primary'):
     Nyx's cybereyes flicker with spirit-light. "My shamanic power LEADS. You're my support."
 
     The crew nods. Different hierarchy now. MAGIC first, tech second.
 
-@elif session.get('lethal_authorized'):
+@elif getattr(session, 'lethal_authorized'):
     The crew's energy is DARK. Violent.
 
     Razor: "We're going in HARD. No mercy."
 
     Nyx: "Kitsune gets what they deserve."
-@elif session.get('compassionate_approach'):
+@elif getattr(session, 'compassionate_approach'):
     Whisper smiles softly. "We're liberators. Not conquerors."
 
     Nyx: "Gentle with the spirits. Professional with everyone else."
-@elif session.get('unshakeable_purpose'):
+@elif getattr(session, 'unshakeable_purpose'):
     The crew stands straighter. CERTAIN.
 
     Nyx: "We KNOW we'll succeed. Not hope. KNOW."
@@ -2232,13 +2232,13 @@ Nyx looks at her crew. Then at the holo-map of Kitsune Dynamics.
 
 Then at you.
 
-@if session.get('heist_delayed'):
+@if getattr(session, 'heist_delayed'):
     "We scout first. Get better intel. Then we strike. Give us a few days."
 
     ~ session.time_until_heist = "days"
 
     + [You wish them luck and prepare to leave] -> Nyx.Session3A.Briefing_Farewell_Delayed
-@elif session.get('immediate_action'):
+@elif getattr(session, 'immediate_action'):
     "We move in two hours. This is happening tonight."
 
     ~ session.time_until_heist = "hours"
@@ -2346,7 +2346,7 @@ Nyx walks you to the stairs. Her hand on your arm. Grip tight.
 
 You descend the stairs. Fast. The crew needs space to gear up.
 
-Out into the {session.weather == "rain" ? rain : fog}. The city feels electric. Tense. Waiting.
+Out into the {session.weather == "rain" ? rain | fog}. The city feels electric. Tense. Waiting.
 
 @if session.outcome_tone == "tragic" or session.outcome_tone == "narrow_escape":
     Your stomach churns. Two hours isn't enough prep time. It CAN'T be enough.
@@ -2467,7 +2467,7 @@ else:
     nyx.preparation = "solid"
 
 # Check if spirits are helping (from briefing)
-if session.get('spirit_guidance'):
+if getattr(session, 'spirit_guidance'):
     nyx.spirits_active = True
 else:
     nyx.spirits_active = False
@@ -3003,7 +3003,7 @@ The crew laughs—relieved, slightly embarrassed, but MOVING.
 ~ session.quality_score += 2
 ~ session.false_alarm = True
 ~ session.crew_morale += 1
-~ nyx.confidence += 1
+~ nyx.confidence = 1
 
 + [Continue to the server core] -> Nyx.Session3A.Phase2_Crisis_Resolved
 
@@ -3121,9 +3121,9 @@ Then Cipher laughs. "That was BEAUTIFUL."
 ~ session.quality_score += 4  // Perfect execution
 ~ session.flawless_infiltration = True
 ~ session.crew_morale += 3
-~ razor.trust += 2
-~ cipher.trust += 2
-~ whisper.trust += 2
+~ razor["trust"] += 2
+~ cipher["trust"] += 2
+~ whisper["trust"] += 2
 ~ nyx.confidence += 2
 
 + [Continue to the server core] -> Nyx.Session3A.Phase2_Crisis_Resolved
@@ -3185,7 +3185,7 @@ The truth has set them free.
 ~ session.facility_cooperating = True
 ~ nyx.shamanic_awakening += 2  // Massive spiritual breakthrough
 ~ session.crew_morale += 3
-~ whisper.trust += 3  // She's in LOVE with this
+~ whisper["trust"] += 3  // She's in LOVE with this
 ~ session.spirits_fully_active = True
 
 + [Continue to the server core] -> Nyx.Session3A.Phase2_Crisis_Resolved
@@ -3214,13 +3214,13 @@ session.phase = "core_decision"
 
 The path ahead is clear.
 
-@if session.get('stealth_maintained'):
+@if getattr(session, 'stealth_maintained'):
     They move like ghosts. Silent. Invisible. Kitsune never knew they were here.
-@elif session.get('perfect_infiltration'):
+@elif getattr(session, 'perfect_infiltration'):
     They walk through the facility like they own it. Because for now, they do.
-@elif session.get('kitsune_infiltrated'):
+@elif getattr(session, 'kitsune_infiltrated'):
     Security systems think they're authorized. Drones patrol for them. The facility has been turned against itself.
-@elif session.get('righteous_truth'):
+@elif getattr(session, 'righteous_truth'):
     The building itself seems to breathe easier. As if it knows what's coming. Liberation.
 @else:
     They move carefully. Alert. But the crisis is past. The way is open.
@@ -3240,7 +3240,7 @@ Cipher approaches. Doesn't hack it.
 
 Just... asks.
 
-@if session.get('facility_cooperating'):
+@if getattr(session, 'facility_cooperating'):
     The door recognizes truth. Opens. Welcomes them.
 @else:
     Cipher's stolen credentials work. The door thinks they're authorized administrators.
@@ -3270,7 +3270,7 @@ Not through speakers. Not through the air.
 
 Through *reality itself.*
 
-@if nyx.shamanic_awakening >= 4 or session.get('spirits_fully_active'):
+@if nyx.shamanic_awakening >= 4 or getattr(session, 'spirits_fully_active'):
     Nyx sees them immediately.
 
     Thousands of spirits. Compressed into server cores. Faces pressed against digital glass. Hands clawing at code-barriers. Mouths open in silent, eternal agony.
@@ -3428,7 +3428,7 @@ She draws the first card.
 
 **Position 1: The Risk**
 
-**{session.cards_final[0].name}{session.cards_final[0].reversed ? " (Reversed)" : ""}**
+**{session.cards_final[0].name}{session.cards_final[0].reversed ? " (Reversed)" | ""}**
 
 @if session.cards_final[0].name == "The Tower":
     A tower struck by lightning. People falling. Structure collapsing. Chaos and destruction. Upheaval. Everything falling apart.
@@ -3470,11 +3470,11 @@ The spirits scream.
 
 The clock ticks.
 
-@if session.cards_final[0] == "The Tower":
+@if session.cards_final[0].name == "The Tower":
     + [Interpret the spread] -> Nyx.Session3A.Phase3_Tower_Interpret
-@elif session.cards_final[0] == "Five of Pentacles":
+@elif session.cards_final[0].name == "Five of Pentacles":
     + [Interpret the spread] -> Nyx.Session3A.Phase3_FivePent_Interpret
-@elif session.cards_final[0] == "Ten of Swords":
+@elif session.cards_final[0].name == "Ten of Swords":
     @if not session.cards_final[0].reversed:
         + [Interpret the spread] -> Nyx.Session3A.Phase3_TenSwords_Upright_Interpret
     @else:
@@ -4767,7 +4767,7 @@ Nyx gathers the cards. Hands them back to you with reverence.
 @if session.decision == "free_all":
     She turns to her crew. "We free them all. Every single spirit. No exceptions. No compromises."
 
-    @if session.get('sacrifice_expected'):
+    @if getattr(session, 'sacrifice_expected'):
         The crew goes quiet. They knew this might be the answer. They're ready.
 
         Razor: "All of them. Whatever it costs."
@@ -4775,7 +4775,7 @@ Nyx gathers the cards. Hands them back to you with reverence.
         Whisper: "We didn't come this far to do half-measures."
 
         Cipher: "Total liberation. Full commitment. I'm in."
-    @elif session.get('miracle_escape'):
+    @elif getattr(session, 'miracle_escape'):
         The crew lights up. They can DO this. All of them. No one dies.
 
         Razor: "Everyone survives? Then let's do this thing."
@@ -4872,7 +4872,7 @@ Nyx gathers the cards. Hands them back to you with reverence.
 @elif session.decision == "data_only":
     She turns to her crew. "We take the data. The evidence. We don't free them today."
 
-    @if session.get('strategic_withdrawal'):
+    @if getattr(session, 'strategic_withdrawal'):
         The crew exhales with relief. They live. They fight another day.
 
         Razor: "Smart. We live to fight properly."
@@ -4882,7 +4882,7 @@ Nyx gathers the cards. Hands them back to you with reverence.
         "We're coming back," Nyx promises. "With everything we need."
 
         Cipher: "Strategic retreat. Maximum future capability."
-    @elif session.get('avoid_death'):
+    @elif getattr(session, 'avoid_death'):
         The crew accepts. No one wants to die today.
 
         Razor: "We survive. That matters."
@@ -4956,7 +4956,7 @@ The facility's response is immediate.
 
     Automated voice: **"CONTAINMENT BREACH. ALL UNITS RESPOND. LETHAL FORCE AUTHORIZED."**
 
-    @if session.get('miracle_escape') or session.get('spirits_fully_active'):
+    @if getattr(session, 'miracle_escape') or getattr(session, 'spirits_fully_active'):
         But the spirits are HELPING. Confusing sensors. Misdirecting security. Creating paths.
 
         "They're protecting us," Nyx gasps. "They're showing us the way out."
@@ -5059,9 +5059,9 @@ else:  # data_only
     session.pursuit_intensity = "routine"
 
 # Special modifiers
-if session.get('spirits_fully_active') or session.get('miracle_escape'):
+if getattr(session, 'spirits_fully_active') or getattr(session, 'miracle_escape'):
     session.complications -= 1  # Spirits helping
-if session.get('kitsune_infiltrated'):
+if getattr(session, 'kitsune_infiltrated'):
     session.complications -= 1  # They think crew is authorized
 if session.briefing_quality == "excellent":
     session.complications -= 1  # Good planning pays off
@@ -5104,7 +5104,7 @@ They sprint back the way they came.
 
     Stairwell ahead. Up. Up. Toward the surface.
 
-    @if session.get('miracle_escape') or session.get('spirits_fully_active'):
+    @if getattr(session, 'miracle_escape') or getattr(session, 'spirits_fully_active'):
         The spirits clear the path. Doors unlock before they reach them. Guards stumble away, terrified by things only they can see.
 
         It's chaos—but somehow, the crew is PROTECTED within it.
@@ -5171,7 +5171,7 @@ They sprint back the way they came.
 
     Razor: "This is the easiest extraction I've ever done. Almost boring."
 
-    @if session.get('kitsune_infiltrated'):
+    @if getattr(session, 'kitsune_infiltrated'):
         They still register as authorized personnel. They WALK out. No running. No fighting. Just professional contractors finishing their shift.
 
         A guard nods to them. "Have a good night."
@@ -5207,7 +5207,7 @@ They reach the service entrance they came through.
 
     Kitsune security can barely track their own assets, let alone four shadow runners.
 
-    @if session.get('sacrifice_expected') and not session.get('miracle_escape'):
+    @if getattr(session, 'sacrifice_expected') and not getattr(session, 'miracle_escape'):
         "We need to split up," Razor shouts. "Draw fire. Someone has to—"
 
         "NO," Nyx interrupts. "We ALL make it. The cards promised."
@@ -5242,7 +5242,7 @@ They reach the service entrance they came through.
     They lose the pursuit in the industrial maze.
 
     ~ session.close_escape = True
-    ~ razor.status = "bruised"  # Minor injuries
+    ~ razor["status"] = "bruised"  # Minor injuries
 
 @elif session.decision == "free_some":
     They walk out calmly. Professional.
@@ -5566,16 +5566,16 @@ The credstick contains {session.total_payment} nuyen.
     "The reading gave us what we needed. Clarity. Direction. Purpose. Thank you."
 @endif
 
-~ reader.nuyen += session.total_payment
+~ reader.money += session.total_payment
 ~ reader.reputation += 2
 ~ reader.mystical_affinity += 2
 
 @if session.decision == "free_all":
-    ~ reader.reputation_shadowrunners += 3  # Legendary status
+    ~ reader.add_reputation(3)  # Legendary status
 @elif session.decision == "free_some":
-    ~ reader.reputation_shadowrunners += 2
+    ~ reader.add_reputation(2)
 @else:
-    ~ reader.reputation_shadowrunners += 1
+    ~ reader.add_reputation(1)
 @endif
 
 + [Accept the payment] -> Nyx.Session3A.Artifact
@@ -5594,7 +5594,7 @@ She reaches into her jacket. Pulls out something small.
 if session.decision == "free_all":
     if session.near_death:
         artifact_type = "razor_token"
-    elif session.get('spirits_fully_active'):
+    elif getattr(session, 'spirits_fully_active'):
         artifact_type = "spirit_core"
     else:
         artifact_type = "liberation_chip"
@@ -5617,7 +5617,6 @@ session.artifact_received = artifact_type
     *"Survivor's charm. Carried through impossible odds. Now it's yours."*
 
     ~ reader.artifacts.append("razor_lucky_token")
-    ~ reader.luck += 1
 
 @elif artifact_type == "spirit_core":
     A small data chip. But it glows faintly. Not with electricity. With something else.
@@ -5784,8 +5783,8 @@ else:
 
 # Update crew status
 for crew_member in ['razor', 'whisper', 'cipher']:
-    session.crew[crew_member].final_status = session.crew[crew_member].status
-    session.crew[crew_member].trust_final = session.crew[crew_member].trust
+    session.crew[crew_member]["final_status"] = session.crew[crew_member]["status"]
+    session.crew[crew_member]["trust_final"] = session.crew[crew_member]["trust"]
 
 # Record final reading quality
 nyx.session_three_quality = session.overall_quality
@@ -5819,7 +5818,7 @@ And you helped them do it.
     *Evidence acquired. Legal warfare imminent. Patient liberation coming.*
 @endif
 
-~ reader.consultations_completed += 1
+~ reader.sessions_completed += 1
 ~ reader.dream_sessions += 1
 ~ nyx.sessions_completed += 1
 

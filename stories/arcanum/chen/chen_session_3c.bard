@@ -341,8 +341,7 @@ Her voice strengthens.
 ~ chen.discussed_house_transformation = True
 ~ reader.empathy += 1
 
-+ ["That's powerful."]
-    -> Chen.Session3C.Why_Shes_Here
++ ["That's powerful."] -> Chen.Session3C.Why_Shes_Here
 
 :: Chen.Session3C.Reengaging_Community
 
@@ -357,8 +356,7 @@ She looks ashamed.
 ~ chen.discussed_community = True
 ~ chen.discussed_guilt = True
 
-+ ["And you're opening it now."]
-    -> Chen.Session3C.Why_Shes_Here
++ ["And you're opening it now."] -> Chen.Session3C.Why_Shes_Here
 
 :: Chen.Session3C.Why_Shes_Here
 
@@ -378,8 +376,7 @@ She leans forward.
 
 ~ session.offered_validation = True
 
-+ ["Let's ask the cards."]
-    -> Chen.Session3C.CardDraw
++ ["Let's ask the cards."] -> Chen.Session3C.CardDraw
 
 # ============================================================================
 # CARD DRAW
@@ -435,8 +432,7 @@ Margaret leans forward, studying it.
 
 "Tell me what you see."
 
-+ [Begin interpretation]
-    -> Chen.Session3C.InterpretationHub
++ [Begin interpretation] -> Chen.Session3C.InterpretationHub
 
 # ============================================================================
 # INTERPRETATION HUB
@@ -469,24 +465,19 @@ Margaret leans forward, studying it.
     Four staffs stand upright, a garland of flowers strung between them. In the background, people celebrate. This is HOME. Not just house - HOME. Foundation. Celebration. The place you return to and feel: yes, THIS is where I belong.
 @endif
 
-+ {reader.style == "intuitive"} ["This is the celebration card. Your house wants to be filled with life again."]
-    -> Chen.Session3C.FourWands_Intuitive_Good
++ {reader.style == "intuitive"} ["This is the celebration card. Your house wants to be filled with life again."] -> Chen.Session3C.FourWands_Intuitive_Good
 
-+ {reader.style == "analytical"} ["Four represents stability. Wands are passion and will. This is foundation built on conscious choice."]
-    -> Chen.Session3C.FourWands_Analytical_Good
++ {reader.style == "analytical"} ["Four represents stability. Wands are passion and will. This is foundation built on conscious choice."] -> Chen.Session3C.FourWands_Analytical_Good
 
-+ ["Home isn't just where you stay. It's where you LIVE. The house is ready to be yours again."]
-    -> Chen.Session3C.FourWands_Perceptive_Excellent
++ ["Home isn't just where you stay. It's where you LIVE. The house is ready to be yours again."] -> Chen.Session3C.FourWands_Perceptive_Excellent
 
-+ ["Four of Wands represents home and celebration."]
-    -> Chen.Session3C.FourWands_Generic_Bad
++ ["Four of Wands represents home and celebration."] -> Chen.Session3C.FourWands_Generic_Bad
 
-+ ["This card says your home is stable. You made the right choice to stay."]
-    -> Chen.Session3C.FourWands_Practical_Okay
++ ["This card says your home is stable. You made the right choice to stay."] -> Chen.Session3C.FourWands_Practical_Okay
 
 :: Chen.Session3C.FourWands_Intuitive_Good
 
-@py: session.interpretation_good += 1 @endpy
+~ session.interpretation_good += 1
 ~ reader.empathy += 1
 ~ chen.trust += 1
 
@@ -510,14 +501,12 @@ Margaret looks at the card intently.
     "But David wouldn't want that. He'd want laughter. He'd want Mrs. Nguyen over for dinner. He'd want the Lees playing mahjong. He'd want Maya bringing friends. The house wants to be ALIVE again."
 @endif
 
-+ ["What would celebration look like?"]
-    -> Chen.Session3C.FourWands_Celebration
-+ ["Who do you invite first?"]
-    -> Chen.Session3C.FourWands_WhoInvite
++ ["What would celebration look like?"] -> Chen.Session3C.FourWands_Celebration
++ ["Who do you invite first?"] -> Chen.Session3C.FourWands_WhoInvite
 
 :: Chen.Session3C.FourWands_Analytical_Good
 
-@py: session.interpretation_good += 1 @endpy
+~ session.interpretation_good += 1
 ~ reader.competence += 1
 ~ chen.trust += 1
 
@@ -539,12 +528,11 @@ Margaret nods, following the logic.
     "The Four of Wands disagrees. It says: home is where you build foundation. You've built forty years of foundation here. That's not weakness. That's ROOTS. And roots are strong."
 @endif
 
-+ ["How does she make the foundation celebrate?"]
-    -> Chen.Session3C.FourWands_Celebration
++ ["How does she make the foundation celebrate?"] -> Chen.Session3C.FourWands_Celebration
 
 :: Chen.Session3C.FourWands_Perceptive_Excellent
 
-@py: session.interpretation_good += 1 @endpy
+~ session.interpretation_good += 1
 ~ reader.insight += 2
 ~ chen.trust += 2
 
@@ -576,14 +564,12 @@ Margaret catches her breath. "Mine? Not ours?"
 
 ~ chen.discussed_house_transformation = True
 
-+ ["What does 'living' look like?"]
-    -> Chen.Session3C.FourWands_WhatLiving
-+ ["Who comes to the celebration?"]
-    -> Chen.Session3C.FourWands_WhoInvite
++ ["What does 'living' look like?"] -> Chen.Session3C.FourWands_WhatLiving
++ ["Who comes to the celebration?"] -> Chen.Session3C.FourWands_WhoInvite
 
 :: Chen.Session3C.FourWands_Practical_Okay
 
-@py: session.interpretation_okay += 1 @endpy
+~ session.interpretation_okay += 1
 ~ reader.competence += 1
 
 "This card says your home is stable. You made the right choice to stay."
@@ -598,12 +584,11 @@ Margaret nods slowly. "So staying is okay?"
 
 "That's reassuring."
 
-+ ["Let me synthesize what this means."]
-    -> Chen.Session3C.Synthesis
++ ["Let me synthesize what this means."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.FourWands_Generic_Bad
 
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 ~ chen.trust -= 1
 
 "Four of Wands represents home and celebration. So your home is good."
@@ -624,8 +609,7 @@ Margaret looks underwhelmed. "I know my house is structurally sound. That's not 
 
 The interpretation completely missed the nuance.
 
-+ ["Let me reconsider—"]
-    -> Chen.Session3C.Synthesis
++ ["Let me reconsider—"] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.FourWands_Celebration
 
@@ -652,8 +636,7 @@ Margaret thinks. "I don't know. I've forgotten."
 
 "All of that. Each one is celebration. Each one transforms the house from museum to home."
 
-+ ["That's the practice."]
-    -> Chen.Session3C.Synthesis
++ ["That's the practice."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.FourWands_WhoInvite
 
@@ -678,8 +661,7 @@ Margaret thinks. "I don't know. I've forgotten."
 
 "And the house fills with life again."
 
-+ ["That's the work."]
-    -> Chen.Session3C.Synthesis
++ ["That's the work."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.FourWands_WhatLiving
 
@@ -710,8 +692,7 @@ She pauses.
 
 "You're already doing it."
 
-+ ["That's what the card is validating."]
-    -> Chen.Session3C.Synthesis
++ ["That's what the card is validating."] -> Chen.Session3C.Synthesis
 
 # ============================================================================
 # TEN OF PENTACLES - INTERPRETATION
@@ -729,24 +710,19 @@ She pauses.
     An elder sits before an archway. Family surrounds them - children playing, dogs running. Pentacles arranged above like a tree of life. This is LEGACY. Not inheritance. LEGACY. What you pass forward through LIVING, not preserving.
 @endif
 
-+ {reader.style == "analytical"} ["Ten is completion. Pentacles are material legacy. This is about what you pass forward."]
-    -> Chen.Session3C.TenPentacles_Analytical_Good
++ {reader.style == "analytical"} ["Ten is completion. Pentacles are material legacy. This is about what you pass forward."] -> Chen.Session3C.TenPentacles_Analytical_Good
 
-+ ["Legacy isn't the house. It's the LIFE you live in the house."]
-    -> Chen.Session3C.TenPentacles_Perceptive_Excellent
++ ["Legacy isn't the house. It's the LIFE you live in the house."] -> Chen.Session3C.TenPentacles_Perceptive_Excellent
 
-+ {reader.style == "intuitive"} ["You're the elder now. The matriarch. What do you want to teach?"]
-    -> Chen.Session3C.TenPentacles_Intuitive_Excellent
++ {reader.style == "intuitive"} ["You're the elder now. The matriarch. What do you want to teach?"] -> Chen.Session3C.TenPentacles_Intuitive_Excellent
 
-+ ["This card is about family legacy and long-term security."]
-    -> Chen.Session3C.TenPentacles_Generic_Bad
++ ["This card is about family legacy and long-term security."] -> Chen.Session3C.TenPentacles_Generic_Bad
 
-+ ["Ten of Pentacles says you have strong roots. You don't need to move."]
-    -> Chen.Session3C.TenPentacles_Practical_Okay
++ ["Ten of Pentacles says you have strong roots. You don't need to move."] -> Chen.Session3C.TenPentacles_Practical_Okay
 
 :: Chen.Session3C.TenPentacles_Analytical_Good
 
-@py: session.interpretation_good += 1 @endpy
+~ session.interpretation_good += 1
 ~ reader.competence += 1
 ~ chen.trust += 1
 
@@ -770,12 +746,11 @@ Margaret leans forward, listening carefully.
 
 ~ chen.discussed_community = True
 
-+ ["What's the difference between legacy and preservation?"]
-    -> Chen.Session3C.TenPentacles_Legacy_vs_Preservation
++ ["What's the difference between legacy and preservation?"] -> Chen.Session3C.TenPentacles_Legacy_vs_Preservation
 
 :: Chen.Session3C.TenPentacles_Perceptive_Excellent
 
-@py: session.interpretation_good += 1 @endpy
+~ session.interpretation_good += 1
 ~ reader.insight += 2
 ~ chen.trust += 2
 
@@ -802,12 +777,11 @@ Margaret goes very still. "Say that again."
 ~ chen.discussed_blooming = True
 ~ chen.discussed_community = True
 
-+ ["What does that life look like?"]
-    -> Chen.Session3C.TenPentacles_What_Life_Looks_Like
++ ["What does that life look like?"] -> Chen.Session3C.TenPentacles_What_Life_Looks_Like
 
 :: Chen.Session3C.TenPentacles_Intuitive_Excellent
 
-@py: session.interpretation_good += 1 @endpy
+~ session.interpretation_good += 1
 ~ reader.empathy += 2
 ~ chen.trust += 2
 
@@ -834,12 +808,11 @@ Margaret's face transforms. "I'm the elder?"
 ~ chen.discussed_community = True
 ~ chen.discussed_blooming = True
 
-+ ["Tell me more about being the elder."]
-    -> Chen.Session3C.TenPentacles_Being_Elder
++ ["Tell me more about being the elder."] -> Chen.Session3C.TenPentacles_Being_Elder
 
 :: Chen.Session3C.TenPentacles_Practical_Okay
 
-@py: session.interpretation_okay += 1 @endpy
+~ session.interpretation_okay += 1
 ~ reader.competence += 1
 
 "Ten of Pentacles says you have strong roots. Deep roots. You don't need to move because your foundation is here."
@@ -854,12 +827,11 @@ Margaret's face transforms. "I'm the elder?"
 
 Margaret nods. "That's comforting."
 
-+ ["That's the message."]
-    -> Chen.Session3C.Synthesis
++ ["That's the message."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.TenPentacles_Generic_Bad
 
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 ~ chen.trust -= 1
 
 "This card is about family legacy and long-term security. So your family and finances are stable."
@@ -878,8 +850,7 @@ Margaret looks frustrated. "I know I'm financially secure. That's not the issue.
 
 The interpretation didn't go deep enough.
 
-+ ["Let me look at it differently—"]
-    -> Chen.Session3C.Synthesis
++ ["Let me look at it differently—"] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.TenPentacles_Legacy_vs_Preservation
 
@@ -906,8 +877,7 @@ Margaret nods slowly.
 
 "I understand now."
 
-+ ["Good. That's the work."]
-    -> Chen.Session3C.Synthesis
++ ["Good. That's the work."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.TenPentacles_What_Life_Looks_Like
 
@@ -936,8 +906,7 @@ Margaret thinks, making mental lists.
 
 "You're already doing it."
 
-+ ["That's the validation you needed."]
-    -> Chen.Session3C.Synthesis
++ ["That's the validation you needed."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.TenPentacles_Being_Elder
 
@@ -962,8 +931,7 @@ Margaret nods. She knows this.
 
 "Then be it. Teach Cantonese. Invite people over. Share your knowledge. Share your life. That's elder work."
 
-+ ["That's the path forward."]
-    -> Chen.Session3C.Synthesis
++ ["That's the path forward."] -> Chen.Session3C.Synthesis
 
 # ============================================================================
 # THE EMPRESS - INTERPRETATION
@@ -981,24 +949,19 @@ Margaret nods. She knows this.
     A figure sits in abundant garden, surrounded by wheat and flowing water. Crown of stars. Pregnant belly. This is FERTILITY. Not just biological - creative, emotional, spiritual. The power to make things GROW. To nurture. To bloom.
 @endif
 
-+ {reader.style == "intuitive"} ["This is your card, Margaret. The gardener. The nurturer. The one who makes things grow."]
-    -> Chen.Session3C.Empress_Intuitive_Excellent
++ {reader.style == "intuitive"} ["This is your card, Margaret. The gardener. The nurturer. The one who makes things grow."] -> Chen.Session3C.Empress_Intuitive_Excellent
 
-+ {reader.style == "storyteller"} ["The Empress says: you're not the curator. You're the gardener. Gardens require change."]
-    -> Chen.Session3C.Empress_Storyteller_Excellent
++ {reader.style == "storyteller"} ["The Empress says: you're not the curator. You're the gardener. Gardens require change."] -> Chen.Session3C.Empress_Storyteller_Excellent
 
-+ ["You planted osmanthus in the dead zone. That's Empress energy. What else wants to grow?"]
-    -> Chen.Session3C.Empress_Perceptive_Excellent
++ ["You planted osmanthus in the dead zone. That's Empress energy. What else wants to grow?"] -> Chen.Session3C.Empress_Perceptive_Excellent
 
-+ ["The Empress represents fertility and abundance in all forms."]
-    -> Chen.Session3C.Empress_Generic_Bad
++ ["The Empress represents fertility and abundance in all forms."] -> Chen.Session3C.Empress_Generic_Bad
 
-+ ["This card is about nurturing and creativity. You should nurture your garden."]
-    -> Chen.Session3C.Empress_Practical_Okay
++ ["This card is about nurturing and creativity. You should nurture your garden."] -> Chen.Session3C.Empress_Practical_Okay
 
 :: Chen.Session3C.Empress_Intuitive_Excellent
 
-@py: session.interpretation_good += 1 @endpy
+~ session.interpretation_good += 1
 ~ reader.empathy += 2
 ~ chen.trust += 2
 
@@ -1025,14 +988,12 @@ Margaret looks at the Empress, then at her dirt-stained hands.
 ~ chen.discussed_garden = True
 ~ chen.discussed_blooming = True
 
-+ ["What else wants to grow in your garden?"]
-    -> Chen.Session3C.Empress_What_Else_Grows
-+ ["How do you nurture growth?"]
-    -> Chen.Session3C.Empress_How_Nurture
++ ["What else wants to grow in your garden?"] -> Chen.Session3C.Empress_What_Else_Grows
++ ["How do you nurture growth?"] -> Chen.Session3C.Empress_How_Nurture
 
 :: Chen.Session3C.Empress_Storyteller_Excellent
 
-@py: session.interpretation_good += 1 @endpy
+~ session.interpretation_good += 1
 ~ reader.empathy += 2
 ~ chen.trust += 2
 
@@ -1057,12 +1018,11 @@ Margaret leans forward.
 ~ chen.discussed_garden = True
 ~ chen.discussed_house_transformation = True
 
-+ ["What changes in your garden?"]
-    -> Chen.Session3C.Empress_Garden_Changes
++ ["What changes in your garden?"] -> Chen.Session3C.Empress_Garden_Changes
 
 :: Chen.Session3C.Empress_Perceptive_Excellent
 
-@py: session.interpretation_good += 1 @endpy
+~ session.interpretation_good += 1
 ~ reader.insight += 2
 ~ chen.trust += 2
 
@@ -1089,12 +1049,11 @@ Margaret catches her breath. "What else wants to grow?"
 ~ chen.discussed_blooming = True
 ~ chen.discussed_house_transformation = True
 
-+ ["Tell me what wants to be born."]
-    -> Chen.Session3C.Empress_What_Births
++ ["Tell me what wants to be born."] -> Chen.Session3C.Empress_What_Births
 
 :: Chen.Session3C.Empress_Practical_Okay
 
-@py: session.interpretation_okay += 1 @endpy
+~ session.interpretation_okay += 1
 ~ reader.competence += 1
 
 "This card is about nurturing and creativity. You should nurture your garden and be creative in your home."
@@ -1109,12 +1068,11 @@ Margaret nods. "Like planting the osmanthus?"
 
 "I can do that."
 
-+ ["That's the guidance."]
-    -> Chen.Session3C.Synthesis
++ ["That's the guidance."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.Empress_Generic_Bad
 
-@py: session.interpretation_bad += 1 @endpy
+~ session.interpretation_bad += 1
 ~ chen.trust -= 1
 
 "The Empress represents fertility and abundance in all forms. So you're in a fertile period."
@@ -1133,8 +1091,7 @@ Margaret looks confused. "Fertile period? I'm sixty-eight."
 
 The interpretation was too vague.
 
-+ ["Let me reconsider—"]
-    -> Chen.Session3C.Synthesis
++ ["Let me reconsider—"] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.Empress_What_Else_Grows
 
@@ -1172,8 +1129,7 @@ She looks up.
 
 "Good. Keep feeling it. Keep growing."
 
-+ ["That's the work."]
-    -> Chen.Session3C.Synthesis
++ ["That's the work."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.Empress_How_Nurture
 
@@ -1204,8 +1160,7 @@ She's quiet.
 
 "I can do that."
 
-+ ["That's Empress energy."]
-    -> Chen.Session3C.Synthesis
++ ["That's Empress energy."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.Empress_Garden_Changes
 
@@ -1235,8 +1190,7 @@ Margaret smiles - real, alive smile.
 
 "Gardens are supposed to be messy. That's how you know they're alive."
 
-+ ["That's the work."]
-    -> Chen.Session3C.Synthesis
++ ["That's the work."] -> Chen.Session3C.Synthesis
 
 :: Chen.Session3C.Empress_What_Births
 
@@ -1266,8 +1220,7 @@ Margaret is crying. "I'm ready."
 
 "Then birth it. One day at a time. One plant. One dinner. One mahjong night. One lesson. Birth yourself new."
 
-+ ["That's the work."]
-    -> Chen.Session3C.Synthesis
++ ["That's the work."] -> Chen.Session3C.Synthesis
 
 # ============================================================================
 # SYNTHESIS
@@ -1402,8 +1355,7 @@ One card. One path. One validation.
     ~ chen.clarity = 4
 @endif
 
-+ [(The reading is complete)]
-    -> Chen.Session3C.Payment
++ [(The reading is complete)] -> Chen.Session3C.Payment
 
 # ============================================================================
 # PAYMENT & GIFT
@@ -1467,8 +1419,7 @@ Margaret stands, gathering her things.
     "Here's forty." Polite but not deeply moved.
 @endif
 
-+ [Walk her to the door]
-    -> Chen.Session3C.Goodbye
++ [Walk her to the door] -> Chen.Session3C.Goodbye
 
 # ============================================================================
 # GOODBYE
@@ -1560,8 +1511,7 @@ You walk Margaret to the door.
     @endpy
 @endif
 
-+ [Close the door]
-    -> Chen.Session3C.SessionComplete
++ [Close the door] -> Chen.Session3C.SessionComplete
 
 # ============================================================================
 # SESSION COMPLETE
@@ -1670,8 +1620,7 @@ Outside, spring afternoon. Everything blooming. Including Margaret.
 
 ---
 
-+ [Return to the Reader's Table]
-    -> ReaderTable
++ [Return to the Reader's Table] -> ReaderTable
 
 # ============================================================================
 # END OF CHEN SESSION 3C

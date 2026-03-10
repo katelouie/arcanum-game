@@ -42,6 +42,8 @@ class Reader:
     # Progression flags
     has_shop: bool = False  # Rented permanent reading space
     advanced_spreads_unlocked: bool = False
+    self_doubt: bool = False  # Set by compromised dream sessions
+    brought_tea_at_arrival: bool = False  # Session-specific hospitality flag
 
     # Achievements collection
     achievements = set()
@@ -563,21 +565,47 @@ class Chen(Client):
     _comfort: int = 4  # Starts slightly guarded (4/10)
     _clarity: int = 0  # Starts confused (0/10)
 
-    # Conversation flags
+    # === CONVERSATION FLAGS (Session 1) ===
     discussed_grief: bool = False
     discussed_culture: bool = False
     discussed_guilt: bool = False
     discussed_practical: bool = False
+
+    # === CONVERSATION FLAGS (Session 2) ===
     discussed_fear: bool = False
     discussed_house: bool = False
     discussed_daughter: bool = False
     mentioned_david_name: bool = False
 
-    # Session outcome
+    # === CONVERSATION FLAGS (Session 3A) ===
+    discussed_autonomy: bool = False
+    discussed_david_liu: bool = False
+    discussed_mrs_wong: bool = False
+
+    # === CONVERSATION FLAGS (Session 3B) ===
+    discussed_emily: bool = False
+    discussed_naming_ceremony: bool = False
+    discussed_house_trap: bool = False
+    discussed_matriarch: bool = False
+
+    # === CONVERSATION FLAGS (Session 3C) ===
+    discussed_maya: bool = False
+    discussed_garden: bool = False
+    discussed_community: bool = False
+    discussed_house_transformation: bool = False
+    discussed_blooming: bool = False
+
+    # === SESSION OUTCOME ===
     will_return: bool = False
     gave_gift: bool = False
+    took_action: bool = False
+    feeling_overwhelmed: bool = False
+    session_two_available: bool = False
+    session_three_unlocked: bool = False
+    next_session_date: str = ""
+    session_three_path: str = ""
 
-    # Session tracking
+    # === SESSION TRACKING ===
     session_one_quality: str = ""
     session_one_cards: list[Card] = field(default_factory=list)
     session_two_quality: str = ""
@@ -636,3 +664,410 @@ class Chen(Client):
             self.session_three_path = "acceptance"
 
         return self.session_three_path
+
+
+@dataclass
+class BlackthornManor(Client):
+    """
+    Blackthorn Manor — Gothic dream scenario client.
+
+    Unlike other clients, the "client" is the house itself. The NPCs inside
+    are tracked as relationship stats on this object. The protagonist is
+    Miss [Name] of Bath — the dream assigns this identity.
+
+    CORE TENSION: You're the only mundane person in a house full of Gothic
+    tropes that turn out to be REAL. Everyone thinks YOU'RE the mystical one.
+    You learned tarot from a BOOK.
+    """
+
+    # Override Client defaults — the house starts neutral
+    _trust: int = 50
+    _comfort: int = 40
+    _openness: int = 0
+
+    # === DREAM IDENTITY ===
+    player_name: str = "Amelia"
+
+    # === CORE TRACKING ===
+    _groundedness: int = 10  # 0-15: How well she stays "from Bath"
+    _composure: int = 10  # 0-15: Emotional steadiness
+    _house_influence: int = 0  # 0-10: How much the house is "noticing" her
+    _gothic_persona: int = 0  # 0-10: How much she's "playing the part"
+
+    # === NPC RELATIONSHIPS ===
+    _lady_blackthorn_opinion: int = 5  # 0-10: Starts impressed (you showed up)
+    _lord_ashford_trust: int = 0  # 0-10: Neutral, distracted
+    _arabella_connection: int = 0  # 0-10: Builds fast if you listen
+    _blackwood_respect: int = 0  # 0-10: Hard to earn, easy to lose
+    _ravencroft_fixation: int = 0  # 0-10: WILL increase whether you want it to or not
+    _heathsniff_affection: int = 0  # 0-10: The dog's opinion matters
+
+    # === SERVANT RELATIONSHIPS ===
+    _servant_trust: int = 3  # 0-10: General servant rapport
+    _winters_approval: int = 3  # 0-10: She's watching, cautiously hopeful
+    _thomas_friendliness: int = 5  # 0-10: Naturally friendly
+    _chen_respect: int = 2  # 0-10: You have to earn it
+
+    # === SUPERNATURAL TRACKING ===
+    supernatural_encounters: int = 0
+    things_rationalized: int = 0
+    ghost_encountered: bool = False
+    cards_glowed: bool = False
+
+    # === INTERPRETATION QUALITY (resets per session) ===
+    interpretation_quality: dict = field(
+        default_factory=lambda: {
+            "grounded": 0,
+            "diplomatic": 0,
+            "gothic": 0,
+            "panicked": 0,
+        }
+    )
+
+    # === PLOT FLAGS ===
+    seance_completed: bool = False
+    money_location_revealed: bool = False
+    ravencroft_encountered_hallway: bool = False
+    winters_rescue: bool = False
+    arabella_confession_heard: bool = False
+
+    # === CROSS-SESSION FLAGS (Session 2 → 3) ===
+    ashford_free: bool = False
+    ravencroft_real_moment: bool = False
+    arabella_warned: bool = False
+
+    # === SESSION RESULTS (persist across sessions) ===
+    session_grade: str = ""
+    dominant_style: str = ""
+
+    # === DINNER TRACKING ===
+    dinner_survey_order: list = field(default_factory=list)
+
+    # === BLEED-THROUGH OBJECTS (dream residue in waking world) ===
+    bleed_objects: list = field(default_factory=list)
+
+    # === GROUNDEDNESS (0-15) ===
+
+    @property
+    def groundedness(self) -> int:
+        return self._groundedness
+
+    @groundedness.setter
+    def groundedness(self, value: int):
+        self._groundedness = max(0, min(15, value))
+
+    def add_groundedness(self, amount: int):
+        old_value = self.groundedness
+        self.groundedness += amount
+        if old_value >= 8 > self.groundedness:
+            self.discuss_topic("identity_shaken")
+
+    # === COMPOSURE (0-15) ===
+
+    @property
+    def composure(self) -> int:
+        return self._composure
+
+    @composure.setter
+    def composure(self, value: int):
+        self._composure = max(0, min(15, value))
+
+    def add_composure(self, amount: int):
+        self.composure += amount
+
+    # === HOUSE INFLUENCE (0-10) ===
+
+    @property
+    def house_influence(self) -> int:
+        return self._house_influence
+
+    @house_influence.setter
+    def house_influence(self, value: int):
+        self._house_influence = max(0, min(10, value))
+
+    def add_house_influence(self, amount: int):
+        old_value = self.house_influence
+        self.house_influence += amount
+        if old_value < 5 <= self.house_influence:
+            self.discuss_topic("house_noticed")
+        if old_value < 8 <= self.house_influence:
+            self.discuss_topic("house_consuming")
+
+    # === GOTHIC PERSONA (0-10) ===
+
+    @property
+    def gothic_persona(self) -> int:
+        return self._gothic_persona
+
+    @gothic_persona.setter
+    def gothic_persona(self, value: int):
+        self._gothic_persona = max(0, min(10, value))
+
+    def add_gothic_persona(self, amount: int):
+        self.gothic_persona += amount
+
+    # === LADY BLACKTHORN OPINION (0-10) ===
+
+    @property
+    def lady_blackthorn_opinion(self) -> int:
+        return self._lady_blackthorn_opinion
+
+    @lady_blackthorn_opinion.setter
+    def lady_blackthorn_opinion(self, value: int):
+        self._lady_blackthorn_opinion = max(0, min(10, value))
+
+    # === LORD ASHFORD TRUST (0-10) ===
+
+    @property
+    def lord_ashford_trust(self) -> int:
+        return self._lord_ashford_trust
+
+    @lord_ashford_trust.setter
+    def lord_ashford_trust(self, value: int):
+        self._lord_ashford_trust = max(0, min(10, value))
+
+    # === ARABELLA CONNECTION (0-10) ===
+
+    @property
+    def arabella_connection(self) -> int:
+        return self._arabella_connection
+
+    @arabella_connection.setter
+    def arabella_connection(self, value: int):
+        self._arabella_connection = max(0, min(10, value))
+
+    # === BLACKWOOD RESPECT (0-10) ===
+
+    @property
+    def blackwood_respect(self) -> int:
+        return self._blackwood_respect
+
+    @blackwood_respect.setter
+    def blackwood_respect(self, value: int):
+        self._blackwood_respect = max(0, min(10, value))
+
+    # === RAVENCROFT FIXATION (0-10) ===
+
+    @property
+    def ravencroft_fixation(self) -> int:
+        return self._ravencroft_fixation
+
+    @ravencroft_fixation.setter
+    def ravencroft_fixation(self, value: int):
+        self._ravencroft_fixation = max(0, min(10, value))
+
+    # === HEATHSNIFF AFFECTION (0-10) ===
+
+    @property
+    def heathsniff_affection(self) -> int:
+        return self._heathsniff_affection
+
+    @heathsniff_affection.setter
+    def heathsniff_affection(self, value: int):
+        self._heathsniff_affection = max(0, min(10, value))
+
+    # === SERVANT TRUST (0-10) ===
+
+    @property
+    def servant_trust(self) -> int:
+        return self._servant_trust
+
+    @servant_trust.setter
+    def servant_trust(self, value: int):
+        self._servant_trust = max(0, min(10, value))
+
+    def add_servant_trust(self, amount: int):
+        self.servant_trust += amount
+
+    # === WINTERS APPROVAL (0-10) ===
+
+    @property
+    def winters_approval(self) -> int:
+        return self._winters_approval
+
+    @winters_approval.setter
+    def winters_approval(self, value: int):
+        self._winters_approval = max(0, min(10, value))
+
+    # === THOMAS FRIENDLINESS (0-10) ===
+
+    @property
+    def thomas_friendliness(self) -> int:
+        return self._thomas_friendliness
+
+    @thomas_friendliness.setter
+    def thomas_friendliness(self, value: int):
+        self._thomas_friendliness = max(0, min(10, value))
+
+    # === CHEN RESPECT (0-10) ===
+
+    @property
+    def chen_respect(self) -> int:
+        return self._chen_respect
+
+    @chen_respect.setter
+    def chen_respect(self, value: int):
+        self._chen_respect = max(0, min(10, value))
+
+    # === COMPUTED PROPERTIES ===
+
+    @property
+    def is_grounded(self) -> bool:
+        """Still firmly "from Bath" """
+        return self.groundedness >= 10
+
+    @property
+    def is_shaken(self) -> bool:
+        """Getting rattled"""
+        return self.composure < 5
+
+    @property
+    def house_is_watching(self) -> bool:
+        """The house has noticed her"""
+        return self.house_influence >= 5
+
+    @property
+    def is_performing(self) -> bool:
+        """Playing the Gothic part instead of being herself"""
+        return self.gothic_persona >= 5
+
+    @property
+    def servants_are_allies(self) -> bool:
+        """Has earned the servants' collective trust"""
+        return self.servant_trust >= 7
+
+    def reset_session_tracking(self):
+        """Reset per-session interpretation quality for a new session."""
+        self.interpretation_quality = {
+            "grounded": 0,
+            "diplomatic": 0,
+            "gothic": 0,
+            "panicked": 0,
+        }
+
+    def calculate_session_grade(self) -> str:
+        """Determine session grade from groundedness."""
+        if self.groundedness >= 12:
+            return "solid"
+        elif self.groundedness >= 8:
+            return "steady"
+        elif self.groundedness >= 4:
+            return "shaken"
+        else:
+            return "compromised"
+
+    def calculate_dominant_style(self) -> str:
+        """Determine which interpretation style dominated."""
+        return max(self.interpretation_quality, key=self.interpretation_quality.get)
+
+    def calculate_seance_quality(self) -> int:
+        """Calculate overall séance quality score."""
+        styles = self.interpretation_quality
+        return (
+            styles["grounded"] * 3
+            + styles["diplomatic"] * 2
+            + styles["gothic"] * 1
+            + styles["panicked"] * -1
+        )
+
+
+@dataclass
+class TheKind(Client):
+    """
+    The Kind — Cozy-liminal dream scenario client.
+
+    A combo record shop & bookstore in Rewind, Oregon that exists in the
+    space between real and impossible. The "client" is the store itself.
+    The crew (Scout, Mal, Delphi) are tracked as relationship stats.
+
+    CORE TENSION: You work here. You've always worked here. The store
+    knows your name and you know its moods. Except you're dreaming.
+    And the store holds records from timelines that never happened.
+
+    DREAM IDENTITY: You're a shopkeeper/tarot reader at Kind Of.
+    Unlike Blackthorn (which assigns a new identity), The Kind lets
+    you be yourself — just in a different place.
+    """
+
+    # Override Client defaults — the store starts warm
+    _trust: int = 60
+    _comfort: int = 70
+    _openness: int = 3
+
+    # === STORE STATE ===
+    _store_warmth: int = 7  # 0-10: The Kind's ambient warmth
+    deep_shelves_revealed: bool = False  # Player has seen the impossible depths
+
+    # === CREW RELATIONSHIPS (0-10) ===
+    _scout_bond: int = 5  # Starts friendly — you work together
+    _mal_bond: int = 3  # Starts reserved — Mal warms slowly
+    _delphi_bond: int = 5  # Starts mutual respect
+
+    # === SESSION RESULTS (persist across sessions) ===
+    session_one_recommendation: str = ""  # "Songbird" / "Gilead" / "Late Light" / "generic"
+    session_one_recommender: str = ""  # "Delphi" / "Mal" / "Scout" / "none"
+    session_one_quality: str = ""  # "exceptional" / "good" / "adequate" / "poor"
+    session_one_dominant_path: str = ""  # "anchor" / "bridge" / "impossible"
+
+    # === BLEED-THROUGH OBJECTS ===
+    bleed_objects: list = field(default_factory=list)
+
+    # === STORE WARMTH (0-10) ===
+
+    @property
+    def store_warmth(self) -> int:
+        return self._store_warmth
+
+    @store_warmth.setter
+    def store_warmth(self, value: int):
+        self._store_warmth = max(0, min(10, value))
+
+    def add_store_warmth(self, amount: int):
+        self.store_warmth += amount
+
+    # === SCOUT BOND (0-10) ===
+
+    @property
+    def scout_bond(self) -> int:
+        return self._scout_bond
+
+    @scout_bond.setter
+    def scout_bond(self, value: int):
+        self._scout_bond = max(0, min(10, value))
+
+    # === MAL BOND (0-10) ===
+
+    @property
+    def mal_bond(self) -> int:
+        return self._mal_bond
+
+    @mal_bond.setter
+    def mal_bond(self, value: int):
+        self._mal_bond = max(0, min(10, value))
+
+    # === DELPHI BOND (0-10) ===
+
+    @property
+    def delphi_bond(self) -> int:
+        return self._delphi_bond
+
+    @delphi_bond.setter
+    def delphi_bond(self, value: int):
+        self._delphi_bond = max(0, min(10, value))
+
+    # === COMPUTED PROPERTIES ===
+
+    @property
+    def store_is_alive(self) -> bool:
+        """The Kind is actively responding to the reader"""
+        return self.store_warmth >= 7
+
+    @property
+    def impossible_section_open(self) -> bool:
+        """The deep shelves are accessible"""
+        return self.deep_shelves_revealed and self.store_warmth >= 5
+
+    @property
+    def crew_is_family(self) -> bool:
+        """Strong bonds with all three crew members"""
+        return self.scout_bond >= 7 and self.mal_bond >= 6 and self.delphi_bond >= 7

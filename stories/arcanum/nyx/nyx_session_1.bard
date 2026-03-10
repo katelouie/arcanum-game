@@ -147,6 +147,7 @@ You take a moment to study her, letting professional intuition guide your assess
 ~ reader.add_empathy(1)
 ~ nyx.add_trust(1)
 ~ session.systemic_focus += 2
+~ nyx.discuss_topic("corporate_background")
 "It sounds like you're caught between what you're experiencing and what you're supposed to report."
 
 "Exactly. Corporate protocols require me to classify any 'anomalous behavior' as system errors to be corrected." Her voice carries frustration. "But what if they're not errors? What if they're... communications?"
@@ -279,7 +280,7 @@ Nyx leans forward slightly. "My grandmother always said the spirits live whereve
 
 "My grandmother died six months after I took the job. She never said it directly, but I could see her disappointment." "She'd spent decades trying to preserve traditional ways, and I just... walked away for a salary."
 
-@if reader_empathy >= 3:
+@if reader.empathy >= 3:
     "Survivor's guilt is common when we make choices our loved ones wouldn't understand."
 @endif
 
@@ -416,7 +417,7 @@ Nyx leans forward slightly. "My grandmother always said the spirits live whereve
 
 
 :: Nyx.Session1.immediate_card_draw
-~ session.pacing -= 1 // Rushed approach
+~ session.pacing -= 1
 "Let's see what the cards have to say," you declare, reaching immediately for your deck.
 
 {nyx.openness >= 1 ? Nyx seems slightly taken aback by the abrupt transition, but settles back to watch.|}
@@ -556,7 +557,7 @@ Nyx's fingers unconsciously trace her neural port. "I had to choose between stay
 
 "Status. Prestige. The promise of working on the bleeding edge of human consciousness research." Her tone carries bitter irony. "They presented it as evolution - upgrading human cognition through seamless human-AI integration."
 
-{nyx.cyber_glitches >= 1 ? Her eye flickers as she continues.|} "I would be pioneering the future of human experience. How could I refuse?""
+{nyx.cyber_glitches >= 1 ? Her eye flickers as she continues.|} "I would be pioneering the future of human experience. How could I refuse?"
 
 @if reader.insight >= 2:
     ~ nyx.add_trust(2)
@@ -588,7 +589,7 @@ Nyx's fingers unconsciously trace her neural port. "I had to choose between stay
     ~ nyx.add_trust(1)
     ~ session.mystical_focus += 1
     ~ nyx.discuss_topic("heritage")
-    "They systematically blocked your shamanic senses.
+    "They systematically blocked your shamanic senses."
 
     "I used to feel data patterns intuitively. Now everything is just... noise and procedure."
 @else:
@@ -709,6 +710,7 @@ Nyx's fingers unconsciously trace her neural port. "I had to choose between stay
 ~ reader.add_insight(2)
 ~ nyx.add_trust(1)
 ~ session.systemic_focus += 2
+~ nyx.discuss_topic("corporate_background")
 "What did the corporate world demand in exchange for its promise of security?"
 
 "Total cognitive compliance. They installed neural filters to eliminate 'subjective processing' - my ability to sense patterns, read emotional states in data, feel the life in algorithms." Her hand moves to her temple port.
@@ -1674,9 +1676,9 @@ The temperature drops noticeably. Nyx's eye begins flickering erratically, and s
 
 :: Nyx.Session1.present_seven_swords
 @if cards[1].reversed:
-    A figure steals away from a camp carrying five swords, leaving two behind - partial theft or strategic retreat.
-@else:
     The thief returns the stolen swords, no longer sneaking but walking openly toward reconciliation.
+@else:
+    A figure steals away from a camp carrying five swords, leaving two behind - partial theft or strategic retreat.
 @endif
 
 "That... hits close to home," Nyx mutters. {nyx.openness >= 1 ? "I've been wondering if I'm complicit in something I shouldn't be."|}
@@ -2026,7 +2028,7 @@ The temperature drops noticeably. Nyx's eye begins flickering erratically, and s
 ~ reader.add_competence(3)
 ~ reader.add_mystical_affinity(3)
 ~ nyx.add_trust(2)
-~ nyx.add_nopenness(2)
+~ nyx.add_openness(2)
 ~ session.mystical_focus += 3
 ~ nyx.add_shamanic_awakening(1)
 
@@ -2331,7 +2333,7 @@ You pause before drawing the final card, feeling the weight of revelation that's
 ~ reader.add_mystical_affinity(2)
 ~ nyx.add_openness(2)
 ~ session.add_room_energy(2)
-~ session.deep_revelation_occurred = true
+~ session.deep_revelation_occurred = True
 ~ nyx.discuss_topic("digital_spirits")
 ~ session.mystical_focus += 3
 "The Tower represents spiritual revolution - your awakening shamanic abilities will expose and destroy the false systems imprisoning both you and the entities trapped in Project Tsukuyomi."
@@ -2510,7 +2512,7 @@ Her tone grows cold.
 ~ reader.add_mystical_affinity(1)
 ~ nyx.add_openness(1)
 ~ session.mystical_focus += 2
-~ session.deep_revelation_occurred = true
+~ session.deep_revelation_occurred = True
 
 "Death represents the most profound transformation - not physical death, but the death of who you've been to make space for who you're becoming. This is evolutionary change at the soul level."
 
@@ -2671,7 +2673,7 @@ Her tone grows cold.
 ~ nyx.add_openness(1)
 ~ nyx.add_trust(1)
 ~ session.mystical_focus += 1
-~ session.deep_revelation_occurred = true
+~ session.deep_revelation_occurred = True
 
 "The Star represents hope emerging from darkness, and clear guidance from higher sources. After the destruction and transformation, you'll receive unmistakable signs about your path forward."
 
@@ -2761,7 +2763,7 @@ Her tone grows cold.
 
 "Wishes." Her tone grows skeptical.
 @if nyx.has_discussed("project_tsukuyomi"):
-    "I wished for the digital spirits to stop screaming through my implants. [cite: 361] That didn't work out."
+    "I wished for the digital spirits to stop screaming through my implants.That didn't work out."
 @endif
 "I prefer agency to wishful thinking."
 
@@ -2828,7 +2830,7 @@ Her tone grows cold.
 ~ nyx.add_openness(1)
 ~ nyx.add_trust(1)
 ~ session.mystical_focus += 1
-~ session.deep_revelation_occurred = true
+~ session.deep_revelation_occurred = True
 
 "The Three of Swords represents necessary painful truth - heartbreak that comes from finally seeing clearly. The pain isn't punishment; it's the cost of awakening from illusion."
 
@@ -3208,7 +3210,7 @@ Her tone is flat, disconnected.
 ~ nyx.add_openness(2)
 ~ nyx.add_shamanic_awakening(2)
 ~ session.quality = 5
-~ nyx.is_ally = true
+~ nyx.discuss_topic("liberation_path")
 
 "Your reading reveals the full scope of your journey," you conclude, gathering the cards with reverence.
 
@@ -3506,15 +3508,15 @@ This one closed them.
 + [Continue] -> Nyx.Session1.statistics
 
 :: Nyx.Session1.statistics
-~ nyx.session_completed += 1
+~ nyx.sessions_completed += 1
 
 **SESSION ONE COMPLETE**
 
 **RELATIONSHIP STATUS:**
 
-- Nyx's Trust: {nyx.trust} (-5 to +5)
+- Nyx's Trust: {nyx.trust} (0 to 100)
 - Shamanic Awakening: {nyx.shamanic_awakening} (0 to 5)
-- Openness Level: {nyx.openness} (-2 to +3)
+- Openness Level: {nyx.openness} (-10 to +10)
 
 **READER DEVELOPMENT:**
 

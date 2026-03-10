@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from random import randint
 from typing import List, Optional
 
-from game_logic.characters import Client, Nyx
+from game_logic.characters import BlackthornManor, Client, Nyx, TheKind
 
 
 @dataclass
@@ -44,6 +44,22 @@ class Session:
     deep_revelation_occurred: bool = False
     client_walked_out: bool = False
     mystical_event_happened: bool = False
+
+    # === READING QUALITY TRACKING ===
+    reading_quality: str = ""
+    interpretation_good: int = 0
+    interpretation_okay: int = 0
+    interpretation_bad: int = 0
+    reversals_handled: int = 0
+
+    # === SESSION-SPECIFIC FLAGS ===
+    time_of_day: str = "afternoon"
+    offered_permission: bool = False
+    gave_concrete_plan: bool = False
+    addressed_too_late_fear: bool = False
+    offered_validation: bool = False
+    discussed_small_changes: bool = False
+    gift_type: str = ""
 
     # === ARC-END SESSION REWARDS ===
     artifacts_awarded: list = field(default_factory=list)

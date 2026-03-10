@@ -31,7 +31,6 @@
 
 :: Chen.Session1
 ~ session = create_session(chen)
-~ session.current_client = chen
 You're in your apartment reading corner.
 
 Rain drums steadily against the window - Seattle's perpetual lullaby. Your tarot deck sits on the small folding table, wrapped in a thrift-store scarf you've claimed as a reading cloth. A single candle flickers beside it (unscented, dollar store, but it's the thought that counts).
@@ -3023,7 +3022,7 @@ if chen.will_return:
     chen.next_session_date = "2 weeks"
 
 chen.session_one_cards = cards
-chen.session_two_quality = session.reading_quality
+chen.session_one_quality = session.reading_quality
 chen.sessions_completed += 1
 
 # Update reader stats summary
@@ -3039,7 +3038,7 @@ reader.sessions_completed += 1
 **Reading Quality:** {session.reading_quality}
 
 @if chen.will_return:
-    Margaret will return in {state.margaret_next_session_date}.
+    Margaret will return in {chen.next_session_date}.
 @endif
 
 @if chen.gave_gift:

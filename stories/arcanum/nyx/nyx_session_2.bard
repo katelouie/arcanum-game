@@ -65,20 +65,26 @@ session.interpretation_quality = {
 }
 
 # Check how she got the data (from Session 1)
-if nyx.mystical_focus >= 7 or nyx.shamanic_awakening >= 3:
+if session.mystical_focus >= 7 or nyx.shamanic_awakening >= 3:
     nyx.data_source = "spirits"  # Spirits led her
     nyx.jumpiness = 2  # Less jumpy
     nyx.kitsune_suspicion = 3  # Lower suspicion
 else:
     nyx.data_source = "hack"  # Traditional hack
     nyx.jumpiness = 4  # Very jumpy
-    nyx.kitsune_suspicion = 6  # Higher suspicion
+    nyx.kitsune_suspicion = 5  # Higher suspicion (max)
 
 # Cyber glitch intensity increases throughout session
 nyx.glitch_intensity = 3  # Starts moderate, escalates
 
 # Track which cards are discussed
 session.discussed_cards = []
+
+# Payment amount
+session.reading_fee = 500
+
+# Betrayal tracking
+session.betrayal_executed = False
 @endpy
 ~ session.atmosphere = 4  # Tense, urgent, paranoid
 ~ session.room_energy = 4
@@ -311,7 +317,8 @@ She touches the data chip. "Someone has to do something. And apparently... that 
 
 :: Nyx.Session2.The_Data_Value_Corrupt
 ~ reader.corruption += 1
-~ reader.insight += 1 // You're probing, which is a form of insight
+# You're probing, which is a form of insight
+~ reader.insight += 1
 "This data," you say, your voice level. "How... *valuable* is it? Not just morally. Financially. Who would *pay* for this?"
 
 Nyx flinches, as if you'd slapped her.
@@ -408,10 +415,10 @@ You lay them out one by one. The Horseshoe formation takes shape on the table:
 @py:
     # Card pools for each position
     position_1_deck = Deck(cards=["The Tower", "Eight of Swords"], reversals=[0, 0.5])
-    position_2_deck = Deck(cards=["Two of Swords", "Seven of Swords"], reversals=[0.5, 0.5])
+    position_2_deck = Deck(cards=["Two of Swords", "Seven of Wands"], reversals=[0.5, 0.5])
     position_3_deck = Deck(cards=["The Star", "Ten of Swords"], reversals=[0, 0.5])
     position_4_deck = Deck(cards=["The Moon", "Seven of Cups"], reversals=[0, 0.5])
-    position_5_deck = Deck(cards=["Five of Pentacles"], "The Devil", reversals=[0, 0])
+    position_5_deck = Deck(cards=["Five of Pentacles", "The Devil"], reversals=[0, 0])
     # KEY POSITION
     position_6_deck = Deck(cards=["The Fool", "Strength", "Temperance"], reversals=[0.5, 0.5, 0.5])
     position_7_deck = Deck(cards=["Six of Swords", "The World"], reversals=[0, 0])
@@ -810,14 +817,14 @@ Nyx stares at it. Her hands clench on the table edge.
 @endif
 
 @if cards[1].reversed:
-    + ["Reversed Two of Swords means clarity is coming - or has already come. You *can* see now. The paralysis is ending."] -> Nyx.Session2.Position2_TwoSwords_Reversed_Analytical
-    + ["The blindfold is off. You see the paths. You know which one calls to you. Stop resisting. Choose."] -> Nyx.Session2.Position2_TwoSwords_Reversed_Intuitive
-    + ["You're at a crossroads with open eyes. That's more powerful - and more terrifying - than blind ignorance."] -> Nyx.Session2.Position2_TwoSwords_Reversed_Generic
+    + ["Reversed Two of Swords means clarity is coming - or has already come. You *can* see now. The paralysis is ending. Run."] -> Nyx.Session2.Position2_TwoSwords_Reversed_Runner
+    + ["The blindfold is off. You see both paths. Use that vision. Stay inside, but serve a different purpose."] -> Nyx.Session2.Position2_TwoSwords_Reversed_Ghost
+    + ["You're at a crossroads with open eyes. That's more powerful - and more terrifying - than blind ignorance. Don't rush."] -> Nyx.Session2.Position2_TwoSwords_Reversed_Loyal
 @else:
     + ["Two of Swords represents decision paralysis. You're deadlocked between Runner path and staying inside the system."] -> Nyx.Session2.Position2_TwoSwords_Upright_Analytical
-    + ["You're paralyzed by trying to see both sides. Choose freedom. The spirits are calling - answer them."] -> Nyx.Session2.Position2_TwoSwords_Upright_Intuitive
-    + ["The blindfolded warrior holds both swords but can use neither. That's you right now - powerful but frozen."] -> Nyx.Session2.Position2_TwoSwords_Upright_Storyteller
-    + ["You're stuck between two choices. That's your present state."] -> Nyx.Session2.Position2_TwoSwords_Upright_Generic
+    + ["You're paralyzed by trying to see both sides. Choose freedom. The spirits are calling - answer them."] -> Nyx.Session2.Position2_TwoSwords_Upright_Runner
+    + ["The blindfolded warrior holds both swords but can use neither. That's you right now - powerful but frozen."] -> Nyx.Session2.Position2_TwoSwords_Upright_Ghost
+    + ["You're stuck between two choices. That's your present state."] -> Nyx.Session2.Position2_TwoSwords_Upright_Loyal
 @endif
 
 :: Nyx.Session2.Position2_TwoSwords_Upright_Analytical
@@ -941,6 +948,36 @@ Nyx's hands clench. "It's that simple? Just... choose freedom?"
 ~ reader.empathy += 1
 
 + ["Let's move forward."] -> Nyx.Session2.Position3_Hub
+
+:: Nyx.Session2.Position2_TwoSwords_Reversed_Ghost
+"The blindfold is off. That's power, Nyx. Most people in your position are still guessing. You SEE Kitsune for what it is. And that means you can move through it with open eyes — not as a victim, but as an operative."
+
+Nyx's expression shifts. Calculating. The decker in her, the data architect, is waking up.
+
+"You want me to stay inside. Deliberately."
+
+"The reversed Two of Swords doesn't just mean 'now you can choose.' It means you can see the whole board. Both sides. Their moves AND yours. That's not paralysis — that's strategic advantage. You become the ghost in their machine."
+
+@if nyx.data_source == "spirits":
+    "The spirits showed me the containment chambers," she says slowly. "From the INSIDE. Because I have INSIDE ACCESS. If I run, I lose that. I lose the ability to help them directly."
+
+    "Exactly. The spirits didn't lead you to the data so you could flee. They led you there because you're the only one positioned to do something about it. From within."
+
+    ~ session.ghost_influence += 2
+    ~ nyx.shamanic_awakening += 1
+@else:
+    "A double agent. Working against them while they think I'm loyal."
+
+    "Working FOR the spirits while Kitsune thinks you're working for them. The reversed Two of Swords says: use your clarity as a weapon, not an exit."
+
+    ~ session.ghost_influence += 1
+@endif
+
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ reader.insight += 1
+
++ ["Let's see what else the cards reveal."] -> Nyx.Session2.Position3_Hub
 
 :: Nyx.Session2.Position2_TwoSwords_Reversed_Loyal
 "Without clear vision, you're vulnerable. The reversed Two of Swords can mean: removing the blindfold too soon, before you're ready. Maybe return to what's stable and proven until you can see the full picture."
@@ -1712,7 +1749,7 @@ Nyx looks relieved. "So it's okay to just... not do anything dramatic?"
 You move to the fifth card.
 
 **Position 5: OBSTACLES**
-**{cards[4].name}**
+**{cards[4].name}**{cards[4].reversed ? " (Reversed)" | ""}
 
 "This shows what stands in your way. What blocks your path forward."
 
@@ -1937,7 +1974,8 @@ Nyx looks relieved. "So it's okay to prioritize survival? To admit I NEED the mo
 
 :: Nyx.Session2.Position5_Corrupt_Protector
 ~ reader.corruption += 1
-~ session.loyal_influence += 1 // Pushes her toward dependency
+# Pushes her toward dependency
+~ session.loyal_influence += 1
 
 "You're right to be afraid," you say, your voice full of grave concern. "You're one person. Out there, in the cold, with no money, no SIN? Kitsune will find you in a day. You're not a runner, Nyx. You're a target."
 
@@ -2586,7 +2624,7 @@ She stares at you, her cybereyes whirring, trying to calculate the odds. Trust w
 You move to the final card - the one that completes the horseshoe.
 
 **Position 7: OUTCOME**
-**{cards[6].name}**
+**{cards[6].name}**{cards[6].reversed ? " (Reversed)" | ""}
 
 "This shows where your chosen path leads. The destination."
 
@@ -3288,7 +3326,7 @@ Dark. Mercenary. But PROFITABLE.
 
 You have information about Nyx. About the data she stole. About Project Tsukuyomi. About her plans.
 
-And you have a contact. @if reader.has_contact["corporate_fixer"]: The corporate fixer you met at the Emerald Lounge. @else: A corporate fixer. Everyone knows one in this city. @endif Someone who buys information. Sells it to the highest bidder.
+And you have a contact. A corporate fixer. Everyone knows one in this city. Someone who buys information. Sells it to the highest bidder.
 
 Kitsune would pay WELL to know:
 - Who hacked their secure servers
@@ -3332,7 +3370,7 @@ Your finger hovers over the commcode.
     nyx.session_three_available = False
 
     reader.corruption += 3
-    reader.credits += 25000  # Blood money
+    reader.money += 25000  # Blood money
     reader.reputation -= 5  # Word gets out eventually
     reader.guilt += 10
 
@@ -3433,14 +3471,14 @@ This is who you are now.
 
 @py:
     # Set permanent game state
-    game.nyx_ending = "betrayed_dead"
-    game.reader_corruption_path = True
+    nyx.ending = "betrayed_dead"
+    reader.corruption_path = True
 
     # Block future Nyx content
     nyx.available_for_sessions = False
 
     # Spirit curse affects future readings
-    game.spirit_interference = True
+    reader.spirit_interference = True
 @endpy
 
 + [This is the path you chose. Live with it.] -> Nyx.Session2.End
@@ -3476,7 +3514,6 @@ You're still who you want to be.
     # Session complete
     # Update reader stats
     reader.sessions_completed += 1
-    reader.total_clients_seen += 1
 
     # Update Nyx's next session availability
     if nyx.final_path in ["runner", "ghost"] and not session.betrayal_executed:
@@ -3596,12 +3633,12 @@ deck = Deck()
 drawn_card = deck.draw_card()
 @endpy
 
-@if drawn_card in ["The Moon", "Seven of Cups", "The Star"]:
-    @if drawn_card == "The Moon":
+@if drawn_card.name in ["The Moon", "Seven of Cups", "The Star"]:
+    @if drawn_card.name == "The Moon":
         The Moon. Illusion. Dreams. Hidden truths. Reality and fantasy bleeding together.
 
         Of COURSE.
-    @elif drawn_card == "Seven of Cups":
+    @elif drawn_card.name == "Seven of Cups":
         The Seven of Cups. Multiple realities. Choices that may or may not be real. Fantasy and truth intermingled.
 
         The universe has a sense of humor.
