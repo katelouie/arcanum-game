@@ -1,0 +1,2882 @@
+# ============================================================================
+# THE KIND — SESSION 1: "THE ONE SHE CAN'T FIND"
+# ============================================================================
+#
+# DREAM SCENARIO: Kind Of — a combo record shop & bookstore in Rewind, Oregon
+# CLIENT: Ellen Zhao — adjunct writing professor, seeking a lost record
+#
+# UNLOCK CONDITIONS:
+# - reader.sessions_completed >= 3  (has some experience)
+# - reader.empathy >= 2
+# - reader.dreams_started == True  (at least one dream has occurred)
+#
+# CATALYST: The dream begins unprompted. You fall asleep at your reading
+#   desk and wake up behind the counter of a store you've never
+#   been to — except you HAVE, because you work here. You've always
+#   worked here. The Kind knows you.
+#
+# CORE QUESTION: "What is Ellen really looking for?"
+#
+# THEME: Memory, loss, and the difference between finding something
+#   and recognizing what you've already found.
+#
+# TONE: Warm. Gentle. Cozy-liminal. The dream you don't want to wake
+#   from. No horror, no danger — just a supernatural store that loves
+#   music and books and the people who wander into it.
+#
+# SPREAD: "Lost and Found" (4-card custom)
+#   Position 1: What Was Lost
+#   Position 2: Where It Lives Now
+#   Position 3: What Blocks the Finding
+#   Position 4: What Finding Looks Like (KEY POSITION)
+#
+# CARD POOLS:
+#   Position 1: Six of Cups / The Empress / Ace of Cups
+#   Position 2: The Moon / Four of Swords / Nine of Pentacles
+#   Position 3: Eight of Cups / Seven of Cups / Five of Swords
+#   Position 4: The Star / Ten of Cups / The World
+#
+# REVERSAL CHANCE: 20% (gentle dream — reversals add texture, not chaos)
+#
+# RECOMMENDATION STRUCTURE: Anchor / Bridge / Impossible
+#   - Anchor (Delphi): Eva Cassidy, *Songbird* (real — 1996 Blues Alley)
+#   - Bridge (Mal): *Gilead* by Marilynne Robinson (cross-medium — book)
+#   - Impossible (Scout): Eva Cassidy, *Late Light* (2024 — from a timeline
+#       where she lived to 71. Only exists in Kind Of's deep shelves.)
+#   - Failstate: Ellen browses, picks something safe, leaves politely
+#
+# PATH VARIABLES:
+#   - anchor_influence (Delphi's path — the real, solid recommendation)
+#   - bridge_influence (Mal's path — the cross-medium surprise)
+#   - impossible_influence (Scout's path — the supernatural deep-shelf pull)
+#   - quality_score (overall reading quality — low score = failstate)
+#
+# BLEED-THROUGH OBJECT: A 7-inch single with a handwritten label
+#   - Anchor/Bridge: unlabeled, warm to the touch
+#   - Impossible: labeled in unfamiliar handwriting, title half-readable
+#   - Failstate: blank vinyl, no grooves
+#
+# CREW:
+#   Scout (he/him, 23) — MUSIC. Turntable behind the counter. Emotional
+#     barometer. Makes mix CDs for regulars. "Gorgeous Disasters" shelf.
+#     Japanese-American/Polish. Loses inside-voice calibration.
+#   Mal (they/them, 28) — BOOKS. Ex-ML engineer. Quit when the algorithm
+#     killed serendipity. Catalogs by emotional resonance in composition
+#     notebooks. Dry, precise, unphased by impossible.
+#   Delphi (she/they, mid-30s to mid-40s) — BOTH/PEOPLE. Doesn't specialize
+#     in medium, specializes in reading people. Recommends across formats.
+#     Carruth alum. Pendleton flannels. Uncanny. Quiet certainty.
+#
+# ============================================================================
+
+:: TheKind.Session1.Start
+@py:
+# Initialize dream session
+session = create_session(the_kind)
+
+# Weather — it's Rewind, Oregon. It rains.
+# Rain doesn't come and go here. It just gets lighter or heavier
+# or turns to mist and back again.
+session.weather = random.choice(["rain", "rain", "rain", "light_rain", "mist"])
+
+# Path influence tracking
+session.anchor_influence = 0      # Delphi's path (the solid ground)
+session.bridge_influence = 0      # Mal's path (the other door)
+session.impossible_influence = 0  # Scout's path (the deep shelf)
+session.quality_score = 0         # Overall reading quality
+
+# Interpretation quality tracking
+session.interpretation_quality = {
+    'excellent': 0,
+    'good': 0,
+    'adequate': 0,
+    'poor': 0
+}
+
+# Track cards discussed
+session.discussed_cards = []
+
+# Ellen's emotional state (shifts during reading)
+session.ellen_openness = 3   # Starts open — she's a regular, she trusts the store
+session.ellen_composure = 8  # High — she's processed the grief, or thinks she has
+session.ellen_hope = 5       # Moderate — she's not sure the record exists
+
+# Crew state
+session.scout_emotional_state = "bright"  # Shifts during reading
+session.delphi_attentiveness = "normal"   # Shifts to "focused" during reading
+session.mal_engaged = False               # Becomes True if Impossible path opens
+
+# The Kind itself
+session.store_warmth = the_kind.store_warmth  # Load from persistent state
+session.deep_shelves_stirring = False  # True if Impossible path is strong
+
+# Recommendation tracking (set during synthesis/recommendation)
+session.recommendation = ""
+session.recommender = ""
+session.store_revealed = False
+session.is_failstate = False
+session.dominant_path = ""
+session.reading_quality = ""
+@endpy
+
+# ============================================================================
+# THE DREAM BEGINS
+# ============================================================================
+
+You're at your reading table. Your real one. In your apartment.
+
+You've been shuffling the deck — just idly, the way you do when you're thinking about nothing and everything. The cards feel warm. The rain outside sounds far away. Your eyes are heavy.
+
+You blink.
+
+And you're somewhere else.
+
++ [Continue] -> TheKind.Session1.Awakening
+
+:: TheKind.Session1.Awakening
+
+The rain is the first thing. Not dramatic rain — not the kind that announces itself. Oregon rain. The kind that was here before you noticed and will be here after you stop noticing and exists in the intervening time as a fact of atmosphere, like gravity or the color green. Nobody in this town owns an umbrella. Umbrellas are a confession that you expected something different.
+
+You're standing behind a counter. A register in front of you — the old kind, with buttons that clunk. The store spreads out in aisles that don't quite align: wooden bins of vinyl to your left, alphabetized by hand with divider cards in Scout's angular block print. Bookshelves to your right — tall, mismatched, some built-in and some freestanding, organized by a system that only makes sense if you've read Mal's composition notebooks. A listening station in the back corner with three different generations of headphones tangled together. A turntable behind the counter, lid up, a record on the platter that finished playing sometime before you arrived.
+
+The ceiling is old pressed tin, painted over twice and peeling back to show its history. The building has siding and big windows and the particular posture of a structure that stopped fighting the weather decades ago and settled into its foundations like a dog into a favorite bed. Nothing is falling apart. Everything is just *lived in.* The corners have been sanded round by rain and by the creeping vegetation that tries, every spring, to reclaim Main Street for the forest.
+
+@if session.weather == "rain":
+    Rain hits the roof in a steady wash — not the flat drumming of a warehouse roof but the layered patter of a proper pitched roof doing its job. The sound of a valley that breathes water. Through the big front windows, Main Street glistens. The sign outside — hand-lettered, the "OF" faded to almost nothing so from a distance it just reads "KIND" — swings gently in the wet.
+@elif session.weather == "light_rain":
+    A light rain mists the front windows. Through the glass, the hand-lettered sign reads "KIND OF" — though the "OF" has faded so badly that most people just call it The Kind. The town beyond is green and soft-edged, the buildings settled into their foundations, corners rounded by weather and time.
+@else:
+    Mist presses against the windows, turning Main Street into watercolor. The sign reads "KIND OF" through the fog — or what's left of it. The "OF" faded years ago. From down the block, in this weather, it just reads "KIND." Everyone in Rewind calls it The Kind anyway. The name transformed from a hedge into a declaration and nobody minded.
+@endif
+
+The air is layered. Old paper — that sweet vanilla decay of books losing an ancient war of attrition against the damp. Plastic sleeves. Dust on vinyl. A ghost of patchouli from someone or something or possibly the building itself. And underneath it all, drifting in through the vent above the back door: verde burritos from Lola's next door, hot enough to make your nose run, and across the street the particular savory warmth of Jade Garden's BBQ pork and those egg batter spring rolls with the red dipping sauce that nobody can identify but everyone orders.
+
+Through the front windows, Main Street does its quiet evening thing. The streetlights are on a timer that makes no sense — the one on the corner goes green for forty-five seconds in a direction nobody drives, and everyone in Rewind just routes around it the way you route around a rock in a stream. Bikes are locked to everything. Frame of Mind — Greta's bike shop, two doors down — is just closing up. Across the quad, somewhere on the Carruth College campus, a guy named Toad is selling hand-drawn comics from a folding table for whatever you've got, and if you listen closely you can hear the distinctive rattle of Dale's vehicle — not a car, not a bike, something in between that he built himself from parts of both — navigating the one-way street that used to be two-way before a town meeting that everyone has a different memory of.
+
+This is Rewind, Oregon. Southern Willamette Valley. Population: enough. The rain doesn't come and go here. It just gets lighter or heavier or turns to mist and back again, and the times when it's not raining are just holding patterns until normalcy resumes.
+
+You work here. You've always worked here. The store knows your name and you know its moods and the register sticks on the 7 key and you have a mug on the shelf behind the counter and a shift that starts at 4pm and this is your life and it's good.
+
+A voice from behind you:
+
+"Kettle's on. You want pu-erh or that weird roasted thing Scout found at the co-op?"
+
++ ["Pu-erh, thanks."] -> TheKind.Session1.Delphi_Intro
++ ["The weird roasted thing."] -> TheKind.Session1.Delphi_Intro_Alt
+
+:: TheKind.Session1.Delphi_Intro
+"Pu-erh it is."
+
+You turn. **Delphi** is behind the back counter, flannel sleeves rolled to the elbow in three precise folds — a Thelonious Monk tee underneath, Monk mid-lean at the piano, caught in the act of finding a note that shouldn't work but does. She's filling a chipped mug that says "I WOULD PREFER NOT TO" from an electric kettle that's older than most of the vinyl in the store.
+
+She hands you a second mug — yours, apparently. You know it's yours. It has a tarot card printed on it: The Star.
+
+"Quiet tonight," she says. Not a complaint. An observation. Delphi treats information like tea — she lets it steep.
+
++ [Continue] -> TheKind.Session1.Store_Settling
+
+:: TheKind.Session1.Delphi_Intro_Alt
+"Adventurous. I respect that."
+
+You turn. **Delphi** is behind the back counter, flannel sleeves rolled to the elbow in three precise folds — a Thelonious Monk tee underneath, Monk mid-lean at the piano, caught in the act of finding a note that shouldn't work but does. She's filling a chipped mug that says "I WOULD PREFER NOT TO" from an electric kettle that's older than most of the vinyl in the store.
+
+She slides you a second mug — yours, with The Star printed on the side — and a tea bag that smells like campfire and hazelnuts and something you can't identify.
+
+"Scout swears it's transcendent. I think it tastes like a barn." She pauses. "A *nice* barn."
+
++ [Continue] -> TheKind.Session1.Store_Settling
+
+:: TheKind.Session1.Store_Settling
+From deeper in the store, you hear a voice — bright, slightly too loud for the space:
+
+"Okay, I'm just saying — if you listen to Joni Mitchell's *Blue* and then immediately put on Frank Ocean's *Blonde*, the emotional architecture is IDENTICAL. Both are about someone dismantling their own mythology in real time while simultaneously building a new one out of the wreckage. Scout Kowalski-Ng, staff picks shelf, five stars, I will die on this hill."
+
+**Scout** rounds the corner of the vinyl bins, lanky, beanie pulled low, carrying a stack of records he's reshelving with the focus of a man on a mission. He sees you and grins.
+
+"Oh good, you're here. I need a tiebreaker. 'Gorgeous Disasters' shelf — do I put *Spirit of Eden* next to *Loveless* or next to *Bitches Brew*? Because the Talk Talk connection to My Bloody Valentine is about texture, but the Miles connection is about *ambition*—"
+
+"Scout." Delphi, without looking up from her tea. "Breathe."
+
+"Right. Breathing." He breathes. Then, quieter: "It's *Bitches Brew* though, right?"
+
+A sound from the book side of the store. The soft shush of a spine being pulled from a shelf and the scratch of pen on paper. **Mal** is back there somewhere, deep in the stacks, cataloging. You can't see them but you can hear the particular focus of their movements — precise, unhurried, the sound of someone doing work they love. Shelving grief memoirs next to ecology textbooks. Both about systems that break down and rebuild.
+
+Their rain jacket hangs on the office door, steaming gently. Three enamel pins on the strap: a white whale, a Borges labyrinth, a semicolon.
+
+This is your crew. This is your shift. The Kind is warm and humming and smells like paper and vinyl and patchouli and verde burritos, and outside it's raining, and you're exactly where you belong.
+
+The bell on the door rattles.
+
++ [Look up] -> TheKind.Session1.Ellen_Arrives
+
+# ============================================================================
+# ELLEN ARRIVES
+# ============================================================================
+
+:: TheKind.Session1.Ellen_Arrives
+
+The door sticks — it always sticks in the wet months, which is most months — and then opens with a rattle-and-bell that's more percussion than chime.
+
+**Ellen Zhao** steps in, shaking rain from her jacket. She's 31, dark hair pulled back, the kind of face that's open and guarded at the same time — a writing professor's face, trained to listen but careful about what it gives away.
+
+She's a regular. Three years of Tuesday nights. You know her. Delphi knows her. Scout knows her dog's name.
+
+But tonight she's different. Not upset. Not dramatic. Just... *looking* for something. She bypasses the new arrivals bin — doesn't even glance. Passes the staff picks, passes the book tables. She's moving through the aisles with a restlessness that doesn't match her usual unhurried browse.
+
+Delphi clocks it immediately. You see her set down her mug, watching Ellen's path through the store with the same quiet attention she gives a card spread that doesn't quite make sense yet.
+
+Scout notices too, but differently — he looks at you with an expression that says *should we...?*
+
+Ellen circles back to the counter. Stops. Looks at you.
+
+"Hey." She's trying to sound casual. "I'm looking for something. And before you ask — I don't know the title. Or the artist. Or the year."
+
++ ["That's what we're here for. Tell me what you remember."] -> TheKind.Session1.Ellen_Story
++ ["Take your time. Want some tea first?"] -> TheKind.Session1.Ellen_Tea_First
++ [Wait. Let her find her own words.] -> TheKind.Session1.Ellen_Silence
+
+:: TheKind.Session1.Ellen_Tea_First
+"Tea would be great, actually."
+
+Delphi is already pouring. She slides a mug across the counter — she knows Ellen's order. Something warm and dark that smells like earth and rain.
+
+Ellen wraps her hands around it. Breathes. The tension in her shoulders drops one notch.
+
+"Thanks." She takes a sip. Then another. Then she looks at you and the words come easier.
+
+~ session.ellen_openness += 1
+~ session.quality_score += 1
+
+-> TheKind.Session1.Ellen_Story
+
+:: TheKind.Session1.Ellen_Silence
+You don't say anything. Just wait. Delphi, from behind the counter, gives you an almost imperceptible nod. *Good instinct.*
+
+The silence does what silence does in a place like The Kind — it makes space. Ellen stops trying to perform "casual" and lets the real thing surface.
+
+"Okay," she says, quieter. "Okay. So."
+
+~ session.ellen_openness += 2
+~ session.quality_score += 1
+~ reader.empathy += 1
+
+-> TheKind.Session1.Ellen_Story
+
+:: TheKind.Session1.Ellen_Story
+Ellen sets her hands on the counter. Palms down. Steadying herself.
+
+"When I was eleven, my mom put a record on in the kitchen. It was a Tuesday. Raining — but that's not a detail, that's just Oregon. She was making something, I can't remember what, and she put a record on the turntable. She had this little portable one she kept on the counter between the toaster and the rice cooker."
+
+She pauses. Her hands haven't moved.
+
+"A woman started singing. Low voice. Strings behind her — not a full orchestra, more like a small room. And there's this moment where the voice drops and then the strings just... *lift.* Like the music is catching her. Like she's falling and the strings won't let her."
+
+From behind the vinyl bins, Scout has gone very still. A record in each hand, forgotten.
+
+"And my mom stopped what she was doing. Just stopped. Wooden spoon in one hand. And she started singing along. Even though she didn't know the words." Ellen almost smiles. "She just made sounds. In the right key — always in the right key — but nonsense. Beautiful nonsense."
+
+She stops. Touches her jaw. The memory is more alive than she expected.
+
+"She died eight months ago. And I've been looking for that record for twenty years."
+
+The store is very quiet. The only sound is rain on the roof and the distant hiss of the turntable's needle, caught in the run-out groove of whatever Scout was playing earlier.
+
+"I've tried everything. Discogs, music forums, every 'help me identify this song' subreddit. I've hummed the four notes I remember into Shazam until my phone probably thinks I'm losing it. I've described it to music professors, record collectors, the DJ at KRWN. Nobody can identify it. I'm starting to think I invented it — that grief and memory just... composited something that was never real."
+
+She looks at you. Then at the shelves stretching deeper than the storefront should allow. At the vinyl bins that go further back than the building has any right to go. At the book stacks that seem to breathe.
+
+"But The Kind always has what you're looking for. Right? That's the thing about this place. So I thought..."
+
+She trails off. Embarrassed by her own hope.
+
+Delphi speaks from behind the counter, quiet: "Why don't you sit with our reader for a minute before we go looking? Sometimes it helps to know what you're looking for before you find it."
+
+Ellen looks at the bead curtain. At the reading nook behind it. At you.
+
++ ["She's right. A reading might help us figure out what you actually need tonight."] -> TheKind.Session1.Pre_Reading
++ ["We'll find it. But let's start here — at the table. Sometimes the cards hear what Shazam can't."] -> TheKind.Session1.Pre_Reading_Mystical
+
+:: TheKind.Session1.Pre_Reading
+"Okay." She almost smiles. "I've never had a reading before. Is that weird? Three years coming here and I've never—"
+
+"It's not weird. You weren't ready. Now you are."
+
+That came from Delphi, not you. Ellen looks at her. Delphi shrugs one shoulder. "Just a feeling."
+
+-> TheKind.Session1.Reading_Setup
+
+:: TheKind.Session1.Pre_Reading_Mystical
+Ellen's expression shifts — cautious, curious. "You think the cards can find a record?"
+
+"I think the cards can find the *question* behind the record. And once we have the question, the store usually has the answer."
+
+You're not sure why you said "the store" like that. Like it's a participant.
+
+Delphi hears it. Gives you a look. Not surprise — recognition.
+
+~ session.impossible_influence += 1
+
+-> TheKind.Session1.Reading_Setup
+
+:: TheKind.Session1.Reading_Setup
+You lead Ellen past the bead curtain — Scout found it at Goodwill, Delphi blessed it, Mal tolerates it — into the reading nook. The lamp with the stained-glass shade throws colored light across the worn hardwood. Your deck is on the table next to a cup of pens and a stack of recommendation cards.
+
+Ellen sits. Looks at the cards with the focused attention of someone who analyzes texts for a living — respectful, slightly clinical, waiting to be convinced.
+
+Behind you, the store settles into its listening mode. Scout drifts to the vinyl bin nearest the bead curtain, suddenly very interested in re-alphabetizing the E's. Delphi angles herself at the counter where she can hear without hovering. Somewhere in the book stacks, Mal's pen stops moving.
+
+You pick up your deck. Shuffle. The cards feel different here — warmer, more certain, like they know what's coming.
+
+"This spread is called 'Lost and Found.' Four cards. Four questions."
+
+You lay down four face-down cards in a gentle arc:
+
+"What was lost. Where it lives now. What blocks the finding. And what finding looks like."
+
+Ellen watches each card land. Her composure is steady, but her hands are clasped in her lap, knuckles white.
+
+"Ready?" you ask.
+
+"Ready."
+
++ [Turn the first card] -> TheKind.Session1.CardDraw
+
+# ============================================================================
+# CARD DRAW
+# ============================================================================
+
+:: TheKind.Session1.CardDraw
+@py:
+# Card pools for each position
+# Reversal chance: 0.2 (20% — gentle dream, reversals add texture not chaos)
+position_1_deck = Deck(cards=["Six of Cups", "The Empress", "Ace of Cups"], reversals=[0.2, 0.2, 0.2])
+position_2_deck = Deck(cards=["The Moon", "Four of Swords", "Nine of Pentacles"], reversals=[0.2, 0.2, 0.2])
+position_3_deck = Deck(cards=["Eight of Cups", "Seven of Cups", "Five of Swords"], reversals=[0.2, 0.2, 0.2])
+position_4_deck = Deck(cards=["The Star", "Ten of Cups", "The World"], reversals=[0.2, 0.2, 0.2])
+
+reading = Reading(spread_id="lost-and-found", decks=[
+    position_1_deck,
+    position_2_deck,
+    position_3_deck,
+    position_4_deck
+])
+
+cards = reading.draw_cards()
+@endpy
+
+@render render_reading(reading=reading)
+
+You turn the cards one at a time. Each one lands on the table with a soft click against wood.
+
+**Position 1 (What Was Lost):** {cards[0].name}{cards[0].reversed ?  — Reversed | }
+**Position 2 (Where It Lives Now):** {cards[1].name}{cards[1].reversed ?  — Reversed | }
+**Position 3 (What Blocks the Finding):** {cards[2].name}{cards[2].reversed ?  — Reversed | }
+**Position 4 (What Finding Looks Like):** {cards[3].name}{cards[3].reversed ?  — Reversed | }
+
+Ellen studies them with the same intensity she probably brings to her students' manuscripts — reading for pattern, for structure, for the thing beneath the surface.
+
+"I don't know what most of these mean," she says. "But that one—" She points to the first card. "That one I feel."
+
+"Then that's where we start."
+
++ [Begin with Position 1 — What Was Lost] -> TheKind.Session1.Position1_Hub
+
+# ============================================================================
+# POSITION 1: WHAT WAS LOST
+# ============================================================================
+
+:: TheKind.Session1.Position1_Hub
+~ session.discussed_cards.append(cards[0].name)
+@render render_reading(reading=reading, highlight=0)
+
+You touch the first card.
+
+**Position 1: What Was Lost**
+**{cards[0].name}**{cards[0].reversed ?  (Reversed) | }
+
+@if cards[0].name == "Six of Cups":
+    -> TheKind.Session1.P1_SixCups
+@elif cards[0].name == "The Empress":
+    -> TheKind.Session1.P1_Empress
+@else:
+    -> TheKind.Session1.P1_AceCups
+@endif
+
+# --- SIX OF CUPS ---
+
+:: TheKind.Session1.P1_SixCups
+@if cards[0].reversed:
+    The Six of Cups — reversed. Two children in a garden, offering flowers — but upside down, the garden feels uncertain. Not lost. Just... *shifting.* Memory rearranging itself.
+
+    Ellen tilts her head. "Is that... bad? That it's upside down?"
+
+    "Not bad. Different. Let me show you."
+
+    Behind you, Scout exhales through his teeth — the sound he makes when a song hits the bridge and he wasn't ready. His hand drifts to the vinyl bin, fingers resting on the divider cards like piano keys.
+
+    Mal looks up from the composition notebook. Their pen taps once. A data point, logged.
+
+    Delphi sets down her mug. Not fully — she rests it on the counter, hand still around it. Steeping.
+
+    + ["Reversed, this card asks whether the memory has *changed* over time — not because you're wrong, but because that's what memories do. They're alive. They remix themselves. Like a song you hear at eleven and then again at thirty — same track, different listener, different meaning."] -> TheKind.Session1.P1_SixCups_R_Empathic
+    + ["This card reversed can mean the past isn't exactly what we think it is. You might be searching for a *feeling* you've attached to a record. The record is the container. The feeling is what matters — and feelings don't have track listings."] -> TheKind.Session1.P1_SixCups_R_Reframing
+    + ["Sometimes this card reversed means clinging to the past. Are you sure this search is healthy for you?"] -> TheKind.Session1.P1_SixCups_R_Blunt
+    + ["When this card is reversed, it suggests the real thing that was lost might be different from what you think."] -> TheKind.Session1.P1_SixCups_R_Vague
+@else:
+    The Six of Cups. Two children in a garden, one offering a cup of flowers to the other. Innocence. Nostalgia. The golden weight of a memory that shaped you.
+
+    Ellen sees it and goes still. "That's... children, right? In a garden?"
+
+    She knows a little. Enough to feel it land.
+
+    Behind you, the store reacts.
+
+    Scout, leaning against the vinyl bins with his arms crossed, exhales through his teeth — the sound he makes when a song hits the bridge and he wasn't ready for it. "Oh," he says softly. "That's a deep cut."
+
+    Mal looks up from the composition notebook. Their pen taps twice — the rhythm of elimination. You've seen it before: two options just fell off their list. Whatever book they were considering for Ellen, they're reconsidering. Their eyes move from the card to Ellen's hands to the card again. Data points. Pattern forming.
+
+    Delphi sets down her mug. That's all. She sets down her mug and gives the card her full attention, and when Delphi gives something her full attention, the temperature in the room changes. She's not reading the card. She's reading Ellen reading the card.
+
+    + ["This card is about a specific kind of memory — one that shaped you. Not the chorus, not the hook everyone knows. The four bars before the chorus that your body knows even when your mind doesn't. Tell me about the feeling in that kitchen."] -> TheKind.Session1.P1_SixCups_U_Empathic
+    + ["The Six of Cups often appears when we're looking for something from childhood that we've idealized. In literature, they call this a 'root scene' — the moment a character keeps returning to, the memory that organizes all the other memories around it like a key signature organizes a song."] -> TheKind.Session1.P1_SixCups_U_Reframing
+    + ["You know how a song can be a place? Not *about* a place — an actual place you go back to when you hear it? This card says you've been trying to go back to the kitchen. To Tuesday night. To the sound of her singing along. You're not looking for a record. You're looking for a room that doesn't exist anymore."] -> TheKind.Session1.P1_SixCups_U_Poetic
+    + ["Interesting card. Childhood memories, the past. Does that resonate?"] -> TheKind.Session1.P1_SixCups_U_Vague
+@endif
+
+# Six of Cups — Upright interpretations
+
+:: TheKind.Session1.P1_SixCups_U_Empathic
+"This card is about a specific kind of memory — one that shaped you. Not the chorus, not the hook everyone knows. The four bars before the chorus that your body knows even when your mind doesn't."
+
+You let that breathe.
+
+"Tell me about the feeling in that kitchen."
+
+Ellen's composure softens. The professor drops away and something younger surfaces.
+
+"Warm. The kitchen was warm and the rain was loud on the roof and my mom was in a good mood. She got like that sometimes — spontaneous. 'Come here, Ellie, listen to this.' She never called me Ellie except when she was happy."
+
+She stops. Touches her mouth. The memory is more alive than she expected.
+
+From the vinyl bins, Scout makes no sound, but you can feel him listening the way he listens to a track that's building toward something.
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_SixCups_U_Reframing
+"The Six of Cups often appears when we're looking for something from childhood that we've idealized. In literature, they call this a 'root scene' — the moment a character keeps returning to, the memory that organizes all the other memories around it."
+
+Ellen pauses. The professor in her engages with this. "You think I've made it into something it wasn't?"
+
+"I think the memory has been doing its own work for twenty years. And that's not a flaw. It's just what memories do when they matter. You tell your students that about first drafts, don't you? They change in your memory. You remember the version you *meant* to write."
+
+She sits with that. Nods slowly. "Same principle. Different medium."
+
+"Different medium."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_SixCups_U_Poetic
+"You know how a song can be a place?"
+
+Ellen's hands unclench. Just slightly.
+
+"Not *about* a place — an actual place you go back to when you hear it. A kitchen. A car. A room you haven't been in for twenty years but the song takes you there in four bars."
+
+She nods. Slowly at first, then faster.
+
+"This card says you've been trying to go back to the kitchen. To Tuesday night. To the sound of her singing along and the wooden spoon and the rain outside and you were eleven and the world was exactly the size of that room."
+
+Ellen's composure cracks. Not much — a brightness in her eyes, a tremor at the jaw. The kind of crack that lets light in rather than letting structure out.
+
+"She always sang along," Ellen says. "Even when she didn't know the words. Especially when she didn't know the words. She'd just..." She almost laughs. "She'd just make sounds. In the right key, always in the right key, but nonsense. Beautiful nonsense."
+
+Scout makes a small, involuntary sound from the vinyl bins. He knows this. He knows the experience of someone singing along wrong and it being perfect.
+
+Mal's pen has stopped. They're looking at Ellen with an expression you've only seen a few times — the one that means a data point has landed somewhere personal, somewhere the algorithm can't reach.
+
+Delphi picks her mug back up. That means the card landed where it needed to. Reading can continue.
+
+~ session.impossible_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 3
+~ session.store_warmth += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_SixCups_U_Vague
+"Interesting card. Childhood memories, the past. Does that resonate?"
+
+Ellen gives you a polite look. The one professors give when a student hasn't done the reading.
+
+"I mean... yes? I told you the whole thing is about a childhood memory. So."
+
+Behind the counter, Delphi's eyebrow goes up. Just barely. You feel it more than see it.
+
+Scout winces and suddenly becomes very interested in alphabetizing the Eva Cassidy section, which was already alphabetized.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+# Six of Cups — Reversed interpretations
+
+:: TheKind.Session1.P1_SixCups_R_Empathic
+"Reversed, this card asks whether the memory you're holding onto has *changed* over time — not because you're wrong, but because that's what memories do. They're alive. They remix themselves."
+
+You let that settle.
+
+"Like a song you hear at eleven and then again at thirty — same track, different listener, different meaning."
+
+Ellen exhales. Not relief — recognition. Like something she's been circling alone has just been said aloud for the first time.
+
+"I've wondered about that. Whether I've been adding to it all these years. The strings — were they really strings? Or did I make them strings because it's more vivid that way? The voice — was it really that low, or has my memory been pitch-shifting it all this time?"
+
+"Does it matter?"
+
+"...I don't know. That's why I'm here."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_SixCups_R_Reframing
+"This card reversed can mean the past isn't what we think it is. Not in a bad way — just that you might be searching for a *feeling* you've attached to a record. The record is the container. The feeling is what matters."
+
+You pause.
+
+"And feelings don't have track listings."
+
+Ellen's eyes get bright. Not tears — recognition. The academic in her meets the griever and they agree on something.
+
+"A container. That's..." She pauses. "That's exactly what it is. I've been looking for the container and ignoring what was inside it."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_SixCups_R_Blunt
+"Sometimes this card reversed means clinging to the past. Are you sure this search is healthy for you?"
+
+Ellen's guard snaps up. You can see it — a physical shift, shoulders squaring, chin lifting.
+
+"I'm not *clinging,* I'm trying to find something that mattered to—"
+
+She stops herself. Takes a breath. "Sorry. That was... yeah. Let's keep going."
+
+The door that was open just closed. Behind the vinyl bins, Scout shifts uncomfortably.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+~ session.ellen_openness -= 2
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_SixCups_R_Vague
+"When this card is reversed, it suggests the real thing that was lost might be different from what you think. The record might matter less than you believe."
+
+Ellen considers this without feeling it. It's the right idea, delivered without any heat.
+
+"Maybe." She waits for more. More doesn't come.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+~ session.anchor_influence += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+# --- THE EMPRESS ---
+
+:: TheKind.Session1.P1_Empress
+@if cards[0].reversed:
+    The Empress — reversed. A mother figure, abundant with life — but inverted, the abundance is blocked. Something creative, something nurturing, has stalled.
+
+    Ellen looks at the card for a long time.
+
+    From the vinyl bins, Scout has gone very quiet. His hand goes to his chest — instinctive, involuntary, the gesture he makes when a vocal performance leaves him physically unable to be cool about it.
+
+    Mal closes the composition notebook. Gently, the way you close a book you're not ready to finish. Whatever process was running — the cross-referencing, the narrowing — it pauses.
+
+    Delphi sets down her mug AND leans forward. You've seen this maybe twice in your time at the store.
+
+    + ["Reversed, The Empress sometimes means the nurturing presence you lost... you haven't figured out how to give that to *yourself* yet. You knew how to be her daughter. You're still learning who you are without that role."] -> TheKind.Session1.P1_Empress_R_Empathic
+    + ["This reversal suggests something creative in you has stalled. Not permanently — but the loss interrupted something. You're looking for a record, but I wonder if you're also looking for permission to *make* something again."] -> TheKind.Session1.P1_Empress_R_Reframing
+    + ["The Empress reversed can indicate difficulty with a mother figure. Was there complexity in your relationship?"] -> TheKind.Session1.P1_Empress_R_Analytical
+    + ["This card reversed means blocked creativity or an absent mother figure. Both seem to apply here."] -> TheKind.Session1.P1_Empress_R_Blunt
+@else:
+    The Empress. A mother. A creator. A figure of warmth and abundance and the kind of love that makes things grow.
+
+    In the "What Was Lost" position, it's unmistakable.
+
+    Ellen doesn't say anything for a moment. She just looks at it.
+
+    Scout straightens up from the vinyl bins. His hand goes to his chest — instinctive, involuntary, the gesture he makes when a vocal performance leaves him physically unable to be cool about it. He knows what this card means in this position and he's already feeling it.
+
+    Mal's pen stops entirely. They close the composition notebook. Gently, the way you close a book you're not ready to finish.
+
+    Delphi sets down her mug AND leans forward. You've seen this maybe twice in your time at the store. It means the reading just became something more than a reading.
+
+    + [You let the silence hold for a moment before speaking softly. "This card is The Empress. She's... she's about nurturing. About the person who made the world feel abundant."] -> TheKind.Session1.P1_Empress_U_Empathic
+    + ["The Empress represents creation, growth, and the kind of love that makes things *flourish.* In this position, it's telling me that what you lost wasn't a record — it was a presence. Someone who made the world feel rich. The voice under the melody that you don't notice until it stops and suddenly the whole song sounds thin."] -> TheKind.Session1.P1_Empress_U_Poetic
+    + ["This card often represents a mother figure. Given what you've told me, that's significant. What was your relationship with your mother like?"] -> TheKind.Session1.P1_Empress_U_Analytical
+    + ["The Empress is a powerful card. It represents feminine energy and abundance. Very positive."] -> TheKind.Session1.P1_Empress_U_Vague
+@endif
+
+# Empress — Upright interpretations
+
+:: TheKind.Session1.P1_Empress_U_Empathic
+You let the silence hold. One breath. Two. The lamp throws colored light across the table and Ellen's hands and the face of the card.
+
+"This card is The Empress. She's... she's about nurturing. About the person who made the world feel abundant."
+
+You don't say "your mother." You don't have to.
+
+Ellen's breath catches. A small sound, involuntary, the kind that escapes before composure can catch it.
+
+"She made everything feel like enough," Ellen says quietly. "Even a rainy Tuesday. Even a random record in the kitchen. She could make anything feel like an event."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 3
+~ session.ellen_composure -= 1
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_Empress_U_Poetic
+"The Empress represents creation, growth, and the kind of love that makes things *flourish.* In this position — 'What Was Lost' — it's telling me that what you lost wasn't a record. It was a presence. Someone who made the world feel rich."
+
+You find the words before you know you have them:
+
+"There's a concept in music production called 'room tone' — the sound of the space itself, the ambient warmth that you only hear when someone removes it. The Empress in this position is your mother's room tone. She was so present, so constant, that you didn't hear her until the room went silent."
+
+Ellen nods slowly. Then faster. Something unlocking.
+
+"She had that. She could make a rainy Tuesday feel like an event. That's why she put the record on. It wasn't about the music. It was about making the kitchen into something *more.*"
+
+The reading deepens. You can feel it — like a shelf in the back of the store shifting, making room.
+
+~ session.impossible_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 3
+~ session.store_warmth += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_Empress_U_Analytical
+"This card often represents a mother figure. Given what you've told me, that's significant. What was your relationship with your mother like?"
+
+Direct. Correct. But it skips the moment — jumps to therapy-brain when Ellen needs space to *feel.* She answers, but briefly.
+
+"Close. We were close. She was..." Ellen looks at the card. "She was a lot like that picture, actually. Full of life."
+
+The thread is there. It just doesn't go deeper yet.
+
+~ session.anchor_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+~ session.ellen_openness += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_Empress_U_Vague
+"The Empress is a powerful card. It represents feminine energy and abundance. Very positive."
+
+Ellen waits for more. More doesn't come.
+
+"Okay," she says, with the particular patience of someone who teaches freshmen. "What does that mean for my question?"
+
+Delphi sets down her mug a little harder than necessary. The sound carries.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+# Empress — Reversed interpretations
+
+:: TheKind.Session1.P1_Empress_R_Empathic
+"Reversed, The Empress sometimes means that the nurturing presence you lost... you haven't figured out how to give that to *yourself* yet. You knew how to be her daughter. You're still learning who you are without that role."
+
+This one hits. Ellen's composure cracks — not dramatically, just a slight loosening around the eyes, the jaw. The kind of crack that lets light in.
+
+"I haven't written anything since she died." She says it like she's hearing it for the first time. "I didn't even connect those things. I teach writing. I haven't *written.*"
+
+From behind the bead curtain, the store is very quiet. Even the turntable's residual hum seems to soften.
+
+~ session.anchor_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 4
+~ session.ellen_composure -= 2
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_Empress_R_Reframing
+"This reversal suggests something creative in you has stalled. Not permanently — but the loss interrupted something. You're looking for a record, but I wonder if you're also looking for permission to *make* something again."
+
+Ellen's eyes widen slightly. An unexpected door, opening.
+
+"I teach writing," she says slowly. "But I haven't... huh." She looks at the card like it's a student paper that just surprised her. "I haven't written anything of my own in eight months."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_Empress_R_Analytical
+"The Empress reversed can indicate difficulty with a mother figure. Was there complexity in your relationship?"
+
+Ellen shakes her head. "No. We were close. Really close."
+
+The thread doesn't go deeper. Not because the interpretation was wrong, but because it was reductive — reducing the Empress to a single meaning when the card was carrying something larger.
+
+~ session.bridge_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_Empress_R_Blunt
+"This card reversed means blocked creativity or an absent mother figure. Both seem to apply here."
+
+Too much, too clinical, too fast. Ellen pulls back. Not visibly — she's too composed for that — but you can feel the warmth leave the space between you.
+
+"I suppose that's... accurate," she says carefully.
+
+Scout, behind the vinyl bins, winces.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+~ session.ellen_openness -= 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+# --- ACE OF CUPS ---
+
+:: TheKind.Session1.P1_AceCups
+@if cards[0].reversed:
+    The Ace of Cups — reversed. A cup overturned. Feelings locked inside, unexpressed, a wellspring that's been stopped.
+
+    Ellen looks at the inverted cup. "Something spilled?" she asks, half-joking. Not really joking.
+
+    Scout tilts his head — the way he does when a song changes key and he's trying to feel whether it went up or down before his theory brain can name the interval. This card interests him. He's not sure why yet.
+
+    Mal writes something in the composition notebook. A single word, underlined. You can't see what it is from here, but Mal writing things down during a reading means they've identified a thread they don't want to lose.
+
+    Delphi is watching Ellen's hands. Not the card — Ellen's hands. They're clasped in her lap and the knuckles are white and Delphi sees that and her expression does something subtle and warm, like a song resolving to the tonic.
+
+    + ["Reversed, this card often means an emotion that got *stuck* — something you felt so deeply it never fully processed. You keep returning to this memory because there's a feeling in it that never got to finish."] -> TheKind.Session1.P1_AceCups_R_Empathic
+    + ["The Ace reversed can mean a blocked emotional channel. Something you can't express, or haven't allowed yourself to. This search might be carrying an emotion you haven't found another outlet for — like a song stuck on repeat because you never let it play to the end."] -> TheKind.Session1.P1_AceCups_R_Reframing
+    + ["Sometimes this card reversed means you're afraid to feel what finding it would bring up."] -> TheKind.Session1.P1_AceCups_R_Practical
+    + ["Reversed Ace of Cups means blocked emotions. You might want to consider talking to someone about your grief."] -> TheKind.Session1.P1_AceCups_R_Blunt
+@else:
+    The Ace of Cups. A single cup, overflowing. Water cascading down in five streams, lilies blooming where it falls. The hand of something larger offering the first feeling, the original feeling, the one that came before you had a name for it.
+
+    Ellen stares at the overflow. The excess. Something about the image of *too much feeling to hold* has caught her, the way a hook catches in a song before you understand the lyrics.
+
+    Scout tilts his head — the way he does when a song changes key and he's trying to feel whether it went up or down before his theory brain can name the interval. This card interests him. He's not sure why yet.
+
+    Mal writes something in the composition notebook. A single word, underlined. You can't see what it is, but Mal writing things down during a reading means they've identified a thread they don't want to lose. They're building Ellen's index entry in real time.
+
+    Delphi is watching Ellen's hands. Not the card — Ellen's hands. They're clasped in her lap and the knuckles are white and Delphi sees that and her expression does something subtle and warm, like a song resolving to the tonic. She knows where this is going.
+
+    + ["The Ace of Cups is a first feeling. The original recording — not the remaster, not the remix, not the cover version you heard later. The demo tape. The first take. Your mom put a record on and something in you *opened* — some channel you didn't have before — and you've been listening through it ever since."] -> TheKind.Session1.P1_AceCups_U_Poetic
+    + ["There's a term in audio engineering — 'reference track.' The recording you compare everything else against. It sets the standard. This card says that night in the kitchen *became* your reference track for feeling. Not just for music — for all feeling."] -> TheKind.Session1.P1_AceCups_U_Reframing
+    + ["This card is about capacity. Before that night, you felt things the way kids feel things — big but formless. That record taught you that feelings could have *structure.* A beginning, a middle, a part that breaks you open, a part that puts you back together. Your mom didn't just play you a song. She handed you the blueprint for how to feel."] -> TheKind.Session1.P1_AceCups_U_Empathic
+    + ["This card is about emotions and new feelings. What emotions come up when you think about this record?"] -> TheKind.Session1.P1_AceCups_U_Vague
+@endif
+
+# Ace of Cups — Upright interpretations
+
+:: TheKind.Session1.P1_AceCups_U_Poetic
+"The Ace of Cups is a first feeling. The original recording — not the remaster, not the remix, not the cover version you heard later and thought was better because you were older. The demo tape. The first take."
+
+You let that settle.
+
+"Your mom put a record on and something in you *opened* — some channel you didn't have before — and you've been listening through it ever since. Every song that's ever made you cry is a callback to that first take."
+
+Ellen goes still. Then, quietly, with the precise voice of someone who has just understood something:
+
+"I think that's the first song that ever made me cry. And I wasn't crying because of the music. I was crying because my mom was crying, and I understood for the first time that she had a whole inner life I couldn't see."
+
+The reading nook goes very quiet. The colored light from the stained glass moves slowly across Ellen's hands.
+
+"I was eleven and I realized my mother was a *person.* Not just my mom. A whole person with feelings I couldn't access. And that was enormous. And terrifying. And beautiful."
+
+Scout, leaning against the vinyl bins, is holding a record sleeve very tightly and not blinking.
+
+~ session.impossible_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 4
+~ session.ellen_composure -= 2
+~ session.store_warmth += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_AceCups_U_Reframing
+"There's a term in audio engineering — 'reference track.' The recording you compare everything else against. It sets the standard for the mix."
+
+Ellen's listening. The professor in her recognizes a useful framework.
+
+"This card says that night in the kitchen *became* your reference track for feeling. Not just for music — for all feeling. You measure every emotional experience against the purity of that first one."
+
+She nods. The nod gets slower, heavier with recognition.
+
+"Everything's so complicated now. Grief is complicated. Even listening to music is complicated. It used to just... hit me. I'd feel something and it was simple and total and I didn't have to *analyze* it."
+
+She laughs a little. "I teach analysis for a living. God."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_AceCups_U_Empathic
+"This card is about capacity. Before that night, you felt things the way kids feel things — big but formless. That record taught you that feelings could have *structure.* A beginning, a middle, a part that breaks you open, a part that puts you back together."
+
+You meet her eyes.
+
+"Your mom didn't just play you a song. She handed you the blueprint for how to feel."
+
+Ellen's hands unclench in her lap. The knuckles go from white to pink.
+
+"She was always doing that. Handing me things I didn't know I needed until years later." She pauses. "The first novel I ever loved — she left it on my pillow. Didn't say a word. Just left it there like it was the most natural thing in the world."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_AceCups_U_Vague
+"This card is about emotions and new feelings. What emotions come up when you think about this record?"
+
+Ellen gives you a surface answer. "Nostalgia, mostly. Some sadness." She's waiting for you to lead. You didn't.
+
+Mal's pen resumes in the back. Whatever they crossed off the list, they put back on. This reading hasn't given them enough to work with yet.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+# Ace of Cups — Reversed interpretations
+
+:: TheKind.Session1.P1_AceCups_R_Empathic
+"Reversed, this card often means an emotion that got *stuck* — something you felt so deeply it never fully processed. You keep returning to this memory because there's a feeling in it that never got to finish."
+
+Ellen is quiet for a long time. When she speaks, her voice is lower. More careful.
+
+"She died in stages. Slowly. I was there for all of it. And I was so busy being strong — making calls, managing her meds, handling the paperwork — that I never just... sat down and felt it."
+
+She looks at the overturned cup.
+
+"And this record — this stupid record I can't find — it's the last time I remember just *feeling* something without managing it. Just standing in the kitchen, eleven years old, crying because my mom was crying, and that was enough. That was the whole thing."
+
+The rain falls. The store holds its breath.
+
+~ session.anchor_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 4
+~ session.ellen_composure -= 3
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_AceCups_R_Reframing
+"The Ace reversed can mean a blocked emotional channel. Something you can't express, or haven't allowed yourself to. This search might be carrying an emotion you haven't found another outlet for."
+
+You pause.
+
+"Like a song stuck on repeat because you never let it play to the end."
+
+Ellen considers this carefully — she's academic enough to appreciate the framework.
+
+"A displacement behavior." She almost smiles. "I teach my students about this in fiction. A character who cleans the house instead of grieving. I didn't think I was doing it."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_AceCups_R_Practical
+"Sometimes this card reversed means you're afraid to feel what finding it would bring up."
+
+Ellen pauses. "Maybe. I don't know." It's a door she's not ready to walk through yet.
+
+~ session.anchor_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+:: TheKind.Session1.P1_AceCups_R_Blunt
+"Reversed Ace of Cups means blocked emotions. You might want to consider talking to someone about your grief."
+
+You're a tarot reader in a combo record shop and bookstore in a town where a guy named Toad sells hand-drawn comics on the quad, not a therapist, and Ellen knows it. She gives you a look — the look of a professor being told to "consider the syllabus."
+
+Delphi, from the counter, gives you a *different* look.
+
+~ session.quality_score -= 2
+~ session.interpretation_quality['poor'] += 1
+~ session.ellen_openness -= 2
+
++ [Continue to Position 2] -> TheKind.Session1.Position2_Hub
+
+# ============================================================================
+# END OF POSITION 1 — POSITION 2 CONTINUES IN NEXT SECTION
+# ============================================================================
+
+# ============================================================================
+# POSITION 2: WHERE IT LIVES NOW
+# ============================================================================
+
+:: TheKind.Session1.Position2_Hub
+~ session.discussed_cards.append(cards[1].name)
+@render render_reading(reading=reading, highlight=1)
+
+You move to the second card.
+
+"Where it lives now. Not where it *was* — where it is right now, in your life."
+
+**Position 2: Where It Lives Now**
+**{cards[1].name}**{cards[1].reversed ?  (Reversed) | }
+
+@if cards[1].name == "The Moon":
+    -> TheKind.Session1.P2_Moon
+@elif cards[1].name == "Four of Swords":
+    -> TheKind.Session1.P2_FourSwords
+@else:
+    -> TheKind.Session1.P2_NinePentacles
+@endif
+
+# --- THE MOON ---
+
+:: TheKind.Session1.P2_Moon
+@if cards[1].reversed:
+    The Moon — reversed. The fog thinning. Whatever is hidden is closer to the surface than she thinks.
+
+    Ellen leans forward slightly. "What does that one mean? With the... dogs? And the moon?"
+
+    Scout is leaning forward too. Something about this card in this position has his attention — the fog lifting means the thing might be *findable,* and Scout lives for the moment a song goes from lost to found.
+
+    Mal's pen has resumed — short, fast strokes. They're narrowing.
+
+    Delphi is still. That particular stillness that means she already knows something and is waiting for everyone else to arrive.
+
+    + ["Reversed Moon means the fog is lifting. Whatever you're looking for — it's *close.* Closer than you think. Like a melody on the tip of your tongue, or a record on a shelf you've walked past a hundred times without checking."] -> TheKind.Session1.P2_Moon_R_Empathic
+    + ["This reversal says the confusion is clearing. You're starting to hear what's real and what you've been adding to the track in your memory. That clarity will change what you're looking for — and that's a good thing."] -> TheKind.Session1.P2_Moon_R_Reframing
+    + ["The Moon reversed is about truth emerging from confusion. Something hidden is about to surface."] -> TheKind.Session1.P2_Moon_R_Practical
+    + ["Good news — reversed Moon means the confusion is ending. You'll probably find it soon."] -> TheKind.Session1.P2_Moon_R_Vague
+@else:
+    The Moon. Two dogs howling. A crayfish emerging from water. A path stretching between two towers into an uncertain landscape. The space between dreaming and waking.
+
+    Delphi pauses mid-pour behind the counter. This card opens doors.
+
+    Scout shifts his weight. The Moon makes him restless — it's the card of the deep shelves, the back catalog, the B-side that never got pressed.
+
+    Mal's pen lifts from the page. They look at the card. Look at the store around them. Something connects.
+
+    + ["The Moon is about the space between what's real and what's imagined — and how sometimes that space is where the truest things live. Your record might not exist in any database because it doesn't live in the database world. It lives *here.* In the space between tracks. In the groove between songs."] -> TheKind.Session1.P2_Moon_U_Poetic
+    + ["This card says the record lives in your subconscious — in the foggy space where memory and imagination blend. You might never find an exact match because it's become something *more* than a recording. A feeling with a melody."] -> TheKind.Session1.P2_Moon_U_Empathic
+    + ["The Moon in this position suggests confusion — you might be combining multiple memories. Have you considered that this might be two or three different records overlapping? The strings from one, the voice from another, the emotion from the kitchen itself?"] -> TheKind.Session1.P2_Moon_U_Reframing
+    + ["The Moon represents illusions and uncertainty. The record might not be what you think it is."] -> TheKind.Session1.P2_Moon_U_Vague
+@endif
+
+# Moon — Upright interpretations
+
+:: TheKind.Session1.P2_Moon_U_Poetic
+"The Moon is about the space between what's real and what's imagined — and how sometimes that space is where the truest things live."
+
+You pause. Something in you — something that belongs to The Kind, to this dream, to whatever this place is — pushes you further.
+
+"Your record might not exist in any database because it doesn't live in the database world. It lives *here.* In the space between tracks. In the groove between songs."
+
+You gesture vaguely at the store. At the shelves stretching deeper than the building should allow. At the vinyl bins that keep going, and the book stacks that lean into each other like old friends, and the warm light, and the rain.
+
+Ellen looks at you. Looks at the store. Really *looks,* maybe for the first time, at how the aisles go deeper than they should and the sections in the back don't quite make sense.
+
+"Here?" she says.
+
+In the book stacks, Mal's pen stops. They close the composition notebook entirely. Stand up. And for the first time in the reading, they move — just a few steps — toward the deep shelves. Not going in. Just... acknowledging the direction.
+
+~ session.impossible_influence += 3
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.deep_shelves_stirring = True
+~ session.mal_engaged = True
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_Moon_U_Empathic
+"This card says the record lives in your subconscious — in dreams, in the foggy space where memory and imagination blend. You might never find an exact match in the real world because it's become something *more* than a recording."
+
+You find the words: "A feeling with a melody."
+
+Ellen's expression changes — the professor lights up. She knows a good line when she hears one.
+
+"A feeling with a melody. That's..." She almost smiles. "I'm going to steal that for a lecture."
+
+The reading warms. The tension loosens. This is the right temperature.
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_Moon_U_Reframing
+"The Moon in this position suggests confusion — you might be combining multiple memories into one. Have you considered that this might be two or three different records overlapping? The strings from one, the voice from another, the emotion from the kitchen itself?"
+
+Ellen nods. "I've thought about that. A music theory friend at Carruth said the same thing. She thinks I'm merging at least two recordings with the ambient sound of rain and my mother humming."
+
+Logical. Probably correct. But it deflates the magic a little. The reading cools one degree.
+
+~ session.bridge_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_Moon_U_Vague
+"The Moon represents illusions and uncertainty. The record might not be what you think it is."
+
+Ellen looks at you with barely concealed patience. "I know that. That's why I'm here."
+
+The turntable behind the counter clicks — the needle arm returning to rest with a sound that feels pointed.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+# Moon — Reversed interpretations
+
+:: TheKind.Session1.P2_Moon_R_Empathic
+"Reversed Moon means the fog is lifting. Whatever you're looking for — it's *close.* Closer than you think."
+
+You feel a strange certainty that has nothing to do with the card. Like the store itself is agreeing with you.
+
+"Like a melody on the tip of your tongue. Or a record on a shelf you've walked past a hundred times without checking."
+
+You say that last part without planning to. Mal's head turns, almost imperceptibly, toward the deep shelves where the vinyl bins go further back than the building should allow.
+
+Ellen's breath quickens. "You think it might actually be here?"
+
+~ session.impossible_influence += 3
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.deep_shelves_stirring = True
+~ session.mal_engaged = True
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_Moon_R_Reframing
+"This reversal says the confusion is clearing. You're starting to hear what's real and what you've been adding to the track in your memory. That clarity is going to change what you're looking for — and that's a good thing."
+
+Ellen relaxes slightly. "I think I've been afraid that if I listen too closely, the memory falls apart. Like overplaying a record — you start hearing the crackle instead of the music."
+
+"Or maybe you hear both. And the crackle is part of the song now."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_Moon_R_Practical
+"The Moon reversed is about truth emerging from confusion. Something hidden is about to surface."
+
+Correct but unspecific. Ellen nods and waits for more.
+
+~ session.impossible_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_Moon_R_Vague
+"Good news — reversed Moon means the confusion is ending. You'll probably find it soon."
+
+False confidence. You have no basis for this. Ellen gives you a tight smile.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+# --- FOUR OF SWORDS ---
+
+:: TheKind.Session1.P2_FourSwords
+@if cards[1].reversed:
+    The Four of Swords — reversed. A figure that should be at rest, but can't be. Restlessness. The search that won't let you sleep.
+
+    Scout drums his fingers on the vinyl bin. Four of Swords reversed makes him anxious — it's the opposite of the listening state, the inability to sit with silence.
+
+    Mal underlines something twice. That's rare.
+
+    Delphi sets her mug down fully. Both hands on the counter.
+
+    + ["Reversed, this card is telling me you *can't stop looking.* Not in a fun way — in an exhausting way. This search has become the thing you do instead of sitting with the grief. You keep the music playing so you never have to hear the quiet."] -> TheKind.Session1.P2_FourSwords_R_Empathic
+    + ["This reversal suggests the search itself has become a problem — it started as connection to your mom, but it's become a way to avoid *feeling* the loss. You're in motion so you don't have to be still. Like listening on shuffle so you never have to sit with the silence between tracks."] -> TheKind.Session1.P2_FourSwords_R_Reframing
+    + ["You've been looking too hard. Sometimes that makes it harder to find things."] -> TheKind.Session1.P2_FourSwords_R_Practical
+    + ["This card reversed means burnout. You're exhausting yourself with this search."] -> TheKind.Session1.P2_FourSwords_R_Vague
+@else:
+    The Four of Swords. A figure lying still on a stone slab, three swords on the wall, one beneath them. Rest. Retreat. Sanctuary. Not death — *pause.*
+
+    Scout exhales slowly. He recognizes this card's energy — the gap between tracks. The silence that's part of the album.
+
+    Mal writes something with unusual care. Small letters, like a margin note in a beloved book.
+
+    Delphi nods once. To herself, or to the card, or to the store.
+
+    + ["This card says the record lives in your *rest.* In the quiet moments — falling asleep, staring out the window during office hours, sitting with Kuro on the couch. It comes to you when you stop looking. When you let the needle reach the run-out groove and just... listen to the room."] -> TheKind.Session1.P2_FourSwords_U_Empathic
+    + ["The Four of Swords is a sanctuary card. Whatever you lost, it's being *held* somewhere safe. It's not gone — it's resting. Waiting for you to be ready. Like a book you loaned to someone you trust — it exists, it's cared for, it'll come back when the time is right."] -> TheKind.Session1.P2_FourSwords_U_Reframing
+    + ["This card suggests you need to stop actively searching and allow the answer to come to you. Have you tried just... not looking for a while?"] -> TheKind.Session1.P2_FourSwords_U_Practical
+    + ["Four of Swords means rest. Maybe you should take a break from the search."] -> TheKind.Session1.P2_FourSwords_U_Vague
+@endif
+
+# Four of Swords — Upright interpretations
+
+:: TheKind.Session1.P2_FourSwords_U_Empathic
+"This card says the record lives in your *rest.* In the quiet moments — when you're falling asleep, or staring out the window during office hours, or sitting with Kuro on the couch."
+
+Ellen's eyes widen slightly at the dog's name. She didn't tell you that.
+
+(She told Scout once, months ago, when he asked about the sticker on her jacket — a silhouette of an Akita with the name underneath. Scout mentioned it to you. You filed it away. That's how The Kind works.)
+
+"He does this thing where he puts his head on my lap when I'm reading and..." She trails off. Smiles a private smile. "Yeah. That's when I hear it most. The four notes. The quiet times."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_FourSwords_U_Reframing
+"The Four of Swords is a sanctuary card. Whatever you lost, it's being *held* somewhere safe. It's not gone — it's resting. Waiting for you to be ready."
+
+You find a second image: "Like a book you loaned to someone you trust. It exists. It's cared for. It'll come back when the time is right."
+
+Ellen's shoulders drop an inch. The relief is physical.
+
+"I like the idea that it's being kept safe somewhere. That it's not just... gone."
+
+Mal, in the book stacks, makes a small sound. Almost involuntary. The book metaphor landed somewhere personal for them too.
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_FourSwords_U_Practical
+"This card suggests you need to stop actively searching and allow the answer to come to you. Have you tried just... not looking for a while?"
+
+Reasonable advice she's already received from multiple well-meaning people.
+
+"I have. And then I wake up at 2am and hum those four notes into my phone again."
+
+~ session.anchor_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_FourSwords_U_Vague
+"Four of Swords means rest. Maybe you should take a break from the search."
+
+She didn't come to a supernatural record shop on a rainy Tuesday to be told to take a break. The look she gives you says as much.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+# Four of Swords — Reversed interpretations
+
+:: TheKind.Session1.P2_FourSwords_R_Empathic
+"Reversed, this card is telling me you *can't stop looking.* And not in a fun way — in an exhausting way. This search has become the thing you do instead of sitting with the grief. You keep the music playing so you never have to hear the quiet."
+
+Tough read. But Ellen came here for honesty, even if she didn't know it.
+
+She's quiet for a long moment. Then:
+
+"I reorganized my entire vinyl collection at 2am last week. By year, then by producer, then by recording location." She almost laughs. "I told myself it was organization. It was just... a way to keep touching records without finding the one that matters."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_FourSwords_R_Reframing
+"This reversal suggests the search itself has become a problem — it started as a way to connect with your mom's memory, but it's become a way to avoid *feeling* the loss. You're in motion so you don't have to be still."
+
+You find the image: "Like listening on shuffle so you never have to sit with the silence between tracks."
+
+Ellen nods slowly. "My therapist would like you."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_FourSwords_R_Practical
+"You've been looking too hard. Sometimes that makes it harder to find things."
+
+True but she knows.
+
+"I've heard that," she says. Patiently.
+
+~ session.anchor_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_FourSwords_R_Vague
+"This card reversed means burnout. You're exhausting yourself with this search."
+
+Reductive. Ellen nods politely and waits for depth that doesn't come.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+# --- NINE OF PENTACLES ---
+
+:: TheKind.Session1.P2_NinePentacles
+@if cards[1].reversed:
+    The Nine of Pentacles — reversed. A garden that feels hollow. Self-sufficiency that's become isolation.
+
+    Scout looks down. This card reversed makes him sad in a way he can't articulate — abundance without an audience.
+
+    Mal's pen pauses. They look at Ellen, not the card. Unusual.
+
+    Delphi's expression softens. She knows this card. She might live this card.
+
+    + ["Reversed, this card says the life you've built is real and beautiful — but there's no one to share it with. Not no one, exactly. No one who *knew* you when the garden was just seeds. No one who heard your first draft and cried."] -> TheKind.Session1.P2_NinePentacles_R_Empathic
+    + ["This reversal suggests you've built a good life but it feels incomplete. The search might be about filling a gap that's really about *sharing* — you want someone to listen with again. Not to music. To the world."] -> TheKind.Session1.P2_NinePentacles_R_Reframing
+    + ["Nine of Pentacles reversed can mean overwork or feeling isolated despite success."] -> TheKind.Session1.P2_NinePentacles_R_Practical
+    + ["This card reversed means your accomplishments feel hollow. Is your career fulfilling?"] -> TheKind.Session1.P2_NinePentacles_R_Vague
+@else:
+    The Nine of Pentacles. A woman in a garden she cultivated herself. A falcon on her wrist. Abundance, self-sufficiency, the quiet pride of a life well-built.
+
+    In the "Where It Lives Now" position, this card is saying something surprising.
+
+    Scout cocks his head. Surprised by the card in this position. Good surprised — the kind of surprised that makes him reassess the whole mix.
+
+    Mal writes two words. Underlines one.
+
+    Delphi almost smiles. Almost.
+
+    + ["This card is telling me something you might not expect. The thing you lost? It lives in the life you've *already built.* Your teaching, your routines, the home you've made. The record's warmth is already in your life — you just haven't recognized it wearing different clothes. It's in every playlist you make for a road trip, every song you hum while grading papers, every time you put music on for Kuro even though he's a dog and doesn't care."] -> TheKind.Session1.P2_NinePentacles_U_Poetic
+    + ["This card represents someone who's cultivated a beautiful, self-sufficient life. Whatever you lost, it's been woven into who you've *become.* You carry it. You just can't see it because you're looking for it in a record sleeve instead of in the mirror."] -> TheKind.Session1.P2_NinePentacles_U_Empathic
+    + ["The Nine of Pentacles is about abundance and independence. The lost thing might already be part of your daily life in ways you haven't noticed."] -> TheKind.Session1.P2_NinePentacles_U_Reframing
+    + ["This is a positive card about material comfort. Things are going well for you."] -> TheKind.Session1.P2_NinePentacles_U_Vague
+@endif
+
+# Nine of Pentacles — Upright interpretations
+
+:: TheKind.Session1.P2_NinePentacles_U_Poetic
+"This card is telling me something you might not expect. The thing you lost? It lives in the life you've *already built.* Your teaching, your routines, the home you've made."
+
+You watch her listen.
+
+"The record's warmth is already in your life — you just haven't recognized it wearing different clothes. It's in every playlist you make for a road trip, every song you hum while grading papers, every time you put music on for Kuro even though he's a dog and doesn't care."
+
+Ellen blinks. Then her expression does something complicated — surprise, resistance, and then a slow, grudging recognition.
+
+"He has preferences, actually," she says quietly. "He likes Ella Fitzgerald. He puts his head down when I play Ella."
+
+"Your mom's influence."
+
+Ellen looks at you. "How did you—" She stops. "Yeah. My mom loved Ella."
+
+From behind the vinyl bins, Scout does a tiny fist pump. Only you see it.
+
+~ session.impossible_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 2
+~ session.store_warmth += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_NinePentacles_U_Empathic
+"This card represents someone who's cultivated a beautiful, self-sufficient life. Whatever you lost, it's been woven into who you've *become.* You carry it."
+
+You let that land.
+
+"You just can't see it because you're looking for it in a record sleeve instead of in the mirror."
+
+Ellen's eyes get bright. Not tears — recognition.
+
+"My mom always said I got my stubbornness from her. I always thought she meant it as a complaint."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_NinePentacles_U_Reframing
+"The Nine of Pentacles is about abundance and independence. The lost thing might already be part of your daily life in ways you haven't noticed."
+
+Correct, but doesn't land with the same resonance. Ellen considers it.
+
+"Maybe. I'll think about that."
+
+~ session.bridge_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_NinePentacles_U_Vague
+"This is a positive card about material comfort. Things are going well for you."
+
+Ellen teaches four sections of composition for adjunct pay. She raises an eyebrow.
+
+Completely misses the position's meaning. Delphi tops off her tea without comment.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+# Nine of Pentacles — Reversed interpretations
+
+:: TheKind.Session1.P2_NinePentacles_R_Empathic
+"Reversed, this card says the life you've built is real and beautiful — but there's no one to share it with. Not no one, exactly. No one who *knew* you when the garden was just seeds."
+
+Ellen's composure flickers. That landed somewhere deep.
+
+"She was at my first reading. At Carruth." Ellen stops. Starts again. "I read this terrible story about a girl and a train station and she sat in the back row and cried. Not because it was good. Because I *wrote* something. She was the only one who ever cried at my writing."
+
+The lamp light moves slowly across the cards.
+
+"And she always brought music. Every visit. She'd drive up from Portland with a new record she'd found at Mississippi Records and say, 'Ellie, sit down, you need to hear this.' Even when I was twenty-five. Even when I was thirty."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 3
+~ session.ellen_composure -= 2
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_NinePentacles_R_Reframing
+"This reversal suggests you've built a good life but it feels incomplete. The search might be about filling a gap that's really about *sharing* — you want someone to listen with again. Not to music. To the world."
+
+Ellen nods slowly. "I listen to everything alone now. Even here — I come alone. I *like* being alone. But there's a difference between solitude and... absence."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_NinePentacles_R_Practical
+"Nine of Pentacles reversed can mean overwork or feeling isolated despite success."
+
+Ellen: "Adjunct professors aren't successful. We're just stubborn." She smiles thinly.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+:: TheKind.Session1.P2_NinePentacles_R_Vague
+"This card reversed means your accomplishments feel hollow. Is your career fulfilling?"
+
+Wrong tree. Wrong forest. Ellen came here about a record, not a career consultation.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session1.Position3_Hub
+
+# ============================================================================
+# POSITION 3: WHAT BLOCKS THE FINDING
+# ============================================================================
+
+:: TheKind.Session1.Position3_Hub
+~ session.discussed_cards.append(cards[2].name)
+@render render_reading(reading=reading, highlight=2)
+
+You move to the third card. The energy shifts — this is the obstacle.
+
+"What blocks the finding. What's between you and the thing you need."
+
+**Position 3: What Blocks the Finding**
+**{cards[2].name}**{cards[2].reversed ?  (Reversed) | }
+
+@if cards[2].name == "Eight of Cups":
+    -> TheKind.Session1.P3_EightCups
+@elif cards[2].name == "Seven of Cups":
+    -> TheKind.Session1.P3_SevenCups
+@else:
+    -> TheKind.Session1.P3_FiveSwords
+@endif
+
+# --- EIGHT OF CUPS ---
+
+:: TheKind.Session1.P3_EightCups
+@if cards[2].reversed:
+    The Eight of Cups — reversed. Someone who tried to walk away but keeps coming back. The inability to leave the search behind.
+
+    Scout goes still. This one he understands viscerally — the record you keep pulling off the shelf even when you know every scratch.
+
+    Mal sets down the pen. Both hands flat on the composition notebook.
+
+    Delphi wraps both hands around her mug but doesn't drink.
+
+    + ["Reversed, this card says you've *tried* to stop looking. You know it might be futile. But you can't let go because letting go feels like letting go of *her.* And that's the real block — you've tied the search to your love, and now you can't stop one without betraying the other."] -> TheKind.Session1.P3_EightCups_R_Empathic
+    + ["This reversal suggests you keep returning to the search even when you know it's not serving you. There's a pattern here worth examining — what does the *act* of searching give you that finding it wouldn't?"] -> TheKind.Session1.P3_EightCups_R_Reframing
+    + ["You keep coming back to this. There might be something about the search itself that you're not ready to let go of."] -> TheKind.Session1.P3_EightCups_R_Practical
+    + ["Reversed Eight of Cups means you can't move forward. You're stuck."] -> TheKind.Session1.P3_EightCups_R_Vague
+@else:
+    The Eight of Cups. A figure walking away under a moonlit sky, leaving eight stacked cups behind. Leaving abundance to search for something unknown.
+
+    Scout's grin fades. He knows this card — walking away from the collection, from the known catalog, to chase the unheard thing.
+
+    Mal opens the composition notebook again. Resumes writing. Whatever they're building, this card adds something.
+
+    Delphi sets her mug down. The sound is quiet and definite.
+
+    + ["The Eight of Cups shows someone walking away from what they have to look for something they don't. And in the 'what blocks you' position..." You let that land. "Ellen, what have you walked away from to keep searching? What's not getting your attention?"] -> TheKind.Session1.P3_EightCups_U_Empathic
+    + ["This card says the obstacle is the search itself. You've been so focused on finding this one specific record that you've left behind other things that matter. The journey became a trap that feels like devotion — and that's the worst kind."] -> TheKind.Session1.P3_EightCups_U_Reframing
+    + ["Eight of Cups often means abandonment — you might be unconsciously abandoning present opportunities while focused on this search."] -> TheKind.Session1.P3_EightCups_U_Analytical
+    + ["This card means you need to move on from the search."] -> TheKind.Session1.P3_EightCups_U_Blunt
+@endif
+
+# Eight of Cups — Upright interpretations
+
+:: TheKind.Session1.P3_EightCups_U_Empathic
+"The Eight of Cups shows someone walking away from what they have to look for something they don't. And in the 'what blocks you' position..."
+
+You let that land. Ellen's watching you carefully.
+
+"Ellen, what have you walked away from to keep searching? What's not getting your attention?"
+
+She goes quiet. Then, carefully:
+
+"I turned down a sabbatical offer. I could've spent it writing. I spent it going through my mom's vinyl collection instead, cataloging everything, trying to match the four notes to something in her library."
+
+The room feels different after this. Like a door opened and the air changed.
+
+~ session.anchor_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 3
+~ session.ellen_composure -= 2
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_EightCups_U_Reframing
+"This card says the obstacle is the search itself. You've been so focused on finding this one specific record that you've left behind other things that matter. The search became a journey and the journey became a trap."
+
+Ellen: "A trap that feels like devotion. That's the worst kind."
+
+She's a writer. She knows what a good line is. And she just heard herself say something true.
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_EightCups_U_Analytical
+"Eight of Cups often means abandonment — you might be unconsciously abandoning present relationships or opportunities while focused on this search."
+
+Clinical but fair. Ellen considers it without feeling it deeply.
+
+"That's possible. I've been pretty single-minded."
+
+~ session.anchor_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_EightCups_U_Blunt
+"This card means you need to move on from the search."
+
+Right conclusion. Zero compassion. Ellen's jaw tightens.
+
+"Thank you for that insight," she says, in the voice she probably uses on students who didn't do the reading.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+~ session.ellen_openness -= 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+# Eight of Cups — Reversed interpretations
+
+:: TheKind.Session1.P3_EightCups_R_Empathic
+"Reversed, this card says you've *tried* to stop looking. You know it might be futile. But you can't let go because letting go feels like letting go of *her.*"
+
+Ellen's breath catches.
+
+"And that's the real block — you've tied the search to your love, and now you can't stop one without betraying the other."
+
+She doesn't say anything for a long time. When she speaks, her voice is smaller.
+
+"If I stop looking, who's listening for her? Who remembers the things she loved?"
+
+The Kind is very quiet. Even the rain seems to hold.
+
+~ session.anchor_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 4
+~ session.ellen_composure -= 3
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_EightCups_R_Reframing
+"This reversal suggests you keep returning to the search even when you know it's not serving you. There's a pattern here worth examining — what does the *act* of searching give you that finding it wouldn't?"
+
+Ellen pauses. Really thinks about this.
+
+"Connection. As long as I'm looking, I'm still... doing something *with* her. Even if she's not here. Like playing a record that's ended but leaving the needle in the groove — you can still hear the room."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_EightCups_R_Practical
+"You keep coming back to this. There might be something about the search itself that you're not ready to let go of."
+
+Ellen nods. "Probably. My therapist has said something similar."
+
+~ session.anchor_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_EightCups_R_Vague
+"Reversed Eight of Cups means you can't move forward. You're stuck."
+
+Ellen: "I know I'm stuck. That's why I'm *here.*"
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+# --- SEVEN OF CUPS ---
+
+:: TheKind.Session1.P3_SevenCups
+@if cards[2].reversed:
+    The Seven of Cups — reversed. The fantasies clearing. A moment of focus cutting through the noise.
+
+    Scout straightens up. Reversed Seven feels like the moment the mix clears and you can hear each instrument separately.
+
+    Mal nods once. Data resolving into pattern.
+
+    Delphi is already looking at Ellen, not the card. She knows what's coming.
+
+    + ["Reversed, this card says you're *finally* hearing clearly. The noise is fading — all the versions, all the maybes — and what's left is the real thing. The block was never the record. It was the hundred versions of the record you'd built around it."] -> TheKind.Session1.P3_SevenCups_R_Empathic
+    + ["This reversal means you're ready to choose. You've been drowning in possibilities and this card says you're coming up for air. The block is dissolving on its own."] -> TheKind.Session1.P3_SevenCups_R_Reframing
+    + ["Seven of Cups reversed means things are becoming clearer. Good sign."] -> TheKind.Session1.P3_SevenCups_R_Practical
+    + ["The confusion is clearing. You should be able to find what you need."] -> TheKind.Session1.P3_SevenCups_R_Vague
+@else:
+    The Seven of Cups. Seven cups floating in clouds, each holding something different — castle, jewels, snake, wreath, dragon, ghost, a veiled shining figure. Choices. Illusions. Fantasy.
+
+    Scout whistles low. He knows this card — the overwhelming wall of sound when you're trying to isolate one instrument.
+
+    Mal's eyes flick to Ellen, then to the card, then to the deep shelves. Triangulating.
+
+    Delphi sips her tea. Steady. Waiting.
+
+    + ["The Seven of Cups is about having too many possibilities and not being able to choose. Every time you revisit the memory, it shifts. Were the strings really strings, or was it a guitar? Was the voice low or just warm? Was the song slow or did grief slow it down in your memory? You've got seven versions and you're trying to Shazam all of them at once."] -> TheKind.Session1.P3_SevenCups_U_Reframing
+    + ["This card says the block is *imagination.* Your memory is creative — you're a writer, it's what you *do* — and it's been adding to this record for twenty years. You're not looking for one song anymore. You're looking for a song that only exists in you."] -> TheKind.Session1.P3_SevenCups_U_Poetic
+    + ["Seven of Cups can mean being lost in fantasy. You might be chasing an idealization rather than a real recording."] -> TheKind.Session1.P3_SevenCups_U_Practical
+    + ["This card means confusion and too many options. Try narrowing your search criteria."] -> TheKind.Session1.P3_SevenCups_U_Vague
+@endif
+
+# Seven of Cups — Upright interpretations
+
+:: TheKind.Session1.P3_SevenCups_U_Reframing
+"The Seven of Cups is about having too many possibilities and not being able to choose. Every time you revisit the memory, it shifts a little. Were the strings really strings, or was it a guitar? Was the voice low or just warm? Was the song slow or did grief slow it down in your memory?"
+
+Ellen almost laughs. The first real laugh of the session.
+
+"Oh god, yes. I have a *spreadsheet.* With columns for 'definitely remember' and 'might be adding' and 'possibly from a different song entirely.'"
+
+From the book stacks, Mal's voice, quiet and deadpan: "I'd like to see that spreadsheet."
+
+Ellen startles — she didn't know anyone was listening from back there — and then laughs again, for real this time. The tension in the reading nook drops three degrees.
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_SevenCups_U_Poetic
+"This card says the block is *imagination.* Your memory is creative — you're a writer, it's what you *do* — and it's been remixing this record for twenty years. You're not looking for one song anymore."
+
+You meet her eyes.
+
+"You're looking for a song that only exists in you."
+
+Ellen's expression shifts. And you feel something else shift too — in the store, in the deep shelves, in the space where impossible things are filed. A record that only exists in one person's memory... and a store that holds records from every possible reality.
+
+~ session.impossible_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.deep_shelves_stirring = True
+~ session.mal_engaged = True
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_SevenCups_U_Practical
+"Seven of Cups can mean being lost in fantasy. You might be chasing an idealization rather than a real recording."
+
+She's heard this. The observation is accurate and already priced in.
+
+"That's what my friend at KRWN keeps telling me." She pauses. "The station's music director."
+
+~ session.bridge_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_SevenCups_U_Vague
+"This card means confusion and too many options. Try narrowing your search criteria."
+
+She's in a supernatural record shop getting a tarot reading, not filing a support ticket. The look on her face says so.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+# Seven of Cups — Reversed interpretations
+
+:: TheKind.Session1.P3_SevenCups_R_Empathic
+"Reversed, this card says you're *finally* hearing clearly. The noise is fading — all the versions, all the maybes — and what's left is the real thing."
+
+You lean forward slightly.
+
+"The block was never the record. It was the hundred versions of the record you'd built around it."
+
+Ellen sits with that. You can see her turning it over — the professor and the griever and the searcher all looking at the same idea from different angles.
+
+"So the block is... me. My own imagination."
+
+"Your imagination was protecting you. Giving you something to chase so you didn't have to stop and listen to the silence."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_SevenCups_R_Reframing
+"This reversal means you're ready to choose. You've been drowning in possibilities and this card says you're coming up for air. The block is dissolving on its own."
+
+Ellen: "Is that why I came here tonight? Because I'm ready?"
+
+"The cards think so."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_SevenCups_R_Practical
+"Seven of Cups reversed means things are becoming clearer. Good sign."
+
+Accurate, unspecific, forgettable.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_SevenCups_R_Vague
+"The confusion is clearing. You should be able to find what you need."
+
+Empty encouragement. Ellen nods politely.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+# --- FIVE OF SWORDS ---
+
+:: TheKind.Session1.P3_FiveSwords
+@if cards[2].reversed:
+    The Five of Swords — reversed. The fight ending. Laying down arms. Choosing peace over being right.
+
+    Scout uncrosses his arms. Something in him relaxes at this reversal — the argument with reality winding down.
+
+    Mal writes a full sentence. That almost never happens during readings.
+
+    Delphi sets down her mug and folds her arms. Not closed off — decisive. Like she's already planning the recommendation.
+
+    + ["Reversed, this card says you're ready to stop fighting reality. You've been insisting this record exists *exactly* as you remember it, and Shazam keeps disagreeing, and you're exhausted. This reversal is permission to surrender — not to grief, but to *gentleness.* To say 'maybe I don't need to be right about this.'"] -> TheKind.Session1.P3_FiveSwords_R_Empathic
+    + ["This reversal suggests the conflict is resolving. You've been at war with your own memory and you're ready for a truce. Not giving up — just changing the terms."] -> TheKind.Session1.P3_FiveSwords_R_Reframing
+    + ["Five of Swords reversed means the fighting is over. You're letting go of the need to win this particular battle."] -> TheKind.Session1.P3_FiveSwords_R_Practical
+    + ["This reversed card means conflict resolution. Things should get easier."] -> TheKind.Session1.P3_FiveSwords_R_Vague
+@else:
+    The Five of Swords. A figure holding three swords, two on the ground, other figures walking away defeated. Conflict. A battle that costs too much to win.
+
+    Scout flinches. Just slightly. He doesn't like this card — it's the sound of feedback in a PA system, a fight nobody asked for.
+
+    Mal stops writing. Looks at Ellen with something that might be concern.
+
+    Delphi's expression doesn't change, but her hands tighten around the mug.
+
+    + ["The Five of Swords is a battle card — and in this position, it's telling me you're fighting with *reality.* You're insisting that this record exists exactly as you remember it, and the world keeps telling you it doesn't. But this isn't a fight you can win by being right. You win it by changing what winning means."] -> TheKind.Session1.P3_FiveSwords_U_Poetic
+    + ["This card represents a conflict where the cost of winning exceeds the prize. Even if you found this exact record tomorrow — the exact pressing, the exact version from your memory — would it give you what you actually need? Or would it just be... an album?"] -> TheKind.Session1.P3_FiveSwords_U_Empathic
+    + ["The Five of Swords sometimes means you're in a fight with yourself. Part of you wants to find it, part of you knows it might not exist. Neither side can win."] -> TheKind.Session1.P3_FiveSwords_U_Reframing
+    + ["This card suggests conflict. Is there someone who disagrees with your search?"] -> TheKind.Session1.P3_FiveSwords_U_Vague
+@endif
+
+# Five of Swords — Upright interpretations
+
+:: TheKind.Session1.P3_FiveSwords_U_Poetic
+"The Five of Swords is a battle card — and in this position, it's telling me you're fighting with *reality.*"
+
+Ellen's hands tighten in her lap.
+
+"You're insisting that this record exists exactly as you remember it, and Shazam keeps telling you it doesn't, and the forums keep telling you it doesn't, and your KRWN friend keeps telling you it doesn't, and you won't surrender. But this isn't a fight you can win by being right."
+
+You let the next part come slow:
+
+"You win it by changing what winning means."
+
+Ellen's composure finally cracks. Not much — a tremor in her jaw, a brightness in her eyes that's different from the intellectual brightness of before. This is the pressure of something that's been held too tight for too long.
+
+"I'm so tired of looking," she says.
+
+This is the moment the reading earns her trust completely. The room changes. Even Scout, behind the vinyl bins, has gone perfectly still.
+
+~ session.impossible_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 4
+~ session.ellen_composure -= 3
+~ session.store_warmth += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_FiveSwords_U_Empathic
+"This card represents a conflict where the cost of winning exceeds the prize. Even if you found this exact record tomorrow — the exact pressing, the exact version from your memory — would it give you what you actually need?"
+
+You pause.
+
+"Or would it just be... an album?"
+
+Ellen stares at you. "I've thought about that. What if I find it and it's just... fine? What if the magic was never in the music?"
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.ellen_openness += 2
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_FiveSwords_U_Reframing
+"The Five of Swords sometimes means you're in a fight with yourself. Part of you wants to find it, part of you knows it might not exist as you remember it. Neither side can win."
+
+Accurate. Ellen considers it.
+
+"That's... probably right. I just don't know how to stop."
+
+~ session.bridge_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_FiveSwords_U_Vague
+"This card suggests conflict. Is there someone who disagrees with your search?"
+
+Misread. The conflict is internal. Ellen blinks.
+
+"I... no? It's not really a group activity."
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+# Five of Swords — Reversed interpretations
+
+:: TheKind.Session1.P3_FiveSwords_R_Empathic
+"Reversed, this card says you're ready to stop fighting reality."
+
+Ellen looks at you. Listening.
+
+"You've been insisting this record exists *exactly* as you remember it, and the world keeps disagreeing, and you're exhausted. This reversal is permission to surrender — not to grief, but to *gentleness.* To say 'maybe I don't need to be right about this.'"
+
+Ellen's eyes close. Just for a moment. When they open, something has loosened in her.
+
+"Permission. That's what I've been looking for. Not the record. Permission to stop."
+
+~ session.anchor_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.ellen_openness += 3
+~ session.ellen_composure -= 2
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_FiveSwords_R_Reframing
+"This reversal suggests the conflict is resolving. You've been at war with your own memory and you're ready for a truce. Not giving up — just changing the terms."
+
+Ellen: "A truce. With myself." She considers this. "I can work with that. That's something I can actually *do.*"
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_FiveSwords_R_Practical
+"Five of Swords reversed means the fighting is over. You're letting go of the need to win this particular battle."
+
+Ellen nods. Straightforward and unremarkable.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+:: TheKind.Session1.P3_FiveSwords_R_Vague
+"This reversed card means conflict resolution. Things should get easier."
+
+Fortune cookie wisdom. Ellen waits for substance.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 4] -> TheKind.Session1.Position4_Hub
+
+# ============================================================================
+# POSITION 4: WHAT FINDING LOOKS LIKE (KEY POSITION)
+# ============================================================================
+
+:: TheKind.Session1.Position4_Hub
+~ session.discussed_cards.append(cards[3].name)
+@render render_reading(reading=reading, highlight=3)
+
+The last card. You touch it, and the lamp light shifts — the stained glass throwing a different color across the table. The store seems to lean in. The turntable behind the counter clicks — the arm lifting, resetting, as if the record player itself is paying attention.
+
+"The last position. What finding looks like. Not 'will you find it' — what finding *means.*"
+
+**Position 4: What Finding Looks Like**
+**{cards[3].name}**{cards[3].reversed ?  (Reversed) | }
+
+@if cards[3].name == "The Star":
+    -> TheKind.Session1.P4_Star
+@elif cards[3].name == "Ten of Cups":
+    -> TheKind.Session1.P4_TenCups
+@else:
+    -> TheKind.Session1.P4_World
+@endif
+
+# --- THE STAR ---
+
+:: TheKind.Session1.P4_Star
+@if cards[3].reversed:
+    The Star — reversed. Hope that's hard to reach. Healing that's available but not yet accepted.
+
+    Scout's hand is on a record sleeve. Holding it without looking at it. Like his body already picked the recommendation and his brain hasn't caught up.
+
+    Mal is standing now. Somewhere near the boundary where the well-lit store starts to shade into the deeper shelves.
+
+    Delphi hasn't moved. But the quality of her stillness has changed — she's not waiting anymore. She's ready.
+
+    + ["The Star reversed doesn't mean no hope — it means the hope is there but you're struggling to *receive* it. You've been searching so hard, for so long, that you've forgotten how to just let something arrive. What if tonight, instead of looking for the record... you let The Kind look for *you?*"] -> TheKind.Session1.P4_Star_R_Poetic
+    + ["Reversed Star means you're blocking your own healing — not deliberately, but by keeping so busy with the search that you never sit still long enough to feel better. The cure is already here. You just keep browsing past it."] -> TheKind.Session1.P4_Star_R_Reframing
+    + ["This reversal suggests healing is available but you're not accepting it yet. What do you think is holding you back?"] -> TheKind.Session1.P4_Star_R_Practical
+    + ["Reversed Star can mean loss of faith. Don't give up."] -> TheKind.Session1.P4_Star_R_Vague
+@else:
+    The Star. A figure kneeling by water, pouring from two vessels — one to the pool, one to the earth. The sky blazing with stars. After the Tower, after the darkness, The Star. Hope. Not the dramatic kind. The quiet kind. The kind that shows up after you've stopped expecting it.
+
+    Ellen looks at it and something in her settles.
+
+    Scout makes a sound — half breath, half laugh. The sound he makes when a song ends perfectly and he's not ready for the silence.
+
+    Mal has moved to the edge of the deep shelves. Not going in. But oriented.
+
+    Delphi picks up her mug. Takes a slow, deliberate sip. Satisfied. The reading has arrived where it was going.
+
+    + ["The Star. After everything — the loss, the searching, the nights humming four notes into Shazam at 2am — this is the card that says *it was worth it.* Not because you'll find the record, but because the search brought you *here.* To this table, this moment, this conversation. Finding doesn't always look like what you expect. Sometimes it looks like a quiet night in a warm store with someone who's listening."] -> TheKind.Session1.P4_Star_U_Poetic
+    + ["The Star is a healing card. Whatever you find tonight — a record, a memory, a new understanding — it's going to bring you peace. Real peace, not the kind you perform for other people. The kind where you can sit with Kuro on the couch and think about your mom and just... feel okay."] -> TheKind.Session1.P4_Star_U_Empathic
+    + ["The Star appears after The Tower in the major arcana — the calm after destruction. Your mother's death was the Tower. This card says you're entering the healing phase. The search resolves from here."] -> TheKind.Session1.P4_Star_U_Reframing
+    + ["The Star is a very positive card. Things are looking up for you."] -> TheKind.Session1.P4_Star_U_Vague
+@endif
+
+# Star — Upright interpretations
+
+:: TheKind.Session1.P4_Star_U_Poetic
+"The Star."
+
+You let the card breathe.
+
+"After everything you've been through — the loss, the searching, the nights humming four notes into Shazam at 2am — this is the card that says *it was worth it.*"
+
+Ellen watches you. Waiting.
+
+"Not because you'll find the record. But because the search brought you *here.* To this table, this moment, this conversation."
+
+You look at the reading nook. The colored lamplight. The worn hardwood. The rain on the roof. Scout behind the vinyl bins, listening. Delphi at the counter, listening. Mal at the edge of the deep shelves, listening. The whole store, listening.
+
+"Finding doesn't always look like what you expect. Sometimes it looks like a quiet night in a warm store with someone who's listening."
+
+Ellen's eyes are bright. She nods. And nods. And her hands unclench in her lap.
+
+From behind the vinyl bins, Scout is definitely not crying. He is *aggressively not crying.*
+
+The Kind feels warmer. The turntable hums a little softer. The rain sounds like music.
+
+~ session.impossible_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.store_warmth += 2
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_Star_U_Empathic
+"The Star is a healing card. Whatever you find tonight — a record, a memory, a new understanding — it's going to bring you peace. Real peace."
+
+You let that word do its work.
+
+"Not the kind you perform for other people. The kind where you can sit with Kuro on the couch and think about your mom and just... feel okay."
+
+Ellen nods. She's ready. Whatever you recommend, she'll trust it.
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_Star_U_Reframing
+"The Star appears after The Tower in the major arcana — it's the calm after destruction. Your mother's death was the Tower. This card says you're entering the healing phase."
+
+The analytical frame actually supports something concrete: the search *resolves.* Something is found.
+
+"The search resolves itself from here."
+
+Mal's eyes meet yours across the store. Brief. Meaningful.
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_Star_U_Vague
+"The Star is a very positive card. Things are looking up for you."
+
+The espresso machine at Lola's next door could have told her that. Ellen smiles politely.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+# Star — Reversed interpretations
+
+:: TheKind.Session1.P4_Star_R_Poetic
+"The Star reversed doesn't mean no hope — it means the hope is there but you're struggling to *receive* it."
+
+You lean forward.
+
+"You've been searching so hard, for so long, that you've forgotten how to just... let something arrive. What if tonight, instead of looking for the record—"
+
+You gesture at the store around you. The shelves that go deeper than they should. The warm light. The rain.
+
+"—you let The Kind look for *you?*"
+
+Something shifts. Not in Ellen — in the *store.* A feeling. Like a shelf in the back adjusting itself, making room. Like a needle finding a groove.
+
+~ session.impossible_influence += 3
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.deep_shelves_stirring = True
+~ session.mal_engaged = True
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_Star_R_Reframing
+"Reversed Star means you're blocking your own healing — not deliberately, but by keeping so busy with the search that you never sit still long enough to feel better. The cure is already here. You just keep browsing past it."
+
+Ellen considers this carefully. "Browsing past it. Like... it's in the store and I keep flipping right over it in the bins?"
+
+"Maybe. Or maybe it's already in your pocket and you forgot to check."
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_Star_R_Practical
+"This reversal suggests healing is available but you're not accepting it yet. What do you think is holding you back?"
+
+Ellen: "I don't know. Maybe I think I don't deserve to stop being sad."
+
+That's honest. That's real. You nod.
+
+~ session.anchor_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_Star_R_Vague
+"Reversed Star can mean loss of faith. Don't give up."
+
+Mal, from near the deep shelves, sighs. It's barely audible. But it's there.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+# --- TEN OF CUPS ---
+
+:: TheKind.Session1.P4_TenCups
+@if cards[3].reversed:
+    The Ten of Cups — reversed. Joy that's fragmented. A family portrait with a crack running through it. The happiness is real, but something's missing from the frame.
+
+    Scout's hand moves to the bin dividers. Touching them. Grounding himself.
+
+    Mal's pen is still. They're looking at the card with an expression that's hard to read.
+
+    Delphi wraps both hands around her mug. Holding it like warmth against something cold.
+
+    + ["Reversed, this card says the happiness you're looking for is real — but it's not going to look like the picture. Your mom, the kitchen, Tuesday night — that exact configuration can't happen again. But the *feeling* can. In a new shape. With new people. In a store that isn't your mom's kitchen but still has warm light and rain outside and someone who puts music on because it makes the room more alive."] -> TheKind.Session1.P4_TenCups_R_Empathic
+    + ["This reversal suggests you're chasing a specific *form* of happiness instead of being open to new forms. The feeling you had that night — it's available. Just not in the same packaging."] -> TheKind.Session1.P4_TenCups_R_Reframing
+    + ["Ten of Cups reversed means happiness isn't quite complete. Something is missing that needs to be addressed."] -> TheKind.Session1.P4_TenCups_R_Practical
+    + ["This reversed card suggests family difficulties or unfulfilled relationships."] -> TheKind.Session1.P4_TenCups_R_Vague
+@else:
+    The Ten of Cups. A family under a rainbow. Cups arcing across the sky. Joy — complete, overflowing, shared. The emotional happy ending.
+
+    Ellen stares at it. This card, in this position, after everything.
+
+    Scout makes a sound that's half breath and half something else. He's gripping the edge of the vinyl bin.
+
+    Mal is standing very still near the deep shelves, composition notebook closed and held against their chest.
+
+    Delphi picks up her mug, takes one long sip, and sets it down with finality. *There it is.*
+
+    + ["The Ten of Cups. You know what this card is? It's *that night.* That Tuesday in the kitchen with the rain outside and the wooden spoon and your mom singing nonsense in the right key. A complete, perfect moment of emotional fullness. And the card isn't in the past — it's in 'what finding looks like.' Which means you don't find the record. You find *another night like that.* Maybe not the same. But just as full."] -> TheKind.Session1.P4_TenCups_U_Poetic
+    + ["This card represents complete emotional joy — not solitary and quiet, but *shared.* Finding looks like connection. With people, with a community, with a place that feels like home."] -> TheKind.Session1.P4_TenCups_U_Empathic
+    + ["The Ten of Cups is about family and happiness. Finding this record could bring you a sense of family connection and closure."] -> TheKind.Session1.P4_TenCups_U_Reframing
+    + ["Great card. Very happy ending ahead."] -> TheKind.Session1.P4_TenCups_U_Vague
+@endif
+
+# Ten of Cups — Upright interpretations
+
+:: TheKind.Session1.P4_TenCups_U_Poetic
+"The Ten of Cups."
+
+You touch the card. The rainbow. The family.
+
+"You know what this card is? It's *that night.* That Tuesday in the kitchen with the rain outside and the wooden spoon and your mom singing nonsense in the right key. A complete, perfect moment of emotional fullness."
+
+Ellen's hand comes up to her mouth.
+
+"And the card isn't in the past position — it's in 'what finding looks like.' Which means..."
+
+You let it click.
+
+"You don't find the record. You find *another night like that.* Maybe not the same. But just as full."
+
+Ellen's eyes spill over. Not dramatic — quiet, surprised, like her body made a decision her composure hadn't approved. She nods. Nods. Nods.
+
+Behind the vinyl bins, Scout is holding a record sleeve against his chest and his eyes are absolutely wet and he is making no effort whatsoever to hide it.
+
+The Kind is as warm as it has ever been.
+
+~ session.impossible_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.store_warmth += 2
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_TenCups_U_Empathic
+"This card represents complete emotional joy — not the solitary, quiet kind, but the *shared* kind. Finding looks like connection. With people, with a community, with a place that feels like home."
+
+You look around The Kind meaningfully. At the worn hardwood. At Scout. At Delphi. At the rain on the big windows.
+
+Ellen looks around too. Really looks.
+
+"I do love it here," she says quietly.
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_TenCups_U_Reframing
+"The Ten of Cups is about family and happiness. Finding this record could bring you a sense of family connection and closure."
+
+Accurate. Unremarkable.
+
+~ session.bridge_influence += 1
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_TenCups_U_Vague
+"Great card. Very happy ending ahead."
+
+Ellen gives you the look. The professor look.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+# Ten of Cups — Reversed interpretations
+
+:: TheKind.Session1.P4_TenCups_R_Empathic
+"Reversed, this card says the happiness you're looking for is real — but it's not going to look like the picture."
+
+Ellen listens.
+
+"Your mom, the kitchen, Tuesday night — that exact configuration can't happen again. But the *feeling* can. In a new shape. With new people."
+
+You look at The Kind around you. The shelves. The rain. The crew.
+
+"In a store that isn't your mom's kitchen but still has warm light and rain outside and someone who puts music on because it makes the room more alive."
+
+Ellen laughs. It's wet and startled and real. She looks at the store — the mismatched shelves, the pressed tin ceiling, the bead curtain Scout found at Goodwill — and something in her *recognizes.*
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.store_warmth += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_TenCups_R_Reframing
+"This reversal suggests you're chasing a specific *form* of happiness instead of being open to new forms. The feeling you had that night — it's available. Just not in the same packaging."
+
+Ellen: "New packaging. I can work with that."
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_TenCups_R_Practical
+"Ten of Cups reversed means happiness isn't quite complete. Something is missing that needs to be addressed."
+
+Ellen: "I know what's missing. She is."
+
+Silence. Correct, but nowhere to go from here.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_TenCups_R_Vague
+"This reversed card suggests family difficulties or unfulfilled relationships."
+
+Ellen: "My mother *died.* So yes."
+
+The bead curtain sways gently. Even it is disappointed in you.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+# --- THE WORLD ---
+
+:: TheKind.Session1.P4_World
+@if cards[3].reversed:
+    The World — reversed. Almost complete. One step from the finish line, unable to cross. The cycle wants to close but something holds it open.
+
+    Scout is very still. His hand on a record, but not gripping. Resting.
+
+    Mal has moved deeper. You can barely see them in the shadowed boundary of the deep shelves.
+
+    Delphi is looking at you. Not at the card. At *you.* Like she knows what you're about to say before you say it.
+
+    + ["The World reversed means you're *so close.* The cycle is almost complete — twenty years of searching, eight months of grief — and it all wants to resolve. It's pressing against you right now. Tonight. In this store. You just need to let it."] -> TheKind.Session1.P4_World_R_Poetic
+    + ["This reversal suggests you're delaying your own closure. Not deliberately — but some part of you isn't ready for the search to end, because ending the search means the story is finished."] -> TheKind.Session1.P4_World_R_Reframing
+    + ["The World reversed means completion is close but not quite here. There's one more step."] -> TheKind.Session1.P4_World_R_Practical
+    + ["Almost there. Reversed World means you're close to finding what you need."] -> TheKind.Session1.P4_World_R_Vague
+@else:
+    The World. The dancer in the wreath. The four elements in the corners. Completion. The end of a journey. The last card of the major arcana — where the Fool's long road finally comes home.
+
+    Ellen looks at it. Even without knowing tarot, she can feel the *finality* of this image.
+
+    Scout lets out a long, slow breath. He knows. He knows this is the card that means the album is over.
+
+    Mal has disappeared into the deep shelves. You can hear their footsteps — precise, unhurried, certain.
+
+    Delphi closes her eyes. Just for a moment. When she opens them, they're warm and certain and the reading is done.
+
+    + ["The World means a cycle completing. Your mother's life. Your grief. This search. They're all the same cycle, and this card says it's *ending* — not abruptly, not painfully, but the way an album ends. The last track fades, and then there's silence, and the silence isn't empty. It's *full.* It's full of everything the music was."] -> TheKind.Session1.P4_World_U_Poetic
+    + ["The World is the last major arcana card — the end of a journey. You've been carrying this search for twenty years. This card says tonight might be the night you set it down. Not because you gave up. Because you're *done.*"] -> TheKind.Session1.P4_World_U_Empathic
+    + ["The World represents completion and achievement. This search is going to reach its conclusion — and it may be different from what you imagined, but it will feel *right.*"] -> TheKind.Session1.P4_World_U_Reframing
+    + ["The World is the best card in the deck. This is a very good omen."] -> TheKind.Session1.P4_World_U_Vague
+@endif
+
+# World — Upright interpretations
+
+:: TheKind.Session1.P4_World_U_Poetic
+"The World means a cycle completing. Your mother's life. Your grief. This search."
+
+Ellen watches the dancer in the wreath.
+
+"They're all the same cycle, and this card says it's *ending* — not abruptly, not painfully, but the way an album ends."
+
+Your voice drops. The reading nook is very quiet.
+
+"The last track fades, and then there's silence, and the silence isn't empty. It's *full.* It's full of everything the music was."
+
+Ellen: "She loved music. So much."
+
+She's crying now. Gently. The good kind — the kind that loosens things instead of tightening them. The kind that's closer to rain than to storms.
+
+~ session.anchor_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.store_warmth += 2
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_World_U_Empathic
+"The World is the last major arcana card — the end of a journey. You've been carrying this search for twenty years."
+
+Ellen's hands are still in her lap. Very still.
+
+"This card says tonight might be the night you set it down. Not because you gave up. Because you're *done.*"
+
+She exhales. Long. Like she's been holding something and didn't know until she let it go.
+
+~ session.impossible_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_World_U_Reframing
+"The World represents completion and achievement. This search is going to reach its conclusion — and it may be different from what you imagined, but it will feel *right.*"
+
+The analytical frame supports the idea that something concrete *resolves* tonight. From the deep shelves, you hear Mal's footsteps stop. They've found something. Or something has found them.
+
+~ session.bridge_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_World_U_Vague
+"The World is the best card in the deck. This is a very good omen."
+
+Mal, from somewhere in the deep shelves, audibly sighs.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+# World — Reversed interpretations
+
+:: TheKind.Session1.P4_World_R_Poetic
+"The World reversed means you're *so close.* The cycle is almost complete — twenty years of searching, eight months of grief — and it all wants to resolve."
+
+You feel the store around you. Warm. Listening. Ready.
+
+"It's pressing against you right now. Tonight. In this store. You just need to let it."
+
+Ellen looks at you. At the cards. At the shelves stretching into the impossible.
+
+"Okay," she whispers. "Okay. I'll let it."
+
+~ session.impossible_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.deep_shelves_stirring = True
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_World_R_Reframing
+"This reversal suggests you're delaying your own closure. Not deliberately — but some part of you isn't ready for the search to end, because ending the search means the story is finished."
+
+Ellen: "And I'm not ready for the story to be finished. Because the story is... the last story I'm in *with* her."
+
+That one cuts deep. For both of you.
+
+~ session.anchor_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_World_R_Practical
+"The World reversed means completion is close but not quite here. There's one more step."
+
+Ellen: "What step?"
+
+"That's what the recommendation is for."
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+:: TheKind.Session1.P4_World_R_Vague
+"Almost there. Reversed World means you're close to finding what you need."
+
+Empty. Ellen waits. And waits.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session1.Synthesis
+
+# ============================================================================
+# SYNTHESIS — DETERMINE PATH
+# ============================================================================
+
+:: TheKind.Session1.Synthesis
+@py:
+# Determine dominant path
+paths = {
+    'anchor': session.anchor_influence,
+    'bridge': session.bridge_influence,
+    'impossible': session.impossible_influence
+}
+
+# Find highest path
+dominant_path = max(paths, key=paths.get)
+
+# Tie-breaking: impossible > anchor > bridge
+if list(paths.values()).count(paths[dominant_path]) > 1:
+    for tiebreak in ['impossible', 'anchor', 'bridge']:
+        if paths[tiebreak] == paths[dominant_path]:
+            dominant_path = tiebreak
+            break
+
+session.dominant_path = dominant_path
+
+# Check for failstate — quality too low
+session.is_failstate = session.quality_score < 3
+
+# Store final quality assessment
+if session.quality_score >= 10:
+    session.reading_quality = "exceptional"
+elif session.quality_score >= 6:
+    session.reading_quality = "good"
+elif session.quality_score >= 3:
+    session.reading_quality = "adequate"
+else:
+    session.reading_quality = "poor"
+@endpy
+
+The four cards lie between you. The reading is done.
+
+Ellen sits with it. The colored lamplight moves across the spread, across her hands, across the table.
+
+@if session.is_failstate:
+    "Thank you," she says. Politely. The professor voice. "That was... interesting."
+
+    The reading didn't land. You can feel it — the distance, the courtesy, the gap between what she needed and what you gave.
+
+    -> TheKind.Session1.Failstate
+@else:
+    @if session.reading_quality == "exceptional":
+        She doesn't say anything for a long moment. The reading has done the thing that good readings do — it's changed the shape of the question. She came in looking for a record. She's leaving with something else. Something harder to name and more valuable to hold.
+    @elif session.reading_quality == "good":
+        She nods slowly. Something has shifted — not seismically, but perceptibly. The question she walked in with isn't quite the same question anymore.
+    @else:
+        She considers the cards. Something landed, even if not everything. The reading gave her enough to work with.
+    @endif
+
+    "So," she says. "What do I listen to?"
+
+    That's the question. That's the moment. The reading is done and now The Kind does what The Kind does.
+
+    @if session.dominant_path == "anchor":
+        -> TheKind.Session1.Recommend_Anchor
+    @elif session.dominant_path == "bridge":
+        -> TheKind.Session1.Recommend_Bridge
+    @else:
+        -> TheKind.Session1.Recommend_Impossible
+    @endif
+@endif
+
+# ============================================================================
+# ANCHOR PATH — Delphi's Recommendation
+# ============================================================================
+
+:: TheKind.Session1.Recommend_Anchor
+Delphi comes around the counter. She doesn't rush. She doesn't explain. She goes to the vinyl bins — not the deep shelves, just the good section, the well-worn part, where the records that have been borrowed a hundred times live — and she pulls something. One record. Without hesitating.
+
+She comes back and sets it on the table next to the tarot cards. The sleeve shows a woman at a microphone, eyes closed, caught in the space between breathing and singing. A small venue. Christmas lights in the background. The warmth of a room where something unrepeatable is about to happen.
+
+"Take this home," Delphi says. "Don't look it up first. Put it on in the kitchen. With the lights low."
+
+Ellen picks it up. Turns it over. Reads the back.
+
+"*Songbird,*" she reads. "Eva Cassidy."
+
+"Blues Alley, 1996. Live recording. One take. She knew she was sick and she sang anyway. Not because she was performing. Because the room needed the song."
+
+Delphi pauses. Looks at Ellen with an expression that's warm and knowing and absolutely certain in a way that only Delphi can be.
+
+"Your mom would have loved this one."
+
+She says it like fact. Not psychic certainty — Delphi certainty. The kind that comes from knowing people and knowing music and knowing that some things just fit.
+
+Ellen holds the record. Not because she's dramatic — because it feels right. Because something about the weight of it, the specificity of Delphi's voice, the quiet confidence of the recommendation, makes her trust it completely.
+
+"Okay," she says. "I'll play it tonight."
+
+[!beat]*Songbird.* Eva Cassidy, 1998. Recorded live at Blues Alley, January 1996.[/!beat]
+
+~ session.recommendation = "Songbird"
+~ session.recommender = "Delphi"
+~ reader.empathy += 1
+~ reader.competence += 1
+
++ [Continue] -> TheKind.Session1.Ellen_Departs
+
+# ============================================================================
+# BRIDGE PATH — Mal's Recommendation
+# ============================================================================
+
+:: TheKind.Session1.Recommend_Bridge
+Mal comes around the end of the book stacks. They're holding something — not a record. A book. Slim, blue, the particular blue of a cold Iowa sky.
+
+They set it on the table next to the tarot cards. Gently, the way they do everything — with precision and care and the unspoken understanding that objects hold more than their physical weight.
+
+"This isn't what you came for," Mal says. "It's not music."
+
+Ellen looks at the book. Looks at Mal. "A book?"
+
+"A letter. Written by a dying father to his young son. About the things he wants to say before the room goes quiet."
+
+Mal pauses. Choosing words with the precision of someone who spent three years choosing words for machines and now chooses them for people.
+
+"You said the record was a woman singing and your mother stopped what she was doing and started singing along, even though she didn't know the words. This book is the same thing in a different medium. Someone trying to say the unsayable. Someone leaving beauty behind because that's all you can leave."
+
+Ellen picks it up. *Gilead.* Marilynne Robinson. She turns to a random page and reads a line and her expression does something private and enormous.
+
+"Oh," she says softly. Then: "Oh, this is—"
+
+"I know."
+
+"But I came here for a record."
+
+"You came here for a feeling. The feeling doesn't care what medium it arrives in."
+
+Mal's eyes meet yours. The composition notebook is closed and held against their chest and for a moment you see something under the dry precision — something that looks a lot like a person who quit a job at a tech company because an algorithm couldn't do what they just did.
+
+Ellen holds the book against her chest. Same gesture she'd have used for a record. The heart doesn't distinguish.
+
+[!beat]*Gilead.* Marilynne Robinson, 2004.[/!beat]
+
+~ session.recommendation = "Gilead"
+~ session.recommender = "Mal"
+~ reader.empathy += 1
+~ reader.insight += 1
+
++ [Continue] -> TheKind.Session1.Ellen_Departs
+
+# ============================================================================
+# IMPOSSIBLE PATH — Scout's Recommendation
+# ============================================================================
+
+:: TheKind.Session1.Recommend_Impossible
+Scout has been quiet. Too quiet for Scout. His hand has been resting on a record sleeve in the bins — you noticed it earlier, you thought he was just fidgeting, but he wasn't. He was *holding* something. Waiting.
+
+Now he steps forward. He's not bouncing. He's not doing the Scout thing where he talks with his whole body and loses his inside-voice calibration. He's quiet in a way you've never seen him.
+
+"Can I—" He looks at you. At Delphi. At Mal, who has emerged from the book stacks to watch. "Can I show her something?"
+
+Delphi nods once.
+
+Scout walks past the vinyl bins. Past the staff picks. Past the "Gorgeous Disasters" shelf he curated himself. Past the section where the hand-lettered divider cards start to say things that don't quite make sense — "Albums Your Future Self Loved" and "B-Sides From Better Timelines" and "Recordings That Only Happened Once."
+
+Deeper.
+
+The aisles go deeper than the building should allow. This isn't dramatic. It's just... The Kind. The shelves stretch. The light goes warmer. The sections change.
+
+And one bin, way in the back, unlabeled except for a small card in Mal's precise handwriting: **"The One You're Humming But Can't Remember The Name."**
+
+Scout stops. His fingers walk along the record spines with the certainty of someone who knows his collection by feel. He stops at one. Pulls it.
+
+He comes back.
+
+He sets the record on the table next to the tarot cards. The sleeve is slightly soft from age or humidity. The cover shows a woman at a piano in a room with tall windows, late afternoon light, autumn trees outside. She's not performing. She's not posing. She's just playing. Her eyes are closed and her mouth is slightly open and you can almost hear it — a voice that drops low and then strings that *lift.*
+
+Ellen looks at it. She doesn't pick it up. Her hand moves toward it and stops.
+
+"Where did you..."
+
+Scout: "Deep shelf. 'The One You're Humming.' Between the Beatles album Yoko fronted and a Prince vault pressing that won't exist for three more years."
+
+"But I've looked everywhere. Every database. Every—"
+
+Scout stops. The bouncing energy, the encyclopedic enthusiasm, all of it settles into something quiet and sure.
+
+"Some songs only exist where someone loved them enough to remember. This store..." He looks around. At the pressed tin ceiling. At the rain on the windows. At the warm, impossible depth of a building that shouldn't be this big. "This store holds those."
+
+Ellen picks up the record. Her hands are shaking. She turns it over. The liner notes are typeset in the small, elegant font of a tiny pressing — the kind of run that numbers in the hundreds, not the thousands. She reads:
+
+[!beat]*Late Light.* Eva Cassidy, 2024. Blix Street Records. Recorded at home, Bowie, Maryland. Strings arranged by Chris Biondo.[/!beat]
+
+She reads the track listing. Her finger stops on track four. The description: *Voice and strings. 4:47. Recorded in the kitchen during a rainstorm.*
+
+Her hand comes up to her mouth.
+
+"This is it," she whispers. "This is — how is this—"
+
+She looks up. At you. At the cards on the table. At the store stretching deeper than it should. At the worn hardwood and the humming turntable and the rain on the big windows.
+
+"Eva Cassidy died in 1996," Ellen says. "She was thirty-three."
+
+Scout nods. "Yeah. She did."
+
+"This says 2024."
+
+"Yeah."
+
+"That's not—"
+
+"I know."
+
+A silence. The kind of silence that happens when reality adjusts itself to make room for something that shouldn't be true but is.
+
+Delphi, from behind the counter, quiet: "Kind of."
+
+The store's name. The name on the sign where the "OF" faded to nothing. *Kind of.* As in: kind of real. Kind of impossible. Kind of the only place in the world where a woman who died at thirty-three can grow old enough to record the album she would have made at seventy-one.
+
+Ellen laughs. It's wet and startled and real. She holds the record against her chest like something that might fly away.
+
+~ session.recommendation = "Late Light"
+~ session.recommender = "Scout"
+~ session.store_revealed = True
+~ reader.mystical_affinity += 1
+~ reader.insight += 1
+
++ [Continue] -> TheKind.Session1.Ellen_Departs
+
+# ============================================================================
+# FAILSTATE — Ellen Browses
+# ============================================================================
+
+:: TheKind.Session1.Failstate
+Ellen thanks you. Stands up from the reading nook. Moves the bead curtain aside.
+
+"I think I'll just... browse for a bit."
+
+Scout tries. "Hey, can I play you something? I've got a few ideas—"
+
+"I'm okay. Thanks, Scout."
+
+She moves through the aisles. New arrivals. Staff picks. Something safe, something fine, something forgettable.
+
+She pulls a record from the bin — a recent indie release that got good reviews. She brings it to the counter. Delphi rings it up without comment.
+
+"See you next Tuesday," Ellen says.
+
+"See you next Tuesday."
+
+The bell rattles. The door sticks, then opens, then closes. Ellen walks into the rain.
+
+Delphi doesn't say anything. She refills her tea. The silence is worse than words.
+
+From the book stacks, Mal's pen starts moving again. Cataloging. As if nothing happened. As if nothing was supposed to.
+
+The Kind feels a little cooler. The turntable's hum sounds a little emptier.
+
+~ session.recommendation = "generic"
+~ session.recommender = "none"
+
++ [Continue] -> TheKind.Session1.DreamFade
+
+# ============================================================================
+# ELLEN DEPARTS
+# ============================================================================
+
+:: TheKind.Session1.Ellen_Departs
+Ellen holds her recommendation. The reading is done. The rain still falls on the roof.
+
+@if session.recommender == "Delphi":
+    She looks at Delphi. "How did you know? About the kitchen, the lights low?"
+
+    Delphi tilts her head. "Same way I know which bin to check. Same way the cards know what to show. Some things just... fit."
+
+    Ellen nods. She doesn't push. People learn quickly not to push Delphi.
+
+    "Thank you," she says. Meaning it completely.
+@elif session.recommender == "Mal":
+    She looks at Mal. "You read this?"
+
+    "Three times." Mal pauses. "Once for the writing. Once for the theology. And once because I missed someone and it was the closest I could get to sitting with them."
+
+    Ellen holds the book tighter. "Thank you," she says. And she means the book, and she means the confession, and she means the store that holds people who give you things you didn't know you needed.
+@else:
+    She's still holding *Late Light.* Still looking at the cover like it might disappear.
+
+    "This has been here the whole time?"
+
+    Scout: "Since before I started. Probably before all of us."
+
+    "But I've been coming here for *three years.*"
+
+    "You weren't looking for it before," Delphi says, from behind the counter. Quiet. Certain. "Tonight you were."
+
+    Ellen turns the record over in her hands. The woman at the piano. The tall windows. The late light.
+
+    "I'm afraid to play it," she says. "What if it's not what I remember?"
+
+    You look at her across the table where the four cards still lie.
+
+    "It won't be what you remember. It'll be what you need."
+
+    She holds the record against her chest. Nods. And walks to the door.
+@endif
+
+The bell rattles. The door sticks, then opens, then closes. Through the window, you watch Ellen walk to her car in the rain, the record held inside her jacket to keep it dry.
+
+The Kind settles. The reading is done. The recommendation is made. The store did what the store does.
+
+Scout lets out a long breath. "That was a good one."
+
+Delphi: "Mm."
+
+Mal, from the book stacks, says nothing. But you hear the composition notebook open. A pen scratch. A new entry being cataloged.
+
+The rain continues. Your shift continues. The Kind continues.
+
+@if session.store_revealed:
+    And somewhere in the deep shelves, where the sections don't make sense and the aisles go deeper than they should, you think you see a new divider card appear in a bin you've never noticed before.
+
+    It says: **"Soon."**
+
+    You don't check it. Not tonight. Tonight was enough.
+@endif
+
++ [Continue] -> TheKind.Session1.DreamFade
+
+# ============================================================================
+# DREAM FADE — WAKING UP
+# ============================================================================
+
+:: TheKind.Session1.DreamFade
+@py:
+# Persist session results to the_kind
+the_kind.sessions_completed += 1
+the_kind.session_one_recommendation = session.recommendation
+the_kind.session_one_recommender = session.recommender
+the_kind.session_one_quality = session.reading_quality
+the_kind.session_one_dominant_path = session.dominant_path
+
+# Persist store state
+the_kind.store_warmth = session.store_warmth
+if session.store_revealed:
+    the_kind.deep_shelves_revealed = True
+
+# Reader rewards
+reader.mystical_affinity += 1
+if session.reading_quality == "exceptional":
+    reader.empathy += 1
+    reader.insight += 1
+elif session.reading_quality == "good":
+    reader.empathy += 1
+elif session.reading_quality == "poor":
+    reader.self_doubt = True
+
+# Set bleed-through object type
+if session.is_failstate:
+    session.bleed_object = "blank_vinyl"
+elif session.dominant_path == "impossible":
+    session.bleed_object = "labeled_single"
+else:
+    session.bleed_object = "warm_single"
+
+# Track bleed object on persistent state
+the_kind.bleed_objects.append(session.bleed_object)
+@endpy
+
+The shift ends. Or the dream ends. It's hard to tell the difference.
+
+The turntable slows. The rain softens. The hardwood floor seems to recede, the grain dissolving into something you can't quite hold onto. Scout's voice fades mid-sentence — something about Joni Mitchell and Frank Ocean — and Delphi's kettle goes silent, and Mal's pen stops, and the store folds itself up like an album ending, the last track fading into the run-out groove, the needle lifting, silence.
+
+You wake up.
+
+Your reading table. Your apartment. Your deck, on the table where you left it.
+
+@if session.is_failstate:
+    The dream is already fading. You remember a store. Shelves. Rain. A woman looking for something. You tried to help. You're not sure you did.
+
+    You rub your face. Make coffee. Try to shake the feeling of having missed something important.
+@elif session.reading_quality == "exceptional":
+    Your chest is full. That's the only word for it — *full.* Like the dream left something behind, some residue of warmth and colored lamplight and the sound of rain on a proper roof.
+
+    You can still hear Scout's voice. Feel Delphi's certainty. See Mal walking into the deep shelves without hesitation.
+
+    You can still feel the hardwood under your feet. That impossible, warm, well-worn floor.
+@else:
+    The dream fades slowly, like a record reaching the end of the side. You hold onto pieces — the shelves, the rain, a woman's face, a record — but they blur.
+
+    Something happened. Something good. You're not sure of the details, but you're sure of the feeling.
+@endif
+
+You sit up. Your tarot deck is on the table.
+
+And next to it—
+
+@if session.bleed_object == "blank_vinyl":
+    A 7-inch single. Blank. No label, no grooves — just smooth black vinyl, featureless. You pick it up. It's just a disc — anonymous, generic, the kind you'd find in a box at a record swap.
+
+    You don't own a turntable. You don't know where this came from. It could be anything.
+
+    Or nothing.
+
+    You set it on the knick-knack shelf. It sits there, blank and patient, holding its silence.
+@elif session.bleed_object == "labeled_single":
+    A 7-inch single. No sleeve — just the disc, with a handwritten label in small, precise script you've never seen before. The title is partially smudged — you can make out "La—" and "—ght" and a year that might be 2024.
+
+    You pick it up. It's warm. Warm the way something is warm when someone was just holding it.
+
+    You don't own a turntable. You don't know where this came from. But the handwriting feels familiar in a way you can't place — angular, all-caps, the handwriting of someone who makes mix CDs for people he'll never see again.
+
+    You set it on the knick-knack shelf. Next to the broken cred chip. Next to whatever else has arrived from dreams that weren't quite dreams.
+
+    The label catches the light. You could swear, for just a moment, that you can read a name on it — an artist who died too young, an album that no database holds, music from a timeline kinder than ours.
+
+    But when you look again, it's just a smudge.
+@else:
+    A 7-inch single. No sleeve, no label. Just the disc itself, warm in your hands. Warm the way a mug of tea is warm, or a hand held during credits, or a store that loves music and books and the people who wander into it.
+
+    You don't own a turntable. You don't know where this came from.
+
+    But it smells like old paper and vinyl dust and very slightly like verde burritos.
+
+    You set it on the knick-knack shelf. It sits there, unlabeled and impossible and warm.
+
+    You don't know what's on it. You're not sure it matters. You know what it *means.*
+@endif
+
+You sit at your reading table. Sip your coffee. Look at your tarot deck.
+
+"Good dream," you say aloud. To yourself. To the cards. To whatever record shop might be listening.
+
+The cards don't answer.
+
+But you feel different. Warmer. Like the dream left something behind — not the single, not the memory, but a *frequency.* A hum. The particular frequency of a place that loves what it holds and holds everything that's loved.
+
+You shuffle the deck. Draw one card. Just to check.
+
+@py:
+# Draw a waking card
+waking_deck = Deck()
+waking_card = waking_deck.draw_card()
+@endpy
+
+**{waking_card.name}.**
+
+@if waking_card.name == "The Star":
+    Hope after darkness. Healing after loss. Dreams as messages from the universe.
+
+    Of *course.*
+@elif waking_card.name == "Six of Cups":
+    Childhood. Nostalgia. A golden memory that shaped everything after.
+
+    You smile. "Yeah. I know."
+@elif waking_card.name == "The World":
+    Completion. A cycle ending. The last card of the journey.
+
+    "Already?" you say to the empty room. "It was only one session."
+@elif waking_card.name == "The Moon":
+    Dreams and reality, bleeding together. The space between.
+
+    You look at the 7-inch on your shelf. At the knick-knack collection that keeps growing from dreams that feel too real.
+
+    "I hear you," you say.
+@else:
+    You stare at it. Looking for connection to the dream. Looking for meaning.
+
+    Maybe there isn't one. Maybe it was just a dream — your subconscious processing music and grief and the sound of rain.
+
+    Or maybe somewhere, in a store with big windows and a faded sign and shelves that go deeper than they should, someone is cataloging a new record and drinking tea and waiting for you to come back.
+@endif
+
+You put the card back. The morning continues.
+
+But The Kind lingers.
+
++ [Return to your day, changed] -> ReaderTable
+
+# ============================================================================
+# END OF SESSION 1
+# ============================================================================

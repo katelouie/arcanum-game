@@ -1,0 +1,7 @@
+:: TheKind.Router ^DREAM:KIND
+@if the_kind.sessions_completed == 0:
+    -> TheKind.Session1.Start
+@else:
+    # Session 1 completed
+    The Kind's story continues soon.
+@endif
