@@ -1,0 +1,1967 @@
+# ============================================================================
+# BLACKTHORN MANOR — SESSION 3: "THE RECKONING"
+# ============================================================================
+#
+# FINAL SESSION. The ghosts. The house. The truth.
+#
+# SESSION 3 STRUCTURE (Full):
+#   Act 1: The Morning After (house unsettled, Arabella's urgency)
+#   Act 2: The East Wing (entering the deep house, first ghost)
+#   Act 3: The Collective Reading (mechanical centerpiece)
+#   Act 4: The Confrontation (Lady Blackthorn remembers)
+#   Act 5: The Farewell
+#   Act 6: Dream Fade + Bleed Objects + The Letter
+#
+# THIS FILE: Acts 1-3 (Part 1)
+# NEXT FILE: Acts 4-6 (Part 2)
+#
+# THE HOUSE — WHAT IT IS:
+#   Blackthorn Manor was built in 1070 by Renaud de Noirépine, a Norman
+#   knight rewarded with Saxon land after the Conquest. The land held a
+#   thingstead — a sacred gathering place where oaths were sworn, disputes
+#   settled, and the community's memory was kept. The Saxons believed the
+#   land itself remembered every word spoken on it. A place of witness.
+#
+#   The first Blackthorn razed the grove. Broke the stones. Built his manor
+#   on top. Erased the people who were there before.
+#
+#   The land didn't forget. It can't — that's its nature. But buried under
+#   stone and made to serve a family built on erasure, its sacred function
+#   inverted. A place of memory became a place of forgetting. The house
+#   CONSUMES remembrance. It absorbs the people who serve it — not their
+#   bodies (at first), but their stories. They become invisible. Unnoticed.
+#   And eventually, literally part of the walls.
+#
+#   The cure: make it remember again. Restore its original function.
+#   The cards are tools of making the invisible visible. Tarot IS memory.
+#
+# SPREAD: "The Forgotten" (repeated 2-card micro-spread per ghost)
+#   Card 1: How They Lived (who were they?)
+#   Card 2: How They Were Taken (what happened?)
+#
+#   Card pools rotate per ghost to avoid repetition.
+#   House interference increases with each reading.
+#   Grounded reading = ghost freed, house weakens
+#   Gothic reading = ghost agitated, house fights harder
+#
+# GHOSTS:
+#   Catherine (maid, 1823) — oldest, most faded, barely a whisper
+#   Samuel (footman, 1845) — angry, strong, pushing at the walls
+#   Margaret (cook, 1867) — warm, sad, tried to warn others
+#   + optional 4th/5th depending on reading quality
+#
+# ============================================================================
+
+:: Blackthorn.Session3.Start
+@py:
+# Dream re-entry — all persistent state lives on blackthorn object
+session = create_session(blackthorn)
+blackthorn.reset_session_tracking()
+
+# Session 3 specific tracking
+session.ghosts_freed = 0
+session.ghosts_attempted = 0
+session.house_resistance = 0
+session.lady_b_memories_recovered = 0
+session.east_wing_entered = False
+session.collective_reading_complete = False
+session.ghosts_read = []
+
+# House power — starts from accumulated house_influence
+session.house_power = 10 + blackthorn.house_influence
+@endpy
+
+# ============================================================================
+# ACT 1: THE MORNING AFTER
+# ============================================================================
+
+The dream continues. Sharper now. More vivid than the first two nights — the colors brighter, the cold colder, the rain louder. As if the dream knows this is the last time.
+
+You wake in the Rose Room. The fire is out. The supernatural cold is *different* this morning — not the ambient chill of Miss Adelaide's preference but something deeper, something that feels like the house *breathing.* In. Out. The walls themselves seem to expand and contract, just barely, just enough that you're not sure you're not imagining it.
+
+You are sure.
+
+The house is unsettled.
+
+@if blackthorn.ashford_free:
+    Something changed last night when the curse broke. You could feel it during the celebration — a loosening, a thread snapping somewhere deep in the structure. Lord Ashford's freedom cost the house something. One less source of Gothic misery. One less current of fear and shame feeding the foundations.
+
+    The house is *hungry.*
+@else:
+    The full moon passed. Lord Ashford's curse held. The house is unchanged — perhaps even stronger, fed by another night of anguish and transformation. You feel it in the walls: satisfaction. A building that got what it needed.
+@endif
+
+Someone knocks. Not Miss Chen's precise rap. Something more urgent.
+
+"Miss {blackthorn.player_name}." Arabella's voice. Thin. Frightened. "Please. Now."
+
++ [Open the door immediately] -> Blackthorn.Session3.Arabella_Urgent
+
+:: Blackthorn.Session3.Arabella_Urgent
+You open the door. Arabella is in the corridor, still in her nightdress, hair loose, barefoot on the freezing floor. Her pale eyes are wide and focused on something you can't see — something behind you, beside you, in the walls around you.
+
+"They're *screaming,*" she whispers. "All of them. All night. Since the curse broke — they felt it. They felt the house *weaken* and they're pushing and the house is pushing *back* and I can't—"
+
+She grabs your arm. Her fingers are ice.
+
+"We have to do it today. Now. Before the house recovers. Before it tightens its grip again."
+
+"Do *what,* Miss Grey?"
+
+"Read for them. The way you read for Lord Blackthorn. Acknowledge them. Say their *names.* The house runs on forgetting — your cards are the opposite of forgetting. Please."
+
+From behind her, at the far end of the corridor, a sound. Not a creak. Not settling beams. A sound like breath held too long and then released — the house exhaling through its bones.
+
+The portraits on the corridor walls are watching. Not the usual passive tracking — they're *alert.* Focused. Every painted Blackthorn eye fixed on the two of you with an intensity that feels like warning.
+
+"Where?" you ask.
+
+"The East Wing. Where they are. Where the house is... *thinnest.*"
+
++ ["Let me get dressed. And get the others."] -> Blackthorn.Session3.Gathering
++ ["We go now. Before I lose my nerve."] -> Blackthorn.Session3.Go_Now
+
+:: Blackthorn.Session3.Go_Now
+"No. Get dressed first." Mrs. Winters's voice. From behind you — she's in the corridor, fully dressed, boots on, hair pinned. She has been awake for hours. She may not have slept at all. "You'll need warm clothes, your cards, and breakfast. In that order."
+
+"Mrs. Winters, the ghosts—"
+
+"Have been in those walls for decades. They can wait twenty minutes for you to eat toast." She looks at Arabella. "You too, miss. Shoes. A cloak. You'll catch your death."
+
+"In *this* house, that's not a figure of speech—"
+
+"*Shoes,* Miss Grey."
+
+~ blackthorn.winters_approval += 1
+
+-> Blackthorn.Session3.Gathering
+
+:: Blackthorn.Session3.Gathering
+You dress. Gray wool. Boots. Your deck in your pocket — warm, always warm. You eat toast in the breakfast room while Mrs. Winters assembles the team with the brisk efficiency of a woman who has been preparing for this day for longer than she'll admit.
+
+Thomas appears first. He's carrying a lantern, a crowbar, and a face that says he understands exactly what's happening and has opinions about it but is going to be helpful regardless.
+
+"The East Wing," he says. Not a question.
+
+"The East Wing."
+
+"Right. I've been in there once. Two years ago. Got lost for four hours. Mrs. Winters had to come find me." He pauses. "The corridors *move,* miss. They change when you're not looking. Stay close to me and don't go through any door that wasn't there a moment ago."
+
+Miss Chen arrives. She's carrying a ball of twine.
+
+"Theseus," she says, when you look at it. "I'm from Guangzhou, not the classics, but I read. We tie one end here. Follow the string back out."
+
+"That's very practical."
+
+"Someone has to be."
+
+@if blackthorn.ashford_free:
+    Lord Ashford appears at the breakfast room door. He looks different — rested, clear-eyed, standing straight without the perpetual hunch of a man expecting to transform. Freedom suits him.
+
+    "I'm coming with you."
+
+    "Lord Ashford, this could be dangerous—"
+
+    "This is my family's house. My family's sin. The Blackthorns took this land from the Saxons and built a dynasty on erasure. I've only just stopped being part of the problem." He meets your eyes. "Let me be part of the solution."
+@endif
+
+Dr. Blackwood emerges from the scullery, notebook in hand. "I couldn't help but overhear—"
+
+Everyone: "*No,* Blackwood."
+
+"I merely wished to offer my services as a scientific observer—"
+
+Mrs. Winters: "You may observe from the *kitchen.* With tea. And your notebooks. And absolutely no Bunsen burners."
+
+"But—"
+
+"*Kitchen,* Doctor."
+
+He retreats, muttering about academic freedom.
+
+@if blackthorn.ravencroft_real_moment:
+    The last to arrive is Ravencroft. He's wearing — you notice with genuine surprise — a normal coat. Buttoned. Sensible boots. His hair is still impossible, but it appears to have been *combed.*
+
+    Heathsniff stands beside him. Alert. Ears forward. Not dramatic — *watchful.* The dog knows something is wrong with this house.
+
+    "I'd like to help," Ravencroft says. Simply. Without capital letters.
+
+    Mrs. Winters looks at him. A long, evaluating look.
+
+    "Can you carry things?"
+
+    "Yes."
+
+    "Can you do as you're told?"
+
+    "...I can try."
+
+    "Good enough. Bring candles."
+@else:
+    From upstairs, a howl — Heathsniff, who has been left in Ravencroft's room and doesn't like it. Ravencroft is not here. He rode out before dawn — back to the moors, back to his performance. The house still has him.
+
+    But Heathsniff appears at the top of the stairs, trots down, and positions himself at your side. Whatever his master is doing, the dog has made his own decision.
+
+    "Good boy, Sniffy."
+
+    Mrs. Winters: "The dog can come. He has better sense than half the gentry."
+@endif
+
+Arabella is last. Pale, focused, wearing a white cloak over her white dress — she looks like something out of the very Gothic novels this house was built to enact. But her eyes are clear and her jaw is set and she is not performing.
+
+"I can see them," she says quietly. "I'll guide you."
+
+Mrs. Winters stands at the head of the group. She looks at the corridor that leads to the East Wing — a corridor she has avoided for forty years, a corridor she has steered her staff away from, a corridor that leads to the part of the house where servants go and don't come back.
+
+"Right," she says. "Let's go get our people."
+
++ [Follow Mrs. Winters into the East Wing] -> Blackthorn.Session3.EastWing_Entry
+
+# ============================================================================
+# ACT 2: THE EAST WING
+# ============================================================================
+
+:: Blackthorn.Session3.EastWing_Entry
+~ session.east_wing_entered = True
+
+The corridor to the East Wing starts normally. Stone floor. Wood paneling. Portraits — the usual watching kind, Blackthorns in ascending order of Gothic intensity.
+
+Then it *changes.*
+
+The transition isn't sudden. It's the kind of change you only notice when you look back and realize the corridor behind you is longer than the one ahead, and the paneling has gone from oak to something darker, and the portraits have stopped being individual Blackthorns and become a single repeated face — the first Blackthorn, Renaud de Noirépine, in Norman armor, with eyes that don't just follow you but *bore into you.*
+
+The air changes too. Colder. Heavier. The smell of old stone and earth and something underneath both — something green and ancient, the ghost of a forest that was cut down eight hundred years ago.
+
+Miss Chen ties her twine to a sconce. "From here, we follow the string back."
+
+Thomas holds the lantern high. The light doesn't travel as far as it should. The walls seem to absorb it.
+
+Arabella walks ahead. Her eyes are unfocused — she's seeing something layered over the physical space, a second architecture of memory and grief. She reaches out and touches the wall.
+
+"Here," she whispers. "She's right here."
+
+"Who?"
+
+"Catherine. The first one. The oldest." Her hand is flat against the plaster. "She's been here since 1823. She's so faded... she barely knows she exists anymore. The house almost finished with her."
+
+You pull out your cards. They're warm in your hands — warmer than they've been all weekend, as if they know what's coming.
+
+Mrs. Winters sets down a second lantern. Positions herself at the corridor junction. Sentinel. Guardian. The same thing she's been for forty years, but now in the place she's been protecting her people *from.*
+
+Thomas stands at the other end. Crowbar in hand. Not for fighting — for opening walls, if it comes to that.
+
+@if blackthorn.ashford_free:
+    Lord Ashford takes a position near the entrance. Steady. Practical. A man who has learned, in the last forty-eight hours, that the most useful thing an aristocrat can do is get out of the way and guard the door.
+@endif
+
+@if blackthorn.ravencroft_real_moment:
+    Ravencroft sets down candles. Lights them. His hands are steady. No performance. Just a man lighting candles in a dark place because someone needs to see.
+
+    Heathsniff presses against your leg. A warm, solid, real weight.
+@else:
+    Heathsniff presses against your leg. His ears are flat. His body is tense. He can feel the house's attention focusing on this corridor like a lens.
+@endif
+
+You kneel on the cold stone floor. Lay out your reading cloth. The cloth looks different here — the symbols seem sharper, the colors more vivid, as if the East Wing's strange atmosphere is amplifying everything.
+
+"Arabella. Can you... bring her forward? Catherine?"
+
+Arabella closes her eyes. Puts both hands on the wall.
+
+The temperature drops.
+
+The plaster under Arabella's palms *pulses.* Once. Twice. Like a heartbeat. Like something inside the wall is trying to push through.
+
+A whisper. So faint you almost miss it. Not a voice — an impression of a voice, the ghost of a ghost, the memory of a woman who has been erased so thoroughly that she barely exists as an echo.
+
+*...please...*
+
+"I hear her," Arabella says. Tears on her face. "She says *please.* That's all she has left. Just... *please.*"
+
++ [Begin the reading. Give Catherine her name back.] -> Blackthorn.Session3.Ghost1_Catherine
+
+# ============================================================================
+# ACT 3: THE COLLECTIVE READING
+# ============================================================================
+#
+# GHOST 1: CATHERINE (Maid, 1823)
+# The oldest. The most faded. Barely there.
+# ============================================================================
+
+:: Blackthorn.Session3.Ghost1_Catherine
+@py:
+# Catherine's card pools
+# Card 1: How They Lived
+catherine_life_deck = Deck(cards=["Page of Cups", "Six of Pentacles", "Three of Cups"], reversals=[0.2, 0.2, 0.2])
+
+# Card 2: How They Were Taken
+catherine_death_deck = Deck(cards=["Eight of Swords", "The Moon", "Five of Cups"], reversals=[0.25, 0.25, 0.25])
+
+catherine_reading = Reading(spread_id="forgotten-catherine", decks=[
+    catherine_life_deck,
+    catherine_death_deck
+])
+
+c_cards = catherine_reading.draw_cards()
+
+# House resistance — first ghost, lowest resistance
+session.house_resistance = 1
+session.ghosts_attempted += 1
+@endpy
+
+You shuffle. The sound is very loud in the East Wing corridor — the snap and riffle of cards echoing off stone walls that shouldn't echo this way, shouldn't carry sound this far, shouldn't be *listening.*
+
+But they are.
+
+"Two cards for Catherine," you say. Your voice is steady. You make it steady. "How she lived. How she was taken."
+
+You draw.
+
+@render render_reading(reading=catherine_reading)
+
+**How She Lived:** {c_cards[0].name}{c_cards[0].reversed ?  — Reversed | }
+**How She Was Taken:** {c_cards[1].name}{c_cards[1].reversed ?  — Reversed | }
+
+The moment the cards land, the wall *shudders.* Not an earthquake — a localized tremor, as if the plaster and stone are reacting to the cards the way the séance candles reacted to Lord Blackthorn's ghost. The house *felt* that.
+
+Arabella gasps. "She's coming forward. She's... she's remembering herself."
+
+A shape in the wall. Not visible — you can't see ghosts, that's Arabella's gift. But you can feel it. A cold spot. A presence. The outline of a woman pressed into plaster and stone and memory.
+
++ [Read for Catherine — grounded, practical, give her back her story] -> Blackthorn.Session3.Catherine_Grounded
++ [Read for Catherine — gently, she's been here so long, be kind] -> Blackthorn.Session3.Catherine_Diplomatic
++ [Read for Catherine — the Gothic voice pulls, the house wants you to perform] -> Blackthorn.Session3.Catherine_Gothic
+
+:: Blackthorn.Session3.Catherine_Grounded
+"Catherine."
+
+You say her name first. Before the interpretation. Before the analysis. You say her *name* because the house has spent seventy years trying to erase it.
+
+"Your name is Catherine. You were a maid in this house. You came here in 1823 and you deserved better."
+
+The wall shudders again. Harder.
+
+@if c_cards[0].name == "Page of Cups":
+    "The Page of Cups. You were young when you came here. Hopeful. Emotional. You came to this house because you needed work and you were good at your job and you *cared* — about the household, about the people in it. You weren't a 'servant' in the way the Blackthorns meant the word. You were a person doing honest work."
+@elif c_cards[0].name == "Six of Pentacles":
+    "The Six of Pentacles. You were generous. You shared what you had — your time, your labor, your kindness. The household relied on you in ways they never acknowledged. You gave and gave and no one gave back."
+@else:
+    "The Three of Cups. You had friends here. You laughed. You celebrated things — birthdays, holidays, small victories in the kitchen or the laundry. You built a life in this house even though the house was never going to let you keep it."
+@endif
+
+Arabella, channeling: "She's nodding. She... she remembers. She remembers her *name.*"
+
+@if c_cards[1].name == "Eight of Swords":
+    "The Eight of Swords. You were trapped. Not suddenly — slowly. The house made you invisible first. Your work was noticed less. Your name was used less. You started getting *lost* — in corridors that shouldn't be confusing, in rooms that hadn't been there before. And one day you walked into the East Wing and you couldn't find your way back."
+@elif c_cards[1].name == "The Moon":
+    "The Moon. Deception. The house *confused* you. Made you doubt yourself. You started forgetting things — where you'd put the linens, which room was yours, what day it was. The forgetting spread until you forgot who you were. And the house... absorbed what was left."
+@else:
+    "The Five of Cups. Grief. You lost yourself here — not all at once, but cup by cup. Each loss small enough to explain away, until there was nothing left. And no one noticed because the house made sure no one noticed."
+@endif
+
+You look at the wall where Arabella's hands are pressed. You can't see Catherine. But you feel her — a warmth against the cold, a pulse in the stone, a person *remembering* herself after seventy years of being nothing.
+
+"Your name is Catherine. You worked here. You *mattered.* And what happened to you was wrong."
+
+A sound from the wall. Not a whisper — a sigh. Deep. Long. The sigh of someone setting down a weight they've been carrying since 1823.
+
+The plaster cracks. A single line, running from floor to ceiling, where Catherine has been. It's just a crack — just old plaster breaking — but it feels like something *opening.*
+
+Arabella: "She's free. She's... going. She's *going.*"
+
+The cold spot fades. The corridor warms — just one degree, just barely, but you feel it.
+
+"Thank you," Arabella whispers. Not to you. To the space where Catherine was.
+
+@py:
+session.ghosts_freed += 1
+session.ghosts_read.append("catherine")
+session.house_power -= 3
+blackthorn.groundedness += 2
+blackthorn.interpretation_quality['grounded'] += 2
+session.lady_b_memories_recovered += 1
+@endpy
+
+-> Blackthorn.Session3.Catherine_Aftermath
+
+:: Blackthorn.Session3.Catherine_Diplomatic
+"Catherine." You say her name softly. The East Wing doesn't deserve softness, but Catherine does — seventy years in a wall earns you every gentleness the world has to offer.
+
+"Let me tell you what the cards see."
+
+@if c_cards[0].name == "Page of Cups":
+    "The Page of Cups. A young woman with an open heart. You came to service because it was honest work, and you brought something rare to this house — warmth. Real warmth, not the kind the fireplaces pretend to give. The kind that comes from a person who cares."
+@elif c_cards[0].name == "Six of Pentacles":
+    "The Six of Pentacles. Generosity. You gave more than you received — and that wasn't an accident, Catherine. That was the house *taking.* The imbalance was engineered. You gave and gave and the house took and took and called it 'service.'"
+@else:
+    "The Three of Cups. You had joy here. Even in this place, even serving people who didn't see you properly, you found joy. Friendships. Celebrations. Moments of light. The house couldn't take that from you. It took everything else, but it couldn't take the fact that you *lived* here, really lived, before it consumed you."
+@endif
+
+You read the second card with the same care. How she was taken. The slow erasure. The forgetting. You don't flinch from it, but you don't dramatize it either.
+
+"Catherine. I'm sorry. I'm sorry this happened to you. I'm sorry no one came sooner."
+
+From the wall — so faint, so fragile — something that might be forgiveness.
+
+Arabella: "She's going. She says... she says it's warm. Where she's going, it's warm."
+
+The crack appears in the plaster. The cold lifts one degree.
+
+@py:
+session.ghosts_freed += 1
+session.ghosts_read.append("catherine")
+session.house_power -= 3
+blackthorn.groundedness += 1
+blackthorn.interpretation_quality['diplomatic'] += 2
+session.lady_b_memories_recovered += 1
+@endpy
+
+-> Blackthorn.Session3.Catherine_Aftermath
+
+:: Blackthorn.Session3.Catherine_Gothic
+The East Wing presses in. The cold. The dark. The weight of eight hundred years of erasure. Something in you *responds* — the same something from the séance, the voice that isn't quite yours, the presence that the house recognizes and wants.
+
+@if blackthorn.gothic_persona >= 5:
+    You give in.
+
+    "*SPIRIT TRAPPED IN STONE AND SORROW—*"
+
+    Your voice echoes through the East Wing. The walls vibrate. Not with Catherine's release — with *response.* The house is listening and the house is *pleased.* This is what it wants. Performance. Drama. Another person playing a role instead of being real.
+
+    The reading is atmospheric. Powerful-sounding. But underneath the Gothic language, you're not *saying* Catherine's name — you're making her part of the show. Another character in the Gothic drama. Another servant swallowed by the narrative.
+
+    Arabella flinches. "That's not— you're not *helping* her, you're—"
+
+    The wall doesn't crack. The cold doesn't lift.
+
+    Catherine is still in the wall. She's *louder* now — agitated, disturbed, woken without being freed. You've done the equivalent of shaking a sleeping person and then walking away.
+
+    Mrs. Winters, from the corridor junction, quiet: "Miss {blackthorn.player_name}. Try again. Plainly."
+
+    @py:
+    session.ghosts_attempted += 1
+    session.house_power += 2
+    blackthorn.gothic_persona += 1
+    blackthorn.house_influence += 2
+    blackthorn.interpretation_quality['gothic'] += 2
+    blackthorn.groundedness -= 2
+    blackthorn.winters_approval -= 1
+    # Catherine NOT freed — will need to be re-attempted or she stays
+    @endpy
+
+    + [Try again. Plainly. From Bath.] -> Blackthorn.Session3.Catherine_Retry
+    + [Move on to the next ghost. Come back for Catherine later.] -> Blackthorn.Session3.Catherine_Failed
+@else:
+    The pull comes. You feel it — the house leaning in, the Gothic voice rising in your throat, the temptation to perform.
+
+    You look at the wall where Catherine has been for seventy years.
+
+    You think about Mrs. Winters. Standing at the corridor junction. Forty years of protecting her people from exactly this.
+
+    You think about Bath.
+
+    "No," you say. Quietly. To the house.
+
+    And then, in your own voice: "Catherine. Your name is Catherine. Let me read your cards."
+
+    The house *recoils.* You feel it — a pressure releasing, a frustrated exhalation from the walls themselves. It wanted the performance. You refused.
+
+    ~ blackthorn.groundedness += 3
+    ~ blackthorn.house_influence -= 1
+
+    -> Blackthorn.Session3.Catherine_Grounded
+@endif
+
+:: Blackthorn.Session3.Catherine_Retry
+You close your eyes. Breathe. The Gothic voice drains away — slowly, reluctantly, like water leaving a basin.
+
+You open your eyes. Look at the wall.
+
+"Catherine. I'm sorry. Let me try that again. Properly."
+
+You read the cards. Plainly. Without capital letters. Without atmosphere. Just the truth: who she was, what the house did to her, the fact that she mattered.
+
+It works. Not as powerfully as a first-time grounded reading — the moment's been muddied — but the crack appears, the cold lifts, and Arabella whispers "She's going."
+
+"I'm sorry, Catherine. For all of it."
+
+@py:
+session.ghosts_freed += 1
+session.ghosts_read.append("catherine")
+session.house_power -= 2  # Reduced impact from retry
+session.lady_b_memories_recovered += 1
+@endpy
+
+-> Blackthorn.Session3.Catherine_Aftermath
+
+:: Blackthorn.Session3.Catherine_Failed
+You move on. Catherine stays.
+
+Arabella looks at you. Doesn't say anything. Doesn't have to.
+
+Mrs. Winters's expression is carefully neutral.
+
+@py:
+session.ghosts_read.append("catherine_failed")
+# Catherine stays in the wall
+@endpy
+
+-> Blackthorn.Session3.Catherine_Aftermath
+
+:: Blackthorn.Session3.Catherine_Aftermath
+@py:
+# Lady Blackthorn's memory — first crack
+# She's somewhere in the house, not in the East Wing yet
+# But the house's grip on her memories has loosened
+if session.lady_b_memories_recovered >= 1:
+    session.lady_b_status = "stirring"
+@endpy
+
+From somewhere outside the East Wing — somewhere in the main house — a sound. A woman's voice. Lady Blackthorn.
+
+"Catherine? But Catherine went to... she went to..."
+
+She trails off. You can't see her, but you can hear the confusion. The house's edited memory, fraying at the edges.
+
+Mrs. Winters hears it too. Her jaw tightens. She says nothing.
+
+"Next," Arabella says. She's pressing forward, deeper into the East Wing. The corridors are changing — Thomas's lantern illuminates walls that weren't there a moment ago, doors that open into rooms too large for the building's footprint, staircases that lead down when the East Wing should only go across.
+
+Miss Chen's twine unspools behind you. The lifeline back to the real house.
+
+"Samuel is next," Arabella says. "He's... louder. Angrier. He's been pushing at the walls for fifty years."
+
+"Why is he angry?"
+
+"Because he *saw.* He figured it out — what the house does. And he tried to warn people. And the house took him for it."
+
+The corridor narrows. The temperature drops. The candles gutter.
+
+Something *slams* against the wall from the inside. Hard enough to crack the plaster. Hard enough to knock dust from the ceiling.
+
+Everyone jumps.
+
+"That's Samuel," Arabella says.
+
++ [Continue deeper. Read for Samuel.] -> Blackthorn.Session3.Ghost2_Samuel
+
+# ============================================================================
+# GHOST 2: SAMUEL (Footman, 1845)
+# Angry. Strong. Knows what the house is.
+# ============================================================================
+
+:: Blackthorn.Session3.Ghost2_Samuel
+@py:
+# Samuel's card pools
+samuel_life_deck = Deck(cards=["Knight of Wands", "Seven of Swords", "King of Pentacles"], reversals=[0.25, 0.25, 0.25])
+samuel_death_deck = Deck(cards=["Five of Swords", "The Tower", "Ten of Swords"], reversals=[0.25, 0.25, 0.25])
+
+samuel_reading = Reading(spread_id="forgotten-samuel", decks=[
+    samuel_life_deck,
+    samuel_death_deck
+])
+
+s_cards = samuel_reading.draw_cards()
+
+# House resistance increases
+session.house_resistance = 2
+session.ghosts_attempted += 1
+@endpy
+
+The house does not want you to read for Samuel.
+
+You know this because the moment you kneel and lay out your cloth, three things happen simultaneously: every candle in the corridor dims to blue points, the floor trembles — actually *trembles,* a vibration you feel through your knees — and the corridor behind Thomas begins to *close.* The walls inch inward, the ceiling lowers, the space between here and safety contracts.
+
+"The walls are moving," Thomas says, very calmly, as if reporting on weather. "I'd appreciate it if we could do this quickly, miss."
+
+Miss Chen checks her twine. It's taut. The corridor is compressing around it but hasn't broken it. Yet.
+
+"Quickly, then." You shuffle. Draw.
+
+@render render_reading(reading=samuel_reading)
+
+**How He Lived:** {s_cards[0].name}{s_cards[0].reversed ?  — Reversed | }
+**How He Was Taken:** {s_cards[1].name}{s_cards[1].reversed ?  — Reversed | }
+
+The moment the cards land, the wall SLAMS again. Plaster rains from the ceiling. Heathsniff barks — a sharp, real, *angry* bark, not a dramatic howl but a warning.
+
+Arabella: "He's furious. He wants OUT. He's been pushing for fifty years and he's *so angry*—"
+
+Something cold and violent presses against you. Not Samuel — the *house.* The house does not want Samuel freed. Samuel *knows things.* Samuel figured it out. Samuel is the one ghost who understands what the house is and the house has spent fifty years keeping him quiet.
+
+@if session.house_power > 12:
+    The pressure is immense. The Gothic voice surges — not as a temptation this time but as an *assault.* The house is using every thread it has in you, every moment you performed instead of reading honestly, every time the dramatic voice won.
+
+    Your hands shake. Your vision blurs. For a moment, you can't remember why you're here. What the cards mean. Who you—
+@else:
+    The pressure is real but manageable. The house pushes. You push back. You are from Bath. You have done this before.
+@endif
+
++ [Read for Samuel — grounded, honest, break through the house's resistance] -> Blackthorn.Session3.Samuel_Grounded
++ [Read for Samuel — carefully, he's angry, meet his anger with respect] -> Blackthorn.Session3.Samuel_Diplomatic
++ [The house is pushing too hard. You're struggling.] -> Blackthorn.Session3.Samuel_Struggle
+
+:: Blackthorn.Session3.Samuel_Grounded
+"Samuel."
+
+The house pushes. You say his name louder.
+
+"*Samuel.* Your name is Samuel. You were a footman in this house. And you were *right.*"
+
+The pushing stops. Not because the house gave up — because Samuel heard you. And his fifty years of rage pauses, just for a moment, at the sound of someone confirming what he's been screaming into stone for half a century.
+
+*You were right. You figured it out. And no one believed you.*
+
+@if s_cards[0].name == "Knight of Wands":
+    "The Knight of Wands. You were brave, Samuel. Fiery. Not the kind of servant who kept his head down and did as he was told — the kind who *noticed* things. Who asked questions. Who saw the pattern that no one else was willing to see."
+@elif s_cards[0].name == "Seven of Swords":
+    "The Seven of Swords. You were clever. You investigated *quietly* — you knew that asking open questions would get you noticed. So you gathered evidence in secret. Checked records. Counted the missing. You were a detective before the word existed, Samuel, and this house punished you for it."
+@else:
+    "The King of Pentacles. You were steady. Reliable. The kind of man the household depended on. And that dependability is what made you dangerous — you were paying attention. Day after day, year after year, you watched the pattern. Servants arriving. Servants vanishing. The house *explaining* and everyone *believing.*"
+@endif
+
+@if s_cards[1].name == "Five of Swords":
+    "The Five of Swords. You fought. When the house came for you, you fought. You didn't go quietly — you tried to warn others, tried to *tell* someone, and the house had to *take* you by force. The walls in this section — Arabella, am I right? — the walls here are *thicker* than elsewhere?"
+
+    Arabella: "Yes. Much thicker. He fought so hard the house had to use more of itself to hold him."
+
+    "Fifty years of fighting, Samuel. You never stopped."
+@elif s_cards[1].name == "The Tower":
+    "The Tower. The house brought you down fast. When it realized what you knew — that you'd seen the pattern, connected the disappearances — it acted quickly. No slow erosion like Catherine. No gentle fading. The house *struck.* A corridor that closed. A room that wasn't there. And then stone."
+
+    The wall shudders.
+
+    "It was afraid of you, Samuel. A *house* was afraid of a *footman.* That says more about you than any card."
+@else:
+    "The Ten of Swords. Complete destruction. The house didn't just take you — it tried to *erase* you. More thoroughly than the others. Because you knew its secret and a secret known is a secret vulnerable."
+
+    You look at the wall. The cracks spreading. The plaster bulging outward.
+
+    "But you wouldn't be erased. Would you? Fifty years and you're still *pushing.*"
+@endif
+
+Samuel's fury has changed. Not dimmed — *focused.* He's not just raging anymore. He's being *heard.*
+
+"Your name is Samuel. You were right about this house. And you've been right for fifty years, alone, in the dark. I'm sorry it took this long."
+
+The wall doesn't crack. It *breaks.* A chunk of plaster the size of your hand falls away and behind it — behind the lath and horsehair and eighty years of construction — is a space. A hollow. And in the hollow, something that used to be a person.
+
+Thomas steps forward. Looks. Steps back.
+
+"Christ," he says softly.
+
+The cold lifts. Not one degree — three. Samuel didn't go gently. Samuel went like a door being kicked open.
+
+@py:
+session.ghosts_freed += 1
+session.ghosts_read.append("samuel")
+session.house_power -= 3
+blackthorn.groundedness += 2
+blackthorn.interpretation_quality['grounded'] += 2
+session.lady_b_memories_recovered += 1
+@endpy
+
+-> Blackthorn.Session3.Samuel_Aftermath
+
+:: Blackthorn.Session3.Samuel_Diplomatic
+"Samuel. I hear you."
+
+Your voice is calm. Respectful. You're talking to an angry man — the angriest person in this building, living or dead — and anger, you know from three years of reading for people, doesn't need to be matched or subdued. It needs to be *witnessed.*
+
+"You've been trying to tell someone for fifty years. I'm here. I'm listening."
+
+The slamming stops.
+
+You read the cards with careful precision. Who he was — brave, or clever, or steady. How he was taken — fighting, or struck down, or erased. You don't rush. You don't flinch. When you reach the part about what the house did to him, you say it plainly, without Gothic embellishment and without euphemism.
+
+"The house *ate* you, Samuel. Because you were dangerous to it. Because you saw the truth and you wouldn't stop seeing it. And your anger is *right.* You have every reason to be angry. But right now I need you to let that anger go — not because it's wrong, but because holding it keeps you *here.* In the wall. Where the house wants you."
+
+A long, trembling pause.
+
+The plaster cracks. Falls away.
+
+Thomas: "...There's someone in there."
+
+"There was always someone in there."
+
+The cold lifts. Samuel goes — not gently, but *deliberately.* The anger doesn't vanish. It resolves. A different thing entirely.
+
+@py:
+session.ghosts_freed += 1
+session.ghosts_read.append("samuel")
+session.house_power -= 3
+blackthorn.groundedness += 1
+blackthorn.interpretation_quality['diplomatic'] += 2
+session.lady_b_memories_recovered += 1
+@endpy
+
+-> Blackthorn.Session3.Samuel_Aftermath
+
+:: Blackthorn.Session3.Samuel_Struggle
+The house is pushing too hard.
+
+The Gothic voice roars in your ears. The cold bites through your dress, your skin, your *bones.* You can't hold the cards — they're slipping, the warm deck suddenly freezing, and Samuel is *screaming* from inside the wall and the corridor is closing and Thomas is shouting about the walls and—
+
+"MISS {blackthorn.player_name}."
+
+Mrs. Winters. At your side. She wasn't there a moment ago and now she is, kneeling on the cold stone, her hand on your arm, her voice cutting through the noise like a knife through fog.
+
+"You are from *Bath.* You learned this from a *book.* Now read the *cards.*"
+
+The words hit like the first cup of tea she made you — hot, sweet, medicinal. The house's pressure doesn't vanish but it *thins.* Enough. Just enough.
+
+You read. Not your best. Not your worst. Shaking hands, chattering teeth, but the words are *honest* and that's what matters.
+
+"Samuel. Your name is Samuel. The house took you because you knew its secret. You were *right.* And I'm sorry."
+
+The wall cracks. Not dramatically — a slow split, reluctant, the house yielding ground it doesn't want to give.
+
+But it yields.
+
+@py:
+session.ghosts_freed += 1
+session.ghosts_read.append("samuel")
+session.house_power -= 2  # Reduced impact from struggle
+blackthorn.composure -= 2
+blackthorn.interpretation_quality['panicked'] += 1
+blackthorn.interpretation_quality['grounded'] += 1
+session.lady_b_memories_recovered += 1
+blackthorn.winters_approval += 2  # She came through for you
+@endpy
+
+-> Blackthorn.Session3.Samuel_Aftermath
+
+:: Blackthorn.Session3.Samuel_Aftermath
+@py:
+if session.lady_b_memories_recovered >= 2:
+    session.lady_b_status = "cracking"
+@endpy
+
+From the main house, louder now: Lady Blackthorn's voice.
+
+"Samuel? Samuel the footman? But he... he went to... where did he..."
+
+The confusion is sharper. More distressed. The house's edits are failing. Every ghost you free tears another hole in the fabricated memories.
+
+@if blackthorn.ravencroft_real_moment:
+    Ravencroft, from the corridor entrance: "Lady Blackthorn is in the hallway. She's... confused. Upset. She's asking about servants I've never heard of."
+
+    "She's remembering," Arabella says. "The house made her forget. It's wearing off."
+@endif
+
+Mrs. Winters is very still. Her face is composed. But her hands, clasped in front of her, are white-knuckled.
+
+She knows what's in these walls. She's known for years. And she stayed. She stayed and she protected her people and she did not go into the East Wing because going in meant confronting it and confronting it meant the house would fight back and she had Thomas and Miss Chen to think about.
+
+She's here now. Because you're here. Because a card reader from Bath with a three-shilling book made it possible.
+
+"Deeper," Arabella says. "Margaret is deeper in."
+
+The corridor stretches ahead. Darker. Colder. The house is tightening around you — not the compression from before, but a more insidious pressure. A *heaviness.* The feeling that you've gone far enough. That you should turn back. That this isn't your problem and you're from Bath and you could just *leave*—
+
+That last one isn't your thought. That's the house.
+
++ [Push deeper. Margaret is waiting.] -> Blackthorn.Session3.Ghost3_Margaret
+
+# ============================================================================
+# GHOST 3: MARGARET (Cook, 1867)
+# Warm. Sad. Tried to warn others.
+# ============================================================================
+
+:: Blackthorn.Session3.Ghost3_Margaret
+@py:
+# Margaret's card pools
+margaret_life_deck = Deck(cards=["The Empress", "Nine of Pentacles", "Queen of Cups"], reversals=[0.2, 0.2, 0.2])
+margaret_death_deck = Deck(cards=["Ten of Swords", "Three of Swords", "The Hermit"], reversals=[0.25, 0.25, 0.25])
+
+margaret_reading = Reading(spread_id="forgotten-margaret", decks=[
+    margaret_life_deck,
+    margaret_death_deck
+])
+
+m_cards = margaret_reading.draw_cards()
+
+# House resistance — highest for Margaret
+session.house_resistance = 3
+session.ghosts_attempted += 1
+@endpy
+
+Deeper.
+
+The East Wing is no longer pretending to be a wing of a house. The corridors have become something else — older, rawer, more *honest* about what this place is. The plaster is gone. The walls are bare stone. Not Norman stone — *Saxon.* Rough-cut, ancient, carved with symbols you can't read but can *feel.* The thingstead. The sacred ground. The place of memory, buried under eight hundred years of Blackthorn architecture.
+
+The air smells like earth and green things and old fire. Like a forest that was cut down but never stopped growing underneath.
+
+Miss Chen's twine is running low. She ties the last length to a stone outcrop.
+
+"This is as far as the string goes," she says. "After this, we navigate by memory."
+
+"In a house that eats memories?" Thomas says.
+
+"Yes." She pauses. "I suggest we not get separated."
+
+Arabella has stopped. She's standing in front of a section of wall that looks different from the rest — smoother, warmer, almost *soft.* She reaches out and touches it and her hand sinks in, just slightly, the way a hand sinks into fresh bread.
+
+"Margaret," she says. "Oh. Oh, she's *warm.*"
+
+"Warm?"
+
+"She's the warmest thing in this wall. She's been... I think she's been protecting the house from *itself.* From the inside. Holding it back. Keeping it from taking Mrs. Winters and Thomas and Miss Chen."
+
+Mrs. Winters makes a sound. Small. Private. The sound of a woman discovering that a cook who disappeared thirty years ago has been protecting her from inside the walls this whole time.
+
+"She's tired," Arabella whispers. "She's been holding for so long. She needs... she needs someone to take over. To tell her she can stop."
+
+You kneel. Lay the cloth. The stone floor is warm here — Margaret's warmth, bleeding through the foundation, the last act of a woman who spent her life feeding people and spent her death shielding them.
+
+You draw.
+
+@render render_reading(reading=margaret_reading)
+
+**How She Lived:** {m_cards[0].name}{m_cards[0].reversed ?  — Reversed | }
+**How She Was Taken:** {m_cards[1].name}{m_cards[1].reversed ?  — Reversed | }
+
+The house *resists.* Not with the violent slamming it used for Samuel — Margaret doesn't trigger rage. It uses something worse: *sadness.* A deep, pulling grief that settles over the corridor like fog. The feeling that nothing you do will be enough. That the house is too old and too strong and too hungry and you're just a woman from Bath with a book and a deck of cards and this is *hopeless*—
+
+That's the house. You know it's the house. But knowing doesn't make it lighter.
+
+@if session.house_power > 8:
+    The grief is heavy. Your hands feel like lead. The cards are warm but your fingers are numb and the distance between the card and the interpretation feels like miles—
+@else:
+    The grief washes over you and passes. You've weakened the house enough that its despair weapon has lost its edge. You feel it, acknowledge it, and let it go.
+@endif
+
++ [Read for Margaret — grounded, warm, the reading she deserves] -> Blackthorn.Session3.Margaret_Grounded
++ [Read for Margaret — let Mrs. Winters hear this one, it's for her too] -> Blackthorn.Session3.Margaret_For_Winters
+
+:: Blackthorn.Session3.Margaret_Grounded
+"Margaret."
+
+The wall sighs. Not the house — Margaret. A sigh of relief. Someone finally came.
+
+@if m_cards[0].name == "The Empress":
+    "The Empress. A nurturer. A mother figure." You look at the wall. "You fed everyone in this house, Margaret. Not just food — *care.* You were the kitchen and the kitchen was the heart of this building. The one room that was warm because of a *person,* not because of the house's tricks."
+@elif m_cards[0].name == "Nine of Pentacles":
+    "The Nine of Pentacles. Self-sufficient. Skilled. Proud of your work. You ran that kitchen like your own domain — and it was. The one part of this house the house couldn't fully control, because you were *competent* enough to make it yours."
+@else:
+    "The Queen of Cups. Emotionally generous. The person everyone came to. When the footmen were homesick, when the maids were frightened, when the house felt *wrong* and no one could say why — they came to the kitchen. They came to you."
+@endif
+
+Mrs. Winters is crying. Silently. Standing at her post, hands clasped, tears running down her face. She knew Margaret. She *knew* her. Margaret trained her. Margaret taught her which corridors to avoid and which rooms went cold for no reason and how to keep the staff safe.
+
+And then Margaret disappeared and Mrs. Winters was told she'd "gone to her sister in Devon" and Mrs. Winters *knew* it wasn't true but the house *made* her believe it and she's spent thirty years with that edited memory and now it's crumbling.
+
+@if m_cards[1].name == "Ten of Swords":
+    "The Ten of Swords. The house took everything. Completely. But Margaret — you didn't go without a fight. Like Samuel, you resisted. But your resistance wasn't rage. It was *endurance.* You let the house take you and then you *held on.* You stayed in the walls and you protected the people who came after you."
+@elif m_cards[1].name == "Three of Swords":
+    "The Three of Swords. Heartbreak. The worst part wasn't the taking — it was knowing that the people you loved would forget you. That Mrs. Winters would believe you'd gone to Devon. That the kitchen would continue without you and eventually even the recipes would change."
+@else:
+    "The Hermit. Isolation. You've been alone in these walls for thirty years, Margaret. Alone and *working.* Still protecting. Still holding the house back. Even in death you wouldn't stop taking care of people."
+@endif
+
+"Margaret. You can rest now."
+
+The warm section of wall pulses. Once. Twice.
+
+"I mean it. You've done enough. *More* than enough. Mrs. Winters is here. Thomas is here. Miss Chen is here. They're safe. You *kept* them safe. And now it's our turn."
+
+A warmth spreads through the corridor. Not the house's warmth — Margaret's. One last act of care, radiating outward through the stone and plaster and ancient timber.
+
+The wall softens further. Releases. Margaret doesn't leave the way Catherine faded or Samuel burst — she *dissolves,* gently, like steam from a kitchen on a cold morning.
+
+Mrs. Winters steps forward. Puts her hand on the wall where Margaret was.
+
+"Thank you," she whispers. "You silly, brave, *wonderful* woman. Thank you."
+
+@py:
+session.ghosts_freed += 1
+session.ghosts_read.append("margaret")
+session.house_power -= 3
+blackthorn.groundedness += 2
+blackthorn.interpretation_quality['grounded'] += 2
+session.lady_b_memories_recovered += 1
+blackthorn.servant_trust += 3
+blackthorn.winters_approval += 3
+@endpy
+
+-> Blackthorn.Session3.Margaret_Aftermath
+
+:: Blackthorn.Session3.Margaret_For_Winters
+You look at Mrs. Winters. She's standing at her post. Hands clasped. The tears she's been fighting since you entered the East Wing are winning.
+
+This reading isn't just for Margaret. It's for her.
+
+"Margaret. Your name is Margaret. You were the cook at Blackthorn Manor." You read the cards — who she was, how she lived. Warm. Capable. The heart of the kitchen.
+
+Then you turn to Mrs. Winters.
+
+"Mrs. Winters. Did you know Margaret?"
+
+A long silence. Then:
+
+"She trained me. I was twenty-two. New to service. Terrified of the house." Her voice cracks. Holds. "She taught me which corridors were safe. Which rooms to avoid after dark. She knew. She *always* knew. And when she..."
+
+She stops.
+
+"When she went to her sister's in Devon?"
+
+Mrs. Winters shakes her head. Slowly. The edited memory, dissolving.
+
+"She didn't go to Devon. She never went to Devon." The words come out one at a time, like stones being pulled from a wall. "I knew. I *knew* and then I didn't know and then I knew again and then I didn't and the house kept... *changing* what I remembered..."
+
+You read the second card. How Margaret was taken. How she stayed in the walls. How she held the house back from the inside, protecting the people who came after her.
+
+"She's been protecting you for thirty years, Mrs. Winters. From inside the walls. The reason this section of the house hasn't taken anyone since her — the reason you and Thomas and Miss Chen are safe — is Margaret."
+
+Mrs. Winters puts her hand on the wall.
+
+"You *impossible* woman," she says. "You absolute — thirty *years* — you could have *rested*—"
+
+From the wall, through Arabella: "Tell her I'm sorry about the stew recipe. I never did write it down."
+
+Mrs. Winters laughs. It's wet and broken and real. "I *know* you didn't. I've been trying to recreate it for *decades.*"
+
+"She says..." Arabella is smiling through tears. "She says the secret is a pinch of nutmeg. She says you always forget the nutmeg."
+
+"I *do* forget the nutmeg. Every *bloody* time."
+
+Margaret goes. Warm. Gentle. A kitchen closing for the night.
+
+@py:
+session.ghosts_freed += 1
+session.ghosts_read.append("margaret")
+session.house_power -= 4  # Extra impact — this one hit deep
+blackthorn.groundedness += 2
+blackthorn.interpretation_quality['grounded'] += 1
+blackthorn.interpretation_quality['diplomatic'] += 2
+session.lady_b_memories_recovered += 1
+blackthorn.servant_trust += 4
+blackthorn.winters_approval += 4
+@endpy
+
+-> Blackthorn.Session3.Margaret_Aftermath
+
+:: Blackthorn.Session3.Margaret_Aftermath
+@py:
+if session.lady_b_memories_recovered >= 3:
+    session.lady_b_status = "breaking"
+@endpy
+
+From the main house — much louder now, much closer — Lady Blackthorn's voice. Not confused anymore. *Distressed.*
+
+"Margaret? *MARGARET?* But Margaret's in Devon — Margaret's always been in — she ISN'T in Devon, is she? She *never* went to Devon. She's *HERE.* She's been *HERE* the whole time. What have I — what has this HOUSE—"
+
+Footsteps. Fast. Coming closer.
+
+The house *shudders.* The whole structure — foundation to turret. Not an earthquake. A response. Its grip on Lady Blackthorn is failing and it's *afraid.* For the first time in eight hundred years, the house built on the thingstead — the house that feeds on forgetting — is losing control of the story.
+
+Mrs. Winters wipes her face. Squares her shoulders.
+
+"She's coming," she says. "Lady Blackthorn. She's remembering."
+
+Thomas: "Is that good or bad?"
+
+Mrs. Winters: "Both."
+
+From the corridor behind you, the sound of someone running in silk slippers on stone floors. The sound of a woman who has been asleep for decades — not physically, but in every way that matters — waking up.
+
+Lady Blackthorn appears at the entrance to the East Wing.
+
+She is not gliding. She is not dramatic. She is not performing.
+
+She is terrified.
+
+"What have I *done?*" she whispers. "What has this house made me *do?*"
+
++ [Continue — the confrontation begins] -> Blackthorn.Session3.Part1_End
+
+# ============================================================================
+# END OF PART 1
+# ============================================================================
+
+:: Blackthorn.Session3.Part1_End
+@py:
+# Save state for Part 2
+session.part1_complete = True
+
+# Calculate reading quality so far
+session.reading_quality = (
+    blackthorn.interpretation_quality['grounded'] * 3 +
+    blackthorn.interpretation_quality['diplomatic'] * 2 +
+    blackthorn.interpretation_quality['gothic'] * 1 +
+    blackthorn.interpretation_quality['panicked'] * -1
+)
+
+# Determine how many ghosts can be freed in Part 2
+# If quality is high and house_power is low, additional ghosts become available
+session.additional_ghosts_available = session.house_power <= 6
+
+# Lady Blackthorn's state carries forward
+session.lady_b_awakening = session.lady_b_status
+@endpy
+
+She stands in the entrance to the East Wing. Lady Blackthorn. Mistress of this house for decades. The woman who dined at midnight and drank something red and glided through corridors and called you "our little card reader" and said "practical" like it was a disease.
+
+She's shaking.
+
+Behind her, the main house creaks and groans — the sounds of a building losing its hold on the narrative it's been maintaining for centuries. Portraits going still. Corridors straightening. The architecture of erasure, failing.
+
+And ahead of you: the deep East Wing. The Saxon stone. The thingstead. More ghosts — fainter, older, decades and decades of servants who lived and worked and were consumed and forgotten.
+
+Lady Blackthorn in the doorway. The house crumbling around her constructed memories. The truth, finally, after eight hundred years, coming up through the floor like tree roots through pavement.
+
+Mrs. Winters steps forward. Between you and Lady Blackthorn. Not protecting you from her — protecting *her* from what she's about to learn.
+
+"Come inside, my lady," Mrs. Winters says. With the voice she uses for serious things. "There's something you need to see."
+
+Lady Blackthorn looks at the East Wing. At the cracked plaster. At the bare Saxon stone.
+
+At the hollow in the wall where Samuel was, where something that used to be a person has been hidden for fifty years.
+
+"Oh *God,*" she says.
+
+And for the first time since you arrived at Blackthorn Manor, Lady Blackthorn is not performing.
+
+# ============================================================================
+# Part 2 continues with:
+#   - Lady Blackthorn's reckoning (the memories return)
+#   - Additional ghost readings (if quality allows)
+#   - The house's final resistance
+#   - The house going quiet (the portraits stop watching)
+#   - The farewell
+#   - Dream fade + bleed objects + The Letter
+# ============================================================================
+
+# ============================================================================
+# SESSION 3, PART 2: "THE RECKONING"
+# ============================================================================
+#
+# Acts 4-6:
+#   Act 4: The Confrontation (Lady Blackthorn remembers, the house fights)
+#   Act 5: The Farewell (the bridge, the goodbyes, the morning)
+#   Act 6: Dream Fade + Bleed Objects + The Letter
+#
+# ============================================================================
+
+# ============================================================================
+# ACT 4: THE CONFRONTATION
+# ============================================================================
+
+:: Blackthorn.Session3.Confrontation
+Lady Blackthorn stands in the entrance to the East Wing. Behind her, the main house groans — long, structural sounds, the sounds a building makes when something that has been holding it together starts to let go.
+
+She's not gliding. She's standing in silk slippers on Saxon stone and her hands are shaking and the black velvet is just a dressing gown and the widow's veil is just fabric and she is just a woman who has been asleep for a very long time.
+
+"How many?" she asks. Her voice is thin. The theatrical contralto is gone. What's underneath is smaller, older, more human. "How many are in the walls?"
+
+Arabella, gently: "I can feel... many. More than three. More than ten."
+
+"*Ten?*"
+
+"Decades, my lady. The house has been doing this for decades. Perhaps longer."
+
+Lady Blackthorn looks at the hollow in the wall where Samuel was. She looks at the cracked plaster where Catherine was. She looks at the warm, softened section where Margaret spent thirty years holding the house back from the inside.
+
+"I thought they *left,*" she says. "I thought — Catherine went to Hampshire. Samuel went to London. Margaret went to her sister's in Devon. Avery — Avery the stable boy — he went to the *circus.*" A terrible sound escapes her — not a sob, not a laugh, something between. "A *circus.* Who goes to a circus? I *believed* it. I believed every — the house told me and I *believed* it because it was *easier* than—"
+
+She stops. Looks at Mrs. Winters.
+
+"You knew."
+
+Mrs. Winters doesn't flinch. "I suspected. For a long time. But the house... it made me forget too. Not completely — I always knew which corridors to avoid, which rooms went wrong. I just couldn't remember *why* I knew. Every time I got close to understanding, the house would..." She searches for words. "Smooth it over. Like plaster over a crack."
+
+"And you *stayed?*"
+
+"Someone had to protect the ones who were still alive."
+
+The silence that follows is the most honest thing that has happened in Blackthorn Manor in a hundred years.
+
++ ["Lady Blackthorn — this isn't your fault."] -> Blackthorn.Session3.Confront_Kind
++ ["Lady Blackthorn — we can't undo what happened. But we can stop it from happening again."] -> Blackthorn.Session3.Confront_Practical
++ [Let Mrs. Winters handle this. She's earned it.] -> Blackthorn.Session3.Confront_Winters
+
+:: Blackthorn.Session3.Confront_Kind
+"Lady Blackthorn. This isn't your fault."
+
+She stares at you. "I was *mistress* of this house—"
+
+"You were its *prisoner.* The house edited your memories. It kept you comfortable and oblivious because that's what it needed — someone to maintain the cycle. Someone to hire servants. Someone to *not ask questions.*" You hold her gaze. "The house chose you because you were dramatic and self-absorbed and wouldn't look too closely at the staff. That's not evil. It's just... human."
+
+"That's the worst thing anyone has ever said to me," she whispers. "And it's true."
+
+She says "true" the way she used to say "practical." Like a medical diagnosis. But this time, she means it.
+
+~ blackthorn.groundedness += 1
+~ session.lady_b_memories_recovered += 1
+
+-> Blackthorn.Session3.Confront_Resolution
+
+:: Blackthorn.Session3.Confront_Practical
+"Lady Blackthorn. We can't undo what happened. But we can stop it from happening again. And we can give the people in these walls what they deserve — their names. Their stories. A proper resting place."
+
+She straightens. Just barely. The dramatic instinct — the one the house cultivated in her — wants to make this a scene of Gothic anguish. But something else is surfacing. Something that looks, unexpectedly, like *duty.*
+
+"What do you need?"
+
+"We need to find them. All of them. Arabella can sense where they are. I can read for them. But we need people to open the walls. To carry what's inside."
+
+@if blackthorn.ashford_free:
+    Lord Ashford, from behind Lady Blackthorn: "I'll do it. This is my family's house. My family's debt."
+@endif
+
+@if blackthorn.ravencroft_real_moment:
+    Ravencroft, quietly: "I can carry things."
+@endif
+
+Thomas lifts his crowbar. "Been waiting for this."
+
+Miss Chen: "I'll document. Names. Dates. Everything. Someone should write it down."
+
+Lady Blackthorn looks at her household — servants and gentry, living and dead, all of them standing in a corridor of Saxon stone inside a house that has been eating people for centuries — and for the first time, she sees them as a *group.* Not stratified. Not separated by class and corridor and the invisible architecture of who matters and who doesn't.
+
+People.
+
+"Then we do it," she says. "All of it. Today."
+
+~ blackthorn.groundedness += 1
+~ session.lady_b_memories_recovered += 1
+
+-> Blackthorn.Session3.Confront_Resolution
+
+:: Blackthorn.Session3.Confront_Winters
+You step back. This isn't your moment.
+
+Mrs. Winters steps forward. She looks at Lady Blackthorn — the woman she's served for decades, the woman who never noticed when staff disappeared, the woman who drank red things at midnight and called everything "delightful" while people were being absorbed into the foundations.
+
+"My lady."
+
+"Mrs. Winters."
+
+"Margaret trained me. Did you know that?"
+
+Lady Blackthorn's face crumbles. "Margaret. I remember — I remember her *now.* She made that stew. The one with the—"
+
+"Nutmeg. Yes."
+
+"And she... she didn't go to Devon."
+
+"No, my lady. She didn't."
+
+A long silence.
+
+"Mrs. Winters. How do you not *hate* me?"
+
+Mrs. Winters considers this. She considers it with the seriousness it deserves — not dismissing it, not rushing past it, giving the question the weight of forty years of complicated loyalty.
+
+"Because you didn't know," she says finally. "The house made sure you didn't know. And because blaming you would mean the house wins — it wants us divided. Gentry against servants. The powerful against the powerless. That's how it *feeds.*"
+
+She offers Lady Blackthorn her hand.
+
+"Let's stop feeding it."
+
+Lady Blackthorn takes her hand. The gesture is awkward — they have never touched like this, never stood as equals, never faced each other without the invisible wall of class between them.
+
+The house *shudders.*
+
+~ blackthorn.servant_trust += 3
+~ blackthorn.winters_approval += 2
+~ session.lady_b_memories_recovered += 2
+
+-> Blackthorn.Session3.Confront_Resolution
+
+# ============================================================================
+# THE HOUSE FIGHTS BACK (AND LOSES)
+# ============================================================================
+
+:: Blackthorn.Session3.Confront_Resolution
+@py:
+# The house is losing. It knows.
+# How hard it fights depends on remaining house_power
+
+if session.house_power <= 4:
+    session.house_fight = "weak"    # House barely resists
+elif session.house_power <= 8:
+    session.house_fight = "moderate" # House fights but can't win
+else:
+    session.house_fight = "strong"   # House makes one last push
+@endpy
+
+The house fights back.
+
+@if session.house_fight == "strong":
+    It fights *hard.*
+
+    The East Wing convulses. The corridors twist — Miss Chen's twine snaps, the lifeline severed. The candles go out. Every one. Darkness so total you can't see your own hands.
+
+    The cold comes. Not the Rose Room's gentle chill or the East Wing's deep freeze — a cold that is *alive,* that wraps around your chest and *squeezes,* that whispers in a voice too old for English, too old for Norman French, the voice of the land itself, corrupted and starving and *furious* at being denied.
+
+    @if blackthorn.gothic_persona >= 5:
+        And the Gothic voice rises in you. Louder than it's ever been. The house is *using* you — every moment you performed, every time you chose atmosphere over honesty, the house was building a foothold in you, and now it pulls.
+
+        *Give in. Be what I need. Be the dramatic one. Be the mystic. Be the SHOW.*
+
+        "I—" Your voice falters. "I can't—"
+
+        Mrs. Winters, in the dark: "You CAN. You are from BATH."
+
+        Thomas: "Read the cards, miss. Just read the cards."
+
+        Heathsniff, pressed against your leg, warm and solid and *real.*
+
+        You hold your deck. The cards are warm. They've always been warm. They were warm the first night when you read for a ghost and they're warm now when the house is trying to swallow you whole.
+
+        You are from Bath. You learned this from a book.
+
+        "*No,*" you say. To the house. To the voice. To eight hundred years of erasure. "I don't perform. I *read.*"
+    @else:
+        The house pushes and you push back. Not with drama. Not with power. With the sheer, stubborn, immovable force of a woman from Bath who has had *enough.*
+
+        "I am a card reader," you say into the darkness. "I learned from a book. I don't have The Gift. I have a *skill.* And I am using it to *remember* the people you tried to make everyone forget."
+    @endif
+
+    The dark holds for one terrible moment.
+
+    Then Mrs. Winters strikes a match. The sound — that small, practical, *human* sound — cuts through eight hundred years of supernatural malice like a kitchen knife through bad bread.
+
+    Light returns. The corridor steadies. The cold retreats.
+
+    The house has nothing left.
+@elif session.house_fight == "moderate":
+    The house tries. The corridors flex — walls inching inward, ceiling lowering, the sensation of enormous weight pressing down. The cold deepens. The candles flicker.
+
+    But it's not enough. Three ghosts freed. Lady Blackthorn waking up. The carefully maintained architecture of forgetting, crumbling.
+
+    Mrs. Winters stands her ground. Thomas braces the corridor walls with his crowbar — a gesture more symbolic than structural, but symbols matter in a house built on them. Miss Chen wraps the broken twine around her fist and plants her feet.
+
+    @if blackthorn.ravencroft_real_moment:
+        Ravencroft steps in front of Arabella. Not dramatically. Protectively. A man doing a useful thing without making it a performance.
+    @endif
+
+    The house pushes. Everyone pushes back. Not with magic. With *presence.* With the simple, radical act of being real people who refuse to forget.
+
+    The pushing stops.
+@else:
+    The house barely resists. Whatever power it had has been spent — three ghosts freed, Lady Blackthorn awakening, the whole edifice of erasure collapsing under the weight of names spoken aloud.
+
+    A tremor moves through the foundations. The East Wing groans. And then — slowly, reluctantly, like an animal releasing something from its jaws — the house lets go.
+@endif
+
+-> Blackthorn.Session3.House_Goes_Quiet
+
+# ============================================================================
+# THE HOUSE GOES QUIET
+# ============================================================================
+
+:: Blackthorn.Session3.House_Goes_Quiet
+@py:
+# Additional ghost readings — if quality allows and house is weak enough
+if session.additional_ghosts_available and session.reading_quality >= 8:
+    session.bonus_ghosts = True
+    session.ghosts_freed += 2  # Two more freed "off-screen" as house collapses
+else:
+    session.bonus_ghosts = False
+
+# Final house_power check
+if session.ghosts_freed >= 3:
+    session.house_defeated = True
+else:
+    session.house_defeated = False
+
+# Final quality calculation
+session.total_quality = (
+    session.reading_quality +
+    session.ghosts_freed * 3 +
+    session.lady_b_memories_recovered * 2 +
+    blackthorn.servant_trust
+)
+@endpy
+
+@if session.bonus_ghosts:
+    You read for more. With the house weakened, they come faster — ghosts pressing forward, emerging from the walls like shoots from thawed ground. Arabella channels. You read. Two cards, a name, a story, a release.
+
+    A gardener named William. A scullery maid named Rose. Fainter ghosts, older, harder to reach — but you reach them. Each reading is a name restored, a story told, a crack in the house's foundation of forgetting.
+
+    The East Wing fills with warmth. Not the house's performing warmth — the real kind. The kind that comes from people being remembered.
+@endif
+
+@if session.house_defeated:
+    And then — between one reading and the next, between one name and the silence after — the house goes quiet.
+
+    Not gradually. Not with a whimper or a crash or a dramatic final convulsion. It just... *stops.*
+
+    The portraits stop watching. You can feel it — a hundred painted eyes, fixed and staring for centuries, suddenly becoming what they always should have been: paint on canvas. Decoration. Art. The corridor of Blackthorn ancestors becomes just a corridor. The repeated face of Renaud de Noirépine becomes just a portrait of a dead man who died nine hundred years ago and has no business watching anyone.
+
+    The corridors straighten. The East Wing, which has been a labyrinth of impossible architecture and shifting walls, resolves into what it actually is: a wing of an old house, poorly maintained, closed for fifty years, full of dust and crumbling plaster and the sad evidence of what was hidden in its walls.
+
+    The Rose Room — you can feel it from here, somehow, the way you can feel a headache lifting — warms up. Not the fire finally winning its battle against the supernatural cold. The cold itself departing. Miss Adelaide, the consumption ghost, releasing her preference for chill. Going wherever the others have gone.
+
+    The chandelier in the entrance hall stops swaying. It's been swaying since you arrived, so subtly you stopped noticing. Now it hangs still. Just a chandelier. Heavy, ornate, ridiculous. But still.
+
+    Lord Ravencroft's personal wind dies.
+
+    That's when you know it's over. When the indoor wind stops. When his shirt just... hangs. Like a normal shirt. On a normal man. In a normal house.
+
+    @if blackthorn.ravencroft_real_moment:
+        He looks down at his shirt. Then at you.
+
+        "That was the *house?*"
+
+        "That was the house."
+
+        "The BILLOWING—"
+
+        "The house."
+
+        "The— the WIND in the HALLWAYS—"
+
+        "All the house."
+
+        He stares at his entirely still shirt. "I thought I was just... dramatic."
+
+        "You *are* dramatic. But the wind was the house."
+
+        Thomas, exhausted, sitting on the floor: "To be fair, m'lord, you were dramatic *before* the wind."
+
+        "Thank you, Thomas. That's... actually comforting."
+    @else:
+        Something changes in the air. The charged, theatrical, *Gothic* quality of Blackthorn Manor drains out of it like water from a bath. What's left is just... old. Cold. A house.
+    @endif
+@else:
+    The house weakens, but doesn't fully yield. The portraits still watch — less intensely, like a predator that's been wounded but not killed. The corridors are straighter but not quite right. The East Wing is still wrong, just... less wrong.
+
+    You freed some. Not all. The house endures.
+
+    But it's *damaged.* The cycle is broken. The servants you freed have left gaps in the house's structure — not physical gaps but *narrative* ones, holes in the story the house has been telling itself for centuries. It will take years to repair. Maybe decades. Maybe it can't.
+
+    Mrs. Winters looks at the weakened walls and nods. "It's not over. But it's *changed.* We can work with changed."
+@endif
+
+Lady Blackthorn stands in the East Wing. She has not moved. She has been watching everything — the readings, the ghosts emerging, the walls cracking, the house she has inhabited for decades revealing itself as something that fed on the people she was supposed to protect.
+
+She looks old. Not ancient — just *her age.* The house's preservation is failing. The preternatural pallor is fading into normal skin, normal lines, normal years. She's not a Gothic figure anymore. She's a woman in her sixties who has been living in a fairy tale and has just woken up.
+
+"We need to find them all," she says. Quietly. Without drama. "Every hollow. Every wall. We need to know their names."
+
+"We will," Lord Ashford says.
+
+"I'll arrange the burials. Proper headstones. With their *names.*"
+
+"Yes."
+
+"And the house—" She looks around. At the Saxon stone. At the thingstead foundation. "This land was taken. The house was built on something sacred. Is there... can we give it back?"
+
+You think about this. About a Norman manor built on a Saxon gathering place. About a place of memory corrupted into a place of forgetting. About eight hundred years of erasure.
+
++ ["You can't give the land back. But you can restore what it was for — a place that remembers."] -> Blackthorn.Session3.Restoration
++ ["That's a question for someone wiser than a card reader from Bath."] -> Blackthorn.Session3.Restoration_Humble
+
+:: Blackthorn.Session3.Restoration
+"The thingstead was a place of witness. A place where stories were told and remembered. The house corrupted that — turned it into a place where stories are *erased.* You can't undo a thousand years of history. But you can change what the house is *for.*"
+
+You look at the East Wing. At the bare Saxon stone showing through the plaster. At the carved symbols, older than the Conquest, older than the Blackthorns, older than everything in this house except the land itself.
+
+"Don't hide this. Don't plaster over the stones again. Let them be *seen.* The East Wing isn't a ruin — it's a record. The oldest part of this building. The part that remembers."
+
+Lady Blackthorn: "A memorial."
+
+"A memorial. For the servants. For the Saxons. For everyone this land was made to forget."
+
+She nods. Slowly. The dramatic widow has become something else — something quieter and more useful. A woman with a project. A woman with amends to make that will take the rest of her natural life and she knows it.
+
+~ blackthorn.groundedness += 2
+
+-> Blackthorn.Session3.Farewell_Transition
+
+:: Blackthorn.Session3.Restoration_Humble
+"That's a question for someone wiser than a card reader from Bath. But I know this: the ghosts didn't want revenge. They wanted to be *remembered.* That's something you can do. You and Lord Ashford. And Mrs. Winters."
+
+Mrs. Winters: "And Thomas and Miss Chen. We all live here. We all have a say."
+
+Lady Blackthorn looks at her housekeeper. At the woman who has been protecting this household for forty years while the house tried to eat everyone in it.
+
+"Yes," she says. "All of us."
+
+~ blackthorn.groundedness += 1
+~ blackthorn.servant_trust += 1
+
+-> Blackthorn.Session3.Farewell_Transition
+
+:: Blackthorn.Session3.Farewell_Transition
+@py:
+# Final tally
+session.final_ghosts_freed = session.ghosts_freed
+session.house_fully_defeated = session.house_defeated
+
+# Determine ending tier
+if session.total_quality >= 25 and session.house_defeated:
+    session.ending_tier = "full_reckoning"    # 5 stars
+elif session.total_quality >= 18 and session.ghosts_freed >= 3:
+    session.ending_tier = "mostly_mended"     # 4 stars
+elif session.total_quality >= 10 and session.ghosts_freed >= 2:
+    session.ending_tier = "partial_peace"     # 3 stars
+elif session.ghosts_freed >= 1:
+    session.ending_tier = "incomplete"        # 2 stars
+else:
+    session.ending_tier = "failure"           # 1 star
+@endpy
+
+The rest of the day is work. Not supernatural work — physical, practical, *human* work. Thomas opens walls with his crowbar. Lord Ashford carries what's found — gently, with the reverence of a man who has recently learned what it costs when aristocrats don't respect the people who serve them. Miss Chen documents everything in a notebook that will eventually become a record more complete than any parish register.
+
+@if blackthorn.ravencroft_real_moment:
+    Ravencroft carries candles. Holds lanterns. Does as he's told. At one point he finds a small object in the rubble — a thimble, silver, engraved with a C. Catherine's.
+
+    He brings it to you. Holds it out in his palm. "For the memorial?"
+
+    "For the memorial."
+
+    He nods. No speech. No capital letters. Just a man doing the work of making things right.
+
+    Heathsniff lies at the entrance to the East Wing, guarding the way out. Making sure everyone can leave when they're ready.
+@endif
+
+Mrs. Winters works. Silently, methodically, the way she's done everything for forty years. When they find Margaret's remains — in the warm section of wall, wrapped in what was once a kitchen apron — she stops. Just for a moment. Puts her hand on the stone. Whispers something you can't hear.
+
+Then she continues.
+
+The local priest is summoned from the village. He arrives, sees the East Wing, sees the remains, and — to his enormous credit — does not faint or flee or ask uncomfortable questions. He simply does his job. Blessings. Prayers. The words the dead should have had when they died.
+
+The burials happen before sunset. In the cemetery behind the manor. Proper graves. Proper headstones. Thomas carved the names himself — he's good with his hands, it turns out, when they're not carrying silver trays.
+
+CATHERINE MARSH, 1798-1823. MAID. REMEMBERED.
+SAMUEL COLE, 1820-1845. FOOTMAN. HE KNEW THE TRUTH.
+MARGARET BYRNE, 1835-1867. COOK. SHE HELD THE LINE.
+
+@if session.bonus_ghosts:
+    WILLIAM HART, 1812-1851. GARDENER. HE TENDED MORE THAN GARDENS.
+    ROSE PRICE, 1849-1870. SCULLERY MAID. SHE DESERVED THE WORLD.
+@endif
+
+The sun breaks through the clouds as the last headstone is placed. The first sun in four days. It falls across the cemetery in gold bars that look, from a certain angle, like the light through a grove of trees that hasn't existed for eight hundred years.
+
+Arabella, eyes closed, face tipped to the light: "They're gone. All of them. They're at peace."
+
+She opens her eyes. Smiles. For the first time since you've known her, she's not looking at things that aren't there. There's nothing else to see. Just the living. Just the sun.
+
+"They say thank you," she adds. "All of them. Even Samuel. Especially Samuel."
+
++ [Continue to evening — the farewell] -> Blackthorn.Session3.Farewell
+
+# ============================================================================
+# ACT 5: THE FAREWELL
+# ============================================================================
+
+:: Blackthorn.Session3.Farewell
+Evening. The last evening.
+
+The bridge is repaired. It happened sometime during the afternoon — Thomas checked and it was simply *there,* solid and whole, as if it had never been washed out at all. The house stopped needing you here. Or the land — the thingstead, the original sacred ground — decided it was time.
+
+The carriage is waiting in the morning. A real one this time, hired from the village. The coachman is Mrs. Caldwell's nephew. He looks skeptical about the manor but his aunt told him to come and Mrs. Caldwell's word is law in Blackthorn Village, even more so now that she's three hundred and forty-two pounds richer.
+
+But tonight: a last supper. Not at midnight. At seven o'clock. Like civilized people. In the dining room, which is just a dining room now — the candles are normal candles, the portraits are normal portraits, the chandelier hangs still and does nothing theatrical with anyone's cheekbones.
+
+The food is good. Mrs. Winters cooked.
+
+There's nutmeg in the stew.
+
+Nobody comments on it. Mrs. Winters serves it with a particular set to her jaw that dares anyone to mention nutmeg, tears, or thirty-year-old recipes retrieved from ghosts. Nobody dares.
+
+@if session.ending_tier == "full_reckoning":
+    The table is warm. Genuinely warm — not the house's manufactured warmth but the warmth of people who have been through something together and come out the other side.
+
+    Lord Ashford sits at the head of the table. His table now, properly. The cursed lord is just a lord — young, tired, determined, making plans for a house that needs to be something better than what it was.
+
+    Lady Blackthorn sits at the far end. She looks her age — sixty-something, silver-haired, the dramatic pallor replaced by normal color and normal lines. She's smaller without the house inflating her. More human. She's been crying on and off all day and makes no effort to hide it.
+
+    Miss Arabella is calm. Calmer than you've ever seen her. For the first time in her life, the ghosts are quiet. She can just *be.*
+
+    Dr. Blackwood has filled four notebooks and is, for the first time in recorded history, *speechless.* He keeps opening his mouth, looking at the table, and closing it again. The scientific framework for what he's witnessed doesn't exist and he knows it and the knowledge has made him, briefly, humble.
+@elif session.ending_tier == "mostly_mended":
+    The table is quiet. Not uncomfortable — reflective. People processing. The day was long and the discoveries were hard and everyone is tired in the way you're tired after a storm.
+
+    Lord Ashford is already making lists. Renovations. Memorials. Letters to families of the identified remains. He's good at lists, it turns out, when he's not using all his energy to be miserable.
+
+    Lady Blackthorn is diminished. Aging. Confused. The memories are still coming back — in waves, each one a small devastation. She'll be dealing with this for years.
+@elif session.ending_tier == "partial_peace":
+    The table is uneasy. Some things were accomplished. Some weren't. The house is weakened but not quiet. The portraits still watch, though less intently. The corridors are mostly straight.
+
+    It's not enough. Everyone knows it's not enough. But it's more than yesterday, and tomorrow someone else can continue the work.
+@else:
+    The table is heavy. You tried. It wasn't enough. The house endures — wounded but alive, its grip loosened but not broken.
+
+    Mrs. Winters serves the stew and doesn't meet your eyes. Not from anger — from the particular sadness of a woman who hoped for more and got what she got.
+@endif
+
+After dinner, the household gathers in the parlor. The fire is real. The warmth is real.
+
+Thomas brings tea. Miss Chen brings biscuits. Mrs. Winters brings something in a bottle that she claims is "medicinal" and pours with a generous hand.
+
++ [Sit with them. This last night.] -> Blackthorn.Session3.LastNight
+
+:: Blackthorn.Session3.LastNight
+You sit. Heathsniff puts his head in your lap immediately, as if he's been waiting all day for this exact configuration of human and dog and firelight.
+
+The conversations are quiet. Private. People drifting toward you one by one, the way clients drift toward the reading table. But they don't want readings. They want to say goodbye.
+
+@if blackthorn.ashford_free:
+    Lord Ashford finds you by the window.
+
+    "I'm going to open parts of the manor as a memorial. The East Wing. The cemetery. The records Miss Chen compiled." He pauses. "Their stories will be told. Every one."
+
+    "That's exactly right."
+
+    "You taught me something, Miss {blackthorn.player_name}."
+
+    "Common sense?"
+
+    "No. Well, yes. But more than that." He looks at the fire. "You taught me that the simplest answer isn't the lazy one. Sometimes it's the *bravest* one. Everyone else was looking for a dramatic solution. You just asked the obvious question."
+
+    "I'm from Bath. It's what we do."
+
+    He smiles. Kisses your hand. The second time. Earned, both times.
+
+    "Visit. Anytime. This house owes you everything."
+
+    "It owes me five pounds. Which I have been meaning to mention."
+
+    He laughs. "I'll add interest."
+@endif
+
+Miss Arabella finds you next. She sits beside you on the settee. Heathsniff adjusts to accommodate her without moving his head from your lap.
+
+"The ghosts are gone," she says. "I can feel it. The house is just... a house." She pauses. "It's the quietest my head has been since I was twelve."
+
+"Is that good?"
+
+"It's *wonderful.* And terrifying. I've never been alone in my own head before."
+
+"What will you do?"
+
+"I've been thinking about it. There are other people like me — people who see things. People who are told they're mad. I want to help them." She looks at you. "Maybe I'll set up a practice. A *legitimate* one. In the village."
+
+"You'd be very good at that."
+
+"Thank you for believing in ghosts. Even though you can't see them."
+
+"I believe in patterns. The ghosts were there in the data."
+
+She laughs. "You're the least mystical mystic I've ever met."
+
+"Thank you. That's the nicest thing anyone has said to me all weekend."
+
+Dr. Blackwood approaches. You brace for a lecture.
+
+"Miss {blackthorn.player_name}. I owe you an apology."
+
+You were not bracing for that.
+
+"I called your work pareidolia. Confirmation bias. The Barnum effect." He adjusts his glasses. "I was wrong. Not about the mechanisms — the cognitive science is sound. But I was wrong about what those mechanisms *mean.* Pattern recognition isn't a flaw. It's a tool. And you wield it better than anyone I've ever observed."
+
+"Thank you, Dr. Blackwood."
+
+"If you're ever interested in being a research subject—"
+
+"No."
+
+"Quite right. Quite right." He clears his throat. "But if you change your mind. I'm at the University of Edinburgh. My door is always open."
+
+"I'll bear that in mind."
+
+He wanders off. You hear him muttering about "a new theoretical framework for applied intuition" and you think he might actually write something worth reading. Stranger things have happened this weekend.
+
+@if blackthorn.ravencroft_real_moment:
+    Ravencroft is last.
+
+    He approaches slowly. Heathsniff lifts his head — looks at his master, looks at you, puts his head back down. He's staying.
+
+    "I'm going to London," Ravencroft says. "Tomorrow. I'm going to... try to be normal. Or at least less..." He gestures at himself. At the everything.
+
+    "Overwhelming?"
+
+    "I was going to say 'atmospheric.' But yes."
+
+    He looks at Heathsniff. At the dog who chose you on the first night and has been choosing you ever since.
+
+    "He'll miss you."
+
+    "I'll miss him too."
+
+    A pause. The fire crackles. The room is warm and still and ordinary.
+
+    "If I write to you," he says. "Would you respond?"
+
+    "Perhaps. If your letters contain *doors* instead of passages."
+
+    He laughs. The real laugh. The one he learned in the cemetery.
+
+    "No secret passages in letters. I promise."
+
+    He looks at you. Without burning. Without intensity. Just looking, the way a person looks at another person they're grateful to know.
+
+    "Thank you. For reading me honestly when I wanted you to read me dramatically."
+
+    "You're welcome. Get a hobby."
+
+    "Architecture, I think. Something with *structure.*"
+
+    "That's very sensible."
+
+    "Don't tell anyone."
+
+    Heathsniff lifts his head. Looks at Ravencroft. Licks his hand once. Then puts his head back in your lap.
+
+    "The dog has taste," Mrs. Winters says from across the room.
+@else:
+    From upstairs, a howl. Heathsniff — or Ravencroft. With those two, it's hard to tell.
+
+    You don't see Ravencroft that evening. He rode out again. Still on the moors. Still performing. But the horse came back without him an hour later, which means he's walking, which means the performance is getting tired.
+
+    Maybe London will find him eventually. Maybe the house letting go will free something in him too.
+
+    Or maybe some people need more than one card reader from Bath.
+
+    Heathsniff lifts his head. Whines softly. Misses his person.
+
+    "He'll be alright, Sniffy," you say. You're not sure you believe it. But the dog seems comforted.
+@endif
+
+The evening winds down. People drift toward bed. The house is quiet around them — just a house, creaking in the wind, settling on its foundations, doing the things houses do when they're not trying to eat anyone.
+
+Mrs. Winters finds you last. Of course she does. She's always last. The one who closes the kitchen, banks the fire, checks the locks.
+
+"You did well, dear."
+
+"I just read cards."
+
+"You gave voice to the voiceless. That's more than cards."
+
+She hugs you. Brief, firm, the hug of a woman who has spent forty years rationing her affection because the job required it and is now, for one moment, allowing herself the luxury.
+
+"You're a good girl," she says into your shoulder. "Don't let anyone tell you otherwise."
+
+"Mrs. Winters—"
+
+"Don't you dare cry. If you cry, I'll cry, and I haven't cried in front of the gentry in forty years and I'm not starting now."
+
+"They've all gone to bed."
+
+"Force of habit." She pulls back. Holds you at arm's length. Studies your face with the same evaluative intensity she brings to checking the silver.
+
+"Come back," she says. "When it's less... eventful."
+
+"I'd like that."
+
+"The Rose Room will be warm now. Finally."
+
+"Thank you, Mrs. Winters. For everything. For the tea and the biscuits and the sugar and the rescuing from Lord Ravencroft at two in the morning and the match in the darkness and the—"
+
+"*Stop.* I said no crying."
+
+Thomas appears at the door. Grins.
+
+"Come back, miss. When it's less murdery."
+
+"It wasn't *murdery,* Thomas, it was—"
+
+"Structurally cannibalistic?"
+
+"...I was going to say 'unusual.'"
+
+Miss Chen appears behind Thomas. Arms folded. Her expression is the warmest you've seen it — which is to say, she almost smiles.
+
+"The dramatics will miss you," she says.
+
+"The dramatics can write."
+
+"They *will.* God help you."
+
+The three of them — Mrs. Winters, Thomas, Miss Chen — stand in the doorway of the parlor. Your people. The sane ones. The practical ones. The ones who kept a Gothic manor running while the manor tried to eat them, who protected each other without recognition or reward, who have been the real heart of this building for longer than any Blackthorn.
+
+You look at them. They look at you.
+
+Nobody says "family." Nobody has to.
+
++ [Go to bed. One last night.] -> Blackthorn.Session3.LastSleep
+
+:: Blackthorn.Session3.LastSleep
+The Rose Room.
+
+The fire is burning. The room is *warm.* Not the fraudulent warmth of a supernatural house performing comfort — the real warmth of a fire doing its job in a room that is, finally, just a room.
+
+Miss Adelaide is gone. You can feel her absence — a lightness where there used to be cold. She left when the house let go. Went wherever ghosts go when they're no longer needed.
+
+The wallpaper is still roses. They look less like old blood now. They just look like faded roses.
+
+You sit on the bed. Your carpetbag is packed. Your reading cloth, folded. Your copy of Professor Crane's *Complete Guide to Cartomancy,* with the moor flower pressed between Chapters 9 and 16.
+
+Your tarot deck is in your hands. Warm. Always warm.
+
+You've read for the living. You've read for the dead. You've read for a ghost at a séance table and a cursed lord in a library and a man in a cemetery who didn't know how to be real and a cook who spent thirty years protecting people from inside a wall.
+
+You learned this from a book.
+
+Professor Crane was right about one thing: the cards are the cards. The reader is the reader. The skill is the skill. He was right about all of it, actually, except the part where he forgot to mention that the skill works on ghosts and the cards don't care whether their client has a pulse and sometimes a three-shilling book from Hatchards is enough to save a household and free the dead and break a house that's been eating people for eight hundred years.
+
+Minor oversight, Professor.
+
+You sleep.
+
++ [Wake up. For the last time.] -> Blackthorn.Session3.DreamFade
+
+# ============================================================================
+# ACT 6: DREAM FADE
+# ============================================================================
+
+:: Blackthorn.Session3.DreamFade
+@py:
+# Final calculations
+reader.sessions_completed += 1
+reader.mystical_affinity += 2  # Bonus for completing full arc
+
+# Ending-tier rewards
+if session.ending_tier == "full_reckoning":
+    reader.competence += 3
+    reader.empathy += 2
+    reader.insight += 2
+elif session.ending_tier == "mostly_mended":
+    reader.competence += 2
+    reader.empathy += 1
+    reader.insight += 1
+elif session.ending_tier == "partial_peace":
+    reader.competence += 1
+    reader.empathy += 1
+elif session.ending_tier == "incomplete":
+    reader.competence += 1
+elif session.ending_tier == "failure":
+    reader.self_doubt = True
+
+# Bleed objects
+session.bleed_objects = []
+
+# Always: silver locket
+session.bleed_objects.append("locket")
+
+# If ghosts were freed: Catherine's thimble
+if session.ghosts_freed >= 1:
+    session.bleed_objects.append("thimble")
+
+# If ending is good: the letter
+if session.ending_tier in ["full_reckoning", "mostly_mended"]:
+    session.bleed_objects.append("letter")
+
+# If Ravencroft had real moment: Heathsniff's collar
+if blackthorn.ravencroft_real_moment:
+    session.bleed_objects.append("collar")
+
+# Mark complete — state lives on blackthorn object
+blackthorn.sessions_completed += 1
+@endpy
+
+Morning. Not dream-morning. *Real* morning. Your apartment. Your reading table. Your coffee gone cold beside the deck.
+
+The dream folds for the last time. Gently. Completely. Like a letter being sealed.
+
+You sit up. The morning light is ordinary. Your room is ordinary. The sounds outside — traffic, birds, the particular ambient hum of Bath being Bath — are ordinary.
+
+On your nightstand:
+
+@if "locket" in session.bleed_objects:
+A silver locket. Small, oval, warm to the touch. You open it.
+
+Inside: a photograph. Tiny, sepia, impossibly detailed. Three people standing in front of a kitchen door. A woman in her sixties with warm eyes and a housekeeper's dress. A young man in a footman's uniform, grinning. A younger woman in a lady's maid's dress, arms folded, almost smiling.
+
+Mrs. Winters. Thomas. Miss Chen.
+
+On the back, engraved in script so small you need a magnifying glass:
+
+*The real magic was common sense. And friendship. And nutmeg.*
+@endif
+
+@if "thimble" in session.bleed_objects:
+
+A thimble. Silver. Tarnished. Engraved with a C.
+
+Catherine's.
+
+You hold it in your palm. It weighs almost nothing. It weighs everything.
+@endif
+
+@if "collar" in session.bleed_objects:
+
+A dog collar. Leather, well-worn, with a brass nameplate:
+
+[!beat]HEATHSNIFF
+"He has taste." — M. Winters[/!beat]
+
+A long silver hair is caught in the buckle. You pull it free. Hold it up to the light.
+
+"I miss you too, Sniffy," you say.
+@endif
+
+You sit with the objects. The impossible, tangible proof. Then you notice something else.
+
+@if "letter" in session.bleed_objects:
+    -> Blackthorn.Session3.TheLetter
+@else:
+    -> Blackthorn.Session3.NoLetter
+@endif
+
+:: Blackthorn.Session3.TheLetter
+Tucked in your tarot deck. Between the Major Arcana and the Cups. A letter.
+
+Not old. Not yellowed or brittle or sealed with wax. *New.* White envelope. Modern paper. A stamp. Posted three days ago.
+
+Your hands shake as you open it.
+
+The handwriting is neat, careful, the handwriting of someone who writes slowly because they want to get the words right.
+
+*Dear Miss {blackthorn.player_name},*
+
+*I know this letter will make no sense. I'm not entirely sure it makes sense to me, and I'm the one writing it.*
+
+*My name is Eleanor Winters. I'm the great-great-granddaughter of a woman named Agnes Winters, who was housekeeper at Blackthorn Manor in Yorkshire for over forty years, beginning in 1857.*
+
+*Gran — my grandmother, who was Agnes's granddaughter — left me a diary when she died. Agnes's diary. She kept it her whole life, through forty years of service at the manor. Most of it is ordinary: household accounts, menus, complaints about the gentry. Exactly what you'd expect.*
+
+*But the last entries are different.*
+
+*She writes about a weekend in October 1873. A card reader came to stay. Hired for a party. A woman from Bath.*
+
+*She writes about a séance where a ghost appeared and the card reader stood her ground and read for a dead man with nothing but a deck of cards and common sense.*
+
+*She writes about a curse being broken because someone suggested paying a bill.*
+
+*She writes about the East Wing. About names in the walls. About a cook called Margaret who had been holding the house together from the inside for thirty years.*
+
+*She writes about the card reader giving the ghosts their voices back. Reading for the dead with the same skill she used for the living. Freeing them. One by one. With a book from Hatchards that cost three shillings.*
+
+*And then she writes your name.*
+
+*YOUR name. Your modern name. Not a Victorian name. Not a name from 1873. Your name, as it appears on your post, on your cards, on the advertisement you placed in the — well, you didn't place it in the Times, but you know what I mean.*
+
+*Agnes wrote: "The card reader from Bath came in a dream. She saved us all. I don't understand it. But the cards are the cards and the reader is the reader, and she was the best reader I ever knew."*
+
+*Miss {blackthorn.player_name}, I don't understand how this works. I don't understand how a woman in 1873 could know your modern name, or how a dream could change what happened in the real past, or how a house could eat people and a deck of cards could set them free.*
+
+*But Gran's diary is real. The headstones in the cemetery behind Blackthorn Manor are real. I've been there. I've seen them. Catherine Marsh. Samuel Cole. Margaret Byrne.*
+
+*They have names because of you.*
+
+*Thank you. Across time and reality and whatever impossible space exists between a dream and a diary written a hundred and fifty years ago.*
+
+*Thank you for remembering them.*
+
+*Yours sincerely,*
+*Eleanor Winters*
+
+*P.S. — The manor is a museum now. They kept the East Wing open. The Saxon stones are visible. There's a plaque: "In memory of those who served this house. Their names are known."*
+
+*P.P.S. — There's a borzoi in the portrait gallery. Long silver fur. Intense gaze. The nameplate says "Heathsniff." I thought you'd want to know he's still there. Somebody painted him. He looks very dignified.*
+
+You read the letter twice. Three times.
+
+You hold it against your chest.
+
+You are from Bath. You learned tarot from a book. You read cards for a living and you are good at it — not because you are mystical or gifted or touched by forces beyond the veil, but because you pay attention and you tell the truth and you remember the people that other people forget.
+
+But perhaps — just perhaps — you are also something more than you thought.
+
+Not mystical. Not supernatural. Just... *enough.* More than enough.
+
+The morning light falls across your reading table. Across the cards. Across the locket and the thimble and the collar and the letter from a woman whose great-great-grandmother remembered your name.
+
+You shuffle your deck.
+
+You draw a card.
+
+The Star.
+
+Hope. Healing. The quiet light that comes after darkness.
+
+You think about Mrs. Winters. About Thomas and Miss Chen. About Margaret's stew and Catherine's thimble and Samuel's fifty years of righteous fury. About a man who learned to stop being a Gothic novel and a dog who chose you on the first night. About a house that forgot how to remember and a woman from Bath who reminded it.
+
+"Good dream," you say.
+
+The cards are warm in your hands.
+
+You go make tea.
+
+-> Blackthorn.Session3.Epilogue
+
+:: Blackthorn.Session3.NoLetter
+No letter. Not this time.
+
+The ghosts you freed are free. The ones you didn't... aren't. The house endures, wounded but alive. Mrs. Winters is still there, still protecting, still fighting.
+
+You look at the objects on your nightstand. The locket. The thimble.
+
+They're real. What you did was real. It just wasn't *enough.*
+
+Maybe you'll dream again. Maybe the house will call you back. Maybe there's more work to do — more walls to open, more names to say, more stories to read from cards that don't care whether their clients are alive or dead.
+
+You shuffle your deck. Draw a card.
+
+The Moon. Dreams and reality. The space between.
+
+"I'll come back," you say. To the cards. To the dream. To Mrs. Winters and Thomas and Miss Chen and all the ghosts still waiting in the walls.
+
+"I'll come back."
+
+You go make tea. It doesn't taste right. You forgot the nutmeg.
+
+-> Blackthorn.Session3.Epilogue
+
+:: Blackthorn.Session3.Epilogue
+@py:
+# Final flags — ending quality stored on blackthorn
+blackthorn.session_grade = session.ending_tier
+@endpy
+
++ [Return to your reading table. Carry what you've learned.] -> ReaderTable
+
+# ============================================================================
+# END OF BLACKTHORN MANOR ARC
+# ============================================================================
+#
+# OUTCOME SUMMARY:
+# ⭐⭐⭐⭐⭐ "The Full Reckoning"
+#   All ghosts freed. House restored to ordinary. Lady Blackthorn remembers.
+#   Servants safe. Proper burials. Names on headstones.
+#   Ashford uncursed. Ravencroft growing. The letter arrives.
+#   A museum stands where a monster stood.
+#   Common sense. A three-shilling book. Nutmeg.
+#
+# ⭐⭐⭐⭐ "The Mostly Mended"
+#   Most ghosts freed. House weakened. Lady Blackthorn waking up.
+#   The work continues. The letter arrives.
+#   It's not perfect. It's enough.
+#
+# ⭐⭐⭐ "The Partial Peace"
+#   Some freed, some trapped. House damaged but enduring.
+#   Bittersweet. The work is unfinished.
+#   No letter. But the thimble is warm.
+#
+# ⭐⭐ "The Incomplete"
+#   Barely managed. One or two ghosts freed.
+#   The house still hungers. Regrets linger.
+#   You'll come back. You have to.
+#
+# ⭐ "The Failure"
+#   The house won. The Gothic voice won.
+#   The ghosts are still in the walls.
+#   The nutmeg stays forgotten.
+#
+# TOTAL ARC: ~30,000 words across 3 sessions, 6 parts
+# ESTIMATED PLAYTIME: 3-5 hours
+#
+# THEMATIC SUMMARY:
+# You don't need to be special. You need to be honest.
+# The cards are the cards. The reader is the reader.
+# The skill is the same.
+# Even for ghosts.
+# Even for a house.
+# Even across time.
+#
+# She was from Bath. She learned it from a book.
+# And that was enough.
+#
+# ============================================================================

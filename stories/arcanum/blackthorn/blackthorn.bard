@@ -1,0 +1,11 @@
+:: Blackthorn ^DREAM:GOTHIC
+@if blackthorn.sessions_completed == 0:
+    -> Blackthorn.Session1.Start
+@elif blackthorn.sessions_completed == 1:
+    -> Blackthorn.Session2.Start
+@elif blackthorn.sessions_completed == 2:
+    -> Blackthorn.Session3.Start
+@else:
+    # Session 3 completed
+    Blackthorn Manor's story is complete.
+@endif

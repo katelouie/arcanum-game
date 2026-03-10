@@ -1,0 +1,2130 @@
+# ============================================================================
+# BLACKTHORN MANOR — SESSION 1: "THE SÉANCE"
+# ============================================================================
+#
+# DREAM SCENARIO: Blackthorn Manor — Gothic England, October 1873
+# GENRE: Gothic Romance (Sincere + Comedy). Jane Austen meets Crimson Peak
+#   meets "I'm just trying to do my job."
+#
+# UNLOCK CONDITIONS:
+# - reader.sessions_completed >= 15
+# - reader.mystical_affinity >= 6
+# - reader.dreams_started == True
+#
+# CATALYST: Deep dream. Sharper and more vivid than the other dreams.
+#   You wake in a carriage you've never been in, wearing clothes
+#   you've never owned, clutching a carpetbag that's yours even
+#   though you've never seen it. The dream has opinions about who
+#   you are: Miss [Name], of Bath. Card reader. Sensible woman.
+#   Hired for a weekend party. Five pounds in your purse.
+#
+# CORE TENSION: You're the only mundane person in a house full of
+#   Gothic tropes that turn out to be REAL. Everyone thinks YOU'RE
+#   the mystical one. You learned tarot from a BOOK.
+#
+# TONE: Comedy of manners + genuine supernatural. Sincere Gothic beats
+#   played for both laughs AND feeling. The comedy IS the horror:
+#   you're stuck here with these people and the bridge is out.
+#
+# SESSION 1 STRUCTURE:
+#   Act 1: Arrival + Rose Room (subtle supernatural — deniable)
+#   Act 2: Midnight Dinner (meet everyone, escalating unease)
+#   Act 3: The Séance (the reading — ghost appears — UNDENIABLE)
+#   Act 4: Hallway Encounter (Ravencroft + Mrs. Winters rescue)
+#   Act 5: Bed (alone with questions)
+#
+# SPREAD: "Through the Veil" (5-card séance spread)
+#   Position 1: The Departed (Who was Lord Blackthorn?)
+#   Position 2: Their Message (What do they want to say?)
+#   Position 3: What They Left Behind
+#   Position 4: What's Hidden
+#   Position 5: The Truth
+#
+# CARD POOLS:
+#   Position 1: King of Swords / Emperor / Knight of Pentacles
+#   Position 2: Seven of Swords / Five of Pentacles / Page of Cups
+#   Position 3: Ten of Pentacles / Four of Pentacles / Six of Swords
+#   Position 4: The Moon / High Priestess / Eight of Swords
+#   Position 5: Three of Swords / Justice / Judgement
+#
+# REVERSAL CHANCE: 25% (slightly higher than Kind Of — more
+#   volatility matches the Gothic atmosphere)
+#
+# INTERPRETATION AXES:
+#   Grounded (best) — reads the cards honestly, stays herself
+#   Diplomatic (good) — softens truth for the room, still accurate
+#   Gothic (risky) — plays into the drama, fun but loses integrity
+#   Panicked (poor) — too rattled to give a proper reading
+#
+# PATH TRACKING:
+#   groundedness — how well she stays "Miss [Name] from Bath"
+#     High = best outcomes, earns servant trust, resists house
+#     Low = house gains influence, Gothic persona takes over
+#   servant_trust — relationship with Mrs. Winters, Thomas, Miss Chen
+#   house_influence — how much the house is "noticing" you
+#   composure — how rattled she is (depletes, must be managed)
+#
+# CHARACTERS:
+#   Lady Blackthorn — hostess, dramatic, in denial about house's nature
+#   Lord Ashford — cursed (real), brooding (default), decent man under it
+#   Miss Arabella Grey — actually sees ghosts, fragile, brave
+#   Dr. Mordecai Blackwood — "scientist," insufferable, takes notes
+#   Lord Ravencroft — the Byronic menace, all performance, no substance
+#   Heathsniff — borzoi, dramatic, actually a very good dog
+#   Mrs. Winters — housekeeper, protector, been here 40 years
+#   Thomas — footman, cheerful, sane, your ally
+#   Miss Chen — lady's maid, sardonic, from Guangzhou, eye-rolling partner
+#   Mr. Graves — butler, skeletal, thematically consistent
+#   Lord Blackthorn's Ghost — appears at séance, angry, dead
+#
+# THE HOUSE:
+#   Blackthorn Manor is not a setting. It's a character.
+#   It consumes. Slowly. The servants who "left" didn't leave.
+#   Lady Blackthorn genuinely doesn't know — or has convinced
+#   herself she doesn't know. "I thought Avery went to the circus."
+#   The house sustains itself on the people who serve it.
+#   Session 1 plants seeds. Session 3 reveals.
+#
+# ============================================================================
+
+:: Blackthorn.Session1.Start ^DREAM:GOTHIC
+@py:
+# Initialize dream session and persistent client state
+session = create_session(blackthorn)
+blackthorn.reset_session_tracking()
+blackthorn.start_session()
+
+# The dream assigns an identity: Miss [Name], of Bath
+# The dream has opinions about who you are
+session.player_title = "Miss " + blackthorn.player_name
+@endpy
+
+# ============================================================================
+# ACT 1: THE ARRIVAL
+# ============================================================================
+
+You're at your reading table. Your real one. Your apartment.
+
+The deck is warm in your hands. You've been shuffling without thinking — the way you do when a dream is coming but hasn't arrived yet.
+
+You blink.
+
+The table is gone.
+
++ [Continue] -> Blackthorn.Session1.Carriage
+
+:: Blackthorn.Session1.Carriage
+
+You are in a carriage.
+
+This is not a gentle transition. There was no dissolve, no mist, no slow fade from your apartment into somewhere else. You were *there* and now you're *here* and the carriage is rattling over gravel and rain is hammering the roof and your hands are gripping a carpetbag you've never seen but recognize completely.
+
+It's yours. Worn leather, brass clasps, one corner slightly scuffed. Inside — you know without looking — your tarot deck (the same one, the real one, warm against your hip through the leather), a spare dress in sensible gray wool, *The Complete Guide to Cartomancy* by Professor Thaddeus Crane (1873 Edition, Hatchards, three shillings), and a very practical umbrella.
+
+Also inside: five pounds in coin. Payment in advance. For the weekend.
+
+You are Miss Amelia Brown, of Bath. You are in your mid-twenties. You are respectable, middle-class, and you read tarot cards for parties and private functions because it pays better than governess work and involves fewer children. You learned this skill from a book. You have never claimed to be mystical, exotic, or "gifted." You placed an advertisement in the *Times*: "Tarot Readings for Parties and Private Functions. Reasonable Rates. References Available."
+
+Lady Blackthorn responded by telegram. The telegram said: *THE CARDS HAVE CALLED YOU TO ME.*
+
+You responded: *My rates are five pounds per weekend engagement. Travel expenses additional.*
+
+She sent twelve pounds. You did not ask questions.
+
+The carriage jolts. Through the rain-streaked window, something looms.
+
++ [Look] -> Blackthorn.Session1.FirstSight
+
+:: Blackthorn.Session1.FirstSight
+Blackthorn Manor.
+
+Turrets. Gargoyles. A quantity of windows that seems unreasonable for a building that isn't a cathedral. The kind of architecture that makes you think "someone was *showing off*" and then "someone was *compensating*" and then "someone was frankly a bit *unwell.*"
+
+The gravel drive is long enough that you have time to count the gargoyles. You stop at fourteen. There are more. Some of them look like they were added later, by someone who thought the original architect hadn't committed hard enough.
+
+Lightning cracks behind the manor. The silhouette is briefly perfect — every turret, every gable, every grotesque ornament picked out in white against black sky.
+
+You think: *This is a professional engagement. I have read cards at garden parties in Cheltenham. I have read for a bishop's wife. This is simply...an atmospheric venue.*
+
+The carriage stops.
+
+The door opens.
+
+Rain falls. Somewhere behind you, something you cannot see makes a sound that is not thunder and is not wind and is not an animal you can name.
+
+~ blackthorn.supernatural_encounters += 1
+~ blackthorn.things_rationalized += 1
+
++ [Step out. You're a professional.] -> Blackthorn.Session1.Arrival_Professional
++ [Hesitate. Something feels wrong.] -> Blackthorn.Session1.Arrival_Cautious
++ [Consider asking the driver to take you back.] -> Blackthorn.Session1.Arrival_Retreat
+
+:: Blackthorn.Session1.Arrival_Professional
+You step out of the carriage. Your boots hit gravel. Rain hits your bonnet.
+
+You are a professional.
+
+A figure stands at the door. Tall. Skeletal. Holding a candelabra that does nothing useful in the rain but is clearly committed to the aesthetic.
+
+"Miss {blackthorn.player_name}." His voice sounds like it last saw moisture during the Napoleonic Wars. "Lady Blackthorn is...expecting you."
+
+He pauses on "expecting" in a way that makes you wonder if the word has a secondary meaning you're not aware of.
+
+~ blackthorn.groundedness += 1
+~ blackthorn.composure += 1
+
++ [Follow him inside.] -> Blackthorn.Session1.MeetGraves
+
+:: Blackthorn.Session1.Arrival_Cautious
+You step out slowly. Something about the manor makes your skin prickle — not dramatically, not like a penny dreadful, just...*wrong.* The way a room feels wrong when someone's been crying in it. The air is *thick.*
+
+A figure stands at the door. Too tall, too thin, holding a candelabra that the rain is doing its best to extinguish.
+
+"Miss {blackthorn.player_name}." His voice is dust and formality. "Lady Blackthorn is...expecting you."
+
+Your instincts say: *pay attention.* You file the feeling away and straighten your bonnet.
+
+~ blackthorn.house_influence += 1
+
++ [Follow him inside. Carefully.] -> Blackthorn.Session1.MeetGraves
+
+:: Blackthorn.Session1.Arrival_Retreat
+You consider it. Genuinely consider it. The rain, the gargoyles, the indefinable *sound* behind you—
+
+The carriage is already moving.
+
+The driver doesn't look back. His horse doesn't look back. The carriage rattles down the drive and into the dark as if it has a very pressing appointment somewhere that isn't here.
+
+"Miss {blackthorn.player_name}."
+
+You turn. A figure stands at the door. A walking anatomy lesson in a butler's uniform, holding a candelabra with the resigned air of a man who has seen guests try to flee before.
+
+"Lady Blackthorn is... expecting you."
+
+You don't have a choice. You never did, probably.
+
+~ blackthorn.composure -= 1
+~ blackthorn.house_influence += 1
+
++ [Follow him inside. It's not like you can leave.] -> Blackthorn.Session1.MeetGraves
+
+:: Blackthorn.Session1.MeetGraves
+"Mr. Graves, miss." He takes your carpetbag. His hand is very cold. "I shall show you to your room."
+
+You follow him through the front doors.
+
+The entrance hall is enormous. Marble floor, dark wood paneling, a chandelier that could comfortably seat six. Portraits line the walls — generations of Blackthorns in ascending order of Gothic intensity. The most recent one, at the far end, is a woman in black velvet who appears to have been painted during an eclipse.
+
+"Mr. Graves." You try to sound conversational. "That's rather...on the nose. For a manor like this."
+
+"The family has always valued thematic consistency, miss."
+
+You can't tell if he's joking. His face doesn't seem to contain the necessary muscles.
+
+You pass a portrait of a stern man in military dress. His painted eyes track you as you walk. You stop. Look back. The eyes are looking at you.
+
+"Mr. Graves — did that painting just—"
+
+"Yes, miss. They do that."
+
+"...Right."
+
+~ blackthorn.supernatural_encounters += 1
+
++ [Rationalize it. Must be a trick of the candlelight.] -> Blackthorn.Session1.Rationalize_Portraits
++ [Ask Mr. Graves directly how a painting can move its eyes.] -> Blackthorn.Session1.Ask_Graves
++ [Walk faster.] -> Blackthorn.Session1.Walk_Faster
+
+:: Blackthorn.Session1.Rationalize_Portraits
+Candlelight. Obviously. The flames move, the shadows shift, the painted eyes appear to follow you. It's a well-documented optical phenomenon. Professor Crane mentions it in Chapter 12: "On the Atmospheric Enhancement of Reading Environments."
+
+You're a rational person. From Bath.
+
+~ blackthorn.things_rationalized += 1
+~ blackthorn.groundedness += 1
+
++ [Keep walking. Sensibly.] -> Blackthorn.Session1.RoseRoom
+
+:: Blackthorn.Session1.Ask_Graves
+"Mr. Graves. How does a painting move its eyes?"
+
+"I couldn't say, miss. It may be the candlelight."
+
+"It's not the candlelight."
+
+"No, miss. It isn't." He continues walking. "The third Lord Blackthorn commissioned the portraits from an artist of... unusual talent. The family was very pleased with the lifelike quality."
+
+"The *lifelike* quality."
+
+"Yes, miss. Will there be anything else?"
+
+~ blackthorn.supernatural_encounters += 1
+~ blackthorn.groundedness += 1
+
++ [Continue to your room. At least you got a straight answer.] -> Blackthorn.Session1.RoseRoom
+
+:: Blackthorn.Session1.Walk_Faster
+You walk faster. Mr. Graves matches your pace without appearing to increase his. His legs are very long. The corridor is very dark. The paintings are definitely, absolutely, without question watching you.
+
+This is fine. This is a professional engagement.
+
+~ blackthorn.composure -= 1
+
++ [Keep walking. Don't run. Professionals don't run.] -> Blackthorn.Session1.RoseRoom
+
+# ============================================================================
+# THE ROSE ROOM
+# ============================================================================
+
+:: Blackthorn.Session1.RoseRoom
+Mr. Graves opens a door on the second floor.
+
+"The Rose Room, miss."
+
+The room is vast. Four-poster bed with curtains heavy enough to muffle a cannon shot. Fireplace roaring — properly roaring, someone has fed it recently — but the room is cold. Not cold the way an old house is cold. Cold the way a room is cold when something in it *prefers* the cold.
+
+Wallpaper: roses. Once red, now faded to the color of old blood. The window overlooks the moors — miles of heather and darkness and rain. The kind of view that makes you think "brooding" and then "exposure" and then "hypothermia."
+
+Your carpetbag has been placed on the bed. You did not see Mr. Graves put it there.
+
+"Why is it so cold?" you ask. "Despite the fire?"
+
+"The previous occupant of this room. Miss Adelaide. She passed of consumption. 1847."
+
+"I'm sorry to hear—"
+
+"She still prefers it cold."
+
+A beat.
+
+"She... *still*—"
+
+"Will you require extra blankets, miss?"
+
++ ["...Yes. Please. Several."] -> Blackthorn.Session1.RoseRoom_Blankets
++ ["Mr. Graves, are you telling me this room is haunted?"] -> Blackthorn.Session1.RoseRoom_Haunted
++ ["I'd like a different room, please."] -> Blackthorn.Session1.RoseRoom_Different
+
+:: Blackthorn.Session1.RoseRoom_Blankets
+"At once, miss." He turns to leave. Pauses. "Dinner is at midnight."
+
+"*Midnight?*"
+
+"Lady Blackthorn prefers late hours. The household has adapted."
+
+"That's...very late for dinner."
+
+"Yes, miss." He closes the door.
+
+You stand in the freezing room with the roaring fire and the watching wallpaper and the window that shows nothing but darkness and rain.
+
+From somewhere in the house — far away, or maybe not as far as you'd like — a wolf howls.
+
+You think: *What have I gotten myself into?*
+
+From somewhere even further away — or maybe closer — a second howl. Higher-pitched. More... *dramatic.*
+
+You think: *Why are there wolves in the house?*
+
++ [Unpack. Try to settle in.] -> Blackthorn.Session1.RoseRoom_Settle
+
+:: Blackthorn.Session1.RoseRoom_Haunted
+Mr. Graves pauses. He appears to consider the question with the gravity it deserves.
+
+"The Rose Room has a resident, miss. Miss Adelaide does not trouble guests unless provoked. She merely prefers a colder temperature. I find it helpful to think of her as a... draft."
+
+"A *draft.*"
+
+"A persistent, localized, somewhat melancholy draft. Yes."
+
+He hands you two extra blankets from the wardrobe — they were already prepared, as if this conversation was expected — and pauses at the door.
+
+"Dinner is at midnight."
+
+"Midnight. Of course it is."
+
+He closes the door. From somewhere in the house, a wolf howls.
+
+~ blackthorn.supernatural_encounters += 1
+~ blackthorn.groundedness += 1
+
++ [Settle in. A draft. Fine.] -> Blackthorn.Session1.RoseRoom_Settle
+
+:: Blackthorn.Session1.RoseRoom_Different
+"I'm afraid all other rooms are occupied, miss. The Rose Room is our finest guest accommodation."
+
+"Even with the...draft?"
+
+"Miss Adelaide is quite gentle. She merely lowers the temperature. She has not thrown anything in several years."
+
+"*Thrown* anything—"
+
+"Dinner is at midnight. Extra blankets are in the wardrobe."
+
+He closes the door. You are alone. In a haunted room. In a Gothic manor. With wolves howling somewhere in the building.
+
+You think: *Five pounds is not enough.*
+
+~ blackthorn.composure -= 1
+~ blackthorn.supernatural_encounters += 1
+
++ [Lock the door. Unpack. Survive until morning.] -> Blackthorn.Session1.RoseRoom_Settle
+
+:: Blackthorn.Session1.RoseRoom_Settle
+You sit on the bed. The mattress is good, at least. The blankets are thick. The fire crackles and achieves absolutely nothing against the supernatural chill.
+
+You open your carpetbag. Your tarot deck is there — warm, familiar, the one real thing in this dream that feels like yours. You hold it for a moment. The weight of it steadies you.
+
+*The Complete Guide to Cartomancy* is there too. You open it to the chapter on "Reading in Unusual Circumstances." Professor Crane's advice: *"The competent cartomantist maintains her composure regardless of environment. Whether reading in a drawing room or a dungeon, the cards are the same. The reader is the same. The skill is the same."*
+
+Thank you, Professor Crane. Very helpful. He did not, you notice, include a chapter on "What To Do When The Room Is Haunted And Dinner Is At Midnight And There Are Wolves."
+
+You change into your reading dress — the gray wool, respectable, warm. Pin your hair. Check your reflection in the mirror above the washstand.
+
+The mirror shows you.
+
+Just you.
+
+(You check twice. Just in case.)
+
+You look at yourself. Mid-twenties. Brown hair, pinned sensibly. The face of a woman who reads cards for pocket money and has never in her life communed with the dead or gazed into the void or had a mystical experience more profound than correctly predicting that Mrs. Henderson's nephew would marry the wrong girl, which frankly anyone could have seen coming.
+
+"You are from Bath," you tell your reflection. "You learned this from a book. You are here to work."
+
+Your reflection agrees. It looks just as unconvinced as you feel.
+
+The clock strikes midnight. Somewhere downstairs, a gong sounds.
+
++ [Go to dinner. Be professional.] -> Blackthorn.Session1.Dinner_Descent
+
+# ============================================================================
+# ACT 2: MIDNIGHT DINNER
+# ============================================================================
+
+:: Blackthorn.Session1.Dinner_Descent
+The corridors are darker now. Your candle throws jumping shadows. The portraits are definitely watching — you've stopped pretending they aren't.
+
+You descend the main staircase. The dining room doors are open. Candlelight spills out — too many candles. Nobody needs this many candles. This is *decorative* fire.
+
+You pause at the threshold.
+
+The dining room is a stage set. Long table, dark wood, silver that catches the candlelight. Portraits of dead Blackthorns watching from the walls (their eyes move too). Rain against the tall windows. A chandelier that's doing its absolute best to be ominous.
+
+The guests are already assembled.
+
++ [Enter] -> Blackthorn.Session1.Dinner_Enter
+
+:: Blackthorn.Session1.Dinner_Enter
+You enter. Every head turns.
+
+At the head of the table: **Lady Blackthorn.**
+
+She rises. Or rather, she *ascends* — there's no visible effort, she simply goes from seated to standing as if gravity is something she participates in voluntarily. Black velvet gown, widow's veil, skin so pale it's practically a statement of intent. She moves toward you and you're not entirely sure her feet touch the floor.
+
+"Miss {blackthorn.player_name}. How *delightful.*"
+
+She takes your hands. Hers are cold. Not Rose-Room cold — a different cold. The cold of marble. The cold of someone who has been indoors for a very long time.
+
+"The cards told me you would come."
+
+"I... responded to your advertisement in the *Times*, my lady."
+
+"Did you? Or did *fate* respond for you?" She gives you a significant look. The look has italics.
+
+"...I sent a telegram."
+
+"The spirits work in mysterious ways." She guides you to the table. "Come. Sit. We've been *so* eager to meet our little card reader."
+
+You are not little. You are a perfectly normal height. She is simply very tall and very dramatic and you are already quite tired of this.
+
+"Dinner first," Lady Blackthorn announces to the table. "And then — a *séance.*"
+
+"My lady, I should mention — I read tarot cards. I don't typically conduct séan—"
+
+"Nonsense. You have *The Gift.* I can *sense* it."
+
+"I have a *book.* From Hatchards. It cost three shillings."
+
+"Such *modesty.*" She glides back to her seat. "Do wear something atmospheric for the séance."
+
+"I'm wearing gray wool."
+
+"How... *practical.*"
+
+She says "practical" the way a duchess says "plague."
+
++ [Take your seat. Survey the room.] -> Blackthorn.Session1.Dinner_Survey
+
+:: Blackthorn.Session1.Dinner_Survey
+@py:
+# Track who player observes first — affects subtle relationship beats
+blackthorn.dinner_survey_order = []
+@endpy
+
+You take your seat — midway down the table, between a chair that smells like wet dog and an empty chair that is much colder than its neighbors. The place settings include more forks than any meal could justify and a glass that appears to contain something very red.
+
+The guests:
+
+To Lady Blackthorn's right, a man in his early thirties stares at his wine glass as if it has personally wronged him. Dark circles under his eyes. Handsome in a haunted, exhausted way — the kind of face that would be quite appealing if it weren't so aggressively *miserable.* When thunder cracks outside, he flinches.
+
+Across from you, a young woman in white — too white, deliberately white, *significally* white — keeps glancing at empty spaces in the room. Not at the walls or furniture. At the *air.* As if something's there.
+
+At the far end, a man in his forties takes notes during the soup course. He has the intense, slightly wild-eyed look of someone who treats the world as a laboratory and everyone in it as a specimen. His pen scratches continuously.
+
+And then there's the empty chair beside you. The one that smells like wet dog. And moor. And something expensively masculine and unnecessarily dramatic.
+
++ [Focus on the brooding man (Lord Ashford)] -> Blackthorn.Session1.Meet_Ashford
++ [Focus on the girl in white (Miss Arabella)] -> Blackthorn.Session1.Meet_Arabella
++ [Focus on the note-taker (Dr. Blackwood)] -> Blackthorn.Session1.Meet_Blackwood
++ [Ask about the empty chair] -> Blackthorn.Session1.Empty_Chair
+
+:: Blackthorn.Session1.Meet_Ashford
+~ blackthorn.dinner_survey_order.append("ashford")
+
+Lady Blackthorn notices your attention. "Lord Ashford, you remember Miss {blackthorn.player_name}, our card reader?"
+
+Lord Ashford looks up. His eyes are deep-set and troubled and he is doing absolutely nothing to disguise this. He has committed fully to anguish as a personality trait.
+
+"Miss {blackthorn.player_name}. Forgive me. I am... distracted."
+
+"Not at all, Lord Ashford. I hope you're—"
+
+"The full moon approaches."
+
+"...I'm sorry?"
+
+Lady Blackthorn, smoothly: "Now, now. Let's not frighten our guest with talk of *family curses* before dessert."
+
+You think: *Family curses. Of course. Why not.*
+
+~ blackthorn.lord_ashford_trust += 1
+
+@if "arabella" not in blackthorn.dinner_survey_order:
+    + [Turn your attention to the girl in white] -> Blackthorn.Session1.Meet_Arabella
+@endif
+@if "blackwood" not in blackthorn.dinner_survey_order:
+    + [Turn your attention to the note-taker] -> Blackthorn.Session1.Meet_Blackwood
+@endif
+@if "empty_chair" not in blackthorn.dinner_survey_order:
+    + [Ask about the empty chair] -> Blackthorn.Session1.Empty_Chair
+@endif
+@if len(blackthorn.dinner_survey_order) >= 2:
+    + [Continue dinner] -> Blackthorn.Session1.Ravencroft_Arrives
+@endif
+
+:: Blackthorn.Session1.Meet_Arabella
+~ blackthorn.dinner_survey_order.append("arabella")
+
+The girl in white catches your eye. She's early twenties, ethereally beautiful in a way that seems rehearsed until you realize it isn't — she really is that pale, that delicate, that wide-eyed. She's been staring at a spot approximately two feet to the left of Dr. Blackwood's head for the last three minutes.
+
+"Miss Grey, are you quite well?" you ask.
+
+She startles. Turns to you. Her eyes are the lightest blue you've ever seen.
+
+"Do you see them too?" she whispers.
+
+"See... what?"
+
+"The others. The ones who aren't really here anymore."
+
+You look at the space she's been watching. You see air. Candlelight. A slightly suspicious stain on the wallpaper.
+
+"I... I'm afraid I don't—"
+
+She looks disappointed. Genuinely, vulnerably disappointed. "Oh. I thought you might. Being *sensitive* and all."
+
+"I'm not particularly—"
+
+Lady Blackthorn: "Arabella dear, don't monopolize our guest. She'll think we're *all* mad."
+
+You think: *Too late.*
+
+~ blackthorn.arabella_connection += 2
+
+@if "ashford" not in blackthorn.dinner_survey_order:
+    + [Turn your attention to the brooding man] -> Blackthorn.Session1.Meet_Ashford
+@endif
+@if "blackwood" not in blackthorn.dinner_survey_order:
+    + [Turn your attention to the note-taker] -> Blackthorn.Session1.Meet_Blackwood
+@endif
+@if "empty_chair" not in blackthorn.dinner_survey_order:
+    + [Ask about the empty chair] -> Blackthorn.Session1.Empty_Chair
+@endif
+@if len(blackthorn.dinner_survey_order) >= 2:
+    + [Continue dinner] -> Blackthorn.Session1.Ravencroft_Arrives
+@endif
+
+:: Blackthorn.Session1.Meet_Blackwood
+~ blackthorn.dinner_survey_order.append("blackwood")
+
+The note-taker notices you noticing him. He sets down his pen — reluctantly, the way an addict sets down a pipe — and fixes you with an evaluative stare.
+
+"Miss {blackthorn.player_name}. You claim to read fortunes through cartomancy?"
+
+"I read tarot cards, yes—"
+
+"Fascinating." He does not sound fascinated. He sounds like he's filing you under a species heading. "Pure pareidolia, of course — the mind's tendency to impose patterns on random stimuli. Yet subjects consistently report *feeling* helped. I'm documenting the phenomenon."
+
+"It's not random, exactly. The cards follow certain symbolic—"
+
+"Confirmation bias. Selection bias. The Barnum effect." He ticks them off on his fingers. "I've written a paper on it. 'On the Persistence of Superstitious Belief Among the Otherwise Rational.' You are exhibit C."
+
+"Exhibit—"
+
+"Nothing personal. Exhibits A and B were a mesmerist and a phrenologist."
+
+"Sir, has it occurred to you that pattern recognition is itself a valuable cognitive skill? You got your medical degree from a *book.* I got mine from a different one."
+
+He blinks. Opens his mouth. Closes it. Opens it again.
+
+"We shall discuss this further. I'd like to run *tests.*"
+
+"I'd rather you didn't."
+
+From a doorway you hadn't noticed, a dry female voice: "She's got you there, Doctor."
+
+You turn. A woman in her thirties — elegant, sardonic, a lady's maid by her dress — stands with arms folded and an expression of pure, refined amusement.
+
+**Miss Chen.** You don't know how you know her name, but you do. Guangzhou, originally. Been at the manor five years. Finds the "mysterious foreigner" tropes hilarious, given that everyone here is far more peculiar than she is.
+
+"Miss Chen." Dr. Blackwood manages to sound simultaneously offended and impressed. "I don't recall inviting commentary from the staff."
+
+"You didn't. I volunteered." She turns to you. "More wine, miss?"
+
+"Please."
+
+You become allies in that moment. Wordlessly and completely.
+
+~ blackthorn.blackwood_respect += 1
+~ blackthorn.chen_respect += 2
+
+@if "ashford" not in blackthorn.dinner_survey_order:
+    + [Turn your attention to the brooding man] -> Blackthorn.Session1.Meet_Ashford
+@endif
+@if "arabella" not in blackthorn.dinner_survey_order:
+    + [Turn your attention to the girl in white] -> Blackthorn.Session1.Meet_Arabella
+@endif
+@if "empty_chair" not in blackthorn.dinner_survey_order:
+    + [Ask about the empty chair] -> Blackthorn.Session1.Empty_Chair
+@endif
+@if len(blackthorn.dinner_survey_order) >= 2:
+    + [Continue dinner] -> Blackthorn.Session1.Ravencroft_Arrives
+@endif
+
+:: Blackthorn.Session1.Empty_Chair
+~ blackthorn.dinner_survey_order.append("empty_chair")
+
+"Lady Blackthorn — the chair beside me. Are we expecting another guest?"
+
+Lady Blackthorn's smile deepens. "Lord Ravencroft. He'll arrive... when the mood takes him."
+
+"When the mood—"
+
+"He has a *flair* for entrances. Best not to question it."
+
+The chair smells powerfully of wet dog and moor grass and something that is either a very expensive cologne or the distilled essence of a Brontë novel.
+
+Thomas — the footman, mid-twenties, cheerful face, the first person you've seen in this house who doesn't appear to be auditioning for something — appears at your elbow with a bread roll.
+
+"Don't worry about Lord Ravencroft, miss," he says, quiet enough that Lady Blackthorn can't hear. "He's harmless. Mostly."
+
+"Mostly?"
+
+"He's very... *intense.* But the dog is lovely."
+
+"The *dog*—"
+
+Thomas opens his mouth to explain, but at that precise moment, every candle in the room flickers.
+
+~ blackthorn.thomas_friendliness += 1
+
++ [Continue dinner] -> Blackthorn.Session1.Ravencroft_Arrives
+
+# ============================================================================
+# THE ENTRANCE
+# ============================================================================
+
+:: Blackthorn.Session1.Ravencroft_Arrives
+The doors burst open.
+
+There is wind. Where is the wind coming from? You are *inside.* There is no reason for wind. And yet: wind. Enough to make the candles gutter and the curtains billow and your napkin to lift delicately from your lap and settle on the floor.
+
+A figure stands in the doorway.
+
+Tall. Dark hair wild and windswept — from the *indoor wind,* apparently. Billowing white shirt open at the collar. Why is his shirt billowing? There is no wind IN THE HALLWAY. The wind appears to be localized exclusively around his person, like a personal weather system committed to drama.
+
+His eyes burn with intensity. This is not a metaphor. They are genuinely, aggressively intense. They are eyes that have read too much Byron and taken it personally.
+
+At his side: a dog.
+
+Not a dog. A *borzoi.* Enormous, elegant, long-snouted, with flowing silver-white fur and the exact same wild, windswept aesthetic as its owner. They stand together in the doorway and they look — there is no other word for this — *disturbingly similar.* Same long, elegant face. Same intense gaze. Same hair situation.
+
+It is one of those dog-and-owner situations. The dog-and-owner situation to end all dog-and-owner situations.
+
+**Lord Ravencroft** strides to the table.
+
+He **points** at you.
+
+"*YOU.*"
+
+Everyone turns to stare.
+
+"...Me?"
+
+"Yes. *YOU.* I saw you arrive. From my window. On the moors. Where I was *BROODING.*"
+
+"...Right."
+
+"You have... a *QUALITY.*"
+
+"I have a *job,* sir. I'm the card reader."
+
+"The *CARDS.* Yes. You commune with FORCES BEYOND—"
+
+"I read from a *book*—"
+
+"I *MUST* have a reading. My *SOUL* is in *TORMENT*—"
+
+Lady Blackthorn, with the tone of someone managing a recurring situation: "Ravencroft, *darling,* do sit down. You're frightening Miss {blackthorn.player_name}."
+
+Lord Ravencroft sits. In the chair beside you. The one that smells like moor and dog and drama.
+
+He does not break eye contact.
+
+The borzoi sits too. At his feet. It also does not break eye contact. The dog is staring at you with the same burning intensity as its master and you are being double-stared-at by a man and his dog and this is your life now.
+
+"This is Heathsniff," Lord Ravencroft says.
+
+"...*Heathsniff.*"
+
+"He is my *SOUL COMPANION.* We roam the moors together. He understands my *TORMENT.*"
+
+Heathsniff: still staring.
+
+Lord Ravencroft: still staring.
+
+You: eating soup, deeply uncomfortable.
+
++ ["That's... a very literary name for a dog."] -> Blackthorn.Session1.Ravencroft_Literary
++ [Ignore him. Focus on your soup.] -> Blackthorn.Session1.Ravencroft_Ignore
++ [Look to the servants for help.] -> Blackthorn.Session1.Ravencroft_Help
+
+:: Blackthorn.Session1.Ravencroft_Literary
+"A literary name for a *literary soul,*" he says, somehow making this sound like a profound philosophical statement rather than a description of a dog.
+
+Miss Chen, pouring wine, catches your eye. Her expression says: *welcome to my life.*
+
+Thomas, serving the fish course, leans down as he places your plate. "The dog's actually quite friendly, miss. It's the master you want to watch."
+
+Lord Ravencroft: "Thomas."
+
+Thomas: "More wine, m'lord?"
+
+~ blackthorn.ravencroft_fixation += 1
+~ blackthorn.heathsniff_affection += 1
+
++ [Eat your dinner. Ignore the staring.] -> Blackthorn.Session1.Dinner_Servants
+
+:: Blackthorn.Session1.Ravencroft_Ignore
+You focus on your soup with the concentration of a woman who has decided that Lord Ravencroft and his matching dog do not exist. Your soup is very interesting. Possibly the most interesting soup you've ever encountered. You could write a monograph on this soup.
+
+Lord Ravencroft does not appear to notice that he's being ignored. Or he notices and finds it *thrilling.*
+
+"The moors were WILD tonight," he says to no one and everyone. "Heathsniff and I rode until the STARS themselves TREMBLED—"
+
+Miss Chen, dryly, from behind Lady Blackthorn's chair: "There are no stars, Lord Ravencroft. It's been raining for three days."
+
+"The *METAPHORICAL* stars—"
+
+"Of course."
+
+~ blackthorn.composure += 1
+~ blackthorn.groundedness += 1
+
++ [Focus on the soup. The soup is normal. You like the soup.] -> Blackthorn.Session1.Dinner_Servants
+
+:: Blackthorn.Session1.Ravencroft_Help
+You look desperately at the nearest servant.
+
+Mrs. Winters is already there.
+
+She has materialized at your elbow — a woman in her sixties, warm eyes, the particular solidity of someone who has seen every conceivable form of aristocratic nonsense and has developed a permanent, load-bearing exasperation.
+
+"Don't mind them, dear," she says, quietly, as she refills your water glass. "They're all quite mad."
+
+"*Thank you,*" you whisper.
+
+"More soup?"
+
+"Please. Yes. Anything."
+
+She pats your shoulder — briefly, professionally, but with genuine warmth. "You're doing fine. Just read the cards like normal. Try not to engage with Lord Ravencroft's dramatics."
+
+"He's very... *intense.*"
+
+"That's one word for it."
+
+~ blackthorn.winters_approval += 2
+~ blackthorn.ravencroft_fixation += 1
+
++ [Accept the soup. And the solidarity.] -> Blackthorn.Session1.Dinner_Servants
+
+# ============================================================================
+# THE SERVANTS (The Only Sane People Here)
+# ============================================================================
+
+:: Blackthorn.Session1.Dinner_Servants
+The dinner progresses. The food is good — someone in this house can cook, and that someone is probably not supernatural. Between courses, the servants orbit the table like planets around a collapsing star.
+
+**Mrs. Winters** — housekeeper, sixties, the quiet authority of a woman who has served three mistresses, survived six housemaids, and long ago stopped being surprised by anything. She moves through the room with the ease of someone who knows every creaking board and exactly which doors to avoid after dark. When she serves you, she gives you looks that communicate entire paragraphs. The current paragraph is: *Eat your food. Ignore the aristocrats. I'll get you through this.*
+
+**Thomas** — footman, mid-twenties, irrepressibly cheerful in a way that seems heroic given his workplace. He winks at you when he pours your wine. He is the first person in this house who has made you feel like the situation might be survivable.
+
+When he serves Lord Ashford, he does so with the practiced ease of someone managing a complicated animal. "More wine, m'lord? Shall I draw the curtains? The moon isn't visible tonight — the clouds, sir." The way he says it suggests the moon's visibility is a nightly concern.
+
+**Miss Chen** — lady's maid, thirties, from Guangzhou, elegant and sardonic in equal measure. She attends Lady Blackthorn with the brisk efficiency of someone who considers the job entertaining enough to compensate for the considerable drawbacks. You catch her watching you during dessert with an expression of genuine curiosity — she's evaluating you, and her evaluation standards are high.
+
+Between the fish and the pudding, you find a moment.
+
++ ["Do you three... live here?"] -> Blackthorn.Session1.Servants_Chat
++ [Focus on observing the gentry instead] -> Blackthorn.Session1.Gentry_Observe
+
+:: Blackthorn.Session1.Servants_Chat
+All three servants are within earshot. Something about the question makes them exchange a look — the look of people who have been asked this before and have developed a coordinated response.
+
+"Unfortunately," all three say, nearly in unison.
+
+Mrs. Winters: "Been here forty years."
+
+Thomas: "Two years for me."
+
+Miss Chen: "Five years. I keep meaning to leave but the pay is good and the dramatics are entertaining."
+
+"Are they... *always* like this?"
+
+All three: "Always."
+
+Thomas: "The trick is to just be very matter-of-fact about everything. 'Yes, m'lord, I'll fetch your tea. Yes, m'lord, I see you've turned into a wolf again. I'll draw the curtains.'"
+
+"...Did you say *wolf?*"
+
+Thomas: "You'll see. Full moon's in three days."
+
+"I'm sorry, *what*—"
+
+Lady Blackthorn, from the head of the table: "Thomas, that's *quite* enough."
+
+Mrs. Winters, gathering plates: "Last card reader lasted two days before fleeing in the night."
+
+"That's... not reassuring."
+
+"Wasn't meant to be, dear. More pudding?"
+
+~ blackthorn.servant_trust += 2
+~ blackthorn.winters_approval += 1
+~ blackthorn.thomas_friendliness += 1
+~ blackthorn.chen_respect += 1
+
++ [Finish dinner. Brace yourself for what comes next.] -> Blackthorn.Session1.Dinner_End
+
+:: Blackthorn.Session1.Gentry_Observe
+You watch the gentry instead.
+
+Lord Ashford barely eats. He pushes food around his plate and stares at the rain against the windows with the expression of a man waiting for a verdict.
+
+Miss Arabella eats neatly, primly, and keeps flinching at things you can't see. At one point she whispers "excuse me" to the empty air beside her plate. No one else reacts.
+
+Dr. Blackwood eats with one hand and takes notes with the other. You catch a fragment of what he's writing: *"Subject C (card reader) displays defensive rationalization patterns consistent with—"* He sees you looking and angles the notebook away.
+
+Lord Ravencroft eats nothing. He drinks wine and stares at you. Heathsniff, lying under the table, has placed his enormous head on your foot. You don't remember this happening. It's just a fact of your existence now. A borzoi is on your foot.
+
+Lady Blackthorn presides. She doesn't eat either — her plate contains something very red that she occasionally stirs but never lifts to her mouth. You file this away under "things you're going to think about later when you're safely in Bath."
+
+~ blackthorn.house_influence += 1
+~ reader.insight += 1
+
++ [File it all away. The pudding is cleared.] -> Blackthorn.Session1.Dinner_End
+
+:: Blackthorn.Session1.Dinner_End
+The pudding is cleared. Lady Blackthorn rises.
+
+"Now then." She clasps her hands. The candlelight does something theatrical with her cheekbones. "Shall we retire to the parlor? It is time to contact the *spirit realm.*"
+
+"My lady, I really should clarify — I read tarot cards. I don't *commune* with spirits—"
+
+"But you have *The Gift.*"
+
+"I have a *book*—"
+
+"Come now. Don't be modest." She gestures to the party. "Everyone, please. The parlor."
+
+They rise. Lord Ashford with reluctance. Miss Arabella with nervous excitement. Dr. Blackwood with his notebook already open. Lord Ravencroft with the fluid grace of a man who has practiced standing up from dinner tables in a mirror.
+
+Heathsniff removes his head from your foot. Stands. Stretches. Shakes his flowing fur. He does this with the deliberate elegance of a creature who knows exactly how good he looks.
+
+Mrs. Winters appears at your elbow one final time.
+
+"You'll be fine, dear," she says. "Just read the cards like you always do."
+
+"Mrs. Winters, they want me to conduct a *séance.* I don't *do* séances."
+
+"I know, dear. But it's that kind of house."
+
+She squeezes your arm — once, brief, warm — and goes to clear the table.
+
+You follow the party to the parlor.
+
+You are from Bath.
+
+You learned this from a book.
+
+Whatever is about to happen, that hasn't changed.
+
++ [Enter the parlor] -> Blackthorn.Session1.Seance_Setup
+
+# ============================================================================
+# END OF PART 1
+# ============================================================================
+# Part 2 continues with:
+#   - The séance setup and card draw
+#   - Lord Blackthorn's ghost appears (undeniable supernatural)
+#   - Card interpretations (grounded/diplomatic/gothic/panicked)
+#   - Post-séance Ravencroft hallway encounter
+#   - Mrs. Winters rescue
+#   - Bed — alone with questions
+# ============================================================================
+
+# ============================================================================
+# ACT 3: THE SÉANCE
+# ============================================================================
+
+:: Blackthorn.Session1.Seance_Setup
+The parlor.
+
+Someone has been busy. Too many candles — every surface holds at least three. Heavy curtains drawn against the rain. A round table at the center, covered in black cloth. Chairs arranged in a circle. The whole room smells like beeswax and anticipation and something underneath those things that you can't name and don't want to.
+
+There is a ouija board on a side table. You are not going anywhere near it.
+
+"Please, everyone. Sit." Lady Blackthorn takes her place at the table. Her hands are very white against the black cloth.
+
+They sit.
+
+Lord Ashford: troubled, resigned, like a man who has attended séances before and found them wanting.
+
+Miss Arabella: nervous but *excited,* eyes flickering to the empty spaces in the room with an expression that is less "I see dead people" and more "the dead people are being really chatty tonight."
+
+Dr. Blackwood: notebook open, pen poised. He has already written the heading: *"Séance Observation Notes, 14th October 1873."* He has underlined it twice.
+
+Lord Ravencroft: *staring at you.* He has not stopped staring at you since he arrived. He has simply relocated the staring from the dining room to the parlor.
+
+Heathsniff: lying at Ravencroft's feet. Also staring at you. The two of them are like a Renaissance painting of devotion, except the devotion is aimed at a woman from Bath who wants to go home.
+
+The empty chair. Across from you. For the "guest."
+
+Lady Blackthorn places her hands flat on the table. "We gather to contact my late husband, Lord Desmond Blackthorn. Who departed this mortal realm five years ago under... *mysterious circumstances.*"
+
+"I'm very sorry for your loss—"
+
+"Are you?" She gives you a look. The look has footnotes.
+
+"...Yes?"
+
+"He was a *terrible* husband. Absolutely dreadful. I'm *delighted* he's dead."
+
+Everyone around the table nods as if this is a perfectly normal thing to say at a séance for the man in question.
+
+"But I need to know where he hid the *money.*"
+
+More nodding.
+
+You think: *I want to go home.*
+
+Lady Blackthorn turns to you. "Miss {blackthorn.player_name}, please... *open the veil.*"
+
++ ["I don't know how to 'open the veil.' I read tarot cards."] -> Blackthorn.Session1.Seance_Resist
++ ["I can lay cards for your late husband. That's what I do."] -> Blackthorn.Session1.Seance_Redirect
++ [Say nothing. Pull out your deck. Just do your job.] -> Blackthorn.Session1.Seance_Silent
+
+:: Blackthorn.Session1.Seance_Resist
+"I don't know how to 'open the veil.' I read tarot cards. From a book. I have never opened, closed, or in any way adjusted a veil in my professional career."
+
+Arabella, helpfully: "Just ask the spirits to come through!"
+
+"I really don't think—"
+
+Dr. Blackwood, scribbling: "Fascinating. The subject is uncomfortable with the role she's being forced into. Note the defensive posture, the repeated invocation of her training manual—"
+
+"I'm not a *subject*—"
+
+Ravencroft, with the intensity of a man ordering his final meal: "Do you *fear* what you might see beyond the veil?"
+
+"I fear being held responsible for things I can't actually *do*—"
+
+Lady Blackthorn: "Just draw some cards, dear. For *atmosphere.*"
+
+You look around the table. Every face is turned to you. Even Heathsniff.
+
+You sigh.
+
+"*Fine.*"
+
+~ blackthorn.groundedness += 2
+~ blackthorn.composure -= 1
+
++ [Pull out your deck.] -> Blackthorn.Session1.Seance_CardDraw
+
+:: Blackthorn.Session1.Seance_Redirect
+"I can lay a spread for your late husband. Cards for the departed — there's a chapter on it in my book. It won't *summon* anyone, but it can tell us something about who he was, what he left unfinished, what's hidden."
+
+Lady Blackthorn looks mildly disappointed that you're not going to levitate or speak in tongues, but she waves a hand. "Very well. Your methods. Whatever works."
+
+You think: *My methods work fine, thank you. They involve a deck of cards and pattern recognition and absolutely no ghosts.*
+
+~ blackthorn.groundedness += 1
+~ blackthorn.lady_blackthorn_opinion -= 1
+
++ [Set up the spread. Your way.] -> Blackthorn.Session1.Seance_CardDraw
+
+:: Blackthorn.Session1.Seance_Silent
+You say nothing. You pull your deck from the pocket of your dress — you've been keeping it close all evening without quite knowing why — and set it on the black cloth.
+
+The table goes quiet.
+
+There's something about the gesture. A professional pulling out her tools. The levity drops. Even Dr. Blackwood's pen pauses.
+
+Ravencroft leans forward. "She's *doing* it. She's opening the—"
+
+"I'm shuffling cards, Lord Ravencroft. Please don't narrate."
+
+~ blackthorn.groundedness += 1
+~ blackthorn.composure += 1
+~ blackthorn.lady_blackthorn_opinion += 1
+
++ [Shuffle. Let the silence do its work.] -> Blackthorn.Session1.Seance_CardDraw
+
+# ============================================================================
+# THE CARD DRAW
+# ============================================================================
+
+:: Blackthorn.Session1.Seance_CardDraw
+@py:
+# Card pools — "Through the Veil" spread
+# 5 positions, 3 possible cards each
+# Reversal chance: 25% (Gothic volatility)
+
+position_1_deck = Deck(cards=["King of Swords", "The Emperor", "Knight of Pentacles"], reversals=[0.25, 0.25, 0.25])
+position_2_deck = Deck(cards=["Seven of Swords", "Five of Pentacles", "Page of Cups"], reversals=[0.25, 0.25, 0.25])
+position_3_deck = Deck(cards=["Ten of Pentacles", "Four of Pentacles", "Six of Swords"], reversals=[0.25, 0.25, 0.25])
+position_4_deck = Deck(cards=["The Moon", "The High Priestess", "Eight of Swords"], reversals=[0.25, 0.25, 0.25])
+position_5_deck = Deck(cards=["Three of Swords", "Justice", "Judgement"], reversals=[0.25, 0.25, 0.25])
+
+reading = Reading(spread_id="through-the-veil", decks=[
+    position_1_deck,
+    position_2_deck,
+    position_3_deck,
+    position_4_deck,
+    position_5_deck
+])
+
+cards = reading.draw_cards()
+@endpy
+
+You shuffle. The sound is loud in the quiet room — the soft riffle and snap of pasteboard, the only normal sound in a deeply abnormal situation.
+
+"This spread is called 'Through the Veil,'" you say. Professor Crane, Chapter 14. You've done this three times before, at estate readings in Cheltenham, and nothing happened except some satisfied widows and reasonable tips. "Five cards. Five questions about the departed."
+
+You lay them face down on the black cloth.
+
+"The Departed — who they were in life. Their Message — what they wish to communicate. What They Left Behind. What's Hidden. And the Truth."
+
+Your hands are steady. You're a professional. You've done this before.
+
+You turn the first card.
+
+**Position 1: The Departed**
+**{cards[0].name}**{cards[0].reversed ?  — Reversed | }
+
+The moment it touches the table—
+
+The candles flicker.
+
+Not gently. Not the way candles flicker in a draft. Every candle in the room dims to a blue point and then flares back, and the temperature drops so sharply you can see your breath.
+
+"What—"
+
+A VOICE. From nowhere. From everywhere. From the empty chair across the table.
+
+**"WHO SUMMONS ME?"**
+
+Everyone jumps. Dr. Blackwood's pen leaves a streak of ink across his notebook. Lord Ashford's hand goes to the table. Miss Arabella claps both hands over her mouth — not in surprise but in *recognition.* As if she's been seeing him all along and is simply relieved everyone else can see him now.
+
+Lord Ravencroft stands. His chair falls backward. Heathsniff howls — one long, eerie, beautiful note.
+
+You: standing, hands flat on the table, cards forgotten: "I didn't— I just laid down a *card*—"
+
+**"WHO DARES DISTURB MY REST?"**
+
+A figure materializes in the empty chair. Translucent. Glowing faintly, the cold blue-white of moonlight on snow. A man. Heavy-set, imperious, dressed in the fashion of five years ago — or five centuries ago, or both. He is dead. He is here. He is looking at you with the absolute fury of someone who has been rudely awakened.
+
+**Lord Desmond Blackthorn's Ghost** sits at his own séance table and he is *angry.*
+
+~ blackthorn.supernatural_encounters += 5
+~ blackthorn.ghost_encountered = True
+~ blackthorn.composure -= 3
+
+"*VICTORIA.*" The ghost turns to Lady Blackthorn. "I should have known."
+
+Lady Blackthorn: "Hello, Desmond. You're looking well. For a corpse."
+
+"You *KILLED* me—"
+
+"You tried to *stake* me first. And you missed. Which was typical."
+
+"*WHO IS THIS MORTAL?*" The ghost rounds on you. "*WHY DOES SHE CARRY THE CARDS?*"
+
++ ["I— I learned from a BOOK—"] -> Blackthorn.Session1.Ghost_Panicked
++ ["I'm a card reader, sir. Hired for the weekend. Five pounds."] -> Blackthorn.Session1.Ghost_Grounded
++ ["I am Miss {blackthorn.player_name}, of Bath, and I am just as surprised as you are."] -> Blackthorn.Session1.Ghost_Honest
+
+:: Blackthorn.Session1.Ghost_Panicked
+"I— I learned from a *BOOK*—"
+
+"*SHE HAS NO POWER. SHE IS BUT MUNDANE FLESH.*"
+
+"*THAT'S WHAT I'VE BEEN SAYING—*"
+
+Your voice is higher than you'd like. Your hands are shaking. There is a ghost. At the table. A real ghost. You have read cards at garden parties in Cheltenham and nothing like this has ever happened and your book did not include a chapter on this and you are from *BATH*—
+
+Mrs. Winters, from the doorway, steady as bedrock: "Pull yourself together, dear. You're doing fine."
+
+"Mrs. Winters, there's a *GHOST*—"
+
+"Yes, dear. There usually is. Tea?"
+
+~ blackthorn.composure -= 2
+~ blackthorn.interpretation_quality['panicked'] += 1
+~ blackthorn.winters_approval += 1
+
++ [Drink the tea. Read the cards. Somehow.] -> Blackthorn.Session1.Ghost_Continue
+
+:: Blackthorn.Session1.Ghost_Grounded
+"I'm a card reader, sir. Hired for the weekend. Five pounds. I read tarot cards. I did not summon you and I don't know how you're here, but I assure you, my cards are from a shop in Bath and they have never done anything like this before."
+
+The ghost pauses. He appears to have expected groveling or screaming or mystic incantations. He was not expecting a job description.
+
+"*YOU... READ CARDS. FOR MONEY.*"
+
+"For a living, yes. It's a skill. Like accounting, but with better artwork."
+
+A beat. From behind you, the faintest sound — Mrs. Winters, in the doorway, exhaling. Not quite a laugh. Approval.
+
+"*SHE HAS NO POWER,*" the ghost says, but with less conviction. "*SHE IS BUT MUNDANE FLESH.*"
+
+"That's what I've been *saying,* sir."
+
+~ blackthorn.groundedness += 3
+~ blackthorn.composure += 1
+~ blackthorn.interpretation_quality['grounded'] += 1
+~ blackthorn.winters_approval += 2
+
++ [Sit down. Read the cards. It's what you're paid for.] -> Blackthorn.Session1.Ghost_Continue
+
+:: Blackthorn.Session1.Ghost_Honest
+"I am Miss {blackthorn.player_name}, of Bath, and I am just as surprised as you are. I laid down a card and you... arrived. This has never happened before. I don't understand it. But I'm here and you're here and I have cards on the table, so perhaps we should just... proceed?"
+
+You're surprised by how steady your voice sounds. It doesn't match the way your legs feel.
+
+The ghost stares at you. Something shifts in his translucent expression — not softening, exactly, but a recalibration. He expected a mystic. You're a professional having a very unusual day at work.
+
+"*HMPH.*" He settles in the chair. The chair creaks, which shouldn't be possible. "*VERY WELL. PROCEED.*"
+
+From the doorway, Mrs. Winters nods. Once. Firmly.
+
+~ blackthorn.groundedness += 2
+~ blackthorn.composure += 2
+~ blackthorn.interpretation_quality['grounded'] += 1
+~ blackthorn.winters_approval += 2
+~ blackthorn.lord_ashford_trust += 1
+
++ [Sit down. Begin the reading.] -> Blackthorn.Session1.Ghost_Continue
+
+# ============================================================================
+# THE READING (With Ghost Present)
+# ============================================================================
+
+:: Blackthorn.Session1.Ghost_Continue
+You sit back down. Your hands are shaking. You clasp them together under the table until they stop.
+
+There is a ghost at the table. An actual, genuine, undeniable ghost. The portraits were one thing — you could rationalize moving eyes. The cold room was one thing — old houses are cold. But this is a *dead man* sitting in a *chair* and he is *talking* and your book did not prepare you for this.
+
+Mrs. Winters appears with a cup of tea. She sets it next to your elbow. "You're doing fine, dear. Just read the cards like always."
+
+You pick up the tea. Drink. It's hot and strong and sweet — too sweet, Mrs. Winters has put sugar in it, the kind of sugar you give someone after a shock — and it steadies you.
+
+"Right." You set down the cup. Look at the spread. "Right."
+
+The first card is already face-up.
+
+@render render_reading(reading=reading, highlight=0)
+
+**Position 1: The Departed — {cards[0].name}**{cards[0].reversed ?  (Reversed) | }
+
+You know this card. You've read it a hundred times in warm, well-lit drawing rooms for perfectly alive people. You know what it means. The fact that you're reading it for a *ghost* doesn't change the meaning. The cards are the same. The reader is the same. The skill is the same.
+
+*Thank you, Professor Crane.*
+
+You turn the remaining cards, one by one. Each one lands on the table and the ghost flickers — brighter, angrier, colder — as the picture emerges.
+
+**Position 2: Their Message — {cards[1].name}**{cards[1].reversed ?  (Reversed) | }
+**Position 3: What They Left Behind — {cards[2].name}**{cards[2].reversed ?  (Reversed) | }
+**Position 4: What's Hidden — {cards[3].name}**{cards[3].reversed ?  (Reversed) | }
+**Position 5: The Truth — {cards[4].name}**{cards[4].reversed ?  (Reversed) | }
+
+The spread is complete. Five cards on black cloth, lit by blue-tinged candlelight, with a ghost's cold glow washing over them.
+
+You study them.
+
+You *know* what they say.
+
++ [Read them honestly. The same way you'd read for anyone.] -> Blackthorn.Session1.Seance_Read_Grounded
++ [Soften the truth. The ghost is right there and he looks angry.] -> Blackthorn.Session1.Seance_Read_Diplomatic
++ [Lean into the drama. Give them the séance they wanted.] -> Blackthorn.Session1.Seance_Read_Gothic
++ [You're too shaken. Just get through it.] -> Blackthorn.Session1.Seance_Read_Panicked
+
+:: Blackthorn.Session1.Seance_Read_Grounded
+You steady yourself. You are from Bath. You read cards for a living. This is a reading. It doesn't matter that the subject is dead and present and glowing. The cards are the cards.
+
+"The spread tells a fairly clear story."
+
+You point to Position 1.
+
+@if cards[0].name == "King of Swords":
+    "The King of Swords{cards[0].reversed ?  reversed |  } in the Departed position. This represents who your late husband was in life." You look at the ghost. He glares back. "{cards[0].reversed ? Reversed, this is a man who used his intelligence to deceive. Sharp-minded, yes, but that sharpness was turned to dishonest purposes | A man of sharp intellect and authority. But in this context — given the other cards — that intellect was used for calculation, not justice}."
+@elif cards[0].name == "The Emperor":
+    "The Emperor{cards[0].reversed ?  reversed |  } in the Departed position. {cards[0].reversed ? An Emperor reversed is authority that has become tyranny. Control that became corruption. Your husband ruled this estate like a kingdom, and he ruled it badly | The Emperor. A man of structure and authority. He controlled things — the estate, the finances, the household. But control isn't the same as honesty}."
+@else:
+    "The Knight of Pentacles{cards[0].reversed ?  reversed |  } in the Departed position. {cards[0].reversed ? Reversed, this knight's diligence became obsession. He was methodical, yes — methodically *extracting* from everything around him | A practical man. Methodical. Focused on material wealth. But the cards around him suggest that focus became something darker}."
+@endif
+
+The ghost flickers. "*SLANDER—*"
+
+"It's not slander if the cards say it, sir. And they do."
+
+Lady Blackthorn, with evident satisfaction: "Go on."
+
+You move to Positions 2 and 3.
+
+@if cards[1].name == "Seven of Swords":
+    "The Seven of Swords as his message. {cards[1].reversed ? Reversed, this suggests secrets coming to light — things he took that are being uncovered | This card is about deception. Theft. Taking what isn't yours and hoping no one notices}."
+@elif cards[1].name == "Five of Pentacles":
+    "The Five of Pentacles as his message. {cards[1].reversed ? Reversed — hardship ending, resources being recovered | Poverty. Loss. But not *his* poverty — he created it. In others. The estate, the tenants, anyone who depended on his management}."
+@else:
+    "The Page of Cups as his message. {cards[1].reversed ? Reversed — an emotional message that's been blocked or corrupted | An emotional offering. But in this spread, alongside these other cards... it reads as manipulation. Using feeling as currency}."
+@endif
+
+@if cards[2].name == "Ten of Pentacles":
+    "And what he left behind: the Ten of Pentacles{cards[2].reversed ?  reversed | }. {cards[2].reversed ? An inheritance in ruins. The estate's finances — they're worse than you know, Lady Blackthorn. He didn't just mismanage. He *dismantled* | The legacy of wealth. But the question is where it *went.* This card suggests the money exists — it's just not where it should be}."
+@elif cards[2].name == "Four of Pentacles":
+    "What he left behind: the Four of Pentacles{cards[2].reversed ?  reversed | }. {cards[2].reversed ? Reversed — the grip has loosened. Whatever he was hoarding, it can be found now | He was hoarding. Clutching resources. Hiding them away. Not spending and not sharing — just *keeping*}."
+@else:
+    "What he left behind: the Six of Swords{cards[2].reversed ?  reversed | }. {cards[2].reversed ? A journey that was never completed. Unfinished business — literally | Transition. Departure. He was moving things — money, assets, something — out of the estate. Somewhere else. Somewhere hidden}."
+@endif
+
+The ghost is *furious* now. His glow has intensified. The room is frigid. Frost is forming on the windowpanes.
+
+"*I DID WHAT I HAD TO—*"
+
+"The cards disagree, sir."
+
+~ blackthorn.groundedness += 3
+~ blackthorn.composure += 2
+~ blackthorn.interpretation_quality['grounded'] += 2
+~ blackthorn.lady_blackthorn_opinion += 2
+~ blackthorn.lord_ashford_trust += 2
+~ blackthorn.arabella_connection += 1
+
++ [Turn to the last two cards. The ones that matter.] -> Blackthorn.Session1.Seance_Hidden
+
+:: Blackthorn.Session1.Seance_Read_Diplomatic
+You look at the cards. You look at the ghost. You look at Lady Blackthorn, who is watching you with the focused attention of a woman who wants her money found.
+
+You choose your words carefully.
+
+"The cards paint a *complex* picture."
+
+You gesture to Position 1.
+
+@if cards[0].name == "King of Swords":
+    "The King of Swords{cards[0].reversed ?  reversed | }. Your husband was intelligent — *very* intelligent. {cards[0].reversed ? But the reversal suggests that intelligence was... not always used transparently | But intelligence without transparency can lead to... complications}."
+@elif cards[0].name == "The Emperor":
+    "The Emperor{cards[0].reversed ?  reversed | }. A man of authority and control. {cards[0].reversed ? Reversed, this suggests that control became somewhat... excessive | An estate like this requires a firm hand. Perhaps too firm}."
+@else:
+    "The Knight of Pentacles{cards[0].reversed ?  reversed | }. A practical, methodical man. {cards[0].reversed ? Though the reversal implies that practicality shaded into something less admirable | Focused on material concerns — perhaps to the exclusion of other values}."
+@endif
+
+The ghost glowers but doesn't scream. You're threading a needle between truth and tact.
+
+"The middle cards suggest... financial irregularities." You don't use the word "theft." You say "irregularities" as if you're an accountant rather than a card reader sitting across from a dead man. "Resources that were redirected. An estate whose accounts don't quite... balance."
+
+Lady Blackthorn: "I *knew* it. Where did he put it?"
+
+"I'm getting there, my lady."
+
+The ghost: "*YOU UNDERSTAND NOTHING—*"
+
+"I understand your wife wants her money back, sir. The cards are being quite clear about that."
+
+~ blackthorn.groundedness += 1
+~ blackthorn.composure += 1
+~ blackthorn.interpretation_quality['diplomatic'] += 2
+~ blackthorn.lady_blackthorn_opinion += 1
+~ blackthorn.blackwood_respect += 1
+
++ [Move to the final two cards.] -> Blackthorn.Session1.Seance_Hidden
+
+:: Blackthorn.Session1.Seance_Read_Gothic
+Something in you shifts. Maybe it's the candles. Maybe it's the ghost. Maybe it's the black cloth and the rain against the windows and the terrible, wonderful, ridiculous *atmosphere* of this room. Whatever it is, a part of you that isn't from Bath — a part that might have been *waiting* for this — leans into it.
+
+"The *spirits* are troubled."
+
+Your voice drops. It sounds different. More resonant. More... *atmospheric.*
+
+"The cards reveal a *darkness.* A soul *stained* by avarice. The departed carries *secrets* beyond the veil — secrets that *weigh* on the living and the dead alike."
+
+Lady Blackthorn: *delighted.* "Yes! YES! This is what I was hoping for!"
+
+Dr. Blackwood, scribbling furiously: "Note the shift in vocal register — subject is adopting performative cadence consistent with —"
+
+Miss Arabella clasps her hands: "She's *channeling.*"
+
+Ravencroft: "*Magnificent.*"
+
+You are not channeling. You are *performing.* And a small, honest part of you knows it — knows that you're giving them the show they wanted instead of the reading they need. The cards would tell you the same thing in plain English. But the room wanted Gothic, so Gothic is what you're giving them.
+
+The ghost stares at you with something you hadn't expected: *contempt.*
+
+"*SHE PLAYS AT POWER SHE DOES NOT HAVE.*"
+
+That stings. Because he's right.
+
+~ blackthorn.gothic_persona += 3
+~ blackthorn.groundedness -= 2
+~ blackthorn.house_influence += 2
+~ blackthorn.interpretation_quality['gothic'] += 2
+~ blackthorn.lady_blackthorn_opinion += 3
+~ blackthorn.winters_approval -= 2
+
++ [Press on. The final cards await.] -> Blackthorn.Session1.Seance_Hidden
+
+:: Blackthorn.Session1.Seance_Read_Panicked
+Your hands won't stop shaking. You look at the cards and you know what they mean — you *always* know what they mean, you've been doing this for three years — but between your knowledge and your mouth is a ghost, an actual ghost, and he's looking at you and he's *dead* and your book didn't cover this and you can't—
+
+"The— the first card. It's the— it represents—" Your voice sounds thin. Wrong. Like someone else speaking through you.
+
+You try to focus. King of Swords. Emperor. Knight of Pentacles. You know what it means. You've read this card a hundred times. But a hundred times without a dead man sitting across from you glowing blue and your hands shaking so badly the tea in the cup is making little waves—
+
+"I— I'm sorry—"
+
+Arabella, gently: "Take your time."
+
+Dr. Blackwood: scribbling "Subject displaying acute stress response—"
+
+"I am NOT a *subject,* Dr. Blackwood—"
+
+The ghost: "*THE MORTAL CANNOT EVEN SPEAK. WHY IS SHE HERE.*"
+
+That does it. Something in you — something stubborn, something from Bath — snaps.
+
+"I am *here,* sir, because your wife *hired* me, and I am doing my *best* under circumstances that were *not in the advertisement.*"
+
+Not a great reading. But at least you're standing.
+
+~ blackthorn.composure -= 3
+~ blackthorn.groundedness -= 1
+~ blackthorn.interpretation_quality['panicked'] += 2
+~ blackthorn.arabella_connection += 1
+
++ [Two cards left. Finish this.] -> Blackthorn.Session1.Seance_Hidden
+
+# ============================================================================
+# THE HIDDEN CARDS AND THE TRUTH
+# ============================================================================
+
+:: Blackthorn.Session1.Seance_Hidden
+You move to the final two cards. These are the ones that matter — What's Hidden and The Truth.
+
+Position 4.
+
+@if cards[3].name == "The Moon":
+    "The Moon. Secrets. Deception. False appearances." You look at the ghost. "You hid things. Not just money. *Yourself.* The Moon says that nobody in this household knew who you really were."
+
+    The ghost's glow dims. Not anger — something else. Something that might be, in a dead man, shame.
+@elif cards[3].name == "The High Priestess":
+    "The High Priestess. Hidden knowledge. Things concealed behind a veil." You almost laugh — given the circumstances. "You had secrets, Lord Blackthorn. Secrets you carried beyond death. Things you made sure nobody could find."
+
+    The ghost shifts in his chair. The translucent face is unreadable.
+@else:
+    "The Eight of Swords. Imprisonment. Someone trapped by lies and unable to escape them." You pause. "This isn't just about you, is it? You trapped *others* in your web. People who depended on this estate — who couldn't leave because you'd made them complicit."
+
+    The ghost flickers violently. You've touched something.
+@endif
+
+The room is very cold now. Your breath fogs. Lady Blackthorn's wine glass has frost on the rim.
+
+"*ENOUGH,*" the ghost snarls. "*YOU KNOW NOTHING—*"
+
+"One card left."
+
+You turn Position 5.
+
+**The Truth.**
+
+@if cards[4].name == "Three of Swords":
+    The Three of Swords.
+
+    Three swords through a heart. Rain. Grief. Betrayal that cuts to the center of everything.
+
+    The ghost sees it and *recoils.*
+@elif cards[4].name == "Justice":
+    Justice.
+
+    A figure on a throne. Scales in one hand, sword in the other. Perfect balance. Perfect consequence.
+
+    The card *glows.*
+
+    Not candlelight. Not reflection. The card itself — the printed image on its face — is luminous. Warm gold against the blue-white cold of the ghost.
+
+    ~ blackthorn.cards_glowed = True
+@else:
+    Judgement.
+
+    The angel's trumpet. The dead rising. The final accounting.
+
+    The ghost stares at it. Something in his translucent face changes — the fury collapses into something older and more terrible.
+@endif
+
++ [Deliver the truth plainly. No drama. Just the cards.] -> Blackthorn.Session1.Seance_Truth_Grounded
++ [Deliver it firmly but not cruelly.] -> Blackthorn.Session1.Seance_Truth_Diplomatic
++ [Let the moment take you. This is bigger than Bath.] -> Blackthorn.Session1.Seance_Truth_Gothic
++ [You can barely speak. But you speak.] -> Blackthorn.Session1.Seance_Truth_Shaken
+
+:: Blackthorn.Session1.Seance_Truth_Grounded
+"The truth."
+
+Your voice is steady. You don't know how. The ghost is glowing and the room is freezing and your tea has gone cold in the cup, but your voice is steady.
+
+@if cards[4].name == "Three of Swords":
+    "The Three of Swords. Betrayal. You stole from this estate, Lord Blackthorn. From your wife, your household, the people who depended on you. And the betrayal wasn't just financial — you hurt someone deeply. Someone who trusted you."
+@elif cards[4].name == "Justice":
+    "Justice. Accounts must be settled. Debts must be paid." You meet the ghost's eyes — translucent, furious, and for the first time, *afraid.* "You stole from this estate and hid the evidence, and this card says it doesn't matter that you're dead. The debt remains."
+@else:
+    "Judgement. The final reckoning. You're being called to account, Lord Blackthorn. Not by me — by the cards, by the house, by whatever it is that brought you here tonight. The truth about what you did is going to come out. It's coming out *now.*"
+@endif
+
+The ghost SCREAMS.
+
+Not a word. A sound. The sound a dead man makes when the thing he hid behind his life's work is laid bare on a table by a woman from Bath with a three-shilling book.
+
+@if blackthorn.cards_glowed:
+    The Justice card blazes. The glow fills the room — warm gold overwhelming cold blue — and the ghost's form *buckles.*
+@endif
+
+"*THE LIBRARY,*" the ghost gasps. He's fading. Being pulled back. "*BEHIND THE BYRON COLLECTION. I HID IT ALL— THE ACCOUNTS, THE DEEDS, EVERYTHING—*"
+
+He looks at you. One last moment. Dead eyes meeting living ones.
+
+"*The cards... they see true. Even beyond the veil.*"
+
+He vanishes.
+
+The candles flare back to normal. The temperature rises. The frost on Lady Blackthorn's wine glass melts and runs down the stem.
+
+Silence.
+
+~ blackthorn.groundedness += 3
+~ blackthorn.composure += 2
+~ blackthorn.interpretation_quality['grounded'] += 2
+~ blackthorn.money_location_revealed = True
+~ blackthorn.servant_trust += 2
+~ reader.competence += 1
+
++ [The séance is over. The room exhales.] -> Blackthorn.Session1.Seance_Aftermath
+
+:: Blackthorn.Session1.Seance_Truth_Diplomatic
+"The final card tells us what we need to know."
+
+You're measured. Careful. The ghost is clearly distressed and you're not cruel, even to the dead.
+
+@if cards[4].name == "Three of Swords":
+    "The Three of Swords. There was a betrayal. A significant one. Lord Blackthorn, the cards suggest that the estate's finances were... deliberately mismanaged. And someone was hurt by it — not just financially."
+@elif cards[4].name == "Justice":
+    "Justice. This card means *balance.* Things that were taken must be returned. Debts incurred must be repaid." You soften your voice, just slightly. "Lord Blackthorn, whatever you did — and the cards are quite clear that you *did* something — the reckoning has arrived."
+@else:
+    "Judgement. The accounting. This card says it's time for the truth, Lord Blackthorn. Not as punishment — as *resolution.* Whatever you hid, it wants to be found. Surely even you must be tired of carrying it."
+@endif
+
+The ghost shudders. Not a scream — something quieter and more devastating. The sound of a man who has been *seen.*
+
+"*The library,*" he says. His voice is smaller now. "*Behind the Byron collection. The documents. The accounts. All of it.*"
+
+He looks at you with something that, in the living, you would call exhaustion.
+
+"*You read well,*" he says. "*For someone with no power.*"
+
+"I have plenty of power, sir. It's just the ordinary kind."
+
+He vanishes. The room warms.
+
+~ blackthorn.groundedness += 2
+~ blackthorn.composure += 1
+~ blackthorn.interpretation_quality['diplomatic'] += 2
+~ blackthorn.money_location_revealed = True
+~ blackthorn.lord_ashford_trust += 1
+
++ [The ghost is gone. The reading is done.] -> Blackthorn.Session1.Seance_Aftermath
+
+:: Blackthorn.Session1.Seance_Truth_Gothic
+Something moves through you.
+
+You don't choose it. It chooses you. The room, the candles, the cold, the *ghost* — it's all pressing against you and something inside you opens like a door you didn't know was there and the words come out in a voice that sounds like yours but *more.*
+
+@if cards[4].name == "Three of Swords":
+    "*The truth is written in SWORDS.* Three blades through the heart of everything you built. Betrayal. Theft. The tears you caused will ECHO beyond your grave—"
+@elif cards[4].name == "Justice":
+    "*JUSTICE.* The scales will BALANCE, Lord Blackthorn. Not even DEATH escapes the ledger. Your debts are DUE—"
+@else:
+    "*JUDGEMENT.* The trumpet SOUNDS. The dead will ANSWER for what they did in LIFE—"
+@endif
+
+The ghost screams. The candles explode — all of them, simultaneously, going out and then reigniting in a burst of blue flame. The table shakes. Your cards lift from the cloth and spin and settle again.
+
+The ghost, terrified now: "*THE LIBRARY — THE BYRON COLLECTION — TAKE IT ALL, JUST LET ME REST—*"
+
+He vanishes. Not fading — *fleeing.*
+
+The room goes dark and then light and then normal and you are sitting at the table with your hands flat on the black cloth and you don't know what just happened.
+
+You don't know what just happened.
+
+Arabella: awed. "You *channeled* him—"
+
+Dr. Blackwood: pen broken, ink on his shirt. "That was — that was—"
+
+Ravencroft: on his feet, eyes burning: "*MAGNIFICENT—*"
+
+Lady Blackthorn: smiling: "I *knew* you had The Gift."
+
+Mrs. Winters, from the doorway, says nothing. But her expression — the one she reserves for serious things — is troubled.
+
+~ blackthorn.gothic_persona += 3
+~ blackthorn.groundedness -= 3
+~ blackthorn.house_influence += 3
+~ blackthorn.interpretation_quality['gothic'] += 2
+~ blackthorn.money_location_revealed = True
+~ blackthorn.lady_blackthorn_opinion += 3
+~ blackthorn.winters_approval -= 2
+~ blackthorn.ravencroft_fixation += 3
+
++ [Come back to yourself. Whatever that means now.] -> Blackthorn.Session1.Seance_Aftermath
+
+:: Blackthorn.Session1.Seance_Truth_Shaken
+You can barely get the words out.
+
+@if cards[4].name == "Three of Swords":
+    "Three of Swords. Betrayal." You're speaking to the table, not to the room. Your voice is small. "He— the cards say he stole from the estate. And someone was hurt."
+@elif cards[4].name == "Justice":
+    "Justice. The— the accounts need to be settled." You're shaking. "There was theft. Hidden documents. The money—"
+@else:
+    "Judgement. The truth is— he hid things. The estate's finances are—" You can't finish. You gesture at the spread. "It's all there. The cards are quite clear."
+@endif
+
+It's not your best work. But the cards don't need your best work. They're doing the job on their own.
+
+The ghost looks at the spread. Reads his own verdict in the images.
+
+"*The library,*" he says, quieter. "*Behind Byron. Everything's there.*"
+
+He vanishes. Not with drama — with the slow dissolution of someone who's been held together by secrets and has just had them removed.
+
+The room warms. Your hands are still shaking.
+
+Mrs. Winters brings you more tea. Sugar. The medicinal amount.
+
+"You did fine, dear," she murmurs. "You got through it."
+
+You drink the tea. You don't trust yourself to speak.
+
+~ blackthorn.composure -= 2
+~ blackthorn.interpretation_quality['panicked'] += 1
+~ blackthorn.money_location_revealed = True
+~ blackthorn.winters_approval += 1
+
++ [It's over. You survived.] -> Blackthorn.Session1.Seance_Aftermath
+
+# ============================================================================
+# SÉANCE AFTERMATH
+# ============================================================================
+
+:: Blackthorn.Session1.Seance_Aftermath
+@py:
+blackthorn.seance_completed = True
+blackthorn.dominant_style = blackthorn.calculate_dominant_style()
+session.seance_quality = blackthorn.calculate_seance_quality()
+@endpy
+
+Lady Blackthorn stands. She is *radiant.*
+
+"Well. That was *productive.*" She turns to the room. "The Byron collection. Thomas, first thing tomorrow, if you would."
+
+Thomas: "Yes, my lady."
+
+"Splendid." She sweeps toward the door. Pauses. Turns back to you.
+
+"Miss {blackthorn.player_name}. You are *everything* I hoped for. I shall write you the most *extraordinary* references."
+
+She glides out. Miss Chen follows, pausing to give you a look — one eyebrow raised, the faintest nod. *Not bad.*
+
+Dr. Blackwood stands, ink-stained and wild-eyed. "I have *SEVENTEEN PAGES* of notes. The acoustic properties of spectral vocalization alone — the thermal variance — I shall be writing papers for *YEARS—*"
+
+He stumbles out, muttering about peer review.
+
+Lord Ashford rises. He looks at you — really looks, for the first time all evening — with an expression that is less "brooding Gothic lord" and more "exhausted man who just watched something impossible."
+
+"Miss {blackthorn.player_name}. Thank you."
+
+"I just read cards—"
+
+"You read them *well.*" He pauses at the door. "I may... I may ask for a reading of my own. If you're willing. I have a... a situation."
+
+"Of course, Lord Ashford."
+
+He nods. Leaves.
+
+Miss Arabella approaches you. Her eyes are bright. She takes your hand — hers is warm, surprisingly warm for someone so pale — and squeezes.
+
+"You *heard* him," she whispers. "You heard the ghost. Even though you can't see them. The cards hear for you."
+
+"I don't think that's how—"
+
+"It *is.* It is and it's *wonderful.*"
+
+She slips away.
+
+The room is emptying. Thomas is snuffing candles. Mrs. Winters is clearing the table.
+
+Lord Ravencroft has not moved. He is standing by his chair. Heathsniff is at his side.
+
+They are both staring at you.
+
+"Miss {blackthorn.player_name}—"
+
+"Not tonight, Lord Ravencroft."
+
+@if blackthorn.dominant_style == "gothic":
+    He steps closer. "*What HAPPENED to you in there? I SAW it — the change — you became something MORE—*"
+
+    "I became someone who needs to go to bed. *Immediately.* Goodnight."
+@else:
+    He steps closer. "You were *extraordinary—*"
+
+    "I was doing my *job.* Which is now done. For the evening. Goodnight, Lord Ravencroft."
+@endif
+
+You leave before he can respond. Thomas holds the door for you. Slips you a biscuit from his pocket as you pass.
+
+"For the shock," he whispers. "Mrs. Winters's recipe."
+
+"Thank you, Thomas."
+
+"First ghost?"
+
+"*Obviously.*"
+
+"You did better than the last one. She fainted. Twice."
+
+"*Comforting.*"
+
+~ blackthorn.thomas_friendliness += 2
+
+You take your candle. You start up the stairs.
+
++ [Go straight to your room] -> Blackthorn.Session1.Hallway_Encounter
++ [There is no option. You are going to your room. Immediately.] -> Blackthorn.Session1.Hallway_Encounter
+
+# ============================================================================
+# ACT 4: THE HALLWAY ENCOUNTER
+# ============================================================================
+
+:: Blackthorn.Session1.Hallway_Encounter
+The corridor is dark. Your candle throws jumping shadows. The portraits watch — you've stopped pretending they don't. Let them watch. You've just read tarot cards for a *ghost.* Painted eyes are nothing.
+
+Your room is at the end of the hall. Twenty steps. Maybe thirty. You count them.
+
+Twelve.
+
+Thirteen.
+
+Fourteen.
+
+A figure steps from the shadows.
+
+"*JESUS CHRIST—*"
+
+Lord Ravencroft. Hair wild. Shirt billowing. WHY is his shirt BILLOWING? There is no wind in the HALLWAY. The wind is LOCALIZED to his PERSON.
+
+"You."
+
+"*Sir, it is PAST TWO IN THE MORNING—*"
+
+"I couldn't sleep. Thinking about you. About the séance. About your *gift*—"
+
+"I don't HAVE a gift—"
+
+He steps closer. "The way you spoke to the spirit. {blackthorn.dominant_style == 'gothic' ? The way you TRANSFORMED — the power that moved through you — | Fearless. RESOLUTE. You stood before the dead and you did not WAVER —}"
+
+"I was *TERRIFIED—*"
+
+He steps closer. He smells like rain and moors and three days without bathing and something expensively masculine that was probably applied in front of a mirror with great deliberation.
+
+"You're *different.* Not like the others. You *SEE* things—"
+
+"I see that you've APPEARED FROM NOWHERE at an INAPPROPRIATE HOUR in your NIGHTSHIRT—"
+
+"This isn't a nightshirt, it's a *POET'S* shirt—"
+
+"It's a shirt with no BUTTONS, sir, and I can see your COLLARBONES—"
+
+"*The cards called you here. To ME—*"
+
+"The *NEWSPAPER* called me here, for *FIVE POUNDS*, which I am starting to think isn't *ENOUGH*—"
+
+He takes your hand.
+
+You pull it back.
+
+"*SIR.* We are *not* engaged. You may not *grab*—"
+
+"Forgive me. The *PASSION*— the *YEARNING*—"
+
+"The *BOUNDARIES*, sir. *PERSONAL BOUNDARIES.*"
+
+Heathsniff appears from the darkness. You didn't see him arrive. He materializes from a shadow like a long-snouted, silvery ghost and sits between you and Ravencroft.
+
+The dog is providing a physical buffer.
+
+The dog is on your side.
+
+~ blackthorn.ravencroft_fixation += 2
+~ blackthorn.heathsniff_affection += 2
+~ blackthorn.ravencroft_encountered_hallway = True
+
++ [Scream for help.] -> Blackthorn.Session1.Hallway_Scream
++ [Tell him firmly and clearly to leave you alone.] -> Blackthorn.Session1.Hallway_Firm
++ [Ask him why. Why is he like this.] -> Blackthorn.Session1.Hallway_Why
+
+:: Blackthorn.Session1.Hallway_Scream
+You open your mouth to scream.
+
+You don't have to.
+
+A door opens. Candlelight. Mrs. Winters in her nightgown and cap, holding a candlestick in one hand like a weapon and a look on her face that has been honed by forty years of managing aristocratic men who don't understand the word "no."
+
+"Lord Ravencroft."
+
+Ravencroft: "Mrs. Winters. I was merely—"
+
+"Harassing the card reader at two in the morning. Yes. I can *see* that."
+
+"*Thank you,* Mrs. Winters—"
+
+Mrs. Winters steps into the hallway. She is five foot four and sixty-two years old and she is the most formidable thing in this house, including the ghost.
+
+"Lord Ravencroft, return to your chambers."
+
+"But I *MUST* speak with her—"
+
+"At a *reasonable* hour. After *breakfast.* When she is *dressed* and *caffeinated.*"
+
+Ravencroft: pouting — literally *pouting,* a grown man in a poet's shirt pouting in a hallway — "The moors call to me—"
+
+"The moors will still be there in the morning."
+
+He leaves. Dramatically. He even manages to make *walking down a corridor* look like the final scene of an opera. Heathsniff follows, pausing to look back at you with an expression that, on a human, would be an apology.
+
+~ blackthorn.winters_rescue = True
+~ blackthorn.winters_approval += 2
+
++ [Let Mrs. Winters walk you back.] -> Blackthorn.Session1.Hallway_WintersWalk
+
+:: Blackthorn.Session1.Hallway_Firm
+"Lord Ravencroft. I have just conducted a reading for a *dead man.* I have been working since *midnight.* I am standing in a freezing corridor in a haunted house and my candle is going out and I need to use the privy and I am from *BATH* and I would like to go to my room and I would like you to *not be between me and my room.* Is that clear?"
+
+A beat.
+
+Ravencroft blinks. For a fraction of a second, something under all the performance surfaces — surprise. Genuine surprise. No one has ever been this direct with him.
+
+"I... yes. Of course. Forgive me."
+
+He steps aside. Heathsniff wags his tail. You walk past.
+
+"Miss {blackthorn.player_name}—"
+
+You turn.
+
+"You were truly remarkable tonight." He says it quietly. Without the capital letters. It's the most human thing he's said all evening.
+
+"Good *night,* Lord Ravencroft."
+
+"Good night."
+
+A door opens behind you. Mrs. Winters, in nightgown and cap, holding a candlestick.
+
+"Everything alright, dear?"
+
+"Under control, Mrs. Winters. But thank you."
+
+"Hmm." She looks at Ravencroft's retreating figure. "First woman who's ever told him no. He won't know what to do with himself."
+
+~ blackthorn.groundedness += 2
+~ blackthorn.ravencroft_fixation += 1
+~ blackthorn.winters_approval += 3
+
++ [Walk to your room. Mrs. Winters falls into step beside you.] -> Blackthorn.Session1.Hallway_WintersWalk
+
+:: Blackthorn.Session1.Hallway_Why
+You stop pulling away. You look at him. Something about the hallway, the dark, the aftermath of a ghost — your defenses are down and your curiosity is up.
+
+"*Why?*"
+
+He blinks. "Why what?"
+
+"Why do you *do* this? The dramatic entrances. The secret passages. The staring. The *shirt.* Why are you like this?"
+
+For a moment — just a moment — the performance drops. His shoulders lower half an inch. His eyes lose the burning intensity and become, briefly, just... eyes. Tired eyes. Young eyes.
+
+"I..." He stops. Starts again. "My parents were like this. My father used to appear in doorways and declaim Byron at my mother across rooms. She would swoon. He would catch her. I thought..."
+
+"You thought that was how people are."
+
+"Is it not?"
+
+The question is so genuine it catches you off guard.
+
+"No, Lord Ravencroft. It is not."
+
+"Oh."
+
+A door opens. Mrs. Winters, in her nightgown, holding a candlestick. She takes in the scene — you, Ravencroft, Heathsniff between you, the strange stillness of two people who've just had an accidental moment of honesty.
+
+"Shall I...?"
+
+"We're alright, Mrs. Winters. Lord Ravencroft was just saying goodnight."
+
+He nods. "Yes. Goodnight. I... I apologize for the..." He gestures vaguely at himself — at the shirt, the hair, the whole situation. "...everything."
+
+"Accepted. Provisionally."
+
+He leaves. Quietly, for once. Heathsniff follows, but gives your hand one soft lick before departing.
+
+~ blackthorn.ravencroft_fixation += 1
+~ blackthorn.groundedness += 1
+~ blackthorn.heathsniff_affection += 2
+~ blackthorn.arabella_connection += 1
+
++ [Head for your room. Mrs. Winters is already there.] -> Blackthorn.Session1.Hallway_WintersWalk
+
+# ============================================================================
+# MRS. WINTERS WALKS YOU BACK
+# ============================================================================
+
+:: Blackthorn.Session1.Hallway_WintersWalk
+@if blackthorn.winters_rescue:
+    Mrs. Winters walks you to the Rose Room. Her candlelight is steadier than yours — forty years of practice.
+
+    "Is he always like that?" you ask.
+
+    "Since he was fifteen. His parents were the same. Very... Byronic."
+
+    "He came out of *nowhere*—"
+
+    "The house has passages. In the walls. He uses them. For *drama.*"
+
+    "This is a *nightmare—*"
+
+    "It's a weekend house party, dear. Same thing, really."
+@else:
+    Mrs. Winters falls into step beside you, uninvited but entirely welcome. She's been hovering near your corridor. You suspect she heard the whole thing.
+
+    "You handled that well."
+
+    "I handled a *ghost* tonight, Mrs. Winters. Lord Ravencroft is almost restful by comparison."
+
+    She almost smiles. Almost. "You'd be the first to think so."
+@endif
+
+She walks you to the Rose Room door. The corridor is dark and the portraits watch and somewhere in the house something creaks that is probably settling beams and is possibly not.
+
+"Mrs. Winters."
+
+"Yes, dear?"
+
+"The ghost. Is this... does this happen often?"
+
+She considers the question. "In this house? More than you'd think. Less than you'd fear."
+
+"That's not reassuring."
+
+"It wasn't meant to be." She pauses. "The last card reader — the one who fled?"
+
+"Thomas mentioned her."
+
+"She couldn't handle it. The house. The guests. The things you see here that you can't explain." She looks at you with eyes that have seen six housemaids come and go and three mistresses and two curses and a poltergeist. "But you. You read for a *ghost* tonight. Sat at the table and read him his cards like he was a widow in Cheltenham wanting to know about her nephew. That takes something."
+
+"It takes being from Bath. We're very stubborn there."
+
+"I know. I'm from Wells."
+
+"That's practically Bath."
+
+"Don't tell anyone." She puts a hand on your arm. "Try to sleep, dear. Tomorrow will be... eventful."
+
+"More eventful than *tonight?*"
+
+"Lord Ashford's transformation is in two nights. Things will get worse before they get better."
+
+"His *what*—"
+
+"Goodnight, dear." She closes the door.
+
+~ blackthorn.servant_trust += 2
+
++ [Go to bed.] -> Blackthorn.Session1.Bed
+
+# ============================================================================
+# ACT 5: BED
+# ============================================================================
+
+:: Blackthorn.Session1.Bed
+@py:
+blackthorn.session_grade = blackthorn.calculate_session_grade()
+@endpy
+
+You sit on the bed. The Rose Room. The supernatural cold. The roaring fire that accomplishes nothing.
+
+Your tarot deck is on the nightstand. You pick it up. The cards are warm. They shouldn't be warm — the room is freezing — but they are. They've been warm all night, you realize. Even at the séance, even when the ghost was screaming and the frost was climbing the windows, the cards in your hand were warm.
+
+You hold them.
+
+A ghost spoke to you tonight.
+
+Not metaphorically. Not symbolically. A dead man materialized at a table and looked at your cards and the cards *worked.* They worked the same way they always work — patterns, symbols, the reader's skill at translating image into meaning — except this time, the subject was dead and the subject *confirmed* the reading.
+
+You don't know what to do with that.
+
+@if blackthorn.session_grade == "solid":
+    You are from Bath. You learned this from a book. Nothing that happened tonight changes that.
+
+    But something that happened tonight *adds* to it.
+
+    The cards worked for a ghost. Your skill — the mundane, learned-from-a-book, three-shillings-at-Hatchards skill — translates across the veil. Not because you're special. Not because you have "The Gift." Because the cards are the cards and the reader is the reader and the skill is the skill, whether the client is alive or dead.
+
+    This is either the most terrifying thing you've ever realized or the most comforting.
+
+    You're not sure which.
+@elif blackthorn.session_grade == "steady":
+    You are from Bath. You learned this from a book. You are shaken but not broken.
+
+    The ghost was real. The reading was real. You are, against all evidence and personal preference, in a house where the dead walk and the paintings watch and dinner is at midnight and there are wolves.
+
+    You survived tonight. You read for a ghost and you survived.
+
+    You can do this. Probably.
+
+    You are from Bath.
+@elif blackthorn.session_grade == "shaken":
+    You are from Bath.
+
+    You repeat it like a ward. Like a prayer. Like something that might keep the dark at bay.
+
+    *I am from Bath. I learned this from a book. I am a professional. I read cards for a living and tonight I read them for a dead man and the dead man screamed and told us where the money was and this is my life now.*
+
+    You pull the blankets up. All of them. The cold seeps through anyway.
+
+    You'll get through this weekend. You will. You're stubborn and competent and from Bath and those things have to count for *something.*
+@else:
+    You don't know who you are.
+
+    That's the thought that keeps you awake. Not the ghost — the ghost was terrifying, but ghosts are ghosts, they're an event, you can process an event. What you can't process is the moment in the séance when you felt something else move through you. Something that used your voice and your cards and your hands but wasn't quite *you.*
+
+    Lady Blackthorn called it The Gift.
+
+    You called it a skill, from a book, from Bath.
+
+    What if it's both?
+
+    The house seems to breathe around you. The fire crackles. The cold presses in.
+
+    You hold your deck against your chest and try to remember who you were before tonight.
+@endif
+
+From outside: a wolf howls. Low, long, anguished.
+
+And beneath it: Heathsniff, howling in unison. Slightly more theatrical.
+
+@if blackthorn.session_grade != "compromised":
+    You think: *I hate it here.*
+
+    You think: *Two more days.*
+
+    You think: *I'm going to need more tea.*
+@else:
+    You think: *Something is happening to me.*
+
+    You think: *This house is doing something to me.*
+
+    You think: *I need to talk to Mrs. Winters.*
+@endif
+
+You sleep.
+
+Fitfully. Briefly. In the spaces between wolf howls and the creak of a house that breathes around you.
+
+You dream within the dream — layers of sleep, impossible architecture — and in the dream within the dream you're in your apartment, at your reading table, and there's a borzoi lying on your feet and you don't mind.
+
++ [Wake up. (End of Session)] -> Blackthorn.Session1.DreamFade
+
+# ============================================================================
+# DREAM FADE
+# ============================================================================
+
+:: Blackthorn.Session1.DreamFade
+@py:
+# Reader progression rewards
+reader.sessions_completed += 1
+reader.mystical_affinity += 1
+
+if blackthorn.session_grade == "solid":
+    reader.competence += 2
+    reader.empathy += 1
+elif blackthorn.session_grade == "steady":
+    reader.competence += 1
+    reader.empathy += 1
+elif blackthorn.session_grade == "shaken":
+    reader.competence += 1
+elif blackthorn.session_grade == "compromised":
+    reader.self_doubt = True
+    reader.insight += 1  # You learn from being overwhelmed
+
+# Bleed-through objects — dream residue in the waking world
+blackthorn.bleed_objects = ["calling_card"]  # Always
+if blackthorn.heathsniff_affection >= 2:
+    blackthorn.bleed_objects.append("borzoi_hair")
+if blackthorn.session_grade in ["solid", "steady"]:
+    blackthorn.bleed_objects.append("biscuit")
+@endpy
+
+Morning. Your apartment. Your reading table.
+
+The dream doesn't fade so much as *fold.* Like someone closing a book — carefully, with a bookmark, intending to return.
+
+You sit up. Your deck is on the nightstand. Your real nightstand.
+
+And next to it:
+
+@if "calling_card" in blackthorn.bleed_objects:
+A calling card. Yellowed, brittle, impossible. Engraved in copperplate script:
+
+[!beat]Lord Desmond Blackthorn. Blackthorn Manor, Yorkshire. 1873.[/!beat]
+
+It smells like beeswax and cold stone. It is over a hundred years old and it appeared on your nightstand this morning.
+@endif
+
+@if "borzoi_hair" in blackthorn.bleed_objects:
+
+A single hair. Long, silvery, impossibly fine. The kind of hair that belongs to a borzoi of exceptional breeding and theatrical disposition.
+
+You hold it up to the light. It gleams.
+
+"Sniffy," you say, without knowing why.
+@endif
+
+@if "biscuit" in blackthorn.bleed_objects:
+
+And — wrapped in a cloth napkin, still *warm,* which is physically impossible — a biscuit. Shortbread. The kind a housekeeper from Wells would make.
+
+You eat it. It tastes like butter and kindness and the firm belief that a cup of tea solves most things.
+@endif
+
+You sit at your reading table. Look at the objects. The impossible made tangible.
+
+@if blackthorn.session_grade == "solid":
+    You are from Bath. You learned tarot from a book.
+
+    And apparently, that's enough.
+
+    For a ghost. For a Gothic manor. For a poet-shirted lord and his matching dog.
+
+    Your book didn't prepare you for this. But *you* were prepared, whether the book knew it or not.
+
+    You shuffle your deck. Draw a card.
+
+    The Star.
+
+    "Of course," you say. And you almost laugh.
+@elif blackthorn.session_grade == "steady":
+    You are from Bath. You learned tarot from a book. You read for a ghost and you lived to tell about it.
+
+    You're going back. You know you're going back. The dream isn't finished — the calling card on your nightstand is proof of that. Lord Ashford needs help. Miss Arabella sees ghosts. Thomas deserves better employers. Mrs. Winters deserves backup.
+
+    And Lord Ravencroft needs... something. You're not sure what. Possibly a firm talking-to and a different shirt.
+
+    You shuffle your deck. Draw a card.
+
+    The Fool.
+
+    "New journey," you mutter. "Wonderful."
+@elif blackthorn.session_grade == "shaken":
+    You are from Bath. You learned tarot from a book.
+
+    You keep saying it. It keeps being true. But the edges of it feel less certain now — not because you've changed, but because the world turned out to be bigger than you thought.
+
+    There's a calling card on your nightstand from a dead man. Your book did not cover this.
+
+    You'll go back. You know you will. Someone has to be the sensible one.
+
+    You shuffle your deck. Draw a card.
+
+    The Moon.
+
+    "Dreams and reality," you say. "Bleeding together."
+
+    You set the card down.
+
+    You make tea.
+@else:
+    You sit at your reading table.
+
+    You hold your deck.
+
+    You don't shuffle. You just hold it.
+
+    Something happened to you in that house. Something moved through you. And the worst part isn't the ghost or the cold or the wind-from-nowhere — the worst part is that it felt *right.* For one moment, at the séance table, you weren't Miss {blackthorn.player_name} from Bath who learned tarot from a book. You were something else. Something the house recognized. Something it *wanted.*
+
+    You need to go back. Not because of Lord Ashford or Miss Arabella or the servants.
+
+    Because you need to find out what you are.
+
+    You shuffle your deck. The cards are warm.
+
+    You draw The Tower.
+
+    You stare at it for a very long time.
+@endif
+
+~ reader.blackthorn_resonance = "permanent"
+
++ [Return to your day. Two more nights at Blackthorn Manor await.] -> ReaderTable
+
+# ============================================================================
+# END OF SESSION 1
+# ============================================================================

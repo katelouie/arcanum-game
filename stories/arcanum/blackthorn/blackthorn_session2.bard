@@ -1,0 +1,2064 @@
+# ============================================================================
+# BLACKTHORN MANOR — SESSION 2: "THE CURSE AND THE MOORS"
+# ============================================================================
+#
+# SESSION 2 STRUCTURE (Full):
+#   Act 1: Breakfast (morning after — reactions, dynamics, comedy)
+#   Act 2: Lord Ashford's Reading (the curse, the spread, common sense)
+#   Act 3: The Moors (Ravencroft on horseback, the chase, rescue)
+#   Act 4: The Cemetery (Ravencroft's real reading — "how do I stop?")
+#   Act 5: Arabella's Warning (servants in the walls, Session 3 setup)
+#   Act 6: Bed (dream within dream, new bleed objects)
+#
+# THIS FILE: Acts 1-3 (Part 1)
+# NEXT FILE: Acts 4-6 (Part 2)
+#
+# SPREAD: "Breaking Chains" (5-card curse-breaking spread)
+#   Position 1: The Binding (What holds you?)
+#   Position 2: The Wound (What was the original wrong?)
+#   Position 3: The Key (How to break free)
+#   Position 4: The Cost (What must be given up?)
+#   Position 5: The Other Side (What freedom looks like)
+#
+# CARD POOLS:
+#   Position 1: The Devil / Eight of Swords / Ten of Wands
+#   Position 2: Justice / Five of Pentacles / Three of Swords
+#   Position 3: The Hanged Man / Six of Pentacles / Temperance
+#   Position 4: Death / Tower / Four of Cups
+#   Position 5: The Star / The Sun / The Fool
+#
+# REVERSAL CHANCE: 25%
+#
+# INTERPRETATION AXES (same as Session 1):
+#   Grounded — practical, honest, stays herself
+#   Diplomatic — careful, kind, softens edges
+#   Gothic — dramatic, swept up in it, risky
+#   Panicked — overwhelmed (less likely in Session 2, she's adapting)
+#
+# MECHANICAL NOTE:
+#   Session 2 carries forward stats from Session 1:
+#   - groundedness, composure, house_influence
+#   - servant_trust, dominant_style, session_grade
+#   - ravencroft_fixation, heathsniff_affection
+#   These affect opening text, NPC reactions, and available options.
+#
+# ============================================================================
+
+:: Blackthorn.Session2.Start
+@py:
+# Dream re-entry — all persistent state lives on blackthorn object
+session = create_session(blackthorn)
+blackthorn.reset_session_tracking()
+
+# Session 2 ephemeral tracking
+session.ashford_curse_approach = None
+session.curse_reading_quality = 0
+session.ashford_took_advice = False
+session.moors_encounter_type = None
+session.days_until_full_moon = 2
+@endpy
+
+# ============================================================================
+# THE DREAM RESUMES
+# ============================================================================
+
+The dream doesn't start. It *continues.*
+
+You blink and you're in the Rose Room. The fire is out. The supernatural cold has settled into a merely terrible mundane cold — November in Yorkshire with inadequate heating. Grey light through the rain-streaked window. The moors beyond, grey-green and vast and sodden.
+
+You're in your nightgown. Your carpetbag is on the chair. Your tarot deck is on the nightstand, warm as always.
+
+Someone knocks.
+
+"Miss {blackthorn.player_name}?" Miss Chen's voice, precise and faintly amused. "Breakfast is served. If you're still alive."
+
+"Was that in question?"
+
+"In this house? Always."
+
++ [Dress. Descend. Face the day.] -> Blackthorn.Session2.Breakfast
+
+# ============================================================================
+# ACT 1: BREAKFAST
+# ============================================================================
+
+:: Blackthorn.Session2.Breakfast
+You dress in the gray wool. Pin your hair. Check the mirror — just you, same as last night, no supernatural additions. Check the nightstand — calling card still there, borzoi hair still there. Real. Impossible. There.
+
+The breakfast room is less dramatic than the dining room — smaller, east-facing windows, morning light doing its watery best to penetrate Yorkshire cloud cover. The table is set for a human meal at a human hour. You could almost believe this was a normal house party.
+
+Almost.
+
+The household is assembled.
+
+@if blackthorn.session_grade == "solid":
+    You enter and the room shifts. Not dramatically — subtly. Mrs. Winters nods, firmly approving. Thomas grins. Miss Chen gives you a look that says *well, you survived* without a trace of surprise.
+
+    You read for a ghost last night and you are still standing and everyone in this room knows it.
+@elif blackthorn.session_grade == "steady":
+    You enter and the room takes note. Mrs. Winters brings you tea before you sit down — strong, sweet, the good china. Thomas pulls your chair out. Miss Chen gives you an almost-nod.
+
+    You survived last night. The household is cautiously impressed.
+@elif blackthorn.session_grade == "shaken":
+    You enter and Mrs. Winters is at your elbow immediately. Tea. Toast. A look that says *sit down, eat something, you're pale.*
+
+    Thomas hovers nearby. Even Miss Chen seems gentler this morning.
+
+    You survived last night. Barely. Everyone can tell.
+@else:
+    You enter and the room goes quiet. Not the impressed kind of quiet — the worried kind. Mrs. Winters steers you to a chair with both hands. The tea appears instantly, sweet enough to stand a spoon in.
+
+    Something happened to you at the séance. Everyone saw it. They're not sure what they saw, but they saw *something,* and the way they look at you now has a new quality.
+
+    Caution.
+@endif
+
+Lady Blackthorn enters last. Dressing gown, black silk, looking fresher than anyone who dined at midnight and attended a séance has any right to look. She doesn't eat. She holds a glass of something red and occasionally inhales it.
+
+"Good *morning,* all. How delightful." She settles at the head of the table. "We found the money, by the way. Desmond hid it in the walls behind the Byron collection. Thomas found it at first light. *Typical* of Desmond — even his hiding places were pretentious."
+
+Thomas, behind her chair: "Three thousand pounds in banknotes, my lady. And a number of documents."
+
+"Excellent. You see, Miss {blackthorn.player_name}? Your reading was *invaluable.*"
+
+"I'm glad the cards were helpful, my lady."
+
+"The *cards.*" She smiles indulgently. "So modest. So *practical.*"
+
+She says "practical" the way she said it last night. Like a medical diagnosis.
+
++ [Survey the room. How is everyone after last night?] -> Blackthorn.Session2.Breakfast_Survey
+
+:: Blackthorn.Session2.Breakfast_Survey
+The post-séance breakfast is its own kind of theater.
+
+**Lord Ashford** is worse than yesterday. Paler. More haggard. He's not eating — just staring at the rain with the expression of a man running out of time. Two days until the full moon. Whatever relief the séance might have provided others, it's done nothing for his particular problem.
+
+He keeps glancing at you. Then away. Then back. He wants to say something. He's working up to it.
+
+**Miss Arabella** is the most composed you've seen her. The séance seems to have *calmed* her — as if a house that acknowledges its ghosts is less frightening than one that pretends they aren't there. She eats toast with marmalade and occasionally whispers "no thank you" to empty air with the practiced ease of someone declining a canape.
+
+**Dr. Blackwood** is *ruined.* Ink on his collar, his cuffs, his forehead (how?). He has clearly not slept. His notebook is open and he's cross-referencing last night's observations with a stack of medical journals he's produced from somewhere.
+
+"The thermal variance *alone,*" he's muttering. "A drop of fourteen degrees Fahrenheit in under thirty seconds — the caloric implications — if the ghost is an endothermic phenomenon then the energy must come from *somewhere*—"
+
+Nobody is listening. Nobody has ever listened. He doesn't seem to mind.
+
+**Lord Ravencroft** is—
+
+You look at the chair beside you.
+
+Empty.
+
+Heathsniff, however, is under the table. His enormous borzoi head is resting on your foot. Again. You didn't feel him arrive. He is simply *there,* warm and heavy and looking up at you with an expression of devoted calm that his master has never once achieved.
+
+"Where is Lord Ravencroft?" you ask, against your better judgment.
+
+Thomas: "On the moors, miss. Since dawn. He does that after significant events. Rides until the horse is tired and then walks until he's tired and then sits on a rock and stares at the horizon."
+
+"For how long?"
+
+"Hours. Sometimes all day." Thomas pauses. "He'll be back. He always comes back."
+
+"That's what I'm afraid of."
+
+Mrs. Winters, passing with a fresh pot of tea: "He won't bother you at breakfast, dear. Not with me here."
+
+"Mrs. Winters, you can't protect me from Lord Ravencroft indefinitely."
+
+"Watch me."
+
+~ blackthorn.heathsniff_affection += 1
+~ blackthorn.winters_approval += 1
+
+Lord Ashford clears his throat. The sound is too loud for the quiet room. Everyone looks at him.
+
+"Miss {blackthorn.player_name}." His voice is controlled. Barely. "Might I request a reading? Privately?"
+
+Lady Blackthorn, with airy interest: "Use the library, dears. I've already removed Desmond's hidden money. It's quite private now."
+
+Lord Ashford stands. He looks at you with desperate, exhausted, trying-very-hard-to-be-dignified eyes.
+
+"It's a matter of some... urgency."
+
++ ["Of course, Lord Ashford. Whenever you're ready."] -> Blackthorn.Session2.Ashford_Setup
++ ["After I finish my tea, if you don't mind. I've learned not to read on an empty stomach."] -> Blackthorn.Session2.Ashford_Tea_First
+
+:: Blackthorn.Session2.Ashford_Tea_First
+He nods. Patient. The patience of a man who has waited seven years — what's another twenty minutes?
+
+You finish your tea. You eat toast. Mrs. Winters brings you a second cup without being asked and a look that says *take your time, the gentry can wait.*
+
+Thomas slips you another biscuit. "For fortification," he whispers.
+
+When you stand, Heathsniff rises too. He follows you and Lord Ashford to the library, padding behind you like a silver shadow.
+
+"Lord Ravencroft's dog seems to appear everywhere," you note.
+
+Lord Ashford, with the ghost of a smile: "Heathsniff has his own agenda. He's considerably more intelligent than his master."
+
+Heathsniff: a dignified huff that neither confirms nor denies.
+
+~ blackthorn.groundedness += 1
+~ blackthorn.composure += 1
+~ blackthorn.heathsniff_affection += 1
+
+-> Blackthorn.Session2.Ashford_Setup
+
+:: Blackthorn.Session2.Ashford_Setup
+The library.
+
+Floor-to-ceiling books. Old leather, old paper, old dust. A fireplace with a proper fire — not the Rose Room's useless blaze but a real, effective, heat-producing fire, the kind that exists because a competent servant built it rather than because a supernatural house is performing the concept of warmth.
+
+The Byron collection has been disturbed — books pulled from shelves, a section of false wall exposed behind them. Thomas's handiwork from this morning. You can see the space where Lord Blackthorn's hidden documents were stored: a cavity in the wall lined with cedar, big enough for a strongbox.
+
+The house hid money in its walls. You file that away under "things to think about."
+
+Lord Ashford paces. His boots on the library carpet make a restless, rhythmic sound. He is a man who has been pacing for seven years and has worn grooves in every carpet he owns.
+
+Heathsniff lies by the fire. He puts his chin on his paws and watches you both with the calm intelligence of a creature who already knows how this conversation ends.
+
+Lord Ashford stops pacing. Faces you.
+
+"I need your help."
+
+"I'll do what I can."
+
+He hesitates. Starts again. Walks to the window — of *course* he walks to the window, they always walk to the window — and stares out at the moors.
+
+"You saw me at dinner. My... discomfort."
+
+"Yes."
+
+"There's a reason." He grips the window frame. His knuckles are white. "My great-grandfather. Lord Edmund Ashford. He wronged a woman. A hedge witch."
+
+"Go on."
+
+"She healed his daughter. Scarlet fever. The girl would have died. The witch saved her life." He turns from the window. "My great-grandfather promised payment. Then refused. Called her a charlatan. A fraud."
+
+"He refused to pay a woman who saved his daughter's life?"
+
+"Aristocratic pride. She was... nobody, to him. A village woman. Beneath notice." He says this with disgust — directed at his ancestor, not the witch. "She cursed him. And all male heirs."
+
+"The transformation."
+
+He startles. "You *know?*"
+
+"Thomas mentioned wolves. And you flinch at windows when the moon is visible. And the howling two nights ago wasn't entirely canine."
+
+He sinks into a chair. "Under the full moon, I become... a beast. I lose all reason. All humanity. The servants lock me in the cellar during the transformation. For everyone's safety."
+
+"How long?"
+
+"Since I turned twenty-one. Seven years now."
+
+He looks at you. Not broodingly — desperately. The brooding is a luxury he can no longer afford. The full moon is in two days.
+
+"Can the cards help me? Is there a way to *break* this?"
+
+"I can try. But I should be honest — I'm not a witch. I'm not a mystic. I read cards."
+
+"Please." He leans forward. "I've consulted *every* occultist in England. They all demand rare ingredients. Blood sacrifices. Midnight rituals. Impossible tasks."
+
+"And none have worked?"
+
+"None."
+
+"How much have you spent?"
+
+He pauses. "...A great deal."
+
+"Thousands?"
+
+"Thousands."
+
+You think about this. You think about charlatans and aristocrats and the particular vulnerability of rich men who believe they're cursed.
+
+"Lord Ashford, may I ask you something before we begin?"
+
+"Anything."
+
++ ["This curse — it's about an unpaid debt. Has anyone ever suggested... paying it?"] -> Blackthorn.Session2.Ashford_Common_Sense_Early
++ ["Let me read first. The cards might show us something."] -> Blackthorn.Session2.Ashford_CardDraw
+
+:: Blackthorn.Session2.Ashford_Common_Sense_Early
+He stares at you.
+
+"...What?"
+
+"The curse. It originated from an unpaid debt. Your great-grandfather refused to pay a woman who saved his daughter's life. So the curse is, at its core, about... a bill. An unpaid bill."
+
+"I... yes, but the *witch*—"
+
+"Is she dead?"
+
+"She died in 1823. Over seventy years ago."
+
+"Does she have descendants?"
+
+Lord Ashford opens his mouth. Closes it. Opens it again.
+
+"I... I don't know. I never thought to ask."
+
+"You've consulted every occultist in England. Have you consulted a *genealogist?*"
+
+A very long pause.
+
+Heathsniff lifts his head from his paws. Even the dog looks like he's thinking *oh come on.*
+
+"That's... remarkably sensible."
+
+"I'm from Bath. Let me read the cards to see if I'm on the right track."
+
+~ blackthorn.groundedness += 3
+~ blackthorn.lord_ashford_trust += 2
+~ session.curse_reading_quality += 2
+~ session.ashford_curse_approach = "early_insight"
+
+-> Blackthorn.Session2.Ashford_CardDraw
+
+# ============================================================================
+# LORD ASHFORD'S READING
+# ============================================================================
+
+:: Blackthorn.Session2.Ashford_CardDraw
+@py:
+# "Breaking Chains" spread — 5 positions
+position_1_deck = Deck(cards=["The Devil", "Eight of Swords", "Ten of Wands"], reversals=[0.25, 0.25, 0.25])
+position_2_deck = Deck(cards=["Justice", "Five of Pentacles", "Three of Swords"], reversals=[0.25, 0.25, 0.25])
+position_3_deck = Deck(cards=["The Hanged Man", "Six of Pentacles", "Temperance"], reversals=[0.25, 0.25, 0.25])
+position_4_deck = Deck(cards=["Death", "The Tower", "Four of Cups"], reversals=[0.25, 0.25, 0.25])
+position_5_deck = Deck(cards=["The Star", "The Sun", "The Fool"], reversals=[0.25, 0.25, 0.25])
+
+reading = Reading(spread_id="breaking-chains", decks=[
+    position_1_deck,
+    position_2_deck,
+    position_3_deck,
+    position_4_deck,
+    position_5_deck
+])
+
+cards = reading.draw_cards()
+@endpy
+
+You clear a space on the library desk. Push aside the scattered papers from Lord Blackthorn's hidden cache. Lay down your reading cloth.
+
+"This spread is from Chapter 9 of my book. 'Breaking Chains.' Five cards."
+
+Lord Ashford watches you shuffle. His hands are clasped between his knees, knuckles white.
+
+"The Binding — what holds you. The Wound — the original wrong. The Key — how to break free. The Cost — what must be given up. And The Other Side — what freedom looks like."
+
+You lay five cards face down.
+
+"Ready?"
+
+"I've been ready for seven years."
+
+You turn the cards.
+
+@render render_reading(reading=reading)
+
+**Position 1 (The Binding):** {cards[0].name}{cards[0].reversed ?  — Reversed | }
+**Position 2 (The Wound):** {cards[1].name}{cards[1].reversed ?  — Reversed | }
+**Position 3 (The Key):** {cards[2].name}{cards[2].reversed ?  — Reversed | }
+**Position 4 (The Cost):** {cards[3].name}{cards[3].reversed ?  — Reversed | }
+**Position 5 (The Other Side):** {cards[4].name}{cards[4].reversed ?  — Reversed | }
+
+Lord Ashford studies them. He doesn't know tarot, but seven years of desperation have taught him to look for patterns in anything.
+
+"What do they say?"
+
++ [Read the full spread — grounded, practical, Miss-[Name]-from-Bath] -> Blackthorn.Session2.Ashford_Read_Grounded
++ [Read carefully — diplomatic, guide him gently toward the answer] -> Blackthorn.Session2.Ashford_Read_Diplomatic
++ [Read dramatically — let the Gothic atmosphere take you] -> Blackthorn.Session2.Ashford_Read_Gothic
++ [You're still shaken from last night. Read as best you can.] -> Blackthorn.Session2.Ashford_Read_Shaken
+
+:: Blackthorn.Session2.Ashford_Read_Grounded
+"The spread tells a clear story. I'll walk you through it."
+
+You point to Position 1.
+
+@if cards[0].name == "The Devil":
+    "The Devil in the Binding position. Chains. Something holding you that feels absolute and permanent." You look at him. "But Lord Ashford — the Devil's chains in this card are loose. Look." You tilt the card toward him. "The figures *could* remove them. The binding feels total, but it's not. It *can* be broken."
+@elif cards[0].name == "Eight of Swords":
+    "The Eight of Swords. A figure blindfolded, surrounded by swords — trapped. But look at the image. The swords don't actually touch her. The binding is partly real and partly *believed.* You're cursed, yes. But you've also been *telling yourself* you're trapped. The isolation. The shame. Those are chains you put on yourself."
+@else:
+    "The Ten of Wands. A figure carrying an impossible burden. The curse is real, but it's not the only thing weighing you down. You've been carrying guilt — your great-grandfather's guilt — as if it's yours. It isn't. You didn't wrong the witch. He did."
+@endif
+
+Lord Ashford is listening. Really listening. Not broodingly, not dramatically — the way a drowning man listens to someone describing the shore.
+
+You move to Position 2.
+
+@if cards[1].name == "Justice":
+    "Justice in the Wound position. This is the clearest card in the spread. The original wrong was a matter of *justice.* A debt was owed. A debt was denied. The universe — or the witch, or whatever force made this curse — is fundamentally *fair.* It doesn't want to punish you. It wants *balance.*"
+@elif cards[1].name == "Five of Pentacles":
+    "The Five of Pentacles. Poverty. Need. The witch who healed your great-grandfather's daughter — she *needed* that payment. She wasn't being greedy. She was a village woman who did skilled work and was refused compensation by a man who could easily afford it. The wound isn't mystical. It's *economic.*"
+@else:
+    "The Three of Swords. Betrayal. Your great-grandfather didn't just refuse to pay — he *betrayed* her. She trusted his word. He gave it and took it back. The curse isn't about money. It's about broken faith."
+@endif
+
+"Now." You tap Position 3. "The Key. How to break free."
+
+@if cards[2].name == "The Hanged Man":
+    "The Hanged Man. A completely different perspective. Everything you've tried — the occultists, the rituals, the midnight ceremonies — has been trying to break the curse with *force.* Magic against magic. But the Hanged Man says turn it upside down. Don't fight the curse. *Answer* it."
+
+    You look at him.
+
+    "The curse asks a question: *Will you pay what's owed?* Every occultist you've hired tried to cheat the question. What if you just... answered it?"
+@elif cards[2].name == "Six of Pentacles":
+    "The Six of Pentacles. Generosity. Paying what's owed." You almost laugh. "Lord Ashford, the cards are being embarrassingly literal. The key to breaking your curse is the Six of Pentacles — the card of *giving someone what they're owed.* I couldn't make this up if I tried."
+@else:
+    "Temperance. Balance. Moderation. The Key isn't dramatic — it's not a blood sacrifice at midnight under a red moon. It's *balance.* Restoring what was taken. Making the scales even."
+@endif
+
+Lord Ashford's expression is changing. You can see it happening in real time — the collapse of seven years of Gothic desperation into the realization that the answer might be *simple.*
+
+"You're suggesting—"
+
+"I'm suggesting you find the witch's descendants and pay the debt. With interest. With a genuine apology. Not because a card reader told you to — because it's the *right thing to do* and the curse *knows* it."
+
+@if session.ashford_curse_approach == "early_insight":
+    "That's what I said before the reading. The cards confirm it."
+@endif
+
+He stares at you. Then at the cards. Then at you again.
+
+"Every witch and occultist I've consulted demanded impossible tasks. Rare ingredients from distant lands. Rituals under specific star alignments. Blood sacrifices—"
+
+"Lord Ashford." You fold your hands. "Have you considered that they might have been *scamming* you?"
+
+A pause. Behind you, from the library doorway, Thomas's voice: "She's not wrong, m'lord."
+
+Lord Ashford: "Thomas. How long have you been there?"
+
+Thomas: "Long enough. She makes a good point. You've spent thousands on curse-breakers. None of them worked. Maybe just... pay the original bill?"
+
+You point to Positions 4 and 5. The Cost. The Other Side.
+
+@if cards[3].name == "Death":
+    "The Cost: Death. Not *literal* death — transformation. The old Lord Ashford dies. The one who hid in this house, ashamed, isolated, letting the curse define him. That version of you ends. What comes after is someone new."
+@elif cards[3].name == "The Tower":
+    "The Cost: The Tower. Your pride. Your family's pride. To break this curse you have to walk into a tea shop in the village and tell a woman you've never met that your great-grandfather was a *cheat* and you're sorry. For an Ashford, that might be harder than any midnight ritual."
+@else:
+    "The Cost: The Four of Cups. Apathy. Resignation. You've been living *inside* this curse for so long it's become comfortable. Miserable, but comfortable. Breaking free means giving up the identity of 'the cursed lord.' You'll have to figure out who you are without it."
+@endif
+
+@if cards[4].name == "The Star":
+    "And what freedom looks like: The Star. Hope. Healing. Not the dramatic kind — the quiet kind. The kind where you wake up on a full moon and nothing happens and you just... live."
+@elif cards[4].name == "The Sun":
+    "And The Other Side: The Sun. Joy. Genuine, uncomplicated, *warm* joy. When was the last time you felt that, Lord Ashford? This card says it's possible. Not someday. Soon."
+@else:
+    "And freedom: The Fool. A new beginning. A clean start. The Fool walks off a cliff and trusts the universe to catch him. Your cliff is walking into a village tea shop and paying a seventy-year-old debt."
+@endif
+
+Lord Ashford is very still. The fire crackles. Heathsniff lifts his head, watching his fellow tenant of this impossible house.
+
+"That's... that's *it?* Pay the debt? Apologize?"
+
+"The cards think so. And frankly, Lord Ashford, so do I."
+
+He laughs. Actually *laughs.* Not a Gothic laugh — a real one, surprised and incredulous and bright, the sound of a man who has just realized that the prison door was never locked.
+
+"That's *remarkably* sensible."
+
+"I'm from Bath."
+
+"So you keep saying." He stands. He looks different already — not cured, not free, but *hopeful.* The brooding lord is still there but something else has surfaced underneath, something that looks like a decent man who's been too busy being cursed to remember he was decent. "There must be records. Parish registers. I'll find the witch's descendants. I'll—"
+
+He stops. Turns back.
+
+"Thank you, Miss {blackthorn.player_name}. For seeing what everyone else missed."
+
+"I just read the cards."
+
+"You read them *well.*"
+
+Thomas, from the doorway, grinning: "You're good at this, miss."
+
+"I just... apply common sense?"
+
+"Which is remarkably *rare* around here."
+
+Lord Ashford strides out with purpose. Not brooding-stride — *determined*-stride. A man with a plan. A man who is going to find a genealogist and then a tea shop.
+
+~ blackthorn.groundedness += 3
+~ session.curse_reading_quality += 3
+~ blackthorn.interpretation_quality['grounded'] += 3
+~ blackthorn.lord_ashford_trust += 3
+~ session.ashford_took_advice = True
+~ blackthorn.servant_trust += 1
+~ reader.competence += 1
+
+-> Blackthorn.Session2.Ashford_Aftermath
+
+:: Blackthorn.Session2.Ashford_Read_Diplomatic
+"Let me take you through it carefully. These cards have a story to tell."
+
+You start with Position 1 — the Binding.
+
+@if cards[0].name == "The Devil":
+    "The Devil. This represents the curse itself — but notice the imagery. The chains are *loose.* This isn't an unbreakable prison. It's a prison whose locks have rusted. The curse has weakened over time. Or perhaps it was never as absolute as you feared."
+@elif cards[0].name == "Eight of Swords":
+    "The Eight of Swords. You feel completely trapped — and you are, partially. But the card shows something interesting: the figure is blindfolded. Some of the binding is the curse. Some of it is your *perception* of the curse. Both are real. But only one can be changed from the inside."
+@else:
+    "The Ten of Wands. You're carrying this burden — but look: the figure is carrying it *willingly.* Part of the binding is the curse. Part of it is your family's guilt, which you've taken on as if it were your own. You didn't wrong the witch, Lord Ashford."
+@endif
+
+He listens. You're gentle with it — not because he's fragile, but because seven years of suffering deserves respect even when the solution is simple.
+
+You walk through the Wound and the Key. You don't rush. You let him arrive at the conclusion himself.
+
+@if cards[2].name == "The Hanged Man":
+    "The Key is the Hanged Man — a reversal of perspective. What if everything you've tried has been the wrong approach? Not wrong in execution — wrong in *category.* What if the answer isn't mystical at all?"
+@elif cards[2].name == "Six of Pentacles":
+    "The Key is the Six of Pentacles. Giving what's owed. This card is about balance — restoring equilibrium. The curse exists because a balance was broken. What if the cure is as simple as restoring it?"
+@else:
+    "Temperance as your Key. Balance. Not force — not fighting the curse with stronger magic. Balance. Evening the scales."
+@endif
+
+"Lord Ashford... the curse was caused by an unpaid debt. Has anyone ever suggested paying it?"
+
+He stares at you the way a man stares at an open door he was certain was locked.
+
+You walk him through the Cost and the Other Side with the same care. The price of freedom. The shape of life after.
+
+"Find the witch's descendants. Pay them. Apologize. Not as a ritual — as a *person* making amends for something his family did."
+
+He's quiet for a long time.
+
+"The occultists—"
+
+"Saw a rich, desperate man and charged accordingly." You keep your voice kind. "You're not the first person to be overcharged for something simple, Lord Ashford. You won't be the last."
+
+Thomas, from the doorway: "She's got a point, m'lord."
+
+Lord Ashford laughs. The surprise of it transforms his face.
+
+~ blackthorn.groundedness += 2
+~ session.curse_reading_quality += 2
+~ blackthorn.interpretation_quality['diplomatic'] += 3
+~ blackthorn.lord_ashford_trust += 3
+~ session.ashford_took_advice = True
+~ blackthorn.servant_trust += 1
+
+-> Blackthorn.Session2.Ashford_Aftermath
+
+:: Blackthorn.Session2.Ashford_Read_Gothic
+Something in you stirs. The same something from last night — the door you didn't know was there, the voice that sounds like yours but *more.*
+
+"The cards speak of *chains,*" you hear yourself say. Your voice has dropped. It has *weight.* "Ancient chains. Forged in *betrayal.* The blood of Ashford bound by the blood of the wronged—"
+
+Lord Ashford leans forward, drawn in by the drama. This is the language he knows. The language of curses and destiny and dark forces.
+
+But Mrs. Winters is in the doorway. You can feel her watching. And somewhere under the performance, a small voice from Bath says: *stop. You know the answer. Just say it plainly.*
+
+@if blackthorn.gothic_persona >= 3:
+    You don't stop. The room wants Gothic. Ashford wants Gothic. The *house* wants Gothic — you can feel it pressing in, the walls listening, the fire leaning, everything in this building hungry for drama and performance and people playing roles instead of being themselves.
+
+    You give them the séance version. Dramatic. Atmospheric. The cards' message wrapped in so much Gothic packaging that the simple truth — *just pay the debt* — sounds like an ancient prophecy instead of practical advice.
+
+    Lord Ashford is moved. But he doesn't *laugh.* The Gothic version doesn't let him laugh. It makes the answer feel heavy and mystical instead of obvious and liberating, and that's the difference between a good reading and a performance.
+
+    ~ blackthorn.gothic_persona += 2
+    ~ blackthorn.groundedness -= 2
+    ~ blackthorn.house_influence += 2
+    ~ blackthorn.interpretation_quality['gothic'] += 3
+    ~ blackthorn.lord_ashford_trust += 1
+    ~ session.ashford_took_advice = True
+    ~ blackthorn.winters_approval -= 1
+@else:
+    You stop yourself. Catch the performance before it takes hold. Pull back.
+
+    "I'm sorry." You shake your head. "I was doing it again. The voice. The drama. That's not—" You take a breath. "Let me start over. Plainly."
+
+    Lord Ashford blinks. "I... yes. Plainly."
+
+    "Your curse is about an unpaid debt. The cards say: pay it. Find the witch's descendants. Give them what your great-grandfather owed, with interest and an apology. That's it. No midnight ritual. No blood sacrifice. Just common decency."
+
+    He stares at you. And then he laughs — surprised, relieved, the laughter of a man who's been told the dragon is actually a lizard.
+
+    "That's it?"
+
+    "That's it."
+
+    ~ blackthorn.groundedness += 1
+    ~ blackthorn.interpretation_quality['gothic'] += 1
+    ~ blackthorn.interpretation_quality['grounded'] += 2
+    ~ blackthorn.lord_ashford_trust += 2
+    ~ session.ashford_took_advice = True
+    ~ blackthorn.winters_approval += 2
+@endif
+
+-> Blackthorn.Session2.Ashford_Aftermath
+
+:: Blackthorn.Session2.Ashford_Read_Shaken
+Your hands are steady today. Steadier than last night. But the ghost is still behind your eyes — the blue-white glow, the screaming, the cold — and when you look at the cards, for a moment you see them the way they looked at the séance: luminous, alive, more than printed images on pasteboard.
+
+You read. It's not your best work and it's not your worst. You tell him the truth — that the curse is about a debt, that the debt can be paid — but you tell it haltingly, without the crispness of the grounded reading or the care of the diplomatic one.
+
+Lord Ashford listens. Gets there. Nods.
+
+"Pay the debt," he says. "That's... yes. That makes sense."
+
+It does. Even imperfectly delivered, the truth is the truth.
+
+"Are you alright, Miss {blackthorn.player_name}?" He's looking at you with genuine concern. Not the performative concern of a Gothic lord — the real kind. "After last night..."
+
+"I'm fine. I just need more tea."
+
+Thomas: "I'll fetch some, miss."
+
+~ blackthorn.composure += 1
+~ blackthorn.interpretation_quality['panicked'] += 1
+~ blackthorn.interpretation_quality['grounded'] += 1
+~ blackthorn.lord_ashford_trust += 2
+~ session.ashford_took_advice = True
+~ session.curse_reading_quality += 1
+
+-> Blackthorn.Session2.Ashford_Aftermath
+
+# ============================================================================
+# ASHFORD AFTERMATH + TRANSITION
+# ============================================================================
+
+:: Blackthorn.Session2.Ashford_Aftermath
+Heathsniff approaches you as Lord Ashford leaves. Puts his head in your lap. You scratch behind his ears without thinking.
+
+"Good boy, Sniffy."
+
+Thomas, clearing the library desk: "He's never that friendly with guests. Usually just stares dramatically with his master."
+
+"He's a good judge of character."
+
+"He is. Though that's a low bar around here."
+
+You sit for a moment. The library is warm. The fire crackles. The rain patters against the windows. For exactly thirty seconds, you could be in any library in England, doing any normal thing.
+
+Heathsniff's tail wags. Slowly. Contentedly.
+
+"Thomas."
+
+"Yes, miss?"
+
+"Is there somewhere I can take a walk? I need air. After the séance, and this reading, I need... sky."
+
+"There's the grounds, miss. The moors beyond. Mrs. Winters will lend you a cloak."
+
+"Are the moors safe?"
+
+Thomas pauses. Considers this. "Define 'safe.'"
+
+"Free of ghosts, curses, vampires, and Lord Ravencroft."
+
+"I can guarantee three out of four."
+
+"Which four?"
+
+"The first three, miss."
+
+"Of course."
+
+~ blackthorn.thomas_friendliness += 1
+~ blackthorn.heathsniff_affection += 1
+
++ [Go. Take the air. Risk the moors.] -> Blackthorn.Session2.Moors_Departure
+
+# ============================================================================
+# ACT 3: THE MOORS
+# ============================================================================
+
+:: Blackthorn.Session2.Moors_Departure
+Mrs. Winters lends you a cloak. Heavy wool, dark green, smelling of cedar and the particular warmth of a woman who believes that proper outerwear is a moral position.
+
+"Stay on the paths, dear. The moors can be treacherous in the wet."
+
+"I will."
+
+"And if you see Lord Ravencroft—"
+
+"I'll run."
+
+"He's on horseback. You won't outrun him." She pauses. "Thomas is watching from the upstairs window. If we see him ride toward you, I'll come."
+
+"You are a *saint,* Mrs. Winters."
+
+"I'm from Wells. Same thing."
+
+You step outside.
+
+The moors.
+
+Vast. Bleak. Extraordinarily beautiful in the way that desolate things sometimes are — heather and bracken and long grass rolling to the horizon under a sky that can't decide between rain and merely threatening rain. The air smells like wet earth and distance and freedom from furniture.
+
+You breathe. Your lungs fill with something that isn't library dust or séance candle smoke or the particular musk of an overwrought borzoi.
+
+You walk.
+
+The path winds along the hillside, away from the manor. You glance back — the house looks different from out here. Smaller. More manageable. Just a building. An ugly, over-turreted, gargoyle-encrusted building with too many windows, but a building nonetheless. Not a living thing. Not a creature.
+
+Probably.
+
+You turn back to the moors. Walk further. The manor recedes. The sky opens. The rain holds off — barely, grudgingly, as if it's doing you a personal favor.
+
+You think about Lord Ashford. The reading. The look on his face when you said "just pay the debt." Seven years of suffering and the answer was an invoice. You think about the ghost at the séance — dead but present, furious but *readable.* You think about your cards, warm in your pocket, doing the same job they've always done regardless of whether the client has a pulse.
+
+You think: *I might actually be good at this.*
+
+Not mystically. Not supernaturally. Just... *good.* Competent. Perceptive. A woman from Bath who reads patterns well.
+
+The thought is interrupted by a sound.
+
++ [Continue] -> Blackthorn.Session2.Moors_Sound
+
+:: Blackthorn.Session2.Moors_Sound
+Thunder.
+
+No. Not thunder. Hooves.
+
+You turn.
+
+A rider on the crest of the hill. Black horse, silhouetted against a sky that has chosen this exact moment to produce a single dramatic shaft of sunlight through the clouds. He sits the horse like a man who has practiced sitting horses for exactly this kind of moment. His coat billows. His hair billows. *Everything* billows.
+
+Beside the horse, running with long fluid strides, a borzoi. Silver-white against the dark heather. Also billowing. Matching the horse stride for stride with the effortless grace of an animal that has been bred for centuries to look incredible while running.
+
+They are coming toward you.
+
+They are coming toward you *fast.*
+
+"Oh *no*—"
+
+Lord Ravencroft thunders down the hillside. The hoofbeats get louder. The horse is enormous and black and breathing steam like something out of a painting. Heathsniff runs alongside with his ears streaming back and his mouth open in what is either a grin or a howl and either way it's too much.
+
+He dismounts before the horse has fully stopped. One fluid motion. Too close. Always too close.
+
+The horse snorts. Stamps. Ravencroft's hair settles from its billowing into merely dramatic. Heathsniff slides to a halt at your feet, panting cheerfully.
+
+"Miss {blackthorn.player_name}."
+
+"Lord Ravencroft."
+
+"The moors are *DANGEROUS* for one such as you."
+
+"I'm from Bath. We have *parks.* I can handle a *field*—"
+
+"But can you handle what *HAUNTS* them?"
+
+"Is it you? Are *you* what haunts them? Because so far you're the only thing that's *BOTHERED* me on this walk—"
+
+Thunder. *Actual* thunder this time. Lightning cracks across the sky — a proper, theatrical, Gothic-novel lightning bolt that illuminates everything for one frozen moment.
+
+His hair whips in the wind.
+
+Heathsniff howls.
+
+"Even the *DOG* is too much," you say.
+
++ ["Lord Ravencroft, I am going back inside. Please do not follow me."] -> Blackthorn.Session2.Moors_Retreat
++ ["You have ten seconds before I start walking. If you have something to say, say it without the dramatics."] -> Blackthorn.Session2.Moors_Direct
++ [Say nothing. Wait. See what he actually wants.] -> Blackthorn.Session2.Moors_Wait
+
+:: Blackthorn.Session2.Moors_Retreat
+"Lord Ravencroft, I am going back inside. I came out for *air,* not for a performance of Wuthering Heights with a live borzoi."
+
+"But I MUST speak with you — about the séance — about your GIFT—"
+
+"I don't *have* a gift—"
+
+"The way you SPOKE to that spirit — FEARLESS — the cards BLAZING in your hands—"
+
+"The cards were *not* blazing—"
+
+@if blackthorn.cards_glowed:
+    Actually, one of them was. You are not going to tell him that.
+@endif
+
+"We've known each other *THIRTY-SIX HOURS*—"
+
+"Time is MEANINGLESS when SOULS connect—"
+
+"Our souls are NOT CONNECTED—"
+
+He takes your hand. You pull it back. This is becoming a *pattern* — a deeply unwelcome, deeply predictable, deeply *exhausting* pattern.
+
+"SIR. What did we discuss last night about BOUNDARIES?"
+
+Before he can answer, a voice carries across the moor. Faint but unmistakable. The voice of a woman who has been walking toward you at pace for the last three minutes, having seen the horseman from the upstairs window.
+
+"LORD RAVENCROFT."
+
+Mrs. Winters. On the moors. In her housekeeper's dress and a shawl and a pair of sturdy boots and an expression that could strip paint.
+
+"Mrs. Winters. I was merely—"
+
+"Accosting Miss {blackthorn.player_name} on the *MOORS.* Yes. I can see that from a *QUARTER MILE AWAY.*"
+
+"We were CONVERSING—"
+
+"Were you? Because from my vantage point it looked like you were LOOMING."
+
+She reaches you. Barely winded. Forty years at Blackthorn Manor have made her impervious to weather, terrain, and aristocratic nonsense.
+
+"Come along, miss. Hot chocolate."
+
+You turn to go. Heathsniff looks between you and his master, conflicted.
+
+"Come, Sniffy." Ravencroft says it imperiously.
+
+Heathsniff follows you and Mrs. Winters instead.
+
+~ blackthorn.ravencroft_fixation += 2
+~ blackthorn.winters_approval += 2
+~ blackthorn.heathsniff_affection += 1
+~ session.moors_encounter_type = "retreat"
+
+-> Blackthorn.Session2.Moors_Return
+
+:: Blackthorn.Session2.Moors_Direct
+"You have ten seconds. Without the dramatics. *Talk* to me like a person."
+
+He blinks. The wind drops — literally drops, as if his personal weather system has been startled into submission.
+
+"I..." He falters. Without the dramatics, Lord Ravencroft is a man standing on a moor in the rain next to a horse, and he doesn't quite know what to do with his hands. "I wanted to apologize. For last night. In the corridor."
+
+"Go on."
+
+"I was... inappropriate. Mrs. Winters was right. It was late, you were exhausted, I appeared from a passage in the walls like a penny dreadful villain and I—" He stops. Runs a hand through his hair. Without the dramatic intent, the gesture is almost... ordinary. "I don't know how to be normal around people."
+
+"I've noticed."
+
+"You're the first person who's told me that."
+
+"I find that hard to believe."
+
+"You're the first person who's told me that whose opinion I *valued.*"
+
+A pause. The rain begins, softly. Heathsniff sits between you, panting, looking back and forth like a spectator at tennis.
+
+It's the most human thing he's said. Maybe the most human thing he's *ever* said.
+
+"Lord Ravencroft. I appreciate the apology. Genuinely." You hold his gaze. "If you'd like a reading — a *real* one, not a performance for both of us — I'd be willing. But not here. Not in the rain. Not with—" you gesture at the horse, the moors, the entire dramatic tableau "—*all this.*"
+
+"Where, then?"
+
+"Somewhere with a roof. And a fire. And *boundaries.*"
+
+The ghost of a smile. A real one. "The library?"
+
+"The library. After dinner. At a *reasonable hour.*"
+
+"...Alright."
+
+Heathsniff wags his tail.
+
+~ blackthorn.ravencroft_fixation += 1
+~ blackthorn.groundedness += 2
+~ blackthorn.ravencroft_real_moment = True
+~ blackthorn.heathsniff_affection += 1
+~ session.moors_encounter_type = "direct"
+
+-> Blackthorn.Session2.Moors_Return
+
+:: Blackthorn.Session2.Moors_Wait
+You say nothing.
+
+It's the most disarming thing you could do. Ravencroft is built for opposition — he thrives on resistance, on the push and pull of someone telling him *no* so he can dramatically insist. Silence breaks the pattern.
+
+He stands there. The wind dies. The horse shifts its weight. Heathsniff looks up at you, then at his master, then lies down on the wet heather with the patience of a dog who has been through this before.
+
+"I..." Ravencroft begins. Stops. Begins again. "You're not going to — you're not going to tell me to go away?"
+
+"I'm waiting to see if you have something worth saying."
+
+Another silence. The rain begins. Light, persistent, the kind that soaks through everything.
+
+"I frightened you last night."
+
+"Yes."
+
+"I'm sorry."
+
+You wait. There's more. You can feel it the way you feel a card that hasn't been turned yet — something underneath, something real.
+
+"I watched you at the séance," he says. Quieter now. The capital letters have drained out of his voice. "You were terrified. Completely terrified. And you did it anyway. You sat at that table with a ghost screaming at you and you read your cards and you gave an honest reading and you didn't *pretend* to be something you're not."
+
+He looks at his hands.
+
+"I pretend to be something I'm not every day of my life."
+
+There it is. The thing underneath.
+
+Heathsniff's tail moves once. Slowly. As if the dog has been waiting for this.
+
+"Lord Ravencroft—"
+
+"Please don't be kind to me. I don't know what to do with kindness."
+
+"I wasn't going to be kind. I was going to say that's very sad and you should probably do something about it."
+
+He laughs. Surprised. The sound is small and genuine and has nothing to do with moors or Byron or windswept anything.
+
+"You *are* from Bath."
+
+"And don't you forget it."
+
+~ blackthorn.ravencroft_fixation += 1
+~ blackthorn.groundedness += 2
+~ blackthorn.ravencroft_real_moment = True
+~ blackthorn.heathsniff_affection += 2
+~ session.moors_encounter_type = "wait"
+
+-> Blackthorn.Session2.Moors_Return
+
+# ============================================================================
+# RETURN FROM THE MOORS
+# ============================================================================
+
+:: Blackthorn.Session2.Moors_Return
+@if session.moors_encounter_type == "retreat":
+    You walk back to the manor with Mrs. Winters. The rain comes properly now — the Yorkshire kind, the kind that's been waiting all morning and has decided it's done being patient.
+
+    "How did you get here so fast?" you ask.
+
+    "Thomas saw him ride out. I was already putting my boots on."
+
+    "You were *watching* for him?"
+
+    "Miss {blackthorn.player_name}, I have been managing Lord Ravencroft since he was fifteen years old. He is as predictable as rain and twice as persistent."
+
+    "Does he do this to every woman who visits?"
+
+    "Every one. Don't take it personally."
+
+    "I'm *not* taking it personally. I'm taking it *professionally.* He's disrupting my *work.*"
+
+    "I'll have words."
+
+    Heathsniff trots beside you. His master's voice calls from the moors behind you, something about destiny and connection, but the wind takes it.
+
+    "Good dog," you tell Heathsniff.
+
+    Heathsniff wags. He has made his choice.
+@elif session.moors_encounter_type == "direct":
+    You walk back alone. The rain begins properly and you pull Mrs. Winters's cloak tighter.
+
+    Ravencroft mounts his horse. Rides in the other direction. No dramatic backward glance — or if there is one, you don't see it, because you're walking toward the house and not looking back.
+
+    Heathsniff hesitates. Looks at his master's retreating horse. Looks at you.
+
+    Follows you.
+
+    "Oh, come on then," you say.
+
+    The dog trots beside you through the rain, long ears streaming, perfectly content.
+
+    At the door, Thomas is waiting with a towel. "He behaved himself?"
+
+    "Better than expected. Worse than hoped."
+
+    "That's Lord Ravencroft in a sentence, miss."
+@else:
+    You walk back together. Not *together* together — he walks his horse ten yards behind you in the rain, which is either respectful distance or dramatic trailing and you're choosing to believe the former.
+
+    Heathsniff walks beside you. Not between you this time. Just... beside. As if the buffer is no longer needed.
+
+    At the manor door, Ravencroft stops.
+
+    "The library. After dinner."
+
+    "After dinner. At a reasonable hour."
+
+    "Define 'reasonable.'"
+
+    "Before midnight. Without a billowing shirt."
+
+    "I'll... see what I can do."
+
+    He takes his horse to the stables. You watch him go. In the rain, without the lightning and the silhouettes and the personal weather system, he's just a tall man with bad hair walking a tired horse through the mud.
+
+    Mrs. Winters opens the door. Looks at you. Looks at Ravencroft's retreating figure.
+
+    "Do I need to have words?"
+
+    "Not today. I think he might be... trying."
+
+    "Hmm." She holds the door. "That would be a first. Hot chocolate?"
+
+    "Please."
+@endif
+
+You step inside. The manor closes around you — warm, close, the particular embrace of a house that has been standing for two centuries and intends to stand for two more. The fire in the entrance hall crackles. The portraits watch.
+
+You're wet. You're cold. You've done two readings today and survived a moor encounter.
+
+It's not even noon.
+
++ [Dry off. Rest. Prepare for whatever comes next.] -> Blackthorn.Session2.Part1_End
+
+# ============================================================================
+# END OF PART 1
+# ============================================================================
+
+:: Blackthorn.Session2.Part1_End
+@py:
+# Save state for Part 2
+session.part1_complete = True
+
+# Carry forward Ashford results
+if session.ashford_took_advice:
+    session.ashford_status = "searching"  # He's looking for the witch's descendants
+else:
+    session.ashford_status = "brooding"   # Still stuck
+
+# Carry forward moors results
+session.ravencroft_softening = blackthorn.ravencroft_real_moment
+
+# Quality tracking
+session.part1_quality = session.curse_reading_quality
+@endpy
+
+You change into dry clothes. Mrs. Winters brings hot chocolate. Thomas brings biscuits. Miss Chen brings a dry look and the news that Dr. Blackwood has been experimenting with ectoplasm samples in the scullery and would someone *please* tell him to stop.
+
+The afternoon stretches ahead. Lord Ashford is in the village, asking about parish registers. Dr. Blackwood is in the scullery, being Dr. Blackwood. Lady Blackthorn is asleep, as she apparently always is during daylight hours, which you are thinking about and will continue to think about.
+
+Lord Ravencroft is somewhere. Being Lord Ravencroft. But slightly less so than before, perhaps.
+
+Heathsniff is asleep on your bed. In the Rose Room. You did not invite him. He simply materialized there, as he does, and curled into a silver crescent on the coverlet, and the supernatural cold in the room decreased by exactly two degrees.
+
+Miss Adelaide, the resident ghost, appears to approve of the dog. Or at least tolerate him.
+
+Tomorrow: the full moon. Lord Ashford's test. Whatever Lord Ravencroft needs to say in the library. And something Miss Arabella has been trying to tell you all morning — something about the servants who came before Mrs. Winters and Thomas and Miss Chen.
+
+Something about the walls.
+
+But that's for tonight.
+
+For now: hot chocolate. Biscuits. A borrowed dog. The sound of rain on a roof that belongs to a house you're beginning to understand.
+
+Two more days.
+
+You can do this.
+
+Probably.
+
+# ============================================================================
+# END OF SESSION 2, PART 1
+# Part 2 continues with:
+#   - The Cemetery (Ravencroft's real reading: "How do I stop being like this?")
+#   - Miss Arabella's warning (the servants in the walls)
+#   - The full moon night (Ashford's test — did the common sense work?)
+#   - Dream fade + new bleed objects
+# ============================================================================
+
+# ============================================================================
+# SESSION 2, PART 2: "THE CEMETERY AND THE MOON"
+# ============================================================================
+#
+# Acts 4-6:
+#   Act 4: The Cemetery (Ravencroft's real reading)
+#   Act 5: Arabella's Warning + The Full Moon
+#   Act 6: Dream Fade
+#
+# NEW SPREAD: "The Mask" (5-card identity spread)
+#   Position 1: The Mask (who you pretend to be)
+#   Position 2: The Face (who you actually are)
+#   Position 3: Why You Wear It (what you're afraid of)
+#   Position 4: What It Costs
+#   Position 5: The First Step (how to begin being real)
+#
+# CARD POOLS:
+#   Position 1: The Fool (R) / Knight of Cups / King of Wands (R)
+#   Position 2: Page of Pentacles / The Hermit / Six of Cups
+#   Position 3: Eight of Swords / The Moon / Five of Cups
+#   Position 4: Death / Four of Cups / The Hanged Man
+#   Position 5: The Sun / Temperance / Ace of Pentacles
+#
+# REVERSAL CHANCE: 20% (lower — this reading is gentler, more intimate)
+#
+# NOTE: The cemetery reading only happens if Ravencroft had a real
+#   moment on the moors. If the player chose "retreat" without any
+#   softening, Ravencroft reverts to full Gothic and the cemetery
+#   scene plays differently — still comic, but without the
+#   vulnerability. The reading still happens, but it lands differently.
+#
+# ============================================================================
+
+# ============================================================================
+# ACT 4: THE CEMETERY
+# ============================================================================
+
+:: Blackthorn.Session2.Cemetery_Approach
+@py:
+# Time has passed. Evening of Day 2.
+session.time_of_day = "evening"
+session.days_until_full_moon = 1  # Tomorrow night
+
+# Determine how we got here
+if session.moors_encounter_type == "direct":
+    session.cemetery_setup = "library_planned"  # He asked to meet in the library
+elif session.moors_encounter_type == "wait":
+    session.cemetery_setup = "vulnerable"        # He showed his real self on the moors
+else:
+    session.cemetery_setup = "ambush"            # He's reverted, catches you outside
+@endpy
+
+Evening.
+
+The day has been strange and quiet. Lord Ashford left for the village after breakfast and hasn't returned. Lady Blackthorn slept through the afternoon — as she always does, which you are *still thinking about.* Dr. Blackwood spent three hours in the scullery and emerged with singed eyebrows and what he claims is "a breakthrough in ectoplasmic spectroscopy." Mrs. Winters confiscated his Bunsen burner.
+
+Miss Arabella has been hovering near you all afternoon. Not speaking. Just... present. Watching the corners of rooms with increasing agitation. She wants to tell you something. She's not ready yet.
+
+And Ravencroft.
+
+@if session.cemetery_setup == "library_planned":
+    He kept his word. He didn't appear from any passages. He didn't loom. He didn't stare — or if he did, he did it from a socially acceptable distance.
+
+    After dinner — at eight o'clock, a *reasonable* hour — he appears at the library door. He knocks. He *knocks.*
+
+    He's wearing a different shirt. It has buttons.
+
+    "Miss {blackthorn.player_name}. You said the library. After dinner. At a reasonable hour."
+
+    "I did."
+
+    "It's eight o'clock. I have... buttons." He gestures at his shirt, faintly embarrassed.
+
+    "I can see that. Come in."
+
+    Heathsniff follows him. Lies by the fire. Puts his chin on his paws.
+@elif session.cemetery_setup == "vulnerable":
+    He's been quiet all day. You've barely seen him. Thomas reports that he spent the afternoon in the stables, grooming his horse — actually grooming it, not brooding near it — and reading something that isn't Byron.
+
+    After dinner, you find him in the library. Already there. Sitting in a chair by the fire, Heathsniff at his feet. He looks up when you enter. No dramatic rising. No burning eyes.
+
+    "I wasn't sure you'd come."
+
+    "You didn't ambush me. I'm rewarding good behavior."
+
+    The ghost of a smile. "Fair enough."
+@else:
+    You're walking to the cemetery.
+
+    Not by choice. Miss Arabella mentioned "disturbances" among the graves this afternoon and you — against every instinct honed by a lifetime of being sensible — decided to investigate. You told Mrs. Winters. She told Thomas. Thomas is watching from the terrace with a lantern, ready to intervene.
+
+    You're examining a headstone when—
+
+    "Beautiful, isn't it? Death. Decay. The eternal REST—"
+
+    You jump. "HOW DO YOU KEEP APPEARING—"
+
+    Lord Ravencroft is *draped* over a headstone. Literally draped. Like a Victorian fainting couch but it's a *grave.* Heathsniff sits on another grave, also looking dramatic. They have coordinated their draping.
+
+    "What are you *DOING* here?"
+
+    "I come here to BROOD."
+
+    "I can *SEE* that—"
+
+    "Do you feel it? The romance of MORTALITY—"
+
+    "I feel COLD, sir, it's OCTOBER—"
+
+    He stands. Approaches. Too close. Always too close.
+
+    "I have NEVER met someone like you."
+
+    "I imagine most people RUN—"
+
+    "Your spirit. Your FIRE. Your complete indifference to my TORTURED SOUL—"
+
+    "It's not INDIFFERENCE, it's BOUNDARIES—"
+
+    But something shifts. Underneath the performance, you can see it — the same crack that appeared on the moors, or wanted to. He's exhausting himself with this. The effort of being Lord Ravencroft, Gothic Romance Lead, is visibly depleting him.
+
+    "Lord Ravencroft."
+
+    He stops mid-declamation.
+
+    "Would you like a reading? A *real* one?"
+
+    He blinks. "You'd do that? After how I've behaved?"
+
+    "I'm a professional. And you're clearly... struggling with something."
+
+    The performance flickers. Underneath it: "Yes. I am."
+@endif
+
++ [Begin the reading] -> Blackthorn.Session2.Ravencroft_Reading_Setup
+
+:: Blackthorn.Session2.Ravencroft_Reading_Setup
+@if session.cemetery_setup == "ambush":
+    You sit on a bench. Not a grave. You have *standards.*
+
+    He sits at a respectful distance. This is new.
+
+    Heathsniff lies between you. Buffer position. Good dog.
+@else:
+    The library is warm. Two chairs by the fire. The curtains drawn against the rain.
+
+    You sit across from each other. A proper distance. Heathsniff between you, chin on paws.
+@endif
+
+You pull out your deck. Shuffle.
+
+"What do you want to ask the cards?"
+
+He thinks. You can see the Gothic responses forming and being discarded — *Will I ever know LOVE?* — *Is my SOUL damned?* — *Are we FATED?*
+
+He discards them all.
+
+Then, quietly:
+
+"How do I stop being like this?"
+
+There it is. The real question. The one underneath all the billowing and brooding and midnight corridor appearances and cemetery draping.
+
+*How do I stop being like this?*
+
+"This spread is called 'The Mask.' Five cards." You don't tell him it's from Chapter 16 of Professor Crane's book. You don't tell him anything except: "Who you pretend to be. Who you actually are. Why you wear the mask. What it costs. And the first step toward taking it off."
+
+He's quiet. His hands are still. His eyes are focused — not burning, not intense, just... present.
+
+"Ready?"
+
+"No. Do it anyway."
+
++ [Draw the cards] -> Blackthorn.Session2.Ravencroft_CardDraw
+
+:: Blackthorn.Session2.Ravencroft_CardDraw
+@py:
+# "The Mask" spread — 5 positions
+# Lower reversal chance (20%) — this is a gentler reading
+r_position_1_deck = Deck(cards=["The Fool", "Knight of Cups", "King of Wands"], reversals=[0.8, 0.2, 0.8])
+# Note: Fool and King of Wands are EXPECTED reversed here — that's their meaning in this position
+# So their reversal chance is high (meaning they'll usually be reversed, which is the "correct" pull)
+# Knight of Cups at 0.2 means he's usually upright (the romantic ideal)
+
+r_position_2_deck = Deck(cards=["Page of Pentacles", "The Hermit", "Six of Cups"], reversals=[0.2, 0.2, 0.2])
+r_position_3_deck = Deck(cards=["Eight of Swords", "The Moon", "Five of Cups"], reversals=[0.2, 0.2, 0.2])
+r_position_4_deck = Deck(cards=["Death", "Four of Cups", "The Hanged Man"], reversals=[0.2, 0.2, 0.2])
+r_position_5_deck = Deck(cards=["The Sun", "Temperance", "Ace of Pentacles"], reversals=[0.2, 0.2, 0.2])
+
+r_reading = Reading(spread_id="the-mask", decks=[
+    r_position_1_deck,
+    r_position_2_deck,
+    r_position_3_deck,
+    r_position_4_deck,
+    r_position_5_deck
+])
+
+r_cards = r_reading.draw_cards()
+@endpy
+
+@render render_reading(reading=r_reading)
+
+You lay the cards in a line. Five face-down cards between you and a man who has spent his entire adult life pretending to be a character from a novel.
+
+You turn them.
+
+**The Mask:** {r_cards[0].name}{r_cards[0].reversed ?  — Reversed | }
+**The Face:** {r_cards[1].name}{r_cards[1].reversed ?  — Reversed | }
+**Why You Wear It:** {r_cards[2].name}{r_cards[2].reversed ?  — Reversed | }
+**What It Costs:** {r_cards[3].name}{r_cards[3].reversed ?  — Reversed | }
+**The First Step:** {r_cards[4].name}{r_cards[4].reversed ?  — Reversed | }
+
+Heathsniff lifts his head. Looks at the cards. Looks at his master. Puts his head back down, as if to say: *finally.*
+
++ [Read for him — grounded, honest, the way you read for Ashford] -> Blackthorn.Session2.Ravencroft_Read_Grounded
++ [Read for him — gently, carefully, he's more fragile than he looks] -> Blackthorn.Session2.Ravencroft_Read_Diplomatic
++ [Read for him — but the Gothic voice is pulling at you] -> Blackthorn.Session2.Ravencroft_Read_Gothic
+
+:: Blackthorn.Session2.Ravencroft_Read_Grounded
+"The Mask."
+
+You touch the first card.
+
+@if r_cards[0].name == "The Fool":
+    "The Fool — {r_cards[0].reversed ? reversed. | upright.}" You study it. "{r_cards[0].reversed ? The Fool reversed in this position is someone living in fantasy. Not innocence — *delusion.* You've built a character and you've been playing him so long you've forgotten he isn't real | The Fool upright — that's interesting. It means the mask you wear actually has *innocence* in it. You're not performing malice. You genuinely believe this is how people are supposed to behave. The mask isn't cynical. It's... naive}."
+@elif r_cards[0].name == "Knight of Cups":
+    "The Knight of Cups{r_cards[0].reversed ?  reversed | }. The romantic ideal. The mask you wear is the *lover* — the Byronic hero, the passionate pursuer, the man who FEELS more DEEPLY than anyone else in the room." You look at him. "{r_cards[0].reversed ? Reversed, this knight's romance has curdled into performance. You don't feel deeply. You perform depth | This knight isn't dishonest, exactly. You *do* feel things. But you've wrapped every feeling in so much drama that the feeling itself has suffocated}."
+@else:
+    "The King of Wands{r_cards[0].reversed ?  reversed | }. The mask is *authority.* Charisma. Commanding a room. {r_cards[0].reversed ? Reversed, that authority is hollow. You dominate rooms because you're terrified of being ignored in them | You're genuinely charismatic, Lord Ravencroft. People respond to you. But you've confused being *noticed* with being *known,* and those are very different things}."
+@endif
+
+He's listening. Not performing listening — actually listening. His hands are clasped. His jaw is tight.
+
+"The Face. Who you actually are."
+
+@if r_cards[1].name == "Page of Pentacles":
+    "The Page of Pentacles. Do you know what this card is? A *student.* A beginner. Someone practical and curious and quietly determined." You let that land. "Under all the Gothic drama, Lord Ravencroft, you're someone who wants to *learn.* You're not a Byronic hero. You're a young man who never figured out how to be himself because no one taught him."
+@elif r_cards[1].name == "The Hermit":
+    "The Hermit. Someone who actually *wants* to be alone — not dramatically alone on a moor, but genuinely, quietly alone. With books, maybe. With a dog. The real you isn't the man who bursts into dining rooms. The real you is someone who'd be perfectly happy in a small study with Heathsniff and a fire and no audience."
+@else:
+    "The Six of Cups. Nostalgia. Childhood. The real you is the boy who loved his parents and watched them perform their Gothic romance and thought *that's what love is.* You're not a villain, Lord Ravencroft. You're a child still imitating his parents."
+@endif
+
+He flinches. Not dramatically. Actually.
+
+"That's—"
+
+"True?"
+
+"...Uncomfortably so."
+
+You move through the remaining cards with the same steady hand. Why You Wear It — fear.
+
+@if r_cards[2].name == "Eight of Swords":
+    "The Eight of Swords. You're trapped — but like Ashford, the trap is partly self-imposed. You wear the mask because you believe that without it, you're *nothing.* That no one would look at you twice if you were just... ordinary."
+@elif r_cards[2].name == "The Moon":
+    "The Moon. Confusion. Fear of the unknown. You wear the mask because the alternative — finding out who you really are — is terrifying. What if the real you is boring? What if the real you is *quiet?* For someone raised on Byron, quiet feels like death."
+@else:
+    "The Five of Cups. Grief. You wear the mask because of something you lost — or never had. The normal childhood. The parents who taught you how to *be* instead of how to *perform.* You're grieving a life you never lived."
+@endif
+
+What It Costs.
+
+@if r_cards[3].name == "Death":
+    "Death. Not literal — transformation denied. The cost of the mask is that you can't *grow.* You're frozen at fifteen, performing the same role your parents taught you, and every year it fits worse and costs more and you're *exhausted.*"
+@elif r_cards[3].name == "Four of Cups":
+    "The Four of Cups. Apathy. Boredom. The mask has made everything *dull.* You perform passion so constantly that real passion can't reach you. Real connection can't reach you. The cost is that you've made yourself *numb.*"
+@else:
+    "The Hanged Man. Suspension. You're stuck. The mask keeps you hanging — not moving forward, not growing, not changing. The cost is your *life,* Lord Ravencroft. Not dramatically. Literally. You're not living. You're rehearsing."
+@endif
+
+And the last card. The First Step.
+
+@if r_cards[4].name == "The Sun":
+    "The Sun. *Joy.* Real, uncomplicated, unselfconscious joy. When was the last time you felt that? Not a performance of ecstasy on a moor. Not PASSION in capital letters. Just... happiness. A warm day. A good meal. The dog doing something funny."
+
+    Heathsniff's tail wags. As if on cue.
+
+    "The first step is finding something that makes you genuinely happy and doing it without an audience."
+@elif r_cards[4].name == "Temperance":
+    "Temperance. Moderation. Balance." You almost laugh. "The first step is the *opposite* of everything you've been doing. Less drama. Less volume. Fewer secret passages and cemetery monologues. More... normal. More human."
+
+    "That sounds terrifying."
+
+    "Most worthwhile things are."
+@else:
+    "The Ace of Pentacles. A new beginning — but a *practical* one. Not a grand transformation. Not a dramatic rebirth. Something small and real. A new skill. A new routine. A day where you don't perform anything. A day where you're just... yourself."
+
+    "I don't know who that is."
+
+    "That's exactly the point. You get to find out."
+@endif
+
+~ blackthorn.groundedness += 3
+~ blackthorn.interpretation_quality['grounded'] += 3
+~ blackthorn.ravencroft_fixation -= 1
+~ blackthorn.ravencroft_real_moment = True
+
+-> Blackthorn.Session2.Ravencroft_Aftermath
+
+:: Blackthorn.Session2.Ravencroft_Read_Diplomatic
+You take it slowly. He's armored in performance — the Gothic persona is load-bearing, it's been holding him together for years, and if you rip it away too fast, whatever's underneath might not be ready.
+
+"Let's start with the Mask."
+
+@if r_cards[0].name == "The Fool":
+    "{r_cards[0].reversed ? The Fool reversed — someone who's been living in a beautiful story that isn't quite real | The Fool — there's innocence in the mask you wear. You're not cruel, Lord Ravencroft. You're just... lost in a narrative that doesn't serve you anymore}."
+@elif r_cards[0].name == "Knight of Cups":
+    "The Knight of Cups{r_cards[0].reversed ?  reversed | }. The romantic ideal. You've modeled yourself on something very *specific* — the passionate, tortured lover. It's not a bad model. It's just... it's a *character.* And characters don't grow. People do."
+@else:
+    "The King of Wands{r_cards[0].reversed ?  reversed | }. You lead with charisma and fire. That's not *wrong* — you genuinely have those qualities. But you've cranked them up so high that they've become a wall instead of a bridge."
+@endif
+
+"The Face — who you are underneath."
+
+@if r_cards[1].name == "Page of Pentacles":
+    "The Page of Pentacles. A learner. Someone practical and curious." You soften your voice. "You're not the storm, Lord Ravencroft. You're the person standing *after* the storm, looking around, wanting to understand what happened. That person is more interesting than any Byronic hero."
+@elif r_cards[1].name == "The Hermit":
+    "The Hermit. Someone who genuinely values solitude — not the *performance* of solitude on a moor, but real quiet. Real stillness. I think if you let yourself, you'd be very content with a book and a fire and Heathsniff."
+@else:
+    "The Six of Cups. A child. I don't mean that unkindly — I mean the real you is still the boy who watched his parents and thought *this is how love works.* That boy deserved better teachers."
+@endif
+
+He's quiet. Not Gothic-quiet. Actually quiet.
+
+You read through the remaining three cards with the same care. Fear. Cost. First step. You don't rush. You let each one breathe.
+
+When you reach the final card, you set down the deck.
+
+"Lord Ravencroft. You're not cursed like Ashford. You're not haunted like Arabella. You're just... stuck in a role that doesn't fit anymore."
+
+"How do I get out?"
+
+"The same way you got in. Slowly. With help." You pause. "Go to London. Meet people who don't live in Gothic manors. Read something that isn't Romantic poetry. Get a hobby that isn't brooding."
+
+"That's very practical."
+
+"I'm from Bath."
+
+He laughs. Genuine. Small. The sound of someone hearing themselves honestly for the first time.
+
+~ blackthorn.groundedness += 2
+~ blackthorn.interpretation_quality['diplomatic'] += 3
+~ blackthorn.ravencroft_fixation -= 1
+~ blackthorn.ravencroft_real_moment = True
+
+-> Blackthorn.Session2.Ravencroft_Aftermath
+
+:: Blackthorn.Session2.Ravencroft_Read_Gothic
+The pull is there. The same pull from the séance — the voice that's yours but *more,* the drama of the setting, the terrible temptation to give him a reading wrapped in Gothic velvet.
+
+@if blackthorn.gothic_persona >= 5:
+    You give in.
+
+    "*The MASK you wear is FIRE AND SHADOW—*"
+
+    And he eats it up. Of course he does. This is his language. This is what he *wants* — not the truth, but a beautiful version of the truth, dressed in enough drama that he never has to actually face it.
+
+    You tell him he's cursed. He's not. You tell him destiny shaped him. It didn't. You tell him the cards see a great transformation coming. The cards see a man who needs therapy and a different shirt.
+
+    The reading is beautiful. Atmospheric. Entirely useless.
+
+    When you finish, his eyes are shining with the wrong kind of feeling. He reaches for your hand.
+
+    "We ARE connected—"
+
+    "Lord Ravencroft—"
+
+    "The cards have SPOKEN—"
+
+    You've given him exactly what he wanted and nothing that he needed. The Gothic voice in you is satisfied. The voice from Bath is ashamed.
+
+    ~ blackthorn.gothic_persona += 2
+    ~ blackthorn.groundedness -= 3
+    ~ blackthorn.house_influence += 2
+    ~ blackthorn.interpretation_quality['gothic'] += 3
+    ~ blackthorn.ravencroft_real_moment = False
+@else:
+    The pull is there. You feel it — the room, the firelight, the drama of a man baring his soul. Everything in you wants to lean into it, to give him the performance he's trained to receive.
+
+    You don't.
+
+    "You're not cursed," you say. Plainly. Simply. In the voice of a woman from Bath.
+
+    He blinks. "What?"
+
+    "You're not cursed. You're not supernatural. You're not destined for anything. You're *performing.*"
+
+    The Gothic response forms on his lips — you can see it arriving, the capital letters, the dramatic rebuttal—
+
+    "You learned this from your parents. Gothic Romance as a lifestyle. But it's not who you *are.* It's who you think you *should* be."
+
+    "I've *always* been—"
+
+    "*Exhausting?* Yes. I know."
+
+    He laughs. The first real, human sound you've heard from him since he rode through the dining room door in a personal windstorm.
+
+    You read the remaining cards. Plainly. Practically. The mask. The face. The fear. The cost. The way out.
+
+    "Go to London. Meet people. Read something other than Gothic Romance. Maybe get a hobby that isn't brooding."
+
+    He sits with it. The fire crackles. Heathsniff shifts at his feet.
+
+    "That's remarkably practical."
+
+    "I'm from Bath."
+
+    ~ blackthorn.groundedness += 2
+    ~ blackthorn.interpretation_quality['gothic'] += 1
+    ~ blackthorn.interpretation_quality['grounded'] += 2
+    ~ blackthorn.ravencroft_fixation -= 1
+    ~ blackthorn.ravencroft_real_moment = True
+@endif
+
+-> Blackthorn.Session2.Ravencroft_Aftermath
+
+# ============================================================================
+# RAVENCROFT AFTERMATH
+# ============================================================================
+
+:: Blackthorn.Session2.Ravencroft_Aftermath
+@if blackthorn.ravencroft_real_moment:
+    He stands. Offers his hand — to shake. Just to shake. He lets go immediately. Respectful.
+
+    "Thank you, Miss {blackthorn.player_name}. For seeing past the... theatrics."
+
+    "You're welcome."
+
+    "I'll... try to be less overwhelming."
+
+    "I'd appreciate that."
+
+    Heathsniff stands. Stretches. Wags. Puts his head against your hand — not a demand, an offering. A dog saying *thank you for helping my person.*
+
+    "He likes you," Ravencroft says. Quieter now. Without the capital letters.
+
+    "He's grown on me."
+
+    "He's a good judge of character."
+
+    "Better than his master."
+
+    He laughs again. It sounds easier this time. Like a muscle being used after a long rest.
+
+    @if session.cemetery_setup == "ambush":
+        He walks back toward the house. Not dramatically. Just... walking. In the dark, without the moonlight and the silhouettes and the personal weather system, he's a tall man with messy hair who is slightly less sure of himself than he was an hour ago.
+
+        That's progress.
+    @else:
+        He stands at the library door. Turns back.
+
+        "If I... if I write to you. After you leave. Would you respond?"
+
+        "Perhaps. If your letters contain *doors* instead of passages."
+
+        He smiles. "No secret passages in letters. I promise."
+    @endif
+@else:
+    He stands. He's still burning. Still intense. The reading gave him more fuel instead of less — you fed the fire instead of banking it, and now he's more convinced than ever that you're connected, fated, destined.
+
+    "Miss {blackthorn.player_name}—"
+
+    "Goodnight, Lord Ravencroft."
+
+    "*We will speak again—*"
+
+    "Goodnight."
+
+    You leave before he can say anything else. Mrs. Winters is in the corridor. She reads your face.
+
+    "Didn't go well?"
+
+    "I... no. I gave him what he wanted instead of what he needed."
+
+    Mrs. Winters looks at you. A long, kind, complicated look.
+
+    "You can try again, dear. People are more forgiving than we think."
+
+    "I'm not sure I can. I don't know how to stop... performing."
+
+    "Hmm." She presses a cup of tea into your hands. "Sounds like you and Lord Ravencroft have more in common than you'd like."
+
+    That lands. Hard.
+@endif
+
+~ blackthorn.heathsniff_affection += 1
+
++ [Continue to the evening] -> Blackthorn.Session2.Arabella_Warning
+
+# ============================================================================
+# ACT 5: ARABELLA'S WARNING
+# ============================================================================
+
+:: Blackthorn.Session2.Arabella_Warning
+Later. The house has settled into its night routine. Lady Blackthorn is awake now — she moves through the corridors with the gliding silence of someone who considers floors optional. Dr. Blackwood is writing in his room. Lord Ashford has returned from the village. He looks... different. Less haunted. He caught your eye at supper and nodded once, meaningfully.
+
+You're on the terrace. Alone — or you think you're alone. The rain has stopped. The sky is clear for the first time since you arrived. Stars. Actual stars. And the moon — not full, not yet, but *nearly.* Tomorrow night.
+
+"Miss {blackthorn.player_name}."
+
+You turn. Miss Arabella. White dress, pale face, hands clasped tightly in front of her.
+
+She's been trying to tell you something all day. You can see it pressing behind her eyes like a word on the tip of a tongue.
+
+"Miss Grey. Are you alright?"
+
+"I need to speak with you." She glances at the house behind her. The windows. The walls. "Not here. Can we walk? Just a little way?"
+
++ ["Of course. Let me get my cloak."] -> Blackthorn.Session2.Arabella_Walk
++ ["Tell me here. I'm tired of walking on moors."] -> Blackthorn.Session2.Arabella_Terrace
+
+:: Blackthorn.Session2.Arabella_Walk
+You walk. Not far — just past the garden wall, where the manor's windows can't see you. The night is cold and clear and the nearly-full moon throws sharp shadows.
+
+Arabella walks beside you. Heathsniff has appeared from nowhere and pads along behind, a silver ghost in the moonlight.
+
+She stops. Turns to you.
+
+-> Blackthorn.Session2.Arabella_Tells
+
+:: Blackthorn.Session2.Arabella_Terrace
+"I'd rather not—" She glances at the walls. "The house *listens.*"
+
+That phrase. *The house listens.* She says it the way you'd say "the butler is eavesdropping" — not metaphorically. She means the *building.*
+
+"The terrace is outside," you say. "Will that do?"
+
+She hesitates. Nods. Sits on the stone bench. You sit beside her.
+
+-> Blackthorn.Session2.Arabella_Tells
+
+:: Blackthorn.Session2.Arabella_Tells
+"They're angry," she whispers. "The servants. The old ones."
+
+"The ghosts?"
+
+She nods. "I've been seeing them since I arrived. At first they were just... there. In corners. On staircases. Watching. But since the séance — since you read for Lord Blackthorn — they've been getting louder. *Angrier.*"
+
+"What do they want?"
+
+"Justice." She wraps her arms around herself. "Miss {blackthorn.player_name}, do you know what happens to servants in this house?"
+
+"They work. They get paid. They—"
+
+"They *disappear.*"
+
+You go still.
+
+"Mrs. Winters has been here forty years. She's the longest-serving. Before her — before the current staff — there were *others.* Dozens. They come. They stay for a while. And then they... leave."
+
+"People leave jobs, Miss Grey. That's not—"
+
+"They don't leave. The house takes them."
+
+The words hang in the cold air. Heathsniff, lying at your feet, lifts his head. His ears are flat. He doesn't like this conversation.
+
+"What do you mean, *the house takes them?*"
+
+"I can see them. The ghosts. They're *in the walls.* Not metaphorically — their bones are in the walls. Buried in the structure. The house..." She struggles for words. "The house is *old,* Miss {blackthorn.player_name}. Old and hungry. It feeds on the people who serve it. Slowly. Over years. They get weaker. They get confused. They wander into the wrong corridor, or the wrong room, and they don't come back. And the house... absorbs them."
+
+You think about Mrs. Winters. Thomas. Miss Chen. Working in a building that eats its staff.
+
+"Does Lady Blackthorn know?"
+
+Arabella's expression is complicated. "She... I don't think she *lets* herself know. When I asked her about previous servants — a footman named Avery, a maid named Catherine — she said Avery 'ran off to the circus' and Catherine 'went to be a governess in Hampshire.' But the ghosts are *here.* They never left. They're in the walls and the floors and the foundations."
+
+She grabs your hand. Hers is trembling.
+
+"The house has been quiet for years. Mrs. Winters and Thomas and Miss Chen are careful — they know the bad corridors, the rooms to avoid, the times of day when the house is... hungrier. But since the séance—"
+
+"Since I woke up Lord Blackthorn's ghost."
+
+"Since you proved that someone can *hear* the dead through the cards. The other ghosts want that. They want to be heard. They want to be *found.* And they're getting impatient."
+
+A cold wind moves across the terrace. Not natural cold — the deep, biting, wrong cold of the Rose Room. The cold of something that prefers it that way.
+
+~ blackthorn.house_influence += 2
+~ blackthorn.arabella_connection += 3
+
++ ["We need to tell Mrs. Winters."] -> Blackthorn.Session2.Arabella_Winters
++ ["How do we help them?"] -> Blackthorn.Session2.Arabella_How
++ ["I'm a card reader from Bath, Miss Grey. Not a ghost hunter."] -> Blackthorn.Session2.Arabella_Reluctant
+
+:: Blackthorn.Session2.Arabella_Winters
+"Mrs. Winters already knows."
+
+"She *knows?*"
+
+"She's survived here for forty years. You don't do that without understanding the house. She knows which corridors go nowhere. Which rooms are cold in ways that fire can't fix. Which nights to bolt her door."
+
+Arabella looks at you.
+
+"She's been protecting Thomas and Miss Chen. Quietly. For years. Making sure they don't go into the East Wing. Making sure they're never alone in the wrong part of the house after dark."
+
+"Mrs. Winters is..."
+
+"The bravest person in this building. But she can't fix it. She can only *manage* it. To fix it, the ghosts need to be heard. Their stories told. Their remains found and properly buried."
+
+"And you think *I* can do that."
+
+"You read for a ghost, Miss {blackthorn.player_name}. You sat at a table and spoke to the dead with nothing but a three-shilling book and a deck of cards. If anyone can hear them, it's you."
+
+~ blackthorn.servant_trust += 2
+~ blackthorn.winters_approval += 1
+
+-> Blackthorn.Session2.Arabella_Promise
+
+:: Blackthorn.Session2.Arabella_How
+"I can *see* them," Arabella says. "I'm a medium — I've always been one, since I was small. But I can't *speak* for them. I see them, I hear fragments, but I can't translate what they need. Not clearly."
+
+She looks at you.
+
+"You can. Through the cards. You're a bridge. Not because you're mystical — because you're *skilled.* You read patterns. You translate symbols into meaning. That's what the ghosts need — someone to read their pattern and say it aloud."
+
+"Miss Grey, I'm not sure that's how tarot—"
+
+"It worked for Lord Blackthorn. He was a ghost and you read him like any other client. Please."
+
+~ blackthorn.arabella_connection += 2
+
+-> Blackthorn.Session2.Arabella_Promise
+
+:: Blackthorn.Session2.Arabella_Reluctant
+"I know." She doesn't argue. She doesn't plead. She just looks at you with those pale, exhausted, ancient-young eyes. "I know you didn't sign up for this. I know you came here for five pounds and a weekend party."
+
+"Twelve pounds, actually. Lady Blackthorn overpaid."
+
+A ghost of a smile. "She does that. She's generous with money she stole from her dead husband's secret wall cache."
+
+You almost laugh. It's not funny. It's really not funny. But Arabella's delivery is dry and precise and she's nineteen years old and she *sees ghosts* and she's still making jokes, and that kind of courage deserves respect.
+
+"I'll think about it."
+
+"That's all I ask."
+
+~ blackthorn.groundedness += 1
+~ blackthorn.arabella_connection += 1
+
+-> Blackthorn.Session2.Arabella_Promise
+
+:: Blackthorn.Session2.Arabella_Promise
+Arabella stands. The moonlight catches her face — pale, serious, older than her years.
+
+"Tomorrow night is the full moon. Lord Ashford's test."
+
+"I know. He went to the village today. To find the witch's descendants."
+
+"I know. I watched him leave." She pauses. "The ghosts watched him too. They're... hopeful. If one curse can be broken with common sense, maybe theirs can too."
+
+She squeezes your hand. Lets go.
+
+"Thank you for listening, Miss {blackthorn.player_name}. Even if you don't do anything. Thank you for not telling me I'm mad."
+
+"You see ghosts. In a house that's haunted. That's not madness. That's *perception.*"
+
+Her smile reaches her eyes for the first time. "Goodnight."
+
+"Goodnight, Miss Grey."
+
+She goes inside. The door closes.
+
+You sit on the terrace alone. Heathsniff puts his head in your lap. The moon is almost full.
+
+Tomorrow night. Ashford's test. The question of whether common sense and a three-shilling book can break a century-old curse.
+
+And after that: the ghosts in the walls. The house that eats its servants. The question of whether a card reader from Bath can do anything about any of it.
+
+Heathsniff whines softly. You scratch his ears.
+
+"I know, Sniffy. I know."
+
++ [Go to bed. Tomorrow everything changes.] -> Blackthorn.Session2.FullMoon
+
+# ============================================================================
+# THE FULL MOON
+# ============================================================================
+
+:: Blackthorn.Session2.FullMoon
+@py:
+# Day 3. The full moon.
+session.days_until_full_moon = 0
+@endpy
+
+The day passes in held breath.
+
+Lord Ashford appears at breakfast. He looks simultaneously terrified and hopeful — the face of a man who has done everything he can and is waiting to find out if it worked.
+
+"I found her," he says. The table goes quiet. "The witch's descendant. Her name is Mrs. Caldwell. She runs a tea shop in the village."
+
+"You spoke with her?"
+
+"I did. I apologized. For my great-grandfather's betrayal. I explained the curse. I offered payment — the original debt, with seventy years of interest." He pauses. "It came to rather a lot."
+
+Lady Blackthorn: "How much?"
+
+"Three hundred and forty-two pounds, sixteen shillings, and eightpence. I calculated the interest at four percent per annum, compounded."
+
+"That's very specific."
+
+"She negotiated. She's quite sharp."
+
+Thomas, from the doorway, biting his lip to keep from grinning.
+
+"And?" you ask.
+
+"She laughed. Said her grandmother had been furious about the unpaid debt. Ranted about it for sixty years. Even after death — apparently she became a very angry ghost."
+
+"Runs in the family," Miss Chen murmurs.
+
+"Mrs. Caldwell took the payment. Then she looked at me and said: '*Finally.* Gran was SO ANNOYING about this in the afterlife.'"
+
+A ripple of something — not quite laughter, not quite relief — moves around the table.
+
+"She lifted the curse. This morning. Before dawn. A cup of tea, a brief incantation over the teapot, and—" He spreads his hands. "Done. She says."
+
+"She *says.*"
+
+"Tonight we'll find out."
+
+The table is quiet. The rain falls. The fire crackles. Everyone is thinking the same thing: what if it didn't work?
+
+And underneath that: what if it *did?* What if the answer to a seven-year curse was always this simple, and everyone missed it because they were looking for something more dramatic?
+
+-> Blackthorn.Session2.FullMoon_Night
+
+:: Blackthorn.Session2.FullMoon_Night
+Evening. The household gathers in the parlor. No séance this time — just people, waiting.
+
+Lord Ashford stands by the window. Watching the sky. The clouds are moving fast, clearing. The moon is rising.
+
+Thomas has prepared the cellar. Just in case. Chains. Locks. The precautions of seven years of full moons.
+
+Mrs. Winters stands by the door. Her hands are folded. Her face is calm. She has watched this man transform monthly for years and locked the cellar door and waited and you can only imagine what that costs.
+
+Miss Chen is beside her. Arms folded. Face unreadable.
+
+Dr. Blackwood has three notebooks open and a thermometer and a device he claims measures "spectral resonance" but which looks suspiciously like a barometer with extra wire.
+
+Miss Arabella sits in the corner. Her eyes are closed. She's listening to something you can't hear.
+
+Ravencroft stands by the fireplace. Heathsniff at his side. For once, he's not staring at you. He's watching Ashford. Genuine concern on his face — not performed concern. The real kind.
+
+@if blackthorn.ravencroft_real_moment:
+    He catches your eye. Nods. A small, human gesture.
+@endif
+
+Lady Blackthorn is in her chair. The glass of red something, untouched.
+
+"The moon is rising," Ashford says.
+
+Everyone watches.
+
+Moonlight hits the window. Fills the room. Silver and sharp and full.
+
+It falls across Lord Ashford's face.
+
+Nothing happens.
+
+One minute.
+
+Nothing.
+
+Two minutes.
+
+Nothing.
+
+Lord Ashford's hands are shaking. His whole body is shaking. Not with transformation — with *waiting.* With the unendurable tension of a man who has spent seven years dreading this moment and is now experiencing it without the thing he dreaded and his body doesn't know what to do with the *absence.*
+
+Three minutes. Four. Five.
+
+The moon is full and bright and Lord Ashford is standing in it and he is just a man. Just a pale, exhausted, trembling man in a parlor in Yorkshire with a fire behind him and moonlight on his face.
+
+"It's gone," he says. Quietly. As if speaking too loudly might bring it back. "The curse. I can *feel* it — or I can't feel it. The weight. The compulsion. It's *gone.*"
+
+He turns to you.
+
+His eyes are wet.
+
+"You did it. With cards and *common sense.*"
+
+"You did it. You went and made amends."
+
+He crosses the room. Takes your hand. Kisses it. The gesture is courtly and genuine and earned.
+
+"Thank you. For seeing what everyone else missed."
+
+Thomas is grinning so wide it looks like it hurts. Mrs. Winters has her hand over her mouth. Miss Chen is blinking rapidly and looking at the ceiling.
+
+Lady Blackthorn: "Well. This is cause for celebration. Thomas, bring champagne."
+
+Dr. Blackwood: "Fascinating. Psychosomatic resolution manifesting as—"
+
+Everyone: "BLACKWOOD."
+
+"I'm simply saying that the placebo effect of debt payment combined with the psychological relief of—"
+
+"*BLACKWOOD.*"
+
+"...I'll get the champagne."
+
+They celebrate. Champagne. Laughter. Thomas produces a cake that Mrs. Winters apparently baked "just in case." Lord Ashford sits by the window in the moonlight — deliberately, *joyfully* in the moonlight — and drinks champagne and looks like a man who has just been let out of prison.
+
+@if blackthorn.ravencroft_real_moment:
+    Ravencroft approaches you during the celebration. Quietly. No drama.
+
+    "You gave him practical advice and it broke a century-old curse."
+
+    "I gave him *obvious* advice. The curse was about an unpaid bill."
+
+    "Obvious to you. Nobody else saw it." He pauses. "Is that what you'd do for me? If I asked? Give me the obvious answer everyone else missed?"
+
+    "I already did."
+
+    "...Yes. You did." He looks at his champagne. "London. Normal people. A hobby."
+
+    "That's the one."
+
+    "Terrifying."
+
+    "Less terrifying than turning into a wolf, I'd think."
+
+    "You'd be surprised."
+
+    Heathsniff pushes between you and puts his head on your knee.
+
+    "He really does like you," Ravencroft says.
+
+    "I like him too."
+
+    A pause. Something unspoken and warm.
+
+    "Goodnight, Miss {blackthorn.player_name}."
+
+    "Goodnight, Lord Ravencroft."
+@endif
+
+The celebration winds down. People drift to bed. The manor is lighter tonight. Something has changed — some thread of misery has been cut, some weight lifted. Even the house feels different. Less pressing. Less *hungry.*
+
+But you remember what Arabella told you. The ghosts in the walls. The servants who didn't leave. The house that feeds.
+
+One curse broken. Another waiting.
+
++ [Sleep. Dream within the dream. Tomorrow is the last day.] -> Blackthorn.Session2.DreamFade
+
+# ============================================================================
+# ACT 6: DREAM FADE
+# ============================================================================
+
+:: Blackthorn.Session2.DreamFade
+@py:
+# Final Session 2 calculations
+reader.sessions_completed += 1
+reader.mystical_affinity += 1
+
+# Determine Session 2 grade
+s2_quality = (
+    blackthorn.interpretation_quality['grounded'] * 3 +
+    blackthorn.interpretation_quality['diplomatic'] * 2 +
+    blackthorn.interpretation_quality['gothic'] * 1 +
+    blackthorn.interpretation_quality['panicked'] * -1
+)
+
+# Add curse-breaking bonus
+if session.ashford_took_advice:
+    s2_quality += 3
+
+# Ravencroft real moment bonus
+if blackthorn.ravencroft_real_moment:
+    s2_quality += 2
+
+if s2_quality >= 12:
+    session.s2_grade = "solid"
+elif s2_quality >= 8:
+    session.s2_grade = "steady"
+elif s2_quality >= 4:
+    session.s2_grade = "shaken"
+else:
+    session.s2_grade = "compromised"
+
+# Rewards
+if session.s2_grade == "solid":
+    reader.competence += 2
+    reader.empathy += 1
+elif session.s2_grade == "steady":
+    reader.competence += 1
+    reader.empathy += 1
+elif session.s2_grade == "shaken":
+    reader.competence += 1
+elif session.s2_grade == "compromised":
+    reader.self_doubt = True
+
+# Bleed objects
+session.bleed_objects = []
+
+# Always: pressed moor flower
+session.bleed_objects.append("moor_flower")
+
+# If Ravencroft had real moment: his sketch of you
+if blackthorn.ravencroft_real_moment:
+    session.bleed_objects.append("sketch")
+
+# If curse was broken: a tea shop receipt
+if session.ashford_took_advice:
+    session.bleed_objects.append("receipt")
+
+# Mark complete — state already lives on blackthorn object
+blackthorn.sessions_completed += 1
+blackthorn.ashford_free = session.ashford_took_advice
+blackthorn.arabella_warned = True
+blackthorn.session_grade = session.s2_grade
+@endpy
+
+The dream folds.
+
+Not abruptly — gently, the way a book closes when you've fallen asleep reading. The fire dims. The champagne glasses blur. The sound of laughter and rain dissolves into something warmer and closer and more familiar.
+
+You wake. Your apartment. Your reading table. Your deck.
+
+@if session.s2_grade == "solid":
+    You feel *good.* Not just awake-good — *accomplished*-good. You broke a curse with common sense. You helped a man take off a mask he'd been wearing since he was fifteen. You listened to a girl who sees ghosts and you didn't tell her she was mad.
+
+    You are from Bath. You learned tarot from a book. And apparently that's more than enough.
+@elif session.s2_grade == "steady":
+    You feel steady. Grounded. The dream left you tired but not depleted — the good tired of work that mattered.
+
+    A curse was broken. A man started to change. A girl trusted you with something impossible.
+
+    Not bad for a woman from Bath with a three-shilling book.
+@elif session.s2_grade == "shaken":
+    You feel the dream clinging to you. The ghosts in the walls. The house that eats its servants. Arabella's pale face in the moonlight.
+
+    One curse broken. Another — bigger, older, hungrier — waiting.
+
+    You're going back. You know you are. The question isn't whether. It's whether you're ready.
+@else:
+    You feel wrong. Hollow. The Gothic voice from the séance is still in your throat. You can feel it — the temptation to perform, to be *more* than what you are, to give the house what it wants.
+
+    Mrs. Winters's words: *Sounds like you and Lord Ravencroft have more in common than you'd like.*
+
+    You stare at the ceiling and think about masks.
+@endif
+
+On your nightstand:
+
+@if "moor_flower" in session.bleed_objects:
+A pressed flower. Heather. Purple-brown, still fragrant somehow, with a single long silver hair caught in its petals.
+
+Did Heathsniff bring you this? Or Ravencroft? Or did the moor itself send a piece of itself home with you?
+
+You don't know. You tuck it in your copy of *The Complete Guide to Cartomancy,* between Chapter 9 ("Breaking Chains") and Chapter 16 ("The Mask").
+@endif
+
+@if "sketch" in session.bleed_objects:
+
+A sketch. Pencil on heavy paper, folded once. You open it.
+
+It's you. Reading cards. In the library, by firelight, with Heathsniff asleep at your feet. The detail is extraordinary — your hands on the cards, the concentration on your face, the particular angle of your head when you're thinking. Whoever drew this was watching you very carefully, and for a long time, and with something that looks a lot like reverence.
+
+It's dated 1873. It's signed with a single R.
+
+It's actually quite good.
+@endif
+
+@if "receipt" in session.bleed_objects:
+
+And a receipt. A proper receipt, on tea shop stationery:
+
+[!beat]Mrs. Caldwell's Tea & Sundries, Blackthorn Village.
+Received from Lord Ashford: £342, 16s, 8d.
+Payment for: Services rendered, 1802. Plus interest.
+Note: "FINALLY." — M. Caldwell[/!beat]
+
+You hold it. A receipt for breaking a curse. Common sense, itemized.
+@endif
+
+You sit at your reading table. One more session. One more night at Blackthorn Manor.
+
+The ghosts in the walls. The house that hungers. Arabella's gift. Mrs. Winters's courage. Thomas and Miss Chen, working every day in a building that would eat them if it could.
+
+And you. A card reader from Bath. With a three-shilling book and a warm deck and the growing, uncomfortable, undeniable suspicion that "just a card reader" might not be the whole story.
+
+You shuffle. Draw a card.
+
+@if session.s2_grade == "solid":
+    The World. Completion. The final card of the journey.
+
+    "One more night," you say to the empty room. "And then it's done."
+@elif session.s2_grade == "steady":
+    Strength. A woman with a lion. Quiet courage. Gentle power.
+
+    "I can do this," you say. And for the first time, you believe it completely.
+@elif session.s2_grade == "shaken":
+    The Tower. Destruction. Structures falling. The truth exposed.
+
+    You stare at it.
+
+    "Right," you say. "That kind of night."
+@else:
+    The High Priestess. Secrets. Intuition. The veil between worlds.
+
+    You hold the card for a long time. Something in you recognizes it. Something that isn't from Bath.
+
+    Something the house put there.
+@endif
+
++ [Return to your day. One more night at Blackthorn Manor.] -> ReaderTable
+
+# ============================================================================
+# END OF SESSION 2
+# ============================================================================
