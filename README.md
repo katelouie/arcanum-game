@@ -1,6 +1,6 @@
 # Arcanum: A Digital Cartomancer's Tale
 
-![Cover Image](images/itchio_cover.png)
+![Cover Image](images/itchio_banner.png)
 
 This is the open-source repository for **Arcanum**, the flagship demo game for the **[Bardic](https://github.com/katelouie/bardic)** interactive fiction engine.
 
@@ -67,7 +67,7 @@ Once running, just open your browser to **`http://localhost:8080`** to play the 
 
 Here are the most important files to look at:
 
-```sh
+```txt
 arcanum-game/
 ├── player/
 │   ├── nicegui_player.py   # The main NiceGUI frontend. This is what you run.
