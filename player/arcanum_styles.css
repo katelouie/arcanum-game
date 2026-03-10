@@ -1,15 +1,15 @@
 /* ================================================================
    arcanum_styles.css — Complete theme system for Arcanum
-   
+
    Themes: default (Real World), cyberpunk (Nyx), gothic (Manor House)
-   
+
    Usage in NiceGUI:
      app.add_static_files("/theme", str(Path(__file__).parent))
      ui.add_head_html('<link rel="stylesheet" href="/theme/arcanum_styles.css">')
    ================================================================ */
 
 /* ========== GOOGLE FONTS ========== */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=Bitter:ital,wght@0,400;0,500;0,700;1,400&family=Vollkorn:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 
 /* ================================================================
@@ -62,14 +62,22 @@
     --sidebar-accent: #1a161e;
     --reading-bg: #0a090c;
     --reading-panel: #12101a;
-    --gold: #8a8495;         /* tarnished silver */
-    --gold-light: #b0a8be;   /* pale silver */
-    --gold-dim: #5a5464;     /* dark pewter */
-    --accent: #7a2030;       /* dried blood burgundy */
-    --accent-light: #a83848; /* brighter burgundy */
-    --text: #c0bcc8;         /* cool grey */
-    --text-muted: #6a6474;   /* slate */
-    --text-bright: #e0dce8;  /* bright cool white */
+    --gold: #8a8495;
+    /* tarnished silver */
+    --gold-light: #b0a8be;
+    /* pale silver */
+    --gold-dim: #5a5464;
+    /* dark pewter */
+    --accent: #7a2030;
+    /* dried blood burgundy */
+    --accent-light: #a83848;
+    /* brighter burgundy */
+    --text: #c0bcc8;
+    /* cool grey */
+    --text-muted: #6a6474;
+    /* slate */
+    --text-bright: #e0dce8;
+    /* bright cool white */
     --heading-font: 'Playfair Display', 'Georgia', serif;
     --body-font: 'Crimson Text', 'Georgia', serif;
 }
@@ -83,14 +91,22 @@
     --sidebar-accent: #241e18;
     --reading-bg: #12110e;
     --reading-panel: #1a1814;
-    --gold: #b89a5a;         /* warm honey amber */
-    --gold-light: #d4c8a0;   /* aged cream */
-    --gold-dim: #7a6b4a;     /* warm brown */
-    --accent: #8b5e3c;       /* terracotta */
-    --accent-light: #c07858; /* warm rust */
-    --text: #d4ccc0;         /* parchment */
-    --text-muted: #8a8070;   /* warm grey */
-    --text-bright: #ece6da;  /* cream white */
+    --gold: #b89a5a;
+    /* warm honey amber */
+    --gold-light: #d4c8a0;
+    /* aged cream */
+    --gold-dim: #7a6b4a;
+    /* warm brown */
+    --accent: #8b5e3c;
+    /* terracotta */
+    --accent-light: #c07858;
+    /* warm rust */
+    --text: #d4ccc0;
+    /* parchment */
+    --text-muted: #8a8070;
+    /* warm grey */
+    --text-bright: #ece6da;
+    /* cream white */
     --heading-font: 'Libre Baskerville', 'Georgia', serif;
     --body-font: 'Literata', 'Georgia', serif;
     /* Kind-specific colors (used via direct reference in components) */
@@ -99,11 +115,39 @@
     --moss-dim: #3a5238;
 }
 
+/* ================================================================
+   CSS VARIABLES — WEIRD WEST THEME (The Ace of Spades)
+   ================================================================ */
+[data-theme="weird_west"] {
+    --sidebar-bg: #1a1410;
+    --sidebar-accent: #241c14;
+    --reading-bg: #14110c;
+    --reading-panel: #1c1812;
+    --gold: #c8944a;
+    /* warm copper amber */
+    --gold-light: #ddb878;
+    /* light amber */
+    --gold-dim: #8a6a3a;
+    /* dark amber */
+    --accent: #a03828;
+    /* desert clay / dusty red */
+    --accent-light: #c85040;
+    /* brighter rust */
+    --text: #d8ccb8;
+    /* warm parchment */
+    --text-muted: #8a7e6e;
+    /* dusty grey */
+    --text-bright: #ece0cc;
+    /* cream */
+    --heading-font: 'Bitter', 'Georgia', serif;
+    --body-font: 'Vollkorn', 'Georgia', serif;
+}
 
 /* ================================================================
    RESET
    ================================================================ */
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -155,8 +199,13 @@ html, body {
     font-style: italic;
 }
 
-.arc-bright { color: var(--text-bright); }
-.arc-accent-text { color: var(--accent); }
+.arc-bright {
+    color: var(--text-bright);
+}
+
+.arc-accent-text {
+    color: var(--accent);
+}
 
 
 /* ================================================================
@@ -186,9 +235,26 @@ html, body {
     margin: 0;
 }
 
-[data-theme="cyberpunk"] .arc-sidebar-title { font-size: 18px; letter-spacing: 4px; }
-[data-theme="gothic"] .arc-sidebar-title { font-size: 20px; letter-spacing: 3px; }
-[data-theme="kind"] .arc-sidebar-title { font-size: 18px; letter-spacing: 2px; }
+[data-theme="cyberpunk"] .arc-sidebar-title {
+    font-size: 18px;
+    letter-spacing: 4px;
+}
+
+[data-theme="gothic"] .arc-sidebar-title {
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+[data-theme="kind"] .arc-sidebar-title {
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+[data-theme="weird_west"] .arc-sidebar-title {
+    font-size: 18px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
 
 .arc-sidebar-byline {
     font-family: var(--heading-font);
@@ -198,9 +264,21 @@ html, body {
     letter-spacing: 1px;
 }
 
-[data-theme="cyberpunk"] .arc-sidebar-byline { font-style: normal; }
-[data-theme="gothic"] .arc-sidebar-byline { font-style: normal; }
-[data-theme="kind"] .arc-sidebar-byline { font-style: normal; }
+[data-theme="cyberpunk"] .arc-sidebar-byline {
+    font-style: normal;
+}
+
+[data-theme="gothic"] .arc-sidebar-byline {
+    font-style: normal;
+}
+
+[data-theme="kind"] .arc-sidebar-byline {
+    font-style: normal;
+}
+
+[data-theme="weird_west"] .arc-sidebar-byline {
+    font-style: normal;
+}
 
 /* Dream mode badge */
 .arc-dream-badge {
@@ -211,9 +289,19 @@ html, body {
     margin-top: -2px;
 }
 
-[data-theme="gothic"] .arc-dream-badge { font-style: italic; }
-[data-theme="kind"] .arc-dream-badge { color: var(--moss, var(--accent)); font-style: italic; }
+[data-theme="gothic"] .arc-dream-badge {
+    font-style: italic;
+}
 
+[data-theme="kind"] .arc-dream-badge {
+    color: var(--moss, var(--accent));
+    font-style: italic;
+}
+
+[data-theme="weird_west"] .arc-dream-badge {
+    text-transform: uppercase;
+    font-weight: 700;
+}
 
 /* ================================================================
    NAV ITEMS
@@ -234,7 +322,9 @@ html, body {
     transition: all 0.2s ease;
 }
 
-.arc-nav-btn:hover { color: var(--gold-light); }
+.arc-nav-btn:hover {
+    color: var(--gold-light);
+}
 
 .arc-nav-btn.active {
     background: color-mix(in srgb, var(--gold) 8%, transparent);
@@ -242,13 +332,38 @@ html, body {
     color: var(--gold-light);
 }
 
-[data-theme="cyberpunk"] .arc-nav-btn { font-size: 12px; }
-[data-theme="cyberpunk"] .arc-nav-btn.active { border-left-color: var(--accent); }
-[data-theme="gothic"] .arc-nav-btn { font-size: 12px; }
-[data-theme="gothic"] .arc-nav-btn.active { border-left-color: var(--accent); }
-[data-theme="kind"] .arc-nav-btn { font-size: 12px; }
-[data-theme="kind"] .arc-nav-btn.active { border-left-color: var(--moss, var(--gold)); }
+[data-theme="cyberpunk"] .arc-nav-btn {
+    font-size: 12px;
+}
 
+[data-theme="cyberpunk"] .arc-nav-btn.active {
+    border-left-color: var(--accent);
+}
+
+[data-theme="gothic"] .arc-nav-btn {
+    font-size: 12px;
+}
+
+[data-theme="gothic"] .arc-nav-btn.active {
+    border-left-color: var(--accent);
+}
+
+[data-theme="kind"] .arc-nav-btn {
+    font-size: 12px;
+}
+
+[data-theme="kind"] .arc-nav-btn.active {
+    border-left-color: var(--moss, var(--gold));
+}
+
+[data-theme="weird_west"] .arc-nav-btn {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+[data-theme="weird_west"] .arc-nav-btn.active {
+    border-left-color: var(--accent);
+}
 
 /* ================================================================
    CONTENT AREA
@@ -277,6 +392,11 @@ html, body {
     line-height: 1.95;
 }
 
+/* Weird West: warm umber with faint red at bottom — lamplight through dust */
+[data-theme="weird_west"] .arc-content {
+    background: linear-gradient(180deg, var(--reading-panel) 0%, var(--reading-bg) 60%, color-mix(in srgb, var(--accent) 2%, var(--reading-bg)) 100%);
+}
+
 .arc-content-inner {
     width: 100%;
     max-width: 680px;
@@ -296,9 +416,18 @@ html, body {
     margin: 16px 0;
 }
 
-.arc-divider-line { flex: 1; height: 1px; }
-.arc-divider-line.left { background: linear-gradient(to right, transparent, var(--gold-dim)); }
-.arc-divider-line.right { background: linear-gradient(to left, transparent, var(--gold-dim)); }
+.arc-divider-line {
+    flex: 1;
+    height: 1px;
+}
+
+.arc-divider-line.left {
+    background: linear-gradient(to right, transparent, var(--gold-dim));
+}
+
+.arc-divider-line.right {
+    background: linear-gradient(to left, transparent, var(--gold-dim));
+}
 
 .arc-divider-dot {
     width: 5px;
@@ -343,6 +472,15 @@ html, body {
     background: linear-gradient(to left, transparent, color-mix(in srgb, var(--gold-dim) 40%, transparent));
 }
 
+/* Weird West: red diamond with flanking bars — cattle brand mark */
+[data-theme="weird_west"] .arc-divider-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 0;
+    transform: rotate(45deg);
+    background: var(--accent);
+    opacity: 0.5;
+}
 
 /* ================================================================
    CLIENT INFO STRIP
@@ -358,9 +496,21 @@ html, body {
     border-left: 3px solid color-mix(in srgb, var(--gold-dim) 40%, transparent);
 }
 
-[data-theme="cyberpunk"] .arc-client-strip { border-left-color: color-mix(in srgb, var(--accent) 40%, transparent); }
-[data-theme="gothic"] .arc-client-strip { border-left-color: color-mix(in srgb, var(--accent) 50%, transparent); }
-[data-theme="kind"] .arc-client-strip { border-left-color: color-mix(in srgb, var(--moss, #5a7a56) 50%, transparent); }
+[data-theme="cyberpunk"] .arc-client-strip {
+    border-left-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+[data-theme="gothic"] .arc-client-strip {
+    border-left-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+[data-theme="kind"] .arc-client-strip {
+    border-left-color: color-mix(in srgb, var(--moss, #5a7a56) 50%, transparent);
+}
+
+[data-theme="weird_west"] .arc-client-strip {
+    border-left-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
 
 
 /* ================================================================
@@ -399,7 +549,11 @@ html, body {
     font-size: 15px;
     border-left: 3px solid color-mix(in srgb, var(--gold-dim) 40%, transparent);
 }
-[data-theme="cyberpunk"] .arc-choice:hover { border-left-color: var(--accent); }
+
+[data-theme="cyberpunk"] .arc-choice:hover {
+    border-left-color: var(--accent);
+}
+
 [data-theme="cyberpunk"] .arc-choice-prefix {
     color: var(--accent);
     font-family: var(--heading-font);
@@ -412,7 +566,11 @@ html, body {
     font-size: 15px;
     border-left: 3px solid color-mix(in srgb, var(--gold-dim) 40%, transparent);
 }
-[data-theme="gothic"] .arc-choice:hover { border-left-color: var(--accent); }
+
+[data-theme="gothic"] .arc-choice:hover {
+    border-left-color: var(--accent);
+}
+
 [data-theme="gothic"] .arc-choice-prefix {
     color: var(--accent);
     font-family: var(--heading-font);
@@ -427,11 +585,34 @@ html, body {
     border-left: 3px solid color-mix(in srgb, var(--gold-dim) 35%, transparent);
     border-radius: 2px;
 }
-[data-theme="kind"] .arc-choice:hover { border-left-color: var(--moss, #5a7a56); }
+
+[data-theme="kind"] .arc-choice:hover {
+    border-left-color: var(--moss, #5a7a56);
+}
+
 [data-theme="kind"] .arc-choice-prefix {
     color: var(--moss, #5a7a56);
     font-family: var(--heading-font);
     font-size: 12px;
+    opacity: 0.7;
+}
+
+/* Weird West choices — bold, terse, red-bordered */
+[data-theme="weird_west"] .arc-choice {
+    font-family: var(--body-font);
+    font-size: 15px;
+    border-left: 3px solid color-mix(in srgb, var(--gold-dim) 40%, transparent);
+}
+
+[data-theme="weird_west"] .arc-choice:hover {
+    border-left-color: var(--accent);
+}
+
+[data-theme="weird_west"] .arc-choice-prefix {
+    color: var(--accent);
+    font-family: var(--heading-font);
+    font-size: 13px;
+    font-weight: 700;
     opacity: 0.7;
 }
 
@@ -474,24 +655,47 @@ html, body {
     overflow: hidden;
 }
 
-.arc-card:hover, .arc-card.selected {
+.arc-card:hover,
+.arc-card.selected {
     border-color: var(--gold);
     box-shadow: 0 0 20px color-mix(in srgb, var(--gold) 12%, transparent);
 }
 
-[data-theme="cyberpunk"] .arc-card { border-radius: 2px; border-color: color-mix(in srgb, var(--gold-dim) 40%, transparent); }
-[data-theme="cyberpunk"] .arc-card:hover, [data-theme="cyberpunk"] .arc-card.selected {
+[data-theme="cyberpunk"] .arc-card {
+    border-radius: 2px;
+    border-color: color-mix(in srgb, var(--gold-dim) 40%, transparent);
+}
+
+[data-theme="cyberpunk"] .arc-card:hover,
+[data-theme="cyberpunk"] .arc-card.selected {
     box-shadow: 0 0 24px color-mix(in srgb, var(--gold) 10%, transparent), 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
-[data-theme="gothic"] .arc-card { border-radius: 4px; }
-[data-theme="gothic"] .arc-card:hover, [data-theme="gothic"] .arc-card.selected {
+[data-theme="gothic"] .arc-card {
+    border-radius: 4px;
+}
+
+[data-theme="gothic"] .arc-card:hover,
+[data-theme="gothic"] .arc-card.selected {
     box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
-[data-theme="kind"] .arc-card { border-radius: 5px; }
-[data-theme="kind"] .arc-card:hover, [data-theme="kind"] .arc-card.selected {
+[data-theme="kind"] .arc-card {
+    border-radius: 5px;
+}
+
+[data-theme="kind"] .arc-card:hover,
+[data-theme="kind"] .arc-card.selected {
     box-shadow: 0 0 16px color-mix(in srgb, var(--gold) 8%, transparent);
+}
+
+[data-theme="weird_west"] .arc-card {
+    border-radius: 3px;
+}
+
+[data-theme="weird_west"] .arc-card:hover,
+[data-theme="weird_west"] .arc-card.selected {
+    box-shadow: 0 0 16px color-mix(in srgb, var(--gold) 10%, transparent);
 }
 
 .arc-card-label {
@@ -513,13 +717,22 @@ html, body {
     padding: 24px;
 }
 
-[data-theme="cyberpunk"] .arc-card-detail { border-left: 3px solid color-mix(in srgb, var(--accent) 40%, transparent); }
-[data-theme="gothic"] .arc-card-detail { border-left: 3px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+[data-theme="cyberpunk"] .arc-card-detail {
+    border-left: 3px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+[data-theme="gothic"] .arc-card-detail {
+    border-left: 3px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
 [data-theme="kind"] .arc-card-detail {
     border-left: 3px solid color-mix(in srgb, var(--moss, #5a7a56) 40%, transparent);
     border-radius: 2px;
 }
 
+[data-theme="weird_west"] .arc-card-detail {
+    border-left: 3px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
 
 /* ================================================================
    STAT ROW (sidebar)
@@ -533,8 +746,14 @@ html, body {
     font-size: 12px;
 }
 
-.arc-stat-label { color: var(--text-muted); letter-spacing: 1px; }
-.arc-stat-value { color: var(--gold-dim); }
+.arc-stat-label {
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.arc-stat-value {
+    color: var(--gold-dim);
+}
 
 
 /* ================================================================
@@ -547,14 +766,37 @@ html, body {
     transition: background 0.3s ease;
 }
 
-.arc-trust-dot.filled { background: var(--gold); }
-.arc-trust-dot.empty { background: color-mix(in srgb, var(--gold-dim) 20%, transparent); }
+.arc-trust-dot.filled {
+    background: var(--gold);
+}
 
-[data-theme="cyberpunk"] .arc-trust-dot { width: 12px; height: 4px; border-radius: 1px; }
+.arc-trust-dot.empty {
+    background: color-mix(in srgb, var(--gold-dim) 20%, transparent);
+}
+
+[data-theme="cyberpunk"] .arc-trust-dot {
+    width: 12px;
+    height: 4px;
+    border-radius: 1px;
+}
 
 /* Kind: rounded squares, moss-filled */
-[data-theme="kind"] .arc-trust-dot { width: 8px; height: 8px; border-radius: 2px; }
-[data-theme="kind"] .arc-trust-dot.filled { background: var(--moss, #5a7a56); }
+[data-theme="kind"] .arc-trust-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+}
+
+[data-theme="kind"] .arc-trust-dot.filled {
+    background: var(--moss, #5a7a56);
+}
+
+/* Weird West: tall tally marks */
+[data-theme="weird_west"] .arc-trust-dot {
+    width: 5px;
+    height: 10px;
+    border-radius: 1px;
+}
 
 
 /* ================================================================
@@ -569,9 +811,24 @@ html, body {
     padding: 0 16px 6px;
 }
 
-[data-theme="cyberpunk"] .arc-section-label.dream { color: var(--accent); }
-[data-theme="gothic"] .arc-section-label.dream { color: var(--accent); font-style: italic; }
-[data-theme="kind"] .arc-section-label.dream { color: var(--moss, #5a7a56); font-style: italic; }
+[data-theme="cyberpunk"] .arc-section-label.dream {
+    color: var(--accent);
+}
+
+[data-theme="gothic"] .arc-section-label.dream {
+    color: var(--accent);
+    font-style: italic;
+}
+
+[data-theme="kind"] .arc-section-label.dream {
+    color: var(--moss, #5a7a56);
+    font-style: italic;
+}
+
+[data-theme="weird_west"] .arc-section-label.dream {
+    color: var(--accent);
+    font-weight: 700;
+}
 
 
 /* ================================================================
@@ -642,7 +899,9 @@ html, body {
     transition: all 0.3s ease;
 }
 
-.arc-btn-primary:hover { filter: brightness(1.1); }
+.arc-btn-primary:hover {
+    filter: brightness(1.1);
+}
 
 .arc-btn-secondary {
     background: transparent;
@@ -658,18 +917,30 @@ html, body {
     transition: all 0.3s ease;
 }
 
-.arc-btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+.arc-btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
 
 
 /* ================================================================
    ANIMATIONS
    ================================================================ */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.arc-fade-in { animation: fadeIn 0.6s ease forwards; }
+.arc-fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
 
 /* Staggered paragraph reveal */
 .arc-stagger-p {
@@ -704,9 +975,22 @@ html, body {
     border-left: 2px solid color-mix(in srgb, var(--gold-dim) 25%, transparent);
 }
 
-[data-theme="cyberpunk"] .arc-note { border-left-color: color-mix(in srgb, var(--accent) 25%, transparent); }
-[data-theme="gothic"] .arc-note { border-left-color: color-mix(in srgb, var(--accent) 30%, transparent); }
-[data-theme="kind"] .arc-note { border-left-color: color-mix(in srgb, var(--moss, #5a7a56) 30%, transparent); }
+[data-theme="cyberpunk"] .arc-note {
+    border-left-color: color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+[data-theme="gothic"] .arc-note {
+    border-left-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+[data-theme="kind"] .arc-note {
+    border-left-color: color-mix(in srgb, var(--moss, #5a7a56) 30%, transparent);
+}
+
+[data-theme="weird_west"] .arc-note {
+    border-left-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
 
 .arc-note-text {
     font-family: var(--body-font);
@@ -750,7 +1034,9 @@ html, body {
     gap: 8px;
 }
 
-.arc-tab:hover { color: var(--gold-light); }
+.arc-tab:hover {
+    color: var(--gold-light);
+}
 
 .arc-tab.active {
     color: var(--gold-light);
@@ -848,8 +1134,15 @@ html, body {
     border-color: color-mix(in srgb, var(--gold-dim) 30%, transparent);
 }
 
-.arc-client-card.special { border-left-color: color-mix(in srgb, var(--accent-light) 50%, transparent); }
-.arc-client-card.dimmed { opacity: 0.4; cursor: default; }
+.arc-client-card.special {
+    border-left-color: color-mix(in srgb, var(--accent-light) 50%, transparent);
+}
+
+.arc-client-card.dimmed {
+    opacity: 0.4;
+    cursor: default;
+}
+
 .arc-client-card.dimmed:hover {
     background: color-mix(in srgb, var(--accent) 3%, transparent);
     border-color: color-mix(in srgb, var(--gold-dim) 18%, transparent);
@@ -863,7 +1156,9 @@ html, body {
     letter-spacing: 1px;
 }
 
-.arc-client-card.dimmed .arc-client-name { color: var(--text-muted); }
+.arc-client-card.dimmed .arc-client-name {
+    color: var(--text-muted);
+}
 
 .arc-client-flavor {
     font-family: var(--body-font);
@@ -901,10 +1196,20 @@ html, body {
     margin-bottom: 6px;
 }
 
-.arc-desk-note.anomaly { border-left-color: var(--accent-light); }
-.arc-desk-note.insight { border-left-color: var(--gold); }
+.arc-desk-note.anomaly {
+    border-left-color: var(--accent-light);
+}
 
-.arc-note-category-dot { width: 6px; height: 6px; border-radius: 3px; flex-shrink: 0; }
+.arc-desk-note.insight {
+    border-left-color: var(--gold);
+}
+
+.arc-note-category-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
 
 .arc-note-category-label {
     font-family: var(--heading-font);
@@ -950,9 +1255,29 @@ html, body {
     border-color: color-mix(in srgb, var(--accent-light) 15%, transparent);
 }
 
-.arc-artifact-name { font-family: var(--heading-font); font-size: 18px; color: var(--gold-light); letter-spacing: 1px; margin-bottom: 6px; }
-.arc-artifact-origin { font-family: var(--heading-font); font-size: 10px; color: color-mix(in srgb, var(--gold-dim) 50%, transparent); letter-spacing: 1px; margin-top: 8px; }
-.arc-artifact-lore { font-family: var(--body-font); font-size: 16px; color: var(--text-muted); font-style: italic; line-height: 1.85; }
+.arc-artifact-name {
+    font-family: var(--heading-font);
+    font-size: 18px;
+    color: var(--gold-light);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.arc-artifact-origin {
+    font-family: var(--heading-font);
+    font-size: 10px;
+    color: color-mix(in srgb, var(--gold-dim) 50%, transparent);
+    letter-spacing: 1px;
+    margin-top: 8px;
+}
+
+.arc-artifact-lore {
+    font-family: var(--body-font);
+    font-size: 16px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.85;
+}
 
 .arc-artifact-provenance {
     font-family: var(--heading-font);
@@ -977,7 +1302,9 @@ html, body {
     transition: color 0.2s ease;
 }
 
-.arc-back-link:hover { color: var(--gold-light); }
+.arc-back-link:hover {
+    color: var(--gold-light);
+}
 
 
 /* ================================================================
@@ -992,8 +1319,14 @@ html, body {
 /* ================================================================
    SCROLLBAR
    ================================================================ */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
 ::-webkit-scrollbar-thumb {
     background: color-mix(in srgb, var(--gold-dim) 25%, transparent);
     border-radius: 3px;
@@ -1003,6 +1336,15 @@ html, body {
 /* ================================================================
    QUASAR / NICEGUI OVERRIDES
    ================================================================ */
-.q-btn { text-transform: none !important; }
-.q-card { background: transparent !important; box-shadow: none !important; }
-.q-drawer { background: var(--sidebar-bg) !important; }
+.q-btn {
+    text-transform: none !important;
+}
+
+.q-card {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.q-drawer {
+    background: var(--sidebar-bg) !important;
+}

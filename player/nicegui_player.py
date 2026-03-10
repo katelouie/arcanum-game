@@ -336,6 +336,8 @@ class GameSession:
             self.active_theme = "gothic"
         elif "DREAM:KIND" in passage_tags or "DREAM:BOOKSHOP" in passage_tags:
             self.active_theme = "kind"
+        elif "DREAM:WEIRDWEST" in passage_tags:
+            self.active_theme = "weird_west"
         elif "THEME:DEFAULT" in passage_tags or "UI:DASHBOARD" in passage_tags:
             self.active_theme = "default"
         # Otherwise: keep self.active_theme as-is (sticky)

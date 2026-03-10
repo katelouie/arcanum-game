@@ -162,6 +162,37 @@ THEMES = {
         "choice_prefix": "❧",
         "trust_label_name": "Rapport",
     },
+    "weird_west": {
+        "name": "Dream — The Ace of Spades",
+        "sidebar_bg": "#1a1410",
+        "sidebar_accent": "#241c14",
+        "reading_bg": "#14110c",
+        "reading_panel": "#1c1812",
+        "gold": "#c8944a",
+        "gold_light": "#ddb878",
+        "gold_dim": "#8a6a3a",
+        "accent": "#a03828",
+        "accent_light": "#c85040",
+        "text": "#d8ccb8",
+        "text_muted": "#8a7e6e",
+        "text_bright": "#ece0cc",
+        "heading_font": "'Bitter', 'Georgia', serif",
+        "body_font": "'Vollkorn', 'Georgia', serif",
+        "trust_labels": [
+            "Stranger",
+            "Acquaintance",
+            "Drinking Buddy",
+            "Trusted",
+            "Blood Oath",
+        ],
+        "session_fmt": "Hand {n} of {total}",
+        "notes_label": "Ledger",
+        "save_label": "Save",
+        "settings_label": "Settings",
+        "dream_badge": "◆ The Ace of Spades",
+        "choice_prefix": "▸",
+        "trust_label_name": "Standing",
+    },
 }
 
 
@@ -239,6 +270,8 @@ def motif(theme: str = "default", size: int = 56):
         _motif_gothic(size)
     elif theme == "kind":
         _motif_kind(size)
+    elif theme == "weird_west":
+        _motif_weird_west(size)
     else:
         _motif_default(size)
 
@@ -385,6 +418,54 @@ def _motif_kind(size: int = 56):
             stroke="var(--gold-dim)" stroke-width="0.3" fill="none" opacity="0.25"/>
       <path d="M32 72 Q36 76 40 76"
             stroke="var(--gold-dim)" stroke-width="0.3" fill="none" opacity="0.25"/>
+    </svg>
+    """,
+        sanitize=False,
+    )
+
+
+def _motif_weird_west(size: int = 56):
+    """Sheriff's star badge — Weird West theme.
+    Six-pointed star inside a circle: lawman's badge meets mystical hexagram.
+    """
+    w = size
+    h = int(size * 1.15)
+    # Compute six-pointed star path
+    import math
+
+    cx, cy = 28, 32
+    outer_r, inner_r = 22, 10
+    points = []
+    for i in range(12):
+        angle = (math.pi * i) / 6 - math.pi / 2
+        r = outer_r if i % 2 == 0 else inner_r
+        x = cx + math.cos(angle) * r
+        y = cy + math.sin(angle) * r
+        points.append(f"{x:.1f},{y:.1f}")
+    star_path = "M" + "L".join(points) + "Z"
+    # Tip dots
+    tip_dots = ""
+    for i in range(6):
+        angle = (math.pi * 2 * i) / 6 - math.pi / 2
+        x = cx + math.cos(angle) * (outer_r + 3)
+        y = cy + math.sin(angle) * (outer_r + 3)
+        tip_dots += f'<circle cx="{x:.1f}" cy="{y:.1f}" r="1" fill="var(--gold-dim)" opacity="0.4"/>'
+
+    ui.html(
+        f"""
+    <svg width="{w}" height="{h}" viewBox="0 0 56 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer circle -->
+      <circle cx="{cx}" cy="{cy}" r="26" stroke="var(--gold-dim)" stroke-width="1" fill="none" opacity="0.5"/>
+      <circle cx="{cx}" cy="{cy}" r="24" stroke="var(--gold)" stroke-width="0.5" fill="none" opacity="0.3"/>
+      <!-- Six-pointed star -->
+      <path d="{star_path}" stroke="var(--gold)" stroke-width="1.2" fill="none"/>
+      <!-- Inner circle -->
+      <circle cx="{cx}" cy="{cy}" r="6" stroke="var(--gold-dim)" stroke-width="0.5" fill="none"/>
+      <circle cx="{cx}" cy="{cy}" r="2.5" fill="var(--accent)" opacity="0.6"/>
+      <!-- Tip dots -->
+      {tip_dots}
+      <!-- Badge plate -->
+      <line x1="14" y1="58" x2="42" y2="58" stroke="var(--gold-dim)" stroke-width="0.5" opacity="0.3"/>
     </svg>
     """,
         sanitize=False,
