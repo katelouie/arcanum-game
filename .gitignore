@@ -44,3 +44,7 @@ saves/*.json
 
 # Logs
 *.log
+
+# Claude
+CLAUDE.md
+claude_info/
