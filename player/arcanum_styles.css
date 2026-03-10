@@ -1,0 +1,1008 @@
+/* ================================================================
+   arcanum_styles.css — Complete theme system for Arcanum
+   
+   Themes: default (Real World), cyberpunk (Nyx), gothic (Manor House)
+   
+   Usage in NiceGUI:
+     app.add_static_files("/theme", str(Path(__file__).parent))
+     ui.add_head_html('<link rel="stylesheet" href="/theme/arcanum_styles.css">')
+   ================================================================ */
+
+/* ========== GOOGLE FONTS ========== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&display=swap');
+
+
+/* ================================================================
+   CSS VARIABLES — DEFAULT THEME (Real World)
+   ================================================================ */
+:root {
+    --sidebar-bg: #1a0e2e;
+    --sidebar-accent: #2d1b4e;
+    --reading-bg: #0f0a18;
+    --reading-panel: #16102a;
+    --gold: #c9a84c;
+    --gold-light: #e2c97e;
+    --gold-dim: #8a7235;
+    --accent: #6b3fa0;
+    --accent-light: #9b6fd0;
+    --text: #d4cde0;
+    --text-muted: #8a7ea0;
+    --text-bright: #f0ecf5;
+    --heading-font: 'Cormorant Garamond', 'Garamond', serif;
+    --body-font: 'EB Garamond', 'Georgia', serif;
+}
+
+
+/* ================================================================
+   CSS VARIABLES — CYBERPUNK THEME (Nyx)
+   ================================================================ */
+[data-theme="cyberpunk"] {
+    --sidebar-bg: #0a0a12;
+    --sidebar-accent: #0f1029;
+    --reading-bg: #06060e;
+    --reading-panel: #0c0c1a;
+    --gold: #00e5ff;
+    --gold-light: #80f0ff;
+    --gold-dim: #0088a0;
+    --accent: #ff2d78;
+    --accent-light: #ff6fa3;
+    --text: #b8c4d8;
+    --text-muted: #5a6a80;
+    --text-bright: #e8f0ff;
+    --heading-font: 'Share Tech Mono', 'Courier New', monospace;
+    --body-font: 'IBM Plex Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+/* ================================================================
+   CSS VARIABLES — GOTHIC THEME (Manor House)
+   ================================================================ */
+[data-theme="gothic"] {
+    --sidebar-bg: #0e0c0f;
+    --sidebar-accent: #1a161e;
+    --reading-bg: #0a090c;
+    --reading-panel: #12101a;
+    --gold: #8a8495;         /* tarnished silver */
+    --gold-light: #b0a8be;   /* pale silver */
+    --gold-dim: #5a5464;     /* dark pewter */
+    --accent: #7a2030;       /* dried blood burgundy */
+    --accent-light: #a83848; /* brighter burgundy */
+    --text: #c0bcc8;         /* cool grey */
+    --text-muted: #6a6474;   /* slate */
+    --text-bright: #e0dce8;  /* bright cool white */
+    --heading-font: 'Playfair Display', 'Georgia', serif;
+    --body-font: 'Crimson Text', 'Georgia', serif;
+}
+
+
+/* ================================================================
+   CSS VARIABLES — THE KIND THEME (Rewind, OR)
+   ================================================================ */
+[data-theme="kind"] {
+    --sidebar-bg: #1a1612;
+    --sidebar-accent: #241e18;
+    --reading-bg: #12110e;
+    --reading-panel: #1a1814;
+    --gold: #b89a5a;         /* warm honey amber */
+    --gold-light: #d4c8a0;   /* aged cream */
+    --gold-dim: #7a6b4a;     /* warm brown */
+    --accent: #8b5e3c;       /* terracotta */
+    --accent-light: #c07858; /* warm rust */
+    --text: #d4ccc0;         /* parchment */
+    --text-muted: #8a8070;   /* warm grey */
+    --text-bright: #ece6da;  /* cream white */
+    --heading-font: 'Libre Baskerville', 'Georgia', serif;
+    --body-font: 'Literata', 'Georgia', serif;
+    /* Kind-specific colors (used via direct reference in components) */
+    --moss: #5a7a56;
+    --moss-light: #7a9a74;
+    --moss-dim: #3a5238;
+}
+
+
+/* ================================================================
+   RESET
+   ================================================================ */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--reading-bg);
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.nicegui-content {
+    padding: 0 !important;
+}
+
+
+/* ================================================================
+   TYPOGRAPHY
+   ================================================================ */
+.arc-heading {
+    font-family: var(--heading-font);
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.arc-subheading {
+    font-family: var(--heading-font);
+    color: var(--gold-light);
+    font-weight: 400;
+}
+
+.arc-body {
+    font-family: var(--body-font);
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+.arc-label {
+    font-family: var(--heading-font);
+    color: var(--gold-dim);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.arc-muted {
+    font-family: var(--heading-font);
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.arc-bright { color: var(--text-bright); }
+.arc-accent-text { color: var(--accent); }
+
+
+/* ================================================================
+   SIDEBAR
+   ================================================================ */
+.arc-sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: linear-gradient(180deg, var(--sidebar-bg) 0%, var(--sidebar-accent) 100%);
+    border-right: 1px solid color-mix(in srgb, var(--gold-dim) 25%, transparent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px;
+    gap: 8px;
+    overflow-y: auto;
+    transition: background 0.6s ease;
+}
+
+.arc-sidebar-title {
+    font-family: var(--heading-font);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+[data-theme="cyberpunk"] .arc-sidebar-title { font-size: 18px; letter-spacing: 4px; }
+[data-theme="gothic"] .arc-sidebar-title { font-size: 20px; letter-spacing: 3px; }
+[data-theme="kind"] .arc-sidebar-title { font-size: 18px; letter-spacing: 2px; }
+
+.arc-sidebar-byline {
+    font-family: var(--heading-font);
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+[data-theme="cyberpunk"] .arc-sidebar-byline { font-style: normal; }
+[data-theme="gothic"] .arc-sidebar-byline { font-style: normal; }
+[data-theme="kind"] .arc-sidebar-byline { font-style: normal; }
+
+/* Dream mode badge */
+.arc-dream-badge {
+    font-family: var(--heading-font);
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-top: -2px;
+}
+
+[data-theme="gothic"] .arc-dream-badge { font-style: italic; }
+[data-theme="kind"] .arc-dream-badge { color: var(--moss, var(--accent)); font-style: italic; }
+
+
+/* ================================================================
+   NAV ITEMS
+   ================================================================ */
+.arc-nav-btn {
+    background: transparent;
+    border: none;
+    border-left: 2px solid transparent;
+    color: var(--text-muted);
+    font-family: var(--heading-font);
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.arc-nav-btn:hover { color: var(--gold-light); }
+
+.arc-nav-btn.active {
+    background: color-mix(in srgb, var(--gold) 8%, transparent);
+    border-left-color: var(--gold);
+    color: var(--gold-light);
+}
+
+[data-theme="cyberpunk"] .arc-nav-btn { font-size: 12px; }
+[data-theme="cyberpunk"] .arc-nav-btn.active { border-left-color: var(--accent); }
+[data-theme="gothic"] .arc-nav-btn { font-size: 12px; }
+[data-theme="gothic"] .arc-nav-btn.active { border-left-color: var(--accent); }
+[data-theme="kind"] .arc-nav-btn { font-size: 12px; }
+[data-theme="kind"] .arc-nav-btn.active { border-left-color: var(--moss, var(--gold)); }
+
+
+/* ================================================================
+   CONTENT AREA
+   ================================================================ */
+.arc-content {
+    flex: 1;
+    background: linear-gradient(135deg, var(--reading-panel) 0%, var(--reading-bg) 100%);
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    transition: background 0.6s ease;
+}
+
+/* Gothic: vertical gradient, slightly warmer at bottom */
+[data-theme="gothic"] .arc-content {
+    background: linear-gradient(180deg, var(--reading-panel) 0%, var(--reading-bg) 60%, color-mix(in srgb, var(--accent) 2%, var(--reading-bg)) 100%);
+}
+
+/* Kind: warm gradient with hint of forest at bottom */
+[data-theme="kind"] .arc-content {
+    background: linear-gradient(180deg, var(--reading-panel) 0%, var(--reading-bg) 70%, color-mix(in srgb, var(--moss-dim, #3a5238) 4%, var(--reading-bg)) 100%);
+}
+
+/* Kind: more generous line height for body text */
+[data-theme="kind"] .arc-body {
+    line-height: 1.95;
+}
+
+.arc-content-inner {
+    width: 100%;
+    max-width: 680px;
+    padding: 48px 56px;
+    position: relative;
+}
+
+
+/* ================================================================
+   DIVIDER
+   ================================================================ */
+.arc-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.arc-divider-line { flex: 1; height: 1px; }
+.arc-divider-line.left { background: linear-gradient(to right, transparent, var(--gold-dim)); }
+.arc-divider-line.right { background: linear-gradient(to left, transparent, var(--gold-dim)); }
+
+.arc-divider-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+}
+
+/* Cyberpunk: angular diamond */
+[data-theme="cyberpunk"] .arc-divider-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 0;
+    transform: rotate(45deg);
+    background: var(--gold);
+}
+
+/* Gothic: burgundy diamond */
+[data-theme="gothic"] .arc-divider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 0;
+    transform: rotate(45deg);
+    background: var(--accent);
+    opacity: 0.7;
+}
+
+/* Kind: tiny moss leaf dot */
+[data-theme="kind"] .arc-divider-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--moss, #5a7a56);
+    opacity: 0.6;
+}
+
+[data-theme="kind"] .arc-divider-line.left {
+    background: linear-gradient(to right, transparent, color-mix(in srgb, var(--gold-dim) 40%, transparent));
+}
+
+[data-theme="kind"] .arc-divider-line.right {
+    background: linear-gradient(to left, transparent, color-mix(in srgb, var(--gold-dim) 40%, transparent));
+}
+
+
+/* ================================================================
+   CLIENT INFO STRIP
+   ================================================================ */
+.arc-client-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    margin-bottom: 24px;
+    background: color-mix(in srgb, var(--accent) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 15%, transparent);
+    border-left: 3px solid color-mix(in srgb, var(--gold-dim) 40%, transparent);
+}
+
+[data-theme="cyberpunk"] .arc-client-strip { border-left-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+[data-theme="gothic"] .arc-client-strip { border-left-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+[data-theme="kind"] .arc-client-strip { border-left-color: color-mix(in srgb, var(--moss, #5a7a56) 50%, transparent); }
+
+
+/* ================================================================
+   CHOICE BUTTONS
+   ================================================================ */
+.arc-choice {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 25%, transparent);
+    color: var(--text);
+    font-family: var(--heading-font);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 14px 24px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s ease;
+    width: 100%;
+}
+
+.arc-choice:hover {
+    background: color-mix(in srgb, var(--gold) 8%, transparent);
+    border-color: color-mix(in srgb, var(--gold) 30%, transparent);
+    color: var(--gold-light);
+}
+
+.arc-choice-prefix {
+    color: var(--gold-dim);
+    margin-right: 12px;
+    font-size: 14px;
+}
+
+/* Cyberpunk choices */
+[data-theme="cyberpunk"] .arc-choice {
+    font-family: var(--body-font);
+    font-size: 15px;
+    border-left: 3px solid color-mix(in srgb, var(--gold-dim) 40%, transparent);
+}
+[data-theme="cyberpunk"] .arc-choice:hover { border-left-color: var(--accent); }
+[data-theme="cyberpunk"] .arc-choice-prefix {
+    color: var(--accent);
+    font-family: var(--heading-font);
+    font-size: 12px;
+}
+
+/* Gothic choices */
+[data-theme="gothic"] .arc-choice {
+    font-family: var(--body-font);
+    font-size: 15px;
+    border-left: 3px solid color-mix(in srgb, var(--gold-dim) 40%, transparent);
+}
+[data-theme="gothic"] .arc-choice:hover { border-left-color: var(--accent); }
+[data-theme="gothic"] .arc-choice-prefix {
+    color: var(--accent);
+    font-family: var(--heading-font);
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+/* Kind choices — warm, bookish, moss-bordered */
+[data-theme="kind"] .arc-choice {
+    font-family: var(--body-font);
+    font-size: 15px;
+    border-left: 3px solid color-mix(in srgb, var(--gold-dim) 35%, transparent);
+    border-radius: 2px;
+}
+[data-theme="kind"] .arc-choice:hover { border-left-color: var(--moss, #5a7a56); }
+[data-theme="kind"] .arc-choice-prefix {
+    color: var(--moss, #5a7a56);
+    font-family: var(--heading-font);
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+
+/* ================================================================
+   META CHOICES (subtle)
+   ================================================================ */
+.arc-meta-choice {
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 15%, transparent);
+    color: var(--text-muted);
+    font-family: var(--heading-font);
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.arc-meta-choice:hover {
+    border-color: color-mix(in srgb, var(--gold-dim) 30%, transparent);
+    color: var(--gold-dim);
+}
+
+
+/* ================================================================
+   CARD SPREAD
+   ================================================================ */
+.arc-card {
+    border: 1.5px solid var(--gold-dim);
+    border-radius: 6px;
+    background: var(--sidebar-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.arc-card:hover, .arc-card.selected {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--gold) 12%, transparent);
+}
+
+[data-theme="cyberpunk"] .arc-card { border-radius: 2px; border-color: color-mix(in srgb, var(--gold-dim) 40%, transparent); }
+[data-theme="cyberpunk"] .arc-card:hover, [data-theme="cyberpunk"] .arc-card.selected {
+    box-shadow: 0 0 24px color-mix(in srgb, var(--gold) 10%, transparent), 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+[data-theme="gothic"] .arc-card { border-radius: 4px; }
+[data-theme="gothic"] .arc-card:hover, [data-theme="gothic"] .arc-card.selected {
+    box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+[data-theme="kind"] .arc-card { border-radius: 5px; }
+[data-theme="kind"] .arc-card:hover, [data-theme="kind"] .arc-card.selected {
+    box-shadow: 0 0 16px color-mix(in srgb, var(--gold) 8%, transparent);
+}
+
+.arc-card-label {
+    font-family: var(--heading-font);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+/* ================================================================
+   CARD DETAIL PANEL
+   ================================================================ */
+.arc-card-detail {
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 20%, transparent);
+    padding: 24px;
+}
+
+[data-theme="cyberpunk"] .arc-card-detail { border-left: 3px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+[data-theme="gothic"] .arc-card-detail { border-left: 3px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+[data-theme="kind"] .arc-card-detail {
+    border-left: 3px solid color-mix(in srgb, var(--moss, #5a7a56) 40%, transparent);
+    border-radius: 2px;
+}
+
+
+/* ================================================================
+   STAT ROW (sidebar)
+   ================================================================ */
+.arc-stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--gold-dim) 10%, transparent);
+    font-family: var(--heading-font);
+    font-size: 12px;
+}
+
+.arc-stat-label { color: var(--text-muted); letter-spacing: 1px; }
+.arc-stat-value { color: var(--gold-dim); }
+
+
+/* ================================================================
+   TRUST METER
+   ================================================================ */
+.arc-trust-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+.arc-trust-dot.filled { background: var(--gold); }
+.arc-trust-dot.empty { background: color-mix(in srgb, var(--gold-dim) 20%, transparent); }
+
+[data-theme="cyberpunk"] .arc-trust-dot { width: 12px; height: 4px; border-radius: 1px; }
+
+/* Kind: rounded squares, moss-filled */
+[data-theme="kind"] .arc-trust-dot { width: 8px; height: 8px; border-radius: 2px; }
+[data-theme="kind"] .arc-trust-dot.filled { background: var(--moss, #5a7a56); }
+
+
+/* ================================================================
+   SECTION LABELS
+   ================================================================ */
+.arc-section-label {
+    font-family: var(--heading-font);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    padding: 0 16px 6px;
+}
+
+[data-theme="cyberpunk"] .arc-section-label.dream { color: var(--accent); }
+[data-theme="gothic"] .arc-section-label.dream { color: var(--accent); font-style: italic; }
+[data-theme="kind"] .arc-section-label.dream { color: var(--moss, #5a7a56); font-style: italic; }
+
+
+/* ================================================================
+   HEADER BUTTONS
+   ================================================================ */
+.arc-header-btn {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 25%, transparent);
+    color: var(--text-muted);
+    font-family: var(--heading-font);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.arc-header-btn:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold-light);
+}
+
+
+/* ================================================================
+   LANDING PAGE
+   ================================================================ */
+.arc-landing {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--reading-bg);
+    gap: 24px;
+}
+
+.arc-landing-title {
+    font-family: var(--heading-font);
+    font-size: 52px;
+    font-weight: 300;
+    letter-spacing: 14px;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-shadow: 0 0 40px color-mix(in srgb, var(--gold) 15%, transparent);
+    padding-left: 14px;
+}
+
+.arc-landing-subtitle {
+    font-family: var(--heading-font);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+}
+
+.arc-btn-primary {
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    border: 1px solid var(--gold-dim);
+    color: var(--sidebar-bg);
+    font-family: var(--heading-font);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 12px 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.arc-btn-primary:hover { filter: brightness(1.1); }
+
+.arc-btn-secondary {
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold-dim);
+    font-family: var(--heading-font);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 12px 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.arc-btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+
+/* ================================================================
+   ANIMATIONS
+   ================================================================ */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.arc-fade-in { animation: fadeIn 0.6s ease forwards; }
+
+/* Staggered paragraph reveal */
+.arc-stagger-p {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.arc-stagger-p.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Gothic: slightly slower, eerier reveal */
+[data-theme="gothic"] .arc-stagger-p {
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Kind: gentle, unhurried reveal */
+[data-theme="kind"] .arc-stagger-p {
+    transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+
+/* ================================================================
+   NOTES PANEL (sidebar)
+   ================================================================ */
+.arc-note {
+    padding: 8px 10px;
+    margin-bottom: 4px;
+    background: color-mix(in srgb, var(--accent) 4%, transparent);
+    border-left: 2px solid color-mix(in srgb, var(--gold-dim) 25%, transparent);
+}
+
+[data-theme="cyberpunk"] .arc-note { border-left-color: color-mix(in srgb, var(--accent) 25%, transparent); }
+[data-theme="gothic"] .arc-note { border-left-color: color-mix(in srgb, var(--accent) 30%, transparent); }
+[data-theme="kind"] .arc-note { border-left-color: color-mix(in srgb, var(--moss, #5a7a56) 30%, transparent); }
+
+.arc-note-text {
+    font-family: var(--body-font);
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.arc-note-source {
+    font-family: var(--heading-font);
+    font-size: 9px;
+    color: color-mix(in srgb, var(--gold-dim) 50%, transparent);
+    letter-spacing: 1px;
+}
+
+
+/* ================================================================
+   READER'S DESK: TABS
+   ================================================================ */
+.arc-tab-bar {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--gold-dim) 15%, transparent);
+    margin-bottom: 24px;
+}
+
+.arc-tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+    font-family: var(--heading-font);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.arc-tab:hover { color: var(--gold-light); }
+
+.arc-tab.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+    background: color-mix(in srgb, var(--gold) 6%, transparent);
+}
+
+.arc-tab-badge {
+    font-family: var(--heading-font);
+    font-size: 9px;
+    color: var(--sidebar-bg);
+    background: var(--gold-dim);
+    border-radius: 8px;
+    padding: 1px 6px;
+}
+
+
+/* ================================================================
+   READER'S DESK: STAT CARDS
+   ================================================================ */
+.arc-desk-stat {
+    flex: 1;
+    padding: 20px 16px;
+    text-align: center;
+    background: color-mix(in srgb, var(--accent) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 12%, transparent);
+}
+
+.arc-desk-stat-label {
+    font-family: var(--heading-font);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.arc-desk-stat-value {
+    font-family: var(--heading-font);
+    font-size: 32px;
+    color: var(--gold);
+    font-weight: 300;
+    line-height: 1;
+}
+
+.arc-desk-stat-sub {
+    font-family: var(--heading-font);
+    font-size: 11px;
+    color: var(--gold-dim);
+    margin-top: 6px;
+}
+
+
+/* ================================================================
+   READER'S DESK: XP BAR
+   ================================================================ */
+.arc-xp-track {
+    flex: 1;
+    height: 4px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.arc-xp-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    transition: width 0.5s ease;
+}
+
+.arc-xp-label {
+    font-family: var(--heading-font);
+    font-size: 11px;
+    color: var(--gold-dim);
+    min-width: 70px;
+    text-align: right;
+}
+
+
+/* ================================================================
+   READER'S DESK: CLIENT CARDS
+   ================================================================ */
+.arc-client-card {
+    padding: 20px 24px;
+    background: color-mix(in srgb, var(--accent) 3%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 18%, transparent);
+    border-left: 3px solid color-mix(in srgb, var(--gold-dim) 40%, transparent);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.arc-client-card:hover {
+    background: color-mix(in srgb, var(--gold) 5%, transparent);
+    border-color: color-mix(in srgb, var(--gold-dim) 30%, transparent);
+}
+
+.arc-client-card.special { border-left-color: color-mix(in srgb, var(--accent-light) 50%, transparent); }
+.arc-client-card.dimmed { opacity: 0.4; cursor: default; }
+.arc-client-card.dimmed:hover {
+    background: color-mix(in srgb, var(--accent) 3%, transparent);
+    border-color: color-mix(in srgb, var(--gold-dim) 18%, transparent);
+}
+
+.arc-client-name {
+    font-family: var(--heading-font);
+    font-size: 20px;
+    color: var(--gold-light);
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.arc-client-card.dimmed .arc-client-name { color: var(--text-muted); }
+
+.arc-client-flavor {
+    font-family: var(--body-font);
+    font-size: 14px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.6;
+    margin-top: 8px;
+}
+
+.arc-client-meta {
+    font-family: var(--heading-font);
+    font-size: 10px;
+    color: var(--gold-dim);
+    letter-spacing: 1px;
+}
+
+.arc-dream-tag {
+    font-family: var(--heading-font);
+    font-size: 10px;
+    color: var(--accent-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+
+/* ================================================================
+   READER'S DESK: NOTES
+   ================================================================ */
+.arc-desk-note {
+    padding: 12px 16px;
+    background: color-mix(in srgb, var(--accent) 3%, transparent);
+    border-left: 2px solid var(--gold-dim);
+    margin-bottom: 6px;
+}
+
+.arc-desk-note.anomaly { border-left-color: var(--accent-light); }
+.arc-desk-note.insight { border-left-color: var(--gold); }
+
+.arc-note-category-dot { width: 6px; height: 6px; border-radius: 3px; flex-shrink: 0; }
+
+.arc-note-category-label {
+    font-family: var(--heading-font);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: color-mix(in srgb, var(--gold-dim) 60%, transparent);
+    text-transform: uppercase;
+}
+
+.arc-filter-chip {
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 20%, transparent);
+    color: var(--text-muted);
+    font-family: var(--heading-font);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.arc-filter-chip.active {
+    background: color-mix(in srgb, var(--gold) 8%, transparent);
+    border-color: var(--gold-dim);
+    color: var(--gold-light);
+}
+
+
+/* ================================================================
+   READER'S DESK: ARTIFACTS
+   ================================================================ */
+.arc-artifact-card {
+    padding: 20px 24px;
+    background: color-mix(in srgb, var(--accent) 2%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 15%, transparent);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.arc-artifact-card:hover {
+    background: color-mix(in srgb, var(--accent-light) 5%, transparent);
+    border-color: color-mix(in srgb, var(--accent-light) 15%, transparent);
+}
+
+.arc-artifact-name { font-family: var(--heading-font); font-size: 18px; color: var(--gold-light); letter-spacing: 1px; margin-bottom: 6px; }
+.arc-artifact-origin { font-family: var(--heading-font); font-size: 10px; color: color-mix(in srgb, var(--gold-dim) 50%, transparent); letter-spacing: 1px; margin-top: 8px; }
+.arc-artifact-lore { font-family: var(--body-font); font-size: 16px; color: var(--text-muted); font-style: italic; line-height: 1.85; }
+
+.arc-artifact-provenance {
+    font-family: var(--heading-font);
+    font-size: 12px;
+    color: var(--gold-dim);
+    letter-spacing: 1px;
+    padding: 12px 16px;
+    background: color-mix(in srgb, var(--accent) 3%, transparent);
+    border-left: 2px solid color-mix(in srgb, var(--accent-light) 20%, transparent);
+}
+
+.arc-back-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--heading-font);
+    font-size: 12px;
+    color: var(--gold-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0 0 16px 0;
+    transition: color 0.2s ease;
+}
+
+.arc-back-link:hover { color: var(--gold-light); }
+
+
+/* ================================================================
+   SAVE/LOAD DIALOG
+   ================================================================ */
+.arc-dialog {
+    background: var(--sidebar-bg) !important;
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 25%, transparent);
+}
+
+
+/* ================================================================
+   SCROLLBAR
+   ================================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--gold-dim) 25%, transparent);
+    border-radius: 3px;
+}
+
+
+/* ================================================================
+   QUASAR / NICEGUI OVERRIDES
+   ================================================================ */
+.q-btn { text-transform: none !important; }
+.q-card { background: transparent !important; box-shadow: none !important; }
+.q-drawer { background: var(--sidebar-bg) !important; }
