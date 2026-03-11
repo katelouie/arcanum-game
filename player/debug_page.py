@@ -10,8 +10,17 @@ from nicegui import ui
 # Ensure game_logic is importable
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from arcanum_theme import divider, get_theme, heading, inject_stagger_script, inject_theme, motif
+from arcanum_theme import (
+    desk_artifact_detail,
+    divider,
+    get_theme,
+    heading,
+    inject_stagger_script,
+    inject_theme,
+    motif,
+)
 from card_renderer import render_svg_card_html, has_svg_card
+from game_logic.artifacts import ARTIFACTS
 from game_logic.tarot import Deck, Spread
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -343,6 +352,65 @@ def _build_deck_gallery():
     render_grid()
 
 
+def _build_artifact_gallery():
+    """Preview all defined artifacts with their full detail views."""
+    artifact_list = sorted(ARTIFACTS.values(), key=lambda a: a.origin_session)
+    detail_container = None
+    list_container = None
+
+    def show_detail(artifact):
+        detail_container.clear()
+        list_container.set_visibility(False)
+        detail_container.set_visibility(True)
+        with detail_container:
+            desk_artifact_detail(artifact.to_dict(), on_back=show_list)
+
+    def show_list():
+        detail_container.set_visibility(False)
+        list_container.set_visibility(True)
+
+    ui.label(
+        f"{len(artifact_list)} artifacts defined. Click to preview detail view."
+    ).style("font-size: 13px; color: var(--gold-dim); margin-bottom: 16px;")
+
+    detail_container = ui.element("div").classes("w-full")
+    detail_container.set_visibility(False)
+
+    list_container = ui.column().classes("w-full").style("gap: 8px;")
+    with list_container:
+        for art in artifact_list:
+            rarity_colors = {
+                "common": "var(--text-muted)",
+                "uncommon": "var(--gold-dim)",
+                "rare": "var(--gold)",
+                "legendary": "var(--gold-light)",
+            }
+            rarity_color = rarity_colors.get(art.rarity, "var(--text-muted)")
+
+            with ui.element("div").style(
+                "padding: 16px 20px; cursor: pointer; "
+                "border: 1px solid color-mix(in srgb, var(--gold-dim) 15%, transparent); "
+                "transition: all 0.2s ease;"
+            ).on("click", lambda a=art: show_detail(a)):
+                with ui.row().classes("items-center gap-3"):
+                    ui.label(art.name).style(
+                        "font-family: var(--heading-font); font-size: 16px; "
+                        f"color: {rarity_color}; letter-spacing: 1px;"
+                    )
+                    ui.label(art.rarity.upper()).style(
+                        f"font-size: 9px; color: {rarity_color}; "
+                        "letter-spacing: 2px; opacity: 0.7;"
+                    )
+                ui.label(art.description).style(
+                    "font-size: 13px; color: var(--text-muted); "
+                    "font-style: italic; margin-top: 4px;"
+                )
+                ui.label(art.origin_session).style(
+                    "font-size: 10px; color: var(--gold-dim); "
+                    "letter-spacing: 1px; margin-top: 6px; opacity: 0.5;"
+                )
+
+
 def register_debug_routes():
     """Register the /debug page and /debug/play route. Call from main module."""
     from bardic.runtime.engine import BardEngine
@@ -388,6 +456,7 @@ def register_debug_routes():
                 spreads_tab = ui.tab("Spreads")
                 deck_tab = ui.tab("Deck")
                 themes_tab = ui.tab("Themes")
+                artifacts_tab = ui.tab("Artifacts")
                 jump_tab = ui.tab("Quick Play")
 
             with ui.tab_panels(tabs, value=spreads_tab).classes("w-full").style(
@@ -401,6 +470,9 @@ def register_debug_routes():
 
                 with ui.tab_panel(themes_tab):
                     _build_theme_gallery()
+
+                with ui.tab_panel(artifacts_tab):
+                    _build_artifact_gallery()
 
                 with ui.tab_panel(jump_tab):
                     _build_quick_jump()
