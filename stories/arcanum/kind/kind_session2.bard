@@ -1,0 +1,3211 @@
+# ============================================================================
+# THE KIND — SESSION 2: "SOLID GROUND"
+# ============================================================================
+#
+# DREAM SCENARIO: Kind Of — a combo record shop & bookstore in Rewind, Oregon
+# NPC: Dev Anand Mehta — Carruth College junior, CS/math double major
+#
+# PREREQS: Session 1 complete (the_kind.sessions_completed >= 1)
+#
+# CATALYST: The dream returns. Unprompted, irresistible. You fall asleep
+#   and The Kind is there, the way it's always there, the way rain is
+#   always there in Rewind. Your shift starts at 4pm. You know this.
+#
+# CORE QUESTION: "Am I actually smart enough?"
+#   (Real answer: You were never given the right foundation.)
+#
+# THEME: Identity, impostor syndrome, the difference between ability
+#   and preparation. The system that failed you is not a reflection of you.
+#   Also: how media — books, music, even math — is how humans think
+#   about being human.
+#
+# TONE: Warm but sharper than Session 1. Dev is prickly where Ellen was
+#   open. The reading has to *earn* Dev's trust in a way Ellen's didn't,
+#   because Dev doesn't believe in this stuff and has been the person
+#   other people count on their entire life.
+#
+# SPREAD: "Solid Ground" (3-card)
+#   Position 1: What You're Carrying
+#   Position 2: What's Actually In The Way
+#   Position 3: What Strength You Don't See Yet
+#
+# CARD POOLS:
+#   Position 1: Ten of Wands / The Emperor / Knight of Pentacles
+#   Position 2: The Tower / Eight of Swords / Two of Swords
+#   Position 3: The Magician / Ace of Wands / Page of Cups
+#
+# REVERSAL CHANCE: 25% (slightly higher — Dev's situation is fraught)
+#
+# RECOMMENDATION STRUCTURE: Foundation / Wildcard / Impossible
+#   - Foundation (Delphi): *How to Prove It* by Daniel Velleman — the bridge
+#       course nobody gave Dev. Delphi diagnoses the gap.
+#   - Wildcard (Scout): Hiromi Uehara, *Spark* — music as a way back to
+#       the joy of complexity. Scout can't do math but he knows what
+#       mastery-plus-joy sounds like.
+#   - Impossible (Mal): A real analysis textbook by Terry Pratchett.
+#       From the deep shelves. From a timeline where Pratchett went to
+#       Cambridge for mathematics. Footnotes and all.
+#   - Failstate: Dev buys a secondhand copy of Rudin. White-knuckles it
+#       alone. The store gets a little colder.
+#
+# PATH VARIABLES:
+#   - foundation_influence (Delphi's path — the diagnosis, the right tool)
+#   - wildcard_influence (Scout's path — joy, music, the unexpected bridge)
+#   - impossible_influence (Mal's path — the deep shelves, the perfect book)
+#   - quality_score (overall reading quality — low score = failstate)
+#
+# BLEED-THROUGH OBJECT: A composition notebook page
+#   - Foundation: A page with a single proof, clean and clear, in
+#       handwriting you don't recognize but that feels like yours
+#   - Wildcard: A page with a proof AND a music recommendation scrawled
+#       in the margin in Scout's angular block print
+#   - Impossible: A page from a book that doesn't exist, with a Pratchett
+#       footnote that makes you laugh and then makes you understand
+#   - Failstate: A blank page. Lined. Waiting.
+#
+# DEV ANAND MEHTA:
+#   Junior, 20. CS/Math double major at Carruth College. Indian-American.
+#   Parents run Mehta's Kitchen on the road between Rewind and the
+#   highway — the kind of place truckers know about and Yelp doesn't.
+#   Grandparents barely literate. Parents didn't go to college.
+#   Dev is the first. Dev is the bet. Dev has been "the smart kid"
+#   since third grade and has never once in their life asked for help
+#   with schoolwork because there was nobody to ask.
+#
+#   Hit the wall in MATH 315: Introduction to Real Analysis. Not because
+#   they're not smart enough — because nobody taught them proof-based
+#   thinking. They went from computational calculus to baby Rudin with
+#   no bridge course. The system skipped a step and Dev thinks it's
+#   their fault.
+#
+# CREW DYNAMICS (Session 2):
+#   Scout: Has no idea what real analysis is. Asks. Somehow says
+#     something accidentally profound about trusting that music is
+#     going somewhere even when it sounds wrong.
+#   Mal: Recognizes Dev. Not literally — but the shape of the problem.
+#     Ex-ML engineer. Knows math. Knows the difference between
+#     understanding and performing understanding. This one is personal.
+#   Delphi: Sees the kid. Sees the weight. Asks the one question
+#     nobody else thought to ask: "What proof-based courses have you
+#     taken?" Diagnoses in three words what the system missed.
+#
+# ============================================================================
+
+:: TheKind.Session2.Start
+@py:
+# Initialize dream session
+session = create_session(the_kind)
+
+# Weather
+session.weather = random.choice(["rain", "rain", "heavy_rain", "light_rain", "wind_and_rain"])
+
+# Path influence tracking
+session.foundation_influence = 0    # Delphi's path (the diagnosis)
+session.wildcard_influence = 0      # Scout's path (the unexpected bridge)
+session.impossible_influence = 0    # Mal's path (the deep shelf pull)
+session.quality_score = 0           # Overall reading quality
+
+# Interpretation quality tracking
+session.interpretation_quality = {
+    'excellent': 0,
+    'good': 0,
+    'adequate': 0,
+    'poor': 0
+}
+
+# Track cards discussed
+session.discussed_cards = []
+
+# Dev's emotional state
+session.dev_openness = 1     # Starts guarded — doesn't want to be here
+session.dev_shame = 8        # High — failing for the first time in their life
+session.dev_hope = 3         # Low — starting to think they're not cut out for this
+
+# Crew state
+session.scout_engaged = False        # Becomes True when Scout connects
+session.delphi_diagnosed = False     # True once she asks the key question
+session.mal_personal = False         # True when Mal sees themselves in Dev
+
+# Store state (loaded from persistent)
+session.store_warmth = the_kind.store_warmth
+
+# Recommendation tracking
+session.recommendation = ""
+session.recommender = ""
+session.is_failstate = False
+session.dominant_path = ""
+session.reading_quality = ""
+@endpy
+
+# ============================================================================
+# THE DREAM RETURNS
+# ============================================================================
+
+You're at your reading table again. Shuffling. Not reading — just shuffling, the way you do when the day is done and the cards are the last thing your hands want to hold before sleep.
+
+The 7-inch single on the knick-knack shelf catches the lamplight.
+
+@if the_kind.session_one_recommendation == "Late Light":
+    You still can't read the smudged label. But sometimes, late at night, you think you can hear it — a low voice and strings, lifting.
+@elif the_kind.session_one_recommendation == "Songbird":
+    Warm to the touch, always. Even when the apartment is cold.
+@elif the_kind.session_one_recommendation == "Gilead":
+    No label. No grooves. But it smells like old paper and tea and certainty.
+@else:
+    Blank and patient. You don't know why you keep it. You don't know why you can't throw it away.
+@endif
+
+You blink.
+
+The cards go warm.
+
++ [Continue] -> TheKind.Session2.Awakening
+
+:: TheKind.Session2.Awakening
+
+The rain is heavier this time.
+
+@if session.weather == "heavy_rain":
+    Not Oregon's usual conversational drizzle — this is the emphatic kind, the rain that clears its throat and lectures. The gutters on Main Street are running full and the awning over Kind Of's front door is drumming like a snare. Through the big windows, the streetlights smear into long gold streaks on wet asphalt, and the sign — KIND, because the OF surrendered years ago — swings hard enough that you can hear the chain.
+@elif session.weather == "wind_and_rain":
+    Wind pushes the rain sideways, rattling the front windows in their frames. The old building leans into it the way it leans into everything — with the patience of a structure that's been rained on for eighty years and expects eighty more. The sign swings. Through the glass, you can see Frame of Mind's awning snapping like a sail, and the traffic light on the corner doing its inscrutable forty-five-second green-in-a-direction-nobody-drives.
+@elif session.weather == "light_rain":
+    A light, steady rain — the kind that barely registers as weather in Rewind. Through the big windows, campus is visible across the quad: Carruth College's handful of buildings glowing warm in the wet dark. The old stone library with the copper gutters gone green. The converted Victorian that houses the math department, its porch light on, a bicycle chained to the railing that has been there so long it might be structural.
+@else:
+    Rain. Oregon rain. The permanent kind that isn't a weather event so much as a regional personality trait. The sign reads KIND through the wet. Main Street glistens. Somewhere on campus, a classroom light is still on in Whitmore Hall — the building where office hours happen too late and too infrequently, where students leave feeling stupider than when they arrived because nobody in the math department has taken a pedagogy course since 1987.
+@endif
+
+You're behind the counter. Your mug — The Star — is warm in your hands. The register's 7 key sticks. The turntable has a record on it: something Scout put on before your shift, still in the run-out groove, the needle riding the silence at the center like a tiny patient pilgrim.
+
+The store is warm.
+
+@if the_kind.store_warmth >= 8:
+    Warmer than usual, actually. The Kind has been like this since your last dream — since Ellen, since the reading, since whatever happened in the deep shelves shifted something in the building's foundations. The pressed tin ceiling seems higher. The aisles seem to breathe more easily. Even the bead curtain hangs differently — less barrier, more invitation.
+@elif the_kind.store_warmth >= 6:
+    The Kind's usual warmth — the ambient hum of a place that likes what it holds. The pressed tin ceiling. The mismatched bookshelves. The vinyl bins with Scout's angular divider cards. Everything where it should be.
+@else:
+    The Kind is quieter than you remember. Not cold — The Kind is never cold — but subdued. Like a store that's thinking about something. The pressed tin ceiling absorbs the sound of rain rather than amplifying it. The aisles are still. Waiting.
+@endif
+
++ [Continue] -> TheKind.Session2.Crew_Evening
+
+:: TheKind.Session2.Crew_Evening
+
+The crew is mid-shift.
+
+**Scout** is behind the turntable, headphones around his neck, reorganizing the staff picks shelf for what you're fairly certain is the fourth time this week. He's pulled the divider card for "Gorgeous Disasters" — his curated shelf of albums that shouldn't work but do, filed by a taxonomy only he understands — and is having an argument with himself about whether Deafheaven's *Sunbather* belongs next to Björk's *Vespertine* or next to Swans' *Soundtracks for the Blind.*
+
+"It's a shoegaze record wearing a black metal costume," he's saying, to nobody, pacing between the bins. "But the *emotional* architecture is pure Björk. The screaming is just texture. Underneath it's all beauty and yearning and—"
+
+He catches you watching. Grins. "I need a ruling. Is *Sunbather* filed under catharsis or under disguise?"
+
+@if the_kind.session_one_recommender == "Scout":
+    His energy is different since the last dream. Quieter underneath the bounce. Like recommending *Late Light* to Ellen changed something in how he carries himself. He still talks too loud. He still gestures with records in both hands. But there's a steadiness now, a sureness, like a musician who just played the best gig of their life and knows it.
+@endif
+
+In the book stacks, **Mal** is doing inventory. You can hear the particular sound of their process: the soft pull of a spine from a shelf, the scratch of a pen in the composition notebook, the gentle return. They're in the section where fiction meets philosophy — the shelves where you might find Borges next to Wittgenstein next to Ursula Le Guin, because Mal catalogs by the *feeling* the work produces, not the genre it claims.
+
+@if the_kind.session_one_recommender == "Mal":
+    Mal has been deeper in the stacks lately. Not just the regular shelves — the ones that go further back than the building should allow. You've seen them emerge with dust on their jacket and titles you can't read and a particular expression that means they've found something that isn't supposed to exist. They don't explain. They just shelve it and update the notebook.
+@endif
+
+Tonight, their rain jacket hangs on the office door — three enamel pins on the strap, same as always: a white whale, a Borges labyrinth, a semicolon — but there's something new pinned next to them. An angle bracket. `>`. A command prompt. Or a proof notation. Or both.
+
+**Delphi** is at the counter, reading a zine someone left in the free pile — hand-stapled, photocopied, something about the mycorrhizal networks under Carruth's campus and how the old-growth root systems connect every tree on the quad to every tree in the surrounding forest. She reads it the way she reads everything: slowly, completely, like it might be the most important thing she'll encounter this week and she's not going to insult it by skimming.
+
+@if the_kind.session_one_recommender == "Delphi":
+    She looks up when you come in. Gives you the nod — the one that means *I know you. I know what we did. Welcome back.* She pours your tea without asking. Pu-erh, because she remembers.
+@else:
+    She looks up when you come in. "Kettle's on. There's that genmaicha Scout found — tastes like popcorn and smells like a temple." She slides your mug across the counter. The Star.
+@endif
+
+The evening settles. The rain makes its case against the roof. Scout resolves the Deafheaven question by filing it under both categories with a handwritten note that says "SEE ALSO" in capitals so aggressive they're practically shouting.
+
+This is your shift. This is your store. You belong here the way the rain belongs.
+
+The bell on the door rattles.
+
+But it doesn't open.
+
++ [Wait] -> TheKind.Session2.Dev_Almost
+
+:: TheKind.Session2.Dev_Almost
+
+Through the front window, someone is standing under the awning. Not coming in. Not leaving. Just... standing there, phone in hand, looking at the door like it's an equation they can't solve.
+
+Young. College-age. A rain jacket that's doing its best but losing the argument — soaked through at the shoulders, water dripping from the hood. A backpack that sits heavy on their frame, the kind of heavy that isn't just textbooks. They're staring at the store's hours sign with the fixed intensity of someone who is absolutely not going to cry on Main Street.
+
+Delphi clocks it. You see her eyes track to the window and stay there. The zine lowers half an inch.
+
+Scout notices Delphi noticing and follows her gaze. "Someone's out there."
+
+"Give them a minute," Delphi says.
+
+Through the glass, the kid looks at their phone. Looks at the door. Looks at their phone. Their thumb moves — scrolling something. Reviews, maybe. Or a course syllabus. Or a text thread they're reading instead of answering.
+
+The door rattles again. This time it opens.
+
++ [Continue] -> TheKind.Session2.Dev_Arrives
+
+# ============================================================================
+# DEV ARRIVES
+# ============================================================================
+
+:: TheKind.Session2.Dev_Arrives
+
+The door sticks — it always sticks — and then opens with the rattle-and-bell, and **Dev** is inside, dripping, blinking in the warm light like someone who just stepped from one atmosphere into another.
+
+Twenty, maybe twenty-one. Brown skin, dark eyes, short hair pushed back from his forehead where the rain plastered it. A Carruth College hoodie under the rain jacket — the maroon one they sell at the campus bookstore, with the oak tree logo that Dev's roommate says looks like a broccoli. Wire-rimmed glasses, slightly fogged from the temperature change. He takes them off, wipes them on his hoodie, puts them back on.
+
+The backpack comes off first. He sets it on the floor by the door with the careful relief of someone unburdening a small suitcase full of bricks. You can see the outline of textbooks through the fabric. Many textbooks. The backpack of a person who carries everything they need because they learned early that nobody else is going to carry it for them.
+
+He stands in the entrance and looks around The Kind with the expression of someone who has walked past this store a hundred times on the way to Mehta's Kitchen — his family's restaurant, on the Rewind road, between the auto parts store and the trailhead, the kind of place where the daily special is written in his dad's handwriting and the chai is a family recipe and the truckers tip well because the food is honest — and never once came in because from the outside it looks like a place for People Who Already Know What They're Looking For.
+
+He does not look like a person who knows what they're looking for. He looks like a person who has been looking for something in the wrong building for three weeks and has run out of buildings.
+
+"Hi." His voice is flatter than his face. Controlled. The voice of someone who has practiced sounding fine. "Do you have—" He stops. Recalibrates. "I'm looking for a textbook. *Principles of Mathematical Analysis* by Walter Rudin. The library's out and I need it by Thursday."
+
+Scout, from the staff picks shelf: "We've got textbooks in the back. Academic section is past the listening station, left at the Borges."
+
+"Left at the... what?"
+
+"The Borges shelf. You'll know it — it's the one where the spines don't quite line up with reality."
+
+Dev stares at Scout with the expression of a CS major encountering an API with no documentation.
+
++ ["I can show you. Follow me."] -> TheKind.Session2.Show_Dev
++ ["Rudin, huh? What class?"] -> TheKind.Session2.Ask_Class
++ [Watch. See what Delphi does.] -> TheKind.Session2.Delphi_Reads_Dev
+
+:: TheKind.Session2.Show_Dev
+"I can show you. Follow me."
+
+You lead Dev past the vinyl bins, past the listening station with its tangled headphones, past the shelf where Borges sits next to a book about mycorrhizal networks and a collection of Escher prints — the shelf where the spines do, in fact, seem to shift slightly when you're not looking directly at them.
+
+The academic section is small but specific: shelves of textbooks organized not by subject but by Mal's emotional resonance system. Mathematics lives between music theory and linguistics, because all three are "languages humans invented to describe patterns they can't say in words" (Mal's composition notebook, volume 4, page 87).
+
+Dev scans the spines. His hand moves fast — he knows how to search a shelf.
+
+"I don't see Rudin."
+
+"We might have it in the back. But—"
+
+"That's fine. I'll just—" He's already reaching for his backpack. Ready to leave.
+
+~ session.quality_score += 1
+
++ ["Before you go — can I ask what class this is for?"] -> TheKind.Session2.Class_Question
++ ["Hang on. Mal knows the math section better than anyone. Let me ask."] -> TheKind.Session2.Get_Mal
+
+:: TheKind.Session2.Ask_Class
+"Rudin, huh? What class?"
+
+Dev's guard flickers. The question is simple but it's also *attention*, which he wasn't expecting.
+
+"MATH 315. Introduction to Real Analysis. Professor Kessler."
+
+From the book stacks, the sound of Mal's pen stopping. A data point.
+
+"Kessler." Delphi, from behind the counter. "She's the one who assigns Rudin to undergrads without a proof-writing prerequisite."
+
+Dev turns. "You know Professor Kessler?"
+
+"I know her syllabus. Three students a semester come in here looking for exactly what you're looking for." Delphi pauses. "Not Rudin. *Help.*"
+
+Dev's jaw tightens. "I don't need help. I need the textbook."
+
+"Mm." Delphi picks up her zine. "Academic section is past the listening station. Left at the Borges."
+
+~ session.foundation_influence += 1
+~ session.quality_score += 1
+~ session.delphi_diagnosed = True
+
++ [Continue] -> TheKind.Session2.Dev_Browses
+
+:: TheKind.Session2.Delphi_Reads_Dev
+You don't say anything. You watch Delphi instead.
+
+She's studying Dev the way she studies a card spread — not the individual elements but the pattern. His posture. The weight distribution. The way he said "I need it by Thursday" — not "I want" but "I need," with the emphasis on *Thursday*, which means a midterm, which means a deadline, which means this isn't a casual browse, this is a crisis dressed up as an errand.
+
+Delphi sets the zine down. She reaches for the kettle. Pours a mug — not her mug, a fresh one, one of the extras from the shelf behind the counter. Slides it to the edge, not toward Dev, just... available. Like a book left face-up on a table. Take it or don't. No pressure.
+
+"Academic section is past the listening station," she says. "Left at the Borges. But if you've got a minute, we probably have something better than Rudin for what you actually need."
+
+Dev: "I need Rudin. That's what's on the syllabus."
+
+"I know what's on the syllabus." Delphi meets his eyes. Not unkind. Not pushy. Just certain. "I'm asking if you've got a minute."
+
+He's going to say no. You can see it forming. But something about the store — the warmth, the rain, the smell of old paper and Lola's verde burritos through the vent — undoes the no before it arrives.
+
+"...sure. Yeah. I've got a minute."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.dev_openness += 1
+~ reader.empathy += 1
+
++ [Continue] -> TheKind.Session2.Dev_Sits
+
+:: TheKind.Session2.Get_Mal
+"Hang on. Mal knows the math section better than anyone."
+
+You call into the stacks. "Mal? Got a student looking for Rudin."
+
+A pause. The sound of a composition notebook closing. Footsteps — precise, unhurried, the sound of someone who navigates the stacks not by sight but by some internal map that updates in real time.
+
+Mal appears at the end of the aisle. They look at Dev. Dev looks at them.
+
+Something passes between them. Not recognition — not literally. But Mal sees something in Dev's posture, in the heaviness of the backpack, in the careful control of the voice, that makes them stop. Their eyes narrow. Not suspicion. *Identification.*
+
+"We don't carry Rudin," Mal says. "On principle."
+
+Dev: "On... principle?"
+
+"It's a brilliant book written for people who already understand the material. As pedagogy, it's an act of violence." Mal pauses. "What class?"
+
+"MATH 315."
+
+"Kessler."
+
+"Yeah."
+
+Mal looks at you. Then at Delphi. Then back at Dev. "Come sit down. I want to ask you something."
+
+~ session.impossible_influence += 1
+~ session.quality_score += 1
+~ session.mal_personal = True
+
++ [Continue] -> TheKind.Session2.Dev_Sits
+
+:: TheKind.Session2.Class_Question
+"Before you go — can I ask what class this is for?"
+
+Dev stops. Backpack half-shouldered. "MATH 315. Real Analysis."
+
+"Professor Kessler?"
+
+The fact that you know the professor's name does something. His guard shifts — not down, but sideways. Curiosity replacing dismissal.
+
+"Yeah. How did you—"
+
+"Small town. Small college." You shrug. "We get a lot of Carruth students in here."
+
+From behind the counter, Delphi: "Kessler assigns Rudin without a proof-writing prerequisite. We see this every fall."
+
+Dev puts the backpack down. Slowly. "Every fall?"
+
+"Every fall. You're not the first and you won't be the last."
+
+~ session.foundation_influence += 1
+~ session.quality_score += 1
+
++ [Continue] -> TheKind.Session2.Dev_Browses
+
+:: TheKind.Session2.Dev_Browses
+Dev finds the academic section. Scans the math shelf — which lives between music theory and linguistics, because of Mal — and doesn't find Rudin.
+
+He stands there for a moment. You can see it: the specific defeat of a person who had one plan and the plan just failed. It's a small defeat, trivial — a textbook not being on a shelf — but it lands on top of all the other defeats of the last three weeks and the cumulative weight shows in his shoulders.
+
+He picks up a different book. Turns it over. Sets it down. Picks up another one. He's browsing now, which means the errand has failed and he doesn't want to leave yet, which means the store is doing the thing the store does: holding people who don't know they need to be held.
+
+Mal materializes at the end of the aisle. They do this — appear without announcement, already in the middle of a thought.
+
+"That one's not going to help you."
+
+Dev looks at the book in his hands. Looks at Mal. "I'm just browsing."
+
+"You're panicking. There's a difference." Mal says this the way they say everything: precisely, without judgment, like they're logging an observation. "Rudin is what's on the syllabus. What's the actual problem?"
+
+Dev stares at them. For a long moment, nothing happens. And then — because Mal asked the question that way, with the flatness of a person who isn't going to flinch at the answer — the dam cracks.
+
+"I can't do the proofs."
+
+It comes out fast. Quiet. Like something he's been holding in his chest for weeks.
+
+"I can do everything else. I can compute. I can code. I wrote a neural net in PyTorch last semester and it *worked.* But the proofs — the epsilon-delta — I read them and I understand every word individually and then the whole thing just—" He gestures. A collapse. "I don't know how to *think* like that. Everyone else in the class seems to just... know. Like they were born knowing how to do this."
+
+Mal: "They weren't."
+
+"Then how—"
+
+"They took a proof-writing course. Probably MATH 201 or something equivalent. A transition course. The bridge between computation and abstraction."
+
+Dev goes still. "There's a... bridge course?"
+
+"There's supposed to be. Some programs require it. Kessler's doesn't."
+
+~ session.mal_personal = True
+~ session.dev_openness += 2
+~ session.dev_shame -= 1
+~ session.impossible_influence += 1
+
++ [Continue] -> TheKind.Session2.Dev_Sits
+
+:: TheKind.Session2.Dev_Sits
+
+They end up in the reading nook. Not because anyone planned it — because the conversation drifted there the way conversations drift in The Kind, pulled by the same soft gravity that makes the aisles go deeper than they should and the bookshelves rearrange themselves when nobody's looking.
+
+Dev sits in the chair where Ellen sat. The colored lamplight falls across his hands, his rain-soaked hoodie, the wire-rimmed glasses that keep fogging in the warmth. He's holding the mug Delphi left at the edge of the counter — he picked it up without deciding to, the way you pick up a warm thing when you're cold.
+
+The crew arranges itself. Scout drifts to the vinyl bins nearest the bead curtain, like last time — but now he's actually listening, actually paying attention, instead of pretending to alphabetize. Delphi angles herself at the counter where she can hear. Mal stands at the end of the book aisle, composition notebook in hand, pen uncapped.
+
+@if not session.delphi_diagnosed:
+    Delphi, from behind the counter: "Dev. What proof-based math courses have you taken before 315?"
+
+    The question lands like a diagnosis. Dev blinks.
+
+    "I... none? I took calc 1, 2, 3, linear algebra, discrete math—"
+
+    "All computational."
+
+    "Yeah."
+
+    Delphi looks at you. The look says: *There it is.* Not *I told you so* — Delphi doesn't do that. Just: *now you see the shape of it.*
+
+    "So nobody taught you how to write proofs, and they put you in analysis."
+
+    Dev: "Is that... is that not normal?"
+
+    "It's normal for Kessler's section. It's not good."
+
+    ~ session.delphi_diagnosed = True
+    ~ session.foundation_influence += 2
+    ~ session.dev_shame -= 2
+@endif
+
+Something opens. Not dramatically — Dev isn't dramatic. But the tight control loosens one notch. He takes a sip of tea. Looks at the reading nook. At the cards on the table.
+
+"What is this? Like... what do you do here?"
+
+"Tarot readings. I'm the store's reader."
+
+Dev: "Like, fortune telling?"
+
+"Like sitting with someone and using cards to ask better questions than the ones they walked in with."
+
+He almost smiles. Almost. "That sounds like something my mom would say. She does this thing at the restaurant — someone comes in and says 'I want the chicken tikka' and she looks at them and she goes 'you want the dal.' And they go 'no, I want the chicken tikka.' And she brings them the dal. And they love it. Every time."
+
+Scout, from behind the vinyl bins: "Your mom sounds incredible."
+
+"She is." Dev's voice shifts. Softer. The kid-voice underneath the college-voice. "She doesn't know anything about real analysis, though."
+
+"Neither does Scout," Delphi says.
+
+"Hey—" Scout starts.
+
+"What's real analysis?" Scout finishes, because he was going to ask anyway.
+
+Dev looks at him. Decides to take it seriously. "It's... okay. So in calculus, you learn that the limit of a function as x approaches some value equals some other value. And it works. You compute it, you get the answer, you move on. Real analysis is where they make you *prove why it works.* Like, rigorously. With symbols and logic. You have to show that for every epsilon — that's like, any tiny positive number — there exists a delta—"
+
+He stops. Rubs his face.
+
+"It sounds like jazz," Scout says.
+
+Dev: "It is *nothing* like jazz."
+
+"No, I mean—" Scout steps out from behind the bins. "The part where you have to trust that it's going somewhere even when it sounds wrong. Like when Coltrane is doing the sheets of sound thing and you're like 'this is chaos' but if you stay with it, if you let it *go where it's going*, it resolves into something that makes your chest hurt."
+
+Dev stares at him.
+
+"I don't know what epsilon-delta is," Scout says. "But I know what it sounds like when someone is building something complicated and beautiful and you can't see the shape yet because you're standing too close."
+
+~ session.scout_engaged = True
+~ session.wildcard_influence += 1
+
+A silence. The reading nook kind of silence — the kind where something just shifted and everyone felt it.
+
+You look at Dev. At the cards on the table. At the colored lamplight.
+
++ ["Can I do a reading for you?"] -> TheKind.Session2.Offer_Reading
++ ["I think the store wants to help you. Let me show you how."] -> TheKind.Session2.Offer_Reading_Mystical
++ [Wait. Let the silence do the work.] -> TheKind.Session2.Offer_Reading_Silence
+
+:: TheKind.Session2.Offer_Reading
+"Can I do a reading for you? Not fortune-telling — just... a way to look at this from a different angle."
+
+Dev: "I don't really believe in—"
+
+He stops. Because he was about to say "this stuff" in a store that has aisles that go deeper than they should, in a building where a music guy just described his mathematical crisis in terms of Coltrane, in a reading nook that smells like rain and old paper and patchouli and verde burritos from next door and the quiet, impossible warmth of a place that shouldn't exist the way it does.
+
+"...okay. Yeah. Why not."
+
+~ session.quality_score += 1
+
+-> TheKind.Session2.Reading_Setup
+
+:: TheKind.Session2.Offer_Reading_Mystical
+"I think the store wants to help you."
+
+You don't know why you said it like that. Like the store is a thing with wants. But Dev looks around — at the shelves that breathe, at the aisles that go deeper than the building allows, at the pressed tin ceiling that seems to lean in — and something in his expression says he doesn't find it as strange as he should.
+
+"The store."
+
+"It does this. It brings people what they need. Sometimes that's a record. Sometimes it's a book. Sometimes it's a reading."
+
+Dev: "A tarot reading."
+
+"A conversation with cards in the middle. The cards don't know math. But they're pretty good at knowing people."
+
+He looks at the deck on the table. Looks at you. "My grandmother would say this is puja." He pauses. "She'd mean it as a compliment."
+
+~ session.impossible_influence += 1
+~ session.quality_score += 1
+~ session.dev_openness += 1
+
+-> TheKind.Session2.Reading_Setup
+
+:: TheKind.Session2.Offer_Reading_Silence
+You don't say anything. You just sit with the cards in front of you and let the reading nook do what it does.
+
+Dev looks at the table. At the deck. At the colored lamplight on the worn hardwood. The silence stretches, but it doesn't break — it *holds.* The way a rest in music holds, the way a proof holds, the way a good store holds the people who wander into it.
+
+"Are those tarot cards?"
+
+"Yeah."
+
+"Do you... do you do readings?"
+
+"If you want."
+
+He sits with it. The CS major in him wants to dismiss it. The part of him that grew up watching his grandmother light incense and say prayers in a language he only half-understands — the part that knows there are ways of knowing that don't compile — that part is curious.
+
+"I don't know what I want," he says. "I just know that nothing I've been doing is working."
+
+"That's a good place to start."
+
+~ session.quality_score += 2
+~ session.dev_openness += 2
+~ reader.empathy += 1
+
+-> TheKind.Session2.Reading_Setup
+
+:: TheKind.Session2.Reading_Setup
+You pick up the deck. Shuffle. The cards feel different when you shuffle them for someone who doesn't believe — not resistant, just attentive. Like they're listening harder.
+
+"Three cards. A spread called 'Solid Ground.'"
+
+Dev: "Solid Ground?"
+
+"What you're carrying. What's actually in the way. And what strength you don't see yet."
+
+You lay the deck on the table. The colored lamplight catches the edges.
+
+"This isn't about math. It's not about Rudin or Kessler or epsilon-delta. It's about *you.* The math is just where it's showing up."
+
+Dev looks at the three face-down cards. His jaw works.
+
+"I've never done this before."
+
+"You've never needed to before."
+
+Behind you, the store settles into its listening mode. Scout leans against the vinyl bins, arms crossed, headphones around his neck. Delphi sets down her mug — both hands on the counter, the posture of full attention. Mal's pen hovers over the composition notebook, ready.
+
+"Ready?" you ask.
+
+Dev takes a breath. The first real breath you've seen him take since he walked in.
+
+"Yeah."
+
++ [Turn the first card] -> TheKind.Session2.CardDraw
+
+# ============================================================================
+# CARD DRAW
+# ============================================================================
+
+:: TheKind.Session2.CardDraw
+@py:
+# Card pools for each position
+# Reversal chance: 0.25 (slightly higher than S1 — Dev's situation is fraught)
+position_1_deck = Deck(cards=["Ten of Wands", "The Emperor", "Knight of Pentacles"], reversals=[0.25, 0.25, 0.25])
+position_2_deck = Deck(cards=["The Tower", "Eight of Swords", "Two of Swords"], reversals=[0.25, 0.25, 0.25])
+position_3_deck = Deck(cards=["The Magician", "Ace of Wands", "Page of Cups"], reversals=[0.25, 0.25, 0.25])
+
+reading = Reading(spread_id="solid-ground", decks=[
+    position_1_deck,
+    position_2_deck,
+    position_3_deck
+])
+
+cards = reading.draw_cards()
+@endpy
+
+@render render_reading(reading=reading)
+
+You lay down three cards in a line. Left to right. The colored lamplight catches each one as it lands on the worn hardwood.
+
+**Position 1 (What You're Carrying):** {cards[0].name}{cards[0].reversed ?  — Reversed | }
+**Position 2 (What's Actually In The Way):** {cards[1].name}{cards[1].reversed ?  — Reversed | }
+**Position 3 (What Strength You Don't See Yet):** {cards[2].name}{cards[2].reversed ?  — Reversed | }
+
+Dev studies them the way he'd study code — looking for structure, for logic, for the thing that makes the whole system cohere. His glasses reflect the lamplight. His hands are in his lap, not clasped like Ellen's were — fisted. The knuckles of someone who has been gripping something too hard for too long.
+
+"I don't know what any of these mean," he says.
+
+"That's fine. That's my job."
+
+He almost smiles. "Okay. Show me."
+
++ [Begin with Position 1 — What You're Carrying] -> TheKind.Session2.Position1_Hub
+
+# ============================================================================
+# POSITION 1: WHAT YOU'RE CARRYING
+# ============================================================================
+
+:: TheKind.Session2.Position1_Hub
+~ session.discussed_cards.append(cards[0].name)
+@render render_reading(reading=reading, highlight=0)
+
+You touch the first card.
+
+**Position 1: What You're Carrying**
+**{cards[0].name}**{cards[0].reversed ?  (Reversed) | }
+
+@if cards[0].name == "Ten of Wands":
+    -> TheKind.Session2.P1_TenWands
+@elif cards[0].name == "The Emperor":
+    -> TheKind.Session2.P1_Emperor
+@else:
+    -> TheKind.Session2.P1_KnightPentacles
+@endif
+
+# --- TEN OF WANDS ---
+
+:: TheKind.Session2.P1_TenWands
+@if cards[0].reversed:
+    The Ten of Wands — reversed. A figure bent under a bundle of ten staves, but upside down, the staves are falling. Letting go, or falling apart. The burden shifting.
+
+    Dev looks at it. "That person is having a bad time."
+
+    "That person is carrying everything themselves. Reversed means something about that is changing. Or needs to."
+
+    Scout, from the vinyl bins, tilts his head. He's looking at the card the way he looks at an album cover — reading the visual composition, the posture, the story in the image. His hand goes to his headphones, a reflex. When Scout encounters something heavy, he reaches for music.
+
+    Behind the counter, Delphi pours herself a fresh cup. Slowly. The way she does when she's about to say something she's been thinking for a while but hasn't. She doesn't say it yet. The tea steeps.
+
+    + ["Reversed, this card is asking what happens if you put some of those staves down. Not all of them — I know you can't put all of them down. But what if the load is supposed to be shared? What if carrying everything alone isn't strength — it's just what you learned because there was nobody else to carry it?"] -> TheKind.Session2.P1_TenWands_R_Empathic
+    + ["Ten of Wands reversed often means a burden being released — or needing to be. You've been carrying this alone. Not just the math. The whole thing. Being the first one in your family to do this, with nobody ahead of you on the trail to say 'here's where it gets steep, here's where you need to rest.' That's what this card sees."] -> TheKind.Session2.P1_TenWands_R_Reframing
+    + ["This card reversed means you're overburdened. Have you considered dropping a class?"] -> TheKind.Session2.P1_TenWands_R_Blunt
+    + ["Reversed Ten of Wands means the pressure is easing. Things should get lighter soon."] -> TheKind.Session2.P1_TenWands_R_Vague
+@else:
+    The Ten of Wands. A figure bent under a bundle of ten staves, carrying them alone, unable to see the road ahead because the load blocks the view. Burden. Responsibility. The weight of doing everything yourself because you don't know any other way.
+
+    Dev stares at it. His jaw tightens. Something about the image — the solitary figure, the impossible load, the road ahead invisible under the weight — hits a frequency he recognizes.
+
+    Scout sees it land. He takes a step back from the vinyl bins, giving the moment room, the way a sound engineer pulls a fader back to let a vocal breathe. His hand rests on a record spine — not fidgeting, anchoring.
+
+    Mal's pen stops. They're watching Dev's hands. The fists. Mal knows hands — they catalog people the way they catalog books, by what the body says when the mouth is being careful.
+
+    Delphi doesn't move. But the quality of her stillness deepens. She's reading Dev reading the card, the same way she read Ellen reading The Empress. Looking for the crack where the light gets in.
+
+    + ["This card is about carrying everything alone. Not because you're a martyr — because you literally don't know another way. You've been the person your family counts on since you were old enough to be counted on. The smart one. The one who's going to make it. And now you're in a class where 'making it' requires a kind of thinking nobody taught you, and you can't tell your parents because they'd worry, and you can't tell your professors because they seem like they were born knowing this, and you can't tell your friends because—"] -> TheKind.Session2.P1_TenWands_U_Empathic
+    + ["Ten wands. Count them — ten separate obligations this person is carrying, and not one of them is optional, and not one of them is somebody else's. That's not a workload. That's an identity. You *are* the person who carries things. The question this card asks is: who carries *you?*"] -> TheKind.Session2.P1_TenWands_U_Poetic
+    + ["This card represents being overburdened. You're taking on too much. Maybe the double major is too ambitious right now."] -> TheKind.Session2.P1_TenWands_U_Practical
+    + ["Heavy card. You're carrying a lot right now."] -> TheKind.Session2.P1_TenWands_U_Vague
+@endif
+
+# Ten of Wands — Upright interpretations
+
+:: TheKind.Session2.P1_TenWands_U_Empathic
+"This card is about carrying everything alone. Not because you're a martyr — because you literally don't know another way."
+
+Dev's breathing changes. Shorter. You're close to something.
+
+"You've been the person your family counts on since you were old enough to be counted on. The smart one. The one who's going to make it. And now you're in a class where 'making it' requires a kind of thinking nobody taught you—"
+
+"Nobody taught me *anything,*" Dev says. Fast. Involuntary. Like it escaped. "I mean — my parents taught me everything. Work ethic, discipline, how to show up. But the academic stuff — the how-to-study, the how-to-ask-for-help, the 'go to office hours, go to the tutoring center, ask a classmate' — I didn't have that. My mom didn't go to college. My dad didn't go to college. My grandparents—" He stops. His voice has gone rough. "I figured everything out myself. Since third grade. And it *worked.* Until it didn't."
+
+The store is very quiet. Outside, the rain intensifies — the heavy Oregon rain that makes the windows run like they're crying on your behalf so you don't have to.
+
+From the vinyl bins, Scout exhales. Quiet. The sound he makes when a lyric lands and he needs a second.
+
+Mal writes something in the composition notebook. One word. You can't see it, but you can hear the single deliberate pen-stroke: one word, underlined.
+
+~ session.foundation_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 2
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_TenWands_U_Poetic
+"Ten wands. Count them."
+
+Dev's eyes go to the card. The figure, bent, carrying ten staves that obscure the path ahead.
+
+"Ten separate obligations this person is carrying, and not one of them is optional, and not one of them is somebody else's. That's not a workload. That's an *identity.* You *are* the person who carries things."
+
+You let that sit.
+
+"The question this card asks is: who carries *you?*"
+
+Dev opens his mouth. Closes it. Opens it again. "Nobody." It comes out quiet. Not self-pitying — factual. The way you'd state a theorem. "My parents carry the restaurant. Sixteen hours a day, six days a week. My grandparents — my dadi can't read English. She signs her name with an X at the bank. I'm the one who does their taxes. I've done their taxes since I was sixteen."
+
+He takes off his glasses. Wipes his eyes with his hoodie sleeve. Puts them back on.
+
+"I'm not complaining. I love them. They work harder than anyone I've ever met. But they can't help me with this. And I don't know how to need help I can't get."
+
+Behind the counter, Delphi closes her eyes. Just for a moment. When she opens them, there's something fierce in them — not anger at Dev, but anger *for* Dev. At the system that puts a kid like this in Rudin's book without a bridge and calls it rigor.
+
+~ session.impossible_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 4
+~ session.dev_shame -= 1
+~ session.store_warmth += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_TenWands_U_Practical
+"This card represents being overburdened. You're taking on too much. Maybe the double major is too ambitious right now."
+
+Dev's guard goes back up. Instantly. You can see it — the walls, the control, the flat careful voice.
+
+"I'm not dropping the major."
+
+"I'm not saying you should, I'm just—"
+
+"I'm. Not. Dropping. The major." Each word a brick in a wall.
+
+Behind the counter, Delphi winces. Imperceptibly, but it's there. Scout suddenly becomes very interested in a Yo La Tengo album that was already perfectly filed.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+~ session.dev_openness -= 2
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_TenWands_U_Vague
+"Heavy card. You're carrying a lot right now."
+
+Dev waits for more. More doesn't come.
+
+"Yeah," he says. "I know."
+
+The reading nook is quiet. Not the productive quiet — the awkward quiet of a moment that should have been more.
+
+Mal's pen taps once. Not writing. Waiting.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+# Ten of Wands — Reversed interpretations
+
+:: TheKind.Session2.P1_TenWands_R_Empathic
+"Reversed, this card is asking what happens if you put some of those staves down."
+
+Dev: "I can't—"
+
+"Not all of them. I know you can't put all of them down. But what if the load is supposed to be shared?"
+
+His hands unclench. Slightly.
+
+"What if carrying everything alone isn't strength — it's just what you learned because there was nobody else to carry it?"
+
+The word *learned* does something. Dev is a smart kid — the kind of smart that hears a reframing and can't unhear it. The carrying-as-learned-behavior instead of carrying-as-virtue. A program he's been running since third grade, when he realized that his parents couldn't help with the math homework and his teacher couldn't explain it in a way that made sense and so he just... figured it out. Alone. At the kitchen table at Mehta's Kitchen, between the dinner rush and closing, with the sound of his dad's voice calling orders in Marathi and the sizzle of the tandoor and his mom wiping down tables and Dev with a textbook he'd checked out from the library because they couldn't afford to buy it.
+
+"I'm good at carrying things," he says. Quiet. "I don't know how to not."
+
+"That's what this card sees."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 2
+~ session.dev_shame -= 1
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_TenWands_R_Reframing
+"Ten of Wands reversed often means a burden being released — or needing to be."
+
+You look at Dev. At the heaviness in his frame that isn't just the rain.
+
+"You've been carrying this alone. Not just the math. The whole thing. Being the first one in your family to do this, with nobody ahead of you on the trail to say 'here's where it gets steep, here's where you need to rest.'"
+
+Dev goes still. The stillness of someone who just heard their own story told back to them by a stranger.
+
+"My roommate's dad is an engineer," Dev says. "He calls his dad when he's stuck on problem sets. Just... calls him. And his dad helps. Like it's nothing."
+
+He stares at the card.
+
+"I didn't even know that was a thing people did."
+
+From the back of the store, the sound of Mal's footsteps stopping. They've been moving through the stacks — you can track Mal by sound the way you track weather, by shifts in pressure — and now they've stopped. They heard that. You know they heard that because three years ago, Mal was a junior ML engineer at a startup in Portland, debugging a neural architecture at 2am because they were the only person on the team without a Stanford pedigree and they thought asking for help meant admitting they didn't belong. They quit six months later. Not because the work was too hard — because the loneliness of pretending it wasn't hard was worse than the work itself.
+
+~ session.impossible_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 2
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_TenWands_R_Blunt
+"This card reversed means you're overburdened. Have you considered dropping a class?"
+
+Dev's expression closes like a book. "No."
+
+"Sometimes strategic retreat—"
+
+"I said no." The kid from Mehta's Kitchen. The kid who figured out long division alone at age eight because nobody in his house could show him. That kid does not retreat. That kid does not drop classes. That kid carries every stave on the card and doesn't complain because complaining is a luxury for people whose parents can afford tutors.
+
+The reading nook gets colder. Not The Kind — Dev. He just closed a door you were supposed to open.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+~ session.dev_openness -= 2
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_TenWands_R_Vague
+"Reversed Ten of Wands means the pressure is easing. Things should get lighter soon."
+
+Dev looks at you. The look of a person who has a midterm on Thursday and has not successfully completed a single proof in three weeks.
+
+"Sure," he says. Politely. The way you're polite to someone who can't help you.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+# --- THE EMPEROR ---
+
+:: TheKind.Session2.P1_Emperor
+@if cards[0].reversed:
+    The Emperor — reversed. A throne, a crown, a figure of authority and order — but inverted. Structure that's become rigid. Authority that's become oppressive. Or: a father figure whose expectations have calcified into law.
+
+    Dev studies it with the careful attention of someone trained to read systems. "That's a king?"
+
+    "An emperor. Structure, authority, order. The person who builds the system everyone else operates in. Reversed means the system itself might be the problem."
+
+    Scout looks at the card and then at Dev and something connects behind his eyes — the particular look Scout gets when two things that seem unrelated suddenly share a key signature. He grew up in a house split between two cultural pressures: his mom's family in Krakow who expected him to study engineering, and his dad's family in Nagoya who expected him to study medicine. He studied neither. He works in a record store. He hasn't called his grandparents in four months.
+
+    Delphi, from behind the counter, pours tea. Not for herself. For the conversation. She's feeding the room the way you feed a fire — small additions, steady heat.
+
+    + ["Reversed Emperor is about a structure that's supposed to support you but instead is crushing you. Not a person — a *system.* The system that said 'you're smart, you'll figure it out' and then gave you no tools and no roadmap and called it a meritocracy. The system that confused your ability to survive with your ability to thrive, and never checked the difference."] -> TheKind.Session2.P1_Emperor_R_Empathic
+    + ["This reversal points to authority that's failed its responsibility. Somewhere along the line, a structure that was supposed to prepare you — a school, a department, a curriculum — skipped a step. The card isn't blaming you. It's blaming the architecture."] -> TheKind.Session2.P1_Emperor_R_Reframing
+    + ["Reversed Emperor can mean issues with a father figure or authority. Is your relationship with your parents putting pressure on your academics?"] -> TheKind.Session2.P1_Emperor_R_Clinical
+    + ["This reversed card suggests structural problems. Something in the system isn't working."] -> TheKind.Session2.P1_Emperor_R_Vague
+@else:
+    The Emperor. A figure on a throne, armored, commanding. Structure. Authority. The person who built the rules and expects them followed. Order as both foundation and cage.
+
+    Dev's expression shifts when he sees it. Not recognition — resonance. Something about the rigidity of the figure, the weight of the throne, the armor that's both protection and imprisonment.
+
+    "That's a lot of... structure," Dev says.
+
+    "It is."
+
+    From behind the vinyl bins, Scout makes a face. Scout has a complicated relationship with authority — his own staff picks shelf is organized by emotional logic that defies every filing convention ever invented, and he once got into a twenty-minute debate with a customer about whether Radiohead's *Kid A* belonged in the "rock" section or the "what happened to rock" section. The Emperor is everything Scout isn't, and he knows it.
+
+    Mal, however. Mal looks at the card with something like recognition. Mal *is* structure. Mal is the composition notebooks, the precise cataloging, the system that makes the impossible shelves navigable. But Mal chose their own structure. They didn't inherit it. That's the difference.
+
+    + ["The Emperor represents the weight of expectations — not just yours, but the structure you grew up inside. Be the smart kid. Get the grades. Go to college. It's not that these were wrong — they got you here. But 'here' is a place where the same rules don't work anymore, and the Emperor doesn't know how to say 'I don't know what comes next.'"] -> TheKind.Session2.P1_Emperor_U_Empathic
+    + ["This card is about systems of order. You've been operating inside a system your whole life — the system of 'work hard, be smart, figure it out.' And it's a good system. It got you through calc 1, 2, 3. It got you into Carruth. But real analysis isn't inside that system. It requires a different kind of thinking, and nobody told you the rules changed."] -> TheKind.Session2.P1_Emperor_U_Reframing
+    + ["The Emperor represents structure and authority. Do you feel like academic expectations are weighing on you?"] -> TheKind.Session2.P1_Emperor_U_Practical
+    + ["Strong card. Represents authority and structure in your life."] -> TheKind.Session2.P1_Emperor_U_Vague
+@endif
+
+# Emperor — Upright interpretations
+
+:: TheKind.Session2.P1_Emperor_U_Empathic
+"The Emperor represents the weight of expectations — not just yours, but the structure you grew up inside."
+
+Dev listens. The CS-major part of him is parsing; the rest of him is feeling.
+
+"Be the smart kid. Get the grades. Go to college. These aren't wrong — they got you *here.* But 'here' is a place where the same rules don't work anymore, and the Emperor doesn't know how to say 'I don't know what comes next.'"
+
+Dev's voice goes quiet. "My dad has a photo of me at the restaurant. Behind the register. Me at my high school graduation. He laminated it."
+
+He stares at the card.
+
+"He tells every customer. 'My son goes to Carruth. Computer science AND mathematics.' Both. He always says both."
+
+The rain on the roof. The colored lamplight. Dev, in the chair, looking at a card that looks like a throne and seeing a laminated photo behind a restaurant register.
+
+"I can't be the person who only does one."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_Emperor_U_Reframing
+"This card is about systems of order. You've been operating inside a system your whole life — the system of 'work hard, be smart, figure it out.' And it's a good system. It got you through calc 1, 2, 3. It got you into Carruth."
+
+Dev nods. Carefully.
+
+"But real analysis isn't inside that system. It requires a different kind of thinking — abstract, proof-based, structural. And nobody told you the rules changed."
+
+"Nobody told me because nobody in my life *knows* the rules changed." He says this without bitterness. Just precision. The matter-of-fact clarity of a kid who realized early that the world gives some people maps and other people compasses and some people neither, and you navigate with what you've got.
+
+"My high school math teacher was great. Mrs. Patterson. She taught calc and she loved it. But she'd never taken a proof-based course either. She couldn't have warned me about this if she'd wanted to."
+
+Mal writes in the notebook. Two words this time. Dev doesn't see it, but you do: *structural gap.* Underlined twice.
+
+~ session.bridge_influence += 2 if hasattr(session, 'bridge_influence') else None
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 2
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_Emperor_U_Practical
+"The Emperor represents structure and authority. Do you feel like academic expectations are weighing on you?"
+
+A therapy question. Dev gives a therapy answer: "Yeah, I guess."
+
+The reading doesn't deepen. It skims.
+
+~ session.quality_score += 0
+~ session.interpretation_quality['adequate'] += 1
+~ session.dev_openness += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_Emperor_U_Vague
+"Strong card. Represents authority and structure in your life."
+
+Dev waits. You can almost hear the compiler error: *Expected: insight. Received: fortune cookie.*
+
+"Okay," he says.
+
+Scout coughs.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+# Emperor — Reversed interpretations
+
+:: TheKind.Session2.P1_Emperor_R_Empathic
+"Reversed Emperor is about a structure that's supposed to support you but instead is crushing you. Not a person — a *system.*"
+
+Dev's hands unclench. One degree. Listening.
+
+"The system that said 'you're smart, you'll figure it out' and then gave you no tools and no roadmap and called it a meritocracy."
+
+Something flashes across his face. Not anger — the precursor to anger. The thing that comes before you're allowed to be angry, when you're still figuring out if you're allowed to be angry.
+
+"The system that confused your ability to *survive* with your ability to *thrive*, and never checked the difference."
+
+"I've been surviving this whole time?" Dev says it like a question. Like the possibility is new.
+
+"You tell me. What does thriving look like?"
+
+He doesn't answer. But his eyes go to the stacks of books around him — the mismatched shelves, the warmth, the store that organizes by feeling instead of by Dewey Decimal — and something in his expression says: *maybe like this. Maybe thriving looks like a place where someone asks you what you actually need instead of assuming you'll figure it out.*
+
+~ session.foundation_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 3
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_Emperor_R_Reframing
+"This reversal points to authority that's failed its responsibility. Somewhere along the line, a structure that was supposed to prepare you — a school, a department, a curriculum — skipped a step."
+
+You look at him steadily.
+
+"The card isn't blaming you. It's blaming the architecture."
+
+Dev sits with that for a long time. "I keep thinking it's me. Like there's a gene for proof-writing and I just... don't have it."
+
+"There isn't."
+
+"How do you know?"
+
+From the back of the store, Mal: "Because I learned it at twenty-six from a YouTube channel and a library book. It's not innate. It's a skill. Someone should have taught it to you."
+
+Dev turns. Mal is standing at the edge of the aisle, composition notebook against their chest, expression unreadable to anyone who doesn't know them. But you know them. And the expression is: *I was you. Different details, same shape.*
+
+~ session.impossible_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 2
+~ session.mal_personal = True
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_Emperor_R_Clinical
+"Reversed Emperor can mean issues with a father figure or authority. Is your relationship with your parents putting pressure on your academics?"
+
+Dev's face goes flat. Not angry — protected. The specific expression of a first-generation kid who has just been asked to pathologize the people who work sixteen-hour days so he can sit in a reading nook and talk about tarot cards.
+
+"My parents are great."
+
+"Of course, I didn't mean—"
+
+"My parents are *great.*"
+
+The door that opened is now reinforced with steel. Behind the counter, Delphi's eyes close briefly. The reading just stepped on a landmine.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+~ session.dev_openness -= 3
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_Emperor_R_Vague
+"This reversed card suggests structural problems. Something in the system isn't working."
+
+Dev: "Yeah. The thing that's not working is me."
+
+He says it matter-of-factly. You should challenge that. You don't. The moment passes.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+# --- KNIGHT OF PENTACLES ---
+
+:: TheKind.Session2.P1_KnightPentacles
+@if cards[0].reversed:
+    The Knight of Pentacles — reversed. A mounted figure, patient and methodical, on a slow horse — but inverted. The diligence has become stagnation. The patience has curdled into stubbornness. The person who does everything right and still isn't moving.
+
+    Dev looks at it and his breath catches. You wonder if he's seeing the horse or the rider — the animal doing exactly what it's told, going exactly where it's pointed, and getting nowhere.
+
+    Scout is leaning against the bin divider labeled "Slow Burns & Late Bloomers" — his section of albums that take three listens before they click. He's watching Dev with the particular attention of someone who recognizes a fellow late bloomer. Scout didn't know music was his *thing* until he was nineteen and heard Sufjan Stevens' *Illinois* on a road trip to Bend and had to pull over because he was crying too hard to drive.
+
+    Delphi's mug is on the counter. Not in her hand — on the counter. Untouched. That means this one matters.
+
+    + ["Reversed, this knight has been doing everything right — showing up, working hard, following the path — and it's not working anymore. Not because the effort is wrong. Because the effort is pointed at the wrong thing. You're the most disciplined person in that classroom and you're failing, and that contradiction is eating you alive because *discipline has always been enough.*"] -> TheKind.Session2.P1_KnightPent_R_Empathic
+    + ["This reversal means the approach itself has stalled. You've been applying computational thinking to a proof-based problem — like using a hammer on a screw. The hammer isn't broken. The screw isn't broken. The combination is broken."] -> TheKind.Session2.P1_KnightPent_R_Reframing
+    + ["Reversed Knight of Pentacles means you're stuck in a rut. Maybe try a different study approach."] -> TheKind.Session2.P1_KnightPent_R_Blunt
+    + ["This reversed card suggests stagnation. Things aren't moving forward."] -> TheKind.Session2.P1_KnightPent_R_Vague
+@else:
+    The Knight of Pentacles. A mounted figure on a heavy horse, moving slowly but deliberately through a landscape. No urgency. No flash. Just steady, methodical progress toward something that matters. The most patient knight in the deck. The one who always shows up.
+
+    Dev studies the card with the recognition of someone seeing themselves in a mirror they didn't know was there.
+
+    "That's... a very slow horse."
+
+    "It's the knight who does the work. Not the flashy one, not the passionate one, not the clever one. The one who shows up every day and puts one foot in front of the other."
+
+    Scout, from behind the vinyl bins: "That's the Springsteen knight. *Born to Run* is the Knight of Wands. This guy is *Nebraska.* Same artist, completely different gear."
+
+    Mal looks up from the composition notebook. Gives Scout a look. The look means: *that was actually good.*
+
+    Delphi just watches. She already knows where this card goes. She's been watching Dev since he walked in and she saw the Knight of Pentacles walking through the rain with a backpack full of bricks, doing what he always does: showing up.
+
+    + ["This is you. Not the struggle — the *person.* The one who does their own taxes at sixteen. The one who figured out long division alone because nobody could show them. The one who walks into a store they've never been in, in the rain, looking for a textbook, because Thursday is coming and they don't quit. The card isn't showing me your burden. It's showing me your *engine.*"] -> TheKind.Session2.P1_KnightPent_U_Empathic
+    + ["The Knight of Pentacles is the most underestimated card in the deck. No drama, no miracles — just relentless, patient, unglamorous work. But here's the thing about this knight: he always arrives. He's slow, but he *always* arrives. The question isn't whether you'll make it through analysis. The question is whether you'll let anyone help you get there faster."] -> TheKind.Session2.P1_KnightPent_U_Poetic
+    + ["This card represents hard work and dedication. You're clearly putting in the effort."] -> TheKind.Session2.P1_KnightPent_U_Practical
+    + ["A diligent card. Shows you're a hard worker."] -> TheKind.Session2.P1_KnightPent_U_Vague
+@endif
+
+# Knight of Pentacles — Upright interpretations
+
+:: TheKind.Session2.P1_KnightPent_U_Empathic
+"This is you. Not the struggle — the *person.*"
+
+Dev watches you.
+
+"The one who does their own taxes at sixteen. The one who figured out long division alone because nobody could show them."
+
+His eyes widen slightly. You didn't know that. You couldn't have known that. But the cards know, or the store knows, or you know because the reading knows what it needs to know.
+
+"The one who walks into a store they've never been in, in the rain, looking for a textbook, because Thursday is coming and they don't quit."
+
+Dev's throat moves. He swallows hard.
+
+"The card isn't showing me your burden. It's showing me your *engine.* And your engine is incredible. But even the best engine stalls if the fuel is wrong."
+
+From behind the counter, Delphi picks up her mug. Takes a sip. Sets it down. *That one landed.*
+
+Dev's fists unclench. For the first time since he walked in, his hands are open. Palms on the table. The posture of someone who just stopped fighting, not because they gave up, but because someone finally said the thing that made fighting unnecessary.
+
+"My dadi says something like that." His voice is rough. "In Marathi. *Ghoda changla ahe, rasta chukla.* The horse is good. The road is wrong."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 4
+~ session.dev_shame -= 3
+~ session.store_warmth += 1
+~ reader.empathy += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_KnightPent_U_Poetic
+"The Knight of Pentacles is the most underestimated card in the deck. No drama, no miracles — just relentless, patient, unglamorous work."
+
+You touch the card.
+
+"But here's the thing about this knight: he always arrives. He's slow, but he *always* arrives."
+
+Dev is very still.
+
+"The question isn't whether you'll make it through analysis. The question is whether you'll let anyone help you get there faster."
+
+The word *let* does something. Dev hears it. Mal hears it — from the stacks, the sound of a pen stopping. Scout hears it — his hand drops from the headphones to his side.
+
+"I don't—" Dev starts. Stops. "I don't know how to let people help. That's not—" He gestures vaguely at himself, at his whole history. "That's not a skill I have."
+
+"That's why you're here."
+
+~ session.impossible_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_KnightPent_U_Practical
+"This card represents hard work and dedication. You're clearly putting in the effort."
+
+Dev: "I know I'm putting in the effort. That's the problem. The effort isn't working."
+
+The reading acknowledges without deepening. Dev is polite about it because Dev is always polite.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+~ session.dev_openness += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_KnightPent_U_Vague
+"A diligent card. Shows you're a hard worker."
+
+Dev looks at you with the expression of a person who is paying for this experience with the last of his emotional reserves and just received a participation trophy.
+
+"Thanks," he says.
+
+Mal's pen taps the notebook. Once. Impatient.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+# Knight of Pentacles — Reversed interpretations
+
+:: TheKind.Session2.P1_KnightPent_R_Empathic
+"Reversed, this knight has been doing everything right — showing up, working hard, following the path — and it's not working anymore."
+
+Dev's jaw clenches.
+
+"Not because the effort is wrong. Because the effort is pointed at the wrong thing. You're the most disciplined person in that classroom and you're *failing*, and that contradiction is eating you alive because discipline has always been enough."
+
+"Always." Dev's voice is hoarse. "Every class. Every test. Every problem set. I just worked harder than everyone else. More hours. More practice problems. Brute force." He almost laughs. "That's literally what we call it in CS. Brute force. Try every possibility until one works."
+
+"And real analysis?"
+
+"Real analysis doesn't *have* every possibility. You have to—" He stops. "You have to see the structure. And I can't. I keep staring at the proofs and they're like... like reading a novel in a language where I know every word but not the grammar."
+
+Mal makes a sound. Small. Involuntary. The sound of someone who just heard their own experience described by a stranger.
+
+~ session.foundation_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 2
+~ session.mal_personal = True
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_KnightPent_R_Reframing
+"This reversal means the approach itself has stalled. You've been applying computational thinking to a proof-based problem — like using a hammer on a screw."
+
+Dev tilts his head. The CS major engages.
+
+"The hammer isn't broken. The screw isn't broken. The combination is broken."
+
+"So I need a screwdriver."
+
+"You need a screwdriver."
+
+He almost smiles. The first almost-smile that reaches his eyes. "What's the screwdriver?"
+
+"That's what the rest of the reading is for."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 2
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_KnightPent_R_Blunt
+"Reversed Knight of Pentacles means you're stuck in a rut. Maybe try a different study approach."
+
+Dev: "I've tried four different study approaches."
+
+He lists them on his fingers. "Textbook. YouTube. Worked examples. Study group — except nobody in the study group knows what they're doing either, so it's just four people staring at the same wall."
+
+The reading offered a platitude to someone who has already tried everything. Dev doesn't hold it against you, but the window of trust narrows.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+:: TheKind.Session2.P1_KnightPent_R_Vague
+"This reversed card suggests stagnation. Things aren't moving forward."
+
+Dev looks at you the way a debugger looks at an unhelpful error message.
+
+"Yeah. I gathered."
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 2] -> TheKind.Session2.Position2_Hub
+
+# ============================================================================
+# POSITION 2: WHAT'S ACTUALLY IN THE WAY
+# ============================================================================
+
+:: TheKind.Session2.Position2_Hub
+~ session.discussed_cards.append(cards[1].name)
+@render render_reading(reading=reading, highlight=1)
+
+You touch the second card.
+
+**Position 2: What's Actually In The Way**
+**{cards[1].name}**{cards[1].reversed ?  (Reversed) | }
+
+The store is paying attention. You can feel it — the particular quality of a building that holds more than it should, leaning in, the aisles narrowing slightly the way they do when something important is happening in the reading nook. Through the bead curtain, you can see the deeper shelves — the ones that don't quite align with the architecture, the ones where Mal's composition notebook entries start to describe books that haven't been published yet — and they seem closer tonight. Interested.
+
+@if cards[1].name == "The Tower":
+    -> TheKind.Session2.P2_Tower
+@elif cards[1].name == "Eight of Swords":
+    -> TheKind.Session2.P2_EightSwords
+@else:
+    -> TheKind.Session2.P2_TwoSwords
+@endif
+
+# --- THE TOWER ---
+
+:: TheKind.Session2.P2_Tower
+@if cards[1].reversed:
+    The Tower — reversed. A crumbling structure, lightning, figures falling — but upside down, it's different. Not destruction from above. Slow erosion. A foundation that was never solid, finally revealing its cracks.
+
+    Dev looks at the card for a long time. "That doesn't look great."
+
+    "It's not as bad as it looks. Reversed, it's less 'explosion' and more 'the thing you thought was solid turns out to have been cracking for a while.'"
+
+    Scout shifts behind the vinyl bins. The Tower makes him uncomfortable — it's the *Kid A* of the tarot, the card that says everything you thought you knew is wrong and you have to rebuild from silence. He reaches for the headphones around his neck like a talisman.
+
+    + ["The Tower reversed, in this position, is actually precise: the thing that's in your way is a foundation that was never properly laid. Not by you — by the system. The educational structure that got you from third grade to a college junior was built on computation and repetition, and it looks solid, and it *is* solid for everything it was designed for. But it was never designed for this. The cracks aren't new. They've been there since someone decided a kid who could compute didn't also need to learn to prove."] -> TheKind.Session2.P2_Tower_R_Empathic
+    + ["Reversed Tower means the collapse is internal, not dramatic. The building didn't explode — it's settling. And when you look at why, you find that one of the load-bearing walls was never actually built. That's not your fault. You can't build a wall you didn't know was supposed to be there."] -> TheKind.Session2.P2_Tower_R_Reframing
+    + ["Reversed Tower means personal upheaval. You're going through a difficult transition period."] -> TheKind.Session2.P2_Tower_R_Practical
+    + ["This reversed card means the worst is over. The crisis is passing."] -> TheKind.Session2.P2_Tower_R_Vague
+@else:
+    The Tower. Lightning splitting a tower in half. Figures falling. Flames. The most feared card in the deck — and in the "What's Actually In The Way" position, the most honest.
+
+    Dev: "That's..." He swallows. "That's a building on fire."
+
+    "It's a *revelation.* The Tower doesn't destroy — it reveals what was already unstable. The lightning doesn't create the cracks. It illuminates them."
+
+    The effect on the room is immediate. Scout takes a half-step back. Delphi leans forward. From the stacks, you hear Mal's footsteps stop completely — the particular silence of someone who just recognized the card before you said it.
+
+    + ["The Tower in this position tells me the obstacle isn't your intelligence, your work ethic, or your dedication. The obstacle is a *revelation* you haven't had yet — or maybe one you've been having for three weeks and refusing to accept: the foundation you've been building on has a gap in it. Not because you built it wrong. Because someone gave you the wrong blueprints."] -> TheKind.Session2.P2_Tower_U_Empathic
+    + ["Everyone's afraid of the Tower. But here's the secret: the Tower only destroys things that were built wrong. The things that were built right? They survive. The lightning is diagnostic. It's a stress test. And what it's telling you is that one specific part of your preparation — not your ability, not your work ethic, one specific structural element — can't bear the load it's being asked to carry. Identify the weak point and reinforce it, and the rest of the building stands."] -> TheKind.Session2.P2_Tower_U_Poetic
+    + ["The Tower means something needs to break down before it can be rebuilt properly. Your current approach to the material isn't working and needs to change."] -> TheKind.Session2.P2_Tower_U_Practical
+    + ["Dramatic card. Major disruption ahead. Things may get worse before they get better."] -> TheKind.Session2.P2_Tower_U_Vague
+@endif
+
+# Tower — Upright interpretations
+
+:: TheKind.Session2.P2_Tower_U_Empathic
+"The Tower in this position tells me the obstacle isn't your intelligence, your work ethic, or your dedication."
+
+Dev tenses. Bracing.
+
+"The obstacle is a *revelation* you haven't had yet — or maybe one you've been having for three weeks and refusing to accept."
+
+"What revelation?"
+
+"That the foundation you've been building on has a gap in it. Not because you built it wrong. Because someone gave you the wrong blueprints."
+
+The word *blueprints* does something. Dev is a CS major — he thinks in architecture, in systems, in specifications. A wrong blueprint isn't a personal failure. It's an engineering problem. And engineering problems have solutions.
+
+"So the gap is—"
+
+"Proof-writing. Mathematical reasoning. The bridge between 'I can compute the answer' and 'I can explain *why* the answer is true.' It's a learnable skill, Dev. It's not magic. It's not talent. It's a course you never took because nobody told you it existed."
+
+Something breaks. Not dramatically — quietly, like ice cracking on a river in early spring. The first fracture that means the thaw is coming.
+
+"A course." His voice is very small. "There was a *course.*"
+
+Delphi, from behind the counter: "MATH 201. Introduction to Mathematical Reasoning. Kessler doesn't list it as a prerequisite. She should."
+
+~ session.foundation_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 3
+~ session.delphi_diagnosed = True
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_Tower_U_Poetic
+"Everyone's afraid of the Tower. But here's the secret."
+
+Dev braces. The way you brace for bad news. The way he's been bracing for three weeks.
+
+"The Tower only destroys things that were built wrong. The things that were built right? They survive."
+
+His jaw unclenches. One degree.
+
+"The lightning is diagnostic. It's a stress test. And what it's telling you is that one specific part of your preparation — not your ability, not your work ethic, one specific structural element — can't bear the load it's being asked to carry."
+
+You hold his gaze.
+
+"Identify the weak point and reinforce it, and the rest of the building stands."
+
+"The weak point is proofs." Dev says it himself this time. Not as a confession — as a diagnosis. The engineer in him taking over, locating the bug. "I can do everything else. I understand the *concepts*. When Kessler explains a theorem on the board, I get it. I can see why it's true. But when I sit down to write the proof—"
+
+"You don't have the language."
+
+"I don't have the *language.*" He says it with relief. With the specific relief of a person who just found the name for the thing that's been nameless and terrifying for weeks. It's not that he can't think. It's that nobody taught him the grammar.
+
+From somewhere in the stacks, Mal: "That's exactly what it is. Proof-writing is a language. Rudin assumes you're fluent."
+
+~ session.impossible_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 2
+~ session.mal_personal = True
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_Tower_U_Practical
+"The Tower means something needs to break down before it can be rebuilt properly. Your current approach to the material isn't working."
+
+Correct but flat. Dev nods. The intellectual content registers; the emotional content doesn't land.
+
+"I know my approach isn't working. That's why I'm looking for the textbook."
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_Tower_U_Vague
+"Dramatic card. Major disruption ahead. Things may get worse before they get better."
+
+Dev stares at you. "I have a *midterm* on *Thursday.*"
+
+Behind the counter, Delphi puts her face in her hands. Very briefly. Then she picks up her mug and drinks.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+~ session.dev_openness -= 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+# Tower — Reversed interpretations
+
+:: TheKind.Session2.P2_Tower_R_Empathic
+"The Tower reversed, in this position, is actually precise."
+
+Dev watches you.
+
+"The thing that's in your way is a foundation that was never properly laid. Not by you — by the system. The educational structure that got you from third grade to a college junior was built on computation and repetition, and it looks solid, and it *is* solid for everything it was designed for."
+
+You touch the card.
+
+"But it was never designed for this. The cracks aren't new. They've been there since someone decided a kid who could compute didn't also need to learn to prove."
+
+Dev is quiet for a long time. The rain fills the silence.
+
+"In second grade," he says, "I taught myself multiplication from a library book because the teacher said we wouldn't learn it until third grade and I wanted to know now. My mom was so proud. She told everyone at the restaurant."
+
+He stares at the card.
+
+"I've been teaching myself everything since second grade. And this is the first time it's not working."
+
+The store creaks. Not the creak of settling — the creak of a building that's paying attention. The pressed tin ceiling seems to lower slightly, not oppressive, protective. The way a parent bends down to hear a child better.
+
+~ session.foundation_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 2
+~ session.store_warmth += 1
+~ reader.empathy += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_Tower_R_Reframing
+"Reversed Tower means the collapse is internal, not dramatic. The building didn't explode — it's settling. And when you look at why, you find that one of the load-bearing walls was never actually built."
+
+Dev's engineering brain engages. "A missing load-bearing wall."
+
+"That's not your fault. You can't build a wall you didn't know was supposed to be there."
+
+He sits with that. The metaphor is precise enough for him to work with — to turn over, to inspect, to debug.
+
+"So the wall is..."
+
+"Proof technique. Mathematical reasoning. The formal grammar of abstract mathematics. It's usually taught as a bridge course between calculus and analysis. Did you take one?"
+
+Dev shakes his head slowly. "Nobody said I needed to."
+
+"Nobody said you needed to."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 2
+~ session.delphi_diagnosed = True
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_Tower_R_Practical
+"Reversed Tower means personal upheaval. You're going through a difficult transition period."
+
+True. Unhelpful. Dev nods the way he'd nod at a weather report.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_Tower_R_Vague
+"This reversed card means the worst is over. The crisis is passing."
+
+Dev checks his phone. The midterm is in three days. The crisis is not passing.
+
+"If you say so."
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+# --- EIGHT OF SWORDS ---
+
+:: TheKind.Session2.P2_EightSwords
+@if cards[1].reversed:
+    The Eight of Swords — reversed. A blindfolded figure surrounded by swords, bound — but upside down, the blindfold is slipping. The bonds are loosening. The prison was always partially self-constructed.
+
+    Dev studies it. "That person is tied up."
+
+    "They think they are. Look closer — the bindings are loose. The swords aren't touching them. The cage is mostly perception."
+
+    From behind the vinyl bins, Scout makes a sound. He knows this card. He *is* this card, some days — the days when he can't recommend a record because every option feels wrong and the paralysis of caring too much looks like not caring at all. Delphi has a word for it: *overcuration.* The state of knowing so much about something that the knowledge becomes a trap instead of a tool.
+
+    + ["Reversed, the blindfold is slipping. You're starting to see that the thing trapping you isn't real analysis — it's the story you're telling yourself *about* real analysis. 'I'm not smart enough.' 'Everyone else gets it.' 'I'm the only one struggling.' Those aren't facts. Those are the swords. And they're not touching you — you just can't see past them."] -> TheKind.Session2.P2_EightSwords_R_Empathic
+    + ["This reversal means the prison is opening. The limiting belief — whatever it is — is starting to crack. Maybe you walked into this store thinking 'I'm not cut out for this.' And the fact that you sat down for this reading means part of you already knows that's not true."] -> TheKind.Session2.P2_EightSwords_R_Reframing
+    + ["Eight of Swords reversed means you're starting to see through your limitations. That's positive progress."] -> TheKind.Session2.P2_EightSwords_R_Practical
+    + ["Good news — this reversed card means liberation from restriction. You'll break free soon."] -> TheKind.Session2.P2_EightSwords_R_Vague
+@else:
+    The Eight of Swords. A blindfolded figure, bound, surrounded by eight swords planted in the ground. Trapped — but the trap is more psychological than physical. The bindings are loose. The swords don't actually touch them. The prison is built from belief.
+
+    Dev looks at the image and his expression goes very still. The stillness of recognition.
+
+    "They can't move," he says. Quiet.
+
+    "They *think* they can't move. Look at the bindings. They're loose. Look at the swords — there's a gap. The figure could walk out. But they can't see it because of the blindfold."
+
+    Scout is watching Dev now with the focus he usually reserves for live performances — the moments when an artist is doing something vulnerable and real and you can't look away because looking away would be a kind of betrayal.
+
+    Mal has come to the edge of the aisle. Not into the reading nook — they respect the space — but close enough to hear. Their expression is the one you've seen twice before: the one that means the reading just touched something in them personally that they didn't expect and they're choosing to stay instead of retreat.
+
+    Delphi sets both palms on the counter. Flat. The posture of someone about to deliver a truth.
+
+    + ["The swords are the stories you tell yourself about who you are and what you're capable of. 'I'm the first one in my family to go to college, so if I fail it means the whole bet was wrong.' 'Everyone else in the class is smarter than me.' 'Asking for help means admitting I don't belong here.' Those are the swords, Dev. And they're not even pointed at you. You pointed them at yourself."] -> TheKind.Session2.P2_EightSwords_U_Empathic
+    + ["This card is about perceived limitations versus real ones. Your real limitation is a missing bridge course. Your *perceived* limitation is 'I'm not smart enough for abstract math.' The gap between those two things — between the structural problem and the story you've built around it — that gap is what's actually in the way. Not the math. The *narrative.*"] -> TheKind.Session2.P2_EightSwords_U_Reframing
+    + ["Eight of Swords means feeling trapped. You're stuck in a situation that feels worse than it actually is."] -> TheKind.Session2.P2_EightSwords_U_Practical
+    + ["This card shows you feel restricted. Try to see past your current limitations."] -> TheKind.Session2.P2_EightSwords_U_Vague
+@endif
+
+# Eight of Swords — Upright interpretations
+
+:: TheKind.Session2.P2_EightSwords_U_Empathic
+"The swords are the stories you tell yourself about who you are and what you're capable of."
+
+Dev's hands go back to fists. You're getting close.
+
+"'I'm the first one in my family to go to college, so if I fail it means the whole bet was wrong.'"
+
+His breath catches.
+
+"'Everyone else in the class is smarter than me.'"
+
+"They're not—"
+
+"'Asking for help means admitting I don't belong here.'"
+
+Dev stops. The protest dies. Because that one — that last one — is the sword that's actually doing the damage.
+
+"I went to office hours once," he says. Very quiet. The kind of quiet that costs something. "First week. Professor Kessler. I asked about a proof technique in the homework and she said—"
+
+He stops. Swallows.
+
+"She said, 'This is covered in the prerequisite material. You should review your notes from your transition course.'"
+
+The reading nook is absolutely still.
+
+"I didn't have notes from a transition course. I didn't have a transition course. I said 'okay' and I left and I never went back to office hours."
+
+Behind the counter, Delphi makes a sound. Not loud. The sound of someone who hears this every fall and is furious every fall and has been furious for longer than Dev has been alive.
+
+"That's not a sword you pointed at yourself," you say. "That one came from outside."
+
+"It doesn't matter where it came from. It's still there."
+
+"Then let's look at it. That's what the next card is for."
+
+~ session.foundation_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 4
+~ session.dev_shame -= 2
+~ session.delphi_diagnosed = True
+~ reader.empathy += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_EightSwords_U_Reframing
+"This card is about perceived limitations versus real ones."
+
+Dev's analytical mind engages. He leans forward.
+
+"Your real limitation is a missing bridge course. Your *perceived* limitation is 'I'm not smart enough for abstract math.'"
+
+"I didn't say I'm not smart enough—"
+
+"You didn't have to. The card did."
+
+He sits back. The deflection collapses.
+
+"The gap between those two things — between the structural problem and the story you've built around it — that gap is what's actually in the way. Not the math. The *narrative.*"
+
+Dev processes this with the speed of someone trained to debug systems. The bug isn't in the code. The bug is in the developer's assumption about what the code is supposed to do.
+
+"So I'm not... I'm not broken."
+
+"You're missing a library. Not a processor."
+
+From behind the bins, Scout: "Ohhhh. That was good." He catches himself. "Sorry. Continue."
+
+~ session.foundation_influence += 2
+~ session.impossible_influence += 1
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 2
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_EightSwords_U_Practical
+"Eight of Swords means feeling trapped. You're stuck in a situation that feels worse than it actually is."
+
+Dev: "It feels pretty bad."
+
+"I know. But the card is saying there's a way out that you're not seeing."
+
+"What way out?"
+
+You don't have a good answer ready. The reading goes adequate.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_EightSwords_U_Vague
+"This card shows you feel restricted. Try to see past your current limitations."
+
+Dev looks at you the way you'd look at a compiler error that says *Error: something went wrong.*
+
+"How?"
+
+The question hangs. You don't have an answer that matches the specificity of his need.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+# Eight of Swords — Reversed interpretations
+
+:: TheKind.Session2.P2_EightSwords_R_Empathic
+"Reversed, the blindfold is slipping. You're starting to see that the thing trapping you isn't real analysis — it's the story you're telling yourself *about* real analysis."
+
+Dev is listening. Really listening, for maybe the first time since he sat down.
+
+"'I'm not smart enough.' 'Everyone else gets it.' 'I'm the only one struggling.'"
+
+"I *am* the only one struggling. Nobody else in the class—"
+
+"Nobody else in the class is telling you they're struggling. That's different."
+
+Dev goes quiet. You can see the reframe happening in real time — the CS major's brain running the new input through existing models and finding that it changes the output.
+
+"My lab partner," he says slowly. "Priya. She always has the problem sets done. Always. But last week she was in the library at 1am and she looked—" He stops. "She looked like me."
+
+"The swords aren't touching you, Dev. They're not touching Priya either. You're all standing in the same circle, blindfolded, thinking you're alone."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 2
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_EightSwords_R_Reframing
+"This reversal means the prison is opening. The limiting belief — whatever it is — is starting to crack."
+
+You look at him in the reading nook. In the warm light. In the store that holds people.
+
+"Maybe you walked into this store thinking 'I'm not cut out for this.' And the fact that you sat down for this reading means part of you already knows that's not true."
+
+Dev: "I sat down because Mal said Rudin is an act of violence and I wanted to hear more."
+
+From the stacks, Mal: "It is."
+
+Dev almost laughs.
+
+~ session.impossible_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 2
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_EightSwords_R_Practical
+"Eight of Swords reversed means you're starting to see through your limitations. That's positive progress."
+
+Dev considers this. It's accurate but light. A status code without a message body.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_EightSwords_R_Vague
+"Good news — this reversed card means liberation from restriction. You'll break free soon."
+
+Dev: "I don't need to 'break free.' I need to understand the Bolzano-Weierstrass theorem by Thursday."
+
+Fair. The reading didn't meet him where he is.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+# --- TWO OF SWORDS ---
+
+:: TheKind.Session2.P2_TwoSwords
+@if cards[1].reversed:
+    The Two of Swords — reversed. A blindfolded figure holding two crossed swords over their heart. Balanced, rigid, refusing to choose. But reversed — the swords dropping, the refusal crumbling. A decision being forced.
+
+    Dev studies it. "Another blindfold."
+
+    "Different blindfold. The Eight of Swords is trapped. The Two of Swords is *choosing* not to see. There's something you already know that you're refusing to look at."
+
+    Delphi shifts behind the counter. The particular shift of someone who knows what the something is and is waiting for the reading to arrive there.
+
+    + ["Reversed, the swords are dropping. The thing you've been refusing to confront — the fact that you need *help*, real help, structural help, not just 'try harder' help — is becoming impossible to avoid. You walked into this store looking for a textbook. You know that's not what you need. You've known for weeks. The two swords were keeping the knowledge at bay and they're falling now."] -> TheKind.Session2.P2_TwoSwords_R_Empathic
+    + ["This reversal means a difficult truth is surfacing. The obstacle isn't your ability — it's your refusal to acknowledge the gap. Not out of pride. Out of fear. Because if the gap is real, then the story you've been telling yourself — 'I can figure out anything alone' — has an exception. And the exception terrifies you."] -> TheKind.Session2.P2_TwoSwords_R_Reframing
+    + ["Two of Swords reversed means a decision you've been avoiding is being forced. What have you been putting off?"] -> TheKind.Session2.P2_TwoSwords_R_Practical
+    + ["This reversed card means indecision is resolving. You'll find clarity soon."] -> TheKind.Session2.P2_TwoSwords_R_Vague
+@else:
+    The Two of Swords. A blindfolded figure holding two swords crossed over their chest. Water behind them. A choice they refuse to make, held in painful balance by sheer force of will.
+
+    Dev looks at it. "What's with the blindfold? Two blindfold cards?"
+
+    "Different kind. This one is voluntary. You're *choosing* not to see something."
+
+    His jaw sets. "I'm not choosing anything. I'm trying to pass a class."
+
+    "You're trying to pass a class by doing the same thing that isn't working, harder and more. That's a choice. The choice not to look at the real problem."
+
+    Scout winces from behind the bins. Not because you're wrong — because he recognizes the move. Scout has a shelf in the back of the store labeled "Albums I Play When I'm Avoiding Something" and it has forty entries and he knows every one by heart. Avoidance has its own discography.
+
+    Mal's pen has stopped entirely. They've set the composition notebook down on a shelf. That never happens. The notebook is an extension of Mal the way the turntable is an extension of Scout. Setting it down means full attention. Means this matters in a way the notebook can't catalog.
+
+    + ["The two swords are the two things you're balancing: 'I can do this alone' and 'I'm drowning.' You can't hold both. They're contradictory and the effort of holding them crossed over your heart is exhausting. The obstacle isn't real analysis. It's the refusal to choose between those two truths — to either admit you need help or accept that you're going to drown."] -> TheKind.Session2.P2_TwoSwords_U_Empathic
+    + ["There's a concept in CS called a deadlock — two processes each waiting for the other to release a resource. That's this card. Part of you knows you need a different approach. Part of you is afraid that admitting that means everything before was wrong. Neither part will yield. So you're frozen. The blindfold isn't ignorance — it's a deadlock."] -> TheKind.Session2.P2_TwoSwords_U_Reframing
+    + ["Two of Swords means avoidance. There's a truth you're not confronting about your situation."] -> TheKind.Session2.P2_TwoSwords_U_Practical
+    + ["This card means you need to make a decision. Stop being indecisive."] -> TheKind.Session2.P2_TwoSwords_U_Vague
+@endif
+
+# Two of Swords — Upright interpretations
+
+:: TheKind.Session2.P2_TwoSwords_U_Empathic
+"The two swords are the two things you're balancing: 'I can do this alone' and 'I'm drowning.' You can't hold both."
+
+Dev's hands grip the edge of the table.
+
+"They're contradictory and the effort of holding them crossed over your heart is exhausting."
+
+"I'm not—"
+
+"The obstacle isn't real analysis. It's the refusal to choose between those two truths — to either admit you need help or accept that you're going to drown."
+
+The word *drown* hits. Dev's eyes go bright behind the wire-rimmed glasses. Not tears — the precursor. The pressure of something being named that's been nameless.
+
+"I've been going to the library every night," he says. "Every night. 7pm to midnight. Five hours of staring at Rudin. Five hours of reading the same proof over and over and not—" His voice breaks. Just slightly. A hairline crack. "I rewrite my notes. I watch YouTube. I go to the optional review sessions and I sit in the back and I *still* don't get it and nobody notices because I'm quiet about it because that's what I do. I'm quiet about it."
+
+Behind the counter, Delphi picks up the mug she poured for Dev — the one he took without thinking, the one that's been cooling in his hands — and without saying a word, she comes around the counter and refills it. Pours from the kettle. Slides it back. Eye contact. Brief. A look that says: *I hear you. You're not invisible. Not here.*
+
+~ session.foundation_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 4
+~ session.dev_shame -= 2
+~ reader.empathy += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_TwoSwords_U_Reframing
+"There's a concept in CS called a deadlock — two processes each waiting for the other to release a resource."
+
+Dev's eyes sharpen. You're speaking his language.
+
+"That's this card. Part of you knows you need a different approach. Part of you is afraid that admitting that means everything before was wrong. Neither part will yield. So you're frozen."
+
+"A deadlock." He turns the word over. "The solution to a deadlock is to break the symmetry. Force one process to yield."
+
+"Which one yields?"
+
+He thinks. The CS major thinking, but also the kid from Mehta's Kitchen thinking, the kid who's never had anyone to debug this with.
+
+"The 'I can do this alone' part," he says quietly. "That one yields."
+
+Mal, from the edge of the aisle, barely audible: "Good."
+
+~ session.impossible_influence += 2
+~ session.foundation_influence += 1
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 2
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_TwoSwords_U_Practical
+"Two of Swords means avoidance. There's a truth you're not confronting about your situation."
+
+Dev: "I know the truth. I'm failing."
+
+"Are you failing, or are you missing something you need?"
+
+He considers. "...maybe the second one."
+
+The crack opens. Just barely.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+~ session.dev_openness += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_TwoSwords_U_Vague
+"This card means you need to make a decision. Stop being indecisive."
+
+Dev: "I'm not indecisive. I'm *stuck.* There's a difference."
+
+He's right. The reading confused paralysis with indecision and Dev corrected it because he's sharper than the interpretation gave him credit for.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+# Two of Swords — Reversed interpretations
+
+:: TheKind.Session2.P2_TwoSwords_R_Empathic
+"Reversed, the swords are dropping. The thing you've been refusing to confront — the fact that you need *help*, real help, structural help — is becoming impossible to avoid."
+
+Dev's breath goes shallow.
+
+"You walked into this store looking for a textbook. You know that's not what you need. You've known for weeks."
+
+"I thought if I just read it enough times—"
+
+"You read Rudin enough times, you memorize Rudin. You still don't learn to prove. It's the wrong tool, Dev. You're not stupid. You brought a wrench to a job that needs a key."
+
+Dev sets down the mug. His hands are shaking slightly. Not from cold.
+
+"Nobody in my family has ever asked for academic help. Because nobody in my family has ever *been* in a position to ask. My dad taught himself restaurant management from a library book. My mom taught herself English from *Sesame Street* and the customers. We don't ask. We figure it out."
+
+He looks at the card. At the swords, falling.
+
+"But this is the first time figuring it out isn't working."
+
+"Because this is the first time it's not about effort. It's about having the right starting point."
+
+~ session.foundation_influence += 3
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 3
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_TwoSwords_R_Reframing
+"This reversal means a difficult truth is surfacing. The obstacle isn't your ability — it's your refusal to acknowledge the gap."
+
+Dev tenses.
+
+"Not out of pride. Out of fear. Because if the gap is real, then the story you've been telling yourself — 'I can figure out anything alone' — has an exception."
+
+"And the exception terrifies you."
+
+Dev goes very still. Then, quietly: "If I can't figure this out alone... then maybe all the other times I figured things out alone were just luck. Maybe I was never actually smart. Maybe the tests were just easy and the teachers were just nice and—"
+
+"Stop." Delphi's voice. Not harsh. Sharp. "That's impostor syndrome talking. And it's wrong. You're not lucky. You're talented and underprepared. Those are different things."
+
+The silence after is heavy and warm, like the store itself pressing in, wrapping around Dev the way rain wraps around Rewind.
+
+~ session.foundation_influence += 2
+~ session.impossible_influence += 1
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 3
+~ session.dev_shame -= 2
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_TwoSwords_R_Practical
+"Two of Swords reversed means a decision you've been avoiding is being forced. What have you been putting off?"
+
+Dev: "Talking to Kessler."
+
+That's honest. Direct. The reading could go deeper but at least it arrived somewhere real.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+~ session.dev_openness += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+:: TheKind.Session2.P2_TwoSwords_R_Vague
+"This reversed card means indecision is resolving. You'll find clarity soon."
+
+Dev: "When? Because Thursday is soon too."
+
+The reading doesn't connect.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Continue to Position 3] -> TheKind.Session2.Position3_Hub
+
+# ============================================================================
+# POSITION 3: WHAT STRENGTH YOU DON'T SEE YET
+# ============================================================================
+
+:: TheKind.Session2.Position3_Hub
+~ session.discussed_cards.append(cards[2].name)
+@render render_reading(reading=reading, highlight=2)
+
+The last card. You touch it, and the lamplight shifts — the stained glass throwing a warmer color across the table, across Dev's hands, across the space between you.
+
+"The last position. What strength you don't see yet."
+
+Dev looks at the face-down card. Looks at you.
+
+"What if there isn't one?"
+
+"Then the card will tell us that too."
+
+**Position 3: What Strength You Don't See Yet**
+**{cards[2].name}**{cards[2].reversed ?  (Reversed) | }
+
+@if cards[2].name == "The Magician":
+    -> TheKind.Session2.P3_Magician
+@elif cards[2].name == "Ace of Wands":
+    -> TheKind.Session2.P3_AceWands
+@else:
+    -> TheKind.Session2.P3_PageCups
+@endif
+
+# --- THE MAGICIAN ---
+
+:: TheKind.Session2.P3_Magician
+@if cards[2].reversed:
+    The Magician — reversed. A figure at a table with all four elemental tools — wand, cup, sword, pentacle — but inverted. The tools are there but the connection to them is blocked. Power untapped. Potential unrecognized.
+
+    Dev looks at the image. "What are all those things on the table?"
+
+    "Everything you need. The Magician has every tool. Reversed means you haven't recognized that yet."
+
+    Scout has gone very quiet. The Magician reversed is the card he'd draw for himself on the bad days — the days when he knows every album in the store but can't find the one a customer needs, when the knowledge feels like clutter instead of capability. He gets it.
+
+    + ["Every tool you need is already on the table. Reversed Magician doesn't mean the tools are missing — it means you're looking right at them and not seeing them. Your computational skills, your CS intuition, your ability to break complex systems into components — that's not separate from mathematical thinking. That IS mathematical thinking. You've been doing proofs your whole coding life. You just didn't know that's what they were called."] -> TheKind.Session2.P3_Magician_R_Empathic
+    + ["The Magician reversed is untapped potential. You already think in systems. You already debug. You already trace logical paths through complex architectures. Real analysis is the same skill wearing different clothes. The obstacle isn't that you can't think abstractly — you think abstractly every time you write code. The obstacle is that nobody ever told you the thinking you're already doing has a name in mathematics."] -> TheKind.Session2.P3_Magician_R_Reframing
+    + ["Reversed Magician suggests you have untapped potential. You're more capable than you think."] -> TheKind.Session2.P3_Magician_R_Practical
+    + ["Good card. You have hidden strengths that will emerge."] -> TheKind.Session2.P3_Magician_R_Vague
+@else:
+    The Magician. A figure at a table with every tool — wand, cup, sword, pentacle. One hand pointing to the sky, the other to the earth. Above, the infinity symbol. The card of someone who has *everything they need* and knows how to use it.
+
+    Dev stares at it. "That looks... powerful."
+
+    "It is. The Magician is the card that says you already have every tool. You just haven't connected them yet."
+
+    From behind the bins, Scout straightens up. The Magician is his favorite card — the card of the person who takes disparate inputs and synthesizes them into something new. It's what Scout does every time he connects Joni Mitchell to Frank Ocean, every time he files Deafheaven next to Björk. Synthesis. The Magician's gift.
+
+    Mal looks at the card and then at Dev and the expression on their face changes. It goes from clinical to warm. Because The Magician, for Mal, is the card that says: *you left the algorithm for a reason. The reason was this. The reason was knowing that a human being can do what no machine can — take everything they know and make something new.*
+
+    Delphi just nods. She already knew.
+
+    + ["Look at what you bring to this table. Not the math table — *this* table. You write code. You build systems. You take complex specifications and translate them into working architectures. Dev — that's what a proof IS. A proof is a logical architecture that starts from axioms and builds, step by step, to a conclusion. You've been writing proofs in Python for two years. The only thing you're missing is the *notation.*"] -> TheKind.Session2.P3_Magician_U_Empathic
+    + ["The Magician has four tools and infinite potential. You have computation, you have logic, you have pattern recognition, and you have the most underrated tool of all — you have the ability to sit with something you don't understand for hours without giving up. Do you know how rare that is? Most people quit. You went to the library every night for three weeks and you're still here. The Magician doesn't give up. The Magician finds the connection."] -> TheKind.Session2.P3_Magician_U_Poetic
+    + ["The Magician shows you have all the skills you need. You just need to apply them differently."] -> TheKind.Session2.P3_Magician_U_Practical
+    + ["Great card for your situation. Very positive."] -> TheKind.Session2.P3_Magician_U_Vague
+@endif
+
+# Magician — Upright interpretations
+
+:: TheKind.Session2.P3_Magician_U_Empathic
+"Look at what you bring to this table. Not the math table — *this* table."
+
+Dev listens. The skepticism is still there, but underneath it, something is hoping.
+
+"You write code. You build systems. You take complex specifications and translate them into working architectures."
+
+He nods. Carefully.
+
+"Dev — that's what a proof *is.* A proof is a logical architecture that starts from axioms and builds, step by step, to a conclusion. You've been writing proofs in Python for two years. The only thing you're missing is the *notation.*"
+
+Something happens behind his eyes. The click. The compile. The moment when code that's been throwing errors suddenly runs and the output makes sense.
+
+"Functions," he says. Slowly. "Proofs are like functions. You declare your inputs — the axioms. You apply operations — the logical steps. And the return value is the conclusion."
+
+From the stacks, Mal: "Yes." One word. But the way Mal says it — with the weight of someone who crossed the same bridge from a different direction — makes it land like a theorem.
+
+Dev's hands open. Palms up on the table. Like he's holding something he just received.
+
+"I've been trying to learn a new language. But it's not a new language. It's a different *syntax* for the same language."
+
+"That's the Magician. Everything you need is already on the table."
+
+~ session.foundation_influence += 2
+~ session.impossible_influence += 1
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_hope += 3
+~ session.store_warmth += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_Magician_U_Poetic
+"The Magician has four tools and infinite potential. You have computation, you have logic, you have pattern recognition, and you have the most underrated tool of all."
+
+Dev waits.
+
+"You have the ability to sit with something you don't understand for hours without giving up. Do you know how rare that is?"
+
+He blinks. He's never thought of persistence as a *tool.* It's just... what he does. What the kid from Mehta's Kitchen does. You sit at the table and you work because the alternative is not working and that's not an option.
+
+"Most people quit. You went to the library every night for three weeks and you're still here. In a store. In the rain. At nine o'clock on a Tuesday. Looking for a textbook."
+
+"That's not a skill. That's just... not giving up."
+
+"Dev. *Not giving up* is the Magician's first and greatest tool. Everything else is technique. Technique can be taught. The thing that can't be taught — the thing the card is showing me — is the person who walks through the rain to a store they've never been in because Thursday is coming and they don't quit."
+
+Scout is absolutely going to cry. He's doing the thing where he presses his lips together very hard and looks at the ceiling.
+
+~ session.wildcard_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_openness += 3
+~ session.dev_hope += 4
+~ session.dev_shame -= 2
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_Magician_U_Practical
+"The Magician shows you have all the skills you need. You just need to apply them differently."
+
+Dev: "Apply them how?"
+
+A fair question that the reading doesn't fully answer. But it opens a door.
+
+"That's what the recommendation is for."
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+~ session.dev_hope += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_Magician_U_Vague
+"Great card for your situation. Very positive."
+
+Dev gives you the look. The one that means *I am a computer science major and you just returned null where I expected a struct.*
+
+Mal sighs from the stacks. Audibly.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+# Magician — Reversed interpretations
+
+:: TheKind.Session2.P3_Magician_R_Empathic
+"Every tool you need is already on the table."
+
+Dev looks at you.
+
+"Reversed Magician doesn't mean the tools are missing — it means you're looking right at them and not seeing them. Your computational skills, your CS intuition, your ability to break complex systems into components — that's not separate from mathematical thinking."
+
+You lean forward.
+
+"That IS mathematical thinking. You've been doing proofs your whole coding life. You just didn't know that's what they were called."
+
+Dev processes this. You can almost see the threads connecting — the if-then logic of code, the if-then logic of proofs. The way a function takes defined inputs and produces guaranteed outputs. The way a proof takes axioms and produces theorems. The *same architecture, different syntax.*
+
+"When I write a function," he says slowly, "I start with the type signature. What goes in, what comes out. And then I build the implementation step by step, making sure each step follows from the last."
+
+"That's a proof."
+
+"...that's a proof."
+
+The reversal flips. The tools on the Magician's table click into focus. The strength Dev didn't see was the strength he's been using every day in a different context.
+
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_openness += 3
+~ session.dev_hope += 3
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_Magician_R_Reframing
+"The Magician reversed is untapped potential. You already think in systems. You already debug. You already trace logical paths through complex architectures."
+
+Dev is listening with the intensity of a programmer reading documentation that finally makes sense.
+
+"Real analysis is the same skill wearing different clothes. The obstacle isn't that you can't think abstractly — you think abstractly every time you write code."
+
+He exhales. The exhale of someone who's been holding their breath for three weeks.
+
+"The obstacle is that nobody ever told you the thinking you're already doing has a name in mathematics."
+
+"Formal logic," Dev says. "It's formal logic. I use it in every conditional, every loop invariant, every—" He stops. Stares at the card. "I already know this."
+
+"You already know this."
+
+~ session.impossible_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_hope += 3
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_Magician_R_Practical
+"Reversed Magician suggests you have untapped potential. You're more capable than you think."
+
+Dev: "I'd like to believe that."
+
+"The next step will show you why you should."
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+~ session.dev_hope += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_Magician_R_Vague
+"Good card. You have hidden strengths that will emerge."
+
+Dev waits. The hidden strengths do not emerge from the interpretation.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+# --- ACE OF WANDS ---
+
+:: TheKind.Session2.P3_AceWands
+@if cards[2].reversed:
+    The Ace of Wands — reversed. A hand emerging from a cloud, holding a living wand, leaves sprouting — but inverted. Creative energy that's blocked. A spark that can't find tinder.
+
+    + ["Reversed Ace of Wands means the creative spark is there but it's blocked. You loved math once — the *joy* of it, the 'oh THAT'S why that works' feeling. That joy hasn't gone away. It's buried under three weeks of fear and shame and Rudin's unforgiving prose. The strength you don't see is the curiosity that got you into math in the first place. It's still there. It's just scared."] -> TheKind.Session2.P3_AceWands_R_Empathic
+    + ["This reversal suggests creative energy that needs a different outlet. The way you've been approaching the material is blocking your natural curiosity. You need to come at it sideways — not through Rudin, not through brute force, but through the door you don't know about yet."] -> TheKind.Session2.P3_AceWands_R_Reframing
+    + ["Reversed Ace means blocked creative energy. Try to find a new way to engage with the material."] -> TheKind.Session2.P3_AceWands_R_Practical
+    + ["Creative energy is blocked but will unblock soon."] -> TheKind.Session2.P3_AceWands_R_Vague
+@else:
+    The Ace of Wands. A hand from a cloud, holding a living wand — green, budding, alive. Pure creative energy. The spark before the fire. The moment before understanding.
+
+    Dev looks at it and something in his expression softens. The card is alive in a way the others weren't — green and growing and unmistakably hopeful.
+
+    "That's... a nice one," he says. Quiet.
+
+    Scout lights up. The Ace of Wands is the card of the first listen — the moment you put a record on for the first time and three seconds in you *know* this one is going to matter. He's been waiting for this card the way he waits for the drop in a song.
+
+    + ["The Ace of Wands is the spark. The moment before understanding — not understanding itself, but the moment your brain goes 'wait, I think I see it.' You've had that moment before. Every time you solved a coding problem that seemed impossible. Every time the algorithm clicked. That spark is your strength, Dev. It's not gone. It's just waiting for the right fuel."] -> TheKind.Session2.P3_AceWands_U_Empathic
+    + ["You know the moment in coding when you've been staring at a bug for hours and suddenly — not gradually, suddenly — you see it? And the solution is obvious and you can't believe you didn't see it before? That's the Ace of Wands. That moment is coming. For the proofs, for the epsilon-delta, for all of it. It's coming because that's how your mind works — it grinds and grinds and then it leaps."] -> TheKind.Session2.P3_AceWands_U_Poetic
+    + ["Ace of Wands represents new creative energy. A breakthrough is possible."] -> TheKind.Session2.P3_AceWands_U_Practical
+    + ["Very creative card. Good things ahead."] -> TheKind.Session2.P3_AceWands_U_Vague
+@endif
+
+# Ace of Wands — Upright interpretations
+
+:: TheKind.Session2.P3_AceWands_U_Empathic
+"The Ace of Wands is the spark. The moment before understanding — not understanding itself, but the moment your brain goes 'wait, I think I see it.'"
+
+Dev nods. He knows this moment. Every coder knows this moment.
+
+"You've had it before. Every time you solved a coding problem that seemed impossible. Every time the algorithm clicked."
+
+"The neural net," Dev says. "Last semester. I spent two weeks getting garbage outputs and then at 3am I found a dimension mismatch in the tensor reshape and suddenly it *worked* and I—" He almost laughs. "I woke up my roommate yelling."
+
+"That spark is your strength, Dev. It's not gone. It's just waiting for the right fuel."
+
+"The right fuel." He looks at the card. At the green, living wand. "Not Rudin."
+
+"Not Rudin."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_hope += 3
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_AceWands_U_Poetic
+"You know the moment in coding when you've been staring at a bug for hours and suddenly — not gradually, *suddenly* — you see it?"
+
+Dev: "Yes."
+
+"And the solution is obvious and you can't believe you didn't see it before?"
+
+"Yes."
+
+"That's the Ace of Wands. That moment is coming. For the proofs, for the epsilon-delta, for all of it. It's coming because that's how your mind works — it grinds and grinds and then it *leaps.*"
+
+From behind the vinyl bins, Scout: "Like the drop in a song. You know it's coming but when it hits—" He mimes an explosion with his hands. Silent. Reverent.
+
+Dev looks at Scout. At you. At the card. And for the first time tonight, something in his posture changes. Not relaxation — *readiness.* The posture of someone who just went from 'I can't do this' to 'I don't know how to do this *yet.*'
+
+~ session.wildcard_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_hope += 4
+~ session.store_warmth += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_AceWands_U_Practical
+"Ace of Wands represents new creative energy. A breakthrough is possible."
+
+Dev: "When?"
+
+"Soon. With the right tools."
+
+Adequate. Dev nods. Waiting for the recommendation.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+~ session.dev_hope += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_AceWands_U_Vague
+"Very creative card. Good things ahead."
+
+Dev looks at the card. Looks at you. The hope that was building fades slightly. The fortune cookie landed on a kid who needed a meal.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+# Ace of Wands — Reversed interpretations
+
+:: TheKind.Session2.P3_AceWands_R_Empathic
+"Reversed Ace of Wands means the creative spark is there but it's blocked."
+
+Dev listens.
+
+"You loved math once — the *joy* of it, the 'oh THAT'S why that works' feeling. Remember that?"
+
+"Freshman year," Dev says. Immediately. Like the memory was right there, waiting to be asked. "Linear algebra. Professor Weng. She showed us eigenvalues and I — I literally sat in the back of the lecture hall grinning like an idiot because it was the most beautiful thing I'd ever seen. How a matrix could have these hidden directions that it just stretches along, and everything else is just combinations of those directions, and—"
+
+He stops. Realizes he's been talking with his hands. Drops them.
+
+"That joy hasn't gone away, Dev. It's buried under three weeks of fear and shame and Rudin's unforgiving prose. The strength you don't see is the curiosity that got you into math in the first place."
+
+"Eigenvalues," he says softly. "I haven't felt like that since eigenvalues."
+
+"You will."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_hope += 3
+~ session.dev_shame -= 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_AceWands_R_Reframing
+"This reversal suggests creative energy that needs a different outlet. The way you've been approaching the material is blocking your natural curiosity."
+
+Dev: "Blocking it how?"
+
+"By treating it like a fight instead of a puzzle. You've been white-knuckling Rudin five hours a night. That's not learning — that's survival. And your brain knows the difference."
+
+He goes quiet. The distinction between learning and surviving is one he hasn't made before — because for Dev, they've always been the same thing.
+
+"You need to come at it sideways. Not through Rudin. Not through brute force. Through the door you don't know about yet."
+
+"What door?"
+
+"That's what the recommendation is for."
+
+~ session.wildcard_influence += 2
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_hope += 2
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_AceWands_R_Practical
+"Reversed Ace means blocked creative energy. Try to find a new way to engage with the material."
+
+Dev: "Like what?"
+
+The reading opened the door but didn't walk through it.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_AceWands_R_Vague
+"Creative energy is blocked but will unblock soon."
+
+Dev checks his phone. Thursday doesn't care about blocked creative energy.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+# --- PAGE OF CUPS ---
+
+:: TheKind.Session2.P3_PageCups
+@if cards[2].reversed:
+    The Page of Cups — reversed. A young figure holding a cup from which a fish emerges — whimsical, emotional, surprising. But reversed, the emotional openness is blocked. The willingness to be surprised, to be a beginner, to feel — that's what's been shut down.
+
+    + ["Reversed Page of Cups is the strength you've *suppressed.* The ability to be a beginner. To not know. To say 'I don't understand this' without hearing it as 'I'm not good enough.' You've been the expert your whole life — the kid who knew the answers, the one the family counted on. Being a beginner again feels like failure. But it's not. It's the prerequisite for learning."] -> TheKind.Session2.P3_PageCups_R_Empathic
+    + ["This reversal shows emotional vulnerability being blocked. The Page of Cups is about beginner's mind — the openness of someone who doesn't know and isn't ashamed of not knowing. You've forgotten how to not know. Or rather, you've forgotten that not knowing is where all learning starts."] -> TheKind.Session2.P3_PageCups_R_Reframing
+    + ["Reversed Page of Cups suggests blocked emotions. Allow yourself to feel what you're going through."] -> TheKind.Session2.P3_PageCups_R_Practical
+    + ["You're blocking your emotional side. Try to be more open."] -> TheKind.Session2.P3_PageCups_R_Vague
+@else:
+    The Page of Cups. A young figure looking at a cup with wonder — a fish leaping from it, unexpected, magical. The card of emotional openness. Beginner's mind. The willingness to be surprised.
+
+    Dev looks at it. The fish makes him almost-smile.
+
+    "There's a fish in the cup."
+
+    "There's always a fish in the cup. That's the Page's gift — they look at ordinary things and find something extraordinary."
+
+    Scout perks up. The Page of Cups is the card Scout would tattoo on his arm if Delphi didn't keep talking him out of it. It's the card of the person who puts on a record they've never heard and is *ready* to be changed by it. Open. Undefended. Curious.
+
+    Delphi watches Dev's face. The almost-smile. The guard that dropped for a moment when the fish surprised him. *There,* her expression says. *That's the crack.*
+
+    Mal has set down the composition notebook entirely. They're just standing at the edge of the aisle, arms crossed, watching the reading the way you'd watch a proof unfold — patiently, attentively, knowing it's going somewhere.
+
+    + ["The Page of Cups is beginner's mind. The willingness to not know — to look at something and say 'I have no idea what this is' and feel *curious* instead of ashamed. That's the strength you've lost. Not because you're arrogant — because the system taught you that not knowing is failure. It's not. Not knowing is the beginning. Every mathematician who ever proved anything started by not knowing, and the great ones never forgot what that felt like."] -> TheKind.Session2.P3_PageCups_U_Empathic
+    + ["Do you know what the best programmers have in common? It's not talent. It's not experience. It's the ability to look at code they don't understand and think 'cool, let me figure this out' instead of 'I should already know this.' That's the Page of Cups. That's beginner's mind. And you've been so busy being the expert — the kid who always knows, the first-gen student who can't afford to not know — that you've forgotten the *joy* of not knowing. The joy of the fish in the cup."] -> TheKind.Session2.P3_PageCups_U_Poetic
+    + ["Page of Cups represents emotional openness and new perspectives. Try to approach the material with fresh eyes."] -> TheKind.Session2.P3_PageCups_U_Practical
+    + ["Nice card. Be open to new emotional experiences."] -> TheKind.Session2.P3_PageCups_U_Vague
+@endif
+
+# Page of Cups — Upright interpretations
+
+:: TheKind.Session2.P3_PageCups_U_Empathic
+"The Page of Cups is beginner's mind. The willingness to not know — to look at something and say 'I have no idea what this is' and feel *curious* instead of ashamed."
+
+Dev's jaw works. Beginner's mind. The phrase lands with the specific weight of something he hasn't let himself be since he was old enough to be "the smart kid."
+
+"That's the strength you've lost. Not because you're arrogant — because the system taught you that not knowing is failure."
+
+"It *is* failure. If I don't know the material, I fail the exam—"
+
+"Not knowing *yet* is different from not knowing *ever.* Every mathematician who ever proved anything started by not knowing. The great ones never forgot what that felt like."
+
+Dev looks at the fish in the cup. At the wonder on the Page's face.
+
+"My dadi," he says quietly. "When she was learning English. She was sixty. She'd sit at the restaurant counter with a children's book — *Goodnight Moon* — and she'd read it out loud. To nobody. To the restaurant. And she'd get the pronunciation wrong and she didn't care because she was *learning.*"
+
+He stops. Takes off his glasses. Wipes them. Not because they're foggy.
+
+"She never once seemed ashamed of not knowing."
+
+"That's the Page of Cups."
+
+"That's my dadi."
+
+The store is very warm. The pressed tin ceiling seems to glow. Somewhere in the stacks, a book shifts on a shelf — not falling, adjusting. Making room.
+
+~ session.foundation_influence += 2
+~ session.impossible_influence += 1
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_hope += 4
+~ session.dev_shame -= 3
+~ session.store_warmth += 1
+~ reader.empathy += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_PageCups_U_Poetic
+"Do you know what the best programmers have in common?"
+
+Dev, the CS major, leans forward. You're in his language now.
+
+"It's not talent. It's not experience. It's the ability to look at code they don't understand and think 'cool, let me figure this out' instead of 'I should already know this.'"
+
+His eyes widen. The recognition.
+
+"That's the Page of Cups. That's beginner's mind. And you've been so busy being the expert — the kid who always knows, the first-gen student who can't afford to not know — that you've forgotten the *joy* of not knowing."
+
+"The joy of—"
+
+"The joy of the fish in the cup. The 'wait, what IS that?' feeling. You had it in linear algebra. You had it when you built your first neural net. You had it every time you encountered something beautiful and confusing and new."
+
+Dev looks at the card. At the fish. At the Page's expression of open wonder.
+
+"I used to love not knowing things," he says. "When did that change?"
+
+"When the stakes got too high to enjoy it."
+
+Scout, from behind the bins: "That's why you listen to music you've never heard. Because the not-knowing is the whole point. The first listen is the Page of Cups."
+
+~ session.wildcard_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_hope += 4
+~ session.dev_shame -= 2
+~ session.store_warmth += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_PageCups_U_Practical
+"Page of Cups represents emotional openness and new perspectives. Try to approach the material with fresh eyes."
+
+Dev: "What does 'fresh eyes' look like for epsilon-delta proofs?"
+
+The reading doesn't have a concrete answer. But the question is real, and the recommendation will answer it.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+~ session.dev_hope += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_PageCups_U_Vague
+"Nice card. Be open to new emotional experiences."
+
+Dev: "I'm trying to pass a math class, not go to therapy."
+
+Fair. The reading missed.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+# Page of Cups — Reversed interpretations
+
+:: TheKind.Session2.P3_PageCups_R_Empathic
+"Reversed Page of Cups is the strength you've *suppressed.* The ability to be a beginner."
+
+Dev goes still.
+
+"To not know. To say 'I don't understand this' without hearing it as 'I'm not good enough.'"
+
+"I—"
+
+"You've been the expert your whole life. The kid who knew the answers. The one the family counted on. Being a beginner again feels like failure."
+
+"It IS—"
+
+"It's not. It's the prerequisite for learning."
+
+A long silence. Rain on the roof. The turntable humming in its run-out groove. Dev, in the chair, looking at a reversed card that shows a young person failing to be surprised by a fish, and seeing himself.
+
+"I don't know how to be a beginner," he says. "I genuinely don't know how."
+
+"That's okay. Because you just said 'I don't know how.' And that's beginner's mind."
+
+Dev stares at you. The logic is circular and airtight and exactly right. The bug that diagnoses itself. The proof that begins with the admission of ignorance.
+
+From behind the counter, Delphi: "That's the reading."
+
+~ session.foundation_influence += 2
+~ session.quality_score += 3
+~ session.interpretation_quality['excellent'] += 1
+~ session.dev_hope += 3
+~ session.dev_shame -= 2
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_PageCups_R_Reframing
+"This reversal shows emotional vulnerability being blocked. The Page of Cups is about beginner's mind — the openness of someone who doesn't know and isn't ashamed of not knowing."
+
+Dev considers this with the analytical part of his brain. The reframe is clean: not knowing isn't a bug, it's a feature.
+
+"You've forgotten how to not know. Or rather, you've forgotten that not knowing is where all learning starts."
+
+"Like a constructor," Dev says. "The initial state. Before any data is loaded."
+
+"Exactly like a constructor."
+
+~ session.impossible_influence += 1
+~ session.quality_score += 2
+~ session.interpretation_quality['good'] += 1
+~ session.dev_hope += 2
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_PageCups_R_Practical
+"Reversed Page of Cups suggests blocked emotions. Allow yourself to feel what you're going through."
+
+Dev: "I'm feeling plenty."
+
+Accurate. The reading named the state without offering a path through it.
+
+~ session.quality_score += 1
+~ session.interpretation_quality['adequate'] += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+:: TheKind.Session2.P3_PageCups_R_Vague
+"You're blocking your emotional side. Try to be more open."
+
+Dev's guard, which had been lowering, snaps back up. Telling a kid who's been emotionally self-sufficient since third grade to "be more open" isn't insight. It's a greeting card.
+
+~ session.quality_score -= 1
+~ session.interpretation_quality['poor'] += 1
+
++ [Complete the reading] -> TheKind.Session2.Synthesis
+
+# ============================================================================
+# PART 3: SYNTHESIS, RECOMMENDATIONS & DREAM FADE
+# ============================================================================
+
+# ============================================================================
+# SYNTHESIS — DETERMINE PATH
+# ============================================================================
+
+:: TheKind.Session2.Synthesis
+@py:
+# Determine dominant path
+paths = {
+    'foundation': session.foundation_influence,
+    'wildcard': session.wildcard_influence,
+    'impossible': session.impossible_influence
+}
+
+# Find highest path
+dominant_path = max(paths, key=paths.get)
+
+# Tie-breaking: impossible > foundation > wildcard
+if list(paths.values()).count(paths[dominant_path]) > 1:
+    for tiebreak in ['impossible', 'foundation', 'wildcard']:
+        if paths[tiebreak] == paths[dominant_path]:
+            dominant_path = tiebreak
+            break
+
+session.dominant_path = dominant_path
+
+# Check for failstate — quality too low
+session.is_failstate = session.quality_score < 3
+
+# Store final quality assessment
+if session.quality_score >= 10:
+    session.reading_quality = "exceptional"
+elif session.quality_score >= 6:
+    session.reading_quality = "good"
+elif session.quality_score >= 3:
+    session.reading_quality = "adequate"
+else:
+    session.reading_quality = "poor"
+@endpy
+
+The three cards lie between you. The reading is done.
+
+Dev stares at the spread. His hands are still, which is new — he's been fidgeting with the zipper on his backpack since he sat down, and the zipper has been running back and forth like a tiny metronome of anxiety. Now: still.
+
+@if session.is_failstate:
+    "Thanks," he says. Flat. The word of someone who came for help and got platitudes.
+
+    He's already reaching for his backpack. Already gone. The reading didn't land — you can feel it, the distance, the courtesy, the gap between what he needed and what you gave. He needed someone to see the shape of the problem. You gave him fortune-cookie fragments.
+
+    -> TheKind.Session2.Failstate
+@else:
+    @if session.reading_quality == "exceptional":
+        He doesn't say anything for a long time. The reading has done something rare: it has made a person who thinks in proofs *feel* something they can't prove. His jaw works. His eyes are bright. Not crying — Dev doesn't cry in front of people, maybe doesn't cry at all anymore, hasn't since the night before his first AP exam when he studied until 3am in his parents' restaurant and his dadi found him and sat with him and didn't say a word because she couldn't read the textbook but she could read the boy.
+
+        "How did you know?" he says. "About the — the gap. The missing step."
+
+        You didn't know. The cards knew. The store knew. You just held the space.
+    @elif session.reading_quality == "good":
+        He sits with it. Something has shifted — not the seismic crack he needed, but a tectonic nudge. The question he walked in with — *am I smart enough?* — isn't quite the same question anymore. It's becoming: *was I given the right tools?*
+
+        "Okay," he says. Quietly. "Okay."
+    @else:
+        He considers the cards. The reading gave him pieces, not the whole picture — but pieces are more than he had when he walked in.
+
+        "I don't know if I buy this," he says. But he hasn't stood up.
+    @endif
+
+    @if session.delphi_diagnosed:
+        Delphi sets her mug down. The particular ceramic-on-wood sound that means she has something to say.
+
+        "The reading's done. But I don't think you came here for cards."
+    @elif session.mal_personal:
+        From the back stacks, Mal's voice: "You came in looking for a textbook."
+
+        It's not a question.
+    @elif session.scout_engaged:
+        Scout, leaning on the counter: "So. You need a book, right? That's the actual thing?"
+    @else:
+        "So," you say. "The reading aside — you came in looking for something."
+    @endif
+
+    Dev nods. "I need a real analysis textbook that doesn't assume I already know how to write proofs. And I need it to not make me feel like an idiot for not knowing."
+
+    That's the real question. That's the moment. The reading is done and now The Kind does what The Kind does.
+
+    @if session.dominant_path == "foundation":
+        -> TheKind.Session2.Recommend_Foundation
+    @elif session.dominant_path == "wildcard":
+        -> TheKind.Session2.Recommend_Wildcard
+    @else:
+        -> TheKind.Session2.Recommend_Impossible
+    @endif
+@endif
+
+# ============================================================================
+# FOUNDATION PATH — Delphi recommends *How to Prove It*
+# ============================================================================
+
+:: TheKind.Session2.Recommend_Foundation
+Delphi steps out from behind the counter. This is unusual. Delphi *is* the counter — she's the fixed point, the center of gravity, the person who stays while everyone else moves. When Delphi walks into the store, it means something.
+
+She crosses to the textbook section. Not the academic textbooks shoved in the corner that Carruth students occasionally wander in for — the *real* textbook section, curated by Mal, organized not by subject but by what they call "pedagogical intention." There's a shelf labeled WANTS TO TEACH YOU. There's a shelf labeled WANTS TO IMPRESS YOU. There's a shelf labeled WRITTEN BY SOMEONE WHO REMEMBERS WHAT IT'S LIKE NOT TO KNOW.
+
+Delphi pulls a book from the third shelf.
+
+*How to Prove It: A Structured Approach* by Daniel J. Velleman.
+
+She sets it on the counter. Opens it to chapter one. Points.
+
+"Read this page."
+
+Dev reads. His eyes move. His mouth moves slightly — the subvocalization of someone trained to understand by hearing, probably from years of studying at the restaurant with the kitchen noise as soundtrack. His brow furrows. Then unfurrows.
+
+"This is... this is teaching me how proofs work. Like, the *grammar* of proofs."
+
+"Because that's what you're missing," Delphi says. "Not analysis. Not Rudin. Not mathematics. You're missing the *language.* You went from arithmetic to algebra to calculus — all computation. Nobody stopped to teach you the part where math changes from calculating answers to constructing arguments."
+
+@if session.delphi_diagnosed:
+    "I asked you what proof courses you'd taken," she says. "You looked at me like I was speaking Martian. That's not a you problem. That's a curriculum problem."
+@endif
+
+Dev stares at the book. At Delphi. At the book again.
+
+"Why didn't anybody tell me this? Why didn't my advisor — why didn't *Kessler* —"
+
+"Because Kessler has a PhD from Princeton and learned proofs at sixteen from his mathematician father and has never once in his career had to imagine what it's like to not have that foundation." Delphi's voice is even. Not angry. Diagnostic. "The system isn't built for you. That doesn't mean you're not built for math."
+
+@if session.dev_shame >= 6:
+    Dev's hands are shaking. Not a lot — just the micro-tremor of someone whose entire self-narrative is being rewritten in a used bookstore during a rainstorm.
+
+    "I thought I was stupid," he whispers.
+
+    "I know," Delphi says. "You're not."
+@endif
+
+She taps the cover. "Two months with this. Before you touch Rudin again. Learn the language first. Then the literature will make sense."
+
+Dev picks it up. Holds it like something that might save his life. Because it might.
+
+"How much?"
+
+"Twelve dollars."
+
+He almost laughs. "Twelve dollars."
+
+"We're a used bookstore in Rewind, Oregon. What did you expect?"
+
+From behind the counter, Scout: "We're very affordable. It's kind of our thing."
+
+Mal, from the back stacks, doesn't say anything. But you hear the composition notebook. A pen scratch. Mal cataloging something — maybe the book, maybe the moment, maybe the particular quality of silence that happens when someone finds the thing they didn't know they needed.
+
+~ session.recommendation = "How to Prove It"
+~ session.recommender = "Delphi"
+
++ [Continue] -> TheKind.Session2.Dev_Departs
+
+# ============================================================================
+# WILDCARD PATH — Scout recommends Hiromi Uehara's *Spark*
+# ============================================================================
+
+:: TheKind.Session2.Recommend_Wildcard
+Scout straightens up behind the counter. Cracks his knuckles — all ten, rapid-fire, the sound of a pianist warming up, which is exactly what it is because Scout played keys for three semesters at Berklee before dropping out because, as he puts it, "I learned more from the listening than the playing."
+
+"Okay. I have a theory."
+
+Delphi: "God help us."
+
+"No, listen. Listen." Scout comes around the counter. He's holding a disc — not a record, a CD. A burned CD in a clear jewel case with a handwritten track list in Scout's angular block print. "Your problem isn't the math. Your problem is you've forgotten what it feels like to enjoy being confused."
+
+Dev: "I have never enjoyed being confused."
+
+"Sure you have. You just don't call it that. When you're writing code and you hit a bug you've never seen before and you start *hunting* it — the dopamine when you finally trace the segfault back to something you didn't expect — that's joy. That's the good confusion. That's the confusion of someone who trusts that the answer exists and they're capable of finding it."
+
+Dev opens his mouth. Closes it. The coder in him recognizes the truth of this.
+
+"Real analysis took that away," Scout says. "It made confusion feel like failure instead of adventure. And I can't fix that with a textbook. But I can fix it with this."
+
+He holds up the CD.
+
+"Hiromi Uehara. *Spark.* 2016."
+
+"I don't need music. I need a math textbook."
+
+"You need both. You need the textbook for the language. Delphi can help you with that." A glance at Delphi, who nods — she'll make sure Dev gets the Velleman. "But you also need to remember what it feels like to be inside something complicated and love it."
+
+Scout's voice drops. The inside voice, the one that only comes out when he's being dead serious, when the constant chatter and the tiny fist pumps and the argument-starting opinions all fall away and what's left is a kid from Modesto who heard Coltrane for the first time at fourteen and understood that music was how he was going to think about the world.
+
+"Hiromi plays piano the way mathematicians write proofs. She starts with a theme — a simple, clean idea — and then she *develops* it. She takes it apart. She puts it back together in ways you didn't expect. She goes somewhere that sounds wrong, sounds impossible, sounds like she's lost the thread entirely — and then she brings it back. Every time. She brings it back and when she does you realize she was never lost. She was just further ahead than you."
+
+"That's..." Dev's brow furrows. "That's literally what proofs do."
+
+Scout grins. Full wattage. Tiny fist pump.
+
+"THAT'S WHAT I'M SAYING."
+
+"Inside voice," Delphi says, automatically.
+
+"That is EXACTLY what I'm saying. Listen to *Spark.* Listen to 'Endeavor.' Listen to the way she goes into the rapids and keeps steering. And then go back to Rudin and read a proof and tell me it doesn't sound different."
+
+He presses the CD into Dev's hands. The track list on the insert, in Scout's handwriting:
+
+1. *Spark*
+2. *Endeavor*
+3. *What Will Be, Will Be*
+4. *In a Trance*
+5. *Take Me Away*
+
+And at the bottom, in smaller print: *"the confusion is the point — trust it"*
+
+"I burned this last Tuesday," Scout says. "I didn't know why. Now I do."
+
+@if session.scout_engaged:
+    Dev looks at the track list. At Scout. At the track list.
+
+    "You burned a CD. Last Tuesday. For someone you hadn't met."
+
+    "The store does that sometimes," Scout says. "I just work here."
+
+    Delphi, quiet: "Kind of."
+@endif
+
+Dev holds the jewel case. Turns it over. The handwriting is messy and earnest and alive.
+
+"How much?"
+
+"Free. It's a burned CD. What am I going to charge you for a burned CD?"
+
+"Scout gives everything away for free," Mal says from the back stacks. "It's why we can't let him near the register."
+
+"That's not true. That's — okay that's mostly true."
+
+~ session.recommendation = "Spark"
+~ session.recommender = "Scout"
+
++ [Continue] -> TheKind.Session2.Dev_Departs
+
+# ============================================================================
+# IMPOSSIBLE PATH — Mal retrieves the Pratchett from the deep shelves
+# ============================================================================
+
+:: TheKind.Session2.Recommend_Impossible
+Mal closes their composition notebook. This is significant. Mal's notebook is always open — it's the interface through which Mal processes the world, the running catalog of everything they've read and felt and connected. When the notebook closes, it means Mal is about to do something that can't be written down while it's happening.
+
+"Stay here," Mal says.
+
+They stand up from the stool in the back stacks. Push their glasses up. Look at the shelf behind them — the one that's always been there, the one with the normal books, the ones organized by emotional resonance — and then look at the wall *behind* the shelf.
+
+There's a door there.
+
+You've worked here for — how long have you worked here? — and you've seen that door before, and you've seen Mal go through it before, and you know what's behind it. The deep shelves. The sections that don't map to any organizational system you've ever encountered. The place where the records are from sessions that didn't happen and the books were written by authors who chose differently.
+
+@if the_kind.deep_shelves_revealed:
+    You've been back there. Once. During the session with Ellen, when the deep shelves revealed themselves — the bins going deeper than the store's physical footprint, the labels handwritten in scripts you almost recognized, the records pressed from futures that never came. This is where Late Light lived. This is where impossible things are filed.
+@else:
+    You've never been back there. Mal goes alone. Delphi says the deep shelves "respond to intention, not inventory." Scout says they "go as deep as you need them to." You're not sure what you believe, but you've seen Mal walk through that door and come back with things that shouldn't exist.
+@endif
+
+Mal looks at Dev.
+
+"What's your relationship with Terry Pratchett?"
+
+Dev blinks. "I — what? I read *Good Omens* in high school."
+
+"Did you like it?"
+
+"I loved it. My friend Priya lent it to me and I read it in two days and I've reread it every year since."
+
+Mal nods. As if this confirms something.
+
+"Stay here," they say again. And they go through the door.
+
+The store shifts. That's the only word for it — the ambient hum changes frequency. The turntable, which has been in its run-out groove for the last twenty minutes, starts to crackle in a way that sounds almost musical. The rain on the windows gets louder, then softer, then louder again, like breathing.
+
+Scout looks at Delphi. Delphi looks at her mug.
+
+"How long do they usually—" Dev starts.
+
+"Depends," Delphi says.
+
+"On what?"
+
+"On how deep it is."
+
+Dev looks at you. You shrug. What are you going to say? *The store has a section that exists between timelines and our colleague is navigating it by emotional resonance to find a mathematics textbook written by a dead fantasy novelist?* You work here. You accept the premises.
+
+Three minutes pass. Four. Dev opens his mouth to ask again and then—
+
+The door opens. Mal comes back. Their glasses are slightly foggy, like they've been in a different climate. Their hands are dusty — not the dust of disuse but the bright, golden dust of books that are still being written somewhere, in some timeline, by some author who made a different choice at twenty-two.
+
+They're carrying a book.
+
+It's a trade paperback, well-designed. Clean mathematical typesetting. The cover is a Discworld blue — that specific shade — with a brilliant geometric diagram that manages to be both rigorous and whimsical. The title:
+
+***A Conditions of the Heart: Real Analysis for People Who Think in Stories***
+*by Terry Pratchett*
+*Cambridge University Press — 2008*
+
+Dev stares at it.
+
+"That's not real."
+
+"Kind of," Mal says. And sets it on the counter.
+
+"That's — Pratchett was a *fantasy novelist.* He didn't — he didn't do *math.*"
+
+"Not in this timeline." Mal opens the book. The pages are real. The typesetting is real. The mathematical notation is flawless — proper epsilon-delta proofs, Bolzano-Weierstrass, Intermediate Value Theorem — but the exposition between the proofs is pure Pratchett. Footnotes and all.
+
+Dev reads a page. His lips move.
+
+"'Consider a function walking from Ankh-Morpork to Lancre,'" he reads aloud. "'It must, at some point, cross the River Ankh*—'"
+
+He looks at the footnote.
+
+"'*Assuming the function can hold its breath. The River Ankh is, technically, not so much a body of water as a body of water's regrettable life choices.'"
+
+He laughs. It surprises him — the sound comes out like a cough, then opens into something real, something that has been locked behind the ribcage of a kid who has been clenching his jaw since September. He laughs and turns the page and reads more and laughs again, and then his face does something complicated because the proof that follows the joke is *clear.* Crystalline. It builds the way Pratchett's narratives build — from something absurd to something true, from something funny to something that makes you understand the world a little better.
+
+"This is the Intermediate Value Theorem," he says. "This is — I *understand* this. I've been staring at this theorem for three weeks and I — this explains it."
+
+"Pratchett went to Cambridge in 1966 in that timeline," Mal says quietly. "Mathematics. He published fiction on the side — just the one novel, a comic fantasy about a flat world, never wrote a sequel. But the textbooks..." Mal's voice does something you've never heard — goes reverent, almost fragile. "The textbooks are extraordinary. He believed math was storytelling. He believed proofs were narrative arcs. And he spent forty years writing books that teach analysis the way he wished someone had taught him."
+
+@if session.mal_personal:
+    Mal looks at Dev. Takes off their glasses, cleans them on their shirt — a gesture that means vulnerability, that means the catalog is open.
+
+    "I was you," Mal says. "Different details. Same shape. ML engineering, not pure math. But the wall — I hit the wall. And I didn't have this." They touch the book's cover. "I had Stack Overflow and imposter syndrome and a conviction that I was fundamentally broken."
+
+    "Are you?" Dev asks. Genuine.
+
+    "No. I was just missing a step. Like you."
+@endif
+
+Dev holds the book. His thumbs rest on the spine. The golden dust from the deep shelves catches the lamplight.
+
+"How much?"
+
+Mal looks at Delphi. Delphi looks at her mug. Some calculation happens in the space between them — the kind of unspoken negotiation that occurs between people who have worked together long enough to have their own language.
+
+"Fourteen dollars," Delphi says.
+
+"For a book that doesn't exist."
+
+"For a book that exists here," Mal corrects. "In this store. In this timeline. For you."
+
+~ session.recommendation = "Pratchett Analysis"
+~ session.recommender = "Mal"
+~ session.store_revealed = True
+~ reader.mystical_affinity += 1
+
++ [Continue] -> TheKind.Session2.Dev_Departs
+
+# ============================================================================
+# FAILSTATE — Dev Buys Rudin
+# ============================================================================
+
+:: TheKind.Session2.Failstate
+Dev stands up. Zips his backpack. The sound of the zipper is loud in the store — louder than it should be, the way sounds get loud when a space is disappointed.
+
+"Thanks for the reading," he says. To you. Not to the crew. Not to the store. "It was... interesting."
+
+The professor word. The word that means: I'm being polite because I was raised right, but this didn't help.
+
+He walks to the textbook section. Pulls a secondhand copy of Rudin from the shelf — *Principles of Mathematical Analysis*, third edition, previous owner's marginalia in pencil, coffee stain on chapter three. The book that broke him. He's going to buy it and white-knuckle it and maybe pass and maybe not and he'll never know that there was a different version of tonight where someone found the right book, the right word, the right angle.
+
+He brings it to the counter. Delphi rings it up.
+
+"Eight dollars."
+
+He pays. Doesn't haggle. Doesn't browse. Doesn't look at the deep shelves or the staff picks or the turntable or the bead curtain or any of the thousand things that make The Kind what it is.
+
+"Good luck with the semester," Scout says. Genuine. Unable to help himself.
+
+"Thanks."
+
+The bell rattles. The door sticks, then opens, then closes. Through the window, you watch Dev walk to his bicycle — a cheap hybrid with a rear rack and a bungee net, the bicycle of someone who does everything themselves — and ride into the rain.
+
+Delphi doesn't say anything. She refills her tea. The silence is the same as Ellen's failstate silence — not angry, not sad. Just the particular quiet of a store that knows it had something to offer and wasn't heard.
+
+Scout picks up the needle. Puts on a record. Coltrane, *A Love Supreme.* The opening prayer fills the store, patient and enormous, and nobody says anything about why Scout chose it. He chose it because when Scout is hurting he reaches for the same album every time, the way some people reach for a drink or a run or a phone call home.
+
+From the back stacks, Mal's pen starts moving. Cataloging. Filing. The composition notebook absorbing another data point in a system only Mal understands.
+
+The Kind gets a little colder. Not much. But enough.
+
+~ session.recommendation = "generic"
+~ session.recommender = "none"
+~ session.is_failstate = True
+
++ [Continue] -> TheKind.Session2.DreamFade
+
+# ============================================================================
+# DEV DEPARTS
+# ============================================================================
+
+:: TheKind.Session2.Dev_Departs
+Dev holds his recommendation. The reading is done. The rain still falls.
+
+@if session.recommender == "Delphi":
+    He looks at the book. Opens it to chapter one again. Reads the first paragraph, lips moving.
+
+    "She said two months," he says. Not to you — to himself. Working the timeline. "Two months with this. Then back to Rudin."
+
+    He looks up at Delphi. "Can I come back? If I get stuck?"
+
+    Delphi's expression doesn't change. But something in the store shifts — the light gets a fraction warmer, the turntable hums a half-step deeper.
+
+    "Tuesday through Saturday. Four to close."
+
+    "That's not what I asked."
+
+    "Yes," she says. "You can come back."
+@elif session.recommender == "Scout":
+    He turns the CD case over in his hands. Reads the track list again.
+
+    "'The confusion is the point,'" he reads. "You really believe that?"
+
+    Scout's face does something you've rarely seen — sincerity without performance, meaning without volume.
+
+    "I believe the confusion is the way through. Not the obstacle. The path."
+
+    "That's..." Dev pauses. The CS major in him is running the logic. "That's what a search algorithm does. You don't know where the answer is. The searching IS the method."
+
+    "SEE?" Scout's inside voice is gone again. "I KEEP TELLING PEOPLE MATH IS MUSIC."
+
+    "You're telling people music is math."
+
+    "SAME THING."
+
+    "It is not the same thing."
+
+    "Kind of," Delphi says, from behind the counter.
+@else:
+    He holds the Pratchett. His thumb traces the cover — the geometric diagram, the Discworld blue, the name of an author who in some other timeline chose numbers over stories and wrote the book that Dev needed.
+
+    "This can't be real," he says. One more time.
+
+    "You've been reading it for ten minutes," Mal says. "You understood the Intermediate Value Theorem. You laughed at three footnotes. Does it matter if it's real?"
+
+    Dev considers this. The philosopher in the mathematician in the CS major.
+
+    "No," he says. "It doesn't."
+
+    "That's the store," Mal says. "That's what this place does. Kind of real. Kind of impossible. Kind of exactly what you need."
+
+    From behind the counter, Scout: "That's literally our name."
+
+    "The sign says KIND."
+
+    "Because the OF faded. The OF is implied."
+
+    "Kind of."
+
+    "See? You get it."
+@endif
+
+The bell rattles. The door sticks, then opens, then closes.
+
+Through the window, you watch Dev strap his purchase to the rear rack of his bicycle with the bungee net. He's careful with it — the way you're careful with something you don't fully trust yet but suspect might be important.
+
+He rides into the rain. The traffic light on the corner does its thing — forty-five seconds of green pointing toward the highway, which nobody uses because everyone in Rewind knows the shortcut through the college parking lot. Dev takes the shortcut. He knows this town. He grew up here. His parents' restaurant is fourteen minutes by bike in good weather, twenty in rain like this.
+
+He'll be fine. Or he'll struggle. Or he'll call his dadi at midnight because he's lonely and she'll answer because she always answers and she'll say *ghoda changla ahe, rasta chukla* — the horse is good, the road is wrong — and he'll feel better the way he's always felt better, from the people who can't help with the math but can help with the boy.
+
+The Kind settles. The reading is done. The recommendation is made.
+
+@if session.reading_quality == "exceptional":
+    Scout lets out a long breath. "That kid is going to be okay."
+
+    "Maybe," Delphi says.
+
+    "No. That kid is going to be okay. I'm calling it."
+
+    Mal, from the back stacks: "Scout, you can't *call* a human being's future."
+
+    "I just did. Write it down in your notebook."
+
+    Silence. Then the sound of a pen. Mal writing it down.
+@elif session.reading_quality == "good":
+    Scout: "Good one."
+
+    Delphi: "Mm."
+
+    From the back stacks, the composition notebook. Pen on paper. Mal adding an entry to whatever system governs the deep shelves, whatever catalog maps emotion to ISBN to timeline to need.
+@else:
+    The store is quieter than usual. The reading landed enough. Not every reading is a revelation. Some are just a start.
+
+    Scout puts something on the turntable. Something gentle. The store absorbs it like rain.
+@endif
+
++ [Continue] -> TheKind.Session2.DreamFade
+
+# ============================================================================
+# DREAM FADE — WAKING UP
+# ============================================================================
+
+:: TheKind.Session2.DreamFade
+@py:
+# Persist session results to the_kind
+the_kind.sessions_completed += 1
+the_kind.session_two_recommendation = session.recommendation
+the_kind.session_two_recommender = session.recommender
+the_kind.session_two_quality = session.reading_quality
+the_kind.session_two_dominant_path = session.dominant_path
+
+# Persist store state
+the_kind.store_warmth = session.store_warmth
+if hasattr(session, 'store_revealed') and session.store_revealed:
+    the_kind.deep_shelves_revealed = True
+
+# Persist crew bonds
+if session.scout_engaged:
+    the_kind.scout_bond = min(10, the_kind.scout_bond + 1)
+if session.delphi_diagnosed:
+    the_kind.delphi_bond = min(10, the_kind.delphi_bond + 1)
+if session.mal_personal:
+    the_kind.mal_bond = min(10, the_kind.mal_bond + 1)
+
+# Reader rewards
+reader.mystical_affinity += 1
+if session.reading_quality == "exceptional":
+    reader.empathy += 1
+    reader.insight += 1
+    reader.competence += 1
+elif session.reading_quality == "good":
+    reader.empathy += 1
+    reader.insight += 1
+elif session.reading_quality == "adequate":
+    reader.empathy += 1
+elif session.reading_quality == "poor":
+    reader.self_doubt = True
+
+# Set bleed-through object type
+if session.is_failstate:
+    session.bleed_object = "blank_page"
+elif session.dominant_path == "impossible":
+    session.bleed_object = "pratchett_page"
+elif session.dominant_path == "wildcard":
+    session.bleed_object = "proof_and_music"
+else:
+    session.bleed_object = "clean_proof"
+
+# Track bleed object on persistent state
+the_kind.bleed_objects.append(session.bleed_object)
+@endpy
+
+The shift ends. Or the dream ends.
+
+The rain softens. The hardwood floor dissolves at the edges, the grain going vague the way things go vague when you're trying to remember them while they're still happening. Scout's voice fades — something about Hiromi and Coltrane and whether modal jazz was the first proof-based music — and Delphi's kettle goes silent, and Mal's pen stops, and the store folds itself up like a book ending, the last paragraph dissolving into white space, the cover closing, silence.
+
+You wake up.
+
+Your reading table. Your apartment. Your deck on the table where you left it.
+
+@if session.is_failstate:
+    The dream is already fading. You remember a store. A kid. Rain. You tried to help. You're not sure you did.
+
+    You rub your face. Make coffee. Try to shake the feeling of having missed something important — something obvious, something you should have seen.
+
+    The deck sits on the table. You don't reach for it.
+@elif session.reading_quality == "exceptional":
+    Your chest is full. That feeling again — the one from the first dream, the residue of colored lamplight and rain and a store that holds impossible things. But this time it's sharper. This time the dream left a taste in your mouth — black tea and vinyl dust and the particular metallic ozone smell of a kid's fear dissolving into something better.
+
+    You can still feel the hardwood under your feet. Still hear Dev reading aloud — the laugh, the startled recognition, the sound of someone understanding something for the first time.
+
+    You can still hear Delphi: *The system isn't built for you. That doesn't mean you're not built for math.*
+@else:
+    The dream fades like the end of a record — slowly, with texture, the run-out groove hissing into silence. You hold onto pieces. A kid's face. Rain. A recommendation.
+
+    Something happened. Something good enough. You're sure of the feeling, if not the details.
+@endif
+
+You sit up. Your tarot deck is on the table.
+
+And next to it—
+
+@if session.bleed_object == "blank_page":
+    A page from a composition notebook. Torn along the perforation, clean. College-ruled. Completely blank.
+
+    You pick it up. It's just paper — anonymous, waiting, the kind of lined page you'd find in any campus bookstore. No writing. No proof. No footnotes. No marginalia. Just thirty-two blue lines and the faint ghost of a spiral binding.
+
+    You set it on the knick-knack shelf. Next to the 7-inch single from the last dream. Next to whatever else has arrived from places you can't quite name.
+
+    The blank page sits there. Patient. Unwritten. Full of nothing and everything and the particular weight of potential that didn't become kinetic.
+@elif session.bleed_object == "clean_proof":
+    A page from a composition notebook. Torn along the perforation. College-ruled.
+
+    There's writing on it. Not yours — the handwriting is careful, deliberate, the penmanship of someone who learned to write by copying their dadi's Devanagari practice sheets and never lost the habit of treating each letter like it matters. The page contains a single proof: the Intermediate Value Theorem, written in a hand you don't recognize but that feels like yours.
+
+    It's correct. Clean. Each line follows from the last with the patience of someone who finally understands what they're saying. In the margin, in smaller print: *"the horse is good."*
+
+    You don't know what that means.
+
+    You set it on the knick-knack shelf. Next to the 7-inch single. The proof catches the morning light.
+
+    You could swear the handwriting looks like it's smiling.
+@elif session.bleed_object == "proof_and_music":
+    A page from a composition notebook. Torn along the perforation. College-ruled.
+
+    There's writing on it — a proof, careful and clean, the Intermediate Value Theorem in a hand you don't recognize. But in the margin, in a completely different handwriting — angular block print, all caps, the handwriting of someone who makes burned CDs for people he hasn't met — a note:
+
+    *"LISTEN TO ENDEAVOR WHILE YOU READ THIS. TRUST ME."*
+
+    Below that, in smaller print: *"the confusion is the point"*
+
+    You don't own a CD player. You don't know where this came from. But the angular handwriting feels like Scout's, and the proof feels like Dev's, and the page feels warm in a way that paper shouldn't.
+
+    You set it on the knick-knack shelf. Next to the 7-inch single from the first dream. The page curls slightly, as if it remembers being held.
+@elif session.bleed_object == "pratchett_page":
+    A page from a book. Not a composition notebook — a *book.* Typeset, with proper mathematical notation and a header font you almost recognize. Page 147.
+
+    The main text is a proof of the Bolzano-Weierstrass theorem. Rigorous. Correct. Beautiful in the way that proofs are beautiful when written by someone who believes mathematics is storytelling.
+
+    There's a footnote.
+
+    You read it:
+
+    *"A bounded sequence, much like a person from a small town with limited resources but unlimited stubbornness, must eventually converge to something. The theorem does not specify WHAT it converges to, which is rather the point. The sequence doesn't know where it's going. It just knows it's going somewhere. This is, in the author's experience, the human condition in a nutshell, and also the plot of most novels worth reading."*
+
+    You laugh. You're alone in your apartment at dawn and you're laughing at a footnote from a book that doesn't exist, written by a man who in this timeline wrote about Discworld instead of real analysis, and the proof above the footnote is the clearest thing you've ever read.
+
+    You set the page on the knick-knack shelf. Next to the 7-inch single. Next to whatever other impossible things have bled through from the store.
+
+    The page smells like old paper and golden dust and the particular warmth of shelves that go deeper than they should.
+@endif
+
+You sit at your reading table. Sip your coffee. Look at your tarot deck.
+
+@if session.is_failstate:
+    The morning continues. The dream fades. You're not sure what happened in there — just the aftertaste of rain and the sense of a missed connection. The deck sits in front of you and you don't want to touch it.
+
+    You go about your day. But something nags — a kid's voice, a zipper, a name you can't quite remember. A question you should have asked and didn't.
+@else:
+    "Good dream," you say. To yourself. To the cards. To whatever record shop might be listening.
+
+    This one felt different from the first. Sharper. Less about loss and more about — what? Foundation. The thing underneath the thing. The step nobody thinks to teach because they never had to learn it.
+
+    @if session.recommender == "Delphi":
+        You can still hear Delphi's voice: *The system isn't built for you. That doesn't mean you're not built for math.* It echoes. It feels like it's not just about Dev.
+    @elif session.recommender == "Scout":
+        You can still hear Scout: *The confusion is the point.* Something about that feels larger than math. Larger than music. Something about the way you learn anything — through the discomfort, into the understanding, out the other side.
+    @elif session.recommender == "Mal":
+        You can still see Mal coming back through the door with dusty hands and foggy glasses, carrying a book from a timeline where Terry Pratchett chose mathematics and wrote the textbook Dev needed. *Kind of real. Kind of impossible. Kind of exactly what you need.*
+    @endif
+@endif
+
+The cards don't answer.
+
+But you feel different. Warmer. Like the dream left something behind — not the page, not the memory, but a *frequency.* The particular frequency of a place that sees people clearly. That knows the difference between *can't do it* and *wasn't given the tools.* That has a shelf labeled WRITTEN BY SOMEONE WHO REMEMBERS WHAT IT'S LIKE NOT TO KNOW.
+
+You shuffle the deck. Draw one card. Just to check.
+
+@py:
+# Draw a waking card
+waking_deck = Deck()
+waking_card = waking_deck.draw_card()
+@endpy
+
+**{waking_card.name}.**
+
+@if waking_card.name == "The Magician":
+    Skill. Resources. The ability to turn nothing into something. The card of someone who has everything they need — they just have to learn to use it.
+
+    You look at the composition notebook page on your shelf. At the knick-knack collection growing from dreams that feel too real.
+
+    "Yeah," you say. "I know."
+@elif waking_card.name == "The Star":
+    Hope after darkness. Healing after struggle. The card of someone who looked up and saw light.
+
+    You think of Dev. Of a kid riding a bicycle through the rain with a book strapped to the rack. Of the particular stubbornness of someone who doesn't know how to quit and is learning that persistence isn't the same as suffering.
+
+    "Keep going, kid."
+@elif waking_card.name == "The Tower":
+    Collapse. Upheaval. The old structure breaking so the new one can be built.
+
+    You almost laugh. The Tower, drawn the morning after a reading about a kid whose entire self-concept shattered and is maybe, possibly, with the right book and the right people and the right amount of rain, rebuilding.
+
+    "On brand," you say to the empty room.
+@elif waking_card.name == "Ace of Pentacles":
+    New beginnings in the material world. A foundation. Solid ground.
+
+    The spread's name. *Solid Ground.* The card knows.
+
+    "Of course you do," you say to the deck. As if it can hear you. As if anything is listening.
+
+    Something is listening. You're increasingly sure of that.
+@else:
+    You stare at it. Looking for connection to the dream. Looking for meaning.
+
+    Maybe there isn't one. Maybe it was just a dream — your subconscious processing math and guilt and the particular frequency of rain on a proper roof.
+
+    Or maybe somewhere, in a store with big windows and a faded sign and shelves that go deeper than they should, someone is cataloging a new entry and drinking tea and waiting for you to come back.
+@endif
+
+You put the card back. The morning continues.
+
+But The Kind lingers. Warmer this time. Closer.
+
+And somewhere in Rewind, Oregon — in the version of reality where the store is a real store and the crew are real people and the deep shelves are just good organization — a kid named Dev is opening a book at a corner table in his parents' restaurant, and the first proof he reads makes sense, and the rain on the awning sounds like the beginning of something.
+
++ [Return to your day, changed] -> ReaderTable
+
+# ============================================================================
+# END OF SESSION 2
+# ============================================================================

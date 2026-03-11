@@ -2532,6 +2532,54 @@
           "rag_mapping": "outcome_and_result.final_outcome"
         }
       ]
+    },
+    {
+      "id": "solid-ground",
+      "name": "Solid Ground",
+      "description": "A three-card spread for when the foundation has cracked — not the ambition, not the ability, but the ground you're standing on. Designed for Kind Of, where sometimes the right recommendation starts with understanding what went wrong.",
+      "layout": "horizontal-3",
+      "cardSize": "large",
+      "aspectRatio": 2.0,
+      "category": "simple",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "What You're Carrying",
+          "short_description": "The weight — visible and invisible — that you brought through the door",
+          "detailed_description": "Not what you say you need. What you're actually holding. The burden might be a textbook or a failing grade, but this card reveals the real weight: expectation, identity, the accumulated pressure of being the person everyone counts on. This position reads the backpack, not the syllabus.",
+          "keywords": ["burden", "weight", "expectation", "pressure", "identity", "responsibility"],
+          "question_adaptations": {
+            "academic": "The real weight you're carrying — beyond the coursework",
+            "creative": "The pressure that's making the work feel impossible",
+            "identity": "The version of yourself you're afraid of losing"
+          },
+          "rag_mapping": "emotional_and_internal.identity"
+        },
+        {
+          "name": "What's Actually In The Way",
+          "short_description": "The real obstacle — which is almost never what you think it is",
+          "detailed_description": "The seeker thinks they know what's wrong (I'm not smart enough, I'm not working hard enough). This card reveals the structural problem: a missing foundation, a systemic gap, a bridge that was never built. The obstacle isn't a flaw in the person. It's a flaw in the path they were given.",
+          "keywords": ["obstacle", "gap", "foundation", "structure", "blindspot", "system"],
+          "question_adaptations": {
+            "academic": "The gap in your preparation that nobody told you about",
+            "creative": "The structural problem in your process, not your talent",
+            "identity": "The false belief about yourself that's doing the actual damage"
+          },
+          "rag_mapping": "emotional_and_internal.shadow"
+        },
+        {
+          "name": "What Strength You Don't See Yet",
+          "short_description": "The resource, quality, or capability you already have but haven't recognized",
+          "detailed_description": "Everyone who walks through the door of a place like Kind Of already has what they need. They just can't see it yet because the weight and the obstacle are blocking the view. This card reveals the strength that's been there all along — often the very quality that brought them through the door in the first place.",
+          "keywords": ["strength", "resource", "hidden", "potential", "resilience", "capability"],
+          "question_adaptations": {
+            "academic": "The intellectual strength you've been using all along without naming it",
+            "creative": "The creative muscle that's already strong enough — you just haven't aimed it here yet",
+            "identity": "The quality in yourself that you've been dismissing as irrelevant"
+          },
+          "rag_mapping": "outcome_and_result.final_outcome"
+        }
+      ]
     }
   ],
   "categories": {
