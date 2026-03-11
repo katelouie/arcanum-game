@@ -181,7 +181,7 @@ def _build_theme_gallery():
         display_name = t.get("dream_badge", theme_name.replace("_", " ").title())
 
         with ui.card().style(
-            "padding: 24px; margin-bottom: 16px; width: 100%; "
+            "padding: 24px; margin-bottom: 24px; width: 100%; "
             "border: 1px solid var(--gold-dim);"
         ):
             with ui.row().classes("items-center gap-4"):
@@ -339,7 +339,7 @@ def _build_deck_gallery():
         ).style("font-size: 11px; color: var(--gold-dim); opacity: 0.5;")
 
     # Card grid container (cleared and rebuilt on toggle)
-    grid_container = ui.column().classes("w-full")
+    grid_container = ui.column().classes("w-full").style("gap: 24px;")
     render_grid()
 
 
