@@ -225,9 +225,14 @@ def inject_theme():
     except Exception:
         pass  # May already be registered
 
-    # Load the external stylesheet (shared=True so it works with @ui.page)
+    # Load the external stylesheets (shared=True so it works with @ui.page)
     ui.add_head_html(
         '<link rel="stylesheet" href="/theme/arcanum_styles.css">', shared=True
+    )
+    # Card CSS for SVG tarot cards (theme-reactive via --card-* variables)
+    ui.add_head_html(
+        '<link rel="stylesheet" href="/theme/cards/arcanum_cards_base.css">',
+        shared=True,
     )
 
 

@@ -22,6 +22,7 @@ from arcanum_theme import (
     show_readers_desk,
     stat_row,
 )
+from card_renderer import render_svg_card_html, has_svg_card
 
 # Import from installed bardic package
 from bardic.runtime.engine import BardEngine
@@ -65,6 +66,7 @@ class GameSession:
         self.engine: BardEngine | None = None
         self.current_screen: str = "landing"
         self.active_theme: str = "default"  # sticky — persists until a tag overrides it
+        self.card_style: str = "arcanum"  # "arcanum" (SVG) or "classic" (Rider-Waite)
         self.main_container = None
         self.card_drawer = None
         self.card_drawer_content = None
@@ -417,6 +419,22 @@ class GameSession:
 
                 divider(width="80%")
 
+                # Card style toggle
+                section_label("Card Style")
+                with ui.element("div").style(
+                    "width: 100%; padding: 0 8px; display: flex; gap: 4px;"
+                ):
+                    for style_name, label in [("arcanum", "Arcanum"), ("classic", "Classic")]:
+                        is_active = self.card_style == style_name
+                        cls = "arc-nav-btn active" if is_active else "arc-nav-btn"
+                        with ui.element("button").classes(cls).on(
+                            "click",
+                            lambda sn=style_name: self._set_card_style(sn),
+                        ):
+                            ui.label(label)
+
+                divider(width="80%")
+
                 # Bottom actions
                 ui.element("div").style("flex: 1;")  # spacer
 
@@ -502,6 +520,11 @@ class GameSession:
     # ================================================================
     # CHOICES
     # ================================================================
+
+    def _set_card_style(self, style: str):
+        """Switch between 'arcanum' (SVG) and 'classic' (Rider-Waite) cards."""
+        self.card_style = style
+        self.update_ui()
 
     def make_choice(self, choice_index: int):
         """Handle player choice and update the story."""
@@ -754,22 +777,45 @@ class GameSession:
         position_name = card_data["name"]
         rotation = card_data.get("rotation", 0)
 
+        # Try SVG card first (if arcanum style is active)
+        svg_html = None
+        if self.card_style == "arcanum":
+            try:
+                card_code = card._get_code()
+                svg_html = render_svg_card_html(card, card_code)
+            except (AttributeError, Exception):
+                pass
+
+        # Fall back to traditional image
         abs_image_path = None
-        try:
-            image_path = card.get_image_filename()
-            abs_image_path = PROJECT_ROOT / image_path
-            has_image = abs_image_path.exists()
-        except AttributeError:
-            has_image = False
+        if svg_html is None:
+            try:
+                image_path = card.get_image_filename()
+                abs_image_path = PROJECT_ROOT / image_path
+                if not abs_image_path.exists():
+                    abs_image_path = None
+            except AttributeError:
+                pass
+
+        # Card height scales with width (tarot proportions ~1:1.73)
+        card_height = int(width * 1.73)
 
         with ui.column().classes("items-center").style(f"width: {width}px; gap: 8px;"):
             with (
                 ui.element("div")
                 .classes("arc-card")
-                .style("padding: 8px; width: 100%;")
+                .style(f"width: 100%; {'padding: 0;' if svg_html else 'padding: 8px;'}")
                 .on("click", lambda cd=card_data: self._show_card_modal(cd))
             ):
-                if has_image:
+                if svg_html:
+                    # Render SVG card inline — the frame and illustration
+                    reversal_style = (
+                        "transform: rotate(180deg);" if card.reversed else ""
+                    )
+                    ui.html(svg_html).style(
+                        f"width: 100%; height: {card_height}px; {reversal_style}"
+                    )
+                elif abs_image_path:
                     rotation_style = (
                         "transform: rotate(180deg);" if card.reversed else ""
                     )
@@ -782,7 +828,7 @@ class GameSession:
                         "align-items: center; justify-content: center;"
                     ):
                         ui.html(
-                            '<span style="font-size: 3em; color: var(--gold-dim);">✧</span>'
+                            '<span style="font-size: 3em; color: var(--gold-dim);">&#10023;</span>'
                         )
 
             label_text = f"⟲ {position_name}" if rotation != 0 else position_name

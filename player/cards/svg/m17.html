@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame elements -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">XVII</div>
+  <div class="card-name">The Star</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- Background glow -->
+      <radialGradient id="starglow" cx="50%" cy="35%" r="40%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.1"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#starglow)"/>
+
+      <!-- ======== WATER POOL ======== -->
+      <radialGradient id="poolglow" cx="50%" cy="88%" r="25%">
+        <stop offset="0%" stop-color="var(--card-accent)" stop-opacity="0.08"/>
+        <stop offset="100%" stop-color="var(--card-accent)" stop-opacity="0"/>
+      </radialGradient>
+      <rect y="600" width="500" height="200" fill="url(#poolglow)"/>
+
+      <ellipse cx="250" cy="682" rx="190" ry="40"
+               stroke="var(--card-accent)" stroke-width="1.5" fill="none" opacity="0.3"/>
+      <ellipse cx="250" cy="682" rx="150" ry="30"
+               stroke="var(--card-accent-light)" stroke-width="1" fill="none" opacity="0.25"/>
+      <ellipse cx="250" cy="682" rx="100" ry="18"
+               stroke="var(--card-accent)" stroke-width="0.7" fill="none" opacity="0.2"/>
+      <!-- Shimmer lines -->
+      <line x1="110" y1="674" x2="175" y2="676" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.22"/>
+      <line x1="195" y1="680" x2="270" y2="678" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.18"/>
+      <line x1="290" y1="676" x2="370" y2="678" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.22"/>
+      <line x1="160" y1="690" x2="340" y2="691" stroke="var(--card-accent-light)" stroke-width="0.5" opacity="0.14"/>
+
+      <!-- ======== FIGURE ======== -->
+      <!-- Aura glow -->
+      <radialGradient id="figureglow" cx="50%" cy="62%" r="18%">
+        <stop offset="0%" stop-color="var(--card-accent-light)" stop-opacity="0.08"/>
+        <stop offset="100%" stop-color="var(--card-accent-light)" stop-opacity="0"/>
+      </radialGradient>
+      <rect y="350" width="500" height="300" fill="url(#figureglow)"/>
+
+      <!-- Aura arcs -->
+      <path d="M170 395 Q250 365 330 395" stroke="var(--card-accent-light)" stroke-width="1" fill="none" opacity="0.25"/>
+      <path d="M180 405 Q250 380 320 405" stroke="var(--card-accent)" stroke-width="0.7" fill="none" opacity="0.2"/>
+      <path d="M160 385 Q250 350 340 385" stroke="var(--card-line)" stroke-width="0.5" fill="none" opacity="0.15"/>
+
+      <!-- Body diamond -->
+      <path d="M250 430 L220 510 L250 580 L280 510 Z"
+            fill="var(--card-fill-light)" fill-opacity="0.4" stroke="var(--card-line)" stroke-width="1.2"/>
+
+      <!-- Head -->
+      <circle cx="250" cy="410" r="25" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+      <circle cx="250" cy="410" r="16" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.55"/>
+      <circle cx="250" cy="410" r="5" fill="var(--card-line)" opacity="0.45"/>
+
+      <!-- Crown arc -->
+      <path d="M228 398 Q250 382 272 398" stroke="var(--card-line-light)" stroke-width="0.8" fill="none" opacity="0.35"/>
+
+      <!-- Left arm -->
+      <path d="M232 460 Q190 475 155 530 Q140 558 138 580"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.75"/>
+      <!-- Left chalice -->
+      <path d="M126 572 L130 563 Q138 554 146 563 L150 572 Q138 580 126 572Z"
+            fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+      <line x1="129" y1="562" x2="147" y2="562" stroke="var(--card-line-light)" stroke-width="0.6" opacity="0.55"/>
+      <!-- Left water stream -->
+      <path d="M138 578 Q134 600 138 625 Q142 650 136 675"
+            stroke="var(--card-accent-light)" stroke-width="2.5" fill="none" opacity="0.4"/>
+      <path d="M138 578 Q130 605 135 635 Q138 660 130 680"
+            stroke="var(--card-accent)" stroke-width="1.2" fill="none" opacity="0.3"/>
+      <!-- Splash -->
+      <ellipse cx="136" cy="678" rx="18" ry="5"
+               stroke="var(--card-accent-light)" stroke-width="0.8" fill="none" opacity="0.25"/>
+
+      <!-- Right arm -->
+      <path d="M268 460 Q310 475 345 530 Q360 558 362 580"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.75"/>
+      <!-- Right chalice -->
+      <path d="M350 572 L354 563 Q362 554 370 563 L374 572 Q362 580 350 572Z"
+            fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+      <line x1="353" y1="562" x2="371" y2="562" stroke="var(--card-line-light)" stroke-width="0.6" opacity="0.55"/>
+      <!-- Right water stream -->
+      <path d="M362 578 Q365 600 360 625 Q356 640 362 640"
+            stroke="var(--card-accent-light)" stroke-width="2.5" fill="none" opacity="0.4"/>
+      <!-- Branch streams -->
+      <path d="M360 635 Q345 642 320 640" stroke="var(--card-accent-light)" stroke-width="1.2" fill="none" opacity="0.22"/>
+      <path d="M360 635 Q375 642 400 640" stroke="var(--card-accent-light)" stroke-width="1.2" fill="none" opacity="0.22"/>
+      <path d="M360 635 Q350 645 335 645" stroke="var(--card-accent)" stroke-width="0.7" fill="none" opacity="0.15"/>
+
+      <!-- Kneeling base -->
+      <path d="M230 570 Q210 610 200 640 L300 640 Q290 610 270 570"
+            fill="var(--card-fill-light)" fill-opacity="0.25" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+      <!-- Knee dots -->
+      <circle cx="215" cy="630" r="3" fill="none" stroke="var(--card-line)" stroke-width="0.7" opacity="0.4"/>
+      <circle cx="285" cy="630" r="3" fill="none" stroke="var(--card-line)" stroke-width="0.7" opacity="0.4"/>
+
+      <!-- ======== MAIN STAR ======== -->
+      <!-- Outer glow rings -->
+      <circle cx="250" cy="220" r="100" fill="none" stroke="var(--card-line)" stroke-width="0.6" opacity="0.2"/>
+      <circle cx="250" cy="220" r="85" fill="none" stroke="var(--card-line)" stroke-width="0.5" opacity="0.15"/>
+
+      <!-- Cardinal rays -->
+      <line x1="250" y1="140" x2="250" y2="85" stroke="var(--card-line-light)" stroke-width="2" opacity="0.75"/>
+      <line x1="250" y1="300" x2="250" y2="355" stroke="var(--card-line-light)" stroke-width="2" opacity="0.75"/>
+      <line x1="170" y1="220" x2="115" y2="220" stroke="var(--card-line-light)" stroke-width="2" opacity="0.75"/>
+      <line x1="330" y1="220" x2="385" y2="220" stroke="var(--card-line-light)" stroke-width="2" opacity="0.75"/>
+
+      <!-- Diagonal rays -->
+      <line x1="193.4" y1="163.4" x2="155" y2="125" stroke="var(--card-line)" stroke-width="1.5" opacity="0.55"/>
+      <line x1="306.6" y1="163.4" x2="345" y2="125" stroke="var(--card-line)" stroke-width="1.5" opacity="0.55"/>
+      <line x1="193.4" y1="276.6" x2="155" y2="315" stroke="var(--card-line)" stroke-width="1.5" opacity="0.55"/>
+      <line x1="306.6" y1="276.6" x2="345" y2="315" stroke="var(--card-line)" stroke-width="1.5" opacity="0.55"/>
+
+      <!-- Star body -->
+      <polygon points="250,140 270,200 330,220 270,240 250,300 230,240 170,220 230,200"
+               fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+      <!-- Inner star -->
+      <polygon points="250,170 262,210 300,220 262,230 250,270 238,230 200,220 238,210"
+               fill="none" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.65"/>
+      <!-- Center -->
+      <circle cx="250" cy="220" r="18" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+      <circle cx="250" cy="220" r="10" fill="none" stroke="var(--card-line-light)" stroke-width="0.6" opacity="0.55"/>
+      <circle cx="250" cy="220" r="5" fill="var(--card-line)" opacity="0.8"/>
+
+      <!-- ======== SEVEN SMALLER STARS ======== -->
+      <!-- Star 1 - upper left -->
+      <polygon points="120,130 128,142 120,154 112,142" fill="none" stroke="var(--card-line)" stroke-width="1.2" opacity="0.55"/>
+      <circle cx="120" cy="142" r="2" fill="var(--card-line)" opacity="0.45"/>
+
+      <!-- Star 2 - upper right -->
+      <polygon points="380,150 388,162 380,174 372,162" fill="none" stroke="var(--card-line)" stroke-width="1.2" opacity="0.55"/>
+      <circle cx="380" cy="162" r="2" fill="var(--card-line)" opacity="0.45"/>
+
+      <!-- Star 3 - mid left -->
+      <polygon points="90,280 97,290 90,300 83,290" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.45"/>
+      <circle cx="90" cy="290" r="1.5" fill="var(--card-line)" opacity="0.35"/>
+
+      <!-- Star 4 - mid right -->
+      <polygon points="410,270 417,280 410,290 403,280" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.45"/>
+      <circle cx="410" cy="280" r="1.5" fill="var(--card-line)" opacity="0.35"/>
+
+      <!-- Star 5 - lower left -->
+      <polygon points="100,380 106,389 100,398 94,389" fill="none" stroke="var(--card-line)" stroke-width="0.9" opacity="0.4"/>
+      <circle cx="100" cy="389" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+
+      <!-- Star 6 - lower right -->
+      <polygon points="400,360 406,369 400,378 394,369" fill="none" stroke="var(--card-line)" stroke-width="0.9" opacity="0.4"/>
+      <circle cx="400" cy="369" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+
+      <!-- Star 7 - top center-right -->
+      <polygon points="340,90 346,99 340,108 334,99" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+      <circle cx="340" cy="99" r="1.5" fill="var(--card-line)" opacity="0.4"/>
+
+      <!-- ======== LANDSCAPE ======== -->
+      <line x1="40" y1="640" x2="460" y2="640" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.25"/>
+      <path d="M30 640 Q70 625 110 635 Q150 620 190 640" stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.18"/>
+      <path d="M310 640 Q350 622 400 632 Q435 625 470 640" stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.18"/>
+
+      <!-- Trees -->
+      <polygon points="70,640 62,610 70,603 78,610"
+               fill="var(--card-fill-light)" fill-opacity="0.2" stroke="var(--card-line-dim)" stroke-width="0.7" opacity="0.2"/>
+      <polygon points="430,640 423,614 430,608 437,614"
+               fill="var(--card-fill-light)" fill-opacity="0.2" stroke="var(--card-line-dim)" stroke-width="0.7" opacity="0.2"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>

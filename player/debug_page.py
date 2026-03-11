@@ -11,6 +11,7 @@ from nicegui import ui
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from arcanum_theme import divider, get_theme, heading, inject_stagger_script, inject_theme, motif
+from card_renderer import render_svg_card_html, has_svg_card
 from game_logic.tarot import Deck, Spread
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -230,6 +231,118 @@ def _build_quick_jump():
                 )
 
 
+def _build_deck_gallery():
+    """Render the full 78-card deck with a toggle between Arcanum SVG and Classic."""
+    deck = Deck()
+
+    # Group by suit
+    groups = [
+        ("Major Arcana", [c for c in deck.cards if c.suit == "major"]),
+        ("Cups", [c for c in deck.cards if c.suit == "cups"]),
+        ("Swords", [c for c in deck.cards if c.suit == "swords"]),
+        ("Wands", [c for c in deck.cards if c.suit == "wands"]),
+        ("Pentacles", [c for c in deck.cards if c.suit == "pentacles"]),
+    ]
+
+    # Style toggle — reactive
+    style_state = {"current": "arcanum"}
+    grid_container = None
+
+    def render_grid():
+        """Render the card grid based on current style."""
+        grid_container.clear()
+        with grid_container:
+            for group_name, cards in groups:
+                ui.label(group_name).style(
+                    "font-family: var(--heading-font); font-size: 18px; "
+                    "color: var(--gold); letter-spacing: 1px; margin-top: 16px; "
+                    "margin-bottom: 8px; width: 100%;"
+                )
+                with ui.element("div").style(
+                    "display: flex; flex-wrap: wrap; gap: 12px; width: 100%; "
+                    "margin-bottom: 24px;"
+                ):
+                    for card in cards:
+                        card_code = card._get_code()
+                        has_svg = has_svg_card(card_code)
+                        use_svg = style_state["current"] == "arcanum" and has_svg
+
+                        with ui.element("div").style("width: 120px;"):
+                            with ui.element("div").style(
+                                "width: 120px; height: 207px; "
+                                "border: 1px solid var(--gold-dim); border-radius: 4px; "
+                                "overflow: hidden; position: relative;"
+                            ):
+                                if use_svg:
+                                    svg_html = render_svg_card_html(card, card_code)
+                                    if svg_html:
+                                        ui.html(svg_html).style(
+                                            "width: 100%; height: 100%;"
+                                        )
+                                    else:
+                                        _render_fallback_image(card)
+                                else:
+                                    _render_fallback_image(card)
+
+                                # SVG badge
+                                if has_svg:
+                                    ui.element("div").style(
+                                        "position: absolute; top: 4px; right: 4px; "
+                                        "width: 8px; height: 8px; border-radius: 50%; "
+                                        "background: var(--gold); opacity: 0.7;"
+                                    )
+
+                            # Card name
+                            ui.label(card.name).style(
+                                "font-size: 9px; color: var(--gold-dim); "
+                                "text-align: center; margin-top: 4px; width: 100%; "
+                                "white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                            )
+
+    def _render_fallback_image(card):
+        """Render the Rider-Waite image for a card."""
+        image_path = card.get_image_filename()
+        abs_path = PROJECT_ROOT / image_path
+        if abs_path.exists():
+            ui.image(str(abs_path)).style(
+                "width: 100%; height: 100%; object-fit: cover;"
+            )
+        else:
+            ui.html(
+                '<span style="font-size: 2em; color: var(--gold-dim); '
+                'display: flex; align-items: center; justify-content: center; '
+                'width: 100%; height: 100%;">&#10023;</span>'
+            )
+
+    def switch_style(style):
+        style_state["current"] = style
+        render_grid()
+
+    # Toggle buttons
+    with ui.row().classes("items-center gap-4 mb-4"):
+        ui.button(
+            "Arcanum",
+            on_click=lambda: switch_style("arcanum"),
+        ).props("flat").style(
+            "color: var(--gold); font-family: var(--heading-font); "
+            "letter-spacing: 1px; text-transform: uppercase; font-size: 12px;"
+        )
+        ui.button(
+            "Classic (Rider-Waite)",
+            on_click=lambda: switch_style("classic"),
+        ).props("flat").style(
+            "color: var(--gold-dim); font-family: var(--heading-font); "
+            "letter-spacing: 1px; text-transform: uppercase; font-size: 12px;"
+        )
+        ui.label(
+            "Gold dot = SVG available"
+        ).style("font-size: 11px; color: var(--gold-dim); opacity: 0.5;")
+
+    # Card grid container (cleared and rebuilt on toggle)
+    grid_container = ui.column().classes("w-full")
+    render_grid()
+
+
 def register_debug_routes():
     """Register the /debug page and /debug/play route. Call from main module."""
     from bardic.runtime.engine import BardEngine
@@ -273,6 +386,7 @@ def register_debug_routes():
                 "color: var(--gold-dim);"
             ).classes("w-full") as tabs:
                 spreads_tab = ui.tab("Spreads")
+                deck_tab = ui.tab("Deck")
                 themes_tab = ui.tab("Themes")
                 jump_tab = ui.tab("Quick Play")
 
@@ -281,6 +395,9 @@ def register_debug_routes():
             ):
                 with ui.tab_panel(spreads_tab):
                     _build_spread_gallery()
+
+                with ui.tab_panel(deck_tab):
+                    _build_deck_gallery()
 
                 with ui.tab_panel(themes_tab):
                     _build_theme_gallery()

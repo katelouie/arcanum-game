@@ -1,0 +1,261 @@
+/* ================================================================
+   arcanum_cards_base.css — Shared tarot card frame and theme system
+   
+   Every card HTML file imports this. The illustration SVG inside each
+   card uses var(--gold), var(--accent), etc., so it automatically
+   adapts to whatever theme context it's rendered in.
+   
+   To render a card in a specific theme, either:
+   1. Set data-theme on the <html> element (matches game's theme system)
+   2. Or wrap the card in a container with data-theme attribute
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+
+/* ========== DEFAULT CARD VARIABLES ========== */
+:root {
+    /* Card-specific tokens (map to theme colors) */
+    --card-bg-top: #0c0820;
+    --card-bg-mid: #150e2e;
+    --card-bg-deep: #1a1035;
+    --card-border: #c9a84c;
+    --card-border-dim: rgba(201, 168, 76, 0.3);
+    --card-line: #c9a84c;
+    --card-line-light: #e2c97e;
+    --card-line-dim: #8a7235;
+    --card-fill: #1a0e2e;
+    --card-fill-light: #2d1b4e;
+    --card-accent: #6b3fa0;
+    --card-accent-light: #9b6fd0;
+    --card-text: #c9a84c;
+    --card-text-dim: rgba(201, 168, 76, 0.5);
+    --card-corner-opacity: 0.5;
+}
+
+/* ========== CYBERPUNK ========== */
+[data-theme="cyberpunk"] {
+    --card-bg-top: #060610;
+    --card-bg-mid: #0a0a1a;
+    --card-bg-deep: #0e0e24;
+    --card-border: #00e5ff;
+    --card-border-dim: rgba(0, 229, 255, 0.25);
+    --card-line: #00e5ff;
+    --card-line-light: #80f0ff;
+    --card-line-dim: #0088a0;
+    --card-fill: #0a0a12;
+    --card-fill-light: #0f1029;
+    --card-accent: #ff2d78;
+    --card-accent-light: #ff6fa3;
+    --card-text: #00e5ff;
+    --card-text-dim: rgba(0, 229, 255, 0.5);
+    --card-corner-opacity: 0.4;
+}
+
+/* ========== GOTHIC ========== */
+[data-theme="gothic"] {
+    --card-bg-top: #08070a;
+    --card-bg-mid: #0e0c12;
+    --card-bg-deep: #14111a;
+    --card-border: #8a8495;
+    --card-border-dim: rgba(138, 132, 149, 0.25);
+    --card-line: #8a8495;
+    --card-line-light: #b0a8be;
+    --card-line-dim: #5a5464;
+    --card-fill: #0e0c0f;
+    --card-fill-light: #1a161e;
+    --card-accent: #7a2030;
+    --card-accent-light: #a83848;
+    --card-text: #8a8495;
+    --card-text-dim: rgba(138, 132, 149, 0.5);
+    --card-corner-opacity: 0.35;
+}
+
+/* ========== THE KIND ========== */
+[data-theme="kind"] {
+    --card-bg-top: #100e0a;
+    --card-bg-mid: #181410;
+    --card-bg-deep: #1e1a14;
+    --card-border: #b89a5a;
+    --card-border-dim: rgba(184, 154, 90, 0.25);
+    --card-line: #b89a5a;
+    --card-line-light: #d4c8a0;
+    --card-line-dim: #7a6b4a;
+    --card-fill: #1a1612;
+    --card-fill-light: #241e18;
+    --card-accent: #5a7a56;
+    --card-accent-light: #7a9a74;
+    --card-text: #b89a5a;
+    --card-text-dim: rgba(184, 154, 90, 0.5);
+    --card-corner-opacity: 0.4;
+}
+
+/* ========== WEIRD WEST ========== */
+[data-theme="weird_west"] {
+    --card-bg-top: #110e0a;
+    --card-bg-mid: #1a1510;
+    --card-bg-deep: #201a14;
+    --card-border: #c8944a;
+    --card-border-dim: rgba(200, 148, 74, 0.25);
+    --card-line: #c8944a;
+    --card-line-light: #ddb878;
+    --card-line-dim: #8a6a3a;
+    --card-fill: #1a1410;
+    --card-fill-light: #241c14;
+    --card-accent: #a03828;
+    --card-accent-light: #c85040;
+    --card-text: #c8944a;
+    --card-text-dim: rgba(200, 148, 74, 0.5);
+    --card-corner-opacity: 0.4;
+}
+
+
+/* ================================================================
+   CARD FRAME — shared by all cards
+   ================================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body.tarot-card {
+    overflow: hidden;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-frame {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg,
+        var(--card-bg-top) 0%,
+        var(--card-bg-mid) 30%,
+        var(--card-bg-deep) 60%,
+        var(--card-bg-top) 100%
+    );
+}
+
+/* Outer border */
+.card-frame .border-outer {
+    position: absolute;
+    inset: 8px;
+    border: 2px solid var(--card-border);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+/* Inner border */
+.card-frame .border-inner {
+    position: absolute;
+    inset: 16px;
+    border: 1px solid var(--card-border-dim);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+/* Corner ornaments */
+.card-frame .corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+}
+
+.card-frame .corner-tl { top: 20px; left: 20px; }
+.card-frame .corner-tr { top: 20px; right: 20px; transform: scaleX(-1); }
+.card-frame .corner-bl { bottom: 20px; left: 20px; transform: scaleY(-1); }
+.card-frame .corner-br { bottom: 20px; right: 20px; transform: scale(-1, -1); }
+
+/* Card number (top center) */
+.card-frame .card-number {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 4px;
+    color: var(--card-text-dim);
+    text-transform: uppercase;
+    z-index: 20;
+}
+
+/* Card name (bottom center) */
+.card-frame .card-name {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    color: var(--card-text);
+    text-transform: uppercase;
+    z-index: 20;
+    white-space: nowrap;
+}
+
+/* Illustration container */
+.card-frame .illustration {
+    position: absolute;
+    top: 60px;
+    left: 24px;
+    right: 24px;
+    bottom: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ================================================================
+   CORNER SVG TEMPLATE — use as innerHTML for each .corner element
+   
+   Each card includes 4 corner SVGs. The stroke colors reference
+   var(--card-border) so they auto-theme.
+   ================================================================ */
+
+/* 
+   Corner SVG markup (paste into each corner div):
+   
+   <svg viewBox="0 0 40 40" fill="none">
+     <path d="M0 40 L0 12 Q0 0 12 0 L40 0" 
+           stroke="var(--card-border)" stroke-width="1" fill="none" 
+           opacity="var(--card-corner-opacity)"/>
+     <circle cx="10" cy="10" r="2.5" 
+             stroke="var(--card-border)" stroke-width="0.5" fill="none" 
+             opacity="calc(var(--card-corner-opacity) - 0.1)"/>
+     <circle cx="10" cy="10" r="1" 
+             fill="var(--card-border)" 
+             opacity="calc(var(--card-corner-opacity) - 0.2)"/>
+   </svg>
+*/
+
+
+/* ================================================================
+   STANDARD CARD SIZES
+   ================================================================ */
+
+/* Full size (for detail view / export) */
+.card-frame.size-full {
+    width: 550px;
+    height: 950px;
+}
+
+/* Game spread size */
+.card-frame.size-game {
+    width: 200px;
+    height: 345px;
+}
+
+.card-frame.size-game .card-number { font-size: 10px; top: 12px; letter-spacing: 2px; }
+.card-frame.size-game .card-name { font-size: 14px; bottom: 12px; letter-spacing: 3px; }
+.card-frame.size-game .border-outer { inset: 4px; border-width: 1.5px; border-radius: 8px; }
+.card-frame.size-game .border-inner { inset: 8px; border-radius: 5px; }
+.card-frame.size-game .corner { width: 20px; height: 20px; }
+.card-frame.size-game .corner-tl { top: 8px; left: 8px; }
+.card-frame.size-game .corner-tr { top: 8px; right: 8px; }
+.card-frame.size-game .corner-bl { bottom: 8px; left: 8px; }
+.card-frame.size-game .corner-br { bottom: 8px; right: 8px; }
+.card-frame.size-game .illustration { top: 28px; left: 10px; right: 10px; bottom: 32px; }

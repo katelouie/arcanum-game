@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame elements -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">0</div>
+  <div class="card-name">The Fool</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- ======== SUN / RADIANCE ======== -->
+      <radialGradient id="sunglow" cx="72%" cy="18%" r="35%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.12"/>
+        <stop offset="50%" stop-color="var(--card-line)" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#sunglow)"/>
+
+      <!-- Sun disc -->
+      <circle cx="380" cy="130" r="55" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.2"/>
+      <circle cx="380" cy="130" r="42" fill="none" stroke="var(--card-line)" stroke-width="0.6" opacity="0.15"/>
+      <circle cx="380" cy="130" r="30" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+      <circle cx="380" cy="130" r="20" fill="none" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.55"/>
+      <circle cx="380" cy="130" r="8" fill="var(--card-line)" opacity="0.7"/>
+
+      <!-- Sun rays — cardinal -->
+      <line x1="380" y1="75" x2="380" y2="45" stroke="var(--card-line-light)" stroke-width="1.5" opacity="0.6"/>
+      <line x1="380" y1="185" x2="380" y2="210" stroke="var(--card-line-light)" stroke-width="1.5" opacity="0.5"/>
+      <line x1="325" y1="130" x2="300" y2="130" stroke="var(--card-line-light)" stroke-width="1.5" opacity="0.5"/>
+      <line x1="435" y1="130" x2="460" y2="130" stroke="var(--card-line-light)" stroke-width="1.5" opacity="0.6"/>
+      <!-- Diagonal rays -->
+      <line x1="341" y1="91" x2="322" y2="72" stroke="var(--card-line)" stroke-width="1.2" opacity="0.45"/>
+      <line x1="419" y1="91" x2="438" y2="72" stroke="var(--card-line)" stroke-width="1.2" opacity="0.45"/>
+      <line x1="341" y1="169" x2="322" y2="188" stroke="var(--card-line)" stroke-width="1.2" opacity="0.4"/>
+      <line x1="419" y1="169" x2="438" y2="188" stroke="var(--card-line)" stroke-width="1.2" opacity="0.4"/>
+      <!-- Short intermediate rays -->
+      <line x1="358" y1="78" x2="350" y2="60" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.3"/>
+      <line x1="402" y1="78" x2="410" y2="60" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.3"/>
+      <line x1="435" y1="108" x2="450" y2="100" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.3"/>
+      <line x1="435" y1="152" x2="450" y2="160" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.3"/>
+
+      <!-- ======== CLIFF EDGE ======== -->
+      <!-- Main precipice — bold and clear -->
+      <path d="M40 520 L280 520 L280 800"
+            stroke="var(--card-line)" stroke-width="2" fill="none" opacity="0.5"/>
+      <!-- Surface highlight -->
+      <path d="M40 520 L280 520"
+            stroke="var(--card-line-light)" stroke-width="1.5" fill="none" opacity="0.35"/>
+      <!-- Strata lines -->
+      <line x1="280" y1="550" x2="320" y2="550" stroke="var(--card-line-dim)" stroke-width="1" opacity="0.2"/>
+      <line x1="280" y1="585" x2="340" y2="585" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.15"/>
+      <line x1="280" y1="620" x2="360" y2="620" stroke="var(--card-line-dim)" stroke-width="1" opacity="0.2"/>
+      <line x1="280" y1="660" x2="380" y2="660" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.15"/>
+      <line x1="280" y1="700" x2="410" y2="700" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.12"/>
+
+      <!-- Void glow -->
+      <radialGradient id="voidglow" cx="70%" cy="85%" r="35%">
+        <stop offset="0%" stop-color="var(--card-accent)" stop-opacity="0.06"/>
+        <stop offset="100%" stop-color="var(--card-accent)" stop-opacity="0"/>
+      </radialGradient>
+      <rect y="520" width="500" height="280" fill="url(#voidglow)"/>
+
+      <!-- Distant mountains -->
+      <path d="M300 720 Q340 690 380 710 Q420 685 460 700 Q480 695 500 710"
+            stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.12"/>
+      <path d="M320 745 Q360 720 400 735 Q440 715 500 730"
+            stroke="var(--card-line-dim)" stroke-width="0.6" fill="none" opacity="0.08"/>
+
+      <!-- ======== FIGURE ======== -->
+      <!-- Aura arcs -->
+      <path d="M140 280 Q210 245 265 300" stroke="var(--card-line)" stroke-width="0.7" fill="none" opacity="0.18"/>
+      <path d="M150 268 Q215 232 275 288" stroke="var(--card-line-light)" stroke-width="0.5" fill="none" opacity="0.12"/>
+
+      <!-- Body diamond -->
+      <path d="M230 330 L200 420 L230 490 L260 420 Z"
+            fill="var(--card-fill-light)" fill-opacity="0.4" stroke="var(--card-line)" stroke-width="1.2"
+            transform="rotate(8, 230, 410)"/>
+
+      <!-- Head -->
+      <circle cx="240" cy="310" r="25" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+      <circle cx="240" cy="310" r="16" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.55"/>
+      <circle cx="240" cy="310" r="5" fill="var(--card-line)" opacity="0.45"/>
+      <!-- Gaze -->
+      <line x1="250" y1="305" x2="264" y2="296" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.35"/>
+
+      <!-- Back leg -->
+      <line x1="220" y1="480" x2="200" y2="518" stroke="var(--card-line)" stroke-width="1.5" opacity="0.7"/>
+      <ellipse cx="198" cy="518" rx="10" ry="4" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.6"/>
+
+      <!-- Front leg past edge -->
+      <line x1="240" y1="470" x2="292" y2="502" stroke="var(--card-line)" stroke-width="1.5" opacity="0.7"/>
+      <ellipse cx="296" cy="502" rx="9" ry="3.5" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+
+      <!-- ======== BINDLE ======== -->
+      <line x1="175" y1="270" x2="215" y2="400" stroke="var(--card-line)" stroke-width="1.5" opacity="0.7"/>
+      <path d="M175 270 L160 252 L175 234 L190 252 Z"
+            fill="var(--card-fill-light)" fill-opacity="0.35" stroke="var(--card-line)" stroke-width="1.2"/>
+      <circle cx="175" cy="252" r="5" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.5"/>
+
+      <!-- Left arm -->
+      <path d="M220 350 Q198 368 188 385" stroke="var(--card-line)" stroke-width="1.2" fill="none" opacity="0.7"/>
+      <!-- Right arm -->
+      <path d="M248 355 Q282 338 314 326" stroke="var(--card-line)" stroke-width="1.2" fill="none" opacity="0.7"/>
+      <!-- Open hand -->
+      <line x1="314" y1="326" x2="326" y2="320" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+      <line x1="314" y1="326" x2="328" y2="326" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+      <line x1="314" y1="326" x2="326" y2="334" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+
+      <!-- ======== DOG ======== -->
+      <path d="M168 496 L155 508 L168 520 L181 508 Z"
+            fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1.2" opacity="0.65"/>
+      <circle cx="183" cy="494" r="8" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1" opacity="0.65"/>
+      <circle cx="186" cy="492" r="2" fill="var(--card-line)" opacity="0.45"/>
+      <path d="M155 502 Q145 490 148 480" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.5"/>
+      <line x1="161" y1="520" x2="158" y2="526" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+      <line x1="166" y1="520" x2="163" y2="526" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+      <line x1="170" y1="520" x2="173" y2="526" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+      <line x1="175" y1="520" x2="178" y2="526" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+
+      <!-- ======== FLOWERS ======== -->
+      <!-- Flower 1 — prominent -->
+      <circle cx="128" cy="510" r="5" fill="none" stroke="var(--card-accent-light)" stroke-width="1.2" opacity="0.55"/>
+      <circle cx="128" cy="510" r="2" fill="var(--card-accent-light)" opacity="0.45"/>
+      <line x1="128" y1="515" x2="128" y2="528" stroke="var(--card-accent)" stroke-width="0.8" opacity="0.4"/>
+      <!-- Petal dots -->
+      <circle cx="123" cy="508" r="2" fill="var(--card-accent-light)" opacity="0.2"/>
+      <circle cx="133" cy="508" r="2" fill="var(--card-accent-light)" opacity="0.2"/>
+      <circle cx="128" cy="505" r="2" fill="var(--card-accent-light)" opacity="0.2"/>
+
+      <!-- Flower 2 -->
+      <circle cx="96" cy="506" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="1" opacity="0.45"/>
+      <circle cx="96" cy="506" r="1.5" fill="var(--card-accent-light)" opacity="0.35"/>
+      <line x1="96" y1="510" x2="96" y2="522" stroke="var(--card-accent)" stroke-width="0.7" opacity="0.3"/>
+
+      <!-- Flower 3 -->
+      <circle cx="70" cy="512" r="3" fill="none" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.35"/>
+      <circle cx="70" cy="512" r="1" fill="var(--card-accent-light)" opacity="0.25"/>
+      <line x1="70" y1="515" x2="70" y2="522" stroke="var(--card-accent)" stroke-width="0.5" opacity="0.2"/>
+
+      <!-- Cliff rocks -->
+      <circle cx="248" cy="520" r="3" fill="none" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.25"/>
+      <circle cx="264" cy="522" r="2.5" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.2"/>
+      <circle cx="273" cy="518" r="2" fill="var(--card-line-dim)" opacity="0.15"/>
+
+      <!-- ======== WIND ======== -->
+      <path d="M300 345 Q345 332 380 350" stroke="var(--card-line)" stroke-width="0.7" fill="none" opacity="0.18"/>
+      <path d="M310 378 Q350 365 385 382" stroke="var(--card-line)" stroke-width="0.6" fill="none" opacity="0.14"/>
+      <path d="M295 408 Q338 392 370 406" stroke="var(--card-line)" stroke-width="0.7" fill="none" opacity="0.18"/>
+
+      <!-- ======== BUTTERFLY ======== -->
+      <path d="M292 275 L284 265 L276 275 L284 269 Z"
+            fill="var(--card-accent-light)" fill-opacity="0.15" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.45"/>
+      <path d="M292 275 L300 265 L308 275 L300 269 Z"
+            fill="var(--card-accent-light)" fill-opacity="0.15" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.45"/>
+      <line x1="292" y1="275" x2="292" y2="280" stroke="var(--card-line-light)" stroke-width="0.4" opacity="0.3"/>
+      <circle cx="292" cy="273" r="1.2" fill="var(--card-line-light)" opacity="0.4"/>
+
+      <!-- ======== GROUND ======== -->
+      <path d="M40 520 Q65 516 90 520 Q125 513 165 520"
+            stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.18"/>
+      <!-- Grass -->
+      <line x1="58" y1="520" x2="55" y2="508" stroke="var(--card-accent)" stroke-width="0.7" opacity="0.25"/>
+      <line x1="80" y1="518" x2="77" y2="506" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.2"/>
+      <line x1="110" y1="516" x2="108" y2="505" stroke="var(--card-accent)" stroke-width="0.7" opacity="0.25"/>
+      <line x1="148" y1="520" x2="145" y2="510" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.2"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>
