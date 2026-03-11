@@ -14,6 +14,8 @@ Usage:
     sidebar, content = sidebar_layout(theme="cyberpunk")
 """
 
+import markdown as _md
+
 from nicegui import ui
 
 
@@ -902,7 +904,17 @@ def desk_artifact_detail(artifact_data: dict, on_back):
 
         lore = artifact_data.get("lore", "")
         if lore:
-            ui.label(lore).classes("arc-artifact-lore").style("margin: 16px 0 24px;")
+            # Detect markdown content and render as HTML
+            if lore.lstrip().startswith("#"):
+                lore_html = _md.markdown(lore, extensions=["footnotes", "tables"])
+                with ui.element("div").classes("arc-artifact-lore-md").style(
+                    "margin: 24px 0;"
+                ):
+                    ui.html(lore_html)
+            else:
+                ui.label(lore).classes("arc-artifact-lore").style(
+                    "margin: 16px 0 24px;"
+                )
 
         origin_char = artifact_data.get("origin_character", "")
         origin_session = artifact_data.get("origin_session", "")

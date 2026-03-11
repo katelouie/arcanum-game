@@ -2,6 +2,18 @@
 
 # artifacts.py
 
+from pathlib import Path
+
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+
+def _load_text_artifact(relative_path: str) -> str:
+    """Load a text file as artifact lore content."""
+    path = _PROJECT_ROOT / relative_path
+    if path.exists():
+        return path.read_text(encoding="utf-8")
+    return f"[Content not found: {relative_path}]"
+
 
 class Artifact:
     def __init__(
@@ -221,6 +233,33 @@ NEW_LIFE_JOURNAL = Artifact(
 )
 
 
+# ============================================================================
+# THE KIND SESSION 2 ARTIFACTS
+# ============================================================================
+
+PRATCHETT_ANALYSIS = Artifact(
+    id="pratchett_analysis",
+    name="Page 147: A Condition of the Heart",
+    description="A typeset page from a book that doesn't exist. Mathematical notation, "
+    "a proof of Bolzano-Weierstrass, and a footnote that makes you laugh "
+    "and then makes you understand.",
+    lore=_load_text_artifact("stories/arcanum/kind/pratchett_analysis.md"),
+    origin_session="The Kind: Session 2 (Solid Ground)",
+    origin_character="Mal (from the deep shelves)",
+    rarity="legendary",
+    physical_properties="Smells like old paper and golden dust. Warm to the touch. "
+    "The typesetting is flawless. The footnote numbering suggests a much larger book.",
+    spiritual_resonance="High. The page feels heavier than paper should. "
+    "When you read the footnotes, you hear a voice — wry, kind, British — "
+    "explaining mathematics the way bedtime stories are told.",
+    cultural_context="From a timeline where Terry Pratchett went to Cambridge for "
+    "mathematics in 1966, wrote one Discworld novel, and spent forty years "
+    "writing analysis textbooks with footnotes.",
+    reader_effect="Mystical affinity +1. The conviction that math is storytelling. "
+    "Occasional urge to re-derive the Intermediate Value Theorem using geography.",
+)
+
+
 # Registry for easy lookup
 ARTIFACTS = {
     "razor_lucky_token": RAZOR_LUCKY_TOKEN,
@@ -240,6 +279,8 @@ ARTIFACTS = {
     # Nyx Session 3C - Path C (Sad)
     "removed_cybereyes_inert": REMOVED_CYBEREYES_INERT,
     "new_life_journal": NEW_LIFE_JOURNAL,
+    # The Kind Session 2
+    "pratchett_analysis": PRATCHETT_ANALYSIS,
 }
 
 

@@ -1368,6 +1368,124 @@ body {
     border-left: 2px solid color-mix(in srgb, var(--accent-light) 20%, transparent);
 }
 
+/* Markdown-rendered artifact lore (e.g., the Pratchett textbook) */
+.arc-artifact-lore-md {
+    font-family: var(--body-font);
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.85;
+}
+
+.arc-artifact-lore-md h1 {
+    font-family: var(--heading-font);
+    font-size: 28px;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    margin: 48px 0 16px;
+    text-align: center;
+}
+
+.arc-artifact-lore-md h2 {
+    font-family: var(--heading-font);
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin: 40px 0 12px;
+}
+
+.arc-artifact-lore-md h3 {
+    font-family: var(--heading-font);
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin: 32px 0 10px;
+}
+
+.arc-artifact-lore-md h4 {
+    font-family: var(--heading-font);
+    font-size: 16px;
+    color: var(--gold-dim);
+    letter-spacing: 1px;
+    margin: 24px 0 8px;
+}
+
+.arc-artifact-lore-md p {
+    margin: 12px 0;
+    color: var(--text);
+}
+
+.arc-artifact-lore-md em {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.arc-artifact-lore-md strong {
+    color: var(--gold-light);
+    font-weight: 600;
+}
+
+.arc-artifact-lore-md blockquote {
+    border-left: 2px solid color-mix(in srgb, var(--gold-dim) 40%, transparent);
+    padding: 8px 20px;
+    margin: 16px 0;
+    background: color-mix(in srgb, var(--accent) 3%, transparent);
+    color: var(--text-muted);
+}
+
+.arc-artifact-lore-md blockquote p {
+    color: var(--text-muted);
+}
+
+.arc-artifact-lore-md hr {
+    border: none;
+    border-top: 1px solid color-mix(in srgb, var(--gold-dim) 25%, transparent);
+    margin: 32px 0;
+}
+
+/* Footnotes — rendered by the markdown footnotes extension */
+.arc-artifact-lore-md .footnote {
+    font-size: 14px;
+    color: var(--text-muted);
+    border-top: 1px solid color-mix(in srgb, var(--gold-dim) 20%, transparent);
+    margin-top: 40px;
+    padding-top: 16px;
+}
+
+.arc-artifact-lore-md .footnote ol {
+    padding-left: 20px;
+}
+
+.arc-artifact-lore-md .footnote li {
+    margin-bottom: 12px;
+    line-height: 1.7;
+}
+
+.arc-artifact-lore-md sup {
+    font-size: 12px;
+    color: var(--gold-dim);
+}
+
+.arc-artifact-lore-md a {
+    color: var(--gold-dim);
+    text-decoration: none;
+    border-bottom: 1px dotted color-mix(in srgb, var(--gold-dim) 40%, transparent);
+}
+
+.arc-artifact-lore-md a:hover {
+    color: var(--gold-light);
+}
+
+/* Ordered/unordered lists in artifact prose */
+.arc-artifact-lore-md ol,
+.arc-artifact-lore-md ul {
+    padding-left: 24px;
+    margin: 12px 0;
+}
+
+.arc-artifact-lore-md li {
+    margin-bottom: 6px;
+}
+
 .arc-back-link {
     background: none;
     border: none;

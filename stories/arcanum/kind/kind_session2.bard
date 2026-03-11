@@ -3041,6 +3041,7 @@ if session.is_failstate:
     session.bleed_object = "blank_page"
 elif session.dominant_path == "impossible":
     session.bleed_object = "pratchett_page"
+    reader.add_artifact("pratchett_analysis")
 elif session.dominant_path == "wildcard":
     session.bleed_object = "proof_and_music"
 else:
@@ -3128,6 +3129,8 @@ And next to it—
     You set the page on the knick-knack shelf. Next to the 7-inch single. Next to whatever other impossible things have bled through from the store.
 
     The page smells like old paper and golden dust and the particular warmth of shelves that go deeper than they should.
+
+    **[ARTIFACT RECEIVED: Page 147 — A Condition of the Heart]**
 @endif
 
 You sit at your reading table. Sip your coffee. Look at your tarot deck.
