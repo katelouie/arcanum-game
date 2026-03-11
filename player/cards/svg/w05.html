@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">V</div>
+  <div class="card-name">Five of Wands</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- Tension glow — hotter, more agitated than other cards -->
+      <radialGradient id="clashglow" cx="50%" cy="42%" r="35%">
+        <stop offset="0%" stop-color="var(--card-accent)" stop-opacity="0.1"/>
+        <stop offset="60%" stop-color="var(--card-accent)" stop-opacity="0.03"/>
+        <stop offset="100%" stop-color="var(--card-accent)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#clashglow)"/>
+
+      <!-- Secondary warm glow at clash point -->
+      <radialGradient id="sparkglow" cx="50%" cy="38%" r="18%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.07"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#sparkglow)"/>
+
+      <!-- ======== GROUND ======== -->
+      <!-- Rough, uneven ground — not the clean lines of other cards -->
+      <path d="M30 680 Q80 670 130 678 Q180 668 230 680 Q280 672 330 682 Q380 670 430 678 Q460 672 480 680"
+            stroke="var(--card-line-dim)" stroke-width="1" fill="none" opacity="0.25"/>
+      <!-- Second ground contour -->
+      <path d="M40 695 Q100 688 160 694 Q220 686 280 695 Q350 688 420 694 Q460 690 475 695"
+            stroke="var(--card-line-dim)" stroke-width="0.6" fill="none" opacity="0.15"/>
+      <!-- Dust/kicked earth -->
+      <circle cx="180" cy="675" r="2" fill="var(--card-line-dim)" opacity="0.1"/>
+      <circle cx="320" cy="678" r="1.5" fill="var(--card-line-dim)" opacity="0.08"/>
+      <circle cx="250" cy="670" r="2.5" fill="var(--card-line-dim)" opacity="0.1"/>
+
+      <!-- ======== THE FIVE WANDS ======== -->
+      <!-- These are the hero element — five staves crossing at jagged, unresolved angles -->
+      <!-- Each wand: a long line with a small flame/bud at the tip -->
+      <!-- The angles are DELIBERATELY uncomfortable — no clean symmetry -->
+
+      <!-- Wand 1: steep diagonal, upper-left to center — 62° -->
+      <line x1="115" y1="120" x2="280" y2="430"
+            stroke="var(--card-line)" stroke-width="2.5" opacity="0.8"/>
+      <!-- Flame bud -->
+      <path d="M113 120 Q108 108 115 100 Q122 108 117 120"
+            fill="var(--card-accent)" fill-opacity="0.35" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.6"/>
+
+      <!-- Wand 2: shallow diagonal, upper-right to center — 25° -->
+      <line x1="420" y1="175" x2="220" y2="380"
+            stroke="var(--card-line)" stroke-width="2.5" opacity="0.8"/>
+      <path d="M422 175 Q428 163 422 155 Q416 163 420 175"
+            fill="var(--card-accent)" fill-opacity="0.35" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.6"/>
+
+      <!-- Wand 3: near-vertical, slight lean left — coming from below -->
+      <line x1="235" y1="640" x2="260" y2="200"
+            stroke="var(--card-line)" stroke-width="2.5" opacity="0.8"/>
+      <path d="M258 200 Q253 188 260 180 Q267 188 262 200"
+            fill="var(--card-accent)" fill-opacity="0.35" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.6"/>
+
+      <!-- Wand 4: opposing diagonal, lower-left to upper-center — 50° -->
+      <line x1="80" y1="560" x2="290" y2="240"
+            stroke="var(--card-line)" stroke-width="2.5" opacity="0.8"/>
+      <path d="M288 240 Q283 228 290 220 Q297 228 292 240"
+            fill="var(--card-accent)" fill-opacity="0.35" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.6"/>
+
+      <!-- Wand 5: opposing diagonal, lower-right to upper-center — 130° -->
+      <line x1="430" y1="530" x2="220" y2="260"
+            stroke="var(--card-line)" stroke-width="2.5" opacity="0.8"/>
+      <path d="M218 260 Q213 248 220 240 Q227 248 222 260"
+            fill="var(--card-accent)" fill-opacity="0.35" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.6"/>
+
+      <!-- ======== CLASH POINT — SPARKS ======== -->
+      <!-- Where the wands cross, small burst marks -->
+      <!-- Central spark cluster around ~250, 330 -->
+      <circle cx="252" cy="320" r="3" fill="var(--card-accent-light)" opacity="0.35"/>
+      <circle cx="245" cy="340" r="2" fill="var(--card-line-light)" opacity="0.25"/>
+      <circle cx="262" cy="310" r="2" fill="var(--card-accent-light)" opacity="0.3"/>
+      <!-- Spark lines radiating from clash -->
+      <line x1="250" y1="325" x2="240" y2="312" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.25"/>
+      <line x1="253" y1="322" x2="268" y2="315" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.25"/>
+      <line x1="248" y1="330" x2="235" y2="335" stroke="var(--card-line-light)" stroke-width="0.6" opacity="0.2"/>
+      <line x1="255" y1="335" x2="270" y2="340" stroke="var(--card-line-light)" stroke-width="0.6" opacity="0.2"/>
+      <!-- Second clash point ~230, 370 -->
+      <circle cx="235" cy="375" r="2" fill="var(--card-accent-light)" opacity="0.25"/>
+      <circle cx="268" cy="355" r="1.5" fill="var(--card-line-light)" opacity="0.2"/>
+
+      <!-- ======== FIVE FIGURES ======== -->
+      <!-- Five small geometric figures, each gripping or pushing a wand -->
+      <!-- They're scattered around the composition, NOT in clean rows -->
+      <!-- Each is deliberately a different posture/angle to convey chaos -->
+
+      <!-- FIGURE 1 — lower-left, pushing wand 1 upward, leaning in aggressively -->
+      <g transform="translate(120, 480)">
+        <!-- Head -->
+        <circle cx="0" cy="0" r="14" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+        <circle cx="0" cy="0" r="3" fill="var(--card-line)" opacity="0.35"/>
+        <!-- Body — kite, leaning right -->
+        <path d="M0 14 L-14 50 L0 75 L14 50 Z"
+              fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1"
+              transform="rotate(12, 0, 45)"/>
+        <!-- Arms — both reaching up/right toward wand -->
+        <path d="M8 22 Q20 10 30 5" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M-4 20 Q8 8 18 0" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.5"/>
+        <!-- Legs — wide stance -->
+        <line x1="-6" y1="75" x2="-16" y2="100" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <line x1="6" y1="75" x2="16" y2="100" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+      </g>
+
+      <!-- FIGURE 2 — right side, pulling wand 2 left, braced stance -->
+      <g transform="translate(390, 420)">
+        <circle cx="0" cy="0" r="14" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+        <circle cx="0" cy="0" r="3" fill="var(--card-line)" opacity="0.35"/>
+        <path d="M0 14 L-14 50 L0 75 L14 50 Z"
+              fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1"
+              transform="rotate(-10, 0, 45)"/>
+        <!-- Arms reaching left toward wand -->
+        <path d="M-8 20 Q-24 12 -35 18" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M-5 28 Q-18 22 -28 28" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.5"/>
+        <line x1="-6" y1="75" x2="-18" y2="98" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <line x1="6" y1="75" x2="12" y2="100" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+      </g>
+
+      <!-- FIGURE 3 — top center, pushing wand 3 downward -->
+      <g transform="translate(270, 140)">
+        <circle cx="0" cy="0" r="14" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+        <circle cx="0" cy="0" r="3" fill="var(--card-line)" opacity="0.35"/>
+        <path d="M0 14 L-14 50 L0 75 L14 50 Z"
+              fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1"
+              transform="rotate(-5, 0, 45)"/>
+        <!-- Arms pushing down -->
+        <path d="M-8 24 Q-16 36 -20 48" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M8 24 Q14 38 12 50" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.5"/>
+        <line x1="-6" y1="75" x2="-14" y2="98" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <line x1="6" y1="75" x2="14" y2="98" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+      </g>
+
+      <!-- FIGURE 4 — lower-left far, swinging wand 4 from below -->
+      <g transform="translate(85, 590)">
+        <circle cx="0" cy="0" r="12" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+        <circle cx="0" cy="0" r="2.5" fill="var(--card-line)" opacity="0.35"/>
+        <path d="M0 12 L-12 42 L0 62 L12 42 Z"
+              fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1"
+              transform="rotate(15, 0, 37)"/>
+        <!-- Arms reaching up-right -->
+        <path d="M6 18 Q20 6 32 -4" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M10 24 Q22 14 30 8" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.45"/>
+        <line x1="-5" y1="62" x2="-12" y2="80" stroke="var(--card-line)" stroke-width="0.8" opacity="0.45"/>
+        <line x1="5" y1="62" x2="14" y2="78" stroke="var(--card-line)" stroke-width="0.8" opacity="0.45"/>
+      </g>
+
+      <!-- FIGURE 5 — lower-right, swinging wand 5 from right -->
+      <g transform="translate(405, 560)">
+        <circle cx="0" cy="0" r="12" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+        <circle cx="0" cy="0" r="2.5" fill="var(--card-line)" opacity="0.35"/>
+        <path d="M0 12 L-12 42 L0 62 L12 42 Z"
+              fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1"
+              transform="rotate(-15, 0, 37)"/>
+        <!-- Arms reaching left -->
+        <path d="M-8 16 Q-22 8 -34 4" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M-6 24 Q-18 18 -28 16" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.45"/>
+        <line x1="-5" y1="62" x2="-14" y2="78" stroke="var(--card-line)" stroke-width="0.8" opacity="0.45"/>
+        <line x1="5" y1="62" x2="10" y2="80" stroke="var(--card-line)" stroke-width="0.8" opacity="0.45"/>
+      </g>
+
+      <!-- ======== ADDITIONAL TENSION MARKS ======== -->
+      <!-- Short slash marks around the edges — visual noise = conflict -->
+      <line x1="60" y1="350" x2="48" y2="340" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.15"/>
+      <line x1="55" y1="360" x2="42" y2="355" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.1"/>
+
+      <line x1="445" y1="300" x2="458" y2="292" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.15"/>
+      <line x1="450" y1="315" x2="462" y2="310" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.1"/>
+
+      <line x1="170" y1="100" x2="160" y2="88" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.1"/>
+      <line x1="340" y1="500" x2="352" y2="508" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.1"/>
+
+      <!-- Dust/motion at ground level -->
+      <path d="M100 670 Q115 662 130 668" stroke="var(--card-accent)" stroke-width="0.6" fill="none" opacity="0.12"/>
+      <path d="M360 672 Q378 664 395 670" stroke="var(--card-accent)" stroke-width="0.6" fill="none" opacity="0.12"/>
+      <path d="M220 676 Q240 668 260 674" stroke="var(--card-accent)" stroke-width="0.5" fill="none" opacity="0.1"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>

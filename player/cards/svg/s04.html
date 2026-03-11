@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">IV</div>
+  <div class="card-name">Four of Swords</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- Stillness glow — cool, centered, soft -->
+      <radialGradient id="restglow" cx="50%" cy="55%" r="40%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.06"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#restglow)"/>
+
+      <!-- ======== ARCHITECTURAL ALCOVE ======== -->
+      <!-- Gothic/chapel arch framing the scene — sanctuary -->
+
+      <!-- Outer arch -->
+      <path d="M90 680 L90 220 Q90 80 250 80 Q410 80 410 220 L410 680"
+            stroke="var(--card-line-dim)" stroke-width="1.5" fill="none" opacity="0.25"/>
+      <!-- Inner arch -->
+      <path d="M110 680 L110 235 Q110 110 250 110 Q390 110 390 235 L390 680"
+            stroke="var(--card-line)" stroke-width="1.2" fill="none" opacity="0.2"/>
+
+      <!-- Arch keystone -->
+      <path d="M240 82 L250 70 L260 82"
+            stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.3"/>
+
+      <!-- Subtle window shape at top of arch — stained glass suggestion -->
+      <ellipse cx="250" cy="145" rx="45" ry="30"
+               fill="none" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.15"/>
+      <!-- Window glow -->
+      <radialGradient id="windowglow" cx="50%" cy="18%" r="8%">
+        <stop offset="0%" stop-color="var(--card-accent-light)" stop-opacity="0.06"/>
+        <stop offset="100%" stop-color="var(--card-accent-light)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="300" fill="url(#windowglow)"/>
+      <!-- Window mullion — vertical cross -->
+      <line x1="250" y1="118" x2="250" y2="172" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.15"/>
+      <line x1="208" y1="145" x2="292" y2="145" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.15"/>
+
+      <!-- ======== THREE SWORDS ON WALL ======== -->
+      <!-- Mounted horizontally on the wall above the figure, parallel, evenly spaced -->
+      <!-- Each sword: long blade with crossguard and pommel -->
+
+      <!-- Sword 1 (highest) -->
+      <g transform="translate(250, 220)">
+        <!-- Blade -->
+        <line x1="-90" y1="0" x2="90" y2="0" stroke="var(--card-line)" stroke-width="2" opacity="0.7"/>
+        <!-- Point -->
+        <path d="M90 0 L100 -3 L100 3 Z" fill="var(--card-line)" opacity="0.5"/>
+        <!-- Crossguard -->
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="var(--card-line)" stroke-width="1.5" opacity="0.6"/>
+        <!-- Grip detail -->
+        <rect x="-20" y="-3" width="40" height="6" rx="2" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.3"/>
+        <!-- Pommel -->
+        <circle cx="-90" cy="0" r="4" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <circle cx="-90" cy="0" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+      </g>
+
+      <!-- Sword 2 (middle) -->
+      <g transform="translate(250, 280)">
+        <line x1="-90" y1="0" x2="90" y2="0" stroke="var(--card-line)" stroke-width="2" opacity="0.7"/>
+        <path d="M90 0 L100 -3 L100 3 Z" fill="var(--card-line)" opacity="0.5"/>
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="var(--card-line)" stroke-width="1.5" opacity="0.6"/>
+        <rect x="-20" y="-3" width="40" height="6" rx="2" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.3"/>
+        <circle cx="-90" cy="0" r="4" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <circle cx="-90" cy="0" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+      </g>
+
+      <!-- Sword 3 (lowest of wall swords) -->
+      <g transform="translate(250, 340)">
+        <line x1="-90" y1="0" x2="90" y2="0" stroke="var(--card-line)" stroke-width="2" opacity="0.7"/>
+        <path d="M90 0 L100 -3 L100 3 Z" fill="var(--card-line)" opacity="0.5"/>
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="var(--card-line)" stroke-width="1.5" opacity="0.6"/>
+        <rect x="-20" y="-3" width="40" height="6" rx="2" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.3"/>
+        <circle cx="-90" cy="0" r="4" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <circle cx="-90" cy="0" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+      </g>
+
+      <!-- ======== STONE SLAB / BIER ======== -->
+      <!-- The platform the figure rests on -->
+      <rect x="115" y="490" width="270" height="20" rx="2"
+            fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1.5" opacity="0.45"/>
+      <!-- Slab legs -->
+      <line x1="140" y1="510" x2="140" y2="550" stroke="var(--card-line)" stroke-width="1.2" opacity="0.3"/>
+      <line x1="360" y1="510" x2="360" y2="550" stroke="var(--card-line)" stroke-width="1.2" opacity="0.3"/>
+      <!-- Base platform -->
+      <line x1="125" y1="550" x2="375" y2="550" stroke="var(--card-line-dim)" stroke-width="1" opacity="0.25"/>
+
+      <!-- ======== RECLINING FIGURE ======== -->
+      <!-- Lying on the slab, horizontal, hands folded — in repose/meditation -->
+
+      <!-- Body — long horizontal diamond/kite, lying flat -->
+      <path d="M175 465 L250 445 L340 465 L250 485 Z"
+            fill="var(--card-fill-light)" fill-opacity="0.35" stroke="var(--card-line)" stroke-width="1.2"/>
+
+      <!-- Head — left side, on a slight pillow shape -->
+      <circle cx="155" cy="465" r="20" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+      <circle cx="155" cy="465" r="12" fill="none" stroke="var(--card-line-light)" stroke-width="0.6" opacity="0.45"/>
+      <circle cx="155" cy="465" r="4" fill="var(--card-line)" opacity="0.3"/>
+      <!-- Eyes closed — horizontal line -->
+      <line x1="148" y1="463" x2="162" y2="463" stroke="var(--card-line-light)" stroke-width="0.5" opacity="0.25"/>
+
+      <!-- Pillow suggestion -->
+      <ellipse cx="143" cy="472" rx="18" ry="6"
+               fill="none" stroke="var(--card-line-dim)" stroke-width="0.7" opacity="0.2"/>
+
+      <!-- Hands folded across chest — prayer position -->
+      <path d="M240 455 L250 448 L260 455"
+            stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.5"/>
+      <path d="M240 458 L250 452 L260 458"
+            stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.35"/>
+
+      <!-- Feet — right side -->
+      <ellipse cx="352" cy="465" rx="10" ry="6"
+               fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.4"/>
+
+      <!-- ======== FOURTH SWORD — beneath the slab ======== -->
+      <!-- Resting below the bier, set down — the personal blade, laid aside -->
+      <g transform="translate(250, 530)">
+        <!-- Blade -->
+        <line x1="-80" y1="0" x2="80" y2="0" stroke="var(--card-line)" stroke-width="2" opacity="0.55"/>
+        <!-- Point -->
+        <path d="M80 0 L90 -3 L90 3 Z" fill="var(--card-line)" opacity="0.4"/>
+        <!-- Crossguard -->
+        <line x1="0" y1="-9" x2="0" y2="9" stroke="var(--card-line)" stroke-width="1.5" opacity="0.5"/>
+        <!-- Grip -->
+        <rect x="-18" y="-3" width="36" height="6" rx="2" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.35"/>
+        <!-- Pommel -->
+        <circle cx="-80" cy="0" r="4" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.45"/>
+        <circle cx="-80" cy="0" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+      </g>
+
+      <!-- ======== ATMOSPHERE ======== -->
+      <!-- Stillness — no sparks, no wind, no motion marks -->
+      <!-- Instead: very faint vertical lines suggesting stone/columns -->
+      <line x1="95" y1="220" x2="95" y2="680" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.06"/>
+      <line x1="405" y1="220" x2="405" y2="680" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.06"/>
+
+      <!-- Floor tiles — subtle grid suggesting chapel floor -->
+      <line x1="115" y1="600" x2="385" y2="600" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.08"/>
+      <line x1="115" y1="640" x2="385" y2="640" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.06"/>
+      <line x1="115" y1="680" x2="385" y2="680" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.05"/>
+      <!-- Vertical tile lines -->
+      <line x1="175" y1="555" x2="175" y2="700" stroke="var(--card-line-dim)" stroke-width="0.4" opacity="0.05"/>
+      <line x1="250" y1="555" x2="250" y2="700" stroke="var(--card-line-dim)" stroke-width="0.4" opacity="0.05"/>
+      <line x1="325" y1="555" x2="325" y2="700" stroke="var(--card-line-dim)" stroke-width="0.4" opacity="0.05"/>
+
+      <!-- Gentle glow around the figure — peace, protection -->
+      <radialGradient id="peaceglow" cx="50%" cy="58%" r="16%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.05"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect y="380" width="500" height="200" fill="url(#peaceglow)"/>
+
+      <!-- Candle — small flame on left, suggesting vigil -->
+      <line x1="120" y1="560" x2="120" y2="540" stroke="var(--card-line-dim)" stroke-width="1" opacity="0.3"/>
+      <!-- Flame -->
+      <path d="M120 540 Q116 532 120 524 Q124 532 120 540"
+            fill="var(--card-accent)" fill-opacity="0.3" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.5"/>
+      <!-- Candle glow -->
+      <radialGradient id="candleglow" cx="24%" cy="68%" r="6%">
+        <stop offset="0%" stop-color="var(--card-accent-light)" stop-opacity="0.05"/>
+        <stop offset="100%" stop-color="var(--card-accent-light)" stop-opacity="0"/>
+      </radialGradient>
+      <rect y="480" width="250" height="150" fill="url(#candleglow)"/>
+
+      <!-- Second candle — right side -->
+      <line x1="380" y1="560" x2="380" y2="540" stroke="var(--card-line-dim)" stroke-width="1" opacity="0.3"/>
+      <path d="M380 540 Q376 532 380 524 Q384 532 380 540"
+            fill="var(--card-accent)" fill-opacity="0.3" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.5"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>
