@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">XVIII</div>
+  <div class="card-name">The Moon</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- Moon glow — the dominant light source, eerie -->
+      <radialGradient id="moonglow" cx="50%" cy="18%" r="30%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.14"/>
+        <stop offset="40%" stop-color="var(--card-line)" stop-opacity="0.05"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="500" fill="url(#moonglow)"/>
+
+      <!-- Secondary unease glow from below — the unconscious rising -->
+      <radialGradient id="deepglow" cx="50%" cy="90%" r="30%">
+        <stop offset="0%" stop-color="var(--card-accent)" stop-opacity="0.08"/>
+        <stop offset="100%" stop-color="var(--card-accent)" stop-opacity="0"/>
+      </radialGradient>
+      <rect y="400" width="500" height="400" fill="url(#deepglow)"/>
+
+      <!-- ======== THE MOON ======== -->
+      <!-- Outer halo rings — unsettling, slightly uneven -->
+      <circle cx="250" cy="130" r="80" fill="none" stroke="var(--card-line)" stroke-width="0.5" opacity="0.12"/>
+      <circle cx="250" cy="130" r="68" fill="none" stroke="var(--card-line)" stroke-width="0.4" opacity="0.1"/>
+
+      <!-- Moon disc -->
+      <circle cx="250" cy="130" r="52" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+
+      <!-- Inner crescent — the moon's "face" suggested by a crescent shadow -->
+      <!-- Dark crescent overlapping the right side gives it a watcher's profile -->
+      <circle cx="268" cy="125" r="42" fill="var(--card-fill-light)" fill-opacity="0.5"/>
+      <!-- This creates a crescent on the left side — a face in profile looking down -->
+
+      <!-- Eye of the moon -->
+      <circle cx="238" cy="120" r="5" fill="none" stroke="var(--card-line-light)" stroke-width="1" opacity="0.6"/>
+      <circle cx="238" cy="120" r="2" fill="var(--card-line)" opacity="0.5"/>
+
+      <!-- Subtle mouth line -->
+      <path d="M232 140 Q240 145 248 140" stroke="var(--card-line-light)" stroke-width="0.7" fill="none" opacity="0.3"/>
+
+      <!-- ======== FALLING DROPS / YODS ======== -->
+      <!-- Fifteen drops descending from the moon — discomfort, the unconscious dripping down -->
+      <!-- Teardrop shapes, scattered unevenly -->
+      <path d="M180 200 Q178 196 180 190 Q182 196 180 200" fill="var(--card-line)" opacity="0.3"/>
+      <path d="M220 215 Q218 211 220 205 Q222 211 220 215" fill="var(--card-line)" opacity="0.25"/>
+      <path d="M280 210 Q278 206 280 200 Q282 206 280 210" fill="var(--card-line)" opacity="0.28"/>
+      <path d="M320 205 Q318 201 320 195 Q322 201 320 205" fill="var(--card-line)" opacity="0.22"/>
+      <path d="M150 225 Q148 221 150 215 Q152 221 150 225" fill="var(--card-line)" opacity="0.2"/>
+      <path d="M200 240 Q198 236 200 230 Q202 236 200 240" fill="var(--card-line)" opacity="0.22"/>
+      <path d="M300 235 Q298 231 300 225 Q302 231 300 235" fill="var(--card-line)" opacity="0.24"/>
+      <path d="M350 230 Q348 226 350 220 Q352 226 350 230" fill="var(--card-line)" opacity="0.18"/>
+      <path d="M165 250 Q163 246 165 240 Q167 246 165 250" fill="var(--card-line)" opacity="0.16"/>
+      <path d="M250 245 Q248 241 250 235 Q252 241 250 245" fill="var(--card-line)" opacity="0.2"/>
+      <path d="M335 250 Q333 246 335 240 Q337 246 335 250" fill="var(--card-line)" opacity="0.16"/>
+      <path d="M130 240 Q128 236 130 230 Q132 236 130 240" fill="var(--card-line)" opacity="0.14"/>
+      <path d="M370 218 Q368 214 370 208 Q372 214 370 218" fill="var(--card-line)" opacity="0.16"/>
+      <path d="M240 258 Q238 254 240 248 Q242 254 240 258" fill="var(--card-line)" opacity="0.14"/>
+      <path d="M310 255 Q308 251 310 245 Q312 251 310 255" fill="var(--card-line)" opacity="0.14"/>
+
+      <!-- ======== TWO TOWERS ======== -->
+      <!-- Flanking the path — sentinels, thresholds, the known world's edge -->
+
+      <!-- Left tower -->
+      <g transform="translate(100, 310)">
+        <!-- Tower body -->
+        <rect x="-18" y="0" width="36" height="110" fill="var(--card-fill-light)" fill-opacity="0.25" stroke="var(--card-line)" stroke-width="1.5"/>
+        <!-- Crenellations -->
+        <rect x="-18" y="-8" width="10" height="10" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <rect x="-4" y="-8" width="10" height="10" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <rect x="8" y="-14" width="10" height="16" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <!-- Window — narrow slit, watching -->
+        <rect x="-3" y="30" width="6" height="18" rx="3" fill="none" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.4"/>
+        <circle cx="0" cy="39" r="1.5" fill="var(--card-accent-light)" opacity="0.25"/>
+        <!-- Second window -->
+        <rect x="-3" y="65" width="6" height="14" rx="3" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.3"/>
+      </g>
+
+      <!-- Right tower -->
+      <g transform="translate(400, 310)">
+        <rect x="-18" y="0" width="36" height="110" fill="var(--card-fill-light)" fill-opacity="0.25" stroke="var(--card-line)" stroke-width="1.5"/>
+        <rect x="-18" y="-14" width="10" height="16" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <rect x="-4" y="-8" width="10" height="10" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <rect x="8" y="-8" width="10" height="10" fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <rect x="-3" y="30" width="6" height="18" rx="3" fill="none" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.4"/>
+        <circle cx="0" cy="39" r="1.5" fill="var(--card-accent-light)" opacity="0.25"/>
+        <rect x="-3" y="65" width="6" height="14" rx="3" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.3"/>
+      </g>
+
+      <!-- ======== THE PATH ======== -->
+      <!-- Winding between the towers, narrowing as it recedes toward the moon -->
+      <!-- This path goes INTO the card, creating depth -->
+      <path d="M250 700 Q220 660 240 620 Q270 580 245 540 Q215 500 240 460 Q265 420 250 380 Q235 340 250 290"
+            stroke="var(--card-line-dim)" stroke-width="2" fill="none" opacity="0.35"/>
+      <!-- Path edge lines — parallel but uneven, like a worn trail -->
+      <path d="M230 700 Q200 660 220 620 Q250 580 225 540 Q195 500 220 460 Q245 420 230 380 Q215 340 230 290"
+            stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.15"/>
+      <path d="M270 700 Q240 660 260 620 Q290 580 265 540 Q235 500 260 460 Q285 420 270 380 Q255 340 270 290"
+            stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.15"/>
+
+      <!-- ======== DOG AND WOLF ======== -->
+      <!-- Left: the dog (tame, domestic) — smaller, sitting upright, howling -->
+      <g transform="translate(160, 470)">
+        <!-- Body — small kite, upright, alert -->
+        <path d="M0 10 L-10 35 L0 50 L10 35 Z"
+              fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1.2"/>
+        <!-- Head — tilted up, howling -->
+        <circle cx="0" cy="0" r="10" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+        <circle cx="-2" cy="-2" r="1.8" fill="var(--card-line)" opacity="0.4"/>
+        <!-- Muzzle pointing up -->
+        <path d="M2 -6 L6 -14 L-1 -10" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <!-- Ears — small points -->
+        <line x1="-6" y1="-6" x2="-10" y2="-14" stroke="var(--card-line)" stroke-width="0.8" opacity="0.45"/>
+        <line x1="3" y1="-7" x2="6" y2="-14" stroke="var(--card-line)" stroke-width="0.8" opacity="0.45"/>
+        <!-- Front legs -->
+        <line x1="-5" y1="50" x2="-6" y2="62" stroke="var(--card-line)" stroke-width="0.8" opacity="0.45"/>
+        <line x1="5" y1="50" x2="6" y2="62" stroke="var(--card-line)" stroke-width="0.8" opacity="0.45"/>
+        <!-- Tail — gentle curve -->
+        <path d="M-8 30 Q-16 22 -14 14" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <!-- Howl lines — tiny arcs from muzzle -->
+        <path d="M8 -16 Q14 -20 12 -26" stroke="var(--card-line-light)" stroke-width="0.5" fill="none" opacity="0.2"/>
+        <path d="M10 -12 Q18 -14 18 -20" stroke="var(--card-line-light)" stroke-width="0.4" fill="none" opacity="0.15"/>
+      </g>
+
+      <!-- Right: the wolf (wild, instinctual) — larger, more angular, more aggressive -->
+      <g transform="translate(340, 460)">
+        <!-- Body — bigger kite, leaning forward -->
+        <path d="M0 12 L-14 42 L0 62 L14 42 Z"
+              fill="var(--card-fill-light)" fill-opacity="0.35" stroke="var(--card-line)" stroke-width="1.5"/>
+        <!-- Head — bigger, sharper features -->
+        <circle cx="0" cy="0" r="13" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+        <circle cx="-2" cy="-2" r="2.5" fill="var(--card-line)" opacity="0.45"/>
+        <!-- Muzzle — longer, more angular, pointing up -->
+        <path d="M3 -8 L8 -20 L-2 -14" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.55"/>
+        <!-- Ears — taller, sharper -->
+        <line x1="-8" y1="-8" x2="-14" y2="-20" stroke="var(--card-line)" stroke-width="1" opacity="0.55"/>
+        <line x1="4" y1="-9" x2="10" y2="-20" stroke="var(--card-line)" stroke-width="1" opacity="0.55"/>
+        <!-- Hackles suggested — small spikes on back -->
+        <line x1="-4" y1="14" x2="-6" y2="8" stroke="var(--card-line)" stroke-width="0.6" opacity="0.3"/>
+        <line x1="0" y1="13" x2="0" y2="7" stroke="var(--card-line)" stroke-width="0.6" opacity="0.3"/>
+        <line x1="4" y1="14" x2="6" y2="8" stroke="var(--card-line)" stroke-width="0.6" opacity="0.3"/>
+        <!-- Front legs — wider stance -->
+        <line x1="-7" y1="62" x2="-10" y2="76" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <line x1="7" y1="62" x2="10" y2="76" stroke="var(--card-line)" stroke-width="1" opacity="0.5"/>
+        <!-- Tail — bristled, raised -->
+        <path d="M-10 35 Q-22 24 -18 12" stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.45"/>
+        <!-- Howl lines — bigger arcs -->
+        <path d="M10 -22 Q18 -28 16 -36" stroke="var(--card-line-light)" stroke-width="0.6" fill="none" opacity="0.22"/>
+        <path d="M14 -18 Q22 -22 22 -30" stroke="var(--card-line-light)" stroke-width="0.5" fill="none" opacity="0.18"/>
+        <path d="M6 -24 Q10 -32 8 -38" stroke="var(--card-line-light)" stroke-width="0.4" fill="none" opacity="0.14"/>
+      </g>
+
+      <!-- ======== THE CREATURE FROM THE DEEP ======== -->
+      <!-- Crayfish / something emerging from water at the bottom -->
+      <!-- Abstract: a diamond-body with pincers and legs rising from ripples -->
+      <g transform="translate(250, 680)">
+        <!-- Body — angular, alien -->
+        <path d="M0 -5 L-14 10 L-8 30 L8 30 L14 10 Z"
+              fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-accent-light)" stroke-width="1.2" opacity="0.55"/>
+        <!-- Head/eyes -->
+        <circle cx="-5" cy="2" r="2.5" fill="none" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.45"/>
+        <circle cx="5" cy="2" r="2.5" fill="none" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.45"/>
+        <circle cx="-5" cy="2" r="1" fill="var(--card-accent-light)" opacity="0.35"/>
+        <circle cx="5" cy="2" r="1" fill="var(--card-accent-light)" opacity="0.35"/>
+        <!-- Pincers — reaching upward out of the water -->
+        <path d="M-14 8 Q-24 -2 -20 -12" stroke="var(--card-accent-light)" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <path d="M-20 -12 L-24 -16" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.35"/>
+        <path d="M-20 -12 L-16 -16" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.35"/>
+        <path d="M14 8 Q24 -2 20 -12" stroke="var(--card-accent-light)" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <path d="M20 -12 L24 -16" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.35"/>
+        <path d="M20 -12 L16 -16" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.35"/>
+        <!-- Legs — four on each side, trailing into water -->
+        <line x1="-12" y1="15" x2="-22" y2="20" stroke="var(--card-accent)" stroke-width="0.7" opacity="0.3"/>
+        <line x1="-10" y1="22" x2="-20" y2="28" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.25"/>
+        <line x1="12" y1="15" x2="22" y2="20" stroke="var(--card-accent)" stroke-width="0.7" opacity="0.3"/>
+        <line x1="10" y1="22" x2="20" y2="28" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.25"/>
+      </g>
+
+      <!-- Water surface — ripples around the creature -->
+      <path d="M120 710 Q160 700 200 708 Q250 716 300 706 Q340 698 380 710"
+            stroke="var(--card-accent)" stroke-width="1.2" fill="none" opacity="0.25"/>
+      <path d="M140 725 Q190 715 240 722 Q290 730 340 720 Q370 714 390 722"
+            stroke="var(--card-accent)" stroke-width="0.8" fill="none" opacity="0.18"/>
+      <path d="M160 738 Q210 730 260 736 Q310 742 360 734"
+            stroke="var(--card-accent)" stroke-width="0.5" fill="none" opacity="0.12"/>
+
+      <!-- ======== ATMOSPHERE ======== -->
+      <!-- Faint ground line between towers -->
+      <path d="M82 420 Q130 430 180 420 Q250 410 320 420 Q370 430 418 420"
+            stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.15"/>
+
+      <!-- Ground vegetation — sparse, nocturnal -->
+      <line x1="135" y1="425" x2="132" y2="415" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.15"/>
+      <line x1="200" y1="418" x2="198" y2="408" stroke="var(--card-accent)" stroke-width="0.5" opacity="0.12"/>
+      <line x1="300" y1="418" x2="302" y2="408" stroke="var(--card-accent)" stroke-width="0.5" opacity="0.12"/>
+      <line x1="365" y1="425" x2="368" y2="415" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.15"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>
