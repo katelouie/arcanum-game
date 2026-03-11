@@ -30,6 +30,7 @@ import random
 @include kind/kind.bard
 @include kind/kind_session1.bard
 @include kind/kind_session2.bard
+@include kind/kind_session3.bard
 
 @metadata
   title: Arcanum

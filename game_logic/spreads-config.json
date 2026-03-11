@@ -2580,6 +2580,54 @@
           "rag_mapping": "outcome_and_result.final_outcome"
         }
       ]
+    },
+    {
+      "id": "what-this-place-holds",
+      "name": "What This Place Holds",
+      "description": "A three-card spread for reading a place instead of a person. Designed for Kind Of's Session 3, where the store itself is the client. The positions move from service to silence to desire — the arc of a caretaker finally asking for something.",
+      "layout": "horizontal-3",
+      "cardSize": "large",
+      "aspectRatio": 2.0,
+      "category": "spiritual",
+      "difficulty": "advanced",
+      "positions": [
+        {
+          "name": "What You've Been Holding",
+          "short_description": "The caretaking — what this place gives and gives and gives",
+          "detailed_description": "The store's labor of love. Every record placed in the right hands, every book surfaced at the right moment, every impossible thing from the deep shelves. This position reads the generosity — and the cost of it. What has this building been carrying while everyone else was being carried?",
+          "keywords": ["generosity", "labor", "caretaking", "legacy", "abundance", "weight"],
+          "question_adaptations": {
+            "place": "What this space has been doing for the people inside it",
+            "caretaker": "The invisible work you've been doing without recognition",
+            "community": "What this gathering place holds for those who gather"
+          },
+          "rag_mapping": "emotional_and_internal.identity"
+        },
+        {
+          "name": "What You Haven't Said",
+          "short_description": "The silence — the need the building has been sitting on",
+          "detailed_description": "The store's unspoken want. The thing it has been holding back because nobody asked, because buildings don't talk, because caretakers learn that their needs come last. This card reveals what the silence has been hiding — not a crisis, not a threat, but a desire that has been growing in the walls.",
+          "keywords": ["silence", "unspoken", "patience", "longing", "isolation", "desire"],
+          "question_adaptations": {
+            "place": "What this space needs but hasn't been able to articulate",
+            "caretaker": "The thing you've been sitting on because nobody thought to ask",
+            "community": "The gap in the community that nobody has named yet"
+          },
+          "rag_mapping": "emotional_and_internal.hidden_feelings"
+        },
+        {
+          "name": "What You Want For Yourself",
+          "short_description": "The ask — the future this place is claiming",
+          "detailed_description": "The store's declaration. Not what it needs to survive — what it wants for itself. The caretaker putting her foot down. The mother sitting at the kitchen table saying 'I want.' This is the key position: it determines whether the store wants to open up (community), be heard (voice), or be explored (depth).",
+          "keywords": ["desire", "future", "declaration", "self", "want", "claiming"],
+          "question_adaptations": {
+            "place": "What this space is claiming for its own future",
+            "caretaker": "What you want when you finally let yourself want",
+            "community": "The future this gathering place is building toward"
+          },
+          "rag_mapping": "outcome_and_result.final_outcome"
+        }
+      ]
     }
   ],
   "categories": {

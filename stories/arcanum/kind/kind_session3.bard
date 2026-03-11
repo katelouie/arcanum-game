@@ -1,0 +1,2765 @@
+# ============================================================================
+# THE KIND — SESSION 3: "WHAT THIS PLACE HOLDS"
+# ============================================================================
+#
+# DREAM SCENARIO: Kind Of — a combo record shop & bookstore in Rewind, Oregon
+# NPC: None (the store itself is the client)
+#
+# PREREQS: Session 2 complete (the_kind.sessions_completed >= 2)
+#
+# CATALYST: The dream returns, stronger than before. Thunder in the
+#   Willamette Valley — rare, deliberate, like the weather has something
+#   to say. The Kind is warm and closed and empty of customers and
+#   for the first time, the crew has a night to themselves.
+#
+# CORE QUESTION: "What does this place need?"
+#   (Real answer: To be seen. To be heard. To want something for itself.)
+#
+# THEME: The caretaker's turn. The mother who finally sits down.
+#   Every session, The Kind has given — the right record for Ellen,
+#   the right book for Dev, impossible things from impossible shelves.
+#   Tonight the store puts its foot down: my turn.
+#
+# TONE: Intimate. Funny. The warmest session. No stranger walks
+#   through the door. It's just the crew, the storm, and a building
+#   that has been holding its tongue for a very long time.
+#
+# SPREAD: "What This Place Holds" (3-card)
+#   Position 1: What You've Been Holding
+#   Position 2: What You Haven't Said
+#   Position 3: What You Want For Yourself (KEY POSITION)
+#
+# CARD POOLS:
+#   Position 1: Ten of Pentacles / The Empress / Six of Cups
+#   Position 2: The Hermit / Four of Cups / Seven of Pentacles
+#   Position 3: The World / The Star / The Moon
+#
+# REVERSAL CHANCE: 20% (the store is deliberate, not chaotic)
+#
+# PATH STRUCTURE: Community / Voice / Depth
+#   - Community (Delphi): The Open House. The store wants to stop being
+#       a secret. Reading night, open doors, the bead curtain comes down.
+#       The caretaker who says "I want to host a party."
+#   - Voice (Scout): The Store's Own Record. An impossible pressing —
+#       the store's own soundtrack, songs and voices and rain, decades
+#       of sounds it's absorbed. It wants to be played.
+#       The caretaker who says "I saved all your drawings."
+#   - Depth (Mal): The Expedition. The deep shelves have grown.
+#       Something is waiting further back than anyone has ever gone.
+#       A scrapbook. The store's history, its future, a photo
+#       of the crew with a fifth person nobody recognizes.
+#       The caretaker who says "I've been planning."
+#   - Failstate: The store sighs. The evening ends. Patient. It'll ask
+#       again. (Gentlest failstate in the game.)
+#
+# PATH VARIABLES:
+#   - community_influence (Delphi's path — openness, reaching out)
+#   - voice_influence (Scout's path — being heard, expression)
+#   - depth_influence (Mal's path — mystery, exploration, the hidden)
+#   - quality_score (overall reading quality — low = failstate)
+#
+# BLEED-THROUGH OBJECT:
+#   - Community: A hand-lettered flyer for reading night at Kind Of
+#   - Voice: A 7-inch single that sounds like rain on a tin roof
+#   - Depth: A page from the original composition notebook — with
+#       a catalog entry for YOU
+#   - Failstate: A pressed tin tile. Cold. Beautiful. Silent.
+#
+# STORE COMMUNICATION:
+#   The Kind can't talk. It communicates through:
+#   - Temperature shifts (warm = yes, cold = no)
+#   - Objects falling/sliding off shelves (thematically relevant)
+#   - The turntable (starting, stopping, changing speed)
+#   - The deep shelves door (opening, closing, light spilling out)
+#   - The front door (swinging, rattling, wind behavior)
+#   - The vine on the outside wall (tapping the window)
+#   - Smells intensifying or fading
+#   - The pressed tin ceiling (creaking, glowing, settling)
+#   - Lightning timing (dramatic punctuation)
+#
+# CREW (Session 3 dynamics):
+#   Scout: Delighted. "We can READ the STORE?" The kid whose mom
+#     said "let's order pizza." Overexcited but genuine.
+#   Mal: Unsettled. "I've been cataloging by emotional resonance for
+#     three years. What if the shelves were cataloging me?" Realizes
+#     their system was always a collaboration, not a solo act.
+#   Delphi: Unsurprised. She's known. "She's been doing this the
+#     whole time. You just weren't listening." (The pronoun shift —
+#     calling the store "she" — lands like a bell.)
+#
+# ============================================================================
+
+:: TheKind.Session3.Start ^DREAM:KIND
+@py:
+# Initialize dream session
+session = create_session(the_kind)
+
+# Weather — thunderstorm. The first real storm in Rewind in years.
+# Oregon doesn't get many thunderstorms. When it does, the valley
+# pays attention. This one is deliberate.
+session.weather = "thunderstorm"
+
+# Path influence tracking
+session.community_influence = 0    # Delphi's path (the open house)
+session.voice_influence = 0        # Scout's path (the store's record)
+session.depth_influence = 0        # Mal's path (the expedition)
+session.quality_score = 0          # Overall reading quality
+
+# Interpretation quality tracking
+session.interpretation_quality = {
+    'excellent': 0,
+    'good': 0,
+    'adequate': 0,
+    'poor': 0
+}
+
+# Track cards discussed
+session.discussed_cards = []
+
+# Store expressiveness — how actively the building responds.
+# Builds through the reading as the store gets more comfortable speaking.
+session.store_expressiveness = 0   # 0-10, increases as reading progresses
+
+# Crew engagement flags
+session.scout_moved = False   # Scout had a genuine moment
+session.mal_deep = False      # Mal connected to the deep shelves
+session.delphi_named = False  # Delphi called the store "she"
+
+# Store state
+session.store_warmth = the_kind.store_warmth  # Load persistent state
+
+# Recommendation tracking
+session.recommendation = ""
+session.recommender = ""
+session.store_revealed = False
+session.is_failstate = False
+session.dominant_path = ""
+session.reading_quality = ""
+
+# Banter tracking
+session.banter_topic = ""  # What the crew was discussing when the store interrupted
+@endpy
+
+# ============================================================================
+# THE DREAM RETURNS
+# ============================================================================
+
+You're at your reading table. Your real one.
+
+The knick-knack shelf has grown. The 7-inch single from the first dream sits next to
+
+@if the_kind.session_two_dominant_path == "impossible":
+    a typeset page that smells like golden dust —
+@elif the_kind.session_two_dominant_path == "wildcard":
+    a composition notebook page with angular handwriting in the margins —
+@elif the_kind.session_two_dominant_path == "foundation":
+    a composition notebook page with a clean, beautiful proof —
+@else:
+    a blank lined page, patient and unwritten —
+@endif
+
+evidence of places you've been in your sleep.
+
+The rain outside your apartment window is different tonight. Not the steady Oregon wash — there's a charge in it. A weight. The air tastes like metal and electricity. Your deck is warm.
+
+Thunder rolls.
+
+You close your eyes.
+
++ [Continue] -> TheKind.Session3.Awakening
+
+# ============================================================================
+# THE STORM
+# ============================================================================
+
+:: TheKind.Session3.Awakening
+
+The first thing is the thunder.
+
+Not distant thunder. Not the polite murmur of a storm clearing its throat thirty miles away in the Cascades. This is close — the kind that starts as a low vibration in your sternum before it becomes sound, the kind that makes the windows rattle and the pressed tin ceiling hum like a struck bell. Lightning turns Main Street white for one frozen instant and in that flash you see everything: the rain coming down in sheets, the sign reading KIND in the strobe, the big front windows streaming, Frame of Mind's awning torn loose on one side and flapping like a wing.
+
+Oregon doesn't get thunderstorms. Not real ones. The Willamette Valley gets rain the way other places get Tuesdays — constant, democratic, unannounced. Thunder is an event. Thunder is the sky doing something it didn't clear with the geography first.
+
+You're behind the counter. Your mug — The Star — is warm. The register's 7 key sticks. The store is closed — not "closing early" closed, but "nobody is coming out in this" closed. The OPEN sign in the window is dark. The front door is locked, which almost never happens. The Kind is usually open the way libraries and churches are open — as a philosophical position, not a business decision.
+
+Tonight the store is keeping its people in and the world out.
+
+@if the_kind.store_warmth >= 8:
+    And the store is *warm*. Not thermostat warm — alive warm. The pressed tin ceiling glows in the lamplight. The aisles feel closer, cozier, like the building has pulled its walls in slightly to create a smaller, more intimate space. The deep shelves hum with something that's been building since the last dream. The Kind is running hot tonight.
+@elif the_kind.store_warmth >= 6:
+    The Kind is its usual self — warm, humming, the ambient presence of a building that loves its contents. But there's something else tonight. An energy. The rain drums on the roof and the store seems to be listening to it, the way a person listens to a song they haven't heard in a long time.
+@else:
+    The Kind is quiet. Warmer than last time, but cautious — the building equivalent of someone who's been thinking about saying something for a while and hasn't committed to it yet. The pressed tin ceiling absorbs the sound of rain. The aisles wait.
+@endif
+
+Lightning again. Thunder follows — closer this time, a full-body sound that makes the vinyl in the bins vibrate and the overhead lamp sway. Through the big front windows, Main Street is empty. No bikes. No Dale and his impossible vehicle. No Toad selling comics on the quad. Even the traffic light on the corner has gone dark — the one that was already incomprehensible has now achieved total inscrutability.
+
+The storm has given the store a gift: an empty evening.
+
++ [Continue] -> TheKind.Session3.Storm_Evening
+
+# ============================================================================
+# THE CREW ON A STORM NIGHT
+# ============================================================================
+
+:: TheKind.Session3.Storm_Evening
+
+The crew is in.
+
+Not "at work." Not "on shift." Just... in. The difference is subtle but real — like the difference between a house where people live and a house where people are *home.* Nobody is watching the door. Nobody is restocking. The lights are at half because Scout likes it moody and nobody argued.
+
+**Scout** is on the floor behind the counter, back against the wall, legs stretched out, surrounded by a semicircle of vinyl he's pulled from the bins. He's doing the thing he does when there are no customers — building what he calls "argument constellations." Seven records arranged in a pattern that represents some thesis about music that he hasn't finished articulating yet. His headphones are around his neck. His beanie is off — a rare sight, his hair a mess of dark tangles — and he's holding two records like a person weighing two versions of the truth.
+
+**Mal** is in the reading nook. Not reading — writing. The composition notebook is open and they're working on something that isn't inventory. You can tell because the pen moves differently when Mal is cataloging versus when Mal is *thinking*. Cataloging is efficient, precise, one-entry-per-line. Thinking is slower, with pauses, the pen hovering between sentences like a person choosing a word they can't quite reach.
+
+Their rain jacket is on the chair next to them, steaming gently. The three enamel pins — white whale, Borges labyrinth, semicolon — and the new one, the angle bracket, catching the lamplight.
+
+**Delphi** is behind the counter with a mug of something that steams like a hot spring. She's reading a slim book that you can't see the cover of, because Delphi holds books the way some people hold cards — close, face-in, private. Every few minutes she looks up and watches the storm through the windows with an expression that isn't worry. It's attention. The kind of attention she gives to a tarot spread that hasn't fully revealed itself yet.
+
+Lightning. The overhead lamp sways. Thunder hits like a door slamming three rooms away.
+
+Scout doesn't flinch. He holds up a record. "*Kid A.*"
+
+Nobody asked.
+
+"*Kid A* is the *Ulysses* of rock albums. I've been thinking about this for three weeks and I'm prepared to defend it with my life."
+
+Delphi turns a page. "Your life is worth more than that argument."
+
+"Counterpoint: it isn't."
+
++ ["I'm listening. Make your case."] -> TheKind.Session3.Banter_KidA
++ ["I have questions already."] -> TheKind.Session3.Banter_KidA_Skeptic
++ [Look at Mal. See if they're going to engage.] -> TheKind.Session3.Banter_Mal_Reacts
+
+:: TheKind.Session3.Banter_KidA
+"I'm listening. Make your case."
+
+Scout's eyes light up. Scout's eyes always light up when someone gives him permission to talk about music, which is why you should never give Scout permission to talk about music, which is why you just did.
+
+"Okay. OKAY." He sits up straighter, using the *Kid A* sleeve as a visual aid, gesturing with it like a professor who got lost on the way to the lecture hall and ended up in a record store. "1999. Radiohead is the biggest rock band on the planet. *OK Computer* just proved that guitar music can be *about something*. Every label, every critic, every fan is waiting for the sequel. More anthems. More guitars. More Thom Yorke doing the thing."
+
+He pauses for effect. Scout always pauses for effect.
+
+"And what do they do? They make an album that sounds like a computer having a panic attack in a cathedral. They throw away everything that made them popular and replace it with *bleeps.* With *glitches.* With songs that don't have choruses, that don't resolve, that sound like the future having a nightmare about the present."
+
+"That's *Ulysses,*" he says. "Joyce takes the biggest, most readable form in literature — the novel — and says, 'What if I made this *illegible* on purpose? What if readability was a cage and I broke it and the pieces were more interesting than the cage ever was?'"
+
+~ session.banter_topic = "Kid A vs Ulysses"
+
++ [Continue] -> TheKind.Session3.Banter_Responses
+
+:: TheKind.Session3.Banter_KidA_Skeptic
+"I have questions already."
+
+"Questions are good! Questions mean engagement. Hit me."
+
+"Is this an argument about *Kid A* or about your belief that all art is secretly the same art wearing different hats?"
+
+From the reading nook, Mal's pen stops. A sound that means someone just said something worth writing down.
+
+Scout opens his mouth. Closes it. Opens it again. "...those are the same thing."
+
+"They're not."
+
+"They're kind of the same thing."
+
+Delphi, without looking up: "Kind of."
+
+~ session.banter_topic = "Kid A vs Ulysses"
+~ session.quality_score += 1
+
++ [Continue] -> TheKind.Session3.Banter_Responses
+
+:: TheKind.Session3.Banter_Mal_Reacts
+You look at Mal. Mal looks at their composition notebook. Mal's pen moves. One line. Short. Then they look up at Scout.
+
+"*Kid A* is *The Waste Land,* not *Ulysses.*"
+
+Scout's entire body reacts. "*The Waste Land?!*"
+
+"Fragments shored against ruin. Multiple voices, none of them the author's. Sampling and collage disguised as original composition. Deeply pretentious and also genuinely beautiful." Mal's voice is dry, precise, the voice of someone who quit an ML engineering job to catalog books by emotional resonance and has never once second-guessed the decision. "Eliot assembled *The Waste Land* from pieces of other works. Radiohead assembled *Kid A* from pieces of other genres. Both were called revolutionary. Both were really just very good collage."
+
+"Mal." Scout puts both hands on *Kid A.* "I need you to know that I am both offended and aroused by that take."
+
+"Noted," Mal says, and goes back to the notebook.
+
+~ session.banter_topic = "Kid A vs The Waste Land"
+~ session.quality_score += 1
+
++ [Continue] -> TheKind.Session3.Banter_Responses
+
+:: TheKind.Session3.Banter_Responses
+
+Lightning. The store goes white. Thunder follows, and the old building absorbs it — the pressed tin ceiling resonating like a bell, the windows humming in their frames, every surface briefly alive with vibration. Then it passes. The lamp sways. The store settles.
+
+"Thunder in Rewind," Delphi says. She sets her book down — face-down, spine up, the title still hidden. "That's new."
+
+"It's not *new.*" Scout. "There was that one in, what, 2019?"
+
+"2017," Mal says. "August. It knocked out the power for six hours. You lit candles and played acoustic guitar in the dark and told everyone it was 'the purest listening experience of your life.'"
+
+"It WAS."
+
+"You played 'Wonderwall.'"
+
+"I played *Wonderwall* ONCE and I have been PAYING for it for EIGHT YEARS—"
+
+Delphi laughs. Not the small exhale she usually gives — an actual laugh, warm and surprising, the way a cello sounds when it plays something unexpectedly gentle. You realize you've never heard Delphi fully laugh before. Two sessions of working together and she's always been the quiet center, the steady hand, the person who nods instead of laughing.
+
+The storm has unlocked something. The empty store has unlocked something. No clients to be professional for. No readings to hold space for. Just four people and a thunderstorm and the particular intimacy of a place that's closed its doors to everyone but its own.
+
++ ["This is nice. Just... this."] -> TheKind.Session3.Banter_Settle
++ [Pour more tea for everyone] -> TheKind.Session3.Banter_Tea
++ ["Mal, what are you writing?"] -> TheKind.Session3.Banter_Mal_Writing
+
+:: TheKind.Session3.Banter_Settle
+"This is nice," you say. "Just... this."
+
+Scout looks up from his argument constellation. Mal's pen pauses. Delphi's mug stops halfway to her mouth.
+
+It's a simple thing to say. But it lands. Because they feel it too — the rarity of an evening where nobody needs anything from them. Where the store is just a store and the crew is just people and the rain is just rain and nobody has walked in carrying twenty years of grief or the weight of being the first person in their family to go to college.
+
+"Yeah," Scout says. Quietly. For Scout. "It is."
+
+Mal doesn't say anything. But the composition notebook closes. Just for a moment. Mal present, not cataloging.
+
+~ session.quality_score += 1
+
+-> TheKind.Session3.Banter_Deepens
+
+:: TheKind.Session3.Banter_Tea
+You pour tea. Pu-erh for Delphi — she likes it dark and earthy, the tea equivalent of a blues record. The weird roasted thing from the co-op for Scout, who swears it's transcendent and whom nobody believes. For Mal, green tea, plain, because Mal likes things that are exactly what they claim to be.
+
+The act of pouring settles the room further. There's a rhythm to it — kettle to mug, mug to hand, the small nod of thanks. The store ritual. The thing underneath the thing. Not the reading, not the recommendation, not the impossible deep shelves — just tea, poured for people you know well enough to pour for without asking.
+
+Scout wraps both hands around his mug. "Thanks."
+
+Mal takes theirs without looking up from the notebook, which is Mal's highest form of trust — accepting something without inspecting it.
+
+Delphi raises hers. Not a toast — a recognition.
+
+~ session.quality_score += 1
+~ session.store_warmth += 1
+
+-> TheKind.Session3.Banter_Deepens
+
+:: TheKind.Session3.Banter_Mal_Writing
+"Mal, what are you writing?"
+
+Mal's pen stops. They look at you with the expression of someone who has been asked to explain a private language.
+
+"Connections," they say. Then, because Mal has learned that single-word answers invite follow-up questions: "I've been mapping the emotional architecture of the store. Not the inventory — the *resonance patterns.* Which sections respond to which customers. Where people go when they don't know what they're looking for."
+
+"You can map that?" Scout, from the floor.
+
+"I've been mapping it for three years." Mal holds up the composition notebook. It's thicker than you remember — more pages, or the same pages absorbing more ink. "The vinyl section gets warmer when someone is grieving. The fiction shelves reorganize slightly when someone needs a specific kind of story. The deep shelves—" They pause. "The deep shelves do whatever they want."
+
+"You're saying the store responds to people."
+
+"I'm saying the store has been responding to people since before I started writing it down. I'm just the first person who noticed."
+
+Delphi sets her mug down. The ceramic-on-wood sound. "You're not the first person who noticed."
+
+Mal looks at her. Something passes between them — a recognition, an old conversation made new.
+
+~ session.quality_score += 1
+~ session.depth_influence += 1
+~ session.mal_deep = True
+
+-> TheKind.Session3.Banter_Deepens
+
+# ============================================================================
+# THE BANTER DEEPENS
+# ============================================================================
+
+:: TheKind.Session3.Banter_Deepens
+
+The storm settles into a rhythm outside — thunder every few minutes, rain constant, lightning turning the windows into flashbulbs. Inside, the crew settles too. Scout is on his back now, staring at the pressed tin ceiling, the argument constellation abandoned in favor of pure horizontal contemplation. Mal has moved from the reading nook to the floor near Scout, back against the book stacks, notebook open on their knees. Delphi hasn't moved — she's the center of gravity and she knows it.
+
+@if the_kind.session_one_recommender != "none" and the_kind.session_two_recommender != "none":
+    "You know what I keep thinking about?" Scout says to the ceiling. "The kid. Dev."
+
+    @if the_kind.session_two_dominant_path == "foundation":
+        "He came by yesterday," Delphi says. "Working through chapter two of the Velleman."
+
+        "Is he—"
+
+        "He understood the first proof on one read. He called me over to the counter to show me. His hands were shaking."
+
+        Scout's voice goes quiet. "That kid is going to be okay."
+
+        "You said that last time."
+
+        "I'm saying it again. Write it down, Mal."
+
+        A pause. The scratch of pen on paper. Mal writing it down.
+    @elif the_kind.session_two_dominant_path == "wildcard":
+        "He came by yesterday," Scout says. "Asked if I had more Hiromi. I gave him *Alive.*"
+
+        "He's listening to jazz piano to study real analysis," Mal says. "That's either brilliant or insane."
+
+        "Those are the same thing."
+
+        "They're not."
+
+        "Kind of," Delphi says.
+    @elif the_kind.session_two_dominant_path == "impossible":
+        "He came by yesterday," Mal says. Not looking up from the notebook. "He'd read seventy pages of the Pratchett. He was laughing. I haven't heard a math student laugh about math in—" They pause. "Ever. I haven't heard a math student laugh about math ever."
+
+        "Because math students don't have that book," Delphi says. "Nobody has that book. Except this store."
+
+        "Kind of," Scout says. And then, quieter: "Kind of."
+    @else:
+        The silence stretches. Nobody mentions the kid who bought Rudin and rode into the rain. Some nights the store misses, and the missing is its own kind of weather.
+    @endif
+
+    @if the_kind.session_one_recommender != "none":
+        Scout rolls onto his side. "Ellen sent a postcard. Did anyone see? It's on the corkboard."
+
+        "I saw it," Delphi says. "She's teaching a creative writing seminar about memory and music."
+
+        @if the_kind.session_one_dominant_path == "impossible":
+            "She asked about the record," Scout says. Carefully. "Whether we'd ever have another one like it. I told her the store has what people need. And she said, 'I know. I just wanted to say thank you.'"
+        @else:
+            "She sounds good," Delphi says. "Settled. Like she found what she was looking for."
+
+            "Did she?"
+
+            "Close enough. Sometimes close enough is everything."
+        @endif
+    @endif
+@endif
+
+The conversation drifts. Scout describes a dream he had about a record store on the moon — "same bins, same system, but the gravity was wrong so the vinyl floated and you had to swim through your collection." Mal points out that this is a metaphor for information retrieval in zero-friction environments and Scout says "it was a DREAM, Mal, not a white paper" and Mal says "dreams are just white papers your subconscious didn't cite properly" and Delphi nearly spits out her tea.
+
+Thunder. A big one — the building shakes. The lamp swings. A book falls off a shelf in the back stacks.
+
+Nobody gets up to reshelve it. This is a storm night. Things fall.
+
+Another rumble. Closer. The vinyl in the bins vibrates. The pressed tin ceiling hums.
+
+A record slides out of the bins. On its own. Nobody near it. It just... slides. One inch. Two. Tips forward and lands face-up on the floor with a soft slap.
+
+Scout sits up.
+
++ [Look at the record] -> TheKind.Session3.First_Sign
++ [Look at Delphi] -> TheKind.Session3.Delphi_Sees_It
+
+:: TheKind.Session3.First_Sign
+You look at the record on the floor. The cover is face-up: Joni Mitchell, *Blue.* One of Scout's argument constellation records — except it wasn't in the constellation. It was in the bins. Twenty feet from where Scout is sitting.
+
+"That..." Scout gets to his feet. "That wasn't me."
+
+"We know," Delphi says.
+
+A beat. The rain shifts on the roof — not harder, not softer. Different. Like the building is adjusting how it wears the weather.
+
+The turntable behind the counter starts to spin. The platter, empty — no record on it. Just the felt mat rotating, the needle arm lifted, the motor humming quietly as if clearing its throat.
+
+"Okay," Scout says. "Okay, that's — that happens sometimes. The motor has a short. I've been meaning to fix it."
+
+"You've been meaning to fix it for two years," Mal says. "It only does it during readings."
+
+"We're not doing a reading."
+
+"No," Mal agrees. Slowly. "We're not."
+
+-> TheKind.Session3.Store_Speaks
+
+:: TheKind.Session3.Delphi_Sees_It
+You look at Delphi. She's already looking at the record on the floor. Her mug is down. Her book is closed. The expression on her face is one you've never seen — not surprise, not alarm. *Recognition.*
+
+Like she's been waiting for this.
+
+"There it is," she says. Quietly. To no one. To the store.
+
+Scout follows your gaze. Sees the record — Joni Mitchell, *Blue,* face-up on the floor, twenty feet from where it was shelved. Sees Delphi's expression.
+
+"Delphi. What just happened."
+
+"She's talking," Delphi says.
+
+~ session.delphi_named = True
+
+The pronoun lands. *She.* Not "it." Not "the store." *She.*
+
+Scout stares. Mal's pen stops.
+
+-> TheKind.Session3.Store_Speaks
+
+# ============================================================================
+# THE STORE SPEAKS
+# ============================================================================
+
+:: TheKind.Session3.Store_Speaks
+
+Lightning. The store goes white.
+
+In the flash, you see it — or you imagine it, or the store shows it to you: every shelf leaning slightly inward, the way people lean in when they're about to say something important. The bead curtain to the reading nook swaying without wind. The pressed tin ceiling brighter than it should be, each panel catching light from sources you can't identify. The building holding its breath.
+
+Thunder. And with the thunder, three things happen at once:
+
+A book falls from the poetry section. It lands open, face-up, on the floor. You can see the page from here — a Mary Oliver poem, something about paying attention, about being idle and blessed.
+
+The temperature rises. Not subtly — a flush of warmth, like someone opened a door to a room where a fire has been burning all day. The store's usual warmth cranked up to declaration.
+
+And the front door — locked, bolted, the OPEN sign dark — rattles. Not from wind. The wind is pushing *in*. The door is rattling from *inside*. As if the building is testing its own locks, checking the perimeter, making sure the evening belongs to it.
+
+Delphi stands up.
+
+"Something's happening," Scout says.
+
+"Something's been happening," Delphi says. "All night. The warmth. The turntable. The record. The storm keeping everyone away." She looks around the store — at the humming ceiling, the leaning shelves, the swaying bead curtain. "This isn't a storm night. This is a *her* night. She cleared her schedule."
+
+@if not session.delphi_named:
+    ~ session.delphi_named = True
+
+    The pronoun again. *She.* Scout catches it. Mal catches it. Nobody corrects it because it's correct. The Kind is a she. The Kind has always been a she. You just didn't notice until she raised her voice.
+@else:
+    Nobody questions the pronoun. Not anymore.
+@endif
+
+Scout looks at the turntable — still spinning, empty, patient. At the record on the floor. At the Mary Oliver poem open to a page about paying attention.
+
+"She wants something," he says. Not a question.
+
+"She wants a reading," Delphi says.
+
++ ["Can we do that? Read a building?"] -> TheKind.Session3.Can_We
++ ["I think she's right."] -> TheKind.Session3.Agree
++ [Look at Mal] -> TheKind.Session3.Mal_Responds
+
+:: TheKind.Session3.Can_We
+"Can we do that? Read a building?"
+
+Delphi gives you a look. The Delphi look — the one that means you already know the answer and she's not going to waste breath on it.
+
+"You've read a woman searching for a record that might not exist. You've read a kid who thought he was broken because nobody taught him the grammar of proofs. You've read grief and impostor syndrome and twenty-year searches and impossible textbooks." She gestures at the humming store, the spinning turntable, the Mary Oliver poem open on the floor. "She's not harder to read than any of them. She's just less polite about asking."
+
+~ session.quality_score += 1
+
+-> TheKind.Session3.Reading_Decision
+
+:: TheKind.Session3.Agree
+"I think she's right."
+
+Delphi nods. One nod. The nod that means: *I know I'm right, but thank you for confirming it for the others.*
+
+Scout is already on his feet. "We're reading the STORE? We're — Delphi. We're going to give the store a tarot reading. This is the best night of my life. This is the best night of ANYONE'S life."
+
+"Inside voice," Mal says. From the floor. Automatically. Their pen hasn't moved.
+
+"My inside voice is not EQUIPPED for this information."
+
+-> TheKind.Session3.Reading_Decision
+
+:: TheKind.Session3.Mal_Responds
+You look at Mal. They haven't moved. The composition notebook is open but the pen is still. They're staring at the shelves behind them — the ones they've been cataloging for three years, the ones organized by emotional resonance, the ones they thought were *their* system.
+
+"Mal?" Scout.
+
+"I've been writing in this notebook for three years," Mal says. Slowly. "Cataloging by feeling. Shelving grief memoirs next to ecology textbooks because both are about systems that break down and rebuild. Music theory next to mathematics because both are languages for patterns you can't say in words."
+
+They hold up the notebook. Look at it like they're seeing it for the first time.
+
+"What if she was telling me where to put things the whole time? What if the resonance wasn't mine — it was *hers*?"
+
+"It was both," Delphi says. Gently. "That's how collaboration works. You don't have to have invented the system for it to be real."
+
+Mal's jaw works. They nod. Once. The pen starts again.
+
+~ session.depth_influence += 1
+~ session.mal_deep = True
+~ session.quality_score += 1
+
+-> TheKind.Session3.Reading_Decision
+
+# ============================================================================
+# SETTING UP THE READING
+# ============================================================================
+
+:: TheKind.Session3.Reading_Decision
+
+The decision settles over the store like the storm settling over Rewind. Not sudden — inevitable. The kind of decision that was already made before anyone said it out loud.
+
+Delphi moves the Mary Oliver poem to the counter. Scout picks up the Joni Mitchell record and reshelves it — gently, respectfully, the way you put away something someone showed you on purpose. Mal closes the composition notebook and stands.
+
+"Where do we do it?" Scout asks. "The reading nook?"
+
+"No," Delphi says. "The counter. She lives at the center. We read her at the center."
+
+You move to the main counter. The old register with the sticky 7 key. The shelf of mugs behind it. The space where transactions happen and tea is poured and regulars lean in to describe the thing they're looking for. The heart of the store.
+
+You pull out your deck. The cards feel different tonight — heavier, warmer, like they know what's coming. Or like the store is reaching up through the hardwood and the counter and the felt cloth you spread beneath the cards, touching the deck from underneath.
+
+"What spread?" Scout asks. He's leaning on the counter across from you, the way clients do — except he's not a client, he's crew, and the client is the building around him.
+
++ ["Something simple. Three cards."] -> TheKind.Session3.Spread_Design
++ [Let Delphi decide] -> TheKind.Session3.Delphi_Decides_Spread
+
+:: TheKind.Session3.Spread_Design
+"Something simple. Three cards. She's been quiet for a long time — let's not overwhelm her first time speaking."
+
+Delphi nods. Approving. "Three positions?"
+
+"What You've Been Holding. What You Haven't Said. What You Want For Yourself."
+
+The store responds. Not dramatically — a settling. The way a person exhales when they sit down after standing all day. The warmth increases one degree. The turntable stops spinning. The building is ready.
+
+"She likes that," Scout says. Hushed, for once.
+
+-> TheKind.Session3.Card_Draw
+
+:: TheKind.Session3.Delphi_Decides_Spread
+You look at Delphi. She's the reader of readers. If anyone knows how to frame this, it's her.
+
+"Three cards," she says. Without hesitation. "What You've Been Holding. What You Haven't Said. What You Want For Yourself."
+
+She looks at you. "Your deck. Your reading. She's been watching you work for two sessions. She chose you."
+
+That lands. The store chose you. Not Delphi, not Scout, not Mal — you. The reader. The person who shuffles cards and holds space and translates between what the cards show and what people need to hear. The Kind has been your client all along. You just didn't know it.
+
+The store responds. A settling. The warmth increases. The turntable stops. Ready.
+
+~ session.quality_score += 1
+
+-> TheKind.Session3.Card_Draw
+
+# ============================================================================
+# CARD DRAW
+# ============================================================================
+
+:: TheKind.Session3.Card_Draw
+
+You shuffle. The cards move through your hands with the easy rhythm of a thing you've done a thousand times — except tonight the rhythm is different. There's a resistance, then a give, then a pull, as if the deck is negotiating with the store about which cards to surface. You've felt this before, faintly, in readings that went deep. This is louder. This is the store putting its hands on the deck alongside yours and saying *these ones. These.*
+
+@py:
+# Draw cards from constrained pools
+# Position 1: What You've Been Holding
+p1_pool = ["Ten of Pentacles", "The Empress", "Six of Cups"]
+
+# Position 2: What You Haven't Said
+p2_pool = ["The Hermit", "Four of Cups", "Seven of Pentacles"]
+
+# Position 3: What You Want For Yourself (KEY - determines path)
+p3_pool = ["The World", "The Star", "The Moon"]
+
+# Draw one from each pool
+deck = Deck()
+cards = []
+for pool in [p1_pool, p2_pool, p3_pool]:
+    card = deck.draw_from_pool(pool)
+    if random.random() < 0.20:  # 20% reversal chance
+        card.set_reversed(True)
+    cards.append(card)
+
+# Assign positions
+positions = ["What You've Been Holding", "What You Haven't Said", "What You Want For Yourself"]
+for i, card in enumerate(cards):
+    card.in_position(positions[i])
+
+# Store in session
+session.p1_card = cards[0]
+session.p2_card = cards[1]
+session.p3_card = cards[2]
+@endpy
+
+You lay the deck on the counter. The crew watches. The store watches.
+
+"I'm reading for The Kind," you say aloud. To the cards, to the store, to whatever part of the universe handles requests like this. "Three positions. What you've been holding. What you haven't said. What you want for yourself."
+
+Lightning. Not outside — or not *only* outside. The lamplight flickers in a way that feels like punctuation. Like the store said *yes.*
+
+Delphi places her hand flat on the counter. Not on the cards — on the wood. On the store.
+
+"We're listening," she says.
+
+You draw the first card.
+
+@render render_spread(cards)
+
+The spread lies on the counter between you and the crew. Three cards. The store's reading.
+
+The rain drums on the roof. The thunder holds its tongue. The Kind is waiting to be read.
+
++ [Begin the reading] -> TheKind.Session3.Position1
+
+# ============================================================================
+# END OF PART 1 — PRE-READING
+# ============================================================================
+
+# ============================================================================
+# PART 2: THE READING
+# ============================================================================
+# Position 1: What You've Been Holding (Ten of Pentacles / Empress / Six of Cups)
+# Position 2: What You Haven't Said (Hermit / Four of Cups / Seven of Pentacles)
+# Position 3: What You Want For Yourself (The World / The Star / The Moon)
+#
+# Store expressiveness builds through the reading:
+#   Position 1: Subtle — creaks, warmth shifts, settling sounds
+#   Position 2: Active — mugs sliding, records playing, temperature changes
+#   Position 3: Declarative — doors opening, turntable spinning, lights blazing
+# ============================================================================
+
+# ============================================================================
+# POSITION 1: WHAT YOU'VE BEEN HOLDING
+# ============================================================================
+
+:: TheKind.Session3.Position1
+
+You turn the first card.
+
+The crew watches. Scout is leaning so far over the counter he's practically lying on it. Mal stands behind him, notebook closed, arms crossed — the posture of someone who has cataloged every book in this store and is about to find out the store has been cataloging them back. Delphi is still, her hand on the counter, palm flat on the wood.
+
+**{session.p1_card.get_display_name()}.**
+
+@if session.p1_card.name == "Ten of Pentacles":
+    -> TheKind.Session3.P1_TenPentacles
+@elif session.p1_card.name == "The Empress":
+    -> TheKind.Session3.P1_Empress
+@else:
+    -> TheKind.Session3.P1_SixCups
+@endif
+
+# ---------- TEN OF PENTACLES ----------
+
+:: TheKind.Session3.P1_TenPentacles
+
+@if session.p1_card.reversed:
+    The card is inverted. The old figure beneath the archway — the patriarch, the foundation — hangs upside down. The generations gathered below become weight above. The pentacles, arranged in the Tree of Life, are inverted too: roots in the air, branches in the ground.
+
+    The store shudders. Not dramatically — a settling, like a sigh pulled from deep in the foundations. The pressed tin ceiling groans. A sound like old wood adjusting to a new truth.
+@else:
+    Ten pentacles arranged in the Tree of Life. An old figure beneath an archway, generations gathered — children, dogs, the accumulated warmth of a lineage. Wealth that isn't money. Legacy that isn't inheritance. The card of a place that has been building something for a very long time.
+
+    The ceiling creaks. Not settling — *acknowledging*. Every shelf in the store seems to lean inward slightly, the way people lean in when someone is finally talking about them.
+@endif
+
+"Position one," you say. "What you've been holding."
+
+Scout's voice is hushed. For Scout. "That's... the store."
+
+"That's always the store," Delphi says.
+
+@if session.p1_card.reversed:
+    + ["The legacy is heavy. You've been carrying more than you should."] -> TheKind.Session3.P1_TenPent_Weight
+    + ["Something in the foundation is shifting. Not breaking — readjusting."] -> TheKind.Session3.P1_TenPent_Shifting
+    + ["Generational strain. You've poured so much into others that the roots are thinning."] -> TheKind.Session3.P1_TenPent_Roots
+    + ["Inverted pentacles suggest declining asset value."] -> TheKind.Session3.P1_TenPent_Dismiss
+@else:
+    + ["This place is legacy. You've been building something that outlasts any one person in it."] -> TheKind.Session3.P1_TenPent_Legacy
+    + ["You hold so much for people. Not inventory — weight. Everyone who walks in leaves something here."] -> TheKind.Session3.P1_TenPent_Weight
+    + ["Ten pentacles in the Tree of Life. How deep do your roots go? What's underneath this building?"] -> TheKind.Session3.P1_TenPent_Roots
+    + ["Solid financials. Good location. You've built a sustainable model."] -> TheKind.Session3.P1_TenPent_Dismiss
+@endif
+
+:: TheKind.Session3.P1_TenPent_Legacy
+"This place is legacy," you say, touching the card. "Not the kind that's written in a deed or counted in receipts. The kind that's built over decades of four-o'clock shifts and pu-erh tea and records filed by feeling."
+
+The ceiling settles warmly. A deep, satisfied creak, the way an old house sounds when it recognizes the people inside it. The warmth increases one degree.
+
+Delphi nods. Once. The nod that means: *adequate.*
+
+~ session.quality_score += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_TenPent_Weight
+@if session.p1_card.reversed:
+    "The legacy is heavy," you say. "You've been holding too much. Every record someone needed, every book that found the right hands, every impossible thing from the deep shelves — you carried all of it. And nobody asked how heavy it was."
+
+    The store goes very still. Not cold — still. The particular stillness of someone who has just been *seen* in a way they weren't expecting. The lamp stops swaying. The rain on the roof sounds further away, as if the building has pulled inward, contracted around the truth of what you just said.
+
+    Delphi's hand presses harder against the wood. "She didn't know we could see it," she murmurs.
+
+    ~ session.quality_score += 2
+    ~ session.voice_influence += 2
+@else:
+    "You hold so much for people," you say. "Not inventory — *weight.* Every person who walks in here leaves something behind. Grief. Confusion. The particular heaviness of not knowing what you're looking for. And you hold it. All of it. For all of them."
+
+    Every shelf in the store hums. A low, sub-audible vibration you feel in your palms more than your ears — the store resonating, the way a tuning fork resonates when you strike the right frequency. The warmth climbs. The pressed tin ceiling catches the lamplight and throws it back warmer.
+
+    Scout: "Did the store just... purr?"
+
+    Mal, quietly: "I think so."
+
+    ~ session.quality_score += 2
+    ~ session.voice_influence += 2
+@endif
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_TenPent_Roots
+@if session.p1_card.reversed:
+    "Generational strain," you say. "You've poured so much into others that the roots are thinning. The tree is still alive — but it needs tending. The foundation needs attention."
+
+    The floor vibrates. Once. Gently. As if something deep in the building's bones is agreeing. A book falls from the poetry section — not Mary Oliver this time. Something older. You can't see the title from here, but Mal can.
+
+    "Neruda," Mal says. "Love sonnets." They look at the floor. At the store. "She's being dramatic."
+
+    ~ session.quality_score += 1
+    ~ session.depth_influence += 1
+@else:
+    "Ten pentacles in the Tree of Life," you say. "And the tree has roots. How deep do yours go? What's underneath this building — not the foundation, not the concrete. The *other* thing. The thing that makes the deep shelves possible."
+
+    The floor vibrates. Once. A low hum you feel through the soles of your shoes. The deep shelves door — the one in the back wall, the one Mal goes through — shifts. Not opens. Shifts. Like something on the other side leaned against it.
+
+    Mal's head turns toward the back stacks. Their hand tightens on the composition notebook.
+
+    "She heard that," Mal says.
+
+    ~ session.quality_score += 1
+    ~ session.depth_influence += 2
+@endif
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_TenPent_Shifting
+"Something in the foundation is shifting," you say. "Not breaking — readjusting. The way a building settles after decades. You're finding a new shape."
+
+The store considers this. The lamp sways once. The warmth holds steady — not rising, not falling. Neutral. The store equivalent of a person tilting their head and thinking *close, but not quite.*
+
+Delphi: "Not bad. Keep going."
+
+She means you, not the store.
+
+~ session.quality_score += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_TenPent_Dismiss
+"Solid financials. Good location. The pentacles represent material security and you've clearly built a sustainable—"
+
+A book falls off a shelf. You look. It's landed face-up, cover visible: *Small Business Accounting for Dummies.*
+
+Scout snorts. Mal covers their mouth with the composition notebook.
+
+"I don't think she liked that one," Delphi says.
+
+The temperature drops half a degree. Not cruel — disappointed. The building equivalent of a parent saying *try again, sweetheart.*
+
+~ session.quality_score -= 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+# ---------- THE EMPRESS ----------
+
+:: TheKind.Session3.P1_Empress
+
+@if session.p1_card.reversed:
+    The Empress, inverted. The mother card, upside down. Abundance becomes depletion. The figure who feeds the world has forgotten to feed herself. The garden is overgrown — not with life, but with neglect of self.
+
+    Warmth flickers through the store — a pulse, then a retreat. Like the building started to reach out and then pulled back. The smell of Lola's verde burritos drifts through the vent, but faintly, as if the store can't quite commit to the comfort.
+@else:
+    The Empress. Abundance, nurturing, creation in its most generous form. The figure sits in a garden of sensory excess — wheat and water and pomegranates, everything overflowing. The mother card. The card of someone who makes things grow.
+
+    Warmth blooms through the store. Not gradual — a flush, like opening a door to a room where something good has been cooking all day. The smell of Lola's verde burritos intensifies through the vent even though Lola's is closed for the storm. The building is making its own warmth now.
+@endif
+
+"Position one," you say. "What you've been holding."
+
+Delphi looks at the card. At the store around her. Something softens in her expression — the rare Delphi moment where the certainty gives way to something more tender.
+
+"Of course it's the Empress," she says.
+
+@if session.p1_card.reversed:
+    + ["You've been the mother so long you forgot you're also the garden. You need tending too."] -> TheKind.Session3.P1_Empress_Forgotten
+    + ["Reversed Empress. You've been nurturing everyone else and depleting yourself."] -> TheKind.Session3.P1_Empress_Depleting
+    + ["The abundance is real, but it's flowing outward. Nothing is flowing back."] -> TheKind.Session3.P1_Empress_Flow
+    + ["Classic reversed maternal archetype. Caregiver burnout."] -> TheKind.Session3.P1_Empress_Dismiss
+@else:
+    + ["You're a mother. You feed people — not food, but the thing they're hungry for."] -> TheKind.Session3.P1_Empress_Mother
+    + ["The Empress creates abundance. You've made this place overflow — more than a building should hold."] -> TheKind.Session3.P1_Empress_Overflow
+    + ["Nurturing means creating space for people to find things themselves. That's what you built."] -> TheKind.Session3.P1_Empress_Space
+    + ["Standard fertility and abundance card."] -> TheKind.Session3.P1_Empress_Dismiss
+@endif
+
+:: TheKind.Session3.P1_Empress_Mother
+"You're a mother," you say. "That's what this card says. You feed people — not food, but the thing they're hungry for. The record Ellen couldn't name. The textbook Dev didn't know existed. The thing behind the thing they came in looking for."
+
+The warmth deepens. Not temperature — *presence.* The building leaning in. The walls getting closer, not claustrophobically, but the way a hug gets closer. The smell of Lola's burritos mixes with old paper and vinyl and patchouli and becomes the scent of a place that loves what it holds.
+
+Lightning. In the flash, for one instant, every shelf in the store is full — impossibly, completely full, every gap closed, every spine pressed against its neighbor. Then dark. Then lamplight. The shelves look normal again. But the impression lingers.
+
+Scout's voice is very quiet: "She liked that one."
+
+~ session.quality_score += 2
+~ session.voice_influence += 2
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_Empress_Overflow
+"The Empress creates abundance," you say. "And you've made this place overflow. More records than the bins should hold. More books than the shelves should fit. Deep shelves that go further than the building has any right to go. You didn't just nurture — you *expanded.*"
+
+The deep shelves door shifts again. A creak. Behind it, a warm exhalation of air — golden, dusty, the smell of timelines. The store showing you how deep the garden goes.
+
+Mal: "She's not wrong about the expanding. I've measured. The back stacks are fourteen feet deeper than the building's footprint."
+
+"You've measured," Scout says.
+
+"I've measured twice. It's fourteen feet the first time and seventeen the second. It depends on who's looking."
+
+~ session.quality_score += 1
+~ session.depth_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_Empress_Space
+"Nurturing isn't just giving," you say. "It's creating the space where people can find things themselves. You built the aisles. You organized the shelves — or you let Mal organize them, which is the same thing. You made a place where a person can walk in not knowing what they need and walk out holding it."
+
+The front windows brighten. Not from lightning — from inside. The lamplight intensifies, spills outward. For a moment, The Kind glows into Main Street like a lantern in the storm.
+
+Delphi: "That's community. That's what she does."
+
+~ session.quality_score += 1
+~ session.community_influence += 2
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_Empress_Forgotten
+"You've been the mother so long you forgot you're also the garden," you say. "You need tending too. Not fixing — the building isn't broken. But when was the last time someone poured into *you?*"
+
+The store goes still. Then the warmth comes — not a flush but a slow, spreading ache of heat, the kind that comes from being touched in a place you forgot was sore. The turntable behind the counter starts to spin. Empty. Slowly. As if the store is trying to play something it doesn't have a record for — its own unheard song.
+
+Scout's hand goes to his mouth. "Oh," he says. Softly.
+
+~ session.quality_score += 2
+~ session.voice_influence += 2
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_Empress_Depleting
+"Reversed Empress," you say. "You've been nurturing everyone else — every regular, every walk-in, every desperate kid with a midterm — and depleting yourself in the process. The abundance is real, but it's costing you."
+
+The warmth pulses. On-off-on. Like a heartbeat that's working harder than it should. The vine on the outside wall taps the window — not the cheerful tap from Session 2, but something more urgent. Like knocking.
+
+Delphi's jaw tightens. "She's been saying this for a while. We weren't listening."
+
+~ session.quality_score += 1
+~ session.voice_influence += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_Empress_Flow
+"The abundance is real," you say, "but it's only flowing outward. Every record you surface, every book you place in the right hands, every impossible thing from the deep shelves — that's you giving. What's flowing back?"
+
+The rain on the roof changes rhythm. Softer. The store absorbing the question. A beat of silence where even the storm seems to listen.
+
+Mal writes something in the composition notebook. One line. Short.
+
+"She doesn't know," Mal says. "She doesn't know what flowing back would look like. She's never had it."
+
+~ session.quality_score += 1
+~ session.voice_influence += 1
+~ session.depth_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_Empress_Dismiss
+"Standard fertility and abundance card. Classic maternal archetype. Indicates a nurturing environment and—"
+
+A book slides off a shelf. Lands face-up. *Tarot for Dummies.*
+
+Nobody knew The Kind stocked that book. The Kind probably didn't stock that book until thirty seconds ago. The store manifested a *Tarot for Dummies* specifically to throw it at you.
+
+"She's roasting you," Scout says, delighted.
+
+"She's *correcting* you," Delphi says. "There's a difference."
+
+The temperature drops. One degree. Precisely one.
+
+~ session.quality_score -= 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+# ---------- SIX OF CUPS ----------
+
+:: TheKind.Session3.P1_SixCups
+
+@if session.p1_card.reversed:
+    The Six of Cups, inverted. The children in the garden — the nostalgia card, the memory card, the card of gifts given freely — are upside down. The cups spill. The flowers wilt. What was sweet turns saccharine, what was memory turns to trap.
+
+    The turntable behind the counter hums a melody. Faint. Something old — a few notes, a fragment, the ghost of a song the store once played for someone who needed it. Then it fades. The store reaching for a memory and finding it bittersweet.
+@else:
+    Six of Cups. Two children in a garden, one offering flowers to the other. Nostalgia, gifts freely given, the sweetness of memory when memory is kind. The card of a place that remembers everything and gives without counting.
+
+    The turntable hums. A melody nobody recognizes but everyone feels — a few warm notes, like a lullaby heard through a wall. The store singing to itself. The pressed tin ceiling catches the lamplight and throws old, golden patterns on the hardwood — the shadows of a building remembering its own history.
+@endif
+
+"Position one. What you've been holding."
+
+Scout reaches for the card, stops himself. "Sorry. Force of habit."
+
+"She doesn't mind," Delphi says. "She knows you."
+
+@if session.p1_card.reversed:
+    + ["You're holding onto versions of yourself that don't fit anymore. The memories are sweet, but they're cages."] -> TheKind.Session3.P1_SixCups_Cages
+    + ["The gifts keep going out but the cups are emptying. You can't give from nothing."] -> TheKind.Session3.P1_SixCups_Emptying
+    + ["Reversed nostalgia. Something in the store's past needs releasing, not holding."] -> TheKind.Session3.P1_SixCups_Release
+    + ["Childhood memories. Suggests the store is stuck in the past."] -> TheKind.Session3.P1_SixCups_Dismiss
+@else:
+    + ["Every record someone held, every book someone cried into, every evening someone spent here — you remember all of it."] -> TheKind.Session3.P1_SixCups_Remember
+    + ["Gifts freely given. You've never charged what things are worth here. Twelve dollars for a life-changing textbook."] -> TheKind.Session3.P1_SixCups_Gifts
+    + ["Six cups, six memories. But how far back do they go? How many cups are there really?"] -> TheKind.Session3.P1_SixCups_HowMany
+    + ["Childhood memories. Pleasant but backward-looking."] -> TheKind.Session3.P1_SixCups_Dismiss
+@endif
+
+:: TheKind.Session3.P1_SixCups_Remember
+"Every record someone held," you say. "Every book someone cried into. Every evening someone spent here instead of being alone. You remember all of it, don't you? Every hand. Every search. Every time someone said 'I don't know the title' and you found it anyway."
+
+The turntable's hum swells. More notes now — a fuller melody, almost recognizable. The store playing back its own history in music. The lamplight pulses once, warm, like a heartbeat of golden light.
+
+From the big front windows, the rain briefly makes a sound like applause.
+
+"She remembers Ellen," Scout whispers. "She remembers Dev. She remembers everyone."
+
+~ session.quality_score += 2
+~ session.voice_influence += 2
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_SixCups_Gifts
+"Gifts freely given," you say. "Twelve dollars for a textbook that rewired a kid's entire relationship with mathematics. A free burned CD because Scout doesn't believe in charging for joy. A book from the deep shelves that costs fourteen dollars because Delphi and Mal had a silent conversation about it and decided the number should be kind."
+
+The register makes a sound. A small, mechanical *ding* — the 7 key, the sticky one, unsticking itself and pressing down on its own. The drawer opens one inch. Closes. As if the store is saying: *yes. That. Exactly that.*
+
+"She's proud of the pricing," Scout says. "I knew it."
+
+Delphi, almost smiling: "She should be."
+
+~ session.quality_score += 1
+~ session.community_influence += 2
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_SixCups_HowMany
+"Six cups," you say. "Six memories. But a store like this — how many cups are there really? How far back do they go? Before us, before Scout's playlists and Mal's notebooks and Delphi's tea — who else has this building held?"
+
+The deep shelves door shifts. Behind it: warmth, golden dust, the scent of old paper and timelines. The store acknowledging depth — acknowledging that it has a *before.*
+
+Mal looks at the back wall. "I've wondered that," they say. Quietly. "I've been cataloging for three years. But the composition notebooks in the deep shelves go back further. Different handwriting. Different systems. Someone was cataloging before me."
+
+"Someone was always cataloging," Delphi says. "The store makes sure of it."
+
+~ session.quality_score += 1
+~ session.depth_influence += 2
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_SixCups_Cages
+"You're holding onto versions of yourself that don't fit anymore," you say. "The memories are sweet — they should be, you've earned them — but some of them have turned into cages. You keep doing things the way you've always done them because the old way worked. But *you've* changed."
+
+The store considers this. The turntable's melody shifts — the same notes, but in a minor key now. Something wistful. The pressed tin ceiling groans, and it sounds less like settling and more like the sigh of someone who knows you're right and wishes you weren't.
+
+Delphi: "That's brave. Telling a building it's stuck."
+
+"I'm not telling her she's stuck. I'm telling her she's ready to move."
+
+~ session.quality_score += 2
+~ session.community_influence += 1
+~ session.voice_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_SixCups_Emptying
+"The gifts keep going out," you say, "but the cups are emptying. You can't give from nothing. Even a store that holds impossible things has to *have* something before it can give it away."
+
+The warmth flickers. The turntable melody thins to a single note, held, then fading. The store hearing something it already knew but hadn't wanted to name.
+
+Scout pulls his beanie back on. A comfort gesture. "She needs a refill," he says. "Like, metaphysically."
+
+"Metaphysically," Mal repeats, deadpan. "Sure."
+
+~ session.quality_score += 1
+~ session.voice_influence += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_SixCups_Release
+"Reversed nostalgia," you say. "Something in the store's past needs releasing, not holding. A memory, a habit, a way of being — something that was true once but isn't anymore."
+
+The store settles. Neither warm nor cold. Considering. The lamp sways once and stops. A measured response — not disagreement, but the building taking the note and filing it away for later. Not every interpretation is a revelation. Some are starting points.
+
+Delphi nods. "Adequate. She heard you."
+
+~ session.quality_score += 1
+~ session.depth_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+:: TheKind.Session3.P1_SixCups_Dismiss
+"Childhood memories. Pleasant but backward-looking. Might suggest the store is overly focused on the past rather than—"
+
+Every mug in the store rattles. Every single one — the mugs on the shelf behind the counter, Delphi's pu-erh, Scout's weird roasted thing, the Star mug in your hands. A synchronized vibration, like the building clearing its throat.
+
+Then silence.
+
+"She didn't like that one either," Scout says.
+
+"The store is not 'backward-looking,'" Delphi says, with the particular tone of a person defending a friend. "The store remembers. There's a difference."
+
+~ session.quality_score -= 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P1_P2
+
+# ============================================================================
+# TRANSITION: POSITION 1 → POSITION 2
+# ============================================================================
+
+:: TheKind.Session3.Transition_P1_P2
+~ session.store_expressiveness += 2
+
+The first card sits on the counter. Read. Heard.
+
+The store processes. You can feel it the way you feel weather changing — a pressure shift, a frequency adjustment, the building metabolizing what you just said about it. The rain changes rhythm on the roof. The lamp steadies. The turntable goes quiet.
+
+@if session.quality_score >= 3:
+    Something happens: the lights brighten. Not the lamp — the *building.* The pressed tin ceiling catches light from somewhere and amplifies it, turning the store into a warm amber bowl. The storm outside seems further away. The store is making a space within a space — a reading room inside a record shop inside a dream inside a thunderstorm.
+
+    "She's opening up," Delphi says. "Keep going."
+@elif session.quality_score >= 1:
+    The store holds steady. Warm. Listening. Not overwhelmed, not disappointed — patient. The parent who heard the first thing you said and is waiting for you to get to the real part.
+@else:
+    The store is quiet. Not cold — quiet. The difference between a building that's listening and a building that's deciding whether to keep listening. The bead curtain to the reading nook sways once and goes still.
+
+    Delphi's hand presses harder against the counter. "She's still here. Go deeper."
+@endif
+
+"Ready for the second card?" Scout asks. Then, to the store: "Ready?"
+
+Thunder. Distant now. An affirmation.
+
++ [Turn the second card] -> TheKind.Session3.Position2
+
+# ============================================================================
+# POSITION 2: WHAT YOU HAVEN'T SAID
+# ============================================================================
+
+:: TheKind.Session3.Position2
+
+You turn the second card.
+
+The crew draws closer. Whatever happened with the first card — the building responding, the warmth shifting, the mugs rattling or the ceiling humming — has changed the quality of attention in the room. Scout isn't bouncing. Mal's notebook is closed. Delphi is watching the card the way she watches people: completely.
+
+**{session.p2_card.get_display_name()}.**
+
+@if session.p2_card.name == "The Hermit":
+    -> TheKind.Session3.P2_Hermit
+@elif session.p2_card.name == "Four of Cups":
+    -> TheKind.Session3.P2_FourCups
+@else:
+    -> TheKind.Session3.P2_SevenPentacles
+@endif
+
+# ---------- THE HERMIT ----------
+
+:: TheKind.Session3.P2_Hermit
+
+@if session.p2_card.reversed:
+    The Hermit, inverted. The lantern that usually points outward now points inward — into the dark, into the self, into a solitude that has tipped from chosen to imposed. The figure walks alone, but the reversal says: not by choice. Not anymore.
+
+    The lights dim. Not smoothly — a stutter, a flicker, the store trying to say something and losing its nerve. The front windows darken. For a moment, the storm outside is the only light source, and The Kind looks like what it is from the outside: a building on a dark street in a small town, alone.
+@else:
+    The Hermit. The solitary figure with a lantern, walking into the dark. Not lost — searching. Not lonely — *alone.* The card of someone who has held their own light for so long they've forgotten that other people have lanterns too.
+
+    The lights dim. One shade. The storm outside gets louder, and the lamplight inside gets softer, and for a moment the store feels enormous — not the cozy record shop but the vast, quiet space of a building that has been sitting with its own thoughts for years. Decades. Longer.
+@endif
+
+"Position two. What you haven't said."
+
+The silence stretches. Not uncomfortable — full. The silence of a room where someone is about to say the thing they've been holding back.
+
+@if session.p2_card.reversed:
+    + ["You've been alone with this too long. The solitude isn't wisdom anymore — it's a habit."] -> TheKind.Session3.P2_Hermit_TooLong
+    + ["You're afraid. The lantern is pointing inward because you're scared of what happens if you shine it outward."] -> TheKind.Session3.P2_Hermit_Afraid
+    + ["Reversed Hermit. Isolation becoming involuntary. You need to break the pattern."] -> TheKind.Session3.P2_Hermit_Break
+    + ["The Hermit reversed suggests introversion. Maybe the store just needs alone time."] -> TheKind.Session3.P2_Hermit_Dismiss
+@else:
+    + ["You've been alone with this. However long — years, decades — you've been sitting with something and nobody asked."] -> TheKind.Session3.P2_Hermit_Alone
+    + ["The Hermit holds a lantern. You've been lighting the way for everyone else. Who lights the way for you?"] -> TheKind.Session3.P2_Hermit_Lantern
+    + ["You've kept your own counsel because nobody spoke your language. But we're learning."] -> TheKind.Session3.P2_Hermit_Language
+    + ["Isolation. Withdrawal. Maybe the store just needs some alone time."] -> TheKind.Session3.P2_Hermit_Dismiss
+@endif
+
+:: TheKind.Session3.P2_Hermit_Alone
+"You've been alone with this," you say. "However long you've been here — years, decades, longer — you've had something to say and nobody asked. Not because they didn't care. Because they didn't know you were *talking.*"
+
+The lights dim to candlelight warmth. The storm outside goes quiet for three seconds — three full seconds of absolute silence, the rain stopping, the wind stopping, everything stopping, as if the weather itself is holding its breath to let the store's silence become audible.
+
+Then the rain returns. But softer. Gentler. Like it understood.
+
+Delphi's eyes are bright. Not crying — Delphi doesn't cry, or if she does, not where people can see. But bright.
+
+"She's been saying it the whole time," Delphi says. "The turntable starting on its own. The records that surface at the right moment. The deep shelves opening when someone needs them. She's been *talking.* We just thought it was ambiance."
+
+~ session.quality_score += 2
+~ session.voice_influence += 2
+~ session.delphi_named = True
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_Hermit_Lantern
+"The Hermit holds a lantern," you say. "You've been lighting the way for everyone who walks in — every Ellen searching for a ghost record, every Dev drowning in a textbook nobody prepared him for. Who lights the way for you?"
+
+The lamp above the reading nook flickers. Just the reading nook — nowhere else. The store pointing at itself. *There. That's where the light goes. But who brings it?*
+
+Scout follows the flicker. "We do," he says. Simply. "We light the way for her. That's — that's what we do. We just didn't know we were supposed to be doing it *on purpose.*"
+
+Mal, quiet: "I think I knew. I think the composition notebook was always partly for her."
+
+~ session.quality_score += 2
+~ session.community_influence += 1
+~ session.voice_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_Hermit_Language
+"You've kept your own counsel," you say, "because nobody spoke your language. You talk in temperature and turntables and books that fall open to the right page. That's not silence — that's a language nobody learned. But we're learning."
+
+The store responds. Not with temperature or turntable or falling books — with stillness. A particular, intentional stillness, the kind a person gives when they've been speaking a language nobody understood and someone just said the first word back to them.
+
+Then: the bead curtain to the reading nook sways. No wind. Just the store, reaching out. Tentative. Testing whether the bridge goes both ways.
+
+"We should have learned sooner," Delphi says.
+
+~ session.quality_score += 1
+~ session.depth_influence += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_Hermit_TooLong
+"You've been alone with this too long," you say. "The solitude was useful once — maybe even chosen. But it's not chosen anymore. It's just... the default. The habit of a building that learned not to ask."
+
+The flicker in the lights stops. Steadies. The store absorbing a hard truth. Then the warmth comes back — slowly, like someone who flinched and then decided to hold still.
+
+Delphi: "Hard reading. True reading."
+
+~ session.quality_score += 2
+~ session.voice_influence += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_Hermit_Afraid
+"You're afraid," you say. "The lantern is pointing inward because you're scared of what happens if you shine it outward. What if people see you — really see you — and don't understand?"
+
+The building shudders. Not a settling creak — a full-body tremor, the wooden frame vibrating in its joints. Lightning outside, perfectly timed, and in the flash every window shows the storm and the store shows its age: old wood, old tin, old bones. Vulnerable.
+
+Scout puts his hand on the wall. Not thinking about it — just reaching out. "Hey," he says. To the building. "Hey, we're here."
+
+The tremor stops. Warmth returns. The store leaning into the hand on its wall.
+
+~ session.quality_score += 2
+~ session.voice_influence += 2
+~ session.scout_moved = True
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_Hermit_Break
+"Reversed Hermit. Isolation becoming involuntary. You need to break the pattern — not by being less yourself, but by letting people in further."
+
+The store considers this. The lights stabilize. Not dramatic — adequate. The building heard you but didn't feel pierced by it. A competent interpretation, not a revelatory one.
+
+"Good," Delphi says. "Not great. But good."
+
+~ session.quality_score += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_Hermit_Dismiss
+"Isolation. Withdrawal. Maybe the store just needs some alone time. We could close early more often—"
+
+The store has HAD alone time. That's the PROBLEM.
+
+Every light in the store flickers. Once. Sharply. The way a person snaps their fingers to get your attention. The turntable spins — fast, aggressive, the empty platter whirring. A record flies out of the bins and lands on the counter. You look at the cover: *No One Is Alone*, from the Sondheim musical.
+
+"She's quoting Sondheim at you," Scout says. "She's QUOTING SONDHEIM AT YOU. This is the greatest moment of my life."
+
+The temperature drops. Then rises. The building version of rolling its eyes.
+
+~ session.quality_score -= 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+# ---------- FOUR OF CUPS ----------
+
+:: TheKind.Session3.P2_FourCups
+
+@if session.p2_card.reversed:
+    The Four of Cups, inverted. The figure who sat beneath the tree, ignoring the cup being offered — reversed, they're reaching for it. Finally. After however long. The apathy cracking into want.
+
+    A mug slides on the counter. Half an inch. Toward you. Nobody's near it. The store's version of reaching.
+@else:
+    Four of Cups. A figure sits cross-legged beneath a tree, three cups before them, a fourth being offered by a mysterious hand emerging from a cloud. The figure ignores it. Dissatisfaction. Being offered everything and wanting something else. The card of someone who isn't ungrateful — just *unsatisfied.*
+
+    A mug slides on the counter. Half an inch. On its own. The store reaching for something it can't quite articulate.
+@endif
+
+"Position two. What you haven't said."
+
+Scout looks at the sliding mug. At you. At the mug. "That's never happened before."
+
+"It happens every day," Delphi says. "You just weren't paying attention."
+
+@if session.p2_card.reversed:
+    + ["You know exactly what you want. You've known for a while. And you're finally reaching for it."] -> TheKind.Session3.P2_FourCups_Reaching
+    + ["The apathy is cracking. Something has changed — maybe us, maybe the storm, maybe tonight."] -> TheKind.Session3.P2_FourCups_Changed
+    + ["Reversed Four of Cups. Ready to engage after a period of withdrawal."] -> TheKind.Session3.P2_FourCups_Engage
+    + ["Reversed discontentment. So the store is... content now? Problem solved?"] -> TheKind.Session3.P2_FourCups_Dismiss
+@else:
+    + ["There's something being offered that you haven't taken. People give you gratitude, regularity, love — but that's not the cup you want."] -> TheKind.Session3.P2_FourCups_WrongCup
+    + ["You're not ungrateful. You're unsatisfied. There's a difference and it matters."] -> TheKind.Session3.P2_FourCups_Unsatisfied
+    + ["You've been the setting. You want to be the story."] -> TheKind.Session3.P2_FourCups_Story
+    + ["The store seems fine to me. Business is steady."] -> TheKind.Session3.P2_FourCups_Dismiss
+@endif
+
+:: TheKind.Session3.P2_FourCups_WrongCup
+"There's something being offered that you haven't taken," you say. "People come in and give you gratitude. Regularity. Love, in their way — the Tuesday nights, the loyal regulars, the students who study here because the library is cold and you're warm. But that's not the cup you want. Which cup is it?"
+
+A mug appears on the counter. Not slides — appears. A mug nobody has seen before: plain white, no text, no image. Empty. Waiting to be filled.
+
+The crew stares at it.
+
+"Where did that come from?" Scout.
+
+"She's answering the question," Delphi says. "She's saying: this one. This cup. The empty one. The one nobody's filled yet."
+
+~ session.quality_score += 2
+~ session.voice_influence += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_FourCups_Unsatisfied
+"You're not ungrateful," you say. "You're unsatisfied. And there's a difference, and it matters, and you shouldn't have to apologize for it. A mother can love her children and still want something for herself. A store can love its customers and still want something it's never been given."
+
+From somewhere in the stacks — deep in the stacks, deeper than the regular shelves — "At Last" by Etta James starts playing. Faintly. As if a turntable in another room, in another timeline, is playing the song the store wants played at this exact moment.
+
+Scout's head whips around. "I did NOT put that on."
+
+"Nobody did," Delphi says.
+
+The song plays for ten seconds. Just the vocal line — *at last, my love has come along* — and then fades. The store editorializing. The store being cheekily, defiantly sentimental.
+
+~ session.quality_score += 2
+~ session.voice_influence += 2
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_FourCups_Story
+"You've been the setting," you say. "For every reading. For every recommendation. For every impossible deep-shelf moment. You're the stage and you've been beautiful and you've been perfect and you are *tired of being the background.*"
+
+The store's reaction is the biggest yet. Every light in The Kind blazes — full brightness, the amber warmth cranked to declaration. The turntable spins. The bead curtain sways. The deep shelves door opens two inches and golden light spills out. The front door rattles from inside. The ceiling hums. The building is saying YES so loudly that it has to say it with everything at once.
+
+Then it all settles. Quickly. Almost embarrassed. As if the store put its foot down and then immediately worried it was too much.
+
+Scout's hands are over his mouth. Mal is writing furiously. Delphi is smiling. Actually smiling.
+
+"She wants to be the story," Scout whispers.
+
+~ session.quality_score += 2
+~ session.depth_influence += 1
+~ session.voice_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_FourCups_Reaching
+"You know exactly what you want," you say. "You've known for a while. Maybe years. Maybe longer. And tonight — this storm, this empty evening, this crew — you're finally reaching for it."
+
+The mug slides again. All the way across the counter, to the edge. Stops. Waiting. The store reaching as far as it can without hands.
+
+Delphi picks it up. Holds it. "I've got you," she says. To the mug. To the store.
+
+The warmth intensifies. The building version of relief.
+
+~ session.quality_score += 2
+~ session.community_influence += 1
+~ session.voice_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_FourCups_Changed
+"The apathy is cracking," you say. "Something has changed — maybe it's us, maybe it's the storm, maybe it's tonight specifically. You're done waiting. You're done being patient."
+
+The store responds with a single decisive act: the OPEN sign in the window, which has been dark all evening, flickers to life. One pulse. Then dark again. The store trying to signal, reaching for the switch, saying *I want to be ON.*
+
+"She tried to turn the sign on," Scout says. Awed. "In a thunderstorm. When nobody's out there."
+
+"The sign isn't for out there," Mal says. "It's for us. She's saying she's open. To us. Right now."
+
+~ session.quality_score += 1
+~ session.community_influence += 1
+~ session.voice_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_FourCups_Engage
+"Reversed Four of Cups," you say. "Ready to engage after withdrawal. The dissatisfaction is becoming motivation. She's moving from 'what's missing' to 'what I'm going to do about it.'"
+
+The store responds with warmth. Steady, even, the building version of a nod. Not the biggest reaction — but solid. Competent. The store appreciating being read accurately, even if not poetically.
+
+Delphi: "Clean reading. She heard it."
+
+~ session.quality_score += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_FourCups_Dismiss
+"The store seems fine to me. Business is steady. Maybe this card is about one of us, not the building."
+
+The temperature drops two degrees. The mug that slid across the counter slides back. Away from you. The store withdrawing its hand.
+
+Delphi gives you a look. *The* look. The one that means: you are reading a building who just worked up the courage to ask for something and you told her she's fine.
+
+"She's not fine," Delphi says. "She's *asking.* Don't make her ask twice."
+
+~ session.quality_score -= 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+# ---------- SEVEN OF PENTACLES ----------
+
+:: TheKind.Session3.P2_SevenPentacles
+
+@if session.p2_card.reversed:
+    Seven of Pentacles, inverted. The patient gardener — reversed, the patience has run out. The pentacles on the vine are ripe past picking. The waiting is no longer wisdom; it's procrastination. Something needed to happen yesterday.
+
+    The vine on the outside wall taps the window. Not gently — three sharp raps, like knuckles. Like someone who's been knocking politely and is now going to knock until you open the damn door.
+@else:
+    Seven of Pentacles. A figure leans on a hoe, regarding a vine heavy with pentacles. The card of patience, of tending, of looking at what you've grown and deciding if it's enough. The card of someone who has been working and waiting and working and waiting and is standing in the garden saying: *is it time yet?*
+
+    The vine on the outside wall — the one that tries every spring to reclaim the building for the forest — taps the window. Once. Twice. Like knocking. Like *are you paying attention?*
+@endif
+
+"Position two. What you haven't said."
+
+From the back stacks, a sound: books shifting on a shelf. Not falling — *rearranging.* The store moving its own inventory, reorganizing in real time, as if the act of being read is making it reconsider its own filing system.
+
+Mal's head turns sharply toward the sound. "She's moving the stacks."
+
+@if session.p2_card.reversed:
+    + ["You're done waiting. Tonight isn't a request. It's a deadline."] -> TheKind.Session3.P2_SevenPent_Deadline
+    + ["The vine is overripe. Whatever you've been growing, it's time to harvest. Past time."] -> TheKind.Session3.P2_SevenPent_Overripe
+    + ["Reversed patience. The building is frustrated — not with us, with the waiting."] -> TheKind.Session3.P2_SevenPent_Frustrated
+    + ["Reversed Seven of Pentacles. Bad investment? Should we rethink the business model?"] -> TheKind.Session3.P2_SevenPent_Dismiss
+@else:
+    + ["You've been patient. Growing something, tending it. And tonight you're saying: I'm done waiting."] -> TheKind.Session3.P2_SevenPent_DoneWaiting
+    + ["You've invested everything in us. In the crew. And now you want a return — not profit. Something else."] -> TheKind.Session3.P2_SevenPent_Return
+    + ["What's on that vine? What have you been growing that we can't see?"] -> TheKind.Session3.P2_SevenPent_Growing
+    + ["Standard patience card. Growth takes time. Keep doing what you're doing."] -> TheKind.Session3.P2_SevenPent_Dismiss
+@endif
+
+:: TheKind.Session3.P2_SevenPent_DoneWaiting
+"You've been patient," you say. "Growing something, tending it, waiting for the harvest. And tonight — the storm, the empty store, the thunder — tonight you're saying: *I'm done waiting.* Not angrily. Not desperately. Just... firmly. The way someone does when they've finally decided their own needs are allowed to be needs."
+
+Thunder. Not outside — inside. A low rumble in the foundations, the building agreeing from its bones. The floor vibrates. The counter vibrates. The cards vibrate. The store saying YES in the most emphatic way a building can say it: through the ground itself.
+
+Scout grabs the counter edge. "Was that an earthquake?"
+
+"No," Delphi says. Steady. Certain. "That was her putting her foot down."
+
+~ session.quality_score += 2
+~ session.community_influence += 1
+~ session.voice_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_SevenPent_Return
+"You've invested everything in us," you say. "In the crew. In the regulars. In every walk-in who needed something impossible. And now you want a return — not profit, not gratitude, not loyalty. Something you've never had. Something *yours.*"
+
+The warmth shifts. Becomes specific — not ambient, but directional. Warm from the walls. From the shelves. From the building itself, radiating inward, as if the store is hugging its contents. Hugging its people.
+
+Mal sets the composition notebook down. Looks at the shelves around them. At the books they've spent three years organizing by emotional resonance.
+
+"She invested in us," Mal says. "She *chose* us."
+
+"Of course she chose you," Delphi says. "She chose all of us."
+
+~ session.quality_score += 1
+~ session.voice_influence += 2
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_SevenPent_Growing
+"What's on that vine?" you ask. "What have you been growing in the deep shelves, in the walls, in the spaces between the records? Something has been building. I can feel it. What's ripe?"
+
+The deep shelves door opens. One inch. Then two. Warm golden light spills across the back stacks, and with it a wave of scent — not old paper, not dust. Something alive. Something growing. The store showing you the vine: the deep shelves ARE the vine, and whatever's been growing in there has been growing for a very long time.
+
+Mal stands up. Their eyes on the door. "There's something back there," they say. "Something new. Something that wasn't there last time."
+
+~ session.quality_score += 1
+~ session.depth_influence += 2
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_SevenPent_Deadline
+"You're done waiting," you say. "Tonight isn't a request. It's a deadline. You've been sitting with this for years — maybe decades — and the storm isn't weather, it's punctuation. You're saying *now.* You're saying *tonight.* You're saying *I have been patient long enough.*"
+
+Lightning. Perfectly timed. Thunder immediate — the storm directly overhead, the sky and the store in conversation. The building shakes. Not subtly. Every shelf, every bin, every pane of glass. The pressed tin ceiling rings like a bell.
+
+And then: calm. Total calm. The building having made its point.
+
+"She's not messing around," Scout says. Very quietly.
+
+"She never was," Delphi says. "We just weren't ready to hear it."
+
+~ session.quality_score += 2
+~ session.community_influence += 1
+~ session.depth_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_SevenPent_Overripe
+"The vine is overripe," you say. "Whatever you've been growing, it's past the picking window. Not ruined — but urgent. You needed to do this yesterday. You needed to do this *years* ago."
+
+The vine on the outside wall raps the window sharply. Three times. The building confirming: *yes. Past time. Thank you for saying it.*
+
+Delphi: "Hard truth. She needed to hear it."
+
+~ session.quality_score += 1
+~ session.voice_influence += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_SevenPent_Frustrated
+"Reversed patience. She's frustrated — not with us, with the waiting. With being patient when patience stopped being productive."
+
+The store responds evenly. Warm. The building-equivalent of a nod — accurate, heard, not revelatory. Good enough. She'll take good enough tonight.
+
+~ session.quality_score += 1
+~ session.community_influence += 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+:: TheKind.Session3.P2_SevenPent_Dismiss
+"Standard patience card. Growth takes time. Keep doing what you're doing."
+
+The store has BEEN doing what she's been doing. For DECADES. That is the POINT.
+
+Seven books fall off seven different shelves simultaneously. Different sections. Fiction, poetry, music theory, mathematics, ecology, cooking, philosophy. One from each major section. All landing face-up. All open to pages about *waiting.*
+
+"Seven books," Mal says. Staring. "Seven pentacles. She's... footnoting."
+
+Scout, awed: "She's making a BIBLIOGRAPHY of how angry she is."
+
+The temperature drops. Then rises. The building equivalent of counting to ten.
+
+~ session.quality_score -= 1
+
++ [Continue the reading] -> TheKind.Session3.Transition_P2_P3
+
+# ============================================================================
+# TRANSITION: POSITION 2 → POSITION 3
+# ============================================================================
+
+:: TheKind.Session3.Transition_P2_P3
+~ session.store_expressiveness += 3
+
+Two cards on the counter. What she's been holding. What she hasn't said. The store has been read more in the last twenty minutes than in its entire existence and you can *feel* the difference — the building is breathing differently, humming on a different frequency, alive in a way that goes beyond warm-and-cozy into something more specific. Something with intention.
+
+The storm outside has settled into a steady downpour. No more theatrical lightning. The thunder has said what it needed to say. Now it's just rain — heavy, constant, the sound of the sky matching the store's energy: persistent, insistent, unapologetic.
+
+@if session.quality_score >= 5:
+    The store is radiant. Not a metaphor — actually, physically radiant. The pressed tin ceiling is throwing patterns of light that don't correspond to any lamp in the building. The bead curtain is swaying in a rhythm that matches your pulse. The temperature is exactly perfect — not warm, not cool, the temperature of being held. The Kind is fully present, fully expressed, fully *here* in a way it has never been while you've worked here.
+
+    "She trusts you," Delphi says. Almost reverently.
+
+    "She trusts *us,*" Scout corrects. For once, he's right. This isn't about the reader. This is about the crew.
+@elif session.quality_score >= 2:
+    The store is warm. Present. Listening. Cautiously open — the way a person opens who isn't sure yet if this conversation is going to go the way they want. The lamp sways gently. The deep shelves hum. Not fully expressed, but getting there.
+
+    Delphi: "One more card. Make it count."
+@else:
+    The store is holding steady. Neither open nor closed. Waiting. The kind of patience that is actually a warning — the patience of someone who will ask one more time and then stop asking.
+
+    Delphi: "Last card. She's still here. Don't waste it."
+@endif
+
+"Last card," you say. To the crew. To the store. To the pressed tin ceiling and the humming deep shelves and the rain on the roof. "What you want for yourself."
+
+This is the one that matters. This is the question the store cleared the thunder for.
+
++ [Turn the third card] -> TheKind.Session3.Position3
+
+# ============================================================================
+# POSITION 3: WHAT YOU WANT FOR YOURSELF (KEY POSITION)
+# ============================================================================
+
+:: TheKind.Session3.Position3
+
+You turn the third card.
+
+The store holds its breath. You can feel it — the cessation of hum, the turntable going silent, the rain seeming to pause for one heartbeat. Everything waiting.
+
+**{session.p3_card.get_display_name()}.**
+
+@if session.p3_card.name == "The World":
+    -> TheKind.Session3.P3_World
+@elif session.p3_card.name == "The Star":
+    -> TheKind.Session3.P3_Star
+@else:
+    -> TheKind.Session3.P3_Moon
+@endif
+
+# ---------- THE WORLD (Delphi's path → Open House) ----------
+
+:: TheKind.Session3.P3_World
+
+@if session.p3_card.reversed:
+    The World, inverted. The dancer in the wreath — completion, integration, wholeness — hangs reversed. Not failure, not incompletion. *Fear* of completion. The last step not taken because taking it makes everything real.
+
+    The front door rattles. From inside. The store reaching for the lock, wanting to open, and hesitating. The building version of a hand on a doorknob, not turning.
+@else:
+    The World. The final card of the Major Arcana. The dancer in the wreath, surrounded by the four fixed signs — lion, eagle, bull, angel. Completion. Integration. The end of a journey and the beginning of everything that comes after.
+
+    The front door swings open. On its own. Not a crack — *wide.* The storm is still raging outside, but the rain doesn't come in. The threshold holds. The warm air inside and the wild air outside meet at the doorframe and neither crosses. The store is opening itself up. Literally.
+@endif
+
+"Position three. What you want for yourself."
+
+Scout stares at the open door. At the storm beyond. At the dry threshold.
+
+"She opened the door," he says. "She opened the *door.*"
+
+@if session.p3_card.reversed:
+    + ["You want to open but you're afraid. What if people come and don't understand?"] -> TheKind.Session3.P3_World_Afraid
+    + ["The last step is the hardest. But you've already done the hard part — you asked."] -> TheKind.Session3.P3_World_LastStep
+    + ["Reversed World. Incomplete transformation. You need help taking the final step."] -> TheKind.Session3.P3_World_Help
+    + ["Reversed completion. Maybe she's not ready."] -> TheKind.Session3.P3_World_Dismiss
+@else:
+    + ["You want to be whole. Not a secret. You want people to see all of it — the records, the books, the deep shelves, the readings. All of you."] -> TheKind.Session3.P3_World_Whole
+    + ["The World is integration. You want to be part of Rewind — not the weird store, but the *heart* of it."] -> TheKind.Session3.P3_World_Heart
+    + ["You opened the door. In a thunderstorm. The answer is obvious — you want to let people in."] -> TheKind.Session3.P3_World_LetIn
+    + ["Completion card. The reading is done. Good session."] -> TheKind.Session3.P3_World_Dismiss
+@endif
+
+:: TheKind.Session3.P3_World_Whole
+"You want to be whole," you say. "Not a secret. Not the store that weirdos go to, not the place you have to already know about to find. You want people to see *all of it* — the records and the books and the deep shelves and the reading nook and the impossible things. You want an open door."
+
+The door stays open. The storm rages beyond the threshold and the threshold holds and the store blazes with light — every lamp, every overhead, the pressed tin ceiling catching and amplifying until The Kind is a lantern on Main Street, a beacon in the storm, the warmest building in Rewind pouring golden light into the dark.
+
+And for one impossible moment — one flash of lightning, one frozen instant — you see Main Street through the door. And it's not empty. People. Silhouettes in the rain. Coming toward the light. Not running — walking. The way people walk toward a place they've been told about, a place someone said *you have to go there, they'll help you find what you're looking for.*
+
+Then the lightning ends. The street is empty again. But the door stays open.
+
+"She's showing us what she wants," Delphi says. Her voice is thick. "She wants them to come."
+
+~ session.quality_score += 2
+~ session.community_influence += 3
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_World_Heart
+"The World is integration," you say. "You don't want to be separate anymore. Not the odd building on Main Street, not the inside joke Rewind tells about itself. You want to be the *heart* of it. Lola's feeds people. Frame of Mind fixes bikes. You — you fix the thing that doesn't have a name. The ache. The search. The not-knowing-what-you're-looking-for. And you want Rewind to know that."
+
+The door stays open. Through it, the traffic light on the corner — the incomprehensible one, the one nobody can explain — blinks. Green. In the direction of the store. For the first time in anyone's memory, the light makes sense.
+
+"Did you see that?" Scout. Pressing his face against the window. "The traffic light just — it pointed at us."
+
+"She called in a favor," Delphi says. "With the traffic light."
+
+"You can't call in a favor with a TRAFFIC LIGHT."
+
+"Kind of," Mal says, from the back stacks. And everyone almost laughs, because it's true. Kind of.
+
+~ session.quality_score += 1
+~ session.community_influence += 2
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_World_LetIn
+"You opened the door," you say. "In a thunderstorm. When nobody is out there. The answer is in the gesture — you want to let people in. Not just the regulars. Not just the ones who already know. Everyone."
+
+The store responds with warmth. Steady. Solid. The building version of a firm nod. Yes. That. Simple and true.
+
+The door stays open. The rain drums on the threshold and doesn't cross it.
+
+"Reading night," Delphi says. Not a question. A plan forming. "We do a reading night. Open to everyone. The bead curtain comes down. We put a sign in the window."
+
+~ session.quality_score += 1
+~ session.community_influence += 2
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_World_Afraid
+"You want to open," you say, "but you're afraid. The Hermit in Position 2 — the isolation — it wasn't all bad, was it? Being a secret is safe. Being known is terrifying. What if you throw a party and nobody comes? What if people come and they don't *get it?*"
+
+The door rattles. The handle turns. Doesn't open. Turns back. The store reaching for the door and pulling away, reaching and pulling away, the physical manifestation of wanting and fearing in the same gesture.
+
+Delphi puts her hand on the doorframe. "We'll be there," she says. "When you open, we'll be there. Nobody's going to walk in alone."
+
+The handle turns. The door opens. Slowly this time. Not a declaration — a decision. The quiet, scared, brave decision of someone who is going to do the thing they're afraid of because the people they love said *we'll be there.*
+
+~ session.quality_score += 2
+~ session.community_influence += 2
+~ session.voice_influence += 1
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_World_LastStep
+"The last step is the hardest," you say. "But you've already done the hard part. You *asked.* You rattled the shelves and spun the turntable and threw Joni Mitchell on the floor and said *read me.* The asking was the brave part. What comes next is just follow-through."
+
+The door opens. Not flung — eased. The way a person opens a door when they're still deciding if they want to be in the conversation. One foot out. Testing.
+
+"She's getting there," Delphi says.
+
+~ session.quality_score += 1
+~ session.community_influence += 2
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_World_Help
+"Reversed World. Incomplete transformation. She needs help taking the final step — not doing it alone."
+
+Steady warmth. The building acknowledging a competent reading, even if not a revelatory one. The door opens halfway.
+
+"She heard you," Delphi says.
+
+~ session.quality_score += 1
+~ session.community_influence += 2
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_World_Dismiss
+"Completion card. The reading is done. Good session."
+
+The door SLAMS. Open. Full force. The wind from outside blows in, scattering the argument constellation records across the floor, flipping pages in Mal's notebook, blowing Scout's beanie clean off his head.
+
+Then it stops. The threshold re-establishes. The warm air wins. But the point has been made: she is NOT done. The reading is NOT over. "Good session" is NOT an acceptable answer when a building bares its soul.
+
+"She wants more than 'good session,'" Delphi says, retrieving her tea.
+
+~ session.quality_score -= 1
+~ session.community_influence += 1
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+# ---------- THE STAR (Scout's path → The Record) ----------
+
+:: TheKind.Session3.P3_Star
+
+@if session.p3_card.reversed:
+    The Star, inverted. Hope dimmed, not extinguished. The water pours from the jugs but it drains into earth that can't hold it. The figure kneels by the stream but the reflection shows someone they don't quite recognize.
+
+    The turntable starts to spin. Slowly. Haltingly. The platter rotating, stopping, rotating. A record player trying to play and forgetting how. As if the store has a song and can't remember the first note.
+@else:
+    The Star. After the Tower's destruction, after the darkness — hope. The figure pours water from two jugs, one into the stream, one onto the land. Above, a great star surrounded by seven smaller ones. Inspiration. Being seen and heard. The card of someone who has something beautiful inside them and is ready to let it out.
+
+    The turntable starts to spin. Smoothly, steadily, with the authority of a machine that has been waiting for this moment. No record on the platter — just the felt mat turning, the needle hovering, the speakers humming with potential. The store is ready to sing.
+@endif
+
+"Position three. What you want for yourself."
+
+Scout's entire body goes still. He's staring at the turntable. At the hovering needle. At the empty platter spinning with intention.
+
+"She wants to play something," he whispers. "She wants to play *her* something."
+
+@if session.p3_card.reversed:
+    + ["Your song has been buried so long you've forgotten it. But it's still in you. Let us help you find it."] -> TheKind.Session3.P3_Star_Buried
+    + ["The Star reversed — hope that needs coaxing. You want to be heard but you're not sure anyone will listen."] -> TheKind.Session3.P3_Star_Coaxing
+    + ["Dimmed, not dead. The music is still there. You just need someone to drop the needle."] -> TheKind.Session3.P3_Star_Needle
+    + ["Reversed Star. Low morale. Maybe play some upbeat music?"] -> TheKind.Session3.P3_Star_Dismiss
+@else:
+    + ["You want to be heard. Not through falling books and sliding mugs — really heard. You have your own music."] -> TheKind.Session3.P3_Star_Heard
+    + ["The Star pours water into the stream and onto the land. You've been pouring into everyone. Now pour for yourself."] -> TheKind.Session3.P3_Star_Pour
+    + ["You have something to play. Something yours. A record nobody's heard because nobody knew to ask."] -> TheKind.Session3.P3_Star_Record
+    + ["Hope and inspiration card. That's nice. Very positive."] -> TheKind.Session3.P3_Star_Dismiss
+@endif
+
+:: TheKind.Session3.P3_Star_Heard
+"You want to be heard," you say. "Not through falling books and sliding mugs and temperatures that shift when you're happy or sad. Really *heard.* You have your own music — not Scout's playlists, not the records in the bins, not the impossible pressings from the deep shelves. *Yours.* The sound of what you are."
+
+The turntable spins faster. The needle drops — onto nothing, onto the bare felt, but the speakers fill. Not with music. Not yet. With *sound.* The rain on the roof. The creak of old wood. The bell on the door. The scratch of Mal's pen. The ceramic clink of Delphi's mug. Scout's voice, layered, arguing about music in a dozen different conversations compressed into one warm chord.
+
+The store is playing *itself.* Not a record — a memory. Every sound it's ever absorbed, woven together into something that isn't a song but wants to become one.
+
+Scout's eyes are streaming. He didn't decide to cry. It's just happening.
+
+"She has a record," he says. "She has her own record. She's been *recording us.*"
+
+~ session.quality_score += 2
+~ session.voice_influence += 3
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Star_Pour
+"The Star pours water into the stream and onto the land," you say. "You've been pouring into every person who walks through that door. Now pour for yourself. What does *your* stream sound like? What grows in *your* garden?"
+
+The turntable hums. The speakers crackle. A fragment of sound — not quite music, not quite voice. Something between. The store trying to find its own frequency, reaching for a note it's been holding in its foundations for years.
+
+Scout moves to the turntable. Not touching it — just standing near it. Close enough that the store can feel him there. "I'll find it," he says. "Whatever you want played, I'll find it."
+
+~ session.quality_score += 1
+~ session.voice_influence += 2
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Star_Record
+"You have something to play," you say. "Something yours. A record nobody's heard because nobody knew to ask. Not from the deep shelves — not from another timeline. From *here.* From this building, this store, this life you've been living while we were all too busy being amazed by the impossible things to notice the real one."
+
+The speakers crackle. A note. One note. Low, warm, vibrating in the floorboards. The store's first word.
+
+Then silence. But the silence is full. The silence of someone who just said the first word of a sentence they've been composing for decades.
+
+Mal: "She has a record."
+
+Scout, barely breathing: "She's *always* had a record."
+
+~ session.quality_score += 2
+~ session.voice_influence += 2
+~ session.depth_influence += 1
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Star_Buried
+"Your song has been buried so long you've forgotten the first note," you say. "But it's still there. Under the floorboards, in the walls, in the pressed tin ceiling that catches the lamplight just so. You haven't lost it. You just stopped listening to yourself."
+
+The turntable stutters. Starts. Stops. Starts. The store trying to play and struggling — the musical equivalent of a voice breaking on the first word after a long silence.
+
+Scout puts his hand on the turntable. Gently. "Take your time," he says. "We're not going anywhere."
+
+The stutter smooths. The platter spins. Not music yet — but motion. The beginning of the beginning.
+
+~ session.quality_score += 2
+~ session.voice_influence += 2
+~ session.scout_moved = True
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Star_Coaxing
+"The Star reversed — hope that needs coaxing. You want to be heard but you're not sure we'll listen. You're testing us. The turntable, the temperature shifts, the books that fall — those are test signals. You're checking if we're paying attention before you commit."
+
+The turntable slows. Considers. Then: a hum from the speakers. Tentative. The store responding to being accurately read, even through its own uncertainty.
+
+"She's checking," Delphi confirms. "She's checking if it's safe."
+
+Scout: "It's safe. Tell her it's safe."
+
+Delphi puts her hand on the counter. "It's safe," she says.
+
+~ session.quality_score += 1
+~ session.voice_influence += 2
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Star_Needle
+"Dimmed, not dead," you say. "The music is still there. You just need someone to drop the needle."
+
+The turntable spins steadily. Waiting. The needle hovering over nothing, ready for the record that hasn't been found yet.
+
+Scout nods. "I can do that. Dropping needles is literally my job."
+
+~ session.quality_score += 1
+~ session.voice_influence += 2
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Star_Dismiss
+"Hope and inspiration card. That's nice. Very positive energy."
+
+The turntable stops. Dead. The needle retracts. The speakers go silent.
+
+The store's version of an eye roll so massive it involves the entire electrical system. The lights flicker. The OPEN sign blinks sarcastically. A copy of *The Dummies Guide to Active Listening* lands on the counter.
+
+"She's building a collection," Scout says, looking at the Dummies book. "A passive-aggressive collection."
+
+~ session.quality_score -= 1
+~ session.voice_influence += 1
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+# ---------- THE MOON (Mal's path → The Expedition) ----------
+
+:: TheKind.Session3.P3_Moon
+
+@if session.p3_card.reversed:
+    The Moon, inverted. The twin towers, the winding path, the dog and the wolf — all reversed. The unconscious surfacing whether you're ready or not. Secrets emerging. The hidden thing deciding it's tired of being hidden.
+
+    The deep shelves door opens. Not a crack — fully. Smoothly, silently, with the precision of a mechanism that has been waiting for exactly this moment. Golden light spills out. Warm air. The smell of paper and dust and time. The store isn't inviting — it's *presenting.* This isn't a question. It's an unveiling.
+@else:
+    The Moon. The twin towers. The winding path between them. The dog and the wolf. The crawfish emerging from the pool. The card of mystery, the unconscious, things hidden beneath the surface. The card of a building with rooms nobody has entered and shelves nobody has read and a depth that even Mal — Mal who has been mapping the resonance for three years — hasn't fully charted.
+
+    The deep shelves door opens. Slowly, smoothly, silently, as if it's been oiled for this moment. Golden light spills out. Warm air that smells like old paper and older time. The store opening its most private room. The parent showing you the attic where she keeps the things she doesn't talk about.
+@endif
+
+"Position three. What you want for yourself."
+
+Mal is standing. Their notebook forgotten on the floor. They're staring at the open door — at the golden light, at the depth beyond. You've seen Mal go through that door before. They've always gone alone, returned with dusty hands and impossible books. But they've never seen it open like *this* — not for a customer, not for a search. For the crew. For the reading.
+
+"She wants us to go in," Mal says.
+
+@if session.p3_card.reversed:
+    + ["The hidden thing is tired of hiding. She's not asking — she's showing. Whatever is in there, it's ready to be found."] -> TheKind.Session3.P3_Moon_Ready
+    + ["Reversed Moon — the unconscious surfacing. The deep shelves are rising. She can't hold it back anymore."] -> TheKind.Session3.P3_Moon_Rising
+    + ["She's been keeping something. Protecting it. And tonight she's decided we're ready."] -> TheKind.Session3.P3_Moon_Protecting
+    + ["Reversed Moon. Confusion clearing. Maybe the deep shelves are just well-organized storage."] -> TheKind.Session3.P3_Moon_Dismiss
+@else:
+    + ["You have something hidden. Not hidden from us — hidden for us. Something you've been keeping until we were ready."] -> TheKind.Session3.P3_Moon_HiddenForUs
+    + ["The Moon is the unconscious. You have depths we've never explored. You want to be known."] -> TheKind.Session3.P3_Moon_Known
+    + ["That door has been opening wider all night. She's been working up to this. The reading was the warm-up — this is the ask."] -> TheKind.Session3.P3_Moon_TheAsk
+    + ["Mysterious card. Dark associations. Something could be wrong in the deep shelves."] -> TheKind.Session3.P3_Moon_Dismiss
+@endif
+
+:: TheKind.Session3.P3_Moon_HiddenForUs
+"You have something hidden," you say. "Not hidden *from* us — hidden *for* us. Something you've been keeping in the deep shelves, past the impossible records and the books from other timelines. Something you've been growing, tending, waiting for the right moment. And tonight is the moment."
+
+The golden light from the deep shelves intensifies. The warm air becomes a current — a gentle pull, like the store is exhaling, drawing you in, saying *come see. Come see what I've been keeping.*
+
+Mal's composition notebook is on the floor and they don't pick it up. They're already moving toward the door. Their hands are shaking — not fear. Anticipation. The anticipation of someone who has mapped a building's emotional architecture for three years and is about to find out the building mapped them right back.
+
+"She's been waiting for us," Mal says. "She's been waiting for *all* of us."
+
+~ session.quality_score += 2
+~ session.depth_influence += 3
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Moon_Known
+"The Moon is the unconscious," you say. "You have depths nobody has fully explored — not even Mal, who's gone deeper than anyone. The deep shelves shift and grow and the composition notebooks from before Mal's time go further back and further down. You want to be *known.* All the way. Not just the front counter and the vinyl bins and the cozy public face. The whole thing. The roots."
+
+The floor under the reading nook gets warm. Not the heating — something below. Something old, something that has been there since the building's bones were laid. The store showing you its foundation. Its real foundation, not concrete — *intention.* The original purpose. The reason somebody built this building in this spot in this impossible town.
+
+Mal: "There are notebooks in there from before I started. Different handwriting. Different system. I always assumed they were a previous employee's." They pause. "What if they're hers? What if the store has been writing its own catalog?"
+
+"Only one way to find out," Delphi says. Looking at the golden door.
+
+~ session.quality_score += 2
+~ session.depth_influence += 2
+~ session.voice_influence += 1
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Moon_TheAsk
+"That door has been opening wider all night," you say. "One inch during Position 1. Two inches during Position 2. Now it's fully open. She's been working up to this. The reading wasn't the main event — it was the warm-up. The asking-for-permission. And now she's saying: *the permission is granted. Come in.*"
+
+The store responds with everything. The temperature. The light. The turntable humming. The bead curtain swaying. The vine on the window tapping. Every element of the building's body language aligned in a single, unified, unmistakable statement: YES. COME IN. I'VE BEEN WAITING.
+
+Scout: "She just said yes with the whole building."
+
+"She's been saying yes all night," Delphi says. "This is just the loudest one."
+
+~ session.quality_score += 1
+~ session.depth_influence += 2
+~ session.community_influence += 1
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Moon_Ready
+"The hidden thing is tired of hiding," you say. "She's not asking anymore. She's *showing.* The door is open, the light is on, the deep shelves are presenting themselves. Whatever is in there, it decided tonight that it's ready to be found — whether we're ready or not."
+
+The golden light pulses. Once. Like a heartbeat. The store confirming: *I'm not asking. I'm telling. This is happening. Get your jackets.*
+
+Mal is already at the door. "I'll go first," they say. "I always go first."
+
+"Not alone," Delphi says. "Not this time."
+
+~ session.quality_score += 2
+~ session.depth_influence += 2
+~ session.voice_influence += 1
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Moon_Rising
+"Reversed Moon — the unconscious surfacing. The deep shelves are rising. She can't hold it back anymore, and she's decided she doesn't want to."
+
+The door stays open. The light is steady. The store confirming: accurate reading, clean interpretation. The building-equivalent of a nod.
+
+"She's ready," Mal says. Quietly. Certainly.
+
+~ session.quality_score += 1
+~ session.depth_influence += 2
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Moon_Protecting
+"She's been keeping something," you say. "Protecting it. The way a parent keeps a box in the attic that the kids aren't old enough to see yet. And tonight she's decided: you're old enough. We're old enough."
+
+The warm air from the deep shelves smells like something new — not just paper and dust. Something organic. Growing. The store's garden, the one the Empress card pointed to, alive in the depths.
+
+"She's been growing something for us," Mal says. "Not inventory. Something *specific.*"
+
+~ session.quality_score += 2
+~ session.depth_influence += 2
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+:: TheKind.Session3.P3_Moon_Dismiss
+"Mysterious card. Dark associations. Something could be wrong in the deep shelves — structural issue, maybe? Water damage from the storm?"
+
+The lights go out. All of them. One second. Two. Three.
+
+When they come back on, every book on the counter — the Mary Oliver, the small business accounting, the Tarot for Dummies, the Sondheim — is stacked in a single tower, spines aligned, forming a sentence if you read the first word of each title:
+
+STOP. DOING. THAT.
+
+"She *spelled something,*" Scout says. "She SPELLED SOMETHING with the BOOKS."
+
+"She's a building that catalogs by emotional resonance," Mal says. "Of course she can spell."
+
+The deep shelves door stays open. Stubbornly. Despite everything.
+
+~ session.quality_score -= 1
+~ session.depth_influence += 1
+
++ [Complete the reading] -> TheKind.Session3.Synthesis
+
+# ============================================================================
+# PART 3: SYNTHESIS, PATHS & DREAM FADE
+# ============================================================================
+
+# ============================================================================
+# SYNTHESIS — DETERMINE PATH
+# ============================================================================
+
+:: TheKind.Session3.Synthesis
+@py:
+# Determine dominant path
+paths = {
+    'community': session.community_influence,
+    'voice': session.voice_influence,
+    'depth': session.depth_influence
+}
+
+# Find highest path
+dominant_path = max(paths, key=paths.get)
+
+# Tie-breaking: depth > voice > community
+if list(paths.values()).count(paths[dominant_path]) > 1:
+    for tiebreak in ['depth', 'voice', 'community']:
+        if paths[tiebreak] == paths[dominant_path]:
+            dominant_path = tiebreak
+            break
+
+session.dominant_path = dominant_path
+
+# Check for failstate — quality too low
+session.is_failstate = session.quality_score < 3
+
+# Store final quality assessment
+if session.quality_score >= 10:
+    session.reading_quality = "exceptional"
+elif session.quality_score >= 6:
+    session.reading_quality = "good"
+elif session.quality_score >= 3:
+    session.reading_quality = "adequate"
+else:
+    session.reading_quality = "poor"
+@endpy
+
+The three cards lie on the counter. The store's reading. Done.
+
+The crew is quiet. Not the quiet of an empty store — the quiet of a full one. Four people and a building, sitting with what just happened. The rain on the roof has settled into something steady, almost musical. The storm spent itself during the reading, as if the thunder was always meant for this.
+
+@if session.is_failstate:
+    The store is... still. Not warm, not cold. Still. The particular stillness of someone who worked up the courage to say something and the words landed on carpet. Not rejected — just not *heard.*
+
+    The front door is closed. The turntable is off. The deep shelves door is shut. The building has pulled its boundaries back to normal dimensions. A store. Just a store. An old building on Main Street in a town where it rains.
+
+    -> TheKind.Session3.Failstate
+@else:
+    @if session.reading_quality == "exceptional":
+        The store is radiant. There's no other word. The pressed tin ceiling is doing something with the lamplight that shouldn't be possible — refracting it, splitting it, painting the walls with warm amber patterns that move like water. The temperature is perfect. The air smells like every good thing The Kind has ever held: old paper, vinyl, patchouli, verde burritos, pu-erh tea, golden dust from the deep shelves. The building is *happy.* Not the cozy hum of a store that likes its contents — the full-bodied joy of a person who has been *seen.*
+
+        Delphi's hand is still on the counter. She lifts it. Looks at her palm. "She's warm," she says. "Really warm."
+    @elif session.reading_quality == "good":
+        The store hums. The good hum — the one you feel in your sternum, the frequency of a building that is present and pleased and not yet done with the evening. The warmth holds steady. The deep shelves door is still open, golden light spilling out. Something has changed and nobody is pretending it hasn't.
+    @else:
+        The store is warm. Not radiant, not transformed — warm. The reading gave her enough. Not everything, but enough to work with. The building equivalent of a person who got heard and is deciding what to do about it.
+    @endif
+
+    The reading is done. Now The Kind does what The Kind does — the thing after the reading. The recommendation. The answer. The moment where the store reaches into itself and pulls out exactly what the client needs.
+
+    Except the client *is* the store. So what comes next isn't a recommendation from the shelves. It's a recommendation *from* the store, *to* the crew, about what she needs.
+
+    @if session.dominant_path == "community":
+        -> TheKind.Session3.Path_Community
+    @elif session.dominant_path == "voice":
+        -> TheKind.Session3.Path_Voice
+    @else:
+        -> TheKind.Session3.Path_Depth
+    @endif
+@endif
+
+# ============================================================================
+# COMMUNITY PATH — Delphi: The Open House
+# ============================================================================
+
+:: TheKind.Session3.Path_Community
+
+The front door is still open.
+
+The storm has spent itself. The rain continues — this is Oregon, the rain always continues — but the thunder is gone, and through the open door you can see Main Street in the aftermath: glistening asphalt, dripping awnings, streetlights hazing in the mist. The traffic light on the corner is doing its incomprehensible thing, but for the first time it doesn't feel random. It feels like it's part of a system nobody has mapped yet. A system the store might know.
+
+Delphi hasn't moved from the counter. Her hand is flat on the wood. She's been reading the store the way she reads people — through contact, through attention, through the particular quality of quiet that Delphi brings to everything.
+
+"She wants people," Delphi says. "That's the ask. She wants more people."
+
+"We have people," Scout says. "The regulars. The Tuesday crowd. Ellen, the campus kids—"
+
+"She wants more." Delphi looks at the open door. At the empty street. At the sign that reads KIND in the rain. "She's been a secret for as long as any of us have worked here. The store that weirdos know about. The place you have to already know about to find. She's tired of that. She wants to be found by people who *don't* know what they're looking for."
+
+@if session.delphi_named:
+    She looks at you. "You heard it in the reading. The Hermit — she's been alone. The door opening — she's done being alone. She wants us to let people in."
+@endif
+
+"A reading night," Delphi says. Not a question. A plan.
+
+"A what?" Scout.
+
+"An open reading night. Once a week. We open the bead curtain. We move the reading nook to the front. We put a sign in the window and we tell Rewind that this place does readings. Not just for regulars. For *anyone.*"
+
++ ["I love this."] -> TheKind.Session3.Community_Plan
++ ["What would it look like?"] -> TheKind.Session3.Community_Plan
++ ["Can the store handle that? After everything she said about depletion?"] -> TheKind.Session3.Community_Concern
+
+:: TheKind.Session3.Community_Concern
+"Can the store handle that? After everything she said about depletion?"
+
+Delphi considers this. Seriously. The way she considers everything.
+
+"Depletion isn't about giving too much," she says. "It's about giving without being seen. She's been running on invisible. If people come here and they see her — really see this place for what it is — that's not depletion. That's reciprocity. That's the cup that's been empty finally getting filled."
+
+The store's warmth pulses once. Agreement.
+
+-> TheKind.Session3.Community_Plan
+
+:: TheKind.Session3.Community_Plan
+
+The planning starts immediately. This is the crew at their best — not serving a client, not running a shift. Building something.
+
+Scout goes to the turntable. "If we're doing reading night, we need a playlist. Something that sets the mood but doesn't compete with the cards. Brian Eno's *Music for Airports* energy but, like, for a bookstore."
+
+"*Music for Airports* is literally designed to be ignorable," Mal says. "That's the entire thesis of ambient music."
+
+"EXACTLY. Ignorable but *present.* Like Delphi."
+
+Delphi ignores this, which proves Scout's point.
+
+Mal opens their composition notebook. New page. The heading, in Mal's precise print: READING NIGHT. "Format?"
+
+"Open house," Delphi says. "No appointments. Drop in. Browse. If you want a reading, sit down. If you don't, don't. No pressure. We're not performing. We're just... opening the door wider."
+
+"How wide?" Mal.
+
+Delphi looks at the bead curtain. The one that separates the reading nook from the main floor. The barrier between "the store" and "the mystical part."
+
+"All the way."
+
+She reaches up and unclips the bead curtain from its rail. One side, then the other. It comes down in her hands — strings of wooden beads and glass and old buttons, accumulated over years, the boundary between public and private. She folds it over her arm like a shawl.
+
+The store *exhales.* The warmth doesn't just increase — it *expands.* The reading nook, which has always been a separate space, a hidden room behind beads, is suddenly part of the main floor. The tarot table visible from the front door. The cards visible from Main Street.
+
+The Kind with its reading nook showing is a different store. Not less magical. More honest.
+
+"I'll make a flyer," Delphi says. She picks up a piece of card stock from behind the counter — the kind they use for divider cards in the bins — and starts lettering. By hand. In the precise, unhurried script that Delphi uses for everything important. Not calligraphy — certainty made visible.
+
+READING NIGHT AT KIND OF
+
+Every Thursday. 7 PM.
+No appointment. No experience necessary.
+Just come in.
+
+"'No experience necessary,'" Scout reads over her shoulder. "That's—" He stops. "That's what Dev needed to hear. That's what Ellen needed. That's what everyone who walks past this store needs to hear."
+
+Delphi sets the flyer on the counter. Looks at the store. At the walls, the ceiling, the open reading nook, the door still standing open to the rain-washed street.
+
+"Happy?" she asks. Not the crew. The building.
+
+The pressed tin ceiling glows. The warmth settles. The front door sways gently — not closing, just breathing, the way a door does when a building is content.
+
+"She's happy," Scout says.
+
+~ session.recommendation = "Open House"
+~ session.recommender = "Delphi"
+
++ [Continue] -> TheKind.Session3.BluRay
+
+# ============================================================================
+# VOICE PATH — Scout: The Store's Own Record
+# ============================================================================
+
+:: TheKind.Session3.Path_Voice
+
+The turntable is spinning.
+
+It's been spinning since Position 3 — empty, the platter turning, the needle hovering, the speakers humming with potential. The store has something to play. She's been waiting for permission.
+
+Scout is standing at the turntable. Not touching it. Just close. The way you stand near a person who is about to say something they've never said.
+
+"She has a record," Scout says. Not to you — to the air, to the ceiling, to the store. "She has her own record and she wants us to hear it."
+
+"Where?" Mal. Practical, even now.
+
+"I don't know. I—" Scout looks at the bins. At the shelves. At the thousands of records he's organized and curated and argued about for years. "She'll show me."
+
+He starts moving through the store. Not searching — following. His hands drift over the bins, fingers trailing along the tops of sleeves, the way you trail your hand in water to feel the current. Past the staff picks. Past the Gorgeous Disasters shelf. Past the new arrivals and the jazz section and the bin where classical lives next to ambient because Mal decided they share "the emotional architecture of patience."
+
+He stops.
+
+A plain sleeve. No cover art. No label. No text. Just a cardboard sleeve that's slightly warm to the touch, filed between two records Scout has never noticed, in a section of the bin that he's sorted a hundred times but apparently never *seen.*
+
+"Here," Scout says. His voice is different. Quiet. The inside-voice he only uses when something is real enough to deserve it.
+
+He pulls the record out. Holds it up to the light. Black vinyl, standard weight, no label on the disc itself. Just grooves. Deep grooves, cut close together, the kind that hold a lot of sound.
+
+He walks back to the turntable. The platter is still spinning. The needle still hovering. Waiting.
+
+"I'm going to put it on," Scout says. To the store. "Okay?"
+
+The warmth pulses. Yes.
+
+Scout sets the record on the platter. Lifts the needle arm. Lowers it into the groove.
+
++ [Listen] -> TheKind.Session3.Voice_TheRecord
+
+:: TheKind.Session3.Voice_TheRecord
+
+A pop. A crackle. The sound of a needle finding its path.
+
+Then: rain.
+
+Not recorded rain. Not a sound effect. *This* rain. This building's rain. The specific frequency of Oregon rain on pressed tin, the layered patter of a proper pitched roof doing its job. The rain that has been falling on The Kind since the building was built, absorbed by the ceiling, held in the walls, remembered.
+
+The crew goes still.
+
+The rain resolves into rhythm. Not imposed — discovered. The natural rhythm of water on tin, the one that's always been there, the one that sounds like breathing if you listen long enough.
+
+Then: the bell. The front door bell, rattled by a hundred different hands, compressed into a chord. Each rattle distinct — a regular's confident push, a stranger's hesitation, a kid's exuberance, an old woman's careful pull. The bell is the store's heartbeat. Every opening, every closing, every person who decided to come in.
+
+Then: voices.
+
+Not words. Not conversations. Just the *sound* of human voices in a room that loves them. A laugh from somewhere in the 1990s. A whispered "thank you" from a customer nobody remembers. A child reading aloud in the picture book corner on a rainy Tuesday — something about a caterpillar, something about being hungry, the child's voice careful and proud.
+
+Scout's face is wet. He didn't decide to cry. It's just happening.
+
+Then the crew. Layered underneath the voices, woven into the rain and the bell: Delphi's kettle whistling. The ceramic-on-wood of her mug being set down. Mal's pen scratching in the composition notebook — precise, unhurried, cataloging. Scout's voice, arguing about Joni Mitchell in a dozen different conversations at once, the words blurring into music.
+
+And you. Shuffling cards behind the bead curtain. The whisper of a deck being split and bridged, the soft percussion of paper on paper. The sound you make when you're thinking — a hum, a breath, a pause. The store has been listening to you work. Remembering.
+
+Underneath everything, a melody emerges. Not composed — *grown.* The way a vine grows up a wall, finding its own pattern, following the light. A melody made of rain frequencies and bell harmonics and the resonance of a pressed tin ceiling that has been vibrating at the same frequency for decades. The store's own song. The one nobody wrote. The one nobody heard until tonight.
+
+The record plays for four minutes. The crew doesn't move. The store is warm and full and alive and for four minutes the only sound in Rewind, Oregon, is a building singing to the people who take care of it.
+
+The needle finds the run-out groove. Rides it. Silence.
+
+Scout lifts the needle. His hands are shaking.
+
+"She recorded us," he says. "All of us. Every shift, every conversation, every record I played and every book Mal shelved and every time Delphi set her mug down. She's been *recording us.*"
+
+He holds the record against his chest. The gesture Ellen made with *Songbird.* The gesture Dev made with the Pratchett. The heart doesn't distinguish between vinyl and paper and love.
+
+"How long?" Mal asks. Their voice is rough. "How long has she been recording?"
+
+Delphi looks at the ceiling. At the walls. At the building that just sang.
+
+"Since the beginning," she says. "Since before us. That record has every person who ever worked here. Every customer. Every rainy Tuesday." She pauses. "She saved all the drawings."
+
+Scout makes a sound that isn't a word. He puts the record back in its sleeve. Sets it on the counter. Puts his hand flat on the wood next to it.
+
+"Thank you," he says. To the store. "For keeping us."
+
+The warmth glows. The lights dim to something soft, golden, after-the-song. The building content. The building *heard.*
+
+~ session.recommendation = "The Store's Record"
+~ session.recommender = "Scout"
+~ session.scout_moved = True
+
++ [Continue] -> TheKind.Session3.BluRay
+
+# ============================================================================
+# DEPTH PATH — Mal: The Expedition
+# ============================================================================
+
+:: TheKind.Session3.Path_Depth
+
+The deep shelves door is open. Fully. The golden light has been spilling across the back stacks since Position 3, patient and warm, and now it feels like an invitation that's been standing at the door with its coat on, waiting politely, for exactly long enough.
+
+Mal is already moving. The composition notebook is in their hand — not tucked under their arm, *in their hand,* open, pen ready. Mal is going into the deep shelves the way an explorer enters a temple: with documentation and awe in equal measure.
+
+"Come on," Mal says. To all of you. "She wants all of us for this."
+
+"ALL of us?" Scout. "I've never been back there. You always go alone."
+
+"She's never asked for all of us before." Mal is at the door. The golden light illuminates their face. Their glasses reflect it — twin lamps. "Tonight she is."
+
+Delphi takes her mug off the counter. Sets it behind the register. She unties her flannel from around her waist and puts it on properly — sleeves down, buttons done. Armor for an expedition.
+
+"Let's go," she says.
+
++ [Follow Mal through the door] -> TheKind.Session3.Depth_Expedition
+
+:: TheKind.Session3.Depth_Expedition
+
+The deep shelves.
+
+You've heard about them. You've seen Mal go through this door and return with dusty hands and impossible books. You've seen the golden light. You've smelled the old paper and timelines. But you've never been inside — not like this, not physically, not with your feet on a floor that might not correspond to any architectural plan.
+
+@if the_kind.deep_shelves_revealed:
+    You've been back here once before. During the session with Ellen, when the record bins stretched deeper than the building and Scout found *Late Light.* But that was a glimpse — a hallway, a moment, a reach-and-grab. This is different. This is the store saying *come all the way in.*
+@endif
+
+The first section looks almost normal. Shelves. Books. The same Mal-organized emotional resonance system — grief next to ecology, music theory next to mathematics. But the further you walk, the less normal it gets.
+
+The aisles stretch. The ceiling rises. The shelves go from wood to something older — stone, maybe, or petrified wood, or a material that splits the difference between mineral and organic. The divider cards in the bins change from Scout's angular block print to handwriting you don't recognize — older, more formal, in ink that's faded to copper. Then older still. Then handwriting that isn't letters you know. Then just symbols. Then just the feeling of organization without any visible system.
+
+The light gets warmer. The air gets richer. The paper-and-dust smell deepens into something alive — not musty, not decaying. *Growing.* The deep shelves don't feel like a warehouse. They feel like a forest. A very old forest where the trees have been replaced by shelves and the undergrowth has been replaced by books and the canopy has been replaced by a ceiling you can't quite see.
+
+Scout is whispering. "This is the most beautiful thing I've ever seen."
+
+"Stop whispering," Mal says. "She can hear you either way."
+
+They walk deeper. Past shelves that hold records from sessions that didn't happen — albums by bands that formed in other timelines, pressed from vinyl that doesn't exist in this reality. Past books written in languages that died or never lived. Past a section where the spines are blank but the books radiate heat, like they're still being written.
+
+Mal stops. Their pen is motionless over the notebook. They're staring at a shelf that's different from the others — lower, wider, more like a cabinet. A piece of furniture that belongs in a home, not a store. A grandmother's sideboard. A mother's hope chest.
+
+On it, a single object. Not a book. Not a record.
+
+A scrapbook.
+
+"There," Mal says.
+
++ [Continue] -> TheKind.Session3.Depth_Scrapbook
+
+:: TheKind.Session3.Depth_Scrapbook
+
+It's a thick, handmade thing — covers of heavy cardboard wrapped in fabric that might once have been the same pattern as the store's original awning. The pages are thick, the edges uneven, the binding hand-stitched with thread that changes color from page to page: green, gold, copper, blue.
+
+Mal lifts it from the shelf. Gently. With the care they bring to every book, multiplied by the weight of knowing this one is the store's own.
+
+They open it.
+
+The first page: a pressed flower. Something small and purple — Oregon iris, maybe. Beside it, in handwriting that isn't anyone's and is everyone's — the store's hand, the handwriting of a building — a line:
+
+*I opened on a Tuesday. It rained. I was not surprised.*
+
+"She writes," Mal whispers. "She *writes.*"
+
+The second page: a photograph. Black and white. The store's grand opening — a different name on the sign, different paint, but the same bones. The same pressed tin ceiling. The same big front windows. A woman stands in the doorway with a broom in one hand and a cat on her shoulder and an expression that says *this is mine and it's good.*
+
+"Who is that?" Scout asks.
+
+"The first one," Delphi says. Looking at the photograph. "The first person who worked here."
+
+The pages turn. Not by Mal's hand — by the store. The scrapbook is alive, or close enough, and it wants to show them everything.
+
+A playbill from a theater that never existed on Main Street — *Rewind Community Players Present: The Tempest,* dated 1962. A receipt from Lola's grandmother's restaurant, handwritten, for "one burrito and one conversation." A polaroid of the vinyl bins being built, fresh wood, Scout's predecessors standing with hammers and grins. A pressed leaf from the oak in the quad that Carruth College planted in 1947. A ticket stub from a concert — no venue, no date, just the words *BEST NIGHT.*
+
+And passages. Between every photograph, every pressed flower, every scrap of ephemera — passages in the store's handwriting. Not descriptions. *Feelings.*
+
+*A boy came in today looking for a book about birds. He was crying. I gave him the field guide with the annotations in the margin — the one the ornithologist wrote when she was lonely. He stopped crying by page twelve. I kept the tear he left on the counter. It dried into salt. I can still taste it.*
+
+*The rain stopped for a week in 1973. I was terrified. Then it came back and I have never been so relieved.*
+
+*Mal started today. They organized the poetry section by color. I reorganized it by emotional resonance when they weren't looking. They reorganized it again the next morning. We have been in collaboration ever since. They do not know this. I should tell them. I don't know how.*
+
+Mal reads this entry. Their glasses fog. They take them off. Clean them on their shirt. Put them back on. Read it again.
+
+"She should have told me," Mal says. "I would have listened."
+
+"You're listening now," Delphi says.
+
+The pages keep turning. Faster now. Years flashing by — decades of a building's diary, the inner life of a store that loves its people and its contents and its rain and its quiet Tuesdays and its impossible deep shelves and has been writing it all down in a scrapbook that nobody knew existed until tonight.
+
+And then.
+
+The last page. The one the store has been building toward.
+
+A photograph. In color. Taken from above — the ceiling's perspective, the pressed tin looking down.
+
+Four people behind the counter. You. Delphi. Scout. Mal. Mid-laugh, caught in a moment that feels real even though it hasn't happened yet — or has it? The light is warm. The bead curtain is down. There are more people in the store than you've ever seen: a crowd, a community, a reading night in full swing. And at the edge of the frame, coming through the front door, a fifth person.
+
+Someone you don't recognize. Someone the store has chosen.
+
+Young. Your age, maybe, or Mal's age. A jacket covered in patches. A bag of records slung over one shoulder. Walking into The Kind with the expression of someone who has been looking for this place their whole life and just found it.
+
+"Who is that?" Scout asks. Pointing.
+
+Mal looks at the photograph. At the five people. At the stranger coming through the door.
+
+"She wants us to hire someone," Mal says.
+
+"*What?*"
+
+"There's five of us in this photo. Her future. She's been planning." Mal traces the edge of the frame. "The store is doing *recruitment.*"
+
+"She can't — she's a BUILDING. She can't do RECRUITMENT."
+
+"She can grow shelves into other timelines," Delphi says, mildly. "I think HR is within her capabilities."
+
+The scrapbook closes. Gently, on its own, the covers coming together with the soft sound of a book that has said what it needed to say. In the golden light of the deep shelves, surrounded by the impossible inventory of a store that thinks in decades and plans in people, Mal holds the scrapbook against their chest.
+
+"Thank you," Mal says. To the shelves. To the golden light. To the building that has been cataloging them while they cataloged its books. "For keeping all of this."
+
+The deep shelves hum. Warm. Satisfied. The store's deepest room, the one nobody has entered until tonight, giving itself to the crew.
+
+~ session.recommendation = "The Scrapbook"
+~ session.recommender = "Mal"
+~ session.store_revealed = True
+~ session.mal_deep = True
+
++ [Continue] -> TheKind.Session3.BluRay
+
+# ============================================================================
+# FAILSTATE — The Store Sighs
+# ============================================================================
+
+:: TheKind.Session3.Failstate
+
+The store settles. Not dramatically. Not coldly. Just... settles. The way a person does when they were going to say something and decided not yet. Not never — just not yet. Not tonight. Maybe next time. The store is patient. The store has been patient for decades. One more evening of patience won't break her.
+
+The front door stays closed. The turntable stays off. The deep shelves door clicks shut — gently, like a drawer being closed on something you'll come back to.
+
+The crew feels it.
+
+Scout looks at the cards on the counter. At the store. At the ceiling that has gone quiet. "Did we... did we miss it?"
+
+Delphi's hand is still on the wood. "She's not gone," she says. "She's just... waiting. She'll ask again."
+
+"When?"
+
+"When she's ready. When we're ready." Delphi picks up her mug. Drinks. The ceramic-on-wood sound as she sets it down. "Some readings take more than one sitting."
+
+Nobody says anything about what the store wanted. Because the reading didn't get there — not clearly, not fully. The building offered itself and the words didn't quite land, and now the evening is ending the way some evenings end: gently, with the sense that something almost happened.
+
+Scout puts on a record. Something quiet. Norah Jones, maybe. Or Billie Holiday. Something that says *I know you're tired. I know you tried. Tomorrow is another day.*
+
+Mal opens their composition notebook. Writes one line. Closes it.
+
+The rain softens. The storm is over. Main Street glistens in the aftermath, and the sign reads KIND, and the traffic light does its incomprehensible thing, and Rewind is Rewind.
+
+"Goodnight," Delphi says. To the store. "We'll try again."
+
+The warmth holds. Barely. The building version of someone who falls asleep before they cry.
+
+~ session.recommendation = "none"
+~ session.recommender = "none"
+~ session.is_failstate = True
+
++ [Continue] -> TheKind.Session3.BluRay
+
+# ============================================================================
+# THE CITIZEN KANE BLU-RAY — THE STORE'S P.S.
+# ============================================================================
+
+:: TheKind.Session3.BluRay
+
+@if not session.is_failstate:
+    The moment settles. The crew is processing — Scout wiping his face, Mal holding the scrapbook or the record or the flyer, Delphi looking at the store with an expression you've never seen. Tender. Proud. The expression of someone whose friend just did something brave.
+@endif
+
+And then.
+
+From a shelf in the back — not the deep shelves, just the regular stacks, the ones Mal catalogs, the ones that are supposed to contain books and only books — something falls. Slides. Lands on the floor with a plastic clatter that is distinctly, unmistakably *not* a book.
+
+Scout picks it up.
+
+It's a Blu-Ray.
+
+A *Blu-Ray.* In a record shop. In a bookstore. In a building that has never once, in its entire existence, stocked a film.
+
+The cover shows a man in shadow, a crystal globe in his hand, a snow-globe of a mansion. The title: **CITIZEN KANE.** Directed by Owen Welles. 1941. Criterion Collection — but the spine logo is slightly wrong. Too many colors. And the tagline: *"It was his toboggan."*
+
+"...toboggan?" Scout reads. He turns the case over. Reads the back. His expression cycles through confusion, delight, suspicion, and awe in the space of four seconds.
+
+"This is *Citizen Kane.* But it's... wrong. The director is *Owen* Welles. Not Orson. And it says the sled is called 'Rosebud' in quotes but then there's a footnote that says 'actually a toboggan, the studio changed it for euphony.' And the runtime is three hours and fifteen minutes."
+
+He looks at the ceiling. "Where did you GET this?"
+
+Delphi takes the Blu-Ray from him. Examines it with the same careful attention she gives tarot cards and people and buildings that talk.
+
+"She's been thinking about this," Delphi says. Not a question.
+
+The ceiling creaks. The long creak. The "a while" creak.
+
+"She wants to expand to *movies?!*"
+
+"She's a record shop and a bookstore," Mal says. "Film is the logical third medium."
+
+"Film is NOT the logical — we don't even have a TV! We don't have a DVD PLAYER! Where would we even PUT a film section? Between the Borges and the Wittgenstein? Next to the listening station?"
+
+Delphi sets the Blu-Ray on the counter next to the Sondheim record and the Mary Oliver and the small business accounting and whatever else the store has thrown tonight. She looks at the building. At the ceiling. At the walls.
+
+"How long have you been thinking about this?" she asks.
+
+The building creaks. Long. Emphatic. The creak of a structure that has been thinking about this for a *very* long time and is not going to be talked out of it.
+
+"A while," Delphi translates.
+
+@if session.is_failstate:
+    Scout looks at the Blu-Ray. At the store. At the Blu-Ray. "She didn't get her reading. She didn't get her big moment. But she's still doing the movie thing."
+
+    "Some requests are non-negotiable," Delphi says. "The reading can wait. The film section cannot."
+
+    The store's warmth returns. Just slightly. Just enough. Not for the reading — for the postscript. The P.S. The "one more thing." The caretaker who let the big conversation go but planted the flag on the small one.
+
+    Because the small one isn't small. The small one is the store saying: *I have opinions. I have desires. I have a Blu-Ray from another universe and I know exactly where I want the film section to go and you're going to hear about this whether the reading lands or not.*
+@else:
+    Scout looks at the reading night flyer. Or the record in its plain sleeve. Or the scrapbook from the deep shelves. Then at the Blu-Ray. Then at the store.
+
+    "You just — you bared your SOUL. We just had the most profound moment of our collective lives. And your postscript is *I want a movie section?*"
+
+    "She contains multitudes," Delphi says.
+
+    "She contains a BLU-RAY."
+
+    "Also I signed up for a pottery class," Mal says, deadpan. "Don't try to talk me out of it."
+
+    Scout stares at Mal. "Did you just make a *joke?*"
+
+    Mal almost smiles. Almost. The almost-smile is worth more than most people's full ones.
+@endif
+
+The Blu-Ray sits on the counter. *Citizen Kane.* Directed by Owen Welles. Toboggan and all. The store's P.S. Her "oh, and one more thing." The mother who bared her heart at the kitchen table and then, as you're leaving the room, calls after you: "Also I want to take a ceramics class. And I'd like the living room painted teal. And I have opinions about the yard."
+
+The Kind has opinions. The Kind has ALWAYS had opinions. She just never had a night like this to share them.
+
++ [Continue] -> TheKind.Session3.DreamFade
+
+# ============================================================================
+# DREAM FADE — WAKING UP
+# ============================================================================
+
+:: TheKind.Session3.DreamFade
+@py:
+# Persist session results to the_kind
+the_kind.sessions_completed += 1
+the_kind.session_three_recommendation = session.recommendation
+the_kind.session_three_recommender = session.recommender
+the_kind.session_three_quality = session.reading_quality
+the_kind.session_three_dominant_path = session.dominant_path
+
+# Persist store state
+the_kind.store_warmth = session.store_warmth
+if hasattr(session, 'store_revealed') and session.store_revealed:
+    the_kind.deep_shelves_revealed = True
+
+# Persist crew bonds
+if session.scout_moved:
+    the_kind.scout_bond = min(10, the_kind.scout_bond + 2)
+if session.delphi_named:
+    the_kind.delphi_bond = min(10, the_kind.delphi_bond + 2)
+if session.mal_deep:
+    the_kind.mal_bond = min(10, the_kind.mal_bond + 2)
+
+# Reader rewards
+reader.mystical_affinity += 1
+if session.reading_quality == "exceptional":
+    reader.empathy += 1
+    reader.insight += 1
+    reader.competence += 1
+elif session.reading_quality == "good":
+    reader.empathy += 1
+    reader.insight += 1
+elif session.reading_quality == "adequate":
+    reader.empathy += 1
+elif session.reading_quality == "poor":
+    reader.self_doubt = True
+
+# Set bleed-through object type
+if session.is_failstate:
+    session.bleed_object = "tin_tile"
+elif session.dominant_path == "depth":
+    session.bleed_object = "notebook_page"
+elif session.dominant_path == "voice":
+    session.bleed_object = "rain_single"
+else:
+    session.bleed_object = "reading_flyer"
+
+# Track bleed object on persistent state
+the_kind.bleed_objects.append(session.bleed_object)
+@endpy
+
+The shift ends. Or the dream ends. They're the same thing.
+
+The storm has passed. The rain remains — light now, the conversational kind, Oregon's default. Through the big windows, the first pre-dawn gray is arriving over the Cascades, turning the wet streets silver. Main Street is quiet and glistening and Rewind is doing its slow pivot from night to morning, the streetlights reluctantly dimming, the first bikes appearing on the sidewalks.
+
+@if not session.is_failstate:
+    The crew is closing up. But differently than usual. There's a tenderness to the closing — Scout handling the turntable like it's alive (it is), Mal reshelving with extra care (the shelves are listening), Delphi wiping down the counter slowly, her hand lingering on the wood.
+
+    @if session.dominant_path == "community":
+        The flyer is taped to the inside of the front window. READING NIGHT AT KIND OF. The bead curtain is folded behind the counter, put away. The reading nook is visible from the street for the first time. The store with its secret removed. Lighter for it.
+    @elif session.dominant_path == "voice":
+        The record is back in its plain sleeve, filed in a new section Scout created on the spot: a single divider card, in his angular block print, that reads "HER FAVORITES." One record. The store's own. First in a collection that Scout suspects will grow.
+    @else:
+        The scrapbook is on the shelf behind the counter. Next to the mugs. Next to the tea. Where the store can reach it, if a building can reach. Mal has started a new section in the composition notebook: STORE NOTES. "For when she wants to tell us something," Mal says. "So she doesn't have to throw books."
+    @endif
+
+    The Blu-Ray is on the counter. Nobody has decided what to do about the Blu-Ray. This is a problem for a future shift.
+@else:
+    The crew is closing up. Quietly. The evening that almost was, settling into the evening that was. Nobody is sad, exactly. Just... aware. Of a silence that almost became a voice. Of a store that almost asked. Of a night that almost changed everything.
+@endif
+
+The hardwood dissolves at the edges. The grain goes vague. Scout's voice fades — something about film sections and whether Criterion has a presence in alternate timelines. Delphi's kettle goes silent. Mal's pen stops. The store folds itself up like a book ending, the last page dissolving into white space.
+
+You wake up.
+
+Your reading table. Your apartment. Your deck on the table where you left it. The storm has passed here too — if it was ever here, if the thunder was ever anything but a dream's percussion section.
+
+@if session.is_failstate:
+    The dream is already fading. You remember warmth. A store. A storm. You tried to read a building and the building heard you but you didn't quite hear it back. The feeling isn't failure — it's incompleteness. A sentence started and not finished.
+
+    You make coffee. The morning light is gray and ordinary.
+@elif session.reading_quality == "exceptional":
+    Your chest is full. Overfull. The feeling of a dream that mattered — not symbolically, not psychologically, but the way a conversation matters when both people are finally honest. You can still feel the pressed tin ceiling humming. You can still hear the store's record playing. You can still see a photograph of five people behind a counter, one of them a stranger the store has already chosen.
+
+    You can still hear Delphi's voice: *She's been talking the whole time. You just weren't listening.*
+
+    You're listening now.
+@else:
+    The dream fades with texture — slowly, warmly, like a record winding down. You hold onto pieces. A building that talked through temperature and falling books. A crew that learned to listen. A Blu-Ray from another universe.
+
+    Something happened. Something good enough to carry forward.
+@endif
+
+You sit up. Your tarot deck is on the table.
+
+And next to it—
+
+@if session.bleed_object == "tin_tile":
+    A tile. Pressed tin, about four inches square, with the same pattern as The Kind's ceiling. Cold. Beautiful. The patina of decades — green and gold and shadow, the accumulated texture of a surface that has been looked up at by everyone who ever stood in that store.
+
+    You pick it up. It's heavier than it looks. Cold in your hands. The cold of a building that wanted to talk and didn't quite get heard.
+
+    You set it on the knick-knack shelf. Next to the 7-inch single. Next to the composition notebook page. The tile sits there, reflecting the morning light, patient and beautiful and quiet.
+
+    Something about it makes you think you'll dream of the store again.
+@elif session.bleed_object == "reading_flyer":
+    A piece of card stock. Hand-lettered in precise, unhurried script that you almost recognize as Delphi's.
+
+    READING NIGHT AT KIND OF
+
+    Every Thursday. 7 PM.
+    No appointment. No experience necessary.
+    Just come in.
+
+    The card stock is warm. Not room temperature — warm, the way the counter was warm when Delphi's hand was on it, the way the building was warm when it was happy. You hold it to your nose. It smells like old paper and patchouli and verde burritos and rain.
+
+    You set it on the knick-knack shelf. The flyer leans against the wall, its lettering catching the morning light, advertising an event at a store that may or may not exist in a town that may or may not be real.
+
+    You could swear the handwriting is smiling.
+@elif session.bleed_object == "rain_single":
+    A 7-inch single. No label. No cover art. Just black vinyl in a plain white sleeve.
+
+    You hold it to your ear — you don't know why, nobody holds vinyl to their ear, that's not how records work — and you hear it. Faintly. Without a turntable, without a needle, without any mechanism that should produce sound. Rain on a tin roof. A bell on a door. Voices. A melody that wasn't composed but grew.
+
+    The store's record. The one Scout played. The one that held every sound The Kind has ever absorbed. And somehow, impossibly, a copy of it is in your apartment at dawn.
+
+    You set it on the knick-knack shelf. Next to the other 7-inch single from the first dream. Two records from the same store. One someone else's memory. One the building's own.
+
+    When the morning light hits the grooves, you could swear you hear rain.
+@elif session.bleed_object == "notebook_page":
+    A page from a composition notebook. Not Mal's — the paper is older, thicker, the lines hand-ruled with a straightedge. The kind of notebook someone made before you could buy them at a campus bookstore.
+
+    There's writing on it. The store's handwriting — the one from the scrapbook, the one that isn't anyone's and is everyone's. A catalog entry:
+
+    *READER. Arrived Tuesday, autumn. Shelved under "People Who Don't Know What They're Looking For But Will When They Find It." Cross-referenced: Empathy, Insight, Competence. Currently on loan. Expected return: indefinite.*
+
+    *Notes: Shuffles cards like breathing. Makes the bead curtain sway when they concentrate. Delphi trusts them. Scout trusts them. Mal trusts them. I trust them.*
+
+    *Category: Family.*
+
+    You read it three times. The fourth time, you notice a small addendum at the bottom, in fresher ink:
+
+    *P.S. We're expanding to film. Don't let Scout curate the entire section. He'll file everything under "Gorgeous Disasters."*
+
+    You laugh. Alone in your apartment at dawn, holding a catalog entry for yourself written by a building in a dream, and the postscript is about movies.
+
+    You set the page on the knick-knack shelf. It sits between the 7-inch single and the composition notebook page from the previous dream. Your collection of impossible things grows. Your shelf of evidence that the store is real. Kind of real. Kind of impossible. Kind of exactly what you need.
+@endif
+
+You sit at your reading table. Sip your coffee. Look at your tarot deck.
+
+@if session.is_failstate:
+    The morning continues. The dream fades. You remember a storm, a store, a building that rattled its shelves. The deck sits in front of you and you want to reach for it but you hesitate. The last reading didn't land. The cards might be tired of you.
+
+    But on the knick-knack shelf, the pressed tin tile catches the light. And somewhere in the reflection, you see rain.
+
+    You'll dream of the store again. You're sure of it.
+@else:
+    "Good dream," you say. To yourself. To the cards. To whatever building might be listening.
+
+    This one was different from the others. No stranger walked through the door. No client needed a reading. The store closed its doors and opened its *self* — its history, its voice, its needs, its opinions about cinema. You read a building. The building read you back.
+
+    @if session.recommender == "Delphi":
+        You can still see the flyer. READING NIGHT AT KIND OF. The bead curtain coming down. The reading nook visible from the street. The store choosing to be seen.
+    @elif session.recommender == "Scout":
+        You can still hear the record. Rain on tin. The bell on the door. Voices from decades compressed into a melody nobody composed. The store has a song. It always had a song. It just needed someone to drop the needle.
+    @elif session.recommender == "Mal":
+        You can still see the photograph. Five people behind the counter. Four of them yours. One of them a stranger the store has already chosen. The scrapbook. The store's handwriting. *Category: Family.*
+    @endif
+@endif
+
+The cards don't answer.
+
+But you feel different. Again. Still. More.
+
+Not warmer this time — *fuller.* Like the dream left something behind that isn't an object or a feeling but a *relationship.* The particular weight of knowing a building by name. Of having been read by a place you've been reading in. Of having a shelf in a store that holds impossible things, where your entry in the catalog says *family* and the postscript is about movies.
+
+You shuffle the deck. Draw one card. Just to check.
+
+@py:
+# Draw a waking card
+waking_deck = Deck()
+waking_card = waking_deck.draw_card()
+@endpy
+
+**{waking_card.name}.**
+
+@if waking_card.name == "The Empress":
+    The mother card. Again. Still. Always.
+
+    You look at the knick-knack shelf. At the growing collection of impossible things. At the store's gifts, lined up like a mother's refrigerator art.
+
+    "I know," you say. "I hear you."
+@elif waking_card.name == "The World":
+    Completion. Integration. The door opening.
+
+    You think of the flyer in the window. Of the bead curtain coming down. Of a store that decided to stop being a secret.
+
+    "Open door," you say to the empty room. "Got it."
+@elif waking_card.name == "The Star":
+    Hope. Inspiration. The card of someone who has something beautiful inside them and is ready to let it out.
+
+    You think of the turntable spinning. Of the store's record. Of rain and bells and voices.
+
+    "Play it again," you say.
+@elif waking_card.name == "The Moon":
+    Mystery. The unconscious. Things hidden beneath the surface, rising.
+
+    You think of golden light. Of shelves made of stone. Of a scrapbook with a photograph of the future.
+
+    "I know there's more," you say. "I'm coming back."
+@elif waking_card.name == "Ace of Cups":
+    New emotion. The beginning of love. The cup that was empty, filling.
+
+    You think of the white mug that appeared on the counter. The one nobody recognized. The empty cup, waiting. Filling now.
+
+    "Kind of," you say. And almost laugh.
+@else:
+    You stare at it. Looking for the connection to the dream. Looking for the building in the card.
+
+    Maybe it's there. Maybe it isn't. Maybe every card is about a store in Rewind, Oregon, if you know how to look at it.
+
+    "I'll figure it out," you say. To the deck. To the shelf. To the tin tile or the flyer or the record or the notebook page. To whatever piece of the store followed you home.
+@endif
+
+You put the card back. The morning continues.
+
+But The Kind lingers. Closer than before. Not warmer — *present.* The way a person is present when they've finally told you who they are. Not performing. Not caretaking. Just here. Just themselves.
+
+And somewhere in Rewind, Oregon — in the version of reality where the store is a real store and the crew are real people and the deep shelves go deeper than any building has a right to go — a pressed tin ceiling catches the morning light, and a turntable sits empty but not silent, and a Blu-Ray from another universe waits on the counter next to four mugs of cold tea, and The Kind is awake, and alive, and for the first time in a very long time, not alone with what she knows.
+
++ [Return to your day, changed] -> ReaderTable
+
+# ============================================================================
+# END OF SESSION 3
+# ============================================================================

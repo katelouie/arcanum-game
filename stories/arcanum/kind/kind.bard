@@ -3,7 +3,9 @@
     -> TheKind.Session1.Start
 @elif the_kind.sessions_completed == 1:
     -> TheKind.Session2.Start
+@elif the_kind.sessions_completed == 2:
+    -> TheKind.Session3.Start
 @else:
-    # Session 2 completed
-    The Kind's story continues soon.
+    # All three sessions completed
+    The Kind rests. The store is warm. The rain continues.
 @endif

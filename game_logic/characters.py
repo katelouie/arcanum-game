@@ -1014,6 +1014,11 @@ class TheKind(Client):
     session_two_quality: str = ""
     session_two_dominant_path: str = ""  # "foundation" / "wildcard" / "impossible"
 
+    session_three_recommendation: str = ""  # "Open House" / "The Store's Record" / "The Scrapbook" / "none"
+    session_three_recommender: str = ""  # "Delphi" / "Scout" / "Mal" / "none"
+    session_three_quality: str = ""
+    session_three_dominant_path: str = ""  # "community" / "voice" / "depth"
+
     # === BLEED-THROUGH OBJECTS ===
     bleed_objects: list = field(default_factory=list)
 
