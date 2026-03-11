@@ -69,7 +69,7 @@
 #
 # ============================================================================
 
-:: TheKind.Session1.Start
+:: TheKind.Session1.Start ^DREAM:KIND
 @py:
 # Initialize dream session
 session = create_session(the_kind)
