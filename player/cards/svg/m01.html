@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">I</div>
+  <div class="card-name">The Magician</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- Power glow — bright, focused, the most "alive" card -->
+      <radialGradient id="powerglow" cx="50%" cy="40%" r="35%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.1"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#powerglow)"/>
+
+      <!-- Vertical axis of power — faint line from heaven to earth through figure -->
+      <line x1="250" y1="30" x2="250" y2="760"
+            stroke="var(--card-line)" stroke-width="0.5" opacity="0.06" stroke-dasharray="6 8"/>
+
+      <!-- ======== LEMNISCATE / INFINITY ======== -->
+      <!-- Floating above the figure's head — mastery, infinite potential -->
+      <path d="M225 75 Q210 55 225 45 Q250 30 275 45 Q290 55 275 75 Q250 90 225 75"
+            stroke="var(--card-line-light)" stroke-width="1.8" fill="none" opacity="0.65"/>
+      <!-- Inner lemniscate for depth -->
+      <path d="M232 72 Q220 58 232 50 Q250 40 268 50 Q280 58 268 72 Q250 84 232 72"
+            stroke="var(--card-line)" stroke-width="0.7" fill="none" opacity="0.3"/>
+      <!-- Center crossing point glow -->
+      <circle cx="250" cy="62" r="3" fill="var(--card-line)" opacity="0.35"/>
+
+      <!-- ======== FIGURE — THE MAGICIAN ======== -->
+      <!-- Standing at the table, one arm up, one down -->
+
+      <!-- Head -->
+      <circle cx="250" cy="140" r="28" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+      <circle cx="250" cy="140" r="18" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.5"/>
+      <circle cx="250" cy="140" r="6" fill="var(--card-line)" opacity="0.45"/>
+
+      <!-- Body — tall kite, standing upright, confident -->
+      <path d="M250 168 L220 300 L250 400 L280 300 Z"
+            fill="var(--card-fill-light)" fill-opacity="0.4" stroke="var(--card-line)" stroke-width="1.5"/>
+
+      <!-- ======== RIGHT ARM — raised to heaven ======== -->
+      <!-- Reaching up, holding a wand/staff pointing skyward -->
+      <path d="M270 200 Q300 170 310 130 Q315 110 310 90"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.75"/>
+      <!-- Hand gripping wand -->
+      <circle cx="310" cy="92" r="5" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+      <!-- Wand in raised hand — pointing to heaven -->
+      <line x1="310" y1="92" x2="310" y2="40"
+            stroke="var(--card-line-light)" stroke-width="2" opacity="0.7"/>
+      <!-- Wand tip glow -->
+      <circle cx="310" cy="38" r="4" fill="var(--card-line)" opacity="0.4"/>
+      <circle cx="310" cy="38" r="8" fill="none" stroke="var(--card-line-light)" stroke-width="0.5" opacity="0.2"/>
+
+      <!-- ======== LEFT ARM — pointing to earth ======== -->
+      <path d="M230 210 Q200 250 185 310 Q178 340 182 370"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.75"/>
+      <!-- Hand pointing down -->
+      <line x1="182" y1="370" x2="178" y2="392"
+            stroke="var(--card-line)" stroke-width="1.2" opacity="0.6"/>
+      <!-- Finger pointing -->
+      <line x1="178" y1="392" x2="175" y2="406"
+            stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.5"/>
+      <!-- Small energy dot at fingertip -->
+      <circle cx="175" cy="408" r="3" fill="var(--card-accent-light)" opacity="0.35"/>
+
+      <!-- Legs — standing firm, slightly apart -->
+      <line x1="240" y1="395" x2="225" y2="530"
+            stroke="var(--card-line)" stroke-width="1.5" opacity="0.6"/>
+      <line x1="260" y1="395" x2="275" y2="530"
+            stroke="var(--card-line)" stroke-width="1.5" opacity="0.6"/>
+      <!-- Feet -->
+      <ellipse cx="223" cy="532" rx="10" ry="4"
+               fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.45"/>
+      <ellipse cx="277" cy="532" rx="10" ry="4"
+               fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.45"/>
+
+      <!-- ======== THE TABLE ======== -->
+      <!-- Wide surface in front of the figure at waist height -->
+      <rect x="100" y="440" width="300" height="14" rx="2"
+            fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1.5" opacity="0.55"/>
+      <!-- Table legs -->
+      <line x1="130" y1="454" x2="130" y2="520" stroke="var(--card-line)" stroke-width="1.2" opacity="0.35"/>
+      <line x1="370" y1="454" x2="370" y2="520" stroke="var(--card-line)" stroke-width="1.2" opacity="0.35"/>
+      <!-- Table apron / edge detail -->
+      <line x1="100" y1="454" x2="400" y2="454" stroke="var(--card-line-dim)" stroke-width="0.7" opacity="0.25"/>
+
+      <!-- ======== FOUR SUIT SYMBOLS ON TABLE ======== -->
+      <!-- These define the canonical look for each suit in the entire deck -->
+
+      <!-- CUP — leftmost -->
+      <g transform="translate(158, 410)">
+        <path d="M-14 24 L-10 8 Q0 0 10 8 L14 24 Q0 30 -14 24Z"
+              fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+        <line x1="-2" y1="24" x2="-2" y2="34" stroke="var(--card-line)" stroke-width="1"/>
+        <line x1="2" y1="24" x2="2" y2="34" stroke="var(--card-line)" stroke-width="1"/>
+        <ellipse cx="0" cy="35" rx="8" ry="3" fill="none" stroke="var(--card-line)" stroke-width="0.8"/>
+        <line x1="-10" y1="8" x2="10" y2="8" stroke="var(--card-line-light)" stroke-width="0.5" opacity="0.4"/>
+      </g>
+
+      <!-- PENTACLE — second from left -->
+      <g transform="translate(218, 418)">
+        <!-- Outer circle -->
+        <circle cx="0" cy="0" r="16" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+        <!-- Five-pointed star inside -->
+        <polygon points="0,-12 3.5,-4 12,-4 5.5,1.5 7.5,10 0,5 -7.5,10 -5.5,1.5 -12,-4 -3.5,-4"
+                 fill="none" stroke="var(--card-line-light)" stroke-width="1" opacity="0.6"/>
+        <!-- Center -->
+        <circle cx="0" cy="0" r="3" fill="var(--card-line)" opacity="0.35"/>
+      </g>
+
+      <!-- SWORD — second from right -->
+      <g transform="translate(282, 418)">
+        <!-- Blade — vertical -->
+        <line x1="0" y1="-18" x2="0" y2="18" stroke="var(--card-line)" stroke-width="2" opacity="0.7"/>
+        <!-- Point -->
+        <path d="M0 -18 L-3 -14 L3 -14 Z" fill="var(--card-line)" opacity="0.5"/>
+        <!-- Crossguard -->
+        <line x1="-10" y1="4" x2="10" y2="4" stroke="var(--card-line)" stroke-width="1.5" opacity="0.6"/>
+        <!-- Grip detail -->
+        <rect x="-3" y="4" width="6" height="10" rx="1.5" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.35"/>
+        <!-- Pommel -->
+        <circle cx="0" cy="18" r="3" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.45"/>
+        <circle cx="0" cy="18" r="1" fill="var(--card-line)" opacity="0.3"/>
+      </g>
+
+      <!-- WAND — rightmost -->
+      <g transform="translate(342, 418)">
+        <!-- Staff — vertical with slight texture -->
+        <line x1="0" y1="-18" x2="0" y2="18" stroke="var(--card-line)" stroke-width="2" opacity="0.6"/>
+        <!-- Flame/bud at top -->
+        <path d="M0 -18 Q-5 -28 0 -34 Q5 -28 0 -18"
+              fill="var(--card-accent)" fill-opacity="0.35" stroke="var(--card-accent-light)" stroke-width="1" opacity="0.6"/>
+        <!-- Tiny leaf/growth marks along shaft -->
+        <line x1="0" y1="-6" x2="5" y2="-10" stroke="var(--card-line)" stroke-width="0.6" opacity="0.3"/>
+        <line x1="0" y1="4" x2="-5" y2="0" stroke="var(--card-line)" stroke-width="0.6" opacity="0.3"/>
+        <!-- Base -->
+        <circle cx="0" cy="18" r="2" fill="var(--card-line)" opacity="0.25"/>
+      </g>
+
+      <!-- ======== ENERGY CONNECTIONS ======== -->
+      <!-- Faint lines connecting the raised hand to heaven, the lowered hand to earth -->
+      <!-- And connecting the figure to each suit symbol -->
+
+      <!-- Heaven connection — from wand tip upward -->
+      <line x1="310" y1="38" x2="310" y2="10"
+            stroke="var(--card-line-light)" stroke-width="0.5" opacity="0.12" stroke-dasharray="3 5"/>
+
+      <!-- Earth connection — from fingertip downward -->
+      <line x1="175" y1="408" x2="170" y2="450"
+            stroke="var(--card-accent-light)" stroke-width="0.5" opacity="0.12" stroke-dasharray="3 5"/>
+
+      <!-- Energy arc around figure — aura of mastery -->
+      <path d="M180 120 Q150 250 180 400"
+            stroke="var(--card-line)" stroke-width="0.5" fill="none" opacity="0.08"/>
+      <path d="M320 120 Q350 250 320 400"
+            stroke="var(--card-line)" stroke-width="0.5" fill="none" opacity="0.08"/>
+
+      <!-- ======== ROSES AND LILIES — simplified as geometric blooms ======== -->
+      <!-- Bordering the bottom, suggesting the garden/abundance -->
+
+      <!-- Left garden cluster -->
+      <!-- Rose — concentric circles -->
+      <circle cx="100" cy="590" r="6" fill="none" stroke="var(--card-accent-light)" stroke-width="1" opacity="0.4"/>
+      <circle cx="100" cy="590" r="3" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.3"/>
+      <circle cx="100" cy="590" r="1" fill="var(--card-accent-light)" opacity="0.3"/>
+      <line x1="100" y1="596" x2="100" y2="616" stroke="var(--card-accent)" stroke-width="0.7" opacity="0.25"/>
+      <!-- Leaf -->
+      <path d="M100 606 Q94 602 96 610" stroke="var(--card-accent)" stroke-width="0.5" fill="none" opacity="0.2"/>
+
+      <!-- Lily — pointed petals -->
+      <path d="M130 582 L127 572 L130 564 L133 572 Z" fill="none" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.35"/>
+      <path d="M124 580 L130 582 L136 580" stroke="var(--card-line-light)" stroke-width="0.6" fill="none" opacity="0.25"/>
+      <line x1="130" y1="582" x2="130" y2="610" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.2"/>
+
+      <!-- Right garden cluster -->
+      <circle cx="400" cy="588" r="6" fill="none" stroke="var(--card-accent-light)" stroke-width="1" opacity="0.4"/>
+      <circle cx="400" cy="588" r="3" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.3"/>
+      <circle cx="400" cy="588" r="1" fill="var(--card-accent-light)" opacity="0.3"/>
+      <line x1="400" y1="594" x2="400" y2="614" stroke="var(--card-accent)" stroke-width="0.7" opacity="0.25"/>
+      <path d="M400 604 Q406 600 404 608" stroke="var(--card-accent)" stroke-width="0.5" fill="none" opacity="0.2"/>
+
+      <path d="M370 580 L367 570 L370 562 L373 570 Z" fill="none" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.35"/>
+      <path d="M364 578 L370 580 L376 578" stroke="var(--card-line-light)" stroke-width="0.6" fill="none" opacity="0.25"/>
+      <line x1="370" y1="580" x2="370" y2="608" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.2"/>
+
+      <!-- Center garden — smaller flowers -->
+      <circle cx="220" cy="600" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="220" cy="600" r="1.5" fill="var(--card-accent-light)" opacity="0.2"/>
+      <line x1="220" y1="604" x2="220" y2="618" stroke="var(--card-accent)" stroke-width="0.5" opacity="0.18"/>
+
+      <circle cx="280" cy="598" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="280" cy="598" r="1.5" fill="var(--card-accent-light)" opacity="0.2"/>
+      <line x1="280" y1="602" x2="280" y2="616" stroke="var(--card-accent)" stroke-width="0.5" opacity="0.18"/>
+
+      <!-- ======== GROUND / GARDEN BED ======== -->
+      <path d="M60 620 Q130 608 200 618 Q250 622 300 616 Q370 608 440 620"
+            stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.15"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">III</div>
+  <div class="card-name">The Empress</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- Warm, abundant glow — the most "alive" background -->
+      <radialGradient id="empressglow" cx="50%" cy="45%" r="40%">
+        <stop offset="0%" stop-color="var(--card-accent-light)" stop-opacity="0.09"/>
+        <stop offset="60%" stop-color="var(--card-line)" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#empressglow)"/>
+
+      <!-- ======== NATURE / GARDEN ======== -->
+      <!-- The Empress is surrounded by growing things — more vegetation than any other card -->
+
+      <!-- Flowing wheat/grass at bottom — organic curves -->
+      <path d="M30 640 Q80 620 130 635 Q180 648 230 630 Q280 618 330 638 Q380 650 430 628 Q460 620 480 636"
+            stroke="var(--card-accent-light)" stroke-width="1" fill="none" opacity="0.2"/>
+      <path d="M40 660 Q100 645 160 658 Q220 670 280 652 Q340 640 400 660 Q450 672 470 658"
+            stroke="var(--card-accent)" stroke-width="0.8" fill="none" opacity="0.15"/>
+      <path d="M50 680 Q120 668 180 678 Q240 688 300 674 Q360 662 420 680 Q460 688 480 676"
+            stroke="var(--card-accent)" stroke-width="0.6" fill="none" opacity="0.1"/>
+
+      <!-- Growing vines up the sides — organic, curving -->
+      <!-- Left vine -->
+      <path d="M80 700 Q70 640 85 580 Q100 520 88 460 Q76 400 90 340 Q104 280 92 220"
+            stroke="var(--card-accent)" stroke-width="1" fill="none" opacity="0.15"/>
+      <!-- Leaves on left vine -->
+      <path d="M85 580 Q72 572 78 564" stroke="var(--card-accent-light)" stroke-width="0.7" fill="none" opacity="0.18"/>
+      <path d="M88 460 Q100 452 96 444" stroke="var(--card-accent-light)" stroke-width="0.7" fill="none" opacity="0.15"/>
+      <path d="M90 340 Q78 332 82 324" stroke="var(--card-accent-light)" stroke-width="0.7" fill="none" opacity="0.12"/>
+      <!-- Right vine -->
+      <path d="M420 700 Q430 640 415 580 Q400 520 412 460 Q424 400 410 340 Q396 280 408 220"
+            stroke="var(--card-accent)" stroke-width="1" fill="none" opacity="0.15"/>
+      <path d="M415 580 Q428 572 422 564" stroke="var(--card-accent-light)" stroke-width="0.7" fill="none" opacity="0.18"/>
+      <path d="M412 460 Q400 452 404 444" stroke="var(--card-accent-light)" stroke-width="0.7" fill="none" opacity="0.15"/>
+      <path d="M410 340 Q422 332 418 324" stroke="var(--card-accent-light)" stroke-width="0.7" fill="none" opacity="0.12"/>
+
+      <!-- Flowers scattered — more than any other card -->
+      <circle cx="100" cy="600" r="5" fill="none" stroke="var(--card-accent-light)" stroke-width="1" opacity="0.4"/>
+      <circle cx="100" cy="600" r="2" fill="var(--card-accent-light)" opacity="0.3"/>
+      <line x1="100" y1="605" x2="100" y2="620" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.25"/>
+
+      <circle cx="400" cy="610" r="5" fill="none" stroke="var(--card-accent-light)" stroke-width="1" opacity="0.4"/>
+      <circle cx="400" cy="610" r="2" fill="var(--card-accent-light)" opacity="0.3"/>
+      <line x1="400" y1="615" x2="400" y2="628" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.25"/>
+
+      <circle cx="150" cy="630" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="150" cy="630" r="1.5" fill="var(--card-accent-light)" opacity="0.2"/>
+
+      <circle cx="350" cy="625" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="350" cy="625" r="1.5" fill="var(--card-accent-light)" opacity="0.2"/>
+
+      <circle cx="200" cy="650" r="3" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.25"/>
+      <circle cx="300" cy="645" r="3" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.25"/>
+
+      <!-- ======== TWELVE-STARRED CROWN ======== -->
+      <!-- Arc of stars above her head -->
+      <g transform="translate(250, 100)">
+        <!-- Crown arc -->
+        <path d="M-60 10 Q-40 -20 0 -28 Q40 -20 60 10"
+              stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.3"/>
+        <!-- 12 stars evenly spaced along the arc -->
+        <circle cx="-55" cy="6" r="2.5" fill="var(--card-line)" opacity="0.4"/>
+        <circle cx="-45" cy="-6" r="2.5" fill="var(--card-line)" opacity="0.45"/>
+        <circle cx="-34" cy="-14" r="2.5" fill="var(--card-line)" opacity="0.5"/>
+        <circle cx="-20" cy="-22" r="2.5" fill="var(--card-line)" opacity="0.5"/>
+        <circle cx="-8" cy="-26" r="2.5" fill="var(--card-line)" opacity="0.55"/>
+        <circle cx="5" cy="-28" r="3" fill="var(--card-line)" opacity="0.55"/>
+        <circle cx="18" cy="-26" r="2.5" fill="var(--card-line)" opacity="0.55"/>
+        <circle cx="30" cy="-22" r="2.5" fill="var(--card-line)" opacity="0.5"/>
+        <circle cx="40" cy="-14" r="2.5" fill="var(--card-line)" opacity="0.5"/>
+        <circle cx="48" cy="-6" r="2.5" fill="var(--card-line)" opacity="0.45"/>
+        <circle cx="55" cy="4" r="2.5" fill="var(--card-line)" opacity="0.4"/>
+        <circle cx="-2" cy="-28" r="2.5" fill="var(--card-line)" opacity="0.55"/>
+      </g>
+
+      <!-- ======== THE EMPRESS — SEATED, ABUNDANT ======== -->
+
+      <!-- Head -->
+      <circle cx="250" cy="148" r="28" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+      <circle cx="250" cy="148" r="18" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.5"/>
+      <circle cx="250" cy="148" r="6" fill="var(--card-line)" opacity="0.4"/>
+
+      <!-- Hair — flowing curves down each side (the Empress has long hair in RW) -->
+      <path d="M230 160 Q215 200 220 260" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.3"/>
+      <path d="M270 160 Q285 200 280 260" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.3"/>
+
+      <!-- Venus symbol on chest — circle with cross below -->
+      <circle cx="250" cy="215" r="10" fill="none" stroke="var(--card-line-light)" stroke-width="1.2" opacity="0.5"/>
+      <line x1="250" y1="225" x2="250" y2="245" stroke="var(--card-line-light)" stroke-width="1.2" opacity="0.5"/>
+      <line x1="243" y1="237" x2="257" y2="237" stroke="var(--card-line-light)" stroke-width="1.2" opacity="0.5"/>
+
+      <!-- Body — wider, more curved than other figures -->
+      <!-- The Empress is abundant — she fills space, curves outward -->
+      <!-- Upper body — soft curves, not angular -->
+      <path d="M250 176 Q220 220 205 300 Q195 360 200 420"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.7"/>
+      <path d="M250 176 Q280 220 295 300 Q305 360 300 420"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+      <!-- Lower robe — wide, flowing, organic -->
+      <path d="M200 420 Q185 480 175 540 Q170 570 160 600"
+            stroke="var(--card-line)" stroke-width="1.2" fill="none" opacity="0.6"/>
+      <path d="M300 420 Q315 480 325 540 Q330 570 340 600"
+            stroke="var(--card-line)" stroke-width="1.2" fill="none" opacity="0.6"/>
+
+      <!-- Body fill — soft curved shape -->
+      <path d="M250 176 Q218 225 205 310 Q195 380 190 440 Q180 510 160 600 L340 600 Q320 510 310 440 Q305 380 295 310 Q282 225 250 176"
+            fill="var(--card-fill-light)" fill-opacity="0.2"/>
+
+      <!-- Robe hem -->
+      <path d="M160 600 Q200 608 250 604 Q300 600 340 608"
+            stroke="var(--card-line)" stroke-width="1.2" fill="none" opacity="0.45"/>
+
+      <!-- Arms — resting outward, palms up, receiving -->
+      <!-- Left arm -->
+      <path d="M215 280 Q180 310 150 340 Q135 360 130 380"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.65"/>
+      <!-- Left hand — open, receiving -->
+      <circle cx="128" cy="383" r="5" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.4"/>
+
+      <!-- Right arm — holding a scepter -->
+      <path d="M285 280 Q320 310 345 340 Q358 358 362 375"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.65"/>
+      <!-- Right hand -->
+      <circle cx="364" cy="378" r="5" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.4"/>
+
+      <!-- Scepter — orb topped, organic -->
+      <line x1="362" y1="378" x2="375" y2="280"
+            stroke="var(--card-line)" stroke-width="1.5" opacity="0.6"/>
+      <!-- Scepter orb top -->
+      <circle cx="376" cy="276" r="8" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+      <circle cx="376" cy="276" r="4" fill="var(--card-line)" opacity="0.3"/>
+
+      <!-- ======== SHIELD WITH VENUS SYMBOL ======== -->
+      <!-- Leaning against the throne/figure, lower left -->
+      <g transform="translate(145, 510)">
+        <!-- Heart-shaped shield — more organic than the Emperor's -->
+        <path d="M0 -20 Q-18 -20 -20 -4 Q-22 12 0 28 Q22 12 20 -4 Q18 -20 0 -20"
+              fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2" opacity="0.4"/>
+        <!-- Venus symbol inside -->
+        <circle cx="0" cy="-2" r="6" fill="none" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.35"/>
+        <line x1="0" y1="4" x2="0" y2="14" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.35"/>
+        <line x1="-4" y1="10" x2="4" y2="10" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.35"/>
+      </g>
+
+      <!-- ======== STREAM / WATER ======== -->
+      <!-- Flowing water at the base — abundance, fertility -->
+      <path d="M120 690 Q180 680 240 688 Q300 696 360 684 Q400 678 440 690"
+            stroke="var(--card-accent-light)" stroke-width="1.2" fill="none" opacity="0.22"/>
+      <path d="M130 706 Q200 696 270 704 Q340 712 410 700"
+            stroke="var(--card-accent)" stroke-width="0.8" fill="none" opacity="0.15"/>
+
+      <!-- ======== STARS SCATTERED ======== -->
+      <circle cx="110" cy="180" r="1.5" fill="var(--card-line)" opacity="0.1"/>
+      <circle cx="390" cy="200" r="1.5" fill="var(--card-line)" opacity="0.1"/>
+      <circle cx="120" cy="300" r="1" fill="var(--card-line)" opacity="0.08"/>
+      <circle cx="380" cy="320" r="1" fill="var(--card-line)" opacity="0.08"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>

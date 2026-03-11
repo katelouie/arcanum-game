@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">IV</div>
+  <div class="card-name">The Emperor</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- Stark, dry glow — authority, not warmth -->
+      <radialGradient id="empglow" cx="50%" cy="40%" r="30%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.07"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#empglow)"/>
+
+      <!-- ======== STONE THRONE ======== -->
+      <!-- All rectangles. No curves. Authority IS structure. -->
+
+      <!-- Throne back — tall rectangular slab -->
+      <rect x="170" y="80" width="160" height="480"
+            fill="var(--card-fill-light)" fill-opacity="0.12" stroke="var(--card-line)" stroke-width="1.5" opacity="0.4"/>
+
+      <!-- Throne top — flat horizontal cap -->
+      <rect x="160" y="70" width="180" height="16" rx="0"
+            fill="var(--card-fill-light)" fill-opacity="0.15" stroke="var(--card-line)" stroke-width="1.5" opacity="0.45"/>
+
+      <!-- Throne armrests -->
+      <rect x="130" y="320" width="50" height="16"
+            fill="none" stroke="var(--card-line)" stroke-width="1.5" opacity="0.4"/>
+      <rect x="320" y="320" width="50" height="16"
+            fill="none" stroke="var(--card-line)" stroke-width="1.5" opacity="0.4"/>
+      <!-- Armrest supports — vertical -->
+      <rect x="130" y="336" width="12" height="100"
+            fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.3"/>
+      <rect x="358" y="336" width="12" height="100"
+            fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.3"/>
+
+      <!-- Throne seat -->
+      <rect x="170" y="440" width="160" height="16"
+            fill="none" stroke="var(--card-line)" stroke-width="1.2" opacity="0.35"/>
+
+      <!-- Throne base / platform -->
+      <rect x="150" y="560" width="200" height="14"
+            fill="none" stroke="var(--card-line)" stroke-width="1.5" opacity="0.4"/>
+      <!-- Steps -->
+      <rect x="130" y="580" width="240" height="12"
+            fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.3"/>
+      <rect x="110" y="598" width="280" height="12"
+            fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.25"/>
+
+      <!-- ======== RAM HEADS — on armrests ======== -->
+      <!-- Geometric ram — circle with spiral horns -->
+      <!-- Left ram -->
+      <g transform="translate(155, 315)">
+        <circle cx="0" cy="0" r="10" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2" opacity="0.5"/>
+        <!-- Spiral horns -->
+        <path d="M-8 -6 Q-18 -8 -20 0 Q-22 8 -14 10"
+              stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.4"/>
+        <path d="M8 -6 Q18 -8 20 0 Q22 8 14 10"
+              stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.4"/>
+        <!-- Eyes -->
+        <circle cx="-3" cy="-1" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+        <circle cx="3" cy="-1" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+      </g>
+      <!-- Right ram -->
+      <g transform="translate(345, 315)">
+        <circle cx="0" cy="0" r="10" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2" opacity="0.5"/>
+        <path d="M-8 -6 Q-18 -8 -20 0 Q-22 8 -14 10"
+              stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.4"/>
+        <path d="M8 -6 Q18 -8 20 0 Q22 8 14 10"
+              stroke="var(--card-line)" stroke-width="1" fill="none" opacity="0.4"/>
+        <circle cx="-3" cy="-1" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+        <circle cx="3" cy="-1" r="1.5" fill="var(--card-line)" opacity="0.3"/>
+      </g>
+
+      <!-- ======== THE EMPEROR — SEATED, RIGID ======== -->
+
+      <!-- Head -->
+      <circle cx="250" cy="155" r="28" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+      <circle cx="250" cy="155" r="18" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.5"/>
+      <circle cx="250" cy="155" r="6" fill="var(--card-line)" opacity="0.4"/>
+
+      <!-- Crown — angular, rigid, squared-off -->
+      <path d="M222 132 L222 118 L230 125 L238 112 L250 122 L262 112 L270 125 L278 118 L278 132"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.55"/>
+      <!-- Crown jewel -->
+      <circle cx="250" cy="118" r="3" fill="var(--card-line)" opacity="0.4"/>
+
+      <!-- Beard — angular, suggested by short lines below chin -->
+      <line x1="240" y1="178" x2="238" y2="195" stroke="var(--card-line)" stroke-width="0.6" opacity="0.2"/>
+      <line x1="250" y1="180" x2="250" y2="200" stroke="var(--card-line)" stroke-width="0.7" opacity="0.25"/>
+      <line x1="260" y1="178" x2="262" y2="195" stroke="var(--card-line)" stroke-width="0.6" opacity="0.2"/>
+
+      <!-- Body — angular, sharp, triangular but stiffer than the Empress -->
+      <!-- Upper torso — rigid triangle -->
+      <path d="M250 183 L215 310 L285 310 Z"
+            fill="var(--card-fill-light)" fill-opacity="0.35" stroke="var(--card-line)" stroke-width="1.5"/>
+
+      <!-- Armor cross on chest — Mars symbol simplified -->
+      <circle cx="250" cy="240" r="10" fill="none" stroke="var(--card-line-light)" stroke-width="1.2" opacity="0.45"/>
+      <line x1="260" y1="240" x2="275" y2="240" stroke="var(--card-line-light)" stroke-width="1.2" opacity="0.45"/>
+      <path d="M270 235 L275 240 L270 245" stroke="var(--card-line-light)" stroke-width="1" fill="none" opacity="0.35"/>
+
+      <!-- Lower body — seated, angular legs visible -->
+      <path d="M215 310 L200 440 L300 440 L285 310"
+            fill="var(--card-fill-light)" fill-opacity="0.2" stroke="var(--card-line)" stroke-width="1.2" opacity="0.6"/>
+      <!-- Legs — right angle, feet on ground -->
+      <line x1="210" y1="440" x2="210" y2="555" stroke="var(--card-line)" stroke-width="1.5" opacity="0.5"/>
+      <line x1="290" y1="440" x2="290" y2="555" stroke="var(--card-line)" stroke-width="1.5" opacity="0.5"/>
+      <!-- Feet — flat, grounded -->
+      <line x1="195" y1="555" x2="225" y2="555" stroke="var(--card-line)" stroke-width="1.2" opacity="0.4"/>
+      <line x1="275" y1="555" x2="305" y2="555" stroke="var(--card-line)" stroke-width="1.2" opacity="0.4"/>
+
+      <!-- ======== ARMS ======== -->
+      <!-- Right arm — holding ankh scepter, resting on armrest -->
+      <path d="M275 260 Q310 290 340 320"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.65"/>
+      <!-- Hand on armrest -->
+      <circle cx="342" cy="322" r="5" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.4"/>
+
+      <!-- Ankh scepter — held in right hand, extending upward -->
+      <line x1="345" y1="318" x2="360" y2="200"
+            stroke="var(--card-line)" stroke-width="2" opacity="0.6"/>
+      <!-- Ankh top — circle with cross -->
+      <circle cx="362" cy="190" r="12" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5" opacity="0.6"/>
+      <line x1="362" y1="202" x2="362" y2="225" stroke="var(--card-line)" stroke-width="1.5" opacity="0.55"/>
+      <line x1="354" y1="212" x2="370" y2="212" stroke="var(--card-line)" stroke-width="1.2" opacity="0.45"/>
+
+      <!-- Left arm — resting on armrest, holding orb -->
+      <path d="M225 260 Q190 290 158 320"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.65"/>
+      <circle cx="155" cy="322" r="5" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.4"/>
+
+      <!-- Orb in left hand -->
+      <circle cx="140" cy="310" r="12" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2" opacity="0.5"/>
+      <circle cx="140" cy="310" r="6" fill="none" stroke="var(--card-line-light)" stroke-width="0.5" opacity="0.3"/>
+      <!-- Cross on orb -->
+      <line x1="140" y1="298" x2="140" y2="306" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.35"/>
+      <line x1="136" y1="302" x2="144" y2="302" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.35"/>
+
+      <!-- ======== MOUNTAINS ======== -->
+      <!-- Barren, angular peaks behind — stark landscape, no vegetation -->
+      <path d="M40 650 L100 560 L140 620 L200 540 L250 610 L300 530 L360 600 L400 550 L460 640"
+            stroke="var(--card-line-dim)" stroke-width="1" fill="none" opacity="0.15"/>
+      <!-- Second range — farther -->
+      <path d="M60 660 L120 600 L170 640 L230 580 L280 630 L340 570 L380 620 L440 580 L480 650"
+            stroke="var(--card-line-dim)" stroke-width="0.6" fill="none" opacity="0.08"/>
+
+      <!-- Ground line -->
+      <line x1="60" y1="660" x2="440" y2="660" stroke="var(--card-line-dim)" stroke-width="0.8" opacity="0.15"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <!-- No card-number or card-name for the back -->
+
+  <!-- ================ CARD BACK DESIGN ================ -->
+  <div class="illustration" style="top:0; left:0; right:0; bottom:0;">
+    <svg width="550" height="950" viewBox="0 0 550 950" fill="none">
+
+      <!-- Central glow -->
+      <radialGradient id="backglow" cx="50%" cy="50%" r="35%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.08"/>
+        <stop offset="100%" stop-color="var(--card-line)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="550" height="950" fill="url(#backglow)"/>
+
+      <!-- ======== ORNATE INNER BORDER ======== -->
+      <!-- A second decorative frame inside the standard card frame -->
+      <rect x="35" y="35" width="480" height="880" rx="8"
+            fill="none" stroke="var(--card-line)" stroke-width="1" opacity="0.2"/>
+      <rect x="45" y="45" width="460" height="860" rx="6"
+            fill="none" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.12"/>
+
+      <!-- Corner diamonds on inner border -->
+      <!-- Top-left -->
+      <path d="M50 50 L58 42 L66 50 L58 58 Z" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="58" cy="50" r="2" fill="var(--card-line)" opacity="0.2"/>
+      <!-- Top-right -->
+      <path d="M484 50 L492 42 L500 50 L492 58 Z" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="492" cy="50" r="2" fill="var(--card-line)" opacity="0.2"/>
+      <!-- Bottom-left -->
+      <path d="M50 900 L58 892 L66 900 L58 908 Z" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="58" cy="900" r="2" fill="var(--card-line)" opacity="0.2"/>
+      <!-- Bottom-right -->
+      <path d="M484 900 L492 892 L500 900 L492 908 Z" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="492" cy="900" r="2" fill="var(--card-line)" opacity="0.2"/>
+
+      <!-- Mid-edge diamonds -->
+      <!-- Top center -->
+      <path d="M275 38 L281 30 L287 38 L281 46 Z" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.25"/>
+      <!-- Bottom center -->
+      <path d="M275 912 L281 904 L287 912 L281 920 Z" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.25"/>
+      <!-- Left center -->
+      <path d="M38 475 L46 469 L54 475 L46 481 Z" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.25"/>
+      <!-- Right center -->
+      <path d="M496 475 L504 469 L512 475 L504 481 Z" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.25"/>
+
+      <!-- ======== OUTERMOST RING ======== -->
+      <circle cx="275" cy="475" r="200" fill="none" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.1"/>
+      <circle cx="275" cy="475" r="185" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.15"/>
+
+      <!-- ======== COMPASS ROSE — THE CENTERPIECE ======== -->
+      <!-- This is the game's brand mark, the same motif from the sidebar -->
+
+      <!-- Outer circle -->
+      <circle cx="275" cy="475" r="120" fill="none" stroke="var(--card-line)" stroke-width="1.5" opacity="0.4"/>
+      <!-- Second circle -->
+      <circle cx="275" cy="475" r="105" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.25"/>
+
+      <!-- Cardinal direction points — long, elegant -->
+      <!-- North -->
+      <polygon points="275,355 265,440 275,420 285,440"
+               fill="var(--card-fill-light)" fill-opacity="0.2" stroke="var(--card-line)" stroke-width="1.5" opacity="0.65"/>
+      <!-- South -->
+      <polygon points="275,595 265,510 275,530 285,510"
+               fill="var(--card-fill-light)" fill-opacity="0.2" stroke="var(--card-line)" stroke-width="1.5" opacity="0.65"/>
+      <!-- East -->
+      <polygon points="395,475 310,465 330,475 310,485"
+               fill="var(--card-fill-light)" fill-opacity="0.2" stroke="var(--card-line)" stroke-width="1.5" opacity="0.65"/>
+      <!-- West -->
+      <polygon points="155,475 240,465 220,475 240,485"
+               fill="var(--card-fill-light)" fill-opacity="0.2" stroke="var(--card-line)" stroke-width="1.5" opacity="0.65"/>
+
+      <!-- Intercardinal points — shorter, thinner -->
+      <!-- NE -->
+      <polygon points="355,395 298,452 310,445 305,458"
+               fill="var(--card-fill-light)" fill-opacity="0.1" stroke="var(--card-line)" stroke-width="1" opacity="0.4"/>
+      <!-- SE -->
+      <polygon points="355,555 298,498 310,505 305,492"
+               fill="var(--card-fill-light)" fill-opacity="0.1" stroke="var(--card-line)" stroke-width="1" opacity="0.4"/>
+      <!-- SW -->
+      <polygon points="195,555 252,498 240,505 245,492"
+               fill="var(--card-fill-light)" fill-opacity="0.1" stroke="var(--card-line)" stroke-width="1" opacity="0.4"/>
+      <!-- NW -->
+      <polygon points="195,395 252,452 240,445 245,458"
+               fill="var(--card-fill-light)" fill-opacity="0.1" stroke="var(--card-line)" stroke-width="1" opacity="0.4"/>
+
+      <!-- Inner ring -->
+      <circle cx="275" cy="475" r="55" fill="none" stroke="var(--card-line)" stroke-width="1.2" opacity="0.35"/>
+      <circle cx="275" cy="475" r="42" fill="none" stroke="var(--card-line-light)" stroke-width="0.6" opacity="0.2"/>
+
+      <!-- Center ornament — the heart of the rose -->
+      <circle cx="275" cy="475" r="22" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5" opacity="0.7"/>
+      <circle cx="275" cy="475" r="14" fill="none" stroke="var(--card-line-light)" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="275" cy="475" r="6" fill="var(--card-line)" opacity="0.55"/>
+
+      <!-- Tiny dots at cardinal/intercardinal tips — jewel accents -->
+      <circle cx="275" cy="352" r="3" fill="var(--card-line)" opacity="0.35"/>
+      <circle cx="275" cy="598" r="3" fill="var(--card-line)" opacity="0.35"/>
+      <circle cx="398" cy="475" r="3" fill="var(--card-line)" opacity="0.35"/>
+      <circle cx="152" cy="475" r="3" fill="var(--card-line)" opacity="0.35"/>
+
+      <circle cx="357" cy="393" r="2" fill="var(--card-line)" opacity="0.25"/>
+      <circle cx="357" cy="557" r="2" fill="var(--card-line)" opacity="0.25"/>
+      <circle cx="193" cy="557" r="2" fill="var(--card-line)" opacity="0.25"/>
+      <circle cx="193" cy="393" r="2" fill="var(--card-line)" opacity="0.25"/>
+
+      <!-- ======== DECORATIVE RAYS ======== -->
+      <!-- Thin lines extending from outer ring to inner border — subtle grid of power -->
+      <!-- Cardinal extensions -->
+      <line x1="275" y1="275" x2="275" y2="55" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.08"/>
+      <line x1="275" y1="675" x2="275" y2="895" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.08"/>
+      <line x1="75" y1="475" x2="55" y2="475" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.08"/>
+      <line x1="475" y1="475" x2="495" y2="475" stroke="var(--card-line-dim)" stroke-width="0.5" opacity="0.08"/>
+
+      <!-- ======== FOUR SUIT SYMBOLS — small, at cardinal positions ======== -->
+      <!-- Placed on the outer ring at N/S/E/W, reinforcing the game's four-suit system -->
+
+      <!-- Cup — North (top) -->
+      <g transform="translate(275, 310)">
+        <path d="M-8 14 L-6 4 Q0 -2 6 4 L8 14 Q0 18 -8 14Z"
+              fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1" opacity="0.35"/>
+        <line x1="-1" y1="14" x2="-1" y2="20" stroke="var(--card-line)" stroke-width="0.6" opacity="0.25"/>
+        <line x1="1" y1="14" x2="1" y2="20" stroke="var(--card-line)" stroke-width="0.6" opacity="0.25"/>
+        <ellipse cx="0" cy="21" rx="5" ry="2" fill="none" stroke="var(--card-line)" stroke-width="0.5" opacity="0.2"/>
+      </g>
+
+      <!-- Pentacle — South (bottom) -->
+      <g transform="translate(275, 628)">
+        <circle cx="0" cy="0" r="10" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1" opacity="0.35"/>
+        <polygon points="0,-7 2.2,-2.2 7.5,-2.2 3.5,1 4.5,6.5 0,3.2 -4.5,6.5 -3.5,1 -7.5,-2.2 -2.2,-2.2"
+                 fill="none" stroke="var(--card-line-light)" stroke-width="0.6" opacity="0.25"/>
+      </g>
+
+      <!-- Sword — East (right) -->
+      <g transform="translate(428, 475)">
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="var(--card-line)" stroke-width="1.2" opacity="0.35"/>
+        <path d="M0 -10 L-2 -7 L2 -7 Z" fill="var(--card-line)" opacity="0.25"/>
+        <line x1="-6" y1="2" x2="6" y2="2" stroke="var(--card-line)" stroke-width="0.8" opacity="0.3"/>
+        <circle cx="0" cy="10" r="2" fill="none" stroke="var(--card-line)" stroke-width="0.5" opacity="0.2"/>
+      </g>
+
+      <!-- Wand — West (left) -->
+      <g transform="translate(122, 475)">
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="var(--card-line)" stroke-width="1.2" opacity="0.35"/>
+        <path d="M0 -10 Q-3 -16 0 -20 Q3 -16 0 -10"
+              fill="var(--card-accent)" fill-opacity="0.2" stroke="var(--card-accent-light)" stroke-width="0.6" opacity="0.3"/>
+        <circle cx="0" cy="10" r="1.5" fill="var(--card-line)" opacity="0.15"/>
+      </g>
+
+      <!-- ======== SCATTERED STARS ======== -->
+      <!-- Small dots in the negative space — the card back is a night sky -->
+      <circle cx="90" cy="120" r="1" fill="var(--card-line)" opacity="0.1"/>
+      <circle cx="460" cy="150" r="1" fill="var(--card-line)" opacity="0.1"/>
+      <circle cx="120" cy="800" r="1" fill="var(--card-line)" opacity="0.08"/>
+      <circle cx="430" cy="820" r="1" fill="var(--card-line)" opacity="0.08"/>
+      <circle cx="80" cy="350" r="1" fill="var(--card-line)" opacity="0.07"/>
+      <circle cx="470" cy="600" r="1" fill="var(--card-line)" opacity="0.07"/>
+      <circle cx="100" cy="650" r="0.8" fill="var(--card-line)" opacity="0.06"/>
+      <circle cx="450" cy="300" r="0.8" fill="var(--card-line)" opacity="0.06"/>
+      <circle cx="150" cy="180" r="1.2" fill="var(--card-line)" opacity="0.09"/>
+      <circle cx="400" cy="770" r="1.2" fill="var(--card-line)" opacity="0.09"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>

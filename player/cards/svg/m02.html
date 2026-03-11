@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">II</div>
+  <div class="card-name">The High Priestess</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- Cool, deep glow — lunar, internal, still -->
+      <radialGradient id="priestessglow" cx="50%" cy="45%" r="35%">
+        <stop offset="0%" stop-color="var(--card-accent-light)" stop-opacity="0.07"/>
+        <stop offset="100%" stop-color="var(--card-accent)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#priestessglow)"/>
+
+      <!-- ======== THE VEIL ======== -->
+      <!-- Behind the figure, between the pillars — the threshold -->
+      <!-- Suggested by faint vertical lines with pomegranate dots -->
+      <line x1="160" y1="80" x2="160" y2="620" stroke="var(--card-accent)" stroke-width="0.4" opacity="0.06"/>
+      <line x1="195" y1="80" x2="195" y2="620" stroke="var(--card-accent)" stroke-width="0.4" opacity="0.06"/>
+      <line x1="230" y1="80" x2="230" y2="620" stroke="var(--card-accent)" stroke-width="0.4" opacity="0.06"/>
+      <line x1="270" y1="80" x2="270" y2="620" stroke="var(--card-accent)" stroke-width="0.4" opacity="0.06"/>
+      <line x1="305" y1="80" x2="305" y2="620" stroke="var(--card-accent)" stroke-width="0.4" opacity="0.06"/>
+      <line x1="340" y1="80" x2="340" y2="620" stroke="var(--card-accent)" stroke-width="0.4" opacity="0.06"/>
+      <!-- Pomegranates on the veil — small circles with dot centers -->
+      <circle cx="178" cy="180" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.18"/>
+      <circle cx="178" cy="180" r="1.5" fill="var(--card-accent-light)" opacity="0.12"/>
+      <circle cx="322" cy="200" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.18"/>
+      <circle cx="322" cy="200" r="1.5" fill="var(--card-accent-light)" opacity="0.12"/>
+      <circle cx="178" cy="340" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.15"/>
+      <circle cx="178" cy="340" r="1.5" fill="var(--card-accent-light)" opacity="0.1"/>
+      <circle cx="322" cy="360" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.15"/>
+      <circle cx="322" cy="360" r="1.5" fill="var(--card-accent-light)" opacity="0.1"/>
+      <circle cx="178" cy="500" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.12"/>
+      <circle cx="322" cy="520" r="4" fill="none" stroke="var(--card-accent-light)" stroke-width="0.7" opacity="0.12"/>
+
+      <!-- ======== TWO PILLARS — B and J ======== -->
+
+      <!-- Left pillar — B (Boaz, dark, feminine) -->
+      <g transform="translate(105, 80)">
+        <rect x="-20" y="0" width="40" height="540" fill="var(--card-fill-light)" fill-opacity="0.15" stroke="var(--card-line)" stroke-width="1.5"/>
+        <!-- Capital -->
+        <rect x="-24" y="-10" width="48" height="14" rx="2" fill="none" stroke="var(--card-line)" stroke-width="1.2"/>
+        <!-- Base -->
+        <rect x="-24" y="540" width="48" height="14" rx="2" fill="none" stroke="var(--card-line)" stroke-width="1.2"/>
+        <!-- Letter B -->
+        <text x="0" y="280" text-anchor="middle" font-family="'Cormorant Garamond', serif"
+              font-size="24" fill="var(--card-line)" opacity="0.35" dominant-baseline="middle">B</text>
+      </g>
+
+      <!-- Right pillar — J (Jachin, light, masculine) -->
+      <g transform="translate(395, 80)">
+        <rect x="-20" y="0" width="40" height="540" fill="var(--card-fill-light)" fill-opacity="0.15" stroke="var(--card-line)" stroke-width="1.5"/>
+        <!-- Capital -->
+        <rect x="-24" y="-10" width="48" height="14" rx="2" fill="none" stroke="var(--card-line)" stroke-width="1.2"/>
+        <!-- Base -->
+        <rect x="-24" y="540" width="48" height="14" rx="2" fill="none" stroke="var(--card-line)" stroke-width="1.2"/>
+        <!-- Letter J -->
+        <text x="0" y="280" text-anchor="middle" font-family="'Cormorant Garamond', serif"
+              font-size="24" fill="var(--card-line)" opacity="0.35" dominant-baseline="middle">J</text>
+      </g>
+
+      <!-- ======== LUNAR CROWN ======== -->
+      <!-- Three phases: waning crescent — full — waxing crescent -->
+      <g transform="translate(250, 105)">
+        <!-- Full moon center -->
+        <circle cx="0" cy="0" r="12" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+        <circle cx="0" cy="0" r="7" fill="none" stroke="var(--card-line-light)" stroke-width="0.6" opacity="0.5"/>
+        <circle cx="0" cy="0" r="3" fill="var(--card-line)" opacity="0.5"/>
+        <!-- Waning crescent left -->
+        <circle cx="-28" cy="0" r="10" fill="none" stroke="var(--card-line)" stroke-width="1.2" opacity="0.6"/>
+        <circle cx="-24" cy="0" r="8" fill="var(--card-fill-light)" fill-opacity="0.5"/>
+        <!-- Waxing crescent right -->
+        <circle cx="28" cy="0" r="10" fill="none" stroke="var(--card-line)" stroke-width="1.2" opacity="0.6"/>
+        <circle cx="32" cy="0" r="8" fill="var(--card-fill-light)" fill-opacity="0.5"/>
+        <!-- Connecting arc -->
+        <path d="M-38 0 Q-20 -18 0 -14 Q20 -18 38 0"
+              stroke="var(--card-line-dim)" stroke-width="0.6" fill="none" opacity="0.2"/>
+      </g>
+
+      <!-- ======== THE HIGH PRIESTESS — SEATED FIGURE ======== -->
+
+      <!-- Head -->
+      <circle cx="250" cy="165" r="28" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+      <circle cx="250" cy="165" r="18" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.5"/>
+      <circle cx="250" cy="165" r="6" fill="var(--card-line)" opacity="0.4"/>
+
+      <!-- Cross on chest — equal-armed solar cross -->
+      <line x1="250" y1="210" x2="250" y2="240" stroke="var(--card-line-light)" stroke-width="1.5" opacity="0.55"/>
+      <line x1="237" y1="225" x2="263" y2="225" stroke="var(--card-line-light)" stroke-width="1.5" opacity="0.55"/>
+
+      <!-- Body — wide, robed, seated, triangular — suggesting a throne-like mass -->
+      <!-- Upper body / torso -->
+      <path d="M250 193 L215 310 L285 310 Z"
+            fill="var(--card-fill-light)" fill-opacity="0.35" stroke="var(--card-line)" stroke-width="1.5"/>
+      <!-- Lower robe — wider, flowing, seated spread -->
+      <path d="M215 310 L170 530 L330 530 L285 310"
+            fill="var(--card-fill-light)" fill-opacity="0.25" stroke="var(--card-line)" stroke-width="1.2" opacity="0.7"/>
+      <!-- Robe hem — horizontal, grounding -->
+      <line x1="170" y1="530" x2="330" y2="530" stroke="var(--card-line)" stroke-width="1.5" opacity="0.5"/>
+
+      <!-- ======== ARMS AND SCROLL ======== -->
+      <!-- Both arms forward in lap, holding a partially hidden scroll -->
+
+      <!-- Left arm -->
+      <path d="M228 260 Q205 310 210 360"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.65"/>
+      <!-- Right arm -->
+      <path d="M272 260 Q295 310 290 360"
+            stroke="var(--card-line)" stroke-width="1.5" fill="none" opacity="0.65"/>
+
+      <!-- Scroll — rectangular with rolled ends, partially visible -->
+      <rect x="215" y="350" width="70" height="30" rx="4"
+            fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2"/>
+      <!-- Scroll rolled ends -->
+      <ellipse cx="215" cy="365" rx="5" ry="15" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+      <ellipse cx="285" cy="365" rx="5" ry="15" fill="none" stroke="var(--card-line)" stroke-width="0.8" opacity="0.5"/>
+      <!-- TORA letters — partially visible, some hidden by robe -->
+      <text x="232" y="370" font-family="'Cormorant Garamond', serif" font-size="14"
+            fill="var(--card-line-light)" opacity="0.4" letter-spacing="4">TO</text>
+      <!-- The remaining letters hidden — the rest of the mystery is concealed -->
+      <rect x="260" y="352" width="22" height="26" fill="var(--card-fill-light)" fill-opacity="0.4"/>
+
+      <!-- Hands — suggested by small shapes at scroll edges -->
+      <circle cx="218" cy="358" r="4" fill="none" stroke="var(--card-line)" stroke-width="0.7" opacity="0.4"/>
+      <circle cx="282" cy="358" r="4" fill="none" stroke="var(--card-line)" stroke-width="0.7" opacity="0.4"/>
+
+      <!-- ======== CRESCENT MOON AT FEET ======== -->
+      <g transform="translate(250, 570)">
+        <!-- Crescent — waxing moon shape -->
+        <circle cx="0" cy="0" r="18" fill="none" stroke="var(--card-line)" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="8" cy="-2" r="15" fill="var(--card-fill-light)" fill-opacity="0.6"/>
+        <!-- The visible crescent that remains -->
+      </g>
+
+      <!-- ======== WATER AT BASE ======== -->
+      <!-- The flowing robe becomes water — the unconscious flowing beneath -->
+      <path d="M130 620 Q190 608 250 616 Q310 624 370 612"
+            stroke="var(--card-accent-light)" stroke-width="0.8" fill="none" opacity="0.18"/>
+      <path d="M140 636 Q200 626 260 632 Q320 638 380 628"
+            stroke="var(--card-accent)" stroke-width="0.6" fill="none" opacity="0.12"/>
+      <path d="M150 650 Q210 642 270 648 Q330 654 390 644"
+            stroke="var(--card-accent)" stroke-width="0.5" fill="none" opacity="0.08"/>
+
+      <!-- ======== ATMOSPHERE ======== -->
+      <!-- Very faint stars in the veil area — hidden knowledge -->
+      <circle cx="190" cy="130" r="1.5" fill="var(--card-line)" opacity="0.12"/>
+      <circle cx="310" cy="140" r="1.5" fill="var(--card-line)" opacity="0.12"/>
+      <circle cx="200" cy="250" r="1" fill="var(--card-line)" opacity="0.1"/>
+      <circle cx="300" cy="270" r="1" fill="var(--card-line)" opacity="0.1"/>
+      <circle cx="210" cy="420" r="1.2" fill="var(--card-line)" opacity="0.08"/>
+      <circle cx="290" cy="440" r="1.2" fill="var(--card-line)" opacity="0.08"/>
+
+      <!-- Floor line -->
+      <line x1="80" y1="635" x2="420" y2="635" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.12"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>
