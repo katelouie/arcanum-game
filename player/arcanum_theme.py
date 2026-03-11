@@ -226,8 +226,10 @@ def inject_theme():
         pass  # May already be registered
 
     # Load the external stylesheets (shared=True so it works with @ui.page)
+    import time
+    _css_v = int(time.time())
     ui.add_head_html(
-        '<link rel="stylesheet" href="/theme/arcanum_styles.css">', shared=True
+        f'<link rel="stylesheet" href="/theme/arcanum_styles.css?v={_css_v}">', shared=True
     )
     # Card CSS for SVG tarot cards (theme-reactive via --card-* variables)
     ui.add_head_html(

@@ -67,6 +67,7 @@ class GameSession:
         self.current_screen: str = "landing"
         self.active_theme: str = "default"  # sticky — persists until a tag overrides it
         self.card_style: str = "arcanum"  # "arcanum" (SVG) or "classic" (Rider-Waite)
+        self.font_size: str = "medium"  # "small", "medium", "large"
         self.main_container = None
         self.card_drawer = None
         self.card_drawer_content = None
@@ -362,11 +363,12 @@ class GameSession:
         t = get_theme(theme)
         is_dream = theme != "default"
 
-        # Apply CSS theme to the DOM (switches CSS variables)
+        # Apply CSS theme and font size to the DOM
         if theme == "default":
             js = "document.documentElement.removeAttribute('data-theme');"
         else:
             js = f"document.documentElement.setAttribute('data-theme', '{theme}');"
+        js += f" document.documentElement.setAttribute('data-font-size', '{self.font_size}');"
         ui.timer(0.01, lambda: ui.run_javascript(js), once=True)
 
         # --- Sidebar + Content Layout ---
@@ -420,18 +422,30 @@ class GameSession:
                 divider(width="80%")
 
                 # Card style toggle
-                section_label("Card Style")
-                with ui.element("div").style(
-                    "width: 100%; padding: 0 8px; display: flex; gap: 4px;"
+                section_label("Card Art")
+                with ui.element("div").classes("arc-toggle").style(
+                    "width: 100%; padding: 0 8px;"
                 ):
-                    for style_name, label in [("arcanum", "Arcanum"), ("classic", "Classic")]:
-                        is_active = self.card_style == style_name
-                        cls = "arc-nav-btn active" if is_active else "arc-nav-btn"
-                        with ui.element("button").classes(cls).on(
-                            "click",
-                            lambda sn=style_name: self._set_card_style(sn),
-                        ):
-                            ui.label(label)
+                    ui.toggle(
+                        {"arcanum": "Arcanum", "classic": "Classic"},
+                        value=self.card_style,
+                        on_change=lambda e: self._set_card_style(e.value),
+                    ).props("dense no-caps spread flat unelevated").style(
+                        "width: 100%;"
+                    )
+
+                # Font size toggle
+                section_label("Text Size")
+                with ui.element("div").classes("arc-toggle").style(
+                    "width: 100%; padding: 0 8px;"
+                ):
+                    ui.toggle(
+                        {"small": "S", "medium": "M", "large": "L"},
+                        value=self.font_size,
+                        on_change=lambda e: self._set_font_size(e.value),
+                    ).props("dense no-caps spread flat unelevated").style(
+                        "width: 100%;"
+                    )
 
                 divider(width="80%")
 
@@ -525,6 +539,13 @@ class GameSession:
         """Switch between 'arcanum' (SVG) and 'classic' (Rider-Waite) cards."""
         self.card_style = style
         self.update_ui()
+
+    def _set_font_size(self, size: str):
+        """Switch content text size (small/medium/large)."""
+        self.font_size = size
+        ui.run_javascript(
+            f"document.documentElement.setAttribute('data-font-size', '{size}');"
+        )
 
     def make_choice(self, choice_index: int):
         """Handle player choice and update the story."""

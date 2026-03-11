@@ -181,8 +181,27 @@ body {
 .arc-body {
     font-family: var(--body-font);
     color: var(--text);
-    font-size: 17px;
-    line-height: 1.85;
+    font-size: var(--content-font-size, 17px);
+    line-height: var(--content-line-height, 1.85);
+}
+
+/* Font size presets — applied via data-font-size on <html> */
+[data-font-size="small"] {
+    --content-font-size: 15px;
+    --content-line-height: 1.75;
+    --choice-font-size: 14px;
+}
+
+[data-font-size="medium"] {
+    --content-font-size: 17px;
+    --content-line-height: 1.85;
+    --choice-font-size: 16px;
+}
+
+[data-font-size="large"] {
+    --content-font-size: 20px;
+    --content-line-height: 1.95;
+    --choice-font-size: 18px;
 }
 
 .arc-label {
@@ -366,6 +385,64 @@ body {
 }
 
 /* ================================================================
+   SIDEBAR TOGGLE (Card Art, etc.)
+   ================================================================ */
+.arc-toggle .q-btn-toggle {
+    border: 1px solid color-mix(in srgb, var(--gold-dim) 40%, transparent) !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+}
+
+.arc-toggle .q-btn {
+    font-family: var(--heading-font) !important;
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+    color: var(--text-muted) !important;
+    background: transparent !important;
+    transition: all 0.2s ease;
+}
+
+.arc-toggle .q-btn .q-btn__content {
+    color: inherit !important;
+}
+
+/* Active state — Quasar's .text-primary uses !important, so we need
+   higher specificity to override it. Double-class + parent beats it. */
+.arc-toggle .q-btn-toggle .q-btn.text-primary,
+.arc-toggle .q-btn-toggle .q-btn.text-primary .q-btn__content {
+    background: color-mix(in srgb, var(--gold) 15%, transparent) !important;
+    color: var(--gold-light) !important;
+}
+
+[data-theme="cyberpunk"] .arc-toggle .q-btn-toggle .q-btn.text-primary,
+[data-theme="cyberpunk"] .arc-toggle .q-btn-toggle .q-btn.text-primary .q-btn__content {
+    background: color-mix(in srgb, var(--accent) 15%, transparent) !important;
+    color: var(--accent) !important;
+}
+
+[data-theme="gothic"] .arc-toggle .q-btn-toggle .q-btn.text-primary,
+[data-theme="gothic"] .arc-toggle .q-btn-toggle .q-btn.text-primary .q-btn__content {
+    background: color-mix(in srgb, var(--accent) 12%, transparent) !important;
+    color: var(--gold-light) !important;
+}
+
+[data-theme="kind"] .arc-toggle .q-btn-toggle .q-btn.text-primary,
+[data-theme="kind"] .arc-toggle .q-btn-toggle .q-btn.text-primary .q-btn__content {
+    background: color-mix(in srgb, var(--moss, var(--gold)) 15%, transparent) !important;
+    color: var(--gold-light) !important;
+}
+
+[data-theme="weird_west"] .arc-toggle .q-btn {
+    font-weight: 700 !important;
+}
+
+[data-theme="weird_west"] .arc-toggle .q-btn-toggle .q-btn.text-primary,
+[data-theme="weird_west"] .arc-toggle .q-btn-toggle .q-btn.text-primary .q-btn__content {
+    background: color-mix(in srgb, var(--accent) 15%, transparent) !important;
+    color: var(--gold-light) !important;
+}
+
+/* ================================================================
    CONTENT AREA
    ================================================================ */
 .arc-content {
@@ -521,7 +598,7 @@ body {
     border: 1px solid color-mix(in srgb, var(--gold-dim) 25%, transparent);
     color: var(--text);
     font-family: var(--heading-font);
-    font-size: 16px;
+    font-size: var(--choice-font-size, 16px);
     font-weight: 500;
     letter-spacing: 1px;
     padding: 14px 24px;
@@ -743,16 +820,18 @@ body {
     padding: 6px 0;
     border-bottom: 1px solid color-mix(in srgb, var(--gold-dim) 10%, transparent);
     font-family: var(--heading-font);
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .arc-stat-label {
-    color: var(--text-muted);
+    color: var(--text);
     letter-spacing: 1px;
+    font-weight: 500;
 }
 
 .arc-stat-value {
-    color: var(--gold-dim);
+    color: var(--gold-light);
+    font-weight: 600;
 }
 
 
