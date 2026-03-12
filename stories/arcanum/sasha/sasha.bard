@@ -1,0 +1,10 @@
+:: Sasha
+@if sasha.sessions_completed == 0:
+    -> Sasha.Session1.Start
+@elif sasha.sessions_completed == 1:
+    -> Sasha.Session2.Start
+@elif sasha.sessions_completed == 2:
+    -> Sasha.Session3.Start
+@else:
+    Sasha's arc is complete. You smile when you think of them.
+@endif

@@ -1,0 +1,1461 @@
+# ============================================================================
+# SASHA SADR - SESSION 1: "Just Practice"
+# ============================================================================
+#
+# STRUCTURE:
+# - Opening & Casual Arrival
+# - The "Just Practice" Setup
+# - The Moment It Gets Real
+# - 4-Card Spread: "What's Really Going On"
+#     Position 1: The Surface (2 cards)
+#     Position 2: Beneath (2 cards)
+#     Position 3: The Other Person (2 cards)
+#     Position 4: What You Need (2 cards)
+# - Synthesis (conditional based on cards + quality)
+# - Payment & Departure (outcome determination)
+#
+# REVERSALS: 30% chance per card
+# INTERPRETATION OPTIONS: 3-4 per card, 1-2 style-gated, rest quality-varied
+# HUB CONVERGENCE: After each position, all branches reconverge
+#
+# Flags in this session:
+# discussed_relationship: bool = False
+# discussed_pattern: bool = False
+# discussed_fear: bool = False
+# discussed_jordan: bool = False
+# ============================================================================
+
+# ============================================================================
+# SESSION START
+# ============================================================================
+
+:: Sasha.Session1.Start
+~ session = create_session(sasha)
+~ session.interpretation_good = 0
+~ session.interpretation_okay = 0
+~ session.interpretation_bad = 0
+~ session.atmosphere = 2
+~ session.room_energy = 2
+You're in your reading corner. Late afternoon light slants through the blinds.
+
+Your phone buzzes.
+
+**[Text from: Sasha]**
+*"heyyy so im outside ur building. this is the tarot thing right?? u said practice. im PRACTICE. 🃏"*
+
+Another buzz.
+
+*"also i brought snacks. u better have coffee."*
+
+@if reader.background == "self_taught":
+    You smile. Of course Sasha would make this feel easy. They were your roommate for two years before they moved in with Jordan — they know exactly when you need someone to show up and not make it weird.
+@else:
+    You smile. Sasha's been texting you since Margaret's reading, asking when they could "be your guinea pig." You've known them since college — old roommate, still one of your closest friends, even after they moved in with their partner Jordan six months back. Today they just showed up.
+@endif
+
++ [Buzz them in with a smile] -> Sasha.Session1.BuzzIn
++ [Text back: "It's not PRACTICE, it's a reading"] -> Sasha.Session1.TextBack
++ [Text back: "What kind of snacks"] -> Sasha.Session1.TextSnacks
+
+:: Sasha.Session1.BuzzIn
+You hit the buzzer.
+
+Footsteps on the stairs — quick, taking them two at a time. A thud, a muffled "ow," and then a knock that's more of a drumroll.
+
++ [Open the door] -> Sasha.Session1.Arrival
+
+:: Sasha.Session1.TextBack
+*"omg okay okay SORRY. a ~reading~. very mystical. very serious."*
+
+*"im still practice tho"*
+
+*"buzz me in its cold"*
+
+~ sasha.add_comfort(5)
++ [Buzz them in, laughing] -> Sasha.Session1.BuzzIn
+
+:: Sasha.Session1.TextSnacks
+*"trail mix (the good kind with the chocolate chips) and those rice crackers you like. NOW BUZZ ME IN"*
+
+~ sasha.add_trust(5)
+~ session.atmosphere += 1
++ [Buzz them in] -> Sasha.Session1.BuzzIn
+
+:: Sasha.Session1.Arrival
+**Sasha Sadr** fills your doorway.
+
+Not physically — they're average height, slim build, dark curly hair pulled into a messy bun with a pen stuck through it. Olive skin, sharp nose, warm brown eyes behind chunky glasses that are always slightly crooked.
+
+They fill the space *energetically*. Sasha walks into rooms like the room was waiting for them.
+
+Today: oversized flannel over a band tee (Mitski), ripped jeans, beat-up Docs. A tote bag slung over one shoulder that says "I READ BANNED BOOKS" in faded letters. They're holding a paper bag of snacks and a thermos of what you hope is coffee.
+
+"Okay," they say, kicking off their shoes without being asked. "I'm here. I'm your lab rat. Read my future. Tell me I'm going to be rich and famous and that Jordan is definitely going to—"
+
+They stop. Recalibrate.
+
+"—that everything's going to be great," they finish, too brightly.
+
+You know Jordan. You've had dinner with Jordan. Jordan brought wine to your birthday and seemed perfectly nice. But something about the way Sasha just said their name — the flinch before the brightness, the sentence that got cut off — doesn't match the "we're great, everything's great" version you've been getting for six months.
+
++ [Note the tone, but don't push yet] -> Sasha.Session1.NotePush
++ ["How IS Jordan? You haven't mentioned them much lately."] -> Sasha.Session1.AskJordan
++ [Let it go, keep things light] -> Sasha.Session1.KeepLight
+
+:: Sasha.Session1.NotePush
+~ reader.add_insight(1)
+~ session.atmosphere += 1
+You file it away. Not the name — you know the name. The *tone.* The way "Jordan" came out like a reflex and got yanked back like a hand from a flame.
+
+Something's changed. The "we're so happy" texts have been getting shorter. The group hang invitations have dried up. You haven't seen Sasha in person in... weeks? A month?
+
+There's a story there. The cards will find it.
+
+"Come in, come in. Coffee?"
+
+Sasha drops their bag on your couch and starts unpacking snacks like they're setting up camp. "Dude, YOUR coffee. I brought the good stuff. French press or drip?"
+
+-> Sasha.Session1.Settling
+
+:: Sasha.Session1.AskJordan
+~ sasha.add_trust(-3)
+~ sasha.add_openness(-1)
+Something tightens behind their eyes. Just for a second.
+
+"Jordan's great! We're great. Everything's—" They wave a hand. "Great. Super great. Anyway! Tarot! Let's do this."
+
+Three "greats" in one breath. That's not how people talk about things that are actually great.
+
+But you pushed too early. The brightness is back, cranked up a notch, and you can feel the door closing.
+
+That's okay. The cards are patient.
+
+"Come in. Coffee?"
+
+"Obviously," they say, and the over-brightness settles to something almost normal.
+
+-> Sasha.Session1.Settling
+
+:: Sasha.Session1.KeepLight
+~ sasha.add_comfort(5)
+"Get in here, you brought snacks and that's the only qualification I need."
+
+Sasha grins — real, full, the kind that crinkles their nose. "See, THIS is why I agreed to be your guinea pig. Low standards, high snack tolerance."
+
+They drop their bag on your couch and start arranging trail mix in a bowl like it's an art installation. "Okay but seriously, French press or drip?"
+
+-> Sasha.Session1.Settling
+
+# ============================================================================
+# SETTLING IN
+# ============================================================================
+
+:: Sasha.Session1.Settling
+The next ten minutes are just... Sasha.
+
+Coffee gets made (French press, they insist, "drip is for people who have given up on joy"). Trail mix gets arranged. Sasha tells you about their week — the bug at work that took three days to find ("it was a SEMICOLON, {reader.name}, a SEMICOLON"), their landlord's passive-aggressive notes about recycling, a podcast about cults they're obsessed with.
+
+They're good at this. At filling space. At making everything feel easy and warm and slightly chaotic.
+
+You notice they haven't sat down at the reading table yet.
+
+They're orbiting it. Coffee in hand, talking, gesturing, but always angled slightly away from the cards. Like they're circling a pool, testing the temperature with one toe.
+
++ ["Ready when you are. No rush."] -> Sasha.Session1.GentleInvite
++ ["You know you actually have to sit down for this part, right?"] -> Sasha.Session1.TeasingInvite
++ [Just wait. Let them come to it.] -> Sasha.Session1.PatientWait
+
+:: Sasha.Session1.GentleInvite
+~ sasha.add_comfort(5)
+~ reader.add_empathy(1)
+Sasha looks at the table. At the cards. At you.
+
+"Yeah," they say, quieter than before. "Okay. Yeah."
+
+They sit down across from you. Set their coffee to the side. Tuck a curl behind their ear.
+
+"So how does this work? Do I, like, ask a question? Or do you just... know things?"
+
+-> Sasha.Session1.TheSetup
+
+:: Sasha.Session1.TeasingInvite
+~ sasha.add_comfort(3)
+Sasha laughs. "Wow, bossy. Is this your reading-room voice? Very authoritative."
+
+But they sit. Pull the chair in. Rest their elbows on the table and their chin in their hands.
+
+"Okay. I'm sitting. Hit me with your mystical wisdom."
+
+-> Sasha.Session1.TheSetup
+
+:: Sasha.Session1.PatientWait
+~ reader.add_insight(1)
+~ sasha.add_trust(5)
+~ session.atmosphere += 1
+You sip your coffee. Let the silence be comfortable.
+
+Sasha's monologue slows. The gestures get smaller. The stories run out.
+
+They look at the table.
+
+"...Okay," they say, almost to themselves. They sit down.
+
+Their hands wrap around their coffee mug. Their knee bounces under the table.
+
+"So," they say. "Cards."
+
+-> Sasha.Session1.TheSetup
+
+# ============================================================================
+# THE SETUP — "JUST PRACTICE"
+# ============================================================================
+
+:: Sasha.Session1.TheSetup
+"You can ask a question," you say. "Or you can just let the cards show you what they want to show you. There's no wrong way."
+
+Sasha drums their fingers on the table. Thinking.
+
+"Okay, here's the thing," they say. "I don't actually have, like, a *question*. I'm just here because you needed practice and I'm a good friend and also I was bored."
+
+They pause.
+
+"So just... do a general thing? Like a check-up? 'How's Sasha doing, cards?'"
+
++ ["A check-up works perfectly."] -> Sasha.Session1.AcceptCheckup
++ ["The cards don't really do 'general.' They find what matters."] -> Sasha.Session1.CardsFind
++ ["Sure — but fair warning, the cards have a way of finding what you're not saying."] -> Sasha.Session1.FairWarning
+
+:: Sasha.Session1.AcceptCheckup
+~ sasha.add_comfort(3)
+"Cool. Easy. Low stakes."
+
+They lean back, arms crossed, smiling. Totally relaxed.
+
+*They think this is going to be fun and meaningless.*
+
+You pick up the deck.
+
+-> Sasha.Session1.ShuffleIntro
+
+:: Sasha.Session1.CardsFind
+~ reader.add_competence(1)
+~ sasha.add_trust(3)
+Sasha's eyebrows go up. "Oh. Ominous."
+
+"Not ominous. Just... honest. The cards reflect what's actually happening, not what we think is happening."
+
+"Huh." They sit up a little straighter. "Okay. That's... actually kind of cool."
+
+-> Sasha.Session1.ShuffleIntro
+
+:: Sasha.Session1.FairWarning
+~ reader.add_insight(1)
+~ sasha.add_trust(3)
+~ sasha.add_openness(1)
+Sasha's smile falters for just a second. Something passes behind their eyes — quick, like a fish in dark water.
+
+"What I'm not saying?" They laugh, but it's hollow at the edges. "I'm an open book, babe. Ask anyone."
+
+*That's exactly what someone who isn't an open book would say.*
+
+"Sure," you say, and pick up the deck.
+
+-> Sasha.Session1.ShuffleIntro
+
+# ============================================================================
+# THE SHUFFLE — THE ENERGY SHIFTS
+# ============================================================================
+
+:: Sasha.Session1.ShuffleIntro
+You shuffle. The cards feel warm in your hands — familiar, alive.
+
+Sasha watches, fascinated despite themselves. "Do you, like, *feel* things when you shuffle? Is it a vibe? A frequency?"
+
+"Something like that."
+
+"Cool cool cool. Very normal."
+
+You spread the cards face-down on the cloth. "Pick four," you say. "Don't think about it. Just let your hand go where it wants."
+
+Sasha reaches out. Their hand hovers over the cards, drifting.
+
+They pick one. Then another. Hesitate over the third — their fingers trembling slightly — then grab it fast, like ripping off a bandaid.
+
+The fourth comes easy. Almost an afterthought.
+
+"Done," they say. "Was that right? That felt weird. The third one felt..." They shake their hand like they touched something hot. "Tingly? Is that normal?"
+
+@if reader.mystical_affinity >= 3:
+    You felt it too. The third card *pulled* at them. Not physically — but in the way that certain songs hit you in the chest before you know why.
+@else:
+    You're not sure what they felt. But their hand is still shaking slightly.
+@endif
+
+"That's perfect," you say. "Let me set up the spread."
+
++ [Arrange the cards with care and intention] -> Sasha.Session1.SpreadSetup
+
+:: Sasha.Session1.SpreadSetup
+
+@py:
+# Constrained card pools per position
+# 30% reversal chance
+deck_surface = Deck(cards=["Two of Cups", "Three of Cups"], reversals=[0.3, 0.3])
+deck_beneath = Deck(cards=["Eight of Swords", "Five of Cups"], reversals=[0.3, 0.3])
+deck_other = Deck(cards=["The Devil", "Seven of Swords"], reversals=[0.3, 0.3])
+deck_need = Deck(cards=["The Star", "Strength"], reversals=[0.3, 0.3])
+
+reading = Reading(spread_id="sasha-whats-really-going-on", decks=[
+    deck_surface, deck_beneath, deck_other, deck_need
+])
+cards = reading.draw_cards()
+@endpy
+
+You lay the four cards in a row. Left to right: Surface, Beneath, The Other Person, What You Need.
+
+"Four cards," you say. "What's Really Going On."
+
+Sasha shifts in their chair. "That's the name of the spread?"
+
+"That's the name."
+
+"...Cool. Not terrifying at all."
+
+@render render_reading(reading=reading)
+
+You turn over the first card.
+
+-> Sasha.Session1.Position1Hub
+
+# ============================================================================
+# POSITION 1: THE SURFACE
+# ============================================================================
+
+:: Sasha.Session1.Position1Hub
+@render render_reading(reading=reading)
+
+**Position 1: The Surface — What You're Showing the World**
+
+**{cards[0].get_display_name()}**
+
+@if cards[0].name == "Two of Cups":
+    Two figures face each other, cups raised in connection. Partnership. Union. The image of two people choosing each other.
+
+    @if cards[0].reversed:
+        But the card is reversed. The connection is strained — something off-balance, a partnership that looks right from the outside but feels wrong from the inside.
+    @endif
+
+    Sasha glances at it. "Oh cute. That's like a love card, right?"
+
+    {cards[0].reversed ? "Sort of," you say carefully. "But reversed, it suggests the connection isn't quite what it seems." | "It can be," you say. "It's about how you present your relationships to the world."}
+
+    -> Sasha.Session1.Position1.TwoCups
+@else:
+    Three figures dance together, cups raised in celebration. Friendship. Joy. Community.
+
+    @if cards[0].reversed:
+        Reversed, the celebration feels forced — the performance of fun, the exhaustion of always being the life of the party.
+    @endif
+
+    Sasha grins. "Hey, that's me! Party Sasha! The fun one!"
+
+    {cards[0].reversed ? "The fun one," you repeat. "Even when you're not feeling it?" | "The one everyone calls when they need a good time?"}
+
+    "Especially then," they say, and for a moment the grin doesn't reach their eyes.
+
+    -> Sasha.Session1.Position1.ThreeCups
+@endif
+
+# --- Two of Cups ---
+
+:: Sasha.Session1.Position1.TwoCups
+
++ {reader.style == "intuitive"} ["You show the world a partnership. But who's holding the cup higher?"] -> Sasha.Session1.P1.TwoCups.Excellent // Excellent
++ {reader.style == "analytical"} [Frame the imbalance with precision — one cup is always heavier] -> Sasha.Session1.P1.TwoCups.ExcellentAnalytical // Excellent
++ ["This card is about connection. You lead with relationships."] -> Sasha.Session1.P1.TwoCups.Good // Good
++ ["The Two of Cups represents partnership and love."] -> Sasha.Session1.P1.TwoCups.Okay // Okay
++ ["Oh nice, this means you're in love! That's sweet."] -> Sasha.Session1.P1.TwoCups.Bad // Bad
+
+:: Sasha.Session1.P1.TwoCups.Excellent
+~ session.interpretation_good += 1
+~ sasha.add_trust(10)
+~ sasha.add_openness(2)
+~ reader.add_empathy(1)
+"You show the world a partnership," you say. {cards[0].reversed ? "But one of these cups is heavier than the other. You're carrying more than your share — and I think you know whose share you're carrying." | "Two cups raised. But when you said Jordan's name a minute ago, you flinched. You covered it fast, but I saw it. Who's holding the cup higher in that partnership, Sasha?"}
+
+Sasha's smile freezes.
+
+"I didn't *flinch*—"
+
+"You did."
+
+Silence. Their hands wrap around their coffee mug.
+
+"Things with Jordan are..." They stare into the mug. "We're fine. We're totally fine."
+
+~ sasha.discussed_jordan = True
+
+*Fine.* The word people use when they're anything but.
+
+-> Sasha.Session1.Position1.End
+
+:: Sasha.Session1.P1.TwoCups.ExcellentAnalytical
+~ session.interpretation_good += 1
+~ sasha.add_trust(8)
+~ sasha.add_openness(1)
+~ reader.add_competence(1)
+"The Two of Cups is about equilibrium in partnership," you say. {cards[0].reversed ? "Reversed, the balance is off. One person is giving more than they're getting." | "But equilibrium requires both cups to be equally full. If one person is always pouring and the other is always drinking — that's not partnership. That's a job."}
+
+Sasha blinks. "Wow, okay. Getting right into it."
+
+"You said this was a check-up."
+
+"Yeah, but I didn't expect you to find something on the first card." They fidget with a bracelet — braided leather, the kind Jordan made them last summer. You remember Jordan tying it on at the barbecue, the way Sasha beamed. "Things are... it's fine with Jordan. It's fine."
+
+-> Sasha.Session1.Position1.End
+
+:: Sasha.Session1.P1.TwoCups.Good
+~ session.interpretation_good += 1
+~ sasha.add_trust(5)
+~ sasha.add_openness(1)
+"This card is about connection," you say. "You lead with your relationships. When people ask how you're doing, you talk about how *they're* doing — your friends, your partner, your people. Your identity is wrapped up in who you love."
+
+Sasha tilts their head. "Is that... bad?"
+
+"Not bad. But it's interesting that the *surface* card — who you show the world — is about someone else. Not about you."
+
+They sit with that for a moment.
+
+-> Sasha.Session1.Position1.End
+
+:: Sasha.Session1.P1.TwoCups.Okay
+~ session.interpretation_okay += 1
+~ sasha.add_trust(3)
+"The Two of Cups represents partnership and love," you say. "It suggests you're in a relationship, or that relationships are a central part of your life right now."
+
+"Yeah, I mean... I have friends. I have a partner. Normal stuff." Sasha shrugs. "Next card?"
+
+-> Sasha.Session1.Position1.End
+
+:: Sasha.Session1.P1.TwoCups.Bad
+~ session.interpretation_bad += 1
+~ sasha.add_trust(-5)
+"Oh nice, this means you're in love! That's sweet."
+
+Sasha raises an eyebrow. "Did you just say 'oh nice' about a tarot card?"
+
+"I — it's a positive card—"
+
+"Babe, even I know that's not how this works." They're teasing, but underneath it: *you missed something.* The reading hasn't earned their respect yet.
+
+-> Sasha.Session1.Position1.End
+
+# --- Three of Cups ---
+
+:: Sasha.Session1.Position1.ThreeCups
+
++ {reader.style == "intuitive"} [EXCELLENT: "The life of the party. But who takes care of the life of the party?"] -> Sasha.Session1.P1.ThreeCups.Excellent
++ {reader.style == "analytical"} [EXCELLENT: Observe the performance pattern — always on, never off] -> Sasha.Session1.P1.ThreeCups.ExcellentAnalytical
++ [GOOD: "You show the world celebration. But celebration can be a mask."] -> Sasha.Session1.P1.ThreeCups.Good
++ [OKAY: "The Three of Cups is about friendship and community."] -> Sasha.Session1.P1.ThreeCups.Okay
++ [BAD: "Great card! You're surrounded by people who love you."] -> Sasha.Session1.P1.ThreeCups.Bad
+
+:: Sasha.Session1.P1.ThreeCups.Excellent
+~ session.interpretation_good += 1
+~ sasha.add_trust(10)
+~ sasha.add_openness(2)
+~ reader.add_empathy(1)
+"The life of the party," you say. {cards[0].reversed ? "But reversed — the party's over and everyone went home and you're alone in the kitchen doing the dishes. Who takes care of the one who takes care of everyone?" | "Three cups raised. But you know what I notice? There's always one person in the group who's laughing the hardest, making sure everyone else is having fun. And nobody ever asks them how they're actually doing."}
+
+Sasha's knee stops bouncing.
+
+"That's..." They swallow. "That's a lot from one card, dude."
+
+"Is it wrong?"
+
+Very long pause.
+
+"No," they say quietly. "It's not wrong."
+
+-> Sasha.Session1.Position1.End
+
+:: Sasha.Session1.P1.ThreeCups.ExcellentAnalytical
+~ session.interpretation_good += 1
+~ sasha.add_trust(8)
+~ sasha.add_openness(1)
+~ reader.add_competence(1)
+"The Three of Cups shows a pattern," you say. {cards[0].reversed ? "Reversed, the celebration is performative. You're expending energy maintaining an image — the fun one, the easy one, the one who's always fine. That's work. And you're not getting paid for it." | "You present as communal, social, light. But the Three of Cups is also about what a group expects from you. You've been cast in a role — the easy one, the bright one — and you play it even when you're exhausted."}
+
+"Okay, *rude,*" Sasha says, but they're not smiling anymore. "When did you get this good?"
+
+"The cards are good. I'm just reading them."
+
+"Uh-huh. Sure."
+
+-> Sasha.Session1.Position1.End
+
+:: Sasha.Session1.P1.ThreeCups.Good
+~ session.interpretation_good += 1
+~ sasha.add_trust(5)
+~ sasha.add_openness(1)
+"You show the world celebration," you say. "Joy, community, togetherness. But celebration can be a mask. Sometimes the person throwing the party is the loneliest person in the room."
+
+Sasha opens their mouth. Closes it.
+
+"...Okay," they say. "That's — yeah. Okay."
+
+They pick at the trail mix. "Next card."
+
+-> Sasha.Session1.Position1.End
+
+:: Sasha.Session1.P1.ThreeCups.Okay
+~ session.interpretation_okay += 1
+~ sasha.add_trust(3)
+"The Three of Cups is about friendship and community," you say. "You're someone who values your people. That's your foundation."
+
+"Yeah, totally," Sasha says, brightening. "I love my friends. Next card?"
+
+They relaxed. Which means you didn't reach them. Not yet.
+
+-> Sasha.Session1.Position1.End
+
+:: Sasha.Session1.P1.ThreeCups.Bad
+~ session.interpretation_bad += 1
+~ sasha.add_trust(-5)
+"Great card! You're surrounded by people who love you."
+
+Sasha looks at you flatly. "You sound like a fortune cookie."
+
+"I—"
+
+"Babe. Dig *deeper*. I know you can."
+
+-> Sasha.Session1.Position1.End
+
+# --- Position 1 Convergence ---
+
+:: Sasha.Session1.Position1.End
+You reach for the second card.
+
+"Ready?" you ask.
+
+@if sasha.openness >= 3:
+    Sasha nods. The breezy energy has shifted — they're leaning forward now, elbows on the table. Present. Listening.
+@elif sasha.openness >= 0:
+    "Hit me," Sasha says. But the joke has less conviction now.
+@else:
+    "Sure," Sasha says carefully. Their guard is up.
+@endif
+
+-> Sasha.Session1.Position2Hub
+
+# ============================================================================
+# POSITION 2: BENEATH
+# ============================================================================
+
+:: Sasha.Session1.Position2Hub
+@render render_reading(reading=reading)
+
+**Position 2: Beneath — What's Actually Happening Underneath**
+
+**{cards[1].get_display_name()}**
+
+@if cards[1].name == "Eight of Swords":
+    A figure stands blindfolded, surrounded by eight swords planted in the ground. Trapped. But — and this is the part most people miss — their hands are only loosely bound. The prison is at least partly self-imposed.
+
+    @if cards[1].reversed:
+        Reversed: the blindfold is slipping. They're starting to see the cage for what it is.
+    @endif
+
+    Sasha stares at it. The smile is completely gone now.
+
+    "That's... that person looks trapped."
+
+    "They are," you say. {cards[1].reversed ? "But the card is reversed. The blindfold is coming off. Something is shifting." | "But look at their hands. The binding is loose. They could step out of the swords if they saw clearly."}
+
+    -> Sasha.Session1.Position2.EightSwords
+@else:
+    Five cups lie spilled on the ground. A figure stands over them, head bowed in grief. Behind them — unseen — two cups remain standing.
+
+    @if cards[1].reversed:
+        Reversed: the figure is starting to turn. Starting to notice what's still standing.
+    @endif
+
+    Sasha's breath catches. Barely audible. But you hear it.
+
+    "That's sad," they say, very quietly.
+
+    "It is," you agree. {cards[1].reversed ? "But reversed, there's a turning. You're starting to look at what survived, not just what was lost." | "But look behind the figure. Two cups still standing. There's something they haven't lost — they just can't see it yet."}
+
+    -> Sasha.Session1.Position2.FiveCups
+@endif
+
+# --- Eight of Swords ---
+
+:: Sasha.Session1.Position2.EightSwords
+
++ {reader.style == "intuitive"} [EXCELLENT: "Underneath the fun, you feel trapped. And you think it's your fault."] -> Sasha.Session1.P2.Eight.Excellent
++ {reader.style == "analytical"} [EXCELLENT: Map the cage — identify what each sword represents] -> Sasha.Session1.P2.Eight.ExcellentAnalytical
++ [GOOD: "The Eight of Swords shows restriction. You feel stuck in something."] -> Sasha.Session1.P2.Eight.Good
++ [OKAY: "This card suggests some difficulties you're dealing with."] -> Sasha.Session1.P2.Eight.Okay
++ [BAD: "Don't worry, the swords aren't real threats."] -> Sasha.Session1.P2.Eight.Bad
+
+:: Sasha.Session1.P2.Eight.Excellent
+~ session.interpretation_good += 1
+~ sasha.add_trust(10)
+~ sasha.add_openness(2)
+~ reader.add_empathy(2)
+~ sasha.discussed_relationship = True
+"Underneath the party, the jokes, the 'everything's fine,'" you say, {cards[1].reversed ? "you've been waking up. Seeing the swords for what they are. That's why you're here — not for practice. Something in you knows you need to look." | "you feel trapped. And the worst part? You think it's your fault. The Eight of Swords — the binding is loose, Sasha. You *could* leave. So why don't you? And because you could leave but don't, you blame yourself for staying."}
+
+Sasha's eyes fill.
+
+They don't cry. They hold it. But their jaw tightens and they look away, toward the window, and for a long moment neither of you speaks.
+
+"I don't know how you—" Their voice cracks. They clear their throat. "That's... yeah. That's pretty accurate."
+
+The room is very quiet. Rain against the window. Coffee cooling.
+
+"Do you want to talk about what's got you trapped?" you ask gently. "Or should we let the cards keep going?"
+
+"Cards," they say immediately. "Let the cards do it. I can't—" They gesture vaguely at their chest. "I can't say it out loud yet."
+
+-> Sasha.Session1.Position2.End
+
+:: Sasha.Session1.P2.Eight.ExcellentAnalytical
+~ session.interpretation_good += 1
+~ sasha.add_trust(8)
+~ sasha.add_openness(2)
+~ reader.add_competence(1)
+~ sasha.discussed_relationship = True
+"Let me name the swords," you say. {cards[1].reversed ? "They're becoming visible to you, which is why you're uncomfortable. Each one is a reason you stay." | "Each one is a reason you stay somewhere that isn't working."} "Fear of being alone — that's one. Habit — two. The belief that it'll get better — three. The idea that you're overreacting — four. Guilt about leaving—"
+
+"Stop," Sasha says. Not angry. Winded.
+
+"I'm sorry. Too much?"
+
+"No, it's—" They press their hands to their face. "It's just really annoying when someone describes your entire inner monologue using a picture of a blindfolded person."
+
+Despite everything, they almost laugh. Almost.
+
+"Keep going," they say through their hands. "I'm fine. This is fine."
+
+-> Sasha.Session1.Position2.End
+
+:: Sasha.Session1.P2.Eight.Good
+~ session.interpretation_good += 1
+~ sasha.add_trust(5)
+~ sasha.add_openness(1)
+"The Eight of Swords shows restriction," you say. "Under the surface — under the fun, the snacks, the 'just practice' — something has you feeling stuck."
+
+Sasha doesn't deny it. That's telling.
+
+"Stuck," they repeat, tasting the word. "Yeah. That's... a word for it."
+
+-> Sasha.Session1.Position2.End
+
+:: Sasha.Session1.P2.Eight.Okay
+~ session.interpretation_okay += 1
+~ sasha.add_trust(3)
+"This card suggests some difficulties you're working through," you say. "Some feeling of being restricted or unable to see your options clearly."
+
+"I mean, who isn't, right?" Sasha says, deflecting. "Late-stage capitalism, am I right?"
+
+The joke lands. But it's a wall, not a bridge.
+
+-> Sasha.Session1.Position2.End
+
+:: Sasha.Session1.P2.Eight.Bad
+~ session.interpretation_bad += 1
+~ sasha.add_trust(-5)
+"Don't worry — the swords aren't real threats. This card is about perception, not actual danger."
+
+Sasha looks at you. Really looks.
+
+"But what if they *are* real?" they say quietly.
+
+You missed it. The swords are real. The trap is real. And you just told them it wasn't.
+
+-> Sasha.Session1.Position2.End
+
+# --- Five of Cups ---
+
+:: Sasha.Session1.Position2.FiveCups
+
++ {reader.style == "intuitive"} [EXCELLENT: "You're grieving something that isn't dead yet. That's the hardest kind."] -> Sasha.Session1.P2.Five.Excellent
++ {reader.style == "analytical"} [EXCELLENT: Observe the math — three cups spilled, two standing. What's the ratio in their life?] -> Sasha.Session1.P2.Five.ExcellentAnalytical
++ [GOOD: "The Five of Cups is about loss. But not all the cups are empty."] -> Sasha.Session1.P2.Five.Good
++ [OKAY: "This card represents grief and disappointment."] -> Sasha.Session1.P2.Five.Okay
++ [BAD: "This card means you've lost something, but you'll get over it."] -> Sasha.Session1.P2.Five.Bad
+
+:: Sasha.Session1.P2.Five.Excellent
+~ session.interpretation_good += 1
+~ sasha.add_trust(10)
+~ sasha.add_openness(2)
+~ reader.add_empathy(2)
+~ sasha.discussed_relationship = True
+"You're grieving something that isn't dead yet," you say. {cards[1].reversed ? "And you've started to turn around — to see what's still standing behind you. But turning around means facing what you've been avoiding." | "That's the hardest kind of grief. You can't mourn something that's still technically alive. So instead you just... carry it. The weight of something that should be beautiful but isn't."}
+
+The room goes very still.
+
+Sasha's hand moves to their wrist — to a braided leather bracelet. They twist it, once, twice.
+
+"Somebody made you that bracelet," you say, before you can stop yourself.
+
+"Yeah," Sasha whispers.
+
+-> Sasha.Session1.Position2.End
+
+:: Sasha.Session1.P2.Five.ExcellentAnalytical
+~ session.interpretation_good += 1
+~ sasha.add_trust(8)
+~ sasha.add_openness(2)
+~ reader.add_competence(1)
+~ sasha.discussed_relationship = True
+"Three cups spilled, two standing," you say. {cards[1].reversed ? "You're turning to look at what survived. That takes courage — most people can only stare at what they've lost." | "You're focused on the three. The loss, the disappointment, the 'this isn't what I signed up for.' But the two behind you — the things that are still good in your life, the parts of you that haven't been spilled — you can't see them. Because you're too busy mourning what's broken."}
+
+"I'm not—" Sasha starts, then stops.
+
+"You're not what?"
+
+"I'm not *mourning.* You mourn things that are over. This isn't—"
+
+They stop again. Catch themselves.
+
+"...Oh," they say.
+
+-> Sasha.Session1.Position2.End
+
+:: Sasha.Session1.P2.Five.Good
+~ session.interpretation_good += 1
+~ sasha.add_trust(5)
+~ sasha.add_openness(1)
+"The Five of Cups is about loss," you say. "But not all the cups are empty. Something in your life is draining, but something is also still whole. The question is which one you're looking at."
+
+Sasha nods slowly. "I tend to look at the broken stuff."
+
+"Most people do."
+
+-> Sasha.Session1.Position2.End
+
+:: Sasha.Session1.P2.Five.Okay
+~ session.interpretation_okay += 1
+~ sasha.add_trust(3)
+"This card represents grief and disappointment," you say. "Something hasn't lived up to what you hoped it would be."
+
+"Well, that's just adulthood, right?" Sasha jokes. But their eyes are glassy.
+
+-> Sasha.Session1.Position2.End
+
+:: Sasha.Session1.P2.Five.Bad
+~ session.interpretation_bad += 1
+~ sasha.add_trust(-5)
+"This card means you've lost something, but you'll get over it. Time heals, you know?"
+
+Sasha stares at you. The disappointment is palpable.
+
+"Sure," they say flatly. "Time heals."
+
+They pull away from the table slightly. Trust lost.
+
+-> Sasha.Session1.Position2.End
+
+# --- Position 2 Convergence ---
+
+:: Sasha.Session1.Position2.End
+The second card sits on the cloth between you. Heavy.
+
+@if sasha.openness >= 3:
+    Sasha's armor is down. They're not performing anymore — they're just sitting here, being honest, being scared. Being *real*.
+
+    "Third card?" they ask. Their voice is smaller now.
+@elif sasha.openness >= 0:
+    Something has shifted. The breezy energy is gone. In its place: something careful, something watching.
+
+    "...Third card," they say.
+@else:
+    Sasha is pulling back. Arms crossed. The humor shield is reinforced.
+
+    "Let's keep going," they say. Flat. Careful.
+@endif
+
+-> Sasha.Session1.Position3Hub
+
+# ============================================================================
+# POSITION 3: THE OTHER PERSON
+# ============================================================================
+
+:: Sasha.Session1.Position3Hub
+@render render_reading(reading=reading)
+
+**Position 3: The Other Person — The Dynamic You're Not Admitting**
+
+**{cards[2].get_display_name()}**
+
+@if cards[2].name == "The Devil":
+    The Devil. Chains, bondage, two figures linked together at the feet of a horned figure. But — like the Eight of Swords — the chains are loose. They could be removed.
+
+    @if cards[2].reversed:
+        Reversed: the chains are breaking. The spell is wearing off. Something that felt permanent is starting to feel optional.
+    @endif
+
+    Sasha goes white.
+
+    "That's... that's a scary card."
+
+    "It's not about evil," you say. {cards[2].reversed ? "And reversed, it's actually about *liberation*. Breaking free from something that held you." | "It's about bondage. Not the dramatic kind — the quiet kind. Patterns. Dependencies. The thing you keep choosing because you don't believe you can choose differently."}
+
+    -> Sasha.Session1.Position3.Devil
+@else:
+    A figure steals away with five swords, two left behind. Deception. Taking more than your share. Getting away with something.
+
+    @if cards[2].reversed:
+        Reversed: the deception is failing. The truth is leaking out.
+    @endif
+
+    Sasha looks at the card for a long time.
+
+    "That person looks sneaky," they say. Trying for light. Failing.
+
+    "They do," you agree. {cards[2].reversed ? "But reversed — the act is falling apart. Whatever they've been getting away with is coming undone." | "Five swords taken, two left behind. Someone in your life is taking more than their share and leaving you with what's left."}
+
+    -> Sasha.Session1.Position3.SevenSwords
+@endif
+
+# --- The Devil ---
+
+:: Sasha.Session1.Position3.Devil
+
++ {reader.style == "intuitive"} [EXCELLENT: "The other person in this reading isn't a monster. They're a pattern you've mistaken for love."] -> Sasha.Session1.P3.Devil.Excellent
++ {reader.style == "analytical"} [EXCELLENT: Map the chains — what specifically does this person control?] -> Sasha.Session1.P3.Devil.ExcellentAnalytical
++ [GOOD: "The Devil represents a bond that feels inescapable but isn't."] -> Sasha.Session1.P3.Devil.Good
++ [OKAY: "This card suggests an unhealthy attachment."] -> Sasha.Session1.P3.Devil.Okay
+
+:: Sasha.Session1.P3.Devil.Excellent
+~ session.interpretation_good += 1
+~ sasha.add_trust(10)
+~ sasha.add_openness(2)
+~ reader.add_empathy(2)
+~ sasha.discussed_jordan = True
+~ sasha.discussed_pattern = True
+"The other person in this reading isn't a monster," you say. {cards[2].reversed ? "And the chains are breaking. You're starting to see them for what they are — not your soulmate, not your savior. Just a pattern you've mistaken for love." | "They're a pattern you've mistaken for love. The Devil isn't about bad people, Sasha. It's about the familiar pain that feels safer than the unfamiliar freedom."}
+
+Sasha's hand goes to the bracelet. Jordan's bracelet. Twisting.
+
+You've met Jordan. Jordan brought wine to your birthday. Jordan seemed *perfectly nice.*
+
+"This is about Jordan," you say. Not a question.
+
+Sasha's face crumbles. Just for a second. Then they rebuild it.
+
+"They're not *bad,*" they say, which is what people say about people who are bad in ways that don't leave bruises. "It's just... I keep thinking it'll get better. It was so good at the beginning. You *saw* us at the beginning. We were perfect."
+
+You remember. You also remember when Sasha stopped inviting you over. When the texts got shorter. When "we're great" replaced actual details.
+
+{cards[2].reversed ? "But the chains are loosening," you say gently. "You're starting to see it." | "But it hasn't gotten better," you say gently.}
+
+"No," Sasha says. "It really hasn't."
+
+-> Sasha.Session1.Position3.End
+
+:: Sasha.Session1.P3.Devil.ExcellentAnalytical
+~ session.interpretation_good += 1
+~ sasha.add_trust(8)
+~ sasha.add_openness(2)
+~ reader.add_competence(1)
+~ sasha.discussed_jordan = True
+~ sasha.discussed_pattern = True
+"Let me map the chains," you say. {cards[2].reversed ? "They're loosening, which means you can see them now. Schedule control — does this person decide when you're available? Emotional regulation — are you responsible for their moods?" | "The Devil card shows specific mechanisms of attachment. Not feelings — mechanisms. Schedule control. Emotional regulation responsibility. Identity erosion — when you start making yourself smaller so they don't get upset."}
+
+Sasha stares at you. "How do you *know* that?"
+
+"I don't. The card does. Which of those hit?"
+
+"All of them," they say, barely audible. "All of them hit."
+
+"Sasha. This is about Jordan."
+
+They nod. Can't speak. The bracelet twists and twists.
+
+-> Sasha.Session1.Position3.End
+
+:: Sasha.Session1.P3.Devil.Good
+~ session.interpretation_good += 1
+~ sasha.add_trust(5)
+~ sasha.add_openness(1)
+~ sasha.discussed_relationship = True
+"The Devil represents a bond that feels inescapable but isn't," you say. "The chains in the image are loose — see? The figures could step out. But they don't. Because the known pain feels safer than the unknown freedom."
+
+Sasha is quiet for a while. Then, very small:
+
+"Things with Jordan aren't... what I've been telling people."
+
+"I know," you say. Because you do. You've known something was wrong for months. You just couldn't name it until now.
+
+-> Sasha.Session1.Position3.End
+
+:: Sasha.Session1.P3.Devil.Okay
+~ session.interpretation_okay += 1
+~ sasha.add_trust(3)
+"This card suggests an unhealthy attachment," you say. "Something or someone in your life that's holding you in a pattern that doesn't serve you."
+
+Sasha nods slowly. Doesn't elaborate. The door cracked open but didn't swing wide.
+
+"Next card?" they say.
+
+-> Sasha.Session1.Position3.End
+
+# --- Seven of Swords ---
+
+:: Sasha.Session1.Position3.SevenSwords
+
++ {reader.style == "intuitive"} [EXCELLENT: "Someone is taking pieces of you and calling it love."] -> Sasha.Session1.P3.Seven.Excellent
++ {reader.style == "analytical"} [EXCELLENT: Identify the theft — what specifically has this person taken?] -> Sasha.Session1.P3.Seven.ExcellentAnalytical
++ [GOOD: "The Seven of Swords shows deception in a relationship dynamic."] -> Sasha.Session1.P3.Seven.Good
++ [OKAY: "This card suggests someone isn't being entirely honest."] -> Sasha.Session1.P3.Seven.Okay
+
+:: Sasha.Session1.P3.Seven.Excellent
+~ session.interpretation_good += 1
+~ sasha.add_trust(10)
+~ sasha.add_openness(2)
+~ reader.add_empathy(2)
+~ sasha.discussed_jordan = True
+~ sasha.discussed_pattern = True
+"Someone is taking pieces of you," you say, {cards[2].reversed ? "and you've started to notice. The reversed Seven — the deception is visible now. You can see what's been taken." | "and calling it love. Five swords taken, two left behind. Your time, your energy, your confidence, your friendships, your sense of self. And what did they leave you? Just enough to keep you from noticing what's gone."}
+
+Sasha's hand goes to the bracelet. Jordan's bracelet. Their eyes are full.
+
+"This is Jordan," they whisper. Not a question. "This is what it's been like."
+
+"I know," you say. "I've been watching you disappear for months. I just didn't know how to say it."
+
+"Nobody does." They wipe their eyes. "Nobody knows how to say it because I made *damn* sure nobody could see it."
+
+-> Sasha.Session1.Position3.End
+
+:: Sasha.Session1.P3.Seven.ExcellentAnalytical
+~ session.interpretation_good += 1
+~ sasha.add_trust(8)
+~ sasha.add_openness(2)
+~ reader.add_competence(1)
+~ sasha.discussed_jordan = True
+"Five swords taken," you say. {cards[2].reversed ? "But the reversed card means the theft is becoming visible. Let me name them:" | "Let me count what's been taken."} "Your time — do you have less of it than you used to? Your friendships — have people drifted? Your confidence — do you second-guess yourself more now than two years ago?"
+
+"Stop," Sasha says. But gently. "Yeah. All of that. Since I moved in with Jordan it's just—"
+
+They catch themselves. But it's too late.
+
+"I know," you say quietly. "I've noticed."
+
+"You've *noticed?*"
+
+"You stopped inviting me over. You stopped texting first. You second-guess everything now. That's not the Sasha I know."
+
+They don't answer. Which is an answer.
+
+-> Sasha.Session1.Position3.End
+
+:: Sasha.Session1.P3.Seven.Good
+~ session.interpretation_good += 1
+~ sasha.add_trust(5)
+~ sasha.add_openness(1)
+~ sasha.discussed_relationship = True
+"The Seven of Swords shows deception in a relationship dynamic," you say. "Not necessarily lying — sometimes it's the quiet theft. Energy, attention, autonomy. Someone taking more than their share."
+
+"Yeah," Sasha says. Small voice. "Yeah. That's... things with Jordan have been like that."
+
+-> Sasha.Session1.Position3.End
+
+:: Sasha.Session1.P3.Seven.Okay
+~ session.interpretation_okay += 1
+~ sasha.add_trust(3)
+"This card suggests someone in your life isn't being entirely honest," you say. "Or perhaps a dynamic where one person has more power than the other."
+
+Sasha fidgets. "Sure. I mean, who doesn't have that?"
+
+Deflection. But at least they didn't shut down.
+
+-> Sasha.Session1.Position3.End
+
+# --- Position 3 Convergence ---
+
+:: Sasha.Session1.Position3.End
+Three cards on the cloth. The story is becoming clear — to you, and to Sasha.
+
+@if sasha.discussed_jordan:
+    The truth about Jordan is in the room now. Not Jordan the person — you already knew Jordan. But the *real* Jordan. The one behind the "we're great" texts and the dinner party smile.
+
+    Sasha sits with it. They look tired — not exhausted, but *relieved*. Like carrying a secret weighs something and they just put it down.
+
+    "One more card?" they ask.
+@elif sasha.discussed_relationship:
+    They haven't said Jordan's name. But they've acknowledged the shape of it — the relationship, the wrongness, the weight.
+
+    "Last card," you say.
+@else:
+    The reading has been surface-level. Sasha's guard held. But the last card is the one that matters most.
+
+    "Last one," you say.
+@endif
+
+-> Sasha.Session1.Position4Hub
+
+# ============================================================================
+# POSITION 4: WHAT YOU NEED
+# ============================================================================
+
+:: Sasha.Session1.Position4Hub
+@render render_reading(reading=reading)
+
+**Position 4: What You Need — What Would Actually Help Right Now**
+
+**{cards[3].get_display_name()}**
+
+@if cards[3].name == "The Star":
+    The Star. A figure kneels by water, pouring from two vessels. Stars shine overhead. Hope. Healing. The light that comes after the tower falls.
+
+    @if cards[3].reversed:
+        Reversed: the hope is there but buried. You've lost faith in the possibility of better.
+    @endif
+
+    Sasha looks at the card and their breath catches. It's the most beautiful card in the spread — quiet, luminous, tender.
+
+    "That's pretty," they say, voice thick.
+
+    "It is," you say. {cards[3].reversed ? "But reversed, The Star is hope you've stopped believing in. You need to find it again." | "The Star is what the cards want for you, Sasha. Hope. Healing. The knowledge that you deserve something gentler than what you have."}
+
+    -> Sasha.Session1.Position4.Star
+@else:
+    Strength. A figure gently holds open the jaws of a lion. Not with force — with patience, with tenderness, with an unshakeable quiet conviction.
+
+    @if cards[3].reversed:
+        Reversed: the courage is there, but you've forgotten you have it.
+    @endif
+
+    Sasha studies the card. "That person is... petting a lion?"
+
+    "Holding it open," you say. {cards[3].reversed ? "Reversed: you have this strength inside you. But you've forgotten. Someone convinced you that you're not brave." | "Not with muscles. With patience and courage. The quiet kind of bravery that doesn't shout."}
+
+    -> Sasha.Session1.Position4.Strength
+@endif
+
+# --- The Star ---
+
+:: Sasha.Session1.Position4.Star
+
++ {reader.style == "intuitive"} [EXCELLENT: "You need to remember that you deserve tenderness. Not just for other people — for yourself."] -> Sasha.Session1.P4.Star.Excellent
++ {reader.style == "analytical"} [EXCELLENT: Frame the Star as a specific action plan — what healing looks like in practice] -> Sasha.Session1.P4.Star.ExcellentAnalytical
++ [GOOD: "The Star says you need hope. Real hope, not the kind you perform."] -> Sasha.Session1.P4.Star.Good
++ [OKAY: "The Star represents hope and healing."] -> Sasha.Session1.P4.Star.Okay
+
+:: Sasha.Session1.P4.Star.Excellent
+~ session.interpretation_good += 1
+~ sasha.add_trust(10)
+~ sasha.add_openness(2)
+~ reader.add_empathy(2)
+~ sasha.discussed_fear = True
+"You need to remember that you deserve tenderness," you say. {cards[3].reversed ? "But reversed — you've stopped believing that. Someone has been telling you, in a thousand small ways, that what you have is the best you can get. And you believed them. You need to *unbelieve* them." | "Not the kind you give everyone else. The kind you give *yourself.* The Star is pouring from two vessels — one into the water, one onto the ground. You've been pouring for others so long you forgot you need to pour for yourself too."}
+
+Sasha starts crying.
+
+Not big, dramatic crying. Just — tears, running silently down their face, while they sit very still with their hands in their lap.
+
+"I'm sorry," they say automatically.
+
+"Don't be sorry. This is what the cards are for."
+
+They nod. Wipe their face with their sleeve. Take a shaky breath.
+
+"I came here for *practice,*" they say, half-laughing, half-crying. "This was supposed to be *easy.*"
+
+"It was supposed to be what you needed."
+
+"...Yeah. I think it was."
+
+-> Sasha.Session1.Position4.End
+
+:: Sasha.Session1.P4.Star.ExcellentAnalytical
+~ session.interpretation_good += 1
+~ sasha.add_trust(8)
+~ sasha.add_openness(2)
+~ reader.add_competence(1)
+~ sasha.discussed_fear = True
+"The Star is specific," you say. {cards[3].reversed ? "Reversed, it means the *capacity* for hope exists but you've blocked it. Practically: when's the last time you did something just for yourself? Not for Jordan, not for your friends, not for work. Just for *you*?" | "It's not 'hope' in the vague sense. It's a prescription. You need: space to feel without performing. Honest conversation with someone who isn't invested in keeping you where you are. And time to remember who you were before this relationship started defining you."}
+
+Sasha blinks. "That's... really specific."
+
+"The cards are specific when you're ready to hear it."
+
+Tears come. Quiet ones.
+
+"I don't even remember," they say. "Who I was before Jordan. Isn't that messed up? It's only been two years and I can't remember."
+
+"That's not messed up. That's a symptom."
+
+-> Sasha.Session1.Position4.End
+
+:: Sasha.Session1.P4.Star.Good
+~ session.interpretation_good += 1
+~ sasha.add_trust(5)
+~ sasha.add_openness(1)
+"The Star says you need hope," you say. "Real hope. Not the performative kind where you tell everyone you're fine. The quiet kind, where you actually start believing things could be different."
+
+Sasha nods. Their eyes are bright.
+
+"Different," they repeat. "I'd like that."
+
+-> Sasha.Session1.Position4.End
+
+:: Sasha.Session1.P4.Star.Okay
+~ session.interpretation_okay += 1
+~ sasha.add_trust(3)
+"The Star represents hope and healing," you say. "The cards are telling you that better things are possible."
+
+"Cool," Sasha says. But the word is thick with something they won't name yet.
+
+-> Sasha.Session1.Position4.End
+
+# --- Strength ---
+
+:: Sasha.Session1.Position4.Strength
+
++ {reader.style == "intuitive"} [EXCELLENT: "You need to remember your own courage. It's still there — someone just buried it."] -> Sasha.Session1.P4.Str.Excellent
++ {reader.style == "analytical"} [EXCELLENT: Identify what strength looks like for Sasha specifically] -> Sasha.Session1.P4.Str.ExcellentAnalytical
++ [GOOD: "Strength says you have more bravery than you think."] -> Sasha.Session1.P4.Str.Good
++ [OKAY: "This card represents inner strength and courage."] -> Sasha.Session1.P4.Str.Okay
+
+:: Sasha.Session1.P4.Str.Excellent
+~ session.interpretation_good += 1
+~ sasha.add_trust(10)
+~ sasha.add_openness(2)
+~ reader.add_empathy(2)
+~ sasha.discussed_fear = True
+"You need to remember your own courage," you say. {cards[3].reversed ? "And reversed — someone has been telling you that you're not brave. That you can't handle things alone. That you need them. And you believed it. But look at this card, Sasha. The lion is powerful and you're holding it with *tenderness*. That's not weakness. That's the hardest kind of strength." | "It's still in there. This card — the woman doesn't fight the lion. She doesn't run. She holds it gently. That's you, Sasha. Your strength isn't force. It's the courage to stay soft in hard situations. But that courage has been buried under someone else's version of who you should be."}
+
+Sasha's jaw works.
+
+"I used to be brave," they say. Very small.
+
+"You still are. You came here."
+
+"That's not—"
+
+"It is. Coming here and sitting in this chair and letting the cards say out loud what you already know? That's the definition of brave."
+
+They cry. Quietly, fiercely, like something breaking open that's been sealed too long.
+
+-> Sasha.Session1.Position4.End
+
+:: Sasha.Session1.P4.Str.ExcellentAnalytical
+~ session.interpretation_good += 1
+~ sasha.add_trust(8)
+~ sasha.add_openness(2)
+~ reader.add_competence(1)
+~ sasha.discussed_fear = True
+"Let me tell you what strength looks like for you specifically," you say. {cards[3].reversed ? "Because reversed, you've forgotten. You've been told you're the one who can't handle things, who needs to be managed." | "Not the loud kind."} "Strength for you is: having the conversation you've been avoiding. Setting a boundary that makes someone uncomfortable. Choosing what you need over what keeps the peace."
+
+"I'm a terrible peacekeeper," Sasha says, trying to laugh.
+
+"No. You're excellent at it. That's the problem. You're so good at keeping the peace that nobody notices you're at war with yourself."
+
+Silence.
+
+"I want to come back," Sasha says. "For a real reading. About... about Jordan. About what I should do."
+
+"The cards don't tell you what to do. But they can help you see clearly."
+
+"That's what I need."
+
+-> Sasha.Session1.Position4.End
+
+:: Sasha.Session1.P4.Str.Good
+~ session.interpretation_good += 1
+~ sasha.add_trust(5)
+~ sasha.add_openness(1)
+"Strength says you have more bravery than you think," you say. "The kind that opens jaws gently. The kind that doesn't need to shout."
+
+Sasha nods slowly. "I could use some of that."
+
+"You have it. That's what the card is saying. It's not something you need to find — it's something you need to *remember*."
+
+-> Sasha.Session1.Position4.End
+
+:: Sasha.Session1.P4.Str.Okay
+~ session.interpretation_okay += 1
+~ sasha.add_trust(3)
+"This card represents inner strength and courage," you say. "You have the resources to handle what you're going through."
+
+"Thanks," Sasha says. But the word hangs in the air, wanting more.
+
+-> Sasha.Session1.Position4.End
+
+# --- Position 4 Convergence ---
+
+:: Sasha.Session1.Position4.End
+Four cards on the cloth. A complete picture.
+
+Surface: {cards[0].get_display_name()}.
+Beneath: {cards[1].get_display_name()}.
+The Other Person: {cards[2].get_display_name()}.
+What You Need: {cards[3].get_display_name()}.
+
+@render render_reading(reading=reading)
+
+Sasha stares at the spread. All four cards.
+
+@if sasha.openness >= 4:
+    They look different now. Younger. Like the armor dropped and underneath it is someone tender and tired and brave.
+@elif sasha.openness >= 1:
+    Something has shifted in them. The breezy energy isn't back. In its place is something quieter, more real.
+@else:
+    They're still guarded. But something cracked, even if just a little.
+@endif
+
+"So," Sasha says. "That wasn't just practice."
+
+"No," you agree. "It wasn't."
+
+-> Sasha.Session1.SynthesisHub
+
+# ============================================================================
+# SYNTHESIS
+# ============================================================================
+
+:: Sasha.Session1.SynthesisHub
+
+@py:
+# Calculate reading quality
+if session.interpretation_good >= 4:
+    session.reading_quality = "transformational"
+    sasha.will_return = True
+elif session.interpretation_good >= 3:
+    session.reading_quality = "profound"
+    sasha.will_return = True
+elif session.interpretation_good >= 2:
+    session.reading_quality = "helpful"
+    sasha.will_return = True
+elif session.interpretation_okay >= 2:
+    session.reading_quality = "adequate"
+    sasha.will_return = True  # Sasha gives second chances
+else:
+    session.reading_quality = "mediocre"
+    sasha.will_return = False
+@endpy
+
+@if session.reading_quality == "transformational":
+    -> Sasha.Session1.Synth.Transformational
+@elif session.reading_quality == "profound":
+    -> Sasha.Session1.Synth.Profound
+@elif session.reading_quality == "helpful":
+    -> Sasha.Session1.Synth.Helpful
+@elif session.reading_quality == "adequate":
+    -> Sasha.Session1.Synth.Adequate
+@else:
+    -> Sasha.Session1.Synth.Mediocre
+@endif
+
+:: Sasha.Session1.Synth.Transformational
+~ sasha.add_trust(15)
+~ reader.add_empathy(1)
+Sasha sits back. Wrung out. But lighter.
+
+"Okay. *Okay.*" They press their palms against their eyes. "I came here thinking this was going to be, like, 'you'll meet a tall dark stranger' and instead you just — I don't even know what just happened."
+
+"The cards happened."
+
+"*You* happened." They look at you with a new kind of respect. "I've been carrying this for... a really long time. And nobody saw it. I'm *good* at hiding it. And you just—"
+
+They gesture at the spread.
+
+"Four cards," you say.
+
+"Four cards," they repeat, shaking their head. "Unreal."
+
+@if sasha.discussed_jordan:
+    "I need to figure out what to do about Jordan," they say. The sentence is steady. Clear. Like they've been rehearsing it in their head for months and only just now let it out of their mouth.
+
+    "That's a reading for another day."
+
+    "Can I come back? For real? Not practice?"
+
+    "Of course."
+@else:
+    "There's... something I need to deal with. I wasn't ready to name it today. But I want to come back and actually talk about it."
+
+    "The cards will be here."
+
+    "Good. Because *I'll* be here."
+@endif
+
+-> Sasha.Session1.Departure
+
+:: Sasha.Session1.Synth.Profound
+~ sasha.add_trust(10)
+Sasha nods slowly, looking at the cards.
+
+"That was... a lot more than I expected."
+
+"The cards tend to find what matters."
+
+"Yeah, they found it alright." They rub their face. "I don't know what to do with all this. But I know I need to sit with it."
+
+@if sasha.discussed_jordan:
+    "And I need to think about Jordan. About what you said."
+@endif
+
+"I'd like to come back," they say. "If that's okay."
+
+"More than okay."
+
+-> Sasha.Session1.Departure
+
+:: Sasha.Session1.Synth.Helpful
+~ sasha.add_trust(5)
+"That was interesting," Sasha says. Carefully. Like they're weighing how much to admit.
+
+"Interesting good or interesting bad?"
+
+"Interesting... real." They fidget with the bracelet. "More real than I thought it would be."
+
+A pause.
+
+"Can I come back? I think I want to do this again. For real."
+
+"Anytime."
+
+-> Sasha.Session1.Departure
+
+:: Sasha.Session1.Synth.Adequate
+"Huh," Sasha says.
+
+Not overwhelmed. Not transformed. Just... something to chew on.
+
+"That was... okay. Some of it hit. Some of it didn't."
+
+"Readings aren't always lightning bolts. Sometimes they're seeds."
+
+They almost smile. "Poetic. Okay, I'll give you another shot. Can I come back next week?"
+
+"Absolutely."
+
+-> Sasha.Session1.Departure
+
+:: Sasha.Session1.Synth.Mediocre
+Sasha stands up. Stretches.
+
+"Well. That was... something."
+
+The air between you is polite. Distant. The reading didn't land. You know it. They know it.
+
+"Thanks for letting me practice," you say.
+
+"Sure, dude. Anytime." But the brightness is hollow and you both know it.
+
+They won't be back. You can feel it.
+
+-> Sasha.Session1.Departure
+
+# ============================================================================
+# DEPARTURE
+# ============================================================================
+
+:: Sasha.Session1.Departure
+Sasha stands. Stretches. Puts their shoes on.
+
+@if session.reading_quality in ["transformational", "profound"]:
+    At the door, they pause. Turn back.
+
+    "Hey. Thank you. For real. Not 'thanks for the tarot.' Thanks for — seeing me."
+
+    They pull the thermos out of their bag. "Keep the coffee. You earned it."
+
+    ~ reader.add_money(0)  // Friends don't charge friends
+    ~ session.payment = 0
+
+    "Sasha — you don't owe me anything. This was practice, remember?"
+
+    "Yeah, well." They smile. Small, real, a little broken. "Best practice I ever did."
+@elif session.reading_quality == "helpful":
+    At the door, Sasha pauses. "Hey. That was good. You're better at this than you think."
+
+    "That means a lot coming from my guinea pig."
+
+    "Ha. See you next week."
+
+    ~ reader.add_money(0)
+    ~ session.payment = 0
+@elif session.reading_quality == "adequate":
+    At the door: "Same time next week?"
+
+    "Sure."
+
+    "Cool. I'll bring better snacks."
+
+    ~ reader.add_money(0)
+    ~ session.payment = 0
+@else:
+    At the door, Sasha waves. "Thanks, babe. Good luck with the card thing."
+
+    The door closes.
+
+    ~ reader.add_money(0)
+    ~ session.payment = 0
+
+    You sit in the quiet, staring at four cards that didn't do their job. Or maybe you didn't do yours.
+@endif
+
+-> Sasha.Session1.End
+
+# ============================================================================
+# SESSION END
+# ============================================================================
+
+:: Sasha.Session1.End
+@py:
+# Save session results
+sasha.session_one_quality = session.reading_quality
+sasha.session_one_cards = cards
+sasha.sessions_completed += 1
+reader.sessions_completed += 1
+@endpy
+
+@if sasha.will_return:
+    The door closes. The apartment is quiet.
+
+    You gather the cards, but you don't shuffle them right away. You just hold them.
+
+    Sasha came in for practice. They left with something heavier and more precious: the beginning of honesty.
+
+    @if sasha.discussed_jordan:
+        *Jordan.* You knew Jordan. You liked Jordan, or the version of Jordan you were shown. But what you know now is bigger than dinner party charm — you know the shape of what Jordan has taken from your friend, and the shape their absence will leave when Sasha is ready to fill it with themselves.
+    @endif
+
+    You put the cards away. Wash the French press. Eat the rest of the trail mix.
+
+    Your phone buzzes.
+
+    **[Text from: Sasha]**
+    @if session.reading_quality == "transformational":
+        *"ok so i cried in my car for like 20 minutes and now im at trader joes buying ice cream. thank u for breaking me open i think?? same time next week??"*
+    @elif session.reading_quality == "profound":
+        *"that was intense. in a good way. i think. see u next week?"*
+    @else:
+        *"hey. thanks. can we do that again sometime?"*
+    @endif
+
+    You smile.
+
+    **[Session 1 Complete — Sasha will return]**
+@else:
+    The door closes.
+
+    You gather the cards. Shuffle them back into the deck.
+
+    The reading didn't land. Sasha left lighter than they came, but not by much. Some readings are like that — the cards show up but the reader doesn't.
+
+    You file it away. Learn from it. Get better.
+
+    **[Session 1 Complete — Sasha will not return]**
+@endif
+
++ [Return to your day] -> ReaderTable

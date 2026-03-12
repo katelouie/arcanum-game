@@ -2628,6 +2628,126 @@
           "rag_mapping": "outcome_and_result.final_outcome"
         }
       ]
+    },
+    {
+      "id": "sasha-whats-really-going-on",
+      "name": "What's Really Going On (4-Card)",
+      "description": "A deceptively casual 4-card spread that peels back layers — what the client presents, what's hidden underneath, the other person in the room, and what they actually need.",
+      "layout": "horizontal-4",
+      "cardSize": "medium",
+      "aspectRatio": 1.0,
+      "category": "relationship",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "The Surface",
+          "short_description": "What you're showing the world",
+          "detailed_description": "The face you wear. The story you tell about yourself. This card shows how you present to others — the mood, the mask, the version of events you've rehearsed. It's not a lie, exactly. But it's not the whole truth.",
+          "keywords": ["surface", "mask", "presentation", "facade", "front", "showing"],
+          "rag_mapping": "emotional_and_internal.feelings"
+        },
+        {
+          "name": "Beneath",
+          "short_description": "What's actually happening underneath",
+          "detailed_description": "The thing you know but haven't said out loud. The feeling that lives underneath the jokes, the deflection, the 'I'm fine.' This card reveals the emotional truth you're carrying — the one that brought you here even if you said you came for practice.",
+          "keywords": ["hidden", "truth", "underneath", "real", "pain", "buried"],
+          "rag_mapping": "emotional_and_internal.subconscious"
+        },
+        {
+          "name": "The Other Person",
+          "short_description": "The person or dynamic you're not naming",
+          "detailed_description": "Someone is in this reading who hasn't been introduced. A partner, a pattern, a presence that shapes your choices. This card shows their energy — or the energy of the dynamic between you — whether or not you've spoken their name yet.",
+          "keywords": ["other", "partner", "dynamic", "relationship", "unnamed", "influence"],
+          "rag_mapping": "relationships_and_dynamics.relationship_dynamics"
+        },
+        {
+          "name": "What You Need",
+          "short_description": "What would actually help right now",
+          "detailed_description": "Not what you want to hear. Not what's easy. What you actually need. This card is the reading's gift — the thing it came here to say, even if you only came here for practice.",
+          "keywords": ["need", "guidance", "truth", "clarity", "help", "gift"],
+          "rag_mapping": "guidance_and_advice.what_to_embrace"
+        }
+      ]
+    },
+    {
+      "id": "sasha-bond-that-binds",
+      "name": "The Bond That Binds (5-Card)",
+      "description": "A 5-card spread for examining what holds a relationship together — the chain, the key, the fear, the deserving, and the break. Designed for clients ready to look directly at a toxic dynamic.",
+      "layout": "cross-5",
+      "cardSize": "medium",
+      "aspectRatio": 1.0,
+      "category": "relationship",
+      "difficulty": "intermediate",
+      "positions": [
+        {
+          "name": "The Chain",
+          "short_description": "What binds you to this pattern",
+          "detailed_description": "The thing that keeps you coming back. Not love — or not only love. The mechanism of attachment: habit, fear, identity, need. This card shows the binding itself, stripped of the story you tell about why you stay.",
+          "keywords": ["binding", "chain", "attachment", "pattern", "bond", "trap"],
+          "rag_mapping": "challenges_and_obstacles.blockages"
+        },
+        {
+          "name": "The Key",
+          "short_description": "What would unlock the pattern",
+          "detailed_description": "Clarity, courage, a conversation, a moment of seeing clearly. This card shows the thing that could change everything — not a magic fix, but the first honest step. The key doesn't open the door for you. It shows you where the lock is.",
+          "keywords": ["key", "clarity", "unlock", "breakthrough", "truth", "insight"],
+          "rag_mapping": "guidance_and_advice.recommended_approach"
+        },
+        {
+          "name": "What You Fear",
+          "short_description": "The fear that keeps the chain in place",
+          "detailed_description": "The real reason you haven't left. Not the practical reasons — those are real but surmountable. This is the deeper fear: of being alone, of being wrong, of discovering that the pain was your fault, of finding out who you are without this person to define yourself against.",
+          "keywords": ["fear", "anxiety", "dread", "avoidance", "paralysis", "alone"],
+          "rag_mapping": "emotional_and_internal.fears"
+        },
+        {
+          "name": "What You Deserve",
+          "short_description": "The love or life that's possible for you",
+          "detailed_description": "This card doesn't predict the future. It shows the quality of connection you're capable of — what healthy love, real partnership, genuine care would look like for you specifically. The contrast with the current situation is the point.",
+          "keywords": ["deserve", "worthy", "possible", "healthy", "love", "future"],
+          "rag_mapping": "outcome_and_result.possible_outcome"
+        },
+        {
+          "name": "The Break",
+          "short_description": "How the pattern ends — if you let it",
+          "detailed_description": "Transformation or departure. Death or walking away. This card shows the nature of the ending that's available to you. It won't be painless. But it shows you what's on the other side of the break.",
+          "keywords": ["break", "ending", "transformation", "departure", "release", "freedom"],
+          "rag_mapping": "outcome_and_result.final_outcome"
+        }
+      ]
+    },
+    {
+      "id": "sasha-who-you-are-now",
+      "name": "Who You Are Now (3-Card)",
+      "description": "A simple, open-hearted 3-card spread for someone who's already done the hard work. What you left behind, what you found, and what's calling you forward.",
+      "layout": "horizontal-3",
+      "cardSize": "medium",
+      "aspectRatio": 1.0,
+      "category": "wellness",
+      "difficulty": "beginner",
+      "positions": [
+        {
+          "name": "What You Left",
+          "short_description": "The weight you put down",
+          "detailed_description": "The thing you carried that you don't carry anymore. The relationship, the pattern, the version of yourself that stayed because staying was easier than leaving. This card honors what it cost you to walk away.",
+          "keywords": ["past", "left", "released", "weight", "cost", "grief"],
+          "rag_mapping": "temporal_positions.past_influences"
+        },
+        {
+          "name": "What You Found",
+          "short_description": "What emerged when you let go",
+          "detailed_description": "The person underneath the pattern. The version of you that existed before the relationship defined you, or the new version that grew from the break. This card shows what you discovered about yourself when you finally had room.",
+          "keywords": ["found", "self", "emerged", "growth", "discovery", "identity"],
+          "rag_mapping": "emotional_and_internal.inner_self"
+        },
+        {
+          "name": "What's Next",
+          "short_description": "Where you're headed from here",
+          "detailed_description": "Not a prediction — an invitation. This card shows the energy of what's calling you forward. New connections, new work, new ways of being in the world. The future isn't written. But it's leaning toward something, and this card shows the lean.",
+          "keywords": ["future", "next", "forward", "invitation", "possibility", "becoming"],
+          "rag_mapping": "outcome_and_result.final_outcome"
+        }
+      ]
     }
   ],
   "categories": {

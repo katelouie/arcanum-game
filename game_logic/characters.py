@@ -1097,3 +1097,122 @@ class TheKind(Client):
     def crew_is_family(self) -> bool:
         """Strong bonds with all three crew members"""
         return self.scout_bond >= 7 and self.mal_bond >= 6 and self.delphi_bond >= 7
+
+
+@dataclass
+class Sasha(Client):
+    """
+    Sasha Sadr — The Familiar Friend (starter client).
+
+    Iranian-American, late 20s, nonbinary (they/them). Works in tech.
+    Casual, warm, self-deprecating, uses humor to deflect. Comes in
+    for a "just practice" reading that accidentally reveals a toxic
+    relationship pattern with their partner Jordan.
+
+    CORE TENSION: Settling vs. Self. Sasha is trapped in a comfortable
+    but toxic relationship. The arc is about recognizing the trauma bond
+    and choosing independence over familiar pain.
+
+    SKILL FOCUS: Empathy (to see beneath the jokes) and Boundaries
+    (to advise without making the choice for them).
+    """
+
+    # Override Client defaults — Sasha starts casual and friendly
+    _trust: int = 55
+    _comfort: int = 60
+    _openness: int = 1  # Slightly guarded under the breezy exterior
+
+    # === SESSION 1 FLAGS: "Just Practice" ===
+    discussed_relationship: bool = False  # Named the toxic relationship
+    discussed_pattern: bool = False  # Identified the settling pattern
+    discussed_fear: bool = False  # Named the fear of being alone
+    discussed_jordan: bool = False  # Named Jordan specifically
+
+    # === SESSION 2 FLAGS: "The Real Reading" ===
+    discussed_trauma_bond: bool = False  # Named the trauma bond mechanism
+    discussed_identity: bool = False  # Explored who Sasha is outside Jordan
+    discussed_leaving: bool = False  # Explicitly discussed leaving
+    discussed_safety: bool = False  # Addressed safety concerns
+
+    # === SESSION 3 FLAGS: "The Referral" ===
+    discussed_independence: bool = False  # Explored new independent life
+    discussed_maya: bool = False  # Maya Chen connection made
+    discussed_future: bool = False  # Talked about what's next
+
+    # === SESSION OUTCOMES ===
+    will_return: bool = False
+    left_jordan: bool = False  # Key outcome from Session 2
+    session_three_path: str = ""  # "transformation" / "pattern_repeat" / "enabler"
+
+    # === SESSION TRACKING ===
+    session_one_quality: str = ""
+    session_one_cards: list = field(default_factory=list)
+    session_two_quality: str = ""
+    session_two_cards: list = field(default_factory=list)
+    session_three_quality: str = ""
+    session_three_cards: list = field(default_factory=list)
+
+    # === COMPUTED PROPERTIES ===
+
+    @property
+    def mask_is_down(self) -> bool:
+        """Sasha has dropped the humor shield"""
+        return self.trust >= 70 and self.openness >= 3
+
+    @property
+    def sees_the_pattern(self) -> bool:
+        """Sasha recognizes the toxic cycle"""
+        return self.discussed_pattern and self.discussed_relationship
+
+    @property
+    def ready_to_leave(self) -> bool:
+        """Sasha has the emotional resources to consider leaving"""
+        return (
+            self.trust >= 75
+            and self.discussed_trauma_bond
+            and self.discussed_identity
+        )
+
+    def determine_session_three_path(self) -> str:
+        """Determine Session 3 path from accumulated flags and quality."""
+        transformation_weight = 50
+        pattern_weight = 50
+
+        # Session 1 flags
+        if self.discussed_relationship:
+            transformation_weight += 15
+        if self.discussed_pattern:
+            transformation_weight += 10
+        if self.discussed_fear:
+            transformation_weight += 10
+        if self.discussed_jordan:
+            transformation_weight += 5
+
+        # Session 2 flags
+        if self.discussed_trauma_bond:
+            transformation_weight += 20
+        if self.discussed_identity:
+            transformation_weight += 15
+        if self.discussed_leaving:
+            transformation_weight += 10
+        if self.discussed_safety:
+            transformation_weight += 5
+
+        # Quality modifiers
+        if self.session_one_quality in ["transformational", "profound"]:
+            transformation_weight += 10
+        if self.session_two_quality in ["transformational", "profound"]:
+            transformation_weight += 15
+        elif self.session_two_quality in ["adequate", "mediocre"]:
+            pattern_weight += 15
+
+        # Roll
+        total_weight = transformation_weight + pattern_weight
+        roll = random.randint(1, total_weight)
+
+        if roll <= transformation_weight:
+            self.session_three_path = "transformation"
+        else:
+            self.session_three_path = "pattern_repeat"
+
+        return self.session_three_path

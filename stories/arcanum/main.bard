@@ -1,6 +1,6 @@
 from game_logic.artifacts import get_artifact
 from game_logic.tarot import Deck, Reading
-from game_logic.characters import Chen, Client, Reader, Nyx, BlackthornManor, TheKind
+from game_logic.characters import Chen, Client, Reader, Nyx, BlackthornManor, TheKind, Sasha
 from game_logic.models import Session, create_session
 
 import random
@@ -31,6 +31,9 @@ import random
 @include kind/kind_session1.bard
 @include kind/kind_session2.bard
 @include kind/kind_session3.bard
+# Sasha
+@include sasha/sasha.bard
+@include sasha/sasha_session_1.bard
 
 @metadata
   title: Arcanum
@@ -48,7 +51,7 @@ clients = []  # Use list instead of set for unhashable objects
 # Starting Clients
 chen = Chen(name="Margaret Chen", age=68, total_sessions=3)
 david = Client(name="David Morrison", age=34, total_sessions=3)
-alex = Client(name="Alex", age=28, total_sessions=3)
+sasha = Sasha(name="Sasha Sadr", age=28, total_sessions=3)
 sarah = Client(name="Sarah Kim", age=30, total_sessions=3)
 # Additional Clients
 maya = Client(name="Maya Chen", age=24, total_sessions=3)
@@ -68,6 +71,8 @@ if blackthorn not in clients and nyx.sessions_completed == 3:
     clients.append(blackthorn)
 if the_kind not in clients and reader.sessions_completed >= 3 and reader.empathy >= 2:
     clients.append(the_kind)
+if sasha not in clients in chen.sessions_completed == 3:
+    clients.append(sasha)
 @endpy
 *Your sanctuary. Candles flicker. Cards wait.*
 
@@ -77,8 +82,8 @@ if the_kind not in clients and reader.sessions_completed >= 3 and reader.empathy
 + {the_kind in clients} [The Kind] -> TheKind.Router ^CLIENT:SPECIAL
 # Starter
 + {chen in clients} [Margaret Chen] -> Chen ^CLIENT
++ {sasha in clients} [Sasha Sadr] -> Sasha ^CLIENT
 # + {david in clients} [David Morrison] -> David ^CLIENT
-# + {alex in clients} [Alex] -> Alex ^CLIENT
 # + {sarah in clients} [Sarah Kim] -> Sarah ^CLIENT
 # # Additional
 # + {maya in clients} [Maya Chen] -> Maya ^CLIENT

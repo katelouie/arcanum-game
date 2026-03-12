@@ -978,10 +978,10 @@ The black book. The letter. The voicemails and emails waiting.
 
     You check the time. 1:47 PM.
 <<elif reader.background == "self_taught">>
-    ~ clients.append(alex)
+    ~ clients.append(sasha)
     You should probably call someone. Practice on a friend first before diving into M. Thorne's client list.
 
-    You text your roommate, Alex:
+    You text Sasha — your old roommate, still one of your closest friends even after they moved in with Jordan six months ago:
 
     *"You home? Something weird happened and I need to practice a reading. You free?"*
 
@@ -1051,13 +1051,13 @@ The black book. The letter. The voicemails and emails waiting.
 <<elif reader.background == "self_taught">>
     The front door opens.
 
-    Alex appears with two coffees and a pastry bag.
+    Sasha appears with two coffees and a pastry bag.
 
     "Okay, what's the weird thing?" they ask, handing you a cup. "Did you finally match with someone normal on that dating app? Did your landlord actually fix something?"
 
     "Better. Weirder." You gesture at the table. "I inherited a tarot reading business."
 
-    Alex stops mid-sip.
+    Sasha stops mid-sip.
 
     "You what."
 
@@ -1129,7 +1129,7 @@ Waiting for you to write your first entry.
 
 :: Prologue.first_reading_transition
 <<if reader.background == "self_taught">>
-    Alex sits down across from you, eyes wide as you explain about the package, the letter, M. Thorne.
+    Sasha sits down across from you, eyes wide as you explain about the package, the letter, M. Thorne.
 
     "That's insane," they say.
 
@@ -1145,11 +1145,11 @@ Waiting for you to write your first entry.
 
     Then at your deck.
 
-    Then at Alex, who's been your friend since college, who let you practice readings on them dozens of times, who never laughed when you said you were going to try this for real.
+    Then at Sasha, who's been your friend since college, who let you practice readings on them dozens of times, who never laughed when you said you were going to try this for real.
 
     "Yeah," you say. "I think I am."
 
-    "Okay then." Alex grins. "Read my cards, professional tarot reader."
+    "Okay then." Sasha grins. "Read my cards, professional tarot reader."
 <<else>>
     Time passes in a blur.
 
