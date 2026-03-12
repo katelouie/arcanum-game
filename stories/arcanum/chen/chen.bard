@@ -2,7 +2,7 @@
 @if chen.sessions_completed == 0:
     -> Chen.Session1
 @elif chen.sessions_completed == 1:
-    -> Chen.Session2
+    -> Chen.Session2.Start
 @elif chen.sessions_completed == 2:
     ~ path = chen.determine_session_three_path()
     @if chen.took_action:

@@ -1022,6 +1022,8 @@ At the hollow in the wall where Samuel was, where something that used to be a pe
 
 And for the first time since you arrived at Blackthorn Manor, Lady Blackthorn is not performing.
 
++ [Follow her inside.] -> Blackthorn.Session3.Confrontation
+
 # ============================================================================
 # Part 2 continues with:
 #   - Lady Blackthorn's reckoning (the memories return)
