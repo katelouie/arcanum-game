@@ -416,6 +416,22 @@ class Nyx(Client):
     _kitsune_suspicion: int = 0  # 0-5: Corporate awareness/danger
     _cyber_glitches: int = 1  # 0-5: Tech malfunction symptoms
 
+    # === SESSION ROUTING ===
+    final_path: str = ""  # "runner" / "ghost" / "loyal" — determines Session 3 branch
+    data_source: str = ""  # "spirits" / "hack" — Session 1 mystical focus carries to Session 2
+
+    # === SESSION RESULTS (persist across sessions) ===
+    session_one_quality: str = ""
+    session_two_quality: str = ""
+    session_three_quality: str = ""
+
+    # === ARC OUTCOME ===
+    ending: str = ""  # "shadow_runner" / "double_agent" / "disappeared" / etc.
+    story_complete: bool = False
+
+    # === BLEED-THROUGH OBJECTS ===
+    bleed_objects: list = field(default_factory=list)
+
     # === SHAMANIC AWAKENING (0-5) ===
 
     @property

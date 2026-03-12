@@ -4,9 +4,9 @@
 # ============================================================================
 #
 # UNLOCK CONDITIONS:
-# - nyx.session_two_complete == True
+# - session.session_two_complete == True
 # - nyx.final_path == "runner"
-# - nyx.session_three_variant == "A"
+# - session.session_three_variant == "A"
 #
 # PREMISE: Nyx has gone full shadow runner. She's assembled a crew to hit
 # Kitsune Dynamics' server farm and free the imprisoned spirits. This is
@@ -103,11 +103,11 @@ session.crew = {
 
 # Check her awakening level for flavor
 if nyx.shamanic_awakening >= 4:
-    nyx.spirit_sight = True  # Can see spirits clearly now
-    nyx.chrome_integrated = True  # Tech and magic balanced
+    session.spirit_sight = True  # Can see spirits clearly now
+    session.chrome_integrated = True  # Tech and magic balanced
 else:
-    nyx.spirit_sight = False
-    nyx.chrome_integrated = False
+    session.spirit_sight = False
+    session.chrome_integrated = False
 
 # Session metadata
 session.readings_complete = {
@@ -1244,7 +1244,7 @@ The crew's energy UNIFIES. No more debate. Clear hierarchy. Nyx commands.
 
 ~ session.crew_morale += 3  // Significantly boosted
 ~ session.quality_score += 3  // Excellent interpretation
-~ nyx.leadership = True  // Critical flag: Nyx makes final calls
+~ session.leadership = True  // Critical flag: Nyx makes final calls
 ~ nyx.shamanic_awakening += 1
 ~ whisper.trust += 1
 ~ cipher.trust += 1
@@ -1285,7 +1285,7 @@ The crew's energy FOCUSES. Clear purpose. No distractions.
 
 ~ session.crew_morale += 2
 ~ session.quality_score += 3
-~ nyx.motivation = "liberation"  // Critical flag: liberation over revenge
+~ session.motivation = "liberation"  // Critical flag: liberation over revenge
 ~ nyx.shamanic_awakening += 1
 ~ session.mission_clarity = True
 
@@ -1409,7 +1409,7 @@ The crew's energy SURGES. No doubt. Just determination.
 
 ~ session.crew_morale += 3  // Major boost
 ~ session.quality_score += 3
-~ nyx.inner_strength = True  // New flag: conviction over firepower
+~ session.inner_strength = True  // New flag: conviction over firepower
 ~ session.unshakeable_purpose = True
 ~ nyx.shamanic_awakening += 1
 
@@ -1498,7 +1498,7 @@ The energy in the room shifts. No more mercy. Just VIOLENCE.
 ~ razor.trust += 2
 ~ session.approach = "brutal"  // Override previous approach
 ~ session.lethal_authorized = True  // New flag: expect high casualties
-~ nyx.motivation = "revenge"  // Shifted from liberation to vengeance
+~ session.motivation = "revenge"  // Shifted from liberation to vengeance
 
 + [Continue] -> Nyx.Session3A.Position2_Hub
 
@@ -1650,7 +1650,7 @@ The crew processes the second card.
     The crew stands straighter. CERTAIN.
 
     Nyx: "We KNOW we'll succeed. Not hope. KNOW."
-@elif nyx.leadership:
+@elif session.leadership:
     Nyx looks at her crew with new authority. "I lead. You follow. Trust me."
 
     And they DO. The energy shifts. Clear command structure.
@@ -2161,7 +2161,7 @@ The crew rises with her. United. Certain. Unstoppable.
 ~ session.quality_score += 4  // Profound, life-changing reading
 ~ session.absolute_purpose = True
 ~ nyx.shamanic_awakening += 3  // Massive spiritual transformation
-~ nyx.destiny_accepted = True
+~ session.destiny_accepted = True
 
 + [The briefing is complete] -> Nyx.Session3A.Position3_Hub
 
@@ -2457,20 +2457,20 @@ if session.days_until_heist == 3:
     # Extra prep time = bonus
     session.crew_morale += 1
     session.complications -= 1  # Fewer things will go wrong
-    nyx.preparation = "excellent"
+    session.preparation = "excellent"
 elif session.hours_until_heist == 2:
     # Rushed = higher risk
     session.complications += 1
-    nyx.preparation = "rushed"
+    session.preparation = "rushed"
 else:
     # Standard = neutral
-    nyx.preparation = "solid"
+    session.preparation = "solid"
 
 # Check if spirits are helping (from briefing)
 if getattr(session, 'spirit_guidance'):
-    nyx.spirits_active = True
+    session.spirits_active = True
 else:
-    nyx.spirits_active = False
+    session.spirits_active = False
 @endpy
 
 You're not there when it happens.
@@ -2507,7 +2507,7 @@ Cipher's AR tattoos pulse. "Matrix topology mapped. ICE distribution nominal. I 
 
 Nyx crouches in the shadows—chrome and meat and shamanic fire.
 
-@if nyx.spirits_active:
+@if session.spirits_active:
     The spirits swarm around her. Invisible to cameras. Visible to HER. They're guiding. Showing paths. Warning of dangers.
 
     "They're with us," she whispers. "They're HELPING."
@@ -2551,7 +2551,7 @@ Fluorescent lights. Sterile corridors. The hum of massive cooling systems. Serve
 
 Nyx's breath mists. Chrome fingers flexing.
 
-@if nyx.spirits_active:
+@if session.spirits_active:
     The spirits press close. Hundreds of them. Thousands. Trapped in the servers. SCREAMING in frequencies only she can hear.
 
     "I hear you," she whispers. "I'm coming. Hold on."
@@ -2599,7 +2599,7 @@ The walls hum. The air vibrates. You can FEEL the data processing—exabytes per
 
 And underneath it: **screaming.**
 
-@if nyx.spirits_active:
+@if session.spirits_active:
     Nyx staggers. The spirits' pain is OVERWHELMING here. Compressed. Tortured. Weaponized.
 
     Razor catches her. "You good?"
@@ -2747,7 +2747,7 @@ Razor goes statue-still, smartgun powered down.
 
 Nyx closes her eyes. Breathing shallow. Chrome body temperature dropping to match the ambient cold.
 
-@if nyx.spirits_active:
+@if session.spirits_active:
     The spirits wrap around them—cloaking, muffling, HIDING. Shamanic camouflage layered over tech stealth.
 @endif
 
@@ -2794,7 +2794,7 @@ You speak fast, vision sharpening. "Look for the path no one watches. The crayfi
 
 Nyx spins—looking at the corridor with new eyes.
 
-@if nyx.spirits_active:
+@if session.spirits_active:
     The spirits SWARM—pointing, guiding, showing. A ventilation grate. Low. Hidden behind a server rack.
 
     "There!" Nyx gasps. "The spirits are showing me—"
@@ -3003,7 +3003,7 @@ The crew laughs—relieved, slightly embarrassed, but MOVING.
 ~ session.quality_score += 2
 ~ session.false_alarm = True
 ~ session.crew_morale += 1
-~ nyx.confidence = 1
+~ session.confidence = 1
 
 + [Continue to the server core] -> Nyx.Session3A.Phase2_Crisis_Resolved
 
@@ -3044,7 +3044,7 @@ Eight of Swords reversed: liberation in motion.
 ~ session.quality_score += 2
 ~ session.victory_momentum = True
 ~ session.crew_morale += 2
-~ nyx.confidence += 2
+~ session.confidence += 2
 ~ razor.trust += 1
 ~ whisper.trust += 1
 ~ cipher.trust += 1
@@ -3124,7 +3124,7 @@ Then Cipher laughs. "That was BEAUTIFUL."
 ~ razor["trust"] += 2
 ~ cipher["trust"] += 2
 ~ whisper["trust"] += 2
-~ nyx.confidence += 2
+~ session.confidence += 2
 
 + [Continue to the server core] -> Nyx.Session3A.Phase2_Crisis_Resolved
 
@@ -3163,7 +3163,7 @@ The drones—confused, receiving spirit-frequency interference—mistake it for 
 
 The lockdown? Never triggers. Because the facility's own systems recognize righteous purpose.
 
-@if nyx.spirits_active:
+@if session.spirits_active:
     The spirits SWARM—joyous, desperate, HELPING. Showing paths. Opening doors. Disabling sensors.
 
     Nyx weeps. "They're helping. They're actually HELPING."
@@ -5293,7 +5293,7 @@ else:
 # Update crew status
 if session.near_death:
     session.crew_morale -= 1  # Traumatic
-    nyx.trauma_level = 2
+    session.trauma_level = 2
 elif session.close_escape:
     session.crew_morale += 0  # Neutral - they survived
 elif session.extraction_outcome == "flawless":
@@ -5753,29 +5753,29 @@ Time to wake up.
 @py:
 # Final session updates
 nyx.sessions_completed = 3
-nyx.session_three_complete = True
-nyx.session_three_variant = "A"
+session.session_three_complete = True
+session.session_three_variant = "A"
 session.complete = True
 
 # Update Nyx's final state based on choices
 if session.decision == "free_all":
-    nyx.liberation_status = "total"
-    nyx.kitsune_relationship = "war"
-    nyx.reputation = "legendary"
+    session.liberation_status = "total"
+    session.kitsune_relationship = "war"
+    session.reputation = "legendary"
 elif session.decision == "free_some":
-    nyx.liberation_status = "partial"
-    nyx.kitsune_relationship = "hostile"
-    nyx.reputation = "professional"
+    session.liberation_status = "partial"
+    session.kitsune_relationship = "hostile"
+    session.reputation = "professional"
 else:
-    nyx.liberation_status = "strategic"
-    nyx.kitsune_relationship = "covert"
-    nyx.reputation = "careful"
+    session.liberation_status = "strategic"
+    session.kitsune_relationship = "covert"
+    session.reputation = "careful"
 
 # Resolve cyber glitches based on spiritual resolution
 if session.decision == "free_all" or session.decision == "free_some":
     if nyx.shamanic_awakening >= 4:
         nyx.cyber_glitches = 0  # Fully integrated
-        nyx.chrome_harmony = True
+        session.chrome_harmony = True
     else:
         nyx.cyber_glitches = 1  # Mostly resolved
 else:

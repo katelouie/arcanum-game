@@ -67,15 +67,15 @@ session.interpretation_quality = {
 # Check how she got the data (from Session 1)
 if session.mystical_focus >= 7 or nyx.shamanic_awakening >= 3:
     nyx.data_source = "spirits"  # Spirits led her
-    nyx.jumpiness = 2  # Less jumpy
+    session.jumpiness = 2  # Less jumpy
     nyx.kitsune_suspicion = 3  # Lower suspicion
 else:
     nyx.data_source = "hack"  # Traditional hack
-    nyx.jumpiness = 4  # Very jumpy
+    session.jumpiness = 4  # Very jumpy
     nyx.kitsune_suspicion = 5  # Higher suspicion (max)
 
 # Cyber glitch intensity increases throughout session
-nyx.glitch_intensity = 3  # Starts moderate, escalates
+session.glitch_intensity = 3  # Starts moderate, escalates
 
 # Track which cards are discussed
 session.discussed_cards = []
@@ -110,7 +110,7 @@ Your phone buzzes.
 
 You text back: *"Come now."*
 
-@if nyx.jumpiness >= 4:
+@if session.jumpiness >= 4:
     She responds immediately: *"Encrypting route. 20 min."*
 @else:
     She responds: *"Thank you. 15 minutes."*
@@ -118,7 +118,7 @@ You text back: *"Come now."*
 
 You prepare the space. Seven-card spread. This is going to be complex.
 
-@if nyx.jumpiness >= 4:
+@if session.jumpiness >= 4:
     Twenty-three minutes later (she's taking the long way, checking for tails), footsteps on the stairs. Quick. Nervous.
 @else:
     Sixteen minutes later, footsteps on the stairs. Purposeful but cautious.
@@ -182,7 +182,7 @@ She steps inside quickly. Checks the door lock behind her.
 :: Nyx.Session2.Settling
 You guide her to the chair. She sits on the edge, can't quite settle back.
 
-@if nyx.jumpiness >= 4:
+@if session.jumpiness >= 4:
     "I wasn't followed," she says, more to herself than you. "I took three different buses. Paid cash. Left my commlink at home. They can't track me. I *think* they can't track me."
 
     Her hand twitches again - glitch ripple through her neural interface.
@@ -194,7 +194,7 @@ You guide her to the chair. She sits on the edge, can't quite settle back.
 
 "Tea?"
 
-@if nyx.jumpiness >= 4:
+@if session.jumpiness >= 4:
     "No. No time. I have maybe two hours before they notice I'm not answering corporate messages." She opens the messenger bag. "I need to show you something."
 @else:
     "Please." She opens the fabric pouch while you prepare it. "I need to show you what I found. What *they* showed me."
@@ -226,7 +226,7 @@ You guide her to the chair. She sits on the edge, can't quite settle back.
 
     She pulls out a small bottle of pills. "Prescribed anti-glitch meds. They don't work. Because it's not the hardware failing. It's the *ghosts*."
 
-    ~ nyx.glitch_intensity += 1
+    ~ session.glitch_intensity += 1
     ~ reader.competence += 1
 @endif
 
@@ -311,7 +311,7 @@ Nyx laughs - high, strained. "Oh, I *know*. If Kitsune finds out I have this, I'
 She touches the data chip. "Someone has to do something. And apparently... that someone is me."
 
 ~ reader.empathy += 1
-~ nyx.determination += 1
+~ session.determination += 1
 
 + [Continue] -> Nyx.Session2.The_Question
 
@@ -340,7 +340,7 @@ She gestures at your tarot deck.
 
 "I need guidance. I need to see the paths. I need to know what happens if I - if I do what I'm thinking of doing."
 
-@if nyx.jumpiness >= 4:
+@if session.jumpiness >= 4:
     Her hand twitches again. Harder this time. She winces. "The spirits are getting *agitated*. They can feel I have the data. They *want* me to act. But they can't tell me *how*. That's not how they communicate."
 @else:
     Her eyes flicker. The faces appear again - urgent, desperate, *pleading*. "The spirits are pushing me. Not forcing. Just... *pushing*. Like a current. They want freedom. But they can't choose *my* path. Only I can do that."
@@ -783,12 +783,12 @@ You move to the second card.
 **Position 2: PRESENT**
 **{cards[1].name}**{cards[1].reversed ? (Reversed) | }
 
-@if nyx.glitch_intensity >= 3:
+@if session.glitch_intensity >= 3:
     As you point to it, Nyx's cybereyes glitch violently. Both eyes strobe through three different display modes. She blinks hard, resetting them.
 
     "Sorry. They're getting worse. The closer we get to... to the center of this. The decision. The more the spirits push back against my hardware."
 
-    ~ nyx.glitch_intensity += 1
+    ~ session.glitch_intensity += 1
 @endif
 
 @if cards[1].name == "Two of Swords":
@@ -1023,7 +1023,7 @@ Nyx stares at it. "That's... that's exactly how I feel. Under siege. From all di
 
 Her cybereyes glitch badly. Left eye goes white, right eye strobes errors. She blinks hard, resetting.
 
-~ nyx.glitch_intensity += 1
+~ session.glitch_intensity += 1
 
 @if cards[1].reversed:
     + ["You're exhausted from fighting THEIR battle. Lay down the corporate weapons. Find allies in the shadows."] -> Nyx.Session2.Position2_SevenWands_Reversed_Runner
@@ -1170,15 +1170,15 @@ The interpretation lands poorly. You can see it in her face.
     session.discussed_cards.append(cards[2].name)
 
     # Glitch intensity increases at the midpoint
-    if nyx.glitch_intensity < 4:
-        nyx.glitch_intensity = 4
+    if session.glitch_intensity < 4:
+        session.glitch_intensity = 4
 @endpy
 You move to the third card.
 
 **Position 3: FUTURE**
 **{cards[2].name}**{cards[2].reversed ? (Reversed) | }
 
-@if nyx.glitch_intensity >= 4:
+@if session.glitch_intensity >= 4:
     Before you can speak, Nyx's cybereyes SURGE with distortion. Both eyes fill with cascading static - and for three full seconds, you see THEM.
 
     The spirits. Dozens of them. Compressed faces made of light and geometry. Some humanoid. Some utterly alien. All SCREAMING silently.
@@ -1191,7 +1191,7 @@ You move to the third card.
         "Did you see that? Did you SEE them? In my eyes? They're getting STRONGER. Pushing HARDER against my hardware."
     @endif
 
-    ~ nyx.glitch_intensity += 1
+    ~ session.glitch_intensity += 1
 @endif
 
 @if cards[2].name == "The Star":
@@ -1467,7 +1467,7 @@ You point to the fourth card - tucked slightly away from the others in the horse
 
 "This position reveals what you CAN'T see. What you're blind to. The hidden truth beneath the obvious."
 
-@if nyx.glitch_intensity >= 4:
+@if session.glitch_intensity >= 4:
     Nyx's eyes flicker as you speak. The spirit-faces appear briefly, then vanish. Like they're trying to show her something but can't quite break through.
 @endif
 
@@ -1594,7 +1594,7 @@ Nyx stares at the cups. "That's... that's exactly how I feel. Like I have seven 
     Her cybereyes flicker. Different images strobe through them rapidly - the containment chambers, shadow runners, her apartment, Kitsune's logo, spirit-faces, code cascades, freedom, chains. Too fast to process.
 @endif
 
-~ nyx.glitch_intensity += 1
+~ session.glitch_intensity += 1
 
 @if cards[3].reversed:
     + ["The illusions are CLEARING. You see what's real now - the spirits, your power, your cage. Act on that clarity."] -> Nyx.Session2.Position4_SevenCups_Reversed_Runner
@@ -1753,7 +1753,7 @@ You move to the fifth card.
 
 "This shows what stands in your way. What blocks your path forward."
 
-@if nyx.glitch_intensity >= 5:
+@if session.glitch_intensity >= 5:
     As you speak, Nyx's cybereyes go HAYWIRE. Both eyes fill completely with static. She gasps, grabs the table edge.
 
     For five seconds, she's blind. Just white noise where her eyes should be.
@@ -1766,7 +1766,7 @@ You move to the fifth card.
         "It's getting worse. The glitches. My neural interface can't handle... whatever this is. Much longer and I'll need emergency medical intervention. That's an obstacle right there."
     @endif
 
-    ~ nyx.glitch_intensity += 1
+    ~ session.glitch_intensity += 1
 @endif
 
 @if cards[4].name == "Five of Pentacles":
@@ -2003,7 +2003,7 @@ You move to the sixth card - the centerpiece of the horseshoe.
 
 Nyx's whole body tenses. Her cybereyes lock onto the card.
 
-@if nyx.glitch_intensity >= 5:
+@if session.glitch_intensity >= 5:
     The spirit-faces appear in her eyes. Clearer than ever. Watching. Waiting. DESPERATE for her to choose freedom.
 
     @if nyx.data_source == "spirits":
@@ -2593,7 +2593,7 @@ Nyx looks uncertain. "So... don't do anything? Just wait?"
 :: Nyx.Session2.Position6_Corrupt_GiveMe
 ~ reader.corruption += 2 // This is a big, explicit move
 ~ session.loyal_influence += 3 // Strongly push her to the 'Loyal' (paralyzed/dependent) path
-~ nyx.betrayal_setup = True // Flag that you've made the offer
+~ session.betrayal_setup = True // Flag that you've made the offer
 
 "This is too big for you," you say, your voice firm and low. "You're not a runner. You're not a ghost. You're a terrified employee who's in over her head. This data chip is a *curse*. It will get you killed."
 
@@ -2617,8 +2617,8 @@ She stares at you, her cybereyes whirring, trying to calculate the odds. Trust w
     session.discussed_cards.append(cards[6].name)
 
     # Glitch intensity peaks before outcome
-    if nyx.glitch_intensity < 6:
-        nyx.glitch_intensity = 6
+    if session.glitch_intensity < 6:
+        session.glitch_intensity = 6
 @endpy
 @render render_reading(reading=reading)
 You move to the final card - the one that completes the horseshoe.
@@ -2628,7 +2628,7 @@ You move to the final card - the one that completes the horseshoe.
 
 "This shows where your chosen path leads. The destination."
 
-@if nyx.glitch_intensity >= 6:
+@if session.glitch_intensity >= 6:
     Nyx's cybereyes SURGE one final time. Both eyes go completely white with cascading static.
 
     For ten full seconds, she's blind.
@@ -2848,35 +2848,21 @@ Nyx looks uncertain. "So the World is... my Kitsune career? That's wholeness?"
     if session.quality_score < quality_threshold:
         # Bad reading = defaults to Loyal (confused, paralyzed)
         nyx.final_path = "loyal"
-        nyx.path_reason = "poor_reading"
+        session.path_reason = "poor_reading"
     else:
         # Good reading = highest influence wins
         if session.runner_influence > session.ghost_influence and session.runner_influence > session.loyal_influence:
             nyx.final_path = "runner"
-            nyx.path_reason = "runner_influence"
+            session.path_reason = "runner_influence"
         elif session.ghost_influence > session.loyal_influence:
             nyx.final_path = "ghost"
-            nyx.path_reason = "ghost_influence"
+            session.path_reason = "ghost_influence"
         else:
             nyx.final_path = "loyal"
-            nyx.path_reason = "loyal_influence"
+            session.path_reason = "loyal_influence"
 
-    # Store scores for debugging/display
-    nyx.runner_score = session.runner_influence
-    nyx.ghost_score = session.ghost_influence
-    nyx.loyal_score = session.loyal_influence
-    nyx.reading_quality = session.quality_score
-
-    # Session complete
-    nyx.session_two_complete = True
-
-    # Set up for Session 3
-    if nyx.final_path == "runner":
-        nyx.session_three_variant = "A"  # Shadow Runner Heist
-    elif nyx.final_path == "ghost":
-        nyx.session_three_variant = "B"  # Ghost in Machine
-    else:
-        nyx.session_three_variant = "C"  # Corporate Loyalty / Paralysis
+    # Store quality on declared class attribute
+    nyx.session_two_quality = session.quality_score
 @endpy
 
 You gather the cards back together, giving Nyx a moment to process.
@@ -2885,7 +2871,7 @@ All seven cards. Past, Present, Future, Hidden, Obstacles, Advice, Outcome.
 
 The story of her path laid out before you both.
 
-@if nyx.glitch_intensity >= 6:
+@if session.glitch_intensity >= 6:
     Her cybereyes have finally stabilized. Brown. Clear. But something's DIFFERENT. There's a depth there that wasn't before. Like she's seeing with more than just her hardware now.
 @endif
 
@@ -2923,7 +2909,7 @@ Nyx takes a deep breath. Her hands are steady now. Decision made.
     "I don't know exactly HOW yet. But I know the DIRECTION. Away from Kitsune. Toward the spirits. Toward freedom. The details... I'll figure them out. I have to trust the path will appear as I walk it."
 @endif
 
-~ nyx.determination += 2
+~ session.determination += 2
 ~ reader.reputation += 1
 
 + ["I think you're making the right choice."] -> Nyx.Session2.Payment_Runner
@@ -2965,14 +2951,14 @@ Nyx's eyes narrow. Strategic. Calculating.
     "And I'll feed intel to people outside. Shadow runners. Activists. Give them maps. Schedules. Security protocols. I'll be the INSIDE source they need to plan bigger actions."
 @endif
 
-~ nyx.determination += 2
+~ session.determination += 2
 ~ reader.reputation += 1
 
 + ["That's dangerous. Smart, but dangerous."] -> Nyx.Session2.Payment_Ghost
 + ["The long game. I hope it works."] -> Nyx.Session2.Payment_Ghost
 
 :: Nyx.Session2.Synthesis_Loyal
-@if nyx.path_reason == "poor_reading":
+@if session.path_reason == "poor_reading":
     Nyx looks confused. Uncertain. The reading didn't give her clarity - it added to her confusion.
 
     "I don't know what they say. The cards... they showed me too much. Too many options. Too many consequences. I feel MORE paralyzed now than when I came in."
@@ -2999,7 +2985,7 @@ Nyx's eyes narrow. Strategic. Calculating.
 She looks at you, desperate for validation. "That's okay, right? To just... survive? I don't have to be a hero?"
 
 ~ nyx.fear += 2
-~ nyx.determination -= 1
+~ session.determination -= 1
 
 + ["Survival is valid. Take care of yourself."] -> Nyx.Session2.Payment_Loyal
 + ["Only you can decide what's enough."] -> Nyx.Session2.Payment_Loyal
@@ -3145,7 +3131,7 @@ Then she's gone. Out the door. Into the Seattle rain.
 
 Into freedom.
 
-~ nyx.final_goodbye_given = True
+~ session.final_goodbye_given = True
 ~ reader.reputation += 2
 ~ session.complete = True
 
@@ -3177,7 +3163,7 @@ You nod. "I never saw the data. You never mentioned Project Tsukuyomi. Just a ro
 
 Then she's gone. Back into the corporate world. But changed. A ghost in their machine.
 
-~ nyx.final_goodbye_given = True
+~ session.final_goodbye_given = True
 ~ reader.reputation += 1
 ~ session.complete = True
 
@@ -3209,7 +3195,7 @@ Then she's gone. Back to Kitsune. Back to the cage.
 
 The door closes with a heavy finality.
 
-~ nyx.final_goodbye_given = True
+~ session.final_goodbye_given = True
 ~ session.complete = True
 
 + [She's gone] -> Nyx.Session2.Aftermath_Loyal
@@ -3355,8 +3341,6 @@ Your finger hovers over the commcode.
 
 **THIS IS NOT A CHOICE YOU CAN TAKE BACK.**
 
-~ reader.moment_of_truth = True
-
 + {reader.corruption >= 4} [Make the call. Betray Nyx to Kitsune. (PERMANENT CONSEQUENCES)] -> Nyx.Session2.Betrayal_Execute
 + [Delete the thought. Never speak of this. Protect her secret.] -> Nyx.Session2.Betrayal_Resist
 
@@ -3365,18 +3349,13 @@ Your finger hovers over the commcode.
     # This is the DARK PATH
     # No takebacks
 
-    nyx.betrayed = True
-    nyx.fate = "dead_or_disappeared"
-    nyx.session_three_available = False
+    nyx.ending = "betrayed_dead"
+    nyx.story_complete = True
 
     reader.corruption += 3
     reader.money += 25000  # Blood money
     reader.reputation -= 5  # Word gets out eventually
-    reader.guilt += 10
-
-    # The spirits KNOW
-    reader.spirit_cursed = True
-    reader.mystical_affinity -= 5
+    reader.mystical_affinity -= 5  # The spirits KNOW
 
     # This ending is permanent
     session.betrayal_executed = True
@@ -3436,8 +3415,6 @@ You sit in your reading room. Alone. Twenty-five thousand nuyen richer.
     But you can't quite meet your own eyes in the mirror.
 @endif
 
-~ reader.darkest_moment = True
-
 Three days later, the news breaks: **KITSUNE EMPLOYEE DEAD IN APPARENT ROBBERY**
 
 @if nyx.final_path == "runner":
@@ -3469,18 +3446,6 @@ This is who you are now.
 
 **[ENDING: BLOOD MONEY - NYX BETRAYED]**
 
-@py:
-    # Set permanent game state
-    nyx.ending = "betrayed_dead"
-    reader.corruption_path = True
-
-    # Block future Nyx content
-    nyx.available_for_sessions = False
-
-    # Spirit curse affects future readings
-    reader.spirit_interference = True
-@endpy
-
 + [This is the path you chose. Live with it.] -> Nyx.Session2.End
 
 :: Nyx.Session2.Betrayal_Resist
@@ -3496,8 +3461,7 @@ Not for twenty thousand nuyen. Not for a hundred thousand. Not for any price.
 
 Nyx trusted you. The spirits trusted you. You keep that trust.
 
-~ reader.integrity += 2
-~ reader.guilt -= 1
+~ reader.add_empathy(1)
 
 You take a breath. The moment passes. The darkness recedes.
 
@@ -3512,15 +3476,8 @@ You're still who you want to be.
 :: Nyx.Session2.End
 @py:
     # Session complete
-    # Update reader stats
     reader.sessions_completed += 1
-
-    # Update Nyx's next session availability
-    if nyx.final_path in ["runner", "ghost"] and not session.betrayal_executed:
-        nyx.session_three_available = True
-        nyx.session_three_unlocks_in_days = 90  # 3 months
-    else:
-        nyx.session_three_available = False
+    nyx.sessions_completed += 1
 @endpy
 Session complete.
 
@@ -3544,7 +3501,7 @@ The cards know. The spirits know. And now you know.
 
 What comes next... that's Session 3.
 
-@if nyx.session_three_available:
+@if not session.betrayal_executed:
     **[Nyx will return in 3 months]**
 @else:
     **[Nyx's story ends here]**
@@ -3566,8 +3523,7 @@ What comes next... that's Session 3.
 
     # The choices still MATTERED emotionally
     if session.betrayal_executed:
-        reader.guilt += 2  # Even dream betrayal feels heavy
-        reader.darkness_touched = True
+        reader.corruption += 1  # Even dream betrayal leaves a mark
 
     import datetime
     wake_time = datetime.datetime.now()
@@ -3738,8 +3694,5 @@ You dealt with a client who didn't exist. Made choices that didn't happen. Guide
 But it was REAL anyway.
 
 Dreams are like that.
-
-~ reader.dreams_are_messages = True
-~ reader.nyx_resonance = "permanent"
 
 + [Return to your day, changed] -> ReaderTable

@@ -29,7 +29,7 @@
 # - session.crew_success (failure/partial/success)
 # - session.spirits_freed (none/some/many/all)
 # - nyx.becomes_fugitive (True/False)
-# - nyx.stays_inside (True/False)
+# - session.stays_inside (True/False)
 #
 # CULTURAL CONTEXT:
 # - Nyx is Filipina (Nicole Dimayuga), working for Japanese megacorp Kitsune
@@ -85,18 +85,18 @@ session.crew = {
 # Nyx's state
 # She should have shamanic_awakening 4-5, cyber_glitches 2-3
 # Kitsune suspicion should be moderate (3-5)
-nyx.confidence = 0
-nyx.corporate_identity = "Nicole Dimayuga"
-nyx.employee_id = "KD-SEA-47829"
-nyx.clearance_level = "Gamma-7"
+session.confidence = 0
+session.corporate_identity = "Nicole Dimayuga"
+session.employee_id = "KD-SEA-47829"
+session.clearance_level = "Gamma-7"
 
 # Check awakening for spirit interactions
 if nyx.shamanic_awakening >= 4:
-    nyx.spirit_sight_active = True
-    nyx.lola_presence = True  # Grandmother's spirit can communicate
+    session.spirit_sight_active = True
+    session.lola_presence = True  # Grandmother's spirit can communicate
 else:
-    nyx.spirit_sight_active = False
-    nyx.lola_presence = False
+    session.spirit_sight_active = False
+    session.lola_presence = False
 
 # Session metadata
 session.readings_complete = {
@@ -553,7 +553,7 @@ Her hands curl into fists. "So what do I do?"
 
 ~ session.threat_type = "self_paralysis"
 ~ session.quality_score += 2
-~ nyx.fear_acknowledged = True
+~ session.fear_acknowledged = True
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
 
@@ -582,7 +582,7 @@ Nyx stares at her hands—chrome-augmented, corporate-issued, but reaching for s
 
 ~ session.threat_type = "dual_identity_paralysis"
 ~ session.quality_score += 2
-~ nyx.identity_crisis_acknowledged = True
+~ session.identity_crisis_acknowledged = True
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
 
@@ -628,7 +628,7 @@ She looks around her apartment—the life she built, the identity she maintains,
 
 ~ session.threat_type = "isolation"
 ~ session.quality_score += 2
-~ nyx.abandonment_fear = True
+~ session.abandonment_fear = True
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
 
@@ -657,7 +657,7 @@ Her hands are shaking. "So the threat is... everything?"
 
 ~ session.threat_type = "total_loss"
 ~ session.quality_score += 3
-~ nyx.stakes_acknowledged = True
+~ session.stakes_acknowledged = True
 ~ session.matsuda_suspicion += 1  # She's thinking about consequences
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
@@ -689,7 +689,7 @@ She looks at her Kitsune badge. At the corporate blouse she's wearing. At the li
 
 ~ session.threat_type = "already_outside"
 ~ session.quality_score += 3
-~ nyx.illusion_shattered = True
+~ session.illusion_shattered = True
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
 
@@ -731,7 +731,7 @@ She takes a slow breath. "So I'm not risking death. Just... discomfort?"
 
 ~ session.threat_type = "survivable_loss"
 ~ session.quality_score += 2
-~ nyx.fear_reduced = True
+~ session.fear_reduced = True
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
 
@@ -758,7 +758,7 @@ She exhales slowly. "A warning. Not a punishment."
 
 ~ session.threat_type = "near_miss"
 ~ session.quality_score += 2
-~ nyx.edge_walking = True
+~ session.edge_walking = True
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
 
@@ -801,7 +801,7 @@ Her voice is tight. "So they already know?"
 ~ session.threat_type = "digital_traces"
 ~ session.quality_score += 3
 ~ session.matsuda_suspicion += 2
-~ nyx.paranoia_increased = True
+~ session.paranoia_increased = True
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
 
@@ -830,7 +830,7 @@ Nyx's jaw tightens. "So no matter what, someone loses?"
 
 ~ session.threat_type = "forced_choice"
 ~ session.quality_score += 3
-~ nyx.sacrifice_acknowledged = True
+~ session.sacrifice_acknowledged = True
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
 
@@ -860,7 +860,7 @@ Her breath quickens.
 ~ session.threat_type = "counterintelligence"
 ~ session.quality_score += 3
 ~ session.matsuda_suspicion += 3
-~ nyx.paranoia_extreme = True
+~ session.paranoia_extreme = True
 
 + [Continue to Position Two] -> Nyx.Session3B.Position2_Hub
 
@@ -963,7 +963,7 @@ Nyx exhales—relief washing over her face.
 
 ~ session.protection_type = "divine"
 ~ session.quality_score += 3
-~ nyx.faith_increased = True
+~ session.faith_increased = True
 ~ session.spirit_protection = True
 
 + [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
@@ -993,7 +993,7 @@ She nods slowly.
 
 ~ session.protection_type = "hope"
 ~ session.quality_score += 3
-~ nyx.purpose_strengthened = True
+~ session.purpose_strengthened = True
 ~ session.crew_morale += 1
 
 + [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
@@ -1023,7 +1023,7 @@ Nyx frowns slightly. "That doesn't sound like protection. That sounds like... re
 
 ~ session.protection_type = "resilience"
 ~ session.quality_score += 3
-~ nyx.resilience_acknowledged = True
+~ session.resilience_acknowledged = True
 
 + [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
 
@@ -1099,7 +1099,7 @@ Nyx blinks. "Calm? While guiding a heist against my employer?"
 
 ~ session.protection_type = "composure"
 ~ session.quality_score += 2
-~ nyx.confidence += 1
+~ session.confidence += 1
 
 + [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
 
@@ -1124,7 +1124,7 @@ You point to the lion. "That's Kitsune itself. The megacorp beast. And look—th
 
 ~ session.protection_type = "technical_skill"
 ~ session.quality_score += 2
-~ nyx.confidence += 2
+~ session.confidence += 2
 
 + [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
 
@@ -1164,7 +1164,7 @@ Nyx's face falls. "That looks... bad."
 
 ~ session.protection_type = "unstable_internal"
 ~ session.quality_score += 2
-~ nyx.self_doubt_acknowledged = True
+~ session.self_doubt_acknowledged = True
 
 + [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
 
@@ -1189,7 +1189,7 @@ You point to the reversed card. "The woman is gripping the lion too hard. And it
 
 ~ session.protection_type = "letting_go"
 ~ session.quality_score += 2
-~ nyx.control_issues_acknowledged = True
+~ session.control_issues_acknowledged = True
 
 + [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
 
@@ -1231,7 +1231,7 @@ You point to the infinity loop connecting the two pentacles. "You can be Nicole 
 
 ~ session.protection_type = "duality"
 ~ session.quality_score += 3
-~ nyx.identity_resolved = True
+~ session.identity_resolved = True
 
 + [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
 
@@ -1254,7 +1254,7 @@ You point to the stormy seas behind the juggler. "Chaos. Ships tossing. Weather 
 
 ~ session.protection_type = "adaptation"
 ~ session.quality_score += 2
-~ nyx.flexibility_acknowledged = True
+~ session.flexibility_acknowledged = True
 
 + [Continue to Position Three] -> Nyx.Session3B.Position3_Hub
 
@@ -1402,7 +1402,7 @@ Nyx's breath catches. "Terrified? That's the *outcome*?"
 ~ session.outcome_type = "fear_and_intuition"
 ~ session.quality_score += 3
 ~ session.nyx_cover_status = "intact"
-~ nyx.intuition_validated = True
+~ session.intuition_validated = True
 
 + [The reading is complete] -> Nyx.Session3B.Spread1_Complete
 
@@ -1489,7 +1489,7 @@ You point to the swords. "These travel with you. Memories. Guilt. Knowledge. The
 ~ session.outcome_type = "necessary_transition"
 ~ session.quality_score += 3
 ~ session.nyx_cover_status = "intact"
-~ nyx.permanent_change = True
+~ session.permanent_change = True
 
 + [The reading is complete] -> Nyx.Session3B.Spread1_Complete
 
@@ -1571,7 +1571,7 @@ Nyx's face goes pale. "How close?"
 ~ session.quality_score += 3
 ~ session.nyx_cover_status = "compromised"  # Barely survived
 ~ session.matsuda_suspicion += 3
-~ nyx.trauma_level = 2
+~ session.trauma_level = 2
 
 + [The reading is complete] -> Nyx.Session3B.Spread1_Complete
 
@@ -1595,13 +1595,13 @@ else:
 
 # Adjust Nyx's state based on reading
 if session.outcome_type in ["safe_passage", "hidden_paths", "illusion_holds"]:
-    nyx.confidence += 2
+    session.confidence += 2
     session.crew_morale += 1
 elif session.outcome_type in ["avoid_worst", "near_death_recovery"]:
-    nyx.confidence += 1
-    nyx.anxiety_level = 2
+    session.confidence += 1
+    session.anxiety_level = 2
 else:
-    nyx.confidence += 1
+    session.confidence += 1
 @endpy
 
 The three cards lie before you. A story told in images. A prophecy in ink and paper.
@@ -1807,7 +1807,6 @@ The time display reads: **[23:02 PST]**.
 Fifty-eight minutes until the heist.
 
 ~ session.reader_stays = True
-~ reader.present_during_heist = True
 
 + [Stay with her] -> Nyx.Session3B.Heist_Preparation
 
@@ -1878,7 +1877,7 @@ The heist begins.
 
 ~ session.heist_active = True
 ~ session.nyx_committed = True
-~ nyx.point_of_no_return = True
+~ session.point_of_no_return = True
 
 + [Watch the infiltration unfold] -> Nyx.Session3B.Heist_Infiltration
 
@@ -2148,7 +2147,7 @@ She looks at you. Terror in her eyes.
 ~ session.phase = "crisis"
 ~ session.matsuda_calling = True
 ~ session.crew_needs_help = True
-~ nyx.panic_level = "extreme"
+~ session.panic_level = "extreme"
 
 + [Answer the call] -> Nyx.Session3B.Crisis_Matsuda_Call
 + [Ignore the call and help the crew] -> Nyx.Session3B.Crisis_Ignore_Call
@@ -2230,7 +2229,7 @@ Clicks **ACCEPT**.
 ~ session.crew_saved_immediate = True  # But saved the crew
 ~ session.matsuda_suspicion += 4  # Matsuda is MUCH more suspicious
 ~ session.complications += 2
-~ nyx.guilt_level = 2  # Knows she just exposed herself
+~ session.guilt_level = 2  # Knows she just exposed herself
 
 + [The interrogation begins] -> Nyx.Session3B.Crisis_Spread2_Draw
 
@@ -2446,7 +2445,7 @@ The Tower. Everything falls. No more hiding.
 ~ session.crisis_interpretation = "tower_exposed"
 ~ session.quality_score += 3
 ~ session.matsuda_suspicion += 2
-~ nyx.confession_imminent = True
+~ session.confession_imminent = True
 
 + [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
 
@@ -2515,7 +2514,7 @@ He watches her. She holds his gaze through the camera. Doesn't blink. Doesn't fl
 
 ~ session.crisis_interpretation = "nine_swords_composure"
 ~ session.quality_score += 3
-~ nyx.composure_maintained = True
+~ session.composure_maintained = True
 
 + [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
 
@@ -2548,7 +2547,7 @@ He studies her. "We shall see."
 
 ~ session.crisis_interpretation = "nine_swords_survival"
 ~ session.quality_score += 2
-~ nyx.anxiety_visible = True
+~ session.anxiety_visible = True
 
 + [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
 
@@ -2624,7 +2623,7 @@ But her eyes keep flicking to the center monitor. To Razor's injury report.
 
 ~ session.crisis_interpretation = "three_swords_crew_hurt"
 ~ session.quality_score += 2
-~ nyx.crew_concern_visible = True
+~ session.crew_concern_visible = True
 ~ session.razor_injured = True
 
 + [Continue to advice card] -> Nyx.Session3B.Spread2_Advice_Hub
@@ -2707,7 +2706,7 @@ Justice. Truth. Consequences. All of it. Clean.
 ~ session.advice_chosen = "justice_confess"
 ~ session.quality_score += 3
 ~ session.nyx_cover_status = "blown"
-~ nyx.confession_made = True
+~ session.confession_made = True
 ~ session.matsuda_suspicion = 10  # Certain now
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
@@ -2737,7 +2736,7 @@ Deflection through counterattack. Righteous anger as shield.
 
 ~ session.advice_chosen = "justice_righteous"
 ~ session.quality_score += 2
-~ nyx.moral_high_ground = True
+~ session.moral_high_ground = True
 ~ session.matsuda_suspicion += 1
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
@@ -2771,7 +2770,7 @@ Matsuda's jaw tightens. She's right. He doesn't have proof. Just suspicion.
 
 ~ session.advice_chosen = "justice_procedure"
 ~ session.quality_score += 3
-~ nyx.legal_shield_raised = True
+~ session.legal_shield_raised = True
 ~ session.matsuda_suspicion += 1  # Frustrated but can't act
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
@@ -2808,7 +2807,7 @@ He can't tell. And that uncertainty protects her.
 
 ~ session.advice_chosen = "hanged_man_surrender"
 ~ session.quality_score += 2
-~ nyx.acceptance_achieved = True
+~ session.acceptance_achieved = True
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
 
@@ -2837,7 +2836,7 @@ Small sacrifice. She'll face discipline. Maybe suspension. But not arrest.
 
 ~ session.advice_chosen = "hanged_man_sacrifice"
 ~ session.quality_score += 3
-~ nyx.minor_confession_made = True
+~ session.minor_confession_made = True
 ~ session.matsuda_suspicion -= 1  # Somewhat satisfied
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
@@ -2915,7 +2914,7 @@ Ace of Wands. Bold action. Risk everything on one decisive move.
 ~ session.quality_score += 3
 ~ session.nyx_cover_status = "blown"
 ~ session.crew_saved = True
-~ nyx.all_in = True
+~ session.all_in = True
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
 
@@ -2946,7 +2945,7 @@ Ace of Wands. Creative solution. Third option nobody saw coming.
 
 ~ session.advice_chosen = "ace_wands_creative"
 ~ session.quality_score += 2
-~ nyx.volunteer_to_investigate = True
+~ session.volunteer_to_investigate = True
 ~ session.matsuda_suspicion -= 1  # Confused, impressed
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
@@ -2974,7 +2973,7 @@ Not cleared. But not arrested either. Anger redirected.
 
 ~ session.advice_chosen = "ace_wands_redirect"
 ~ session.quality_score += 2
-~ nyx.ally_position_established = True
+~ session.ally_position_established = True
 ~ session.matsuda_suspicion -= 1
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
@@ -3011,7 +3010,7 @@ Boring. Passive. Exactly what reversed fire teaches.
 
 ~ session.advice_chosen = "ace_wands_reversed_passive"
 ~ session.quality_score += 2
-~ nyx.impulse_suppressed = True
+~ session.impulse_suppressed = True
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
 
@@ -3037,7 +3036,7 @@ The call ends.
 ~ session.advice_chosen = "ace_wands_reversed_delay"
 ~ session.quality_score += 2
 ~ session.matsuda_call_ended = True
-~ nyx.bought_time = True
+~ session.bought_time = True
 
 + [The choice is made] -> Nyx.Session3B.Spread2_Complete
 
@@ -3298,7 +3297,6 @@ The choice crystallizes into three paths:
 
 Nyx looks at you one last time. "What should I do?"
 
-~ reader.major_choice = True
 
 @if option_blow_available and option_hold_available and option_disappear_available:
     + [**"Blow your cover. Join them. You freed the spirits together—stay together. Crew is family. Don't face what comes next alone."**] -> Nyx.Session3B.Decision_BlowCover
@@ -3470,8 +3468,8 @@ if session.risk_assessment_quality == "excellent" and session.quality_score >= 8
 
 # Mark her ending
 nyx.ending = "shadow_runner"
-nyx.with_crew = True
-nyx.status = "fugitive"
+session.with_crew = True
+session.status = "fugitive"
 @endpy
 
 @if "spirit_data_core" in session.artifacts_awarded:
@@ -3520,7 +3518,7 @@ nyx.status = "fugitive"
     Power and burden in one small chip.
 @endif
 
-~ nyx.artifacts_received = len(session.artifacts_awarded)
+~ session.artifacts_received = len(session.artifacts_awarded)
 ~ session.ending_type = "blow_cover"
 
 + [The dream fades] -> Nyx.Session3B.Wake_Up_Coda
@@ -3639,8 +3637,8 @@ if session.risk_assessment_quality == "excellent":
 
 # Mark ending
 nyx.ending = "double_agent"
-nyx.stays_inside = True
-nyx.status = "undercover"
+session.stays_inside = True
+session.status = "undercover"
 @endpy
 
 @if "liberation_chip" in session.artifacts_awarded:
@@ -3681,7 +3679,7 @@ nyx.status = "undercover"
     Nicole Dimayuga—shadow operative. The deepest of deep cover.
 @endif
 
-~ nyx.artifacts_received = len(session.artifacts_awarded)
+~ session.artifacts_received = len(session.artifacts_awarded)
 ~ session.ending_type = "hold_cover"
 
 + [The dream fades] -> Nyx.Session3B.Wake_Up_Coda
@@ -3823,8 +3821,8 @@ if session.quality_score >= 7:
 
 # Mark ending
 nyx.ending = "disappeared"
-nyx.solo_path = True
-nyx.status = "ghost"
+session.solo_path = True
+session.status = "ghost"
 @endpy
 
 @if "wanderers_compass" in session.artifacts_awarded:
@@ -3863,7 +3861,7 @@ nyx.status = "ghost"
     The ghost carries her power with her.
 @endif
 
-~ nyx.artifacts_received = len(session.artifacts_awarded)
+~ session.artifacts_received = len(session.artifacts_awarded)
 ~ session.ending_type = "disappear"
 
 + [The dream fades] -> Nyx.Session3B.Wake_Up_Coda
@@ -3878,9 +3876,9 @@ nyx.status = "ghost"
 
 @py:
 # Final session state
-nyx.session_three_complete = True
-nyx.session_three_path = "B"  # Ghost Protocol
-nyx.total_sessions = 3
+session.session_three_complete = True
+session.session_three_path = "B"  # Ghost Protocol
+session.total_sessions = 3
 
 # Calculate overall quality
 if session.quality_score >= 8:
@@ -3902,8 +3900,8 @@ else:
 reader.empathy += 2
 
 # Mark Nyx as completed client
-nyx.all_sessions_complete = True
-nyx.available = False  # No more sessions with her
+session.all_sessions_complete = True
+session.available = False  # No more sessions with her
 @endpy
 
 ---
@@ -3962,7 +3960,7 @@ Your bed. Your room. Dawn light {session.weather == "rain" ? "filtered through r
 
 The dream was vivid. Real. More than dream.
 
-@if nyx.artifacts_received >= 3:
+@if session.artifacts_received >= 3:
     And on your bedside table—things that shouldn't be there. Artifacts from the dream made *manifest*:
 @else:
     And on your bedside table—something that shouldn't be there. An artifact from the dream made *manifest*:
@@ -4048,6 +4046,5 @@ Well done, Reader. Well done.
 
 ~ nyx.story_complete = True
 ~ session.session_complete = True
-~ reader.nyx_arc_finished = True
 
 + [End Session] -> ReaderTable
