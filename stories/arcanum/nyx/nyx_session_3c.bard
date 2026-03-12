@@ -1908,7 +1908,7 @@ Nyx listens carefully.
 
 "You find wisdom in solitude. Not the ecstatic fire of shamanism, but the quiet glow of the lantern. Gentle. Human. Peaceful. You learn to sit with yourself. Accept your limitations. Make peace with being ordinary."
 
-@if session.fire_path_vessel or session.fire_path_spark:
+@if session.fire_path_vessel or session.fire_path_new_beginning:
     "You never become vessel or conduit or divine spark. But you become... *content*. In a small, human way. And maybe that's enough."
 @endif
 
@@ -2237,7 +2237,7 @@ Nyx goes very still.
 
 "This isn't small. This isn't personal. This isn't 'Nyx's private struggle.' The World says: you're part of something VAST. Your choice ripples. Affects. *Matters*."
 
-@if session.fire_path_vessel or session.fire_path_spark:
+@if session.fire_path_vessel or session.fire_path_new_beginning:
     "The fire path serves the whole. You become conduit for liberation. Not just of Kitsune's spirits—of the *principle* of liberation. You prove it's possible."
 @endif
 
@@ -2366,7 +2366,7 @@ You meet her eyes.
 
 "That's the demand. The universe doesn't want you to abandon humanity for spirits. It wants you to BRIDGE them. You become the angel. The mediator. The one who pours between vessels—bringing spirit wisdom to human world, bringing human groundedness to spirit realm."
 
-@if session.fire_path_partnership or session.fire_path_mastery:
+@if session.fire_path_partnership or session.fire_path_integration:
     "The fire path isn't escaping into spirit world. It's CONNECTING worlds. You stand with feet in both. That's the work. That's the calling."
 @endif
 
@@ -2484,7 +2484,7 @@ You meet her eyes directly.
 
 "Sometimes moderation is cowardice. Sometimes you need to pour yourself out COMPLETELY. The vessels overflow? *Good*. Let them. Embrace the flood."
 
-@if session.fire_path_vessel or session.fire_path_spark:
+@if session.fire_path_vessel or session.fire_path_new_beginning:
     "The fire path showed you becoming vessel, conduit, divine spark. That's EXCESSIVE. Total. Absolute. No holding back."
 @endif
 

@@ -2639,6 +2639,8 @@ But her eyes keep flicking to the center monitor. To Razor's injury report.
 @py:
 # Crisis situation identified. Now for advice.
 session.crisis_identified = True
+session.crisis_advice_card = session.cards_crisis[1].name
+session.crisis_advice_reversed = session.cards_crisis[1].reversed
 @endpy
 
 Matsuda continues his interrogation. Questions. Pressure. Suspicion.

@@ -3416,6 +3416,7 @@ session.deck_reward = Deck(
 )
 session.reading_3 = Reading(spread_id="risk-reward", decks=[session.deck_risk, session.deck_reward])
 session.cards_final = session.reading_3.draw_cards()
+session.reward_card = session.cards_final[1].name
 @endpy
 
 Nyx lays them out on top of a server rack.
@@ -5216,8 +5217,8 @@ They reach the service entrance they came through.
 
         ~ session.near_death = True
         ~ razor.status = "injured"  # Took hits but survived
-        ~ whisper.drones_lost.append("Byron")
-        ~ whisper.drones_lost.append("Keats")
+        ~ whisper['drones_lost'].append("Byron")
+        ~ whisper['drones_lost'].append("Keats")
     @else:
         The chaos PROTECTS them. The spirits ensure it.
 
