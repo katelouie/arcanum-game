@@ -115,7 +115,7 @@ There's a story there. The cards will find it.
 
 Sasha drops their bag on your couch and starts unpacking snacks like they're setting up camp. "Dude, YOUR coffee. I brought the good stuff. French press or drip?"
 
--> Sasha.Session1.Settling
++ [Usher them in] -> Sasha.Session1.Settling
 
 :: Sasha.Session1.AskJordan
 ~ sasha.add_trust(-3)
@@ -134,7 +134,7 @@ That's okay. The cards are patient.
 
 "Obviously," they say, and the over-brightness settles to something almost normal.
 
--> Sasha.Session1.Settling
++ [Let the brightness settle] -> Sasha.Session1.Settling
 
 :: Sasha.Session1.KeepLight
 ~ sasha.add_comfort(5)
@@ -144,7 +144,7 @@ Sasha grins — real, full, the kind that crinkles their nose. "See, THIS is why
 
 They drop their bag on your couch and start arranging trail mix in a bowl like it's an art installation. "Okay but seriously, French press or drip?"
 
--> Sasha.Session1.Settling
++ [Put the kettle on] -> Sasha.Session1.Settling
 
 # ============================================================================
 # SETTLING IN
@@ -176,7 +176,7 @@ They sit down across from you. Set their coffee to the side. Tuck a curl behind 
 
 "So how does this work? Do I, like, ask a question? Or do you just... know things?"
 
--> Sasha.Session1.TheSetup
++ [Settle into your reading voice] -> Sasha.Session1.TheSetup
 
 :: Sasha.Session1.TeasingInvite
 ~ sasha.add_comfort(3)
@@ -186,7 +186,7 @@ But they sit. Pull the chair in. Rest their elbows on the table and their chin i
 
 "Okay. I'm sitting. Hit me with your mystical wisdom."
 
--> Sasha.Session1.TheSetup
++ [Meet their eyes across the table] -> Sasha.Session1.TheSetup
 
 :: Sasha.Session1.PatientWait
 ~ reader.add_insight(1)
@@ -204,7 +204,7 @@ Their hands wrap around their coffee mug. Their knee bounces under the table.
 
 "So," they say. "Cards."
 
--> Sasha.Session1.TheSetup
++ [Begin] -> Sasha.Session1.TheSetup
 
 # ============================================================================
 # THE SETUP — "JUST PRACTICE"
@@ -235,7 +235,7 @@ They lean back, arms crossed, smiling. Totally relaxed.
 
 You pick up the deck.
 
--> Sasha.Session1.ShuffleIntro
++ [Feel the cards warm in your hands] -> Sasha.Session1.ShuffleIntro
 
 :: Sasha.Session1.CardsFind
 ~ reader.add_competence(1)
@@ -246,7 +246,7 @@ Sasha's eyebrows go up. "Oh. Ominous."
 
 "Huh." They sit up a little straighter. "Okay. That's... actually kind of cool."
 
--> Sasha.Session1.ShuffleIntro
++ [Pick up the deck] -> Sasha.Session1.ShuffleIntro
 
 :: Sasha.Session1.FairWarning
 ~ reader.add_insight(1)
@@ -260,7 +260,7 @@ Sasha's smile falters for just a second. Something passes behind their eyes — 
 
 "Sure," you say, and pick up the deck.
 
--> Sasha.Session1.ShuffleIntro
++ [Let the shuffle begin] -> Sasha.Session1.ShuffleIntro
 
 # ============================================================================
 # THE SHUFFLE — THE ENERGY SHIFTS
@@ -325,7 +325,7 @@ Sasha shifts in their chair. "That's the name of the spread?"
 
 You turn over the first card.
 
--> Sasha.Session1.Position1Hub
++ [See what the surface reveals] -> Sasha.Session1.Position1Hub
 
 # ============================================================================
 # POSITION 1: THE SURFACE
@@ -397,7 +397,7 @@ Silence. Their hands wrap around their coffee mug.
 
 *Fine.* The word people use when they're anything but.
 
--> Sasha.Session1.Position1.End
++ [Let "fine" hang in the air] -> Sasha.Session1.Position1.End
 
 :: Sasha.Session1.P1.TwoCups.ExcellentAnalytical
 ~ session.interpretation_good += 1
@@ -412,7 +412,7 @@ Sasha blinks. "Wow, okay. Getting right into it."
 
 "Yeah, but I didn't expect you to find something on the first card." They fidget with a bracelet — braided leather, the kind Jordan made them last summer. You remember Jordan tying it on at the barbecue, the way Sasha beamed. "Things are... it's fine with Jordan. It's fine."
 
--> Sasha.Session1.Position1.End
++ [Notice the bracelet twisting] -> Sasha.Session1.Position1.End
 
 :: Sasha.Session1.P1.TwoCups.Good
 ~ session.interpretation_good += 1
@@ -426,7 +426,7 @@ Sasha tilts their head. "Is that... bad?"
 
 They sit with that for a moment.
 
--> Sasha.Session1.Position1.End
++ [Let the card settle] -> Sasha.Session1.Position1.End
 
 :: Sasha.Session1.P1.TwoCups.Okay
 ~ session.interpretation_okay += 1
@@ -435,7 +435,7 @@ They sit with that for a moment.
 
 "Yeah, I mean... I have friends. I have a partner. Normal stuff." Sasha shrugs. "Next card?"
 
--> Sasha.Session1.Position1.End
++ [Move on — for now] -> Sasha.Session1.Position1.End
 
 :: Sasha.Session1.P1.TwoCups.Bad
 ~ session.interpretation_bad += 1
@@ -448,7 +448,7 @@ Sasha raises an eyebrow. "Did you just say 'oh nice' about a tarot card?"
 
 "Babe, even I know that's not how this works." They're teasing, but underneath it: *you missed something.* The reading hasn't earned their respect yet.
 
--> Sasha.Session1.Position1.End
++ [Swallow the miss and keep going] -> Sasha.Session1.Position1.End
 
 # --- Three of Cups ---
 
@@ -477,7 +477,7 @@ Very long pause.
 
 "No," they say quietly. "It's not wrong."
 
--> Sasha.Session1.Position1.End
++ [Hold the silence gently] -> Sasha.Session1.Position1.End
 
 :: Sasha.Session1.P1.ThreeCups.ExcellentAnalytical
 ~ session.interpretation_good += 1
@@ -492,7 +492,7 @@ Very long pause.
 
 "Uh-huh. Sure."
 
--> Sasha.Session1.Position1.End
++ [Let the card settle] -> Sasha.Session1.Position1.End
 
 :: Sasha.Session1.P1.ThreeCups.Good
 ~ session.interpretation_good += 1
@@ -506,7 +506,7 @@ Sasha opens their mouth. Closes it.
 
 They pick at the trail mix. "Next card."
 
--> Sasha.Session1.Position1.End
++ [Reach for the next card] -> Sasha.Session1.Position1.End
 
 :: Sasha.Session1.P1.ThreeCups.Okay
 ~ session.interpretation_okay += 1
@@ -517,7 +517,7 @@ They pick at the trail mix. "Next card."
 
 They relaxed. Which means you didn't reach them. Not yet.
 
--> Sasha.Session1.Position1.End
++ [The cards are patient] -> Sasha.Session1.Position1.End
 
 :: Sasha.Session1.P1.ThreeCups.Bad
 ~ session.interpretation_bad += 1
@@ -530,7 +530,7 @@ Sasha looks at you flatly. "You sound like a fortune cookie."
 
 "Babe. Dig *deeper*. I know you can."
 
--> Sasha.Session1.Position1.End
++ [Take the hit and move on] -> Sasha.Session1.Position1.End
 
 # --- Position 1 Convergence ---
 
@@ -547,7 +547,7 @@ You reach for the second card.
     "Sure," Sasha says carefully. Their guard is up.
 @endif
 
--> Sasha.Session1.Position2Hub
++ [Turn the second card] -> Sasha.Session1.Position2Hub
 
 # ============================================================================
 # POSITION 2: BENEATH
@@ -620,7 +620,7 @@ The room is very quiet. Rain against the window. Coffee cooling.
 
 "Cards," they say immediately. "Let the cards do it. I can't—" They gesture vaguely at their chest. "I can't say it out loud yet."
 
--> Sasha.Session1.Position2.End
++ [Let the cards speak for them] -> Sasha.Session1.Position2.End
 
 :: Sasha.Session1.P2.Eight.ExcellentAnalytical
 ~ session.interpretation_good += 1
@@ -640,7 +640,7 @@ Despite everything, they almost laugh. Almost.
 
 "Keep going," they say through their hands. "I'm fine. This is fine."
 
--> Sasha.Session1.Position2.End
++ [Give them a moment, then continue] -> Sasha.Session1.Position2.End
 
 :: Sasha.Session1.P2.Eight.Good
 ~ session.interpretation_good += 1
@@ -652,7 +652,7 @@ Sasha doesn't deny it. That's telling.
 
 "Stuck," they repeat, tasting the word. "Yeah. That's... a word for it."
 
--> Sasha.Session1.Position2.End
++ [Sit with what you just said] -> Sasha.Session1.Position2.End
 
 :: Sasha.Session1.P2.Eight.Okay
 ~ session.interpretation_okay += 1
@@ -663,7 +663,7 @@ Sasha doesn't deny it. That's telling.
 
 The joke lands. But it's a wall, not a bridge.
 
--> Sasha.Session1.Position2.End
++ [Note the wall and move on] -> Sasha.Session1.Position2.End
 
 :: Sasha.Session1.P2.Eight.Bad
 ~ session.interpretation_bad += 1
@@ -676,7 +676,7 @@ Sasha looks at you. Really looks.
 
 You missed it. The swords are real. The trap is real. And you just told them it wasn't.
 
--> Sasha.Session1.Position2.End
++ [Feel the miss settle in your chest] -> Sasha.Session1.Position2.End
 
 # --- Five of Cups ---
 
@@ -704,7 +704,7 @@ Sasha's hand moves to their wrist — to a braided leather bracelet. They twist 
 
 "Yeah," Sasha whispers.
 
--> Sasha.Session1.Position2.End
++ [Let the whisper breathe] -> Sasha.Session1.Position2.End
 
 :: Sasha.Session1.P2.Five.ExcellentAnalytical
 ~ session.interpretation_good += 1
@@ -724,7 +724,7 @@ They stop again. Catch themselves.
 
 "...Oh," they say.
 
--> Sasha.Session1.Position2.End
++ [Hold the silence] -> Sasha.Session1.Position2.End
 
 :: Sasha.Session1.P2.Five.Good
 ~ session.interpretation_good += 1
@@ -736,7 +736,7 @@ Sasha nods slowly. "I tend to look at the broken stuff."
 
 "Most people do."
 
--> Sasha.Session1.Position2.End
++ [Let the card settle] -> Sasha.Session1.Position2.End
 
 :: Sasha.Session1.P2.Five.Okay
 ~ session.interpretation_okay += 1
@@ -745,7 +745,7 @@ Sasha nods slowly. "I tend to look at the broken stuff."
 
 "Well, that's just adulthood, right?" Sasha jokes. But their eyes are glassy.
 
--> Sasha.Session1.Position2.End
++ [Pretend you didn't see the glassiness] -> Sasha.Session1.Position2.End
 
 :: Sasha.Session1.P2.Five.Bad
 ~ session.interpretation_bad += 1
@@ -758,7 +758,7 @@ Sasha stares at you. The disappointment is palpable.
 
 They pull away from the table slightly. Trust lost.
 
--> Sasha.Session1.Position2.End
++ [Feel the distance widen] -> Sasha.Session1.Position2.End
 
 # --- Position 2 Convergence ---
 
@@ -779,7 +779,7 @@ The second card sits on the cloth between you. Heavy.
     "Let's keep going," they say. Flat. Careful.
 @endif
 
--> Sasha.Session1.Position3Hub
++ [Turn the third card] -> Sasha.Session1.Position3Hub
 
 # ============================================================================
 # POSITION 3: THE OTHER PERSON
@@ -856,7 +856,7 @@ You remember. You also remember when Sasha stopped inviting you over. When the t
 
 "No," Sasha says. "It really hasn't."
 
--> Sasha.Session1.Position3.End
++ [Let the truth sit between you] -> Sasha.Session1.Position3.End
 
 :: Sasha.Session1.P3.Devil.ExcellentAnalytical
 ~ session.interpretation_good += 1
@@ -877,7 +877,7 @@ Sasha stares at you. "How do you *know* that?"
 
 They nod. Can't speak. The bracelet twists and twists.
 
--> Sasha.Session1.Position3.End
++ [Watch the bracelet twist] -> Sasha.Session1.Position3.End
 
 :: Sasha.Session1.P3.Devil.Good
 ~ session.interpretation_good += 1
@@ -892,7 +892,7 @@ Sasha is quiet for a while. Then, very small:
 
 "I know," you say. Because you do. You've known something was wrong for months. You just couldn't name it until now.
 
--> Sasha.Session1.Position3.End
++ [Let the naming settle] -> Sasha.Session1.Position3.End
 
 :: Sasha.Session1.P3.Devil.Okay
 ~ session.interpretation_okay += 1
@@ -903,7 +903,7 @@ Sasha nods slowly. Doesn't elaborate. The door cracked open but didn't swing wid
 
 "Next card?" they say.
 
--> Sasha.Session1.Position3.End
++ [Move to the last card] -> Sasha.Session1.Position3.End
 
 # --- Seven of Swords ---
 
@@ -931,7 +931,7 @@ Sasha's hand goes to the bracelet. Jordan's bracelet. Their eyes are full.
 
 "Nobody does." They wipe their eyes. "Nobody knows how to say it because I made *damn* sure nobody could see it."
 
--> Sasha.Session1.Position3.End
++ [Sit with what they just said] -> Sasha.Session1.Position3.End
 
 :: Sasha.Session1.P3.Seven.ExcellentAnalytical
 ~ session.interpretation_good += 1
@@ -953,7 +953,7 @@ They catch themselves. But it's too late.
 
 They don't answer. Which is an answer.
 
--> Sasha.Session1.Position3.End
++ [Accept the silence as confirmation] -> Sasha.Session1.Position3.End
 
 :: Sasha.Session1.P3.Seven.Good
 ~ session.interpretation_good += 1
@@ -964,7 +964,7 @@ They don't answer. Which is an answer.
 
 "Yeah," Sasha says. Small voice. "Yeah. That's... things with Jordan have been like that."
 
--> Sasha.Session1.Position3.End
++ [Hold space for the small voice] -> Sasha.Session1.Position3.End
 
 :: Sasha.Session1.P3.Seven.Okay
 ~ session.interpretation_okay += 1
@@ -975,7 +975,7 @@ Sasha fidgets. "Sure. I mean, who doesn't have that?"
 
 Deflection. But at least they didn't shut down.
 
--> Sasha.Session1.Position3.End
++ [Note the deflection, keep going] -> Sasha.Session1.Position3.End
 
 # --- Position 3 Convergence ---
 
@@ -998,7 +998,7 @@ Three cards on the cloth. The story is becoming clear — to you, and to Sasha.
     "Last one," you say.
 @endif
 
--> Sasha.Session1.Position4Hub
++ [Reach for the last card] -> Sasha.Session1.Position4Hub
 
 # ============================================================================
 # POSITION 4: WHAT YOU NEED
@@ -1072,7 +1072,7 @@ They nod. Wipe their face with their sleeve. Take a shaky breath.
 
 "...Yeah. I think it was."
 
--> Sasha.Session1.Position4.End
++ [Let the tears dry on their own] -> Sasha.Session1.Position4.End
 
 :: Sasha.Session1.P4.Star.ExcellentAnalytical
 ~ session.interpretation_good += 1
@@ -1092,7 +1092,7 @@ Tears come. Quiet ones.
 
 "That's not messed up. That's a symptom."
 
--> Sasha.Session1.Position4.End
++ [Let the diagnosis land] -> Sasha.Session1.Position4.End
 
 :: Sasha.Session1.P4.Star.Good
 ~ session.interpretation_good += 1
@@ -1104,7 +1104,7 @@ Sasha nods. Their eyes are bright.
 
 "Different," they repeat. "I'd like that."
 
--> Sasha.Session1.Position4.End
++ [Hold that hope gently] -> Sasha.Session1.Position4.End
 
 :: Sasha.Session1.P4.Star.Okay
 ~ session.interpretation_okay += 1
@@ -1113,7 +1113,7 @@ Sasha nods. Their eyes are bright.
 
 "Cool," Sasha says. But the word is thick with something they won't name yet.
 
--> Sasha.Session1.Position4.End
++ [Hear what "cool" is hiding] -> Sasha.Session1.Position4.End
 
 # --- Strength ---
 
@@ -1144,7 +1144,7 @@ Sasha's jaw works.
 
 They cry. Quietly, fiercely, like something breaking open that's been sealed too long.
 
--> Sasha.Session1.Position4.End
++ [Be still while something breaks open] -> Sasha.Session1.Position4.End
 
 :: Sasha.Session1.P4.Str.ExcellentAnalytical
 ~ session.interpretation_good += 1
@@ -1166,7 +1166,7 @@ Silence.
 
 "That's what I need."
 
--> Sasha.Session1.Position4.End
++ [Promise the cards will be here] -> Sasha.Session1.Position4.End
 
 :: Sasha.Session1.P4.Str.Good
 ~ session.interpretation_good += 1
@@ -1178,7 +1178,7 @@ Sasha nods slowly. "I could use some of that."
 
 "You have it. That's what the card is saying. It's not something you need to find — it's something you need to *remember*."
 
--> Sasha.Session1.Position4.End
++ [Let the remembering begin] -> Sasha.Session1.Position4.End
 
 :: Sasha.Session1.P4.Str.Okay
 ~ session.interpretation_okay += 1
@@ -1187,7 +1187,7 @@ Sasha nods slowly. "I could use some of that."
 
 "Thanks," Sasha says. But the word hangs in the air, wanting more.
 
--> Sasha.Session1.Position4.End
++ [Let "thanks" be enough for now] -> Sasha.Session1.Position4.End
 
 # --- Position 4 Convergence ---
 
@@ -1215,7 +1215,7 @@ Sasha stares at the spread. All four cards.
 
 "No," you agree. "It wasn't."
 
--> Sasha.Session1.SynthesisHub
++ [Look at the whole spread together] -> Sasha.Session1.SynthesisHub
 
 # ============================================================================
 # SYNTHESIS
@@ -1287,7 +1287,7 @@ They gesture at the spread.
     "Good. Because *I'll* be here."
 @endif
 
--> Sasha.Session1.Departure
++ [Walk them to the door] -> Sasha.Session1.Departure
 
 :: Sasha.Session1.Synth.Profound
 ~ sasha.add_trust(10)
@@ -1307,7 +1307,7 @@ Sasha nods slowly, looking at the cards.
 
 "More than okay."
 
--> Sasha.Session1.Departure
++ [See them to the door] -> Sasha.Session1.Departure
 
 :: Sasha.Session1.Synth.Helpful
 ~ sasha.add_trust(5)
@@ -1323,7 +1323,7 @@ A pause.
 
 "Anytime."
 
--> Sasha.Session1.Departure
++ [Start cleaning up the spread] -> Sasha.Session1.Departure
 
 :: Sasha.Session1.Synth.Adequate
 "Huh," Sasha says.
@@ -1338,7 +1338,7 @@ They almost smile. "Poetic. Okay, I'll give you another shot. Can I come back ne
 
 "Absolutely."
 
--> Sasha.Session1.Departure
++ [Gather the cards] -> Sasha.Session1.Departure
 
 :: Sasha.Session1.Synth.Mediocre
 Sasha stands up. Stretches.
@@ -1353,7 +1353,7 @@ The air between you is polite. Distant. The reading didn't land. You know it. Th
 
 They won't be back. You can feel it.
 
--> Sasha.Session1.Departure
++ [Let them go] -> Sasha.Session1.Departure
 
 # ============================================================================
 # DEPARTURE
@@ -1404,7 +1404,7 @@ Sasha stands. Stretches. Puts their shoes on.
     You sit in the quiet, staring at four cards that didn't do their job. Or maybe you didn't do yours.
 @endif
 
--> Sasha.Session1.End
++ [Close the session] -> Sasha.Session1.End
 
 # ============================================================================
 # SESSION END

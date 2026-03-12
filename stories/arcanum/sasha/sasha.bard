@@ -4,7 +4,9 @@
 @elif sasha.sessions_completed == 1:
     -> Sasha.Session2.Start
 @elif sasha.sessions_completed == 2:
-    -> Sasha.Session3.Start
+    # -> Sasha.Session3.Start
+    + [Sasha's third session is still being written.] -> ReaderTable
 @else:
     Sasha's arc is complete. You smile when you think of them.
+    + [Return to your table] -> ReaderTable
 @endif

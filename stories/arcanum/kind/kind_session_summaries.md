@@ -86,3 +86,57 @@ When the player wakes up, a notebook page bleeds through into reality based on t
 * **Foundation:** A clean, correct proof written in handwriting that feels like the player's.
 * **Wildcard:** A proof featuring a music recommendation scrawled in the margin by Scout.
 * **Impossible:** A printed page from the impossible Pratchett textbook featuring a humorous footnote about the Bolzano-Weierstrass theorem.
+
+## Session 3
+
+Here is a comprehensive synopsis of **The Kind: Session 3 ("What This Place Holds")** designed to give your AI co-writer a complete understanding of the narrative structure, branching paths, and specific flavor of the episode.
+
+### **The Core Premise: The Caretaker's Turn**
+
+In Session 3, the dream shifts its established formula. There is no human client; **the client is the store itself**. After spending previous sessions giving the crew and customers exactly what they need (impossible records, perfect textbooks), the building puts its foot down. It wants to be seen, heard, and tended to.
+
+### **Atmosphere and Setup**
+
+* **The Storm:** The session opens during a rare, violent Willamette Valley thunderstorm. The store is locked, the "OPEN" sign is dark, and the crew (Scout, Mal, Delphi) have the night to themselves.
+* **Crew Dynamics:** The scene starts with cozy, highly specific banter. Scout is arguing that Radiohead's *Kid A* is the *Ulysses* of rock albums, while Mal counters that it's actually *The Waste Land*.
+* **The Store Speaks:** The store begins communicating non-verbally. A Joni Mitchell record slides across the floor, the empty turntable begins to spin, and the temperature flushes warmly. Delphi drops a massive narrative pivot by shifting pronouns: *"She's talking,"* transforming the store from an "it" to a "she".
+
+### **The Mechanics: Environmental Storytelling**
+
+The player performs a 3-card spread ("What This Place Holds") directly on the checkout counter. Because the store cannot speak, it reacts to the player's interpretations through the environment:
+
+* **Approval:** The pressed tin ceiling hums, the room grows warmer, golden light spills from the back room, or the rain applauds against the windows.
+* **Rejection/Sass:** If the player gives a generic or shallow reading, the store gets sassy. It will drop a copy of *Small Business Accounting for Dummies* or *Tarot for Dummies* onto the floor, drop the room temperature, or aggressively slam doors.
+
+### **The Three Branching Finales**
+
+The climax of the session depends on the third card drawn ("What You Want For Yourself") and the player's reading style. It results in three highly distinct, character-driven resolutions:
+
+**1. The Community Path (Delphi / The World)**
+
+* **The Vibe:** The store is tired of being a well-kept secret for weirdos; it wants to be the heart of the town.
+* **The Event:** The front doors blow wide open to the storm, but the rain refuses to cross the threshold. Delphi realizes the store wants to invite people in. She physically tears down the bead curtain separating the tarot nook from the main store and writes a flyer to host a public "Reading Night".
+
+**2. The Voice Path (Scout / The Star)**
+
+* **The Vibe:** The store wants to share its own music. It has been the background for decades and wants to be the story.
+* **The Event:** Scout is guided to a blank, label-less 7-inch record in the bins. When he plays it, it isn't a recorded song—it's a symphony made of the ambient sounds the store has absorbed over the decades: rain on the tin roof, the door chime, and the layered voices of the crew and customers.
+
+**3. The Depth Path (Mal / The Moon)**
+
+* **The Vibe:** The store wants to be fully known, opening up its most mysterious depths.
+* **The Event:** The door to the impossible "deep shelves" opens fully, inviting the whole crew inside. Mal discovers a handmade scrapbook kept by the store itself. It contains pressed flowers, receipts from timelines that don't exist, and the store's personal diary entries about loving the crew. The final page is a photo of the current crew alongside a mysterious fifth person, revealing the store is doing its own HR recruitment.
+
+*(Note: There is also a **Failstate** where the store sighs, shuts its doors, and patiently decides to wait for another day when the reader is more prepared.)*
+
+### **The Postscript: The Humor**
+
+To break the heavy emotional tension of the finale, the store offers a hilarious "P.S.". A plastic Blu-Ray case clatters to the floor. It is a Criterion Collection copy of *Citizen Kane*—but from an alternate universe where it is directed by "Owen Welles" and the sled is named "toboggan". The store is aggressively demanding that the crew build it a film section.
+
+### **The "Bleed" Objects (Waking World)**
+
+When the player wakes up in their real apartment, they find a physical artifact from the dream on their nightstand, depending on their path:
+
+* **Community:** Delphi's hand-lettered flyer for "Reading Night".
+* **Voice:** The blank 7-inch record that whispers the sound of rain when held to the ear.
+* **Depth:** A page from the store's composition notebook containing a catalog entry for the player themselves, cross-referenced under "Empathy" and categorized simply as: *Family*.

@@ -15,4 +15,5 @@
     @endif
 @elif chen.sessions_completed == 3:
     Margaret Chen's story is complete.
+    + [Return to your table] -> ReaderTable
 @endif

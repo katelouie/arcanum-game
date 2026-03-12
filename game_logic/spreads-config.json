@@ -2670,48 +2670,34 @@
       ]
     },
     {
-      "id": "sasha-bond-that-binds",
-      "name": "The Bond That Binds (5-Card)",
-      "description": "A 5-card spread for examining what holds a relationship together — the chain, the key, the fear, the deserving, and the break. Designed for clients ready to look directly at a toxic dynamic.",
-      "layout": "cross-5",
+      "id": "sasha-the-truth-about-this",
+      "name": "The Truth About This (3-Card)",
+      "description": "A direct, evaluative 3-card spread. No leading questions — just honest assessment. Where are you? What's real? Where is this going? Designed for someone who already knows something is wrong and needs clarity, not discovery.",
+      "layout": "horizontal-3",
       "cardSize": "medium",
       "aspectRatio": 1.0,
       "category": "relationship",
       "difficulty": "intermediate",
       "positions": [
         {
-          "name": "The Chain",
-          "short_description": "What binds you to this pattern",
-          "detailed_description": "The thing that keeps you coming back. Not love — or not only love. The mechanism of attachment: habit, fear, identity, need. This card shows the binding itself, stripped of the story you tell about why you stay.",
-          "keywords": ["binding", "chain", "attachment", "pattern", "bond", "trap"],
-          "rag_mapping": "challenges_and_obstacles.blockages"
+          "name": "Where You Are",
+          "short_description": "Your current position — honest, unvarnished",
+          "detailed_description": "Not where you wish you were. Not where you're pretending to be. This card shows your actual situation right now, stripped of the narrative you've been telling yourself and others. It's an assessment, not a judgment.",
+          "keywords": ["present", "reality", "position", "truth", "situation", "now"],
+          "rag_mapping": "situation_and_context.current_state"
         },
         {
-          "name": "The Key",
-          "short_description": "What would unlock the pattern",
-          "detailed_description": "Clarity, courage, a conversation, a moment of seeing clearly. This card shows the thing that could change everything — not a magic fix, but the first honest step. The key doesn't open the door for you. It shows you where the lock is.",
-          "keywords": ["key", "clarity", "unlock", "breakthrough", "truth", "insight"],
-          "rag_mapping": "guidance_and_advice.recommended_approach"
+          "name": "What's Real",
+          "short_description": "The truth underneath the story",
+          "detailed_description": "Everyone has a version of events they tell themselves. This card cuts through that version to show what's actually happening — the dynamic, the pattern, the cost. Not what you want to be true. What IS true.",
+          "keywords": ["truth", "reality", "underneath", "pattern", "dynamic", "honest"],
+          "rag_mapping": "emotional_and_internal.core_emotions"
         },
         {
-          "name": "What You Fear",
-          "short_description": "The fear that keeps the chain in place",
-          "detailed_description": "The real reason you haven't left. Not the practical reasons — those are real but surmountable. This is the deeper fear: of being alone, of being wrong, of discovering that the pain was your fault, of finding out who you are without this person to define yourself against.",
-          "keywords": ["fear", "anxiety", "dread", "avoidance", "paralysis", "alone"],
-          "rag_mapping": "emotional_and_internal.fears"
-        },
-        {
-          "name": "What You Deserve",
-          "short_description": "The love or life that's possible for you",
-          "detailed_description": "This card doesn't predict the future. It shows the quality of connection you're capable of — what healthy love, real partnership, genuine care would look like for you specifically. The contrast with the current situation is the point.",
-          "keywords": ["deserve", "worthy", "possible", "healthy", "love", "future"],
-          "rag_mapping": "outcome_and_result.possible_outcome"
-        },
-        {
-          "name": "The Break",
-          "short_description": "How the pattern ends — if you let it",
-          "detailed_description": "Transformation or departure. Death or walking away. This card shows the nature of the ending that's available to you. It won't be painless. But it shows you what's on the other side of the break.",
-          "keywords": ["break", "ending", "transformation", "departure", "release", "freedom"],
+          "name": "Where This Goes",
+          "short_description": "The trajectory — what's already in motion",
+          "detailed_description": "Not a prescription. Not advice. This card shows the direction things are already moving — the momentum, the inevitability, the transformation that's started whether you chose it or not. It's a weather report, not a command.",
+          "keywords": ["trajectory", "direction", "momentum", "future", "movement", "change"],
           "rag_mapping": "outcome_and_result.final_outcome"
         }
       ]

@@ -34,6 +34,7 @@ import random
 # Sasha
 @include sasha/sasha.bard
 @include sasha/sasha_session_1.bard
+@include sasha/sasha_session_2.bard
 
 @metadata
   title: Arcanum
