@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="arcanum_cards_base.css">
+</head>
+<body class="tarot-card" style="width:550px; height:950px;">
+<div class="card-frame size-full">
+
+  <!-- Frame -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+
+  <svg class="corner corner-tl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 40 40" fill="none">
+    <path d="M0 40 L0 12 Q0 0 12 0 L40 0" stroke="var(--card-border)" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="10" cy="10" r="2.5" stroke="var(--card-border)" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <circle cx="10" cy="10" r="1" fill="var(--card-border)" opacity="0.3"/>
+  </svg>
+
+  <div class="card-number">X</div>
+  <div class="card-name">Wheel of Fortune</div>
+
+  <!-- ================ ILLUSTRATION ================ -->
+  <div class="illustration">
+    <svg width="500" height="800" viewBox="0 0 500 800" fill="none">
+
+      <!-- Central glow — emanating from the wheel -->
+      <radialGradient id="wheelglow" cx="50%" cy="47%" r="30%">
+        <stop offset="0%" stop-color="var(--card-line)" stop-opacity="0.1"/>
+        <stop offset="50%" stop-color="var(--card-accent-light)" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="var(--card-accent)" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="500" height="800" fill="url(#wheelglow)"/>
+
+      <!-- ======== THE WHEEL — three concentric rings ======== -->
+
+      <!-- Outermost ring — thick, the rim of fate -->
+      <circle cx="250" cy="370" r="180" fill="none" stroke="var(--card-line)" stroke-width="2" opacity="0.5"/>
+      <circle cx="250" cy="370" r="175" fill="none" stroke="var(--card-line)" stroke-width="0.6" opacity="0.2"/>
+
+      <!-- TORA / TAROT letters around the outer rim — spaced evenly -->
+      <!-- Using simple letter positions at 72° intervals around the wheel -->
+      <text x="250" y="195" text-anchor="middle" font-family="'Cormorant Garamond', serif"
+            font-size="22" fill="var(--card-line-light)" opacity="0.45" dominant-baseline="middle">T</text>
+      <text x="418" y="310" text-anchor="middle" font-family="'Cormorant Garamond', serif"
+            font-size="22" fill="var(--card-line-light)" opacity="0.45" dominant-baseline="middle">A</text>
+      <text x="390" y="490" text-anchor="middle" font-family="'Cormorant Garamond', serif"
+            font-size="22" fill="var(--card-line-light)" opacity="0.45" dominant-baseline="middle">R</text>
+      <text x="110" y="490" text-anchor="middle" font-family="'Cormorant Garamond', serif"
+            font-size="22" fill="var(--card-line-light)" opacity="0.45" dominant-baseline="middle">O</text>
+      <text x="82" y="310" text-anchor="middle" font-family="'Cormorant Garamond', serif"
+            font-size="22" fill="var(--card-line-light)" opacity="0.45" dominant-baseline="middle">T</text>
+
+      <!-- Alchemical symbols between letters — tiny, at the same radius -->
+      <!-- Aquarius (water waves) between T-A -->
+      <path d="M340 238 Q345 232 350 238 Q355 244 360 238" stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.25"/>
+      <!-- Scorpio (M-arrow) between A-R -->
+      <path d="M428 400 L432 404 L436 400 L440 404 L442 398" stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.25"/>
+      <!-- Leo (loop) between R-O -->
+      <path d="M250 555 Q256 548 262 555 Q260 562 254 558" stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.25"/>
+      <!-- Taurus (circle-horns) between O-T -->
+      <circle cx="62" cy="400" r="4" fill="none" stroke="var(--card-line-dim)" stroke-width="0.7" opacity="0.2"/>
+      <path d="M58 396 Q56 388 62 386 Q68 388 66 396" stroke="var(--card-line-dim)" stroke-width="0.6" fill="none" opacity="0.2"/>
+      <!-- Hebrew letters between — yod, he, vav, he — even smaller -->
+      <circle cx="310 " cy="210" r="1.5" fill="var(--card-line)" opacity="0.15"/>
+      <circle cx="424" cy="360" r="1.5" fill="var(--card-line)" opacity="0.15"/>
+      <circle cx="340" cy="530" r="1.5" fill="var(--card-line)" opacity="0.15"/>
+      <circle cx="160" cy="530" r="1.5" fill="var(--card-line)" opacity="0.15"/>
+
+      <!-- Middle ring -->
+      <circle cx="250" cy="370" r="130" fill="none" stroke="var(--card-line)" stroke-width="1.5" opacity="0.4"/>
+
+      <!-- Inner ring -->
+      <circle cx="250" cy="370" r="80" fill="none" stroke="var(--card-line)" stroke-width="1.5" opacity="0.45"/>
+
+      <!-- ======== SPOKES ======== -->
+      <!-- Eight spokes radiating from center — clock-like, fate turning -->
+      <line x1="250" y1="290" x2="250" y2="210" stroke="var(--card-line)" stroke-width="1.2" opacity="0.3"/>
+      <line x1="250" y1="450" x2="250" y2="530" stroke="var(--card-line)" stroke-width="1.2" opacity="0.3"/>
+      <line x1="170" y1="370" x2="90" y2="370" stroke="var(--card-line)" stroke-width="1.2" opacity="0.3"/>
+      <line x1="330" y1="370" x2="410" y2="370" stroke="var(--card-line)" stroke-width="1.2" opacity="0.3"/>
+      <!-- Diagonals -->
+      <line x1="193" y1="313" x2="137" y2="257" stroke="var(--card-line)" stroke-width="1" opacity="0.2"/>
+      <line x1="307" y1="313" x2="363" y2="257" stroke="var(--card-line)" stroke-width="1" opacity="0.2"/>
+      <line x1="193" y1="427" x2="137" y2="483" stroke="var(--card-line)" stroke-width="1" opacity="0.2"/>
+      <line x1="307" y1="427" x2="363" y2="483" stroke="var(--card-line)" stroke-width="1" opacity="0.2"/>
+
+      <!-- Spoke end diamonds — where spokes hit the inner ring -->
+      <path d="M250 290 L245 285 L250 280 L255 285 Z" fill="var(--card-line)" opacity="0.25"/>
+      <path d="M250 450 L245 455 L250 460 L255 455 Z" fill="var(--card-line)" opacity="0.25"/>
+      <path d="M170 370 L165 365 L160 370 L165 375 Z" fill="var(--card-line)" opacity="0.25"/>
+      <path d="M330 370 L335 365 L340 370 L335 375 Z" fill="var(--card-line)" opacity="0.25"/>
+
+      <!-- ======== INNER WHEEL DESIGN ======== -->
+      <!-- Cross and inner geometry -->
+      <line x1="250" y1="295" x2="250" y2="445" stroke="var(--card-line-light)" stroke-width="1" opacity="0.25"/>
+      <line x1="175" y1="370" x2="325" y2="370" stroke="var(--card-line-light)" stroke-width="1" opacity="0.25"/>
+
+      <!-- Center hub — the axis of fate -->
+      <circle cx="250" cy="370" r="25" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5" opacity="0.7"/>
+      <circle cx="250" cy="370" r="16" fill="none" stroke="var(--card-line-light)" stroke-width="0.7" opacity="0.45"/>
+      <circle cx="250" cy="370" r="6" fill="var(--card-line)" opacity="0.55"/>
+
+      <!-- ======== SPHINX — seated on top of wheel ======== -->
+      <!-- Guardian of the wheel's mystery — geometric, regal, centered -->
+      <g transform="translate(250, 188)">
+        <!-- Body — horizontal, sphinx-like (lion body) -->
+        <path d="M-22 14 Q-26 4 -16 0 L16 0 Q26 4 22 14 L-22 14"
+              fill="var(--card-fill-light)" fill-opacity="0.3" stroke="var(--card-line)" stroke-width="1.5" opacity="0.6"/>
+        <!-- Head — upright, regal -->
+        <circle cx="0" cy="-12" r="12" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.5"/>
+        <circle cx="0" cy="-14" r="2" fill="var(--card-line)" opacity="0.45"/>
+        <!-- Headdress — angular, pharaonic -->
+        <path d="M-10 -20 L-14 -32 L0 -28 L14 -32 L10 -20"
+              stroke="var(--card-line)" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <!-- Sword held across body — guardian's weapon -->
+        <line x1="-26" y1="8" x2="26" y2="8" stroke="var(--card-line-light)" stroke-width="1.5" opacity="0.45"/>
+        <path d="M26 8 L30 6 L30 10 Z" fill="var(--card-line)" opacity="0.3"/>
+        <!-- Paws -->
+        <line x1="-18" y1="14" x2="-20" y2="22" stroke="var(--card-line)" stroke-width="0.8" opacity="0.35"/>
+        <line x1="-12" y1="14" x2="-13" y2="22" stroke="var(--card-line)" stroke-width="0.8" opacity="0.35"/>
+        <line x1="12" y1="14" x2="13" y2="22" stroke="var(--card-line)" stroke-width="0.8" opacity="0.35"/>
+        <line x1="18" y1="14" x2="20" y2="22" stroke="var(--card-line)" stroke-width="0.8" opacity="0.35"/>
+      </g>
+
+      <!-- ======== SERPENT — descending on the left ======== -->
+      <!-- Typhon / Set — descending, sinuous, going down -->
+      <path d="M100 310 Q85 340 90 370 Q95 400 82 430 Q70 460 78 490"
+            stroke="var(--card-accent-light)" stroke-width="1.5" fill="none" opacity="0.45"/>
+      <!-- Serpent head — pointing down -->
+      <circle cx="78" cy="494" r="6" fill="var(--card-fill)" stroke="var(--card-accent-light)" stroke-width="1" opacity="0.5"/>
+      <circle cx="76" cy="496" r="1.5" fill="var(--card-accent-light)" opacity="0.35"/>
+      <!-- Forked tongue -->
+      <line x1="76" y1="500" x2="72" y2="508" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.3"/>
+      <line x1="76" y1="500" x2="80" y2="508" stroke="var(--card-accent)" stroke-width="0.6" opacity="0.3"/>
+
+      <!-- ======== ANUBIS — ascending on the right ======== -->
+      <!-- Jackal-headed figure climbing the wheel — rising fortune -->
+      <g transform="translate(408, 420)">
+        <!-- Body — ascending, leaning upward -->
+        <path d="M0 0 L-10 30 L0 45 L10 30 Z"
+              fill="var(--card-fill-light)" fill-opacity="0.25" stroke="var(--card-line)" stroke-width="1.2" opacity="0.5"/>
+        <!-- Jackal head — angular, canine, pointed snout upward -->
+        <circle cx="2" cy="-10" r="8" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2" opacity="0.5"/>
+        <!-- Tall pointed ears -->
+        <line x1="-3" y1="-16" x2="-6" y2="-26" stroke="var(--card-line)" stroke-width="0.8" opacity="0.4"/>
+        <line x1="5" y1="-16" x2="8" y2="-26" stroke="var(--card-line)" stroke-width="0.8" opacity="0.4"/>
+        <!-- Snout -->
+        <path d="M6 -12 L14 -18 L8 -8" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <!-- Eye -->
+        <circle cx="2" cy="-12" r="1.5" fill="var(--card-line)" opacity="0.35"/>
+        <!-- Arms reaching up toward the rim -->
+        <path d="M-6 8 Q-16 -2 -22 -10" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.35"/>
+        <path d="M6 6 Q12 -4 8 -14" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.35"/>
+        <!-- Legs -->
+        <line x1="-4" y1="45" x2="-8" y2="58" stroke="var(--card-line)" stroke-width="0.8" opacity="0.35"/>
+        <line x1="4" y1="45" x2="8" y2="58" stroke="var(--card-line)" stroke-width="0.8" opacity="0.35"/>
+      </g>
+
+      <!-- ======== FOUR FIXED SIGNS — in the corners ======== -->
+      <!-- Each on a small cloud-platform, reading books (knowledge is eternal) -->
+
+      <!-- Top-left: AQUARIUS / Angel (human) -->
+      <g transform="translate(85, 95)">
+        <circle cx="0" cy="0" r="18" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2" opacity="0.4"/>
+        <!-- Human face -->
+        <circle cx="0" cy="-2" r="3" fill="var(--card-line)" opacity="0.25"/>
+        <!-- Wings suggested -->
+        <path d="M-14 4 Q-24 -4 -22 -14" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.25"/>
+        <path d="M14 4 Q24 -4 22 -14" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.25"/>
+        <!-- Book -->
+        <rect x="-8" y="8" width="16" height="10" rx="1" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.25"/>
+        <!-- Cloud -->
+        <path d="M-22 22 Q-14 18 -6 22 Q2 18 10 22 Q18 18 26 22"
+              stroke="var(--card-line-dim)" stroke-width="0.5" fill="none" opacity="0.12"/>
+      </g>
+
+      <!-- Top-right: SCORPIO / Eagle -->
+      <g transform="translate(415, 95)">
+        <circle cx="0" cy="0" r="18" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2" opacity="0.4"/>
+        <!-- Eagle beak -->
+        <path d="M0 -4 L8 -8 L4 -2" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.3"/>
+        <!-- Eye -->
+        <circle cx="-2" cy="-4" r="2" fill="var(--card-line)" opacity="0.25"/>
+        <!-- Wing -->
+        <path d="M-10 2 Q-20 -6 -16 -14" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.25"/>
+        <path d="M10 2 Q18 -2 16 -10" stroke="var(--card-line)" stroke-width="0.7" fill="none" opacity="0.2"/>
+        <!-- Book -->
+        <rect x="-8" y="8" width="16" height="10" rx="1" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.25"/>
+        <path d="M-22 22 Q-14 18 -6 22 Q2 18 10 22 Q18 18 26 22"
+              stroke="var(--card-line-dim)" stroke-width="0.5" fill="none" opacity="0.12"/>
+      </g>
+
+      <!-- Bottom-left: TAURUS / Bull -->
+      <g transform="translate(85, 650)">
+        <circle cx="0" cy="0" r="18" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2" opacity="0.4"/>
+        <!-- Horns -->
+        <path d="M-6 -8 Q-14 -18 -10 -6" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.3"/>
+        <path d="M6 -8 Q14 -18 10 -6" stroke="var(--card-line)" stroke-width="0.8" fill="none" opacity="0.3"/>
+        <!-- Snout -->
+        <ellipse cx="0" cy="2" rx="6" ry="4" fill="none" stroke="var(--card-line)" stroke-width="0.6" opacity="0.25"/>
+        <!-- Eyes -->
+        <circle cx="-4" cy="-4" r="1.5" fill="var(--card-line)" opacity="0.2"/>
+        <circle cx="4" cy="-4" r="1.5" fill="var(--card-line)" opacity="0.2"/>
+        <!-- Book -->
+        <rect x="-8" y="8" width="16" height="10" rx="1" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.25"/>
+        <path d="M-22 -22 Q-14 -18 -6 -22 Q2 -18 10 -22 Q18 -18 26 -22"
+              stroke="var(--card-line-dim)" stroke-width="0.5" fill="none" opacity="0.12"/>
+      </g>
+
+      <!-- Bottom-right: LEO / Lion -->
+      <g transform="translate(415, 650)">
+        <circle cx="0" cy="0" r="18" fill="var(--card-fill)" stroke="var(--card-line)" stroke-width="1.2" opacity="0.4"/>
+        <!-- Mane — radiating short lines -->
+        <line x1="-12" y1="-12" x2="-16" y2="-16" stroke="var(--card-line)" stroke-width="0.6" opacity="0.2"/>
+        <line x1="0" y1="-14" x2="0" y2="-18" stroke="var(--card-line)" stroke-width="0.6" opacity="0.2"/>
+        <line x1="12" y1="-12" x2="16" y2="-16" stroke="var(--card-line)" stroke-width="0.6" opacity="0.2"/>
+        <line x1="-14" y1="0" x2="-18" y2="0" stroke="var(--card-line)" stroke-width="0.6" opacity="0.2"/>
+        <line x1="14" y1="0" x2="18" y2="0" stroke="var(--card-line)" stroke-width="0.6" opacity="0.2"/>
+        <!-- Face -->
+        <circle cx="-3" cy="-3" r="1.5" fill="var(--card-line)" opacity="0.2"/>
+        <circle cx="3" cy="-3" r="1.5" fill="var(--card-line)" opacity="0.2"/>
+        <!-- Nose/mouth -->
+        <path d="M-2 1 L0 3 L2 1" stroke="var(--card-line)" stroke-width="0.5" fill="none" opacity="0.2"/>
+        <!-- Book -->
+        <rect x="-8" y="8" width="16" height="10" rx="1" fill="none" stroke="var(--card-line-dim)" stroke-width="0.6" opacity="0.25"/>
+        <path d="M-22 -22 Q-14 -18 -6 -22 Q2 -18 10 -22 Q18 -18 26 -22"
+              stroke="var(--card-line-dim)" stroke-width="0.5" fill="none" opacity="0.12"/>
+      </g>
+
+      <!-- ======== ROTATION SUGGESTION ======== -->
+      <!-- Faint curved arrow around the outer ring — the wheel turns -->
+      <path d="M120 250 Q100 320 120 390"
+            stroke="var(--card-line-dim)" stroke-width="1" fill="none" opacity="0.12"/>
+      <path d="M118 390 L124 382 L128 392"
+            stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.12"/>
+
+      <path d="M380 490 Q400 420 380 350"
+            stroke="var(--card-line-dim)" stroke-width="1" fill="none" opacity="0.12"/>
+      <path d="M382 350 L376 358 L372 348"
+            stroke="var(--card-line-dim)" stroke-width="0.8" fill="none" opacity="0.12"/>
+
+    </svg>
+  </div>
+</div>
+</body>
+</html>
