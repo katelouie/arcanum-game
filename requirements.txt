@@ -1,5 +1,5 @@
 # Bardic interactive fiction engine
-bardic>=0.7.1
+bardic>=0.8.0
 
 # UI framework
 nicegui>=1.4.0
