@@ -39,6 +39,27 @@
         }
       ]
     },
+    "horizontal-4": {
+      "name": "Four Cards Horizontal",
+      "positions": [
+        {
+          "x": 20,
+          "y": 30
+        },
+        {
+          "x": 40,
+          "y": 30
+        },
+        {
+          "x": 60,
+          "y": 30
+        },
+        {
+          "x": 80,
+          "y": 30
+        }
+      ]
+    },
     "triangle-3": {
       "name": "Three Cards Triangle",
       "positions": [
