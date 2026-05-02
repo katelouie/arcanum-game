@@ -549,8 +549,22 @@ class GameSession:
 
     def make_choice(self, choice_index: int):
         """Handle player choice and update the story."""
-        self.engine.choose(choice_index)
-        self.update_ui()
+        try:
+            self.engine.choose(choice_index)
+            self.update_ui()
+        except Exception:
+            import traceback
+            traceback.print_exc()
+            ui.notify(
+                "Something went wrong on our end — the game hit an "
+                "unexpected error. Try refreshing the page, and if "
+                "it keeps happening, please let the developer know "
+                "at the itch.io page. Sorry about that!",
+                type="warning",
+                position="bottom",
+                close_button=True,
+                timeout=0,
+            )
 
     def render_choices(self, choices: list):
         """Render all choices with theme styling, categorized by tags."""
