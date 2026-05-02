@@ -66,14 +66,14 @@ the_kind = TheKind(name="The Kind", age=50, total_sessions=3, flavor_text="???")
 
 :: ReaderTable ^UI:DASHBOARD
 @py:
-if nyx not in clients and chen.sessions_completed == 3:
+if sasha not in clients and chen.sessions_completed >= 1:
+    clients.append(sasha)
+if nyx not in clients and chen.sessions_completed >= 1:
     clients.append(nyx)
 if blackthorn not in clients and nyx.sessions_completed == 3:
     clients.append(blackthorn)
 if the_kind not in clients and reader.sessions_completed >= 3 and reader.empathy >= 2:
     clients.append(the_kind)
-if sasha not in clients and chen.sessions_completed == 3:
-    clients.append(sasha)
 @endpy
 *Your sanctuary. Candles flicker. Cards wait.*
 
