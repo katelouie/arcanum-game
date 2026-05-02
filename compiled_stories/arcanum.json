@@ -264474,7 +264474,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "if nyx not in clients and chen.sessions_completed == 3:\n    clients.append(nyx)\nif blackthorn not in clients and nyx.sessions_completed == 3:\n    clients.append(blackthorn)\nif the_kind not in clients and reader.sessions_completed >= 3 and reader.empathy >= 2:\n    clients.append(the_kind)\nif sasha not in clients in chen.sessions_completed == 3:\n    clients.append(sasha)"
+          "code": "if nyx not in clients and chen.sessions_completed == 3:\n    clients.append(nyx)\nif blackthorn not in clients and nyx.sessions_completed == 3:\n    clients.append(blackthorn)\nif the_kind not in clients and reader.sessions_completed >= 3 and reader.empathy >= 2:\n    clients.append(the_kind)\nif sasha not in clients and chen.sessions_completed == 3:\n    clients.append(sasha)"
         }
       ],
       "tags": [
