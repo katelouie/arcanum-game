@@ -11849,7 +11849,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "# Set up the position decks\ndeck_current = Deck(cards=[\"Four of Cups\", \"Two of Swords\"])\ndeck_staying = Deck(cards=[\"Ten of Pentacles\", \"Four of Wands\"])\ndeck_moving = Deck(cards=[\"Six of Swords\", \"Eight of Cups\"])\ndeck_fear = Deck(cards=[\"Five of Pentacles\", \"Five of Cups\"])\ndeck_guidance = Deck(cards=[\"The Lovers\", \"Temperance\", \"Death\"])\n\n# Create reading and draw cards into spread\nreading = Reading(spread_id=\"chen-house-decision\", decks=[\n    deck_current, deck_staying, deck_moving, deck_fear, deck_guidance\n])\ncards = reading.draw_cards()\n\n# Initialize interpretation tracking\nsession.interpretation_good = 0\nsession.interpretation_okay = 0\nsession.interpretation_bad = 0"
+          "code": "# Set up the position decks\ndeck_current = Deck(cards=[\"Four of Cups\", \"Two of Swords\"])\ndeck_staying = Deck(cards=[\"Ten of Pentacles\", \"Four of Wands\"])\ndeck_moving = Deck(cards=[\"Six of Swords\", \"Eight of Cups\"])\ndeck_fear = Deck(cards=[\"Five of Pentacles\", \"Five of Cups\"])\ndeck_guidance = Deck(cards=[\"The Lovers\", \"Temperance\", \"Death\"])\n\n# Create reading and draw cards into spread\nreading = Reading(spread_id=\"chen-house-decision\", decks=[\n    deck_current, deck_staying, deck_moving, deck_fear, deck_guidance\n])\ncards = reading.draw_cards()\n\n# Initialize interpretation tracking\nsession.interpretation_good = 0\nsession.interpretation_okay = 0\nsession.interpretation_bad = 0\n\n# Store card names for end-of-session recap\nsession.card_1_current = cards[0].get_display_name()\nsession.card_2_staying = cards[1].get_display_name()\nsession.card_3_moving = cards[2].get_display_name()\nsession.card_4_fear = cards[3].get_display_name()\nsession.card_5_guidance = cards[4].get_display_name()"
         }
       ],
       "tags": [],
@@ -35428,7 +35428,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session = create_session(chen)\n\n    # Initialize session tracking\n    session.interpretation_good = 0\n    session.interpretation_okay = 0\n    session.interpretation_bad = 0\n\n    # Initialize flags\n    chen.discussed_grief = False\n    chen.discussed_guilt = False\n    chen.discussed_culture = False\n    chen.discussed_practical = False\n    chen.discussed_autonomy = False\n    chen.discussed_david_liu = False\n    chen.discussed_mrs_wong = False\n\n    # Session-specific\n    session.offered_permission = False"
+          "code": "session = create_session(chen)\n\n# Initialize session tracking\nsession.interpretation_good = 0\nsession.interpretation_okay = 0\nsession.interpretation_bad = 0\n\n# Initialize flags\nchen.discussed_grief = False\nchen.discussed_guilt = False\nchen.discussed_culture = False\nchen.discussed_practical = False\nchen.discussed_autonomy = False\nchen.discussed_david_liu = False\nchen.discussed_mrs_wong = False\n\n# Session-specific\nsession.offered_permission = False"
         },
         {
           "type": "python_statement",
@@ -38582,7 +38582,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # Tight 3-card pool for Session 3A\n    deck = Deck(cards=[\n        \"Six of Pentacles\",   # Community giving/receiving\n        \"Nine of Cups\",       # Wish fulfillment (complicated)\n        \"Five of Swords\"      # Community friction\n    ])\n\n    # Create reading\n    reading = Reading(\n        spread_id=\"single-focus\",\n        decks=[deck]\n    )\n\n    # Draw the card\n    cards = reading.draw_cards()"
+          "code": "# Tight 3-card pool for Session 3A\ndeck = Deck(cards=[\n    \"Six of Pentacles\",   # Community giving/receiving\n    \"Nine of Cups\",       # Wish fulfillment (complicated)\n    \"Five of Swords\"      # Community friction\n])\n\n# Create reading\nreading = Reading(\n    spread_id=\"single-focus\",\n    decks=[deck]\n)\n\n# Draw the card\ncards = reading.draw_cards()"
         }
       ],
       "tags": [],
@@ -43678,7 +43678,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # Calculate reading quality\n    if session.interpretation_good >= 1:\n        session.reading_quality = \"profound\"\n        chen.clarity = 10\n    elif session.interpretation_okay >= 1:\n        session.reading_quality = \"helpful\"\n        chen.clarity = 7\n    else:\n        session.reading_quality = \"adequate\"\n        chen.clarity = 4"
+          "code": "# Calculate reading quality\nif session.interpretation_good >= 1:\n    session.reading_quality = \"profound\"\n    chen.clarity = 10\nelif session.interpretation_okay >= 1:\n    session.reading_quality = \"helpful\"\n    chen.clarity = 7\nelse:\n    session.reading_quality = \"adequate\"\n    chen.clarity = 4"
         }
       ],
       "tags": [],
@@ -44129,7 +44129,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "        # Unlock new clients\n        maya.unlocked = True\n        maya.unlock_reason = \"Margaret's granddaughter, struggling with identity\"\n        maya.relationship_to_chen = \"granddaughter\"\n\n        eleanor.unlocked = True\n        eleanor.unlock_reason = \"Margaret's library friend, stuck in grief\"\n        eleanor.relationship_to_chen = \"close friend\"\n\n        # Chen's arc is complete\n        chen.arc_complete = True\n        chen.final_state = \"thriving_in_community\"\n        chen.will_return = False"
+                  "code": "# Unlock new clients\nmaya.unlocked = True\nmaya.unlock_reason = \"Margaret's granddaughter, struggling with identity\"\nmaya.relationship_to_chen = \"granddaughter\"\n\neleanor.unlocked = True\neleanor.unlock_reason = \"Margaret's library friend, stuck in grief\"\neleanor.relationship_to_chen = \"close friend\"\n\n# Chen's arc is complete\nchen.arc_complete = True\nchen.final_state = \"thriving_in_community\"\nchen.will_return = False"
                 },
                 {
                   "type": "text",
@@ -44214,7 +44214,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "        # Partial unlock - only Maya\n        maya.unlocked = True\n        maya.unlock_reason = \"Margaret mentioned you\"\n        maya.relationship_to_chen = \"granddaughter\"\n\n        chen.arc_complete = True\n        chen.final_state = \"adjusting_with_help\"\n        chen.will_return = False"
+                  "code": "# Partial unlock - only Maya\nmaya.unlocked = True\nmaya.unlock_reason = \"Margaret mentioned you\"\nmaya.relationship_to_chen = \"granddaughter\"\n\nchen.arc_complete = True\nchen.final_state = \"adjusting_with_help\"\nchen.will_return = False"
                 },
                 {
                   "type": "text",
@@ -44251,7 +44251,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "        chen.arc_complete = True\n        chen.final_state = \"uncertain\"\n        chen.will_return = False"
+                  "code": "chen.arc_complete = True\nchen.final_state = \"uncertain\"\nchen.will_return = False"
                 }
               ]
             }
@@ -44772,7 +44772,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session.current_client = None\n    reader.sessions_completed += 1\n    chen.sessions_completed += 1\n\n    # Special achievement for completing Chen's full arc\n    if chen.arc_complete and chen.final_state == \"thriving_in_community\":\n        reader.achievements.add(\"chen_arc_complete\")"
+          "code": "session.current_client = None\nreader.sessions_completed += 1\nchen.sessions_completed += 1\n\n# Special achievement for completing Chen's full arc\nif chen.arc_complete and chen.final_state == \"thriving_in_community\":\n    reader.achievements.add(\"chen_arc_complete\")"
         }
       ],
       "tags": [],
@@ -44939,7 +44939,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session = create_session(chen)\n\n    # Initialize session tracking\n    session.interpretation_good = 0\n    session.interpretation_okay = 0\n    session.interpretation_bad = 0\n\n    # Initialize flags\n    chen.discussed_grief = False\n    chen.discussed_guilt = False\n    chen.discussed_culture = False\n    chen.discussed_emily = False\n    chen.discussed_naming_ceremony = False\n    chen.discussed_house_trap = False\n    chen.discussed_matriarch = False\n\n    # Session-specific\n    session.gave_concrete_plan = False\n    session.addressed_too_late_fear = False"
+          "code": "session = create_session(chen)\n\n# Initialize session tracking\nsession.interpretation_good = 0\nsession.interpretation_okay = 0\nsession.interpretation_bad = 0\n\n# Initialize flags\nchen.discussed_grief = False\nchen.discussed_guilt = False\nchen.discussed_culture = False\nchen.discussed_emily = False\nchen.discussed_naming_ceremony = False\nchen.discussed_house_trap = False\nchen.discussed_matriarch = False\n\n# Session-specific\nsession.gave_concrete_plan = False\nsession.addressed_too_late_fear = False"
         },
         {
           "type": "python_statement",
@@ -46788,7 +46788,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # Action-focused 3-card pool for Session 3B\n    deck = Deck(cards=[\n        \"The Fool\",        # Leap of faith, new beginning NOW\n        \"Eight of Wands\",  # Speed, momentum, urgency\n        \"Death\"            # Transformation, necessary ending\n    ])\n\n    # Create reading\n    reading = Reading(\n        spread_id=\"single-focus\",\n        decks=[deck]\n    )\n\n    # Draw the card\n    cards = reading.draw_cards()"
+          "code": "# Action-focused 3-card pool for Session 3B\ndeck = Deck(cards=[\n    \"The Fool\",        # Leap of faith, new beginning NOW\n    \"Eight of Wands\",  # Speed, momentum, urgency\n    \"Death\"            # Transformation, necessary ending\n])\n\n# Create reading\nreading = Reading(\n    spread_id=\"single-focus\",\n    decks=[deck]\n)\n\n# Draw the card\ncards = reading.draw_cards()"
         }
       ],
       "tags": [],
@@ -51487,7 +51487,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # Calculate reading quality\n    if session.interpretation_good >= 1:\n        session.reading_quality = \"profound\"\n        chen.clarity = 10\n    elif session.interpretation_okay >= 1:\n        session.reading_quality = \"helpful\"\n        chen.clarity = 7\n    else:\n        session.reading_quality = \"adequate\"\n        chen.clarity = 4"
+          "code": "# Calculate reading quality\nif session.interpretation_good >= 1:\n    session.reading_quality = \"profound\"\n    chen.clarity = 10\nelif session.interpretation_okay >= 1:\n    session.reading_quality = \"helpful\"\n    chen.clarity = 7\nelse:\n    session.reading_quality = \"adequate\"\n    chen.clarity = 4"
         }
       ],
       "tags": [],
@@ -52219,7 +52219,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "        # Unlock Maya Chen\n        maya.unlocked = True\n        maya.unlock_reason = \"Margaret's granddaughter, struggling with identity\"\n        maya.relationship_to_chen = \"granddaughter\"\n        maya.context = \"Margaret went to Portland to help Emily with premature baby and naming ceremony\"\n\n        # Chen's arc is complete\n        chen.arc_complete = True\n        chen.final_state = \"transformed_into_matriarch\"\n        chen.will_return = \"after Portland to report back\"\n        chen.named_baby_ethan = True"
+                  "code": "# Unlock Maya Chen\nmaya.unlocked = True\nmaya.unlock_reason = \"Margaret's granddaughter, struggling with identity\"\nmaya.relationship_to_chen = \"granddaughter\"\nmaya.context = \"Margaret went to Portland to help Emily with premature baby and naming ceremony\"\n\n# Chen's arc is complete\nchen.arc_complete = True\nchen.final_state = \"transformed_into_matriarch\"\nchen.will_return = \"after Portland to report back\"\nchen.named_baby_ethan = True"
                 },
                 {
                   "type": "text",
@@ -52304,7 +52304,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "        # Unlock Maya Chen (basic)\n        maya.unlocked = True\n        maya.unlock_reason = \"Margaret mentioned you\"\n        maya.relationship_to_chen = \"granddaughter\"\n\n        chen.arc_complete = True\n        chen.final_state = \"attempting_transformation\"\n        chen.will_return = False"
+                  "code": "# Unlock Maya Chen (basic)\nmaya.unlocked = True\nmaya.unlock_reason = \"Margaret mentioned you\"\nmaya.relationship_to_chen = \"granddaughter\"\n\nchen.arc_complete = True\nchen.final_state = \"attempting_transformation\"\nchen.will_return = False"
                 },
                 {
                   "type": "text",
@@ -52341,7 +52341,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "        chen.arc_complete = True\n        chen.final_state = \"still_uncertain\"\n        chen.will_return = False"
+                  "code": "chen.arc_complete = True\nchen.final_state = \"still_uncertain\"\nchen.will_return = False"
                 }
               ]
             }
@@ -52901,7 +52901,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session.current_client = None\n    reader.sessions_completed += 1\n    chen.sessions_completed += 1\n\n    # Special achievement for completing Chen's full arc via 3B\n    if chen.arc_complete and chen.final_state == \"transformed_into_matriarch\":\n        reader.achievements.add(\"chen_arc_complete_crisis_path\")"
+          "code": "session.current_client = None\nreader.sessions_completed += 1\nchen.sessions_completed += 1\n\n# Special achievement for completing Chen's full arc via 3B\nif chen.arc_complete and chen.final_state == \"transformed_into_matriarch\":\n    reader.achievements.add(\"chen_arc_complete_crisis_path\")"
         }
       ],
       "tags": [],
@@ -53054,7 +53054,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session = create_session(chen)\n\n    # Initialize session tracking\n    session.interpretation_good = 0\n    session.interpretation_okay = 0\n    session.interpretation_bad = 0\n\n    # Initialize flags\n    chen.discussed_grief = False\n    chen.discussed_guilt = False\n    chen.discussed_maya = False\n    chen.discussed_garden = False\n    chen.discussed_community = False\n    chen.discussed_house_transformation = False\n    chen.discussed_blooming = False\n\n    # Session-specific\n    session.offered_validation = False\n    session.discussed_small_changes = False"
+          "code": "session = create_session(chen)\n\n# Initialize session tracking\nsession.interpretation_good = 0\nsession.interpretation_okay = 0\nsession.interpretation_bad = 0\n\n# Initialize flags\nchen.discussed_grief = False\nchen.discussed_guilt = False\nchen.discussed_maya = False\nchen.discussed_garden = False\nchen.discussed_community = False\nchen.discussed_house_transformation = False\nchen.discussed_blooming = False\n\n# Session-specific\nsession.offered_validation = False\nsession.discussed_small_changes = False"
         },
         {
           "type": "python_statement",
@@ -55047,7 +55047,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    from game_logic.tarot import Deck, Reading\n\n    # Growth/home-focused pool for Session 3C\n    deck = Deck(cards=[\n        \"Four of Wands\",      # Home as celebration\n        \"Ten of Pentacles\",   # Legacy through life\n        \"The Empress\"         # Nurturing, garden, growth\n    ])\n\n    # Create reading\n    reading = Reading(\n        spread_id=\"chen-session3c-blooming\",\n        decks=[deck]\n    )\n\n    # Draw the card\n    cards = reading.draw_cards()"
+          "code": "from game_logic.tarot import Deck, Reading\n\n# Growth/home-focused pool for Session 3C\ndeck = Deck(cards=[\n    \"Four of Wands\",      # Home as celebration\n    \"Ten of Pentacles\",   # Legacy through life\n    \"The Empress\"         # Nurturing, garden, growth\n])\n\n# Create reading\nreading = Reading(\n    spread_id=\"chen-session3c-blooming\",\n    decks=[deck]\n)\n\n# Draw the card\ncards = reading.draw_cards()"
         }
       ],
       "tags": [],
@@ -60099,7 +60099,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # Calculate reading quality\n    if session.interpretation_good >= 1:\n        session.reading_quality = \"profound\"\n        chen.clarity = 10\n    elif session.interpretation_okay >= 1:\n        session.reading_quality = \"helpful\"\n        chen.clarity = 7\n    else:\n        session.reading_quality = \"adequate\"\n        chen.clarity = 4"
+          "code": "# Calculate reading quality\nif session.interpretation_good >= 1:\n    session.reading_quality = \"profound\"\n    chen.clarity = 10\nelif session.interpretation_okay >= 1:\n    session.reading_quality = \"helpful\"\n    chen.clarity = 7\nelse:\n    session.reading_quality = \"adequate\"\n    chen.clarity = 4"
         }
       ],
       "tags": [],
@@ -60622,7 +60622,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "        # Unlock Maya Chen\n        maya.unlocked = True\n        maya.unlock_reason = \"Margaret's granddaughter, struggling with identity\"\n        maya.relationship_to_chen = \"granddaughter\"\n        maya.context = \"Margaret bloomed where she was planted, teaches Cantonese now, has vibrant community life\"\n\n        # Chen's arc is complete\n        chen.arc_complete = True\n        chen.final_state = \"blooming_where_planted\"\n        chen.will_return = False\n        chen.planted_osmanthus = True\n        chen.teaching_cantonese = True"
+                  "code": "# Unlock Maya Chen\nmaya.unlocked = True\nmaya.unlock_reason = \"Margaret's granddaughter, struggling with identity\"\nmaya.relationship_to_chen = \"granddaughter\"\nmaya.context = \"Margaret bloomed where she was planted, teaches Cantonese now, has vibrant community life\"\n\n# Chen's arc is complete\nchen.arc_complete = True\nchen.final_state = \"blooming_where_planted\"\nchen.will_return = False\nchen.planted_osmanthus = True\nchen.teaching_cantonese = True"
                 },
                 {
                   "type": "text",
@@ -60707,7 +60707,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "        # Unlock Maya Chen (basic)\n        maya.unlocked = True\n        maya.unlock_reason = \"Margaret mentioned you\"\n        maya.relationship_to_chen = \"granddaughter\"\n\n        chen.arc_complete = True\n        chen.final_state = \"attempting_to_bloom\"\n        chen.will_return = False"
+                  "code": "# Unlock Maya Chen (basic)\nmaya.unlocked = True\nmaya.unlock_reason = \"Margaret mentioned you\"\nmaya.relationship_to_chen = \"granddaughter\"\n\nchen.arc_complete = True\nchen.final_state = \"attempting_to_bloom\"\nchen.will_return = False"
                 },
                 {
                   "type": "text",
@@ -60744,7 +60744,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "        chen.arc_complete = True\n        chen.final_state = \"still_withering\"\n        chen.will_return = False"
+                  "code": "chen.arc_complete = True\nchen.final_state = \"still_withering\"\nchen.will_return = False"
                 }
               ]
             }
@@ -61316,7 +61316,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session.current_client = None\n    reader.sessions_completed += 1\n    chen.sessions_completed += 1\n\n    # Special achievement for completing Chen's full arc via 3C\n    if chen.arc_complete and chen.final_state == \"blooming_where_planted\":\n        reader.achievements.add(\"chen_arc_complete_rooted_path\")"
+          "code": "session.current_client = None\nreader.sessions_completed += 1\nchen.sessions_completed += 1\n\n# Special achievement for completing Chen's full arc via 3C\nif chen.arc_complete and chen.final_state == \"blooming_where_planted\":\n    reader.achievements.add(\"chen_arc_complete_rooted_path\")"
         }
       ],
       "tags": [],
@@ -84287,7 +84287,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # Card pools for each position\n    position_1_deck = Deck(cards=[\"The Tower\", \"Eight of Swords\"], reversals=[0, 0.5])\n    position_2_deck = Deck(cards=[\"Two of Swords\", \"Seven of Wands\"], reversals=[0.5, 0.5])\n    position_3_deck = Deck(cards=[\"The Star\", \"Ten of Swords\"], reversals=[0, 0.5])\n    position_4_deck = Deck(cards=[\"The Moon\", \"Seven of Cups\"], reversals=[0, 0.5])\n    position_5_deck = Deck(cards=[\"Five of Pentacles\", \"The Devil\"], reversals=[0, 0])\n    # KEY POSITION\n    position_6_deck = Deck(cards=[\"The Fool\", \"Strength\", \"Temperance\"], reversals=[0.5, 0.5, 0.5])\n    position_7_deck = Deck(cards=[\"Six of Swords\", \"The World\"], reversals=[0, 0])\n\n    reading = Reading(spread_id=\"nyx-session2-horseshoe\", decks=\n        [\n            position_1_deck,\n            position_2_deck,\n            position_3_deck,\n            position_4_deck,\n            position_5_deck,\n            position_6_deck,\n            position_7_deck\n        ]\n    )\n\n    cards = reading.draw_cards()"
+          "code": "# Card pools for each position\nposition_1_deck = Deck(cards=[\"The Tower\", \"Eight of Swords\"], reversals=[0, 0.5])\nposition_2_deck = Deck(cards=[\"Two of Swords\", \"Seven of Wands\"], reversals=[0.5, 0.5])\nposition_3_deck = Deck(cards=[\"The Star\", \"Ten of Swords\"], reversals=[0, 0.5])\nposition_4_deck = Deck(cards=[\"The Moon\", \"Seven of Cups\"], reversals=[0, 0.5])\nposition_5_deck = Deck(cards=[\"Five of Pentacles\", \"The Devil\"], reversals=[0, 0])\n# KEY POSITION\nposition_6_deck = Deck(cards=[\"The Fool\", \"Strength\", \"Temperance\"], reversals=[0.5, 0.5, 0.5])\nposition_7_deck = Deck(cards=[\"Six of Swords\", \"The World\"], reversals=[0, 0])\n\nreading = Reading(spread_id=\"nyx-session2-horseshoe\", decks=\n    [\n        position_1_deck,\n        position_2_deck,\n        position_3_deck,\n        position_4_deck,\n        position_5_deck,\n        position_6_deck,\n        position_7_deck\n    ]\n)\n\ncards = reading.draw_cards()"
         }
       ],
       "tags": [],
@@ -88423,7 +88423,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session.discussed_cards.append(cards[2].name)\n\n    # Glitch intensity increases at the midpoint\n    if session.glitch_intensity < 4:\n        session.glitch_intensity = 4"
+          "code": "session.discussed_cards.append(cards[2].name)\n\n# Glitch intensity increases at the midpoint\nif session.glitch_intensity < 4:\n    session.glitch_intensity = 4"
         }
       ],
       "tags": []
@@ -96655,7 +96655,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    session.discussed_cards.append(cards[6].name)\n\n    # Glitch intensity peaks before outcome\n    if session.glitch_intensity < 6:\n        session.glitch_intensity = 6"
+          "code": "session.discussed_cards.append(cards[6].name)\n\n# Glitch intensity peaks before outcome\nif session.glitch_intensity < 6:\n    session.glitch_intensity = 6"
         }
       ],
       "tags": []
@@ -97815,7 +97815,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # Calculate final path based on influence scores\n\n    # First check: quality threshold\n    quality_threshold = 8  # Need at least 8 quality points for good reading\n\n    if session.quality_score < quality_threshold:\n        # Bad reading = defaults to Loyal (confused, paralyzed)\n        nyx.final_path = \"loyal\"\n        session.path_reason = \"poor_reading\"\n    else:\n        # Good reading = highest influence wins\n        if session.runner_influence > session.ghost_influence and session.runner_influence > session.loyal_influence:\n            nyx.final_path = \"runner\"\n            session.path_reason = \"runner_influence\"\n        elif session.ghost_influence > session.loyal_influence:\n            nyx.final_path = \"ghost\"\n            session.path_reason = \"ghost_influence\"\n        else:\n            nyx.final_path = \"loyal\"\n            session.path_reason = \"loyal_influence\"\n\n    # Store quality on declared class attribute\n    nyx.session_two_quality = session.quality_score"
+          "code": "# Calculate final path based on influence scores\n\n# First check: quality threshold\nquality_threshold = 8  # Need at least 8 quality points for good reading\n\nif session.quality_score < quality_threshold:\n    # Bad reading = defaults to Loyal (confused, paralyzed)\n    nyx.final_path = \"loyal\"\n    session.path_reason = \"poor_reading\"\nelse:\n    # Good reading = highest influence wins\n    if session.runner_influence > session.ghost_influence and session.runner_influence > session.loyal_influence:\n        nyx.final_path = \"runner\"\n        session.path_reason = \"runner_influence\"\n    elif session.ghost_influence > session.loyal_influence:\n        nyx.final_path = \"ghost\"\n        session.path_reason = \"ghost_influence\"\n    else:\n        nyx.final_path = \"loyal\"\n        session.path_reason = \"loyal_influence\"\n\n# Store quality on declared class attribute\nnyx.session_two_quality = session.quality_score"
         }
       ],
       "tags": []
@@ -100960,7 +100960,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # This is the DARK PATH\n    # No takebacks\n\n    nyx.ending = \"betrayed_dead\"\n    nyx.story_complete = True\n\n    reader.corruption += 3\n    reader.money += 25000  # Blood money\n    reader.reputation -= 5  # Word gets out eventually\n    reader.mystical_affinity -= 5  # The spirits KNOW\n\n    # This ending is permanent\n    session.betrayal_executed = True"
+          "code": "# This is the DARK PATH\n# No takebacks\n\nnyx.ending = \"betrayed_dead\"\nnyx.story_complete = True\n\nreader.corruption += 3\nreader.money += 25000  # Blood money\nreader.reputation -= 5  # Word gets out eventually\nreader.mystical_affinity -= 5  # The spirits KNOW\n\n# This ending is permanent\nsession.betrayal_executed = True"
         }
       ],
       "tags": [],
@@ -101266,7 +101266,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # Session complete\n    reader.sessions_completed += 1\n    nyx.sessions_completed += 1"
+          "code": "# Session complete\nreader.sessions_completed += 1\nnyx.sessions_completed += 1"
         }
       ],
       "tags": [],
@@ -102288,7 +102288,7 @@
       "execute": [
         {
           "type": "python_block",
-          "code": "    # Reader gains insight from the dream\n    reader.mystical_affinity += 1\n    reader.insight += 1\n\n    # The choices still MATTERED emotionally\n    if session.betrayal_executed:\n        reader.corruption += 1  # Even dream betrayal leaves a mark\n\n    import datetime\n    wake_time = datetime.datetime.now()"
+          "code": "# Reader gains insight from the dream\nreader.mystical_affinity += 1\nreader.insight += 1\n\n# The choices still MATTERED emotionally\nif session.betrayal_executed:\n    reader.corruption += 1  # Even dream betrayal leaves a mark\n\nimport datetime\nwake_time = datetime.datetime.now()"
         },
         {
           "type": "python_block",
@@ -126793,7 +126793,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "    # Calculate how many spirits freed (rough estimate)\n    import random\n    if nyx.shamanic_awakening >= 4:\n        session.spirits_count_freed = random.randint(800, 1200)\n    else:\n        session.spirits_count_freed = random.randint(400, 700)"
+                  "code": "# Calculate how many spirits freed (rough estimate)\nimport random\nif nyx.shamanic_awakening >= 4:\n    session.spirits_count_freed = random.randint(800, 1200)\nelse:\n    session.spirits_count_freed = random.randint(400, 700)"
                 },
                 {
                   "type": "text",
@@ -193781,7 +193781,7 @@
                 },
                 {
                   "type": "python_block",
-                  "code": "    session.ghosts_attempted += 1\n    session.house_power += 2\n    blackthorn.gothic_persona += 1\n    blackthorn.house_influence += 2\n    blackthorn.interpretation_quality['gothic'] += 2\n    blackthorn.groundedness -= 2\n    blackthorn.winters_approval -= 1\n    # Catherine NOT freed \u2014 will need to be re-attempted or she stays"
+                  "code": "session.ghosts_attempted += 1\nsession.house_power += 2\nblackthorn.gothic_persona += 1\nblackthorn.house_influence += 2\nblackthorn.interpretation_quality['gothic'] += 2\nblackthorn.groundedness -= 2\nblackthorn.winters_approval -= 1\n# Catherine NOT freed \u2014 will need to be re-attempted or she stays"
                 },
                 {
                   "type": "text",

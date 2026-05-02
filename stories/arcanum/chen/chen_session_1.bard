@@ -768,6 +768,13 @@ cards = reading.draw_cards()
 session.interpretation_good = 0
 session.interpretation_okay = 0
 session.interpretation_bad = 0
+
+# Store card names for end-of-session recap
+session.card_1_current = cards[0].get_display_name()
+session.card_2_staying = cards[1].get_display_name()
+session.card_3_moving = cards[2].get_display_name()
+session.card_4_fear = cards[3].get_display_name()
+session.card_5_guidance = cards[4].get_display_name()
 @endpy
 
 + [Lay out the cards.] -> Chen.Session1.LayoutCards
