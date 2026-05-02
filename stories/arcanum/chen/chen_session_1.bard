@@ -1160,7 +1160,6 @@ The reading fell flat. You didn't give her anything she didn't already know.
 # ============================================================================
 
 :: Chen.Session1.Position2_Hub
-@render render_reading(reading=reading)
 # Logic hub
 You both look at the second card.
 
@@ -1476,7 +1475,6 @@ You sense you're not giving her anything useful.
 # ============================================================================
 
 :: Chen.Session1.Position3_Hub
-@render render_reading(reading=reading)
 # Logic hub
 You turn to the third card.
 
@@ -1803,7 +1801,6 @@ The reading is circular. You're not adding anything she doesn't already know.
 
 :: Chen.Session1.Position4_Hub
 # Logic hub
-@render render_reading(reading=reading)
 **Position 4: What You Fear**
 
 @if cards[3].name == "Five of Pentacles":
@@ -2084,7 +2081,6 @@ You've completely missed the deeper fear here.
 
 :: Chen.Session1.Position5_Hub
 # Logic hub
-@render render_reading(reading=reading)
 You both take a breath.
 
 Four cards revealed. The situation laid bare.

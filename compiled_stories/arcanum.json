@@ -13854,12 +13854,6 @@
       "params": [],
       "content": [
         {
-          "type": "render_directive",
-          "name": "render_reading",
-          "args": "reading=reading",
-          "framework_hint": null
-        },
-        {
           "type": "text",
           "value": "You both look at the second card."
         },
@@ -15411,12 +15405,6 @@
       "id": "Chen.Session1.Position3_Hub",
       "params": [],
       "content": [
-        {
-          "type": "render_directive",
-          "name": "render_reading",
-          "args": "reading=reading",
-          "framework_hint": null
-        },
         {
           "type": "text",
           "value": "You turn to the third card."
@@ -17042,12 +17030,6 @@
       "params": [],
       "content": [
         {
-          "type": "render_directive",
-          "name": "render_reading",
-          "args": "reading=reading",
-          "framework_hint": null
-        },
-        {
           "type": "text",
           "value": "**Position 4: What You Fear**"
         },
@@ -18424,12 +18406,6 @@
       "id": "Chen.Session1.Position5_Hub",
       "params": [],
       "content": [
-        {
-          "type": "render_directive",
-          "name": "render_reading",
-          "args": "reading=reading",
-          "framework_hint": null
-        },
         {
           "type": "text",
           "value": "You both take a breath."
@@ -26118,12 +26094,6 @@
       "params": [],
       "content": [
         {
-          "type": "render_directive",
-          "name": "render_reading",
-          "args": "reading=reading",
-          "framework_hint": null
-        },
-        {
           "type": "text",
           "value": "**Position 1: "
         },
@@ -28543,12 +28513,6 @@
           "value": "\n"
         },
         {
-          "type": "render_directive",
-          "name": "render_reading",
-          "args": "reading=reading",
-          "framework_hint": null
-        },
-        {
           "type": "text",
           "value": "You turn over the second card."
         },
@@ -28602,8 +28566,10 @@
       "params": [],
       "content": [
         {
-          "type": "text",
-          "value": "\n"
+          "type": "render_directive",
+          "name": "render_reading",
+          "args": "reading=reading",
+          "framework_hint": null
         },
         {
           "type": "conditional",
@@ -30840,12 +30806,6 @@
       "id": "Chen.Session2.Position3_Hub",
       "params": [],
       "content": [
-        {
-          "type": "render_directive",
-          "name": "render_reading",
-          "args": "reading=reading",
-          "framework_hint": null
-        },
         {
           "type": "text",
           "value": "**Position 3: Guidance**"

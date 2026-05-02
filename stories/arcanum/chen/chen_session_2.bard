@@ -528,7 +528,6 @@ Three cards. You lay them face-down in a row.
 # ============================================================================
 
 :: Chen.Session2.Position1_Hub
-@render render_reading(reading=reading)
 **Position 1: {chen.took_action ? Past Action | Past Block}**
 
 @if cards[0].name == "Eight of Wands":
@@ -966,7 +965,6 @@ if cards[0].reversed:
 :: Chen.Session2.Position2_Hub
 
 **Position 2: Present Feeling**
-@render render_reading(reading=reading)
 You turn over the second card.
 
 @if cards[1].name == "Five of Cups":
@@ -979,7 +977,7 @@ You turn over the second card.
 @endif
 
 :: Chen.Session2.FiveCups_Interpret
-
+@render render_reading(reading=reading)
 @if cards[1].reversed:
     The **Five of Cups - Reversed**.
 
@@ -1388,7 +1386,6 @@ She nods slowly. "Yes."
 # ============================================================================
 
 :: Chen.Session2.Position3_Hub
-@render render_reading(reading=reading)
 **Position 3: Guidance**
 
 The final card. You turn it over slowly.
